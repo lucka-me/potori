@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="utf-8" />
+    <head>
+        <title>Portal Submission Checker for Ingress</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <!-- Stylesheet -->
+        <link type="text/css" rel="stylesheet" href="https://lucka.moe/toolkit/css/common.css" />
+        <link type="text/css" rel="stylesheet" href="./css/extended.css" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Exo" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+            integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"
+        />
+    </head>
+    <body>
+        <div class="flex-box bg-primary fullwidth">
+            <div class="flex-box frame-16">
+                <h1 class="textwhite" id="title">PSCI</h1>
+            </div>
+            <div class="split"></div>
+            <button type="button" class="header-button bg-primary bgd-primary-ho textwhite" hidden="true" id="buttonAuth" title="Authorize">
+                <i class="frame-16 fas fa-sign-in-alt fa-lg"></i>
+            </button>
+            <button type="button" class="header-button bg-primary bgd-primary-ho textwhite" hidden="true" id="buttonSignout" title="Sign out">
+                <i class="frame-16 fas fa-sign-out-alt fa-lg"></i>
+            </button>
+        </div>
+        <div class="flex-box bgl-primary fullwidth flex-just-c">
+            <div class="frame-16 min-w-200">
+                <div class="fullwidth at-c" id="ipscStatus">Loading resource...</div>
+                <div class="flex-box fullwidth flex-justify-space-between" id="ipscReceivedBox" hidden>
+                    <div>Received:&nbsp;</div>
+                    <div id="ipscReceivedCount">0</div>
+                </div>
+                <div class="flex-box fullwidth flex-justify-space-between" id="ipscAcceptedBox" hidden>
+                    <div>Accepted:&nbsp;</div>
+                    <div id="ipscAcceptedCount">0</div>
+                </div>
+                <div class="flex-box fullwidth flex-justify-space-between" id="ipscRejectedBox" hidden>
+                    <div>Rejected:&nbsp;</div>
+                    <div id="ipscRejectedCount">0</div>
+                </div>
+                <div class="flex-box fullwidth flex-justify-space-between" id="ipscPendingBox" hidden>
+                    <div>Pending:&nbsp;</div>
+                    <div id="ipscPendingCount">0</div>
+                </div>
+            </div>
+        </div>
+        <div class="main-box fullwidth a-c">
+
+            <template id="templateCard">
+                <div class="card">
+                    <div class="card-frame">
+                        <div class="at-c">
+                            <i class="fas fa-check-circle fa-lg fa-fw" id="statusIcon"></i>
+                        </div>
+                        <img class="portalImg margin-left-8" id="portalImg" src=""></img>
+                        <div class="flex-box flex-dir-col margin-left-8">
+                            <div class="flex-box a-baseline">
+                                <i class="fas fa-map-marker fa-fw"></i>
+                                <div class="margin-left-8" id="portalTitle">Test Title</div>
+                            </div>
+                            <div class="flex-box a-baseline">
+                                <i class="fas fa-cloud-upload-alt fa-fw"></i>
+                                <div class="margin-left-8" id="portalConfirmedTime">2019-01-01</div>
+                            </div>
+                            <div class="flex-box a-baseline">
+                                <i class="fas fa-clock fa-fw"></i>
+                                <div class="margin-left-8" id="portalInterval">31 days</div>
+                            </div>
+                            <div class="flex-box a-baseline" id="portalFinalBox">
+                                <i class="fas fa-check fa-fw" id="portalFinalIcon"></i>
+                                <div class="margin-left-8" id="portalFinalTime">2019-02-01</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+            <div class="card-list fullwidth" id="cardList"></div>
+
+            <div class="footer">
+                <div class="flex-box text-nowarp a-baseline">
+                    <a class="footer-item" href="https://github.com/lucka-me/PSCI/blob/master/CHANGELOG.md" title="Changelog">0.1</a>
+                    <a class="footer-item" href="https://github.com/lucka-me/PSCI" title="GitHub">
+                        <i class="fab fa-github fa-lg"></i>
+                    </a>
+                    <a class="footer-item" href="https://lucka.moe" title="Blog" >Lucka</a>
+                    |
+                    <a class="footer-item" href="./privacy" title="Privacy Policy" >Privacy</a>
+                </div>
+            </div>
+        </div>
+        <!--Scripts-->
+        <script type="text/javascript" src="./lib/main.js"></script>
+        <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+    </body>
+</html>
