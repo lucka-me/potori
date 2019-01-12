@@ -1,11 +1,11 @@
 # PSCI
 
 <p align=center>
-  <a href="./CHANGELOG.md"><img alt="Version" src="https://img.shields.io/badge/version-0.1.1-green.svg"/></a>
-  <a href="https://lucka.moe/PSCI"><img alt="Demo" src="https://img.shields.io/badge/demo-available-brightgreen.svg"/></a>
-  <a href="https://lucka.moe"><img alt="Author" src="https://img.shields.io/badge/author-Lucka-2578B5.svg"/></a>
-  <a href="./LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-A31F34.svg"/></a><br>
-  <a href="https://www.apple.com/safari/"><img alt="Safari Support" src="https://img.shields.io/badge/safari-support-brightgreen.svg"/></a>
+    <a href="./CHANGELOG.md"><img alt="Version" src="https://img.shields.io/badge/version-0.1.2-green.svg"/></a>
+    <a href="https://lucka.moe/PSCI"><img alt="Demo" src="https://img.shields.io/badge/demo-available-brightgreen.svg"/></a>
+    <a href="https://lucka.moe"><img alt="Author" src="https://img.shields.io/badge/author-Lucka-2578B5.svg"/></a>
+    <a href="./LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-A31F34.svg"/></a><br>
+    <a href="https://www.apple.com/safari/"><img alt="Safari Support" src="https://img.shields.io/badge/safari-support-brightgreen.svg"/></a>
   <!--<a href="https://www.google.com/chrome/"><img alt="Chrome Support" src="https://img.shields.io/badge/chrome-support-brightgreen.svg"/></a>
   <a href="https://www.mozilla.org/firefox/"><img alt="Firefox Support" src="https://img.shields.io/badge/firefox-support-brightgreen.svg"/></a>
   <a href="https://www.microsoft.com/windows/microsoft-edge"><img alt="Edge Support" src="https://img.shields.io/badge/edge-support-brightgreen.svg"/></a>
