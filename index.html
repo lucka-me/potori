@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
     <head>
         <title>Portal Submission Checker for Ingress</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1"/>
         <!-- Stylesheet -->
         <link type="text/css" rel="stylesheet" href="https://lucka.moe/toolkit/css/common.css" />
         <link type="text/css" rel="stylesheet" href="./css/extended.css" />
@@ -46,42 +46,44 @@
                 </div>
             </div>
         </div>
-        <div class="main-box fullwidth a-c">
+
+        <div class="flex-1 flex-box margin-left-8">
 
             <template id="templateCard">
                 <div class="card">
-                    <div class="card-frame">
-                        <div class="at-c">
-                            <i class="fas fa-check-circle fa-lg fa-fw" id="statusIcon"></i>
+                    <div class="fullwidth"><img id="portalImg" src=""></img></div>
+                    <div class="frame-12 flex-box flex-dir-col fullwidth">
+                        <div class="flex-box fullwidth font-20 a-c">
+                            <div id="portalTitle">Test Title</div>
+                            <div class="split"></div>
+                            <i class="fas fa-check-circle fa-fw" id="statusIcon"></i>
                         </div>
-                        <img class="portalImg margin-left-8" id="portalImg" src=""></img>
-                        <div class="flex-box flex-dir-col margin-left-8">
-                            <div class="flex-box a-baseline">
-                                <i class="fas fa-map-marker fa-fw"></i>
-                                <div class="margin-left-8" id="portalTitle">Test Title</div>
-                            </div>
-                            <div class="flex-box a-baseline">
+                        <div style="height:8px;width:100%;"></div>
+                        <div class="flex-box flex-warp fullwidth">
+                            <div class="flex-box a-c">
                                 <i class="fas fa-cloud-upload-alt fa-fw"></i>
-                                <div class="margin-left-8" id="portalConfirmedTime">2019-01-01</div>
+                                <div class="margin-left-4" id="portalConfirmedTime">2019-01-01</div>
                             </div>
-                            <div class="flex-box a-baseline">
+                            <div class="flex-box a-c margin-left-8">
                                 <i class="fas fa-clock fa-fw"></i>
-                                <div class="margin-left-8" id="portalInterval">31 days</div>
+                                <div class="margin-left-4" id="portalInterval">31 days</div>
                             </div>
-                            <div class="flex-box a-baseline" id="portalFinalBox">
+                            <div class="flex-box a-c margin-left-8" id="portalFinalBox">
                                 <i class="fas fa-check fa-fw" id="portalFinalIcon"></i>
-                                <div class="margin-left-8" id="portalFinalTime">2019-02-01</div>
+                                <div class="margin-left-4" id="portalFinalTime">2019-02-01</div>
                             </div>
                         </div>
                     </div>
                 </div>
             </template>
 
-            <div class="card-list fullwidth" id="cardList"></div>
+            <div id="cardList"></div>
+        </div>
 
-            <div class="footer frame-16">
+        <div class="footer">
+            <div class="frame-16">
                 <div class="flex-box text-nowarp a-baseline">
-                    <a class="footer-item" href="https://github.com/lucka-me/PSCI/blob/master/CHANGELOG.md" title="Changelog">0.1.2</a>
+                    <a class="footer-item" href="https://github.com/lucka-me/PSCI/blob/master/CHANGELOG.md" title="Changelog">0.1.3</a>
                     <a class="footer-item" href="https://github.com/lucka-me/PSCI" title="GitHub">
                         <i class="fab fa-github fa-lg"></i>
                     </a>

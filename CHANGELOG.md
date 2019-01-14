@@ -1,5 +1,13 @@
 # Changelog
 ```markdown
+## [0.1.3] - 2018-01-14
+UI improved
+
+### Changed
+- Style of cards to MD-like style
+```
+
+```markdown
 ## [0.1.2] - 2018-01-12
 Bug fixed
 

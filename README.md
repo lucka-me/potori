@@ -1,7 +1,7 @@
 # PSCI
 
 <p align=center>
-    <a href="./CHANGELOG.md"><img alt="Version" src="https://img.shields.io/badge/version-0.1.2-green.svg"/></a>
+    <a href="./CHANGELOG.md"><img alt="Version" src="https://img.shields.io/badge/version-0.1.3-green.svg"/></a>
     <a href="https://lucka.moe/PSCI"><img alt="Demo" src="https://img.shields.io/badge/demo-unavailable-red.svg"/></a>
     <a href="https://lucka.moe"><img alt="Author" src="https://img.shields.io/badge/author-Lucka-2578B5.svg"/></a>
     <a href="./LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-A31F34.svg"/></a><br>
