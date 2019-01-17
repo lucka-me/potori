@@ -1,11 +1,14 @@
 body {
     font-family: 'Exo', sans-serif;
+    margin: 0;
+}
+
+body.fullheight {
     height: 100vh;
     min-height: 100vh;
     max-height: 100vh;
     display: flex;
     flex-direction: column;
-    margin: 0;
 }
 
 h1 {
@@ -15,8 +18,10 @@ h1 {
 
 button, .button { font-family: 'Exo', sans-serif; }
 
+.logo { height: 32px; }
 .flex-justify-space-between { justify-content: space-between; }
 [hidden]{ display:none; }
+.margin-right-8 { margin-right: 8px; }
 
 .status-pending { color: #CAAF85; }
 .status-accepted { color: #35C572; }

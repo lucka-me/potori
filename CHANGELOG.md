@@ -1,5 +1,19 @@
 # Changelog
 ```markdown
+## [0.1.4] - 2018-01-17
+UI fixed and policy updated
+
+### Added
+- An icon
+
+### Changed
+- More details in the policy page
+
+### Fixed
+- Minor mistakes in UI
+```
+
+```markdown
 ## [0.1.3] - 2018-01-14
 UI improved
 
