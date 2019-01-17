@@ -22,6 +22,7 @@ button, .button { font-family: 'Exo', sans-serif; }
 .flex-justify-space-between { justify-content: space-between; }
 [hidden]{ display:none; }
 .margin-right-8 { margin-right: 8px; }
+.max-w-400 { max-width: 400px; }
 
 .status-pending { color: #CAAF85; }
 .status-accepted { color: #35C572; }

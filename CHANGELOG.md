@@ -1,4 +1,17 @@
 # Changelog
+
+```markdown
+## [0.1.6] - 2018-01-18
+Reason of rejection
+
+### Added
+- The status icon of rejected portals now show the reason of rejection
+
+### Changed
+- Policy updated
+- Minor UI improved
+```
+
 ```markdown
 ## [0.1.5] - 2018-01-17
 Link to BS watermeter
