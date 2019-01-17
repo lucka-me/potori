@@ -1,5 +1,13 @@
 # Changelog
 ```markdown
+## [0.1.5] - 2018-01-17
+Link to BS watermeter
+
+### Added
+- Click title to query the portal in Brainstorming watermeter
+```
+
+```markdown
 ## [0.1.4] - 2018-01-17
 UI fixed and policy updated
 
