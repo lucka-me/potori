@@ -1,6 +1,17 @@
 # Changelog
 
 ```markdown
+## [0.1.7] - 2018-01-18
+Intel link added
+
+### Added
+- Click title of accepted portal to open intel
+
+### Changed
+- Click status icon to open BS watermeter in new tab
+```
+
+```markdown
 ## [0.1.6] - 2018-01-18
 Reason of rejection
 

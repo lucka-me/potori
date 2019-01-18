@@ -62,7 +62,7 @@ button, .button { font-family: 'Exo', sans-serif; }
     height: 150px;
 }
 
-#portalTitle {
+#portalTitleLink {
     color: #000;
     text-decoration: none;
 }
