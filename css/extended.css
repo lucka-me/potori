@@ -1,6 +1,8 @@
 body {
     font-family: 'Exo', sans-serif;
     margin: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 body.fullheight {
@@ -34,32 +36,54 @@ button, .button { font-family: 'Exo', sans-serif; }
     border-radius: 0;
 }
 
-/* Card Suit */
-#cardList {
+.main-box {
+    flex: 1;
     display: flex;
-    flex-flow: column wrap;
-    align-content: flex-start;
-    align-items: flex-start;
-    overflow-x: auto;
-    width: 100%;
+    flex-flow: row nowrap;
+}
+
+#map {
+    flex: 2;
     height: 100%;
 }
 
-.card {
-    border-radius: 2px;
-    box-shadow: 0px 1px 2px #C0C0C0;
-    width: 300px;
-    margin: 4px;
+/* Card Suit */
+#cardList {
+    background-color: #E5E5E5;
     display: flex;
+    flex-flow: column nowrap;
+    align-content: flex-start;
+    overflow-y: scroll;
+    width: auto;
+    height: 100%;
+}
+
+.list-item {
+    display: flex;
+    flex-shrink: 0;
+    flex-basis: auto;
+    margin: 4px 8px;
+}
+
+.card {
+    border-radius: 4px;
+    box-shadow: 0 2px 2px 1px #C0C0C0;
+    background-color: #FFF;
+    width: 300px;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
 }
 
 #portalImg {
-    border-radius: 2px 2px 0px 0px;
+    border-radius: 50%;
+    box-shadow: 0 2px 2px 1px #C0C0C0;
     object-fit: cover;
     object-position: center;
-    width: 300px;
-    height: 150px;
+    width: 80px;
+    height: 80px;
+    margin: 4px;
 }
 
 #portalTitleLink {

@@ -1,7 +1,7 @@
 <h1 align=center><img height=64px src="./src/logo.svg" link="#"/></h1>
 
 <p align=center>
-    <a href="./CHANGELOG.md"><img alt="Version" src="https://img.shields.io/badge/version-0.1.7-green.svg"/></a>
+    <a href="./CHANGELOG.md"><img alt="Version" src="https://img.shields.io/badge/version-0.2.0-green.svg"/></a>
     <a href="https://lucka.moe/PSCI"><img alt="Demo" src="https://img.shields.io/badge/demo-unavailable-red.svg"/></a>
     <a href="https://lucka.moe"><img alt="Author" src="https://img.shields.io/badge/author-Lucka-2578B5.svg"/></a>
     <a href="./LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-A31F34.svg"/></a><br>
@@ -21,7 +21,7 @@
 </p>
 
 ## Description
-A web application to check the portal submission mails from the gmail inbox and present their status.
+A web application to check the portal nomination mails from the gmail inbox and present their status.
 
 ## Requirement
 - [Lucka's CSS](https://github.com/lucka-me/toolkit/tree/master/Web/CSS)  

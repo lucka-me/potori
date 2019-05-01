@@ -11,6 +11,9 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
             integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"
         />
+        <!-- Mapbox -->
+        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.css' rel='stylesheet' />
+
     </head>
     <body class="fullheight">
         <div class="flex-box bg-primary fullwidth">
@@ -47,39 +50,42 @@
             </div>
         </div>
 
-        <div class="flex-1 flex-box margin-left-8">
+        <div class="main-box">
+
+            <div id="map"></div>
 
             <template id="templateCard">
-                <div class="card">
-                    <div class="fullwidth"><img id="portalImg" src=""></img></div>
-                    <div class="frame-12 flex-box flex-dir-col fullwidth">
-                        <div class="flex-box fullwidth a-c">
-                            <div class="font-20" id="portalTitle">Test Title</div>
-                            <a href="" target="_blank" class="font-20" id="portalTitleLink" hidden>Linked Title</a>
-                            <div class="split"></div>
-                            <a href="" target="_blank" id="bsLink">
-                                <div id="statusIconDiv"><i class="fas fa-check-circle fa-fw fa-2x" id="statusIcon"></i></div>
-                                <div id="statusIconStackDiv" hidden>
-                                    <span class="fa-stack status-rejected">
-                                        <i class="fas fa-circle fa-stack-2x" style="vertical-align: top;"></i>
-                                        <i class="fas fa-clone fa-stack-1x fa-inverse" id="statusIconStack"></i>
-                                    </span>
+                <div class="list-item">
+                    <img id="portalImg" src=""></img>
+                    <div id="card" class="card">
+                        <div class="frame-12 flex-box flex-dir-col">
+                            <div class="flex-box fullwidth a-c">
+                                <div class="font-20" id="portalTitle">Test Title</div>
+                                <a href="" target="_blank" class="font-20" id="portalTitleLink" hidden>Linked Title</a>
+                                <div class="split"></div>
+                                <a href="" target="_blank" id="bsLink">
+                                    <div id="statusIconStackDiv">
+                                        <span class="fa-stack status-rejected" id="statusIconSpan">
+                                            <i class="fas fa-circle fa-stack-2x" style="vertical-align: top;"></i>
+                                            <i class="fas fa-clone fa-stack-1x fa-inverse" id="statusIconStack"></i>
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div style="height:8px;width:100%;"></div>
+                            <div class="flex-box flex-dir-col fullwidth">
+                                <div class="flex-box a-c margin-right-8">
+                                    <i class="fas fa-cloud-upload-alt fa-fw"></i>
+                                    <div class="margin-left-4" id="portalConfirmedTime">2019-01-01</div>
                                 </div>
-                            </a>
-                        </div>
-                        <div style="height:8px;width:100%;"></div>
-                        <div class="flex-box flex-warp fullwidth">
-                            <div class="flex-box a-c margin-right-8">
-                                <i class="fas fa-cloud-upload-alt fa-fw"></i>
-                                <div class="margin-left-4" id="portalConfirmedTime">2019-01-01</div>
-                            </div>
-                            <div class="flex-box a-c margin-right-8">
-                                <i class="fas fa-clock fa-fw"></i>
-                                <div class="margin-left-4" id="portalInterval">31 days</div>
-                            </div>
-                            <div class="flex-box a-c" id="portalFinalBox">
-                                <i class="fas fa-check fa-fw" id="portalFinalIcon"></i>
-                                <div class="margin-left-4" id="portalFinalTime">2019-02-01</div>
+                                <div class="flex-box a-c margin-right-8">
+                                    <i class="fas fa-clock fa-fw"></i>
+                                    <div class="margin-left-4" id="portalInterval">31 days</div>
+                                </div>
+                                <div class="flex-box a-c" id="portalFinalBox">
+                                    <i class="fas fa-check fa-fw" id="portalFinalIcon"></i>
+                                    <div class="margin-left-4" id="portalFinalTime">2019-02-01</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -92,7 +98,7 @@
         <div class="footer">
             <div class="frame-16">
                 <div class="flex-box text-nowarp a-baseline">
-                    <a class="footer-item" href="https://github.com/lucka-me/PSCI/blob/master/CHANGELOG.md" title="Changelog">0.1.7</a>
+                    <a class="footer-item" href="https://github.com/lucka-me/PSCI/blob/master/CHANGELOG.md" title="Changelog">0.2.0</a>
                     <a class="footer-item" href="https://github.com/lucka-me/PSCI" title="GitHub">
                         <i class="fab fa-github fa-lg"></i>
                     </a>
@@ -105,5 +111,6 @@
         <!--Scripts-->
         <script type="text/javascript" src="./lib/main.js"></script>
         <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+        <script async defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.js" onload="loadMap()"></script>
     </body>
 </html>

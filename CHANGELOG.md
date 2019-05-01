@@ -1,4 +1,14 @@
 # Changelog
+```markdown
+## [0.2.0] - 2018-05-01
+UI updated with some new features
+
+### Added
+- A map to display the nominations with results
+
+### Changed
+- The main UI
+```
 
 ```markdown
 ## [0.1.7] - 2018-01-18
