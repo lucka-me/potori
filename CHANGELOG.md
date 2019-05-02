@@ -1,5 +1,17 @@
 # Changelog
 ```markdown
+## [0.2.1] - 2018-05-03
+New feature: Filter
+
+### Added
+- A filter to hide / display accepted, rejected or pending nominations
+
+### Changed
+- UI improved
+- Data structure optimized
+```
+
+```markdown
 ## [0.2.0] - 2018-05-01
 UI updated with some new features
 
