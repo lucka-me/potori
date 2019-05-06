@@ -1,5 +1,13 @@
 # Changelog
 ```markdown
+## [0.2.2] - 2018-05-06
+Optimized for portrait orientation like mobile phone
+
+### Changed
+- UI optimized for portrait orientation
+```
+
+```markdown
 ## [0.2.1] - 2018-05-03
 New feature: Filter
 

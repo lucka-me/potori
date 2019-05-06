@@ -42,22 +42,29 @@ button, .button { font-family: 'Exo', sans-serif; }
 .main-box {
     flex: 1;
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: row wrap;
 }
 
 #map {
     flex: 2;
     height: 100%;
+    min-width: 400px;
+}
+
+@media screen and (max-width: 800px) {
+    #map { height: 40% !important; }
+    #cardList { height: 60% !important; }
 }
 
 /* Card Suit */
 #cardList {
+    flex: 1;
     background-color: #E5E5E5;
     display: flex;
     flex-flow: column nowrap;
     align-content: flex-start;
     overflow-y: scroll;
-    width: auto;
+    min-width: 400px;
     height: 100%;
 }
 
@@ -69,10 +76,10 @@ button, .button { font-family: 'Exo', sans-serif; }
 }
 
 .card {
+    flex: 1;
     border-radius: 4px;
     box-shadow: 0 2px 2px 1px #C0C0C0;
     background-color: #FFF;
-    width: 300px;
     margin: 0;
     display: flex;
     flex-direction: column;
