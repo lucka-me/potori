@@ -1,5 +1,13 @@
 # Changelog
 ```markdown
+## [0.2.3] - 2018-05-06
+Fixed min-width
+
+### Fixed
+- Changed min-width from 400px to 300px to avoid overflow on mobile
+```
+
+```markdown
 ## [0.2.2] - 2018-05-06
 Optimized for portrait orientation like mobile phone
 

@@ -48,10 +48,10 @@ button, .button { font-family: 'Exo', sans-serif; }
 #map {
     flex: 2;
     height: 100%;
-    min-width: 400px;
+    min-width: 300px;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 600px) {
     #map { height: 40% !important; }
     #cardList { height: 60% !important; }
 }
@@ -64,7 +64,7 @@ button, .button { font-family: 'Exo', sans-serif; }
     flex-flow: column nowrap;
     align-content: flex-start;
     overflow-y: scroll;
-    min-width: 400px;
+    min-width: 300px;
     height: 100%;
 }
 
