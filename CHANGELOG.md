@@ -1,5 +1,13 @@
 # Changelog
 ```markdown
+## [0.2.4] - 2018-05-11
+Fixed confirmation time of pending portals
+
+### Fixed
+- Confirmation time of pending portals are displayed as Invalid Date
+```
+
+```markdown
 ## [0.2.3] - 2018-05-06
 Fixed min-width
 
