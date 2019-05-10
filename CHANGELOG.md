@@ -1,5 +1,13 @@
 # Changelog
 ```markdown
+## [0.2.5] - 2018-05-11
+Fixed: scroll to card
+
+### Fixed
+- Won't scroll to the card when click marker
+```
+
+```markdown
 ## [0.2.4] - 2018-05-11
 Fixed confirmation time of pending portals
 
