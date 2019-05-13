@@ -30,32 +30,68 @@
         </div>
         <div class="flex-box bgl-primary fullwidth flex-just-c">
             <table class="frame-16 min-w-200">
-                <caption class="at-c" id="consoleStatus">Loading resource...</caption>
-                <tr id="consoleReceivedRow" hidden>
-                    <td>Received</td>
-                    <td id="consoleReceivedCount" class="at-r">0</td>
-                    <td></td>
+                <caption class="at-c" id="controlStatus">Loading resource...</caption>
+                <tr id="controlReceivedRow" hidden>
                     <td>
-                        <i class="cursor-pointer fas fa-angle-double-up" style="display:none;" id="consoleCollapseAll" onclick="onClickCollapseAll()"></i>
+                        <i class="cursor-pointer fas fa-angle-double-up fa-fw" style="display:none;" id="controlCollapseAll" onclick="onClickCollapseAll()"></i>
+                    </td>
+                    <td>Received</td>
+                    <td id="controlReceivedCount" class="at-r">0</td>
+                    <td></td>
+                </tr>
+                <tr id="controlAcceptedRow" hidden>
+                    <td></td>
+                    <td>Accepted</td>
+                    <td id="controlAcceptedCount" class="at-r">0</td>
+                    <td>
+                        <input type="checkbox" id="controlAcceptedCheckShow" class="margin-0" checked disabled/>
                     </td>
                 </tr>
-                <tr id="consoleAcceptedRow" hidden>
-                    <td>Accepted</td>
-                    <td id="consoleAcceptedCount" class="at-r">0</td>
-                    <td><input type="checkbox" id="consoleCheckShowAccepted" class="margin-0" checked onchange="onChangeShowAccepted()" disabled/></td>
-                    <td></td>
-                </tr>
-                <tr id="consoleRejectedRow" hidden>
+                <tr id="controlRejectedRow" hidden>
+                    <td>
+                        <i class="cursor-pointer fas fa-angle-double-up fa-fw" style="display:none;" id="controlCollapseRejectedReasonAll" onclick="onClickCollapseRejectedReason()"></i>
+                    </td>
                     <td>Rejected</td>
-                    <td id="consoleRejectedCount" class="at-r">0</td>
-                    <td><input type="checkbox" id="consoleCheckShowRejected" class="margin-0" checked onchange="onChangeShowRejected()" disabled/></td>
-                    <td></td>
+                    <td id="controlRejectedCount" class="at-r">0</td>
+                    <td>
+                        <input type="checkbox" id="controlRejectedCheckShow" class="margin-0" checked disabled/>
+                    </td>
                 </tr>
-                <tr id="consolePendingRow" hidden>
-                    <td>Pending</td>
-                    <td id="consolePendingCount" class="at-r">0</td>
-                    <td><input type="checkbox" id="consoleCheckShowPending" class="margin-0" checked onchange="onChangeShowPending()" disabled/></td>
+                <tr id="controlRejectedReasonAllRow" hidden>
                     <td></td>
+                    <td colspan="3">
+                        <table class="fullwidth">
+                            <tr id="controlRejectedReasonUndeclaredRow" class="at-r" hidden>
+                                <td>
+                                    <i class="fas fa-question fa-fw" title="Undeclared"></i>
+                                </td>
+                                <td id="controlRejectedReasonUndeclaredCount">0</td>
+                                <td><input type="checkbox" id="controlRejectedReasonUndeclaredCheckShow" class="margin-0" checked disabled/></td>
+                            </tr>
+                            <tr id="controlRejectedReasonDuplicatedRow" class="at-r" hidden>
+                                <td>
+                                    <i class="fas fa-clone fa-fw" title="Duplicated"></i>
+                                </td>
+                                <td id="controlRejectedReasonDuplicatedCount">0</td>
+                                <td><input type="checkbox" id="controlRejectedReasonDuplicatedCheckShow" class="margin-0" checked disabled/></td>
+                            </tr>
+                            <tr id="controlRejectedReasonTooCloseRow" class="at-r" hidden>
+                                <td>
+                                    <i class="fas fa-arrows-alt-h fa-fw" title="Too Close"></i>
+                                </td>
+                                <td id="controlRejectedReasonTooCloseCount">0</td>
+                                <td><input type="checkbox" id="controlRejectedReasonTooCloseCheckShow" class="margin-0" checked disabled/></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr id="controlPendingRow" hidden>
+                    <td></td>
+                    <td>Pending</td>
+                    <td id="controlPendingCount" class="at-r">0</td>
+                    <td>
+                        <input type="checkbox" id="controlPendingCheckShow" class="margin-0" checked disabled/>
+                    </td>
                 </tr>
             </table>
         </div>
@@ -108,7 +144,7 @@
         <div class="footer">
             <div class="frame-16">
                 <div class="flex-box text-nowarp a-baseline">
-                    <a class="footer-item" href="https://github.com/lucka-me/PSCI/blob/master/CHANGELOG.md" title="Changelog">0.2.6</a>
+                    <a class="footer-item" href="https://github.com/lucka-me/PSCI/blob/master/CHANGELOG.md" title="Changelog">0.2.7</a>
                     <a class="footer-item" href="https://github.com/lucka-me/PSCI" title="GitHub">
                         <i class="fab fa-github fa-lg"></i>
                     </a>

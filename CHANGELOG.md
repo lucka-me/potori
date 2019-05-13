@@ -1,5 +1,17 @@
 # Changelog
 ```markdown
+## [0.2.7] - 2018-05-13
+New feature: Filter & statics for rejected portals classified by the reason
+
+### Add
+- Classify the rejected portal by reason
+
+### Changed
+- Id of elements: "console" -> "control"
+- Pack dozens of objects into three main objects
+```
+
+```markdown
 ## [0.2.6] - 2018-05-13
 Collapsible in console
 
