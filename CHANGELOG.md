@@ -1,5 +1,19 @@
 # Changelog
 ```markdown
+## [0.2.6] - 2018-05-13
+Collapsible in console
+
+### Add
+- A button in console to collapse the rows
+
+### Changed
+- Id of elements: "psci" -> "console"
+
+### Fixed
+- Issues when there is no acceptance or rejection mail - not tested yet
+```
+
+```markdown
 ## [0.2.5] - 2018-05-11
 Fixed: scroll to card
 

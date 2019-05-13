@@ -30,26 +30,32 @@
         </div>
         <div class="flex-box bgl-primary fullwidth flex-just-c">
             <table class="frame-16 min-w-200">
-                <caption class="at-c" id="psciStatus">Loading resource...</caption>
-                <tr id="psciReceivedRow" hidden>
+                <caption class="at-c" id="consoleStatus">Loading resource...</caption>
+                <tr id="consoleReceivedRow" hidden>
                     <td>Received</td>
-                    <td id="psciReceivedCount" class="at-r">0</td>
+                    <td id="consoleReceivedCount" class="at-r">0</td>
+                    <td></td>
+                    <td>
+                        <i class="cursor-pointer fas fa-angle-double-up" style="display:none;" id="consoleCollapseAll" onclick="onClickCollapseAll()"></i>
+                    </td>
+                </tr>
+                <tr id="consoleAcceptedRow" hidden>
+                    <td>Accepted</td>
+                    <td id="consoleAcceptedCount" class="at-r">0</td>
+                    <td><input type="checkbox" id="consoleCheckShowAccepted" class="margin-0" checked onchange="onChangeShowAccepted()" disabled/></td>
                     <td></td>
                 </tr>
-                <tr id="psciAcceptedRow" hidden>
-                    <td>Accepted</td>
-                    <td id="psciAcceptedCount" class="at-r">0</td>
-                    <td><input type="checkbox" id="psciCheckShowAccepted" class="margin-0" checked onchange="onChangeShowAccepted()" disabled/></td>
-                </tr>
-                <tr id="psciRejectedRow" hidden>
+                <tr id="consoleRejectedRow" hidden>
                     <td>Rejected</td>
-                    <td id="psciRejectedCount" class="at-r">0</td>
-                    <td><input type="checkbox" id="psciCheckShowRejected" class="margin-0" checked onchange="onChangeShowRejected()" disabled/></td>
+                    <td id="consoleRejectedCount" class="at-r">0</td>
+                    <td><input type="checkbox" id="consoleCheckShowRejected" class="margin-0" checked onchange="onChangeShowRejected()" disabled/></td>
+                    <td></td>
                 </tr>
-                <tr id="psciPendingRow" hidden>
+                <tr id="consolePendingRow" hidden>
                     <td>Pending</td>
-                    <td id="psciPendingCount" class="at-r">0</td>
-                    <td><input type="checkbox" id="psciCheckShowPending" class="margin-0" checked onchange="onChangeShowPending()" disabled/></td>
+                    <td id="consolePendingCount" class="at-r">0</td>
+                    <td><input type="checkbox" id="consoleCheckShowPending" class="margin-0" checked onchange="onChangeShowPending()" disabled/></td>
+                    <td></td>
                 </tr>
             </table>
         </div>
@@ -102,7 +108,7 @@
         <div class="footer">
             <div class="frame-16">
                 <div class="flex-box text-nowarp a-baseline">
-                    <a class="footer-item" href="https://github.com/lucka-me/PSCI/blob/master/CHANGELOG.md" title="Changelog">0.2.5</a>
+                    <a class="footer-item" href="https://github.com/lucka-me/PSCI/blob/master/CHANGELOG.md" title="Changelog">0.2.6</a>
                     <a class="footer-item" href="https://github.com/lucka-me/PSCI" title="GitHub">
                         <i class="fab fa-github fa-lg"></i>
                     </a>
