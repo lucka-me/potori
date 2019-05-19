@@ -106,7 +106,11 @@ button, .button { font-family: 'Exo', sans-serif; }
     margin: 4px;
 }
 
-#portalTitleLink {
+#portalTitleLink, .link {
     color: #000;
     text-decoration: none;
+}
+
+.link:hover {
+    text-decoration: underline;
 }

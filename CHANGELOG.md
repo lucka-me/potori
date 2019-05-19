@@ -1,5 +1,16 @@
 # Changelog
 ```markdown
+## [0.2.8] - 2018-05-19
+Hide rejection reason filters by default
+
+### Add
+- An intro page, required by OAuth consent screen
+
+### Changed
+- Hide rejection reason filters when process finishes
+```
+
+```markdown
 ## [0.2.7] - 2018-05-13
 New feature: Filter & statics for rejected portals classified by the reason
 
