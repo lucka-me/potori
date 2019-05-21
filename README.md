@@ -1,27 +1,26 @@
 <h1 align=center><img height=64px src="./src/logo.svg" link="#"/></h1>
 
-<p align=center>
-    <a href="./CHANGELOG.md"><img alt="Version" src="https://img.shields.io/badge/version-0.2.7-green.svg"/></a>
-    <a href="https://lucka.moe/PSCI"><img alt="Demo" src="https://img.shields.io/badge/demo-unavailable-red.svg"/></a>
-    <a href="https://lucka.moe"><img alt="Author" src="https://img.shields.io/badge/author-Lucka-2578B5.svg"/></a>
-    <a href="./LICENSE"><img alt="License" src="https://img.shields.io/badge/license-MIT-A31F34.svg"/></a><br>
-    <a href="https://www.apple.com/safari/"><img alt="Safari Support" src="https://img.shields.io/badge/safari-support-brightgreen.svg"/></a>
-  <a href="https://www.google.com/chrome/"><img alt="Chrome Support" src="https://img.shields.io/badge/chrome-support-brightgreen.svg"/></a>
-  <!--<a href="https://www.mozilla.org/firefox/"><img alt="Firefox Support" src="https://img.shields.io/badge/firefox-support-brightgreen.svg"/></a>
-  <a href="https://www.microsoft.com/windows/microsoft-edge"><img alt="Edge Support" src="https://img.shields.io/badge/edge-support-brightgreen.svg"/></a>
-  <a href="http://microsoft.com/ie"><img alt="IE Broken" src="https://img.shields.io/badge/ie-broken-red.svg"/></a>
-  <a href="https://www.opera.com/"><img alt="Opera Support" src="https://img.shields.io/badge/opera-support-brightgreen.svg"/></a>-->
+[![](https://img.shields.io/badge/version-0.2.8-green.svg)](./CHANGELOG.md "Changelog") [![](https://img.shields.io/badge/demo-unavailable-red.svg)](https://lucka.moe/PSCI "Demo") [![](https://img.shields.io/badge/author-Lucka-2578B5.svg)](https://lucka.moe "Author") [![](https://img.shields.io/badge/license-MIT-A31F34.svg)](./LICENSE "License")
+[![](https://img.shields.io/badge/safari-support-brightgreen.svg)](https://www.apple.com/safari/ "Safari Support") [![](https://img.shields.io/badge/chrome-support-brightgreen.svg)]("https://www.google.com/chrome/ "Chrome Support")<!-- [![](https://img.shields.io/badge/firefox-support-brightgreen.svg)]("https://www.mozilla.org/firefox/ "Firefox Support") [![](https://img.shields.io/badge/edge-support-brightgreen.svg)]("https://www.microsoft.com/windows/microsoft-edge "Edge Support") [![](https://img.shields.io/badge/ie-broken-red.svg)]("http://microsoft.com/ie "IE Broken") [![](https://img.shields.io/badge/opera-support-brightgreen.svg)]("https://www.opera.com/ "Opera Support")-->
 
-</p>
-
-<p align=center>
-    Portal Submission Checker for Ingress<br/>
-    <strong>Due to Google's policy, the demo page could not work until the OAuth page is verified.</strong><br/>
-    You can clone the repository to your computer, <a href="https://developers.google.com/gmail/api/quickstart/js" title="Browser Quickstart | Gmail API | Google Developers">replace the API key and Client ID with your own</a> and host it.
+Portal Submission Checker for Ingress  
+**Due to Google's policy, the demo page could not work until the OAuth screen is verified.**  
+You can download the repository to your computer, open the **[/docs](./docs) folder** [and host it](https://developers.google.com/gmail/api/quickstart/js "Browser Quickstart | Gmail API | Google Developers").
 </p>
 
 ## Description
 A web application to check the portal nomination mails from the gmail inbox and present their status.
+
+## Notice
+I've got some ideas for the next major version of PSCI and am working on it. The files of version `0.2.8` are moved into the [/docs](./docs) folder and will be used to build the [demo page](https://lucka.moe/PSCI) for Google OAuth screen verification.
+
+### The Next Version
+Here are some of my ideas for the next version.
+- [ ] Re-organize the current code
+- [ ] Support nominations from Ingress Prime
+- [ ] Save/load data to/from file
+- [ ] Saving/load data to/from Google Drive
+- [ ] Fetch data from OPR Brainstorming database
 
 ## Requirement
 - [Lucka's CSS](https://github.com/lucka-me/toolkit/tree/master/Web/CSS)  
