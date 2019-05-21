@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="utf-8" />
+    <head>
+        <title>Portal Submission Checker for Ingress</title>
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1"/>
+        <!-- Stylesheet -->
+        <link type="text/css" rel="stylesheet" href="https://lucka.moe/toolkit/css/common.css" />
+        <link type="text/css" rel="stylesheet" href="./css/extended.css" />
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Exo" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
+            integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"
+        />
+        <!-- Mapbox -->
+        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.css' rel='stylesheet' />
+
+    </head>
+    <body class="fullheight">
+        <div class="flex-box bg-primary fullwidth">
+            <div class="flex-box frame-16">
+                <img class="logo" src="./src/logo-white.svg"></img>
+            </div>
+            <div class="split"></div>
+            <button type="button" class="header-button bg-primary bgd-primary-ho textwhite" hidden="true" id="buttonAuth" title="Authorize">
+                <i class="frame-16 fas fa-sign-in-alt fa-lg"></i>
+            </button>
+            <button type="button" class="header-button bg-primary bgd-primary-ho textwhite" hidden="true" id="buttonSignout" title="Sign out">
+                <i class="frame-16 fas fa-sign-out-alt fa-lg"></i>
+            </button>
+        </div>
+        <div class="flex-box bgl-primary fullwidth flex-just-c">
+            <table class="frame-16 min-w-200">
+                <caption class="at-c" id="controlStatus">Loading resource...</caption>
+                <tr id="controlReceivedRow" hidden>
+                    <td>
+                        <i class="cursor-pointer fas fa-angle-double-up fa-fw" style="display:none;" id="controlCollapseAll" onclick="onClickCollapseAll()"></i>
+                    </td>
+                    <td>Received</td>
+                    <td id="controlReceivedCount" class="at-r">0</td>
+                    <td></td>
+                </tr>
+                <tr id="controlAcceptedRow" hidden>
+                    <td></td>
+                    <td>Accepted</td>
+                    <td id="controlAcceptedCount" class="at-r">0</td>
+                    <td>
+                        <input type="checkbox" id="controlAcceptedCheckShow" class="margin-0" checked disabled/>
+                    </td>
+                </tr>
+                <tr id="controlRejectedRow" hidden>
+                    <td>
+                        <i class="cursor-pointer fas fa-angle-double-down fa-fw" style="display:none;" id="controlCollapseRejectedReasonAll" onclick="onClickCollapseRejectedReason()"></i>
+                    </td>
+                    <td>Rejected</td>
+                    <td id="controlRejectedCount" class="at-r">0</td>
+                    <td>
+                        <input type="checkbox" id="controlRejectedCheckShow" class="margin-0" checked disabled/>
+                    </td>
+                </tr>
+                <tr id="controlRejectedReasonAllRow" hidden>
+                    <td></td>
+                    <td colspan="3">
+                        <table class="fullwidth">
+                            <tr id="controlRejectedReasonUndeclaredRow" class="at-r" hidden>
+                                <td>
+                                    <i class="fas fa-question fa-fw" title="Undeclared"></i>
+                                </td>
+                                <td id="controlRejectedReasonUndeclaredCount">0</td>
+                                <td><input type="checkbox" id="controlRejectedReasonUndeclaredCheckShow" class="margin-0" checked disabled/></td>
+                            </tr>
+                            <tr id="controlRejectedReasonDuplicatedRow" class="at-r" hidden>
+                                <td>
+                                    <i class="fas fa-clone fa-fw" title="Duplicated"></i>
+                                </td>
+                                <td id="controlRejectedReasonDuplicatedCount">0</td>
+                                <td><input type="checkbox" id="controlRejectedReasonDuplicatedCheckShow" class="margin-0" checked disabled/></td>
+                            </tr>
+                            <tr id="controlRejectedReasonTooCloseRow" class="at-r" hidden>
+                                <td>
+                                    <i class="fas fa-arrows-alt-h fa-fw" title="Too Close"></i>
+                                </td>
+                                <td id="controlRejectedReasonTooCloseCount">0</td>
+                                <td><input type="checkbox" id="controlRejectedReasonTooCloseCheckShow" class="margin-0" checked disabled/></td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+                <tr id="controlPendingRow" hidden>
+                    <td></td>
+                    <td>Pending</td>
+                    <td id="controlPendingCount" class="at-r">0</td>
+                    <td>
+                        <input type="checkbox" id="controlPendingCheckShow" class="margin-0" checked disabled/>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="main-box">
+
+            <div id="map"></div>
+
+            <template id="templateCard">
+                <div class="list-item">
+                    <img id="portalImg" src=""></img>
+                    <div id="card" class="card">
+                        <div class="frame-12 flex-box flex-dir-col">
+                            <div class="flex-box fullwidth a-c">
+                                <div class="font-20" id="portalTitle">Test Title</div>
+                                <a href="" target="_blank" class="font-20" id="portalTitleLink" hidden>Linked Title</a>
+                                <div class="split"></div>
+                                <a href="" target="_blank" id="bsLink">
+                                    <div id="statusIconStackDiv">
+                                        <span class="fa-stack status-rejected" id="statusIconSpan">
+                                            <i class="fas fa-circle fa-stack-2x" style="vertical-align: top;"></i>
+                                            <i class="fas fa-clone fa-stack-1x fa-inverse" id="statusIconStack"></i>
+                                        </span>
+                                    </div>
+                                </a>
+                            </div>
+                            <div style="height:8px;width:100%;"></div>
+                            <div class="flex-box flex-dir-col fullwidth">
+                                <div class="flex-box a-c margin-right-8">
+                                    <i class="fas fa-cloud-upload-alt fa-fw"></i>
+                                    <div class="margin-left-4" id="portalConfirmedTime">2019-01-01</div>
+                                </div>
+                                <div class="flex-box a-c margin-right-8">
+                                    <i class="fas fa-clock fa-fw"></i>
+                                    <div class="margin-left-4" id="portalInterval">31 days</div>
+                                </div>
+                                <div class="flex-box a-c" id="portalFinalBox">
+                                    <i class="fas fa-check fa-fw" id="portalFinalIcon"></i>
+                                    <div class="margin-left-4" id="portalFinalTime">2019-02-01</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </template>
+
+            <div id="cardList"></div>
+        </div>
+
+        <div class="footer">
+            <div class="frame-16">
+                <div class="flex-box text-nowarp a-baseline">
+                    <a class="footer-item" href="./intro" target="_blank" title="Intro" >Intro</a>
+                    |
+                    <a class="footer-item" href="./privacy" target="_blank" title="Privacy Policy" >Privacy</a>
+                    <a class="footer-item" href="https://github.com/lucka-me/PSCI" target="_blank" title="GitHub">
+                        <i class="fab fa-github fa-lg"></i>
+                    </a>
+                    <a class="footer-item" href="https://lucka.moe" target="_blank" title="Blog" >Lucka</a>
+                    |
+                    <a class="footer-item" href="https://github.com/lucka-me/PSCI/blob/master/CHANGELOG.md" target="_blank" title="Changelog">0.2.8</a>
+                </div>
+            </div>
+        </div>
+        <!--Scripts-->
+        <script type="text/javascript" src="./lib/main.js"></script>
+        <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+        <script async defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.js" onload="loadMap()"></script>
+    </body>
+</html>
