@@ -36,12 +36,14 @@
                         <i class="cursor-pointer fas fa-angle-double-up fa-fw" style="display:none;" id="controlCollapseAll" onclick="ui.event.collapse.all()"></i>
                     </td>
                     <td>Received</td>
+                    <td id="controlRecievedProgressCell" class="at-r"><span id="controlRecievedProgressRedacted">0</span><br/><span id="controlRecievedProgressPrime">0</span></td>
                     <td id="controlReceivedCount" class="at-r">0</td>
                     <td></td>
                 </tr>
                 <tr id="controlAcceptedRow" hidden>
                     <td></td>
                     <td>Accepted</td>
+                    <td id="controlAcceptedProgressCell" class="at-r"><span id="controlAcceptedProgressRedacted">0</span><br/><span id="controlAcceptedProgressPrime">0</span></td>
                     <td id="controlAcceptedCount" class="at-r">0</td>
                     <td>
                         <input type="checkbox" id="controlAcceptedCheckShow" class="margin-0" checked disabled/>
@@ -52,6 +54,7 @@
                         <i class="cursor-pointer fas fa-angle-double-down fa-fw" style="display:none;" id="controlCollapseRejectedReasonAll" onclick="ui.event.collapse.rejectedReason()"></i>
                     </td>
                     <td>Rejected</td>
+                    <td id="controlRejectedProgressCell" class="at-r"><span id="controlRejectedProgressRedacted">0</span><br/><span id="controlRejectedProgressPrime">0</span></td>
                     <td id="controlRejectedCount" class="at-r">0</td>
                     <td>
                         <input type="checkbox" id="controlRejectedCheckShow" class="margin-0" checked disabled/>
@@ -158,6 +161,7 @@
         </div>
         <!--Scripts-->
         <script type="text/javascript" src="./lib/value.js"></script>
+        <script type="text/javascript" src="./lib/ui.js"></script>
         <script type="text/javascript" src="./lib/toolkit.js"></script>
         <script type="text/javascript" src="./lib/main.js"></script>
         <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};auth.handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>

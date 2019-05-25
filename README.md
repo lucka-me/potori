@@ -16,7 +16,7 @@ I've got some ideas for the next major version of PSCI and am working on it. The
 
 ### The Next Version
 Here are some of my ideas for the next version.
-- [ ] Re-organize the current code
+- [x] Re-organize the current code
 - [ ] Support nominations from Ingress Prime
 - [ ] Save/load data to/from file
 - [ ] Saving/load data to/from Google Drive
