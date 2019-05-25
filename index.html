@@ -33,7 +33,7 @@
                 <caption class="at-c" id="controlStatus">Loading resource...</caption>
                 <tr id="controlReceivedRow" hidden>
                     <td>
-                        <i class="cursor-pointer fas fa-angle-double-up fa-fw" style="display:none;" id="controlCollapseAll" onclick="onClickCollapseAll()"></i>
+                        <i class="cursor-pointer fas fa-angle-double-up fa-fw" style="display:none;" id="controlCollapseAll" onclick="ui.event.collapse.all()"></i>
                     </td>
                     <td>Received</td>
                     <td id="controlReceivedCount" class="at-r">0</td>
@@ -49,7 +49,7 @@
                 </tr>
                 <tr id="controlRejectedRow" hidden>
                     <td>
-                        <i class="cursor-pointer fas fa-angle-double-down fa-fw" style="display:none;" id="controlCollapseRejectedReasonAll" onclick="onClickCollapseRejectedReason()"></i>
+                        <i class="cursor-pointer fas fa-angle-double-down fa-fw" style="display:none;" id="controlCollapseRejectedReasonAll" onclick="ui.event.collapse.rejectedReason()"></i>
                     </td>
                     <td>Rejected</td>
                     <td id="controlRejectedCount" class="at-r">0</td>
@@ -128,9 +128,9 @@
                                     <i class="fas fa-clock fa-fw"></i>
                                     <div class="margin-left-4" id="portalInterval">31 days</div>
                                 </div>
-                                <div class="flex-box a-c" id="portalFinalBox">
-                                    <i class="fas fa-check fa-fw" id="portalFinalIcon"></i>
-                                    <div class="margin-left-4" id="portalFinalTime">2019-02-01</div>
+                                <div class="flex-box a-c" id="portalResultBox">
+                                    <i class="fas fa-check fa-fw" id="portalResultIcon"></i>
+                                    <div class="margin-left-4" id="portalResultTime">2019-02-01</div>
                                 </div>
                             </div>
                         </div>
@@ -158,6 +158,7 @@
         </div>
         <!--Scripts-->
         <script type="text/javascript" src="./lib/value.js"></script>
+        <script type="text/javascript" src="./lib/toolkit.js"></script>
         <script type="text/javascript" src="./lib/main.js"></script>
         <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};auth.handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
         <script async defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js" onload="ui.map.load()"></script>
