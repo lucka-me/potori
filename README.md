@@ -17,10 +17,10 @@ I've got some ideas for the next major version of PSCI and am working on it. The
 ### The Next Version
 Here are some of my ideas for the next version.
 - [x] Re-organize the current code
-- [ ] Support nominations from Ingress Prime
+- [x] Support nominations from Ingress Prime
 - [ ] Save/load data to/from file
 - [ ] Saving/load data to/from Google Drive
-- [ ] Fetch data from OPR Brainstorming database
+- [ ] Fetch data (location) from OPR Brainstorming database
 
 The mails of nominations from Ingress Prime is localized, so I need samples of mails in every language to find out the keywords used to query the mails and extract information from the body. The samples I've collected are saved in [/samples](./samples).
 
