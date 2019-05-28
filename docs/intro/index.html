@@ -26,7 +26,14 @@
                     PSCI (Portal Submission Checker for Ingress) is a web application to visualize your Ingress Portal nominations. With PSCI, <br/>
                     PSCI will obtain your mails related to Portal nominations from your Gmail inbox, so you must login with your account to use it.
                 </p>
-                <h2>Principle</h2>
+                <h2>Permission</h2>
+                <p>
+                    PSCI requires the following permission:
+                    <ul>
+                        <li><b>Gmail: Read Only</b><br/>This is the core permission on which PSCI is dependent. PSCI will obtain mails related to Ingress Portal nomination, then extract and display informations from them. PSCI will not send any of your data outside the browser page.</li>
+                    </ul>
+                </p>
+                <h2>Workflow</h2>
                 <p>
                     This part will describe how PSCI works.<br/>
                     For those mails related to Portals nominated from Scanner [REDACTED], the subjects and contents are generated from several templates, some keywords are used to filter mails and extract informations.<br/>
@@ -139,7 +146,7 @@
                     </li>
                     <li>The title is linked to the Intel Map.</li>
                     <li>
-                        The status icon<span class="fa-stack status-accepted" id="statusIconSpan"><i class="fas fa-circle fa-stack-2x" style="vertical-align: top;"></i><i class="fas fa-check fa-stack-1x fa-inverse" id="statusIconStack"></i></span> is linked to the Brainstorming Watermeter, and the icon will display the reason if the nomination is rejected.
+                        The status icon <span class="fa-stack status-accepted" id="statusIconSpan"><i class="fas fa-circle fa-stack-2x" style="vertical-align: top;"></i><i class="fas fa-check fa-stack-1x fa-inverse" id="statusIconStack"></i></span> is linked to the Brainstorming Watermeter, and the icon will display the reason if the nomination is rejected.
                     </li>
                 </ul>
                 <p>
