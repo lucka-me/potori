@@ -20,7 +20,7 @@ Here are some of my ideas for the next version.
 - [x] Support nominations from Ingress Prime
 - [ ] Save/load data to/from file
 - [ ] Saving/load data to/from Google Drive
-- [ ] Fetch data (location) from OPR Brainstorming database
+- [x] Fetch data (location) from OPR Brainstorming database
 
 The mails of nominations from Ingress Prime is localized, so I need samples of mails in every language to find out the keywords used to query the mails and extract information from the body. The samples I've collected are saved in [/samples](./samples).
 

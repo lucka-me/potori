@@ -166,5 +166,7 @@
         <script type="text/javascript" src="./lib/main.js"></script>
         <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};auth.handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
         <script async defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js" onload="ui.map.load()"></script>
+        <script src="https://www.gstatic.com/firebasejs/5.9.1/firebase-app.js" onload="firebaseKit.init()"></script>
+        <script async defer src="https://www.gstatic.com/firebasejs/5.9.1/firebase-database.js" onload="firebaseKit.loadReference()"></script>
     </body>
 </html>
