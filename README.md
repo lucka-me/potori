@@ -18,7 +18,7 @@ I've got some ideas for the next major version of PSCI and am working on it. The
 Here are some of my ideas for the next version.
 - [x] Re-organize the current code
 - [x] Support nominations from Ingress Prime
-- [ ] Save/load data to/from file
+- [x] Save/load data to/from file
 - [ ] Saving/load data to/from Google Drive
 - [x] Fetch data (location) from OPR Brainstorming database
 
