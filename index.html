@@ -12,7 +12,7 @@
             integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"
         />
         <!-- Mapbox -->
-        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.css' rel='stylesheet' />
+        <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.css" rel="stylesheet" />
 
     </head>
     <body class="fullheight">
@@ -21,11 +21,17 @@
                 <img class="logo" src="./src/logo-white.svg"></img>
             </div>
             <div class="split"></div>
+            <button type="button" class="header-button bg-primary bgd-primary-ho textwhite" hidden="true" id="buttonOpenFile" title="Open file" onclick="fileKit.onOpenFile()">
+                <i class="frame-16 fas fa-folder-open fa-fw fa-lg"></i>
+            </button>
+            <button type="button" class="header-button bg-primary bgd-primary-ho textwhite" hidden="true" id="buttonSaveFile" title="Save file" onclick="fileKit.onSaveFile()">
+                <i class="frame-16 fas fa-save fa-fw fa-lg"></i>
+            </button>
             <button type="button" class="header-button bg-primary bgd-primary-ho textwhite" hidden="true" id="buttonAuth" title="Authorize">
-                <i class="frame-16 fas fa-sign-in-alt fa-lg"></i>
+                <i class="frame-16 fas fa-sign-in-alt fa-fw fa-lg"></i>
             </button>
             <button type="button" class="header-button bg-primary bgd-primary-ho textwhite" hidden="true" id="buttonSignout" title="Sign out">
-                <i class="frame-16 fas fa-sign-out-alt fa-lg"></i>
+                <i class="frame-16 fas fa-sign-out-alt fa-fw fa-lg"></i>
             </button>
         </div>
         <div class="flex-box bgl-primary fullwidth flex-just-c">
@@ -163,6 +169,7 @@
         <script type="text/javascript" src="./lib/value.js"></script>
         <script type="text/javascript" src="./lib/ui.js"></script>
         <script type="text/javascript" src="./lib/toolkit.js"></script>
+        <script type="text/javascript" src="./lib/fileKit.js"></script>
         <script type="text/javascript" src="./lib/main.js"></script>
         <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};auth.handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
         <script async defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js" onload="ui.map.load()"></script>
