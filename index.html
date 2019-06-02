@@ -21,11 +21,14 @@
                 <img class="logo" src="./src/logo-white.svg"></img>
             </div>
             <div class="split"></div>
-            <button type="button" class="header-button bg-primary bgd-primary-ho textwhite" hidden="true" id="buttonOpenFile" title="Open file" onclick="fileKit.onOpenFile()">
+            <button type="button" class="header-button bg-primary bgd-primary-ho textwhite" hidden="true" id="buttonOpenFile" title="Open file" onclick="fileKit.local.onOpenFile()">
                 <i class="frame-16 fas fa-folder-open fa-fw fa-lg"></i>
             </button>
-            <button type="button" class="header-button bg-primary bgd-primary-ho textwhite" hidden="true" id="buttonSaveFile" title="Save file" onclick="fileKit.onSaveFile()">
+            <button type="button" class="header-button bg-primary bgd-primary-ho textwhite" hidden="true" id="buttonSaveFile" title="Save file" onclick="fileKit.local.onSaveFile()">
                 <i class="frame-16 fas fa-save fa-fw fa-lg"></i>
+            </button>
+            <button type="button" class="header-button bg-primary bgd-primary-ho textwhite" hidden="true" id="buttonUploadFile" title="Upload file" onclick="fileKit.googleDrive.onUploadFile()">
+                <i class="frame-16 fas fa-cloud-upload-alt fa-fw fa-lg"></i>
             </button>
             <button type="button" class="header-button bg-primary bgd-primary-ho textwhite" hidden="true" id="buttonAuth" title="Authorize">
                 <i class="frame-16 fas fa-sign-in-alt fa-fw fa-lg"></i>
