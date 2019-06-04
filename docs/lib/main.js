@@ -192,7 +192,7 @@ function requestRejectionMailList() {
 function requestMailList(query, callback) {
     var messages = [];
     var requestHandler = function(response) {
-        messages = messages.concat(response.result.messages);
+        if (response.result.messages) messages = messages.concat(response.result.messages);
         if (response.result.nextPageToken) {
             var request = getListRequest(query, response.result.nextPageToken);
             request.execute(requestHandler);
@@ -257,6 +257,7 @@ function processRejectionMails() {
 }
 
 function processMails(mailList, portalList, finishSingleCallback, additionalProcessForMailBody) {
+    if (portalList.length == mailList.length) checkToDisplayPortals();
     for (var i = 0; i < mailList.length; i++) {
         var request = gapi.client.gmail.users.messages.get({
             "userId": "me",
