@@ -5,7 +5,7 @@
 
 Portal Submission Checker for Ingress  
 **Due to Google's policy, the demo page could not work until the OAuth screen is verified.**  
-You can download the repository to your computer, open the **[/docs](./docs) folder** [and host it](https://developers.google.com/gmail/api/quickstart/js "Browser Quickstart | Gmail API | Google Developers").
+You can download the repository to your computer [and host it](https://developers.google.com/gmail/api/quickstart/js "Browser Quickstart | Gmail API | Google Developers").
 </p>
 
 ## Description
@@ -19,8 +19,9 @@ Here are some of my ideas for the next version.
 - [x] Re-organize the current code
 - [x] Support nominations from Ingress Prime
 - [x] Save/load data to/from file
-- [ ] Saving/load data to/from Google Drive :bangbang: (Don't know how to upload file at all :confounded:)
+- [x] Saving/load data to/from Google Drive
 - [x] Fetch data (location) from OPR Brainstorming database
+- [ ] Design the new logo
 
 The mails of nominations from Ingress Prime is localized, so I need samples of mails in every language to find out the keywords used to query the mails and extract information from the body. The samples I've collected are saved in [/samples](./samples).
 
