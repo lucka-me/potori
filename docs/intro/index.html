@@ -68,8 +68,7 @@
                             </li>
                             <li>
                                 The photo of the Portal is included in each mail, with its url in this format: <code>https://lh3.googleusercontent.com/a-very-long-uid</code><br/>
-                                The <i>very long uid</i> is important: it's used to not only show the photo along with the card, but also generate a <b>shorter uid</b>, a hash code, to identify the same Portal from different mails (such as confirmation mail and acceptance mail).<br/>
-                                Besides, the <b>shorter uid</b> could link to the data page (called <i>Watermeter</i>) in Brainstorming, a wondeful plugin for Ingress OPR, which may show you the opinions from some OPR volunteers who use the plugin.
+                                The <i>very long uid</i> is important: it's used to not only show the photo along with the card, but also generate a <b>shorter uid</b>, a hash code, to identify the same Portal from different mails (such as confirmation mail and acceptance mail).
                             </li>
                             <li>
                                 In the result mails (acceptance and rejection mails), there is always an <i>Intel Map link</i>, which contains the <b>coordinate of the Portal</b>. PSCI will extract the <b>coordinate</b> and display a <b>marker</b> on the map.
@@ -109,16 +108,14 @@
                         <div class="card">
                             <div class="frame-12 flex-box flex-dir-col">
                                 <div class="flex-box fullwidth a-c">
-                                    <a href="https://www.ingress.com/intel?ll=22.540779,114.051921&amp;amp;z=18" target="_blank" class="font-20" id="portalTitleLink">福田站</a>
+                                    <div class="font-20" id="portalTitle">福田站</div>
                                     <div class="split"></div>
-                                    <a href="http://kitten-114.getforge.io/watermeter.html#fbkqdrfsfm" target="_blank" id="bsLink">
-                                        <div>
-                                            <span class="fa-stack status-accepted" id="statusIconSpan">
-                                                <i class="fas fa-circle fa-stack-2x" style="vertical-align: top;"></i>
-                                                <i class="fas fa-check fa-stack-1x fa-inverse" id="statusIconStack"></i>
-                                            </span>
-                                        </div>
-                                    </a>
+                                    <div>
+                                        <span class="fa-stack status-accepted" id="statusIconSpan">
+                                            <i class="fas fa-circle fa-stack-2x" style="vertical-align: top;"></i>
+                                            <i class="fas fa-check fa-stack-1x fa-inverse" id="statusIconStack"></i>
+                                        </span>
+                                    </div>
                                 </div>
                                 <div style="height:8px;width:100%;"></div>
                                 <div class="flex-box flex-dir-col fullwidth">
@@ -144,13 +141,12 @@
                         When click the card, the map will fly to the corresponding location.<br/>
                         And when click the marker, the list will scroll to the corresponding card.
                     </li>
-                    <li>The title is linked to the Intel Map.</li>
                     <li>
-                        The status icon <span class="fa-stack status-accepted" id="statusIconSpan"><i class="fas fa-circle fa-stack-2x" style="vertical-align: top;"></i><i class="fas fa-check fa-stack-1x fa-inverse" id="statusIconStack"></i></span> is linked to the Brainstorming Watermeter, and the icon will display the reason if the nomination is rejected.
+                        The status icon <span class="fa-stack status-accepted" id="statusIconSpan"><i class="fas fa-circle fa-stack-2x" style="vertical-align: top;"></i><i class="fas fa-check fa-stack-1x fa-inverse" id="statusIconStack"></i></span>  displays the status of the portal or the reason if the nomination is rejected.
                     </li>
                 </ul>
                 <p>
-                    Moreover, you can hide some nominations by uncheck the filter in the status bar.
+                    Moreover, you can hide some nominations by unchecking the filter in the status bar.
                 </p>
                 <h2>Data Useage & Privacy</h2>
                 <p>
@@ -162,7 +158,7 @@
         <div class="footer">
             <div class=" frame-16">
                 <div class="flex-box text-nowarp a-baseline">
-                    <a class="footer-item" href="https://github.com/lucka-me/PSCI/blob/master/CHANGELOG.md" title="Changelog">0.2.8</a>
+                    <a class="footer-item" href="https://github.com/lucka-me/PSCI/blob/master/CHANGELOG.md" title="Changelog">0.2.9</a>
                     <a class="footer-item" href="https://github.com/lucka-me/PSCI" title="GitHub">
                         <i class="fab fa-github fa-lg"></i>
                     </a>

@@ -1,5 +1,13 @@
 # Changelog
 ```markdown
+## [0.2.9] - 2018-06-25
+Removed all features related to 3rd-party
+
+### Removed
+- Bs Watermeter link and Intel Map link
+```
+
+```markdown
 ## [0.2.8] - 2018-05-19
 Hide rejection reason filters by default
 

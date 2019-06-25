@@ -384,7 +384,6 @@ function displayPortals() {
         fillCardBasic(newCard, portal);
         newCard.getElementById("statusIconSpan").className = "fa-stack status-pending";
         newCard.getElementById("statusIconStack").className = "fas fa-ellipsis-h fa-stack-1x fa-inverse";
-        newCard.getElementById("portalTitle").innerHTML = portal.name;
         newCard.getElementById("portalInterval").innerHTML = Math.floor((new Date().getTime() - portal.confirmedTime) / (24 * 3600 * 1000)) + " days"
         newCard.getElementById("portalFinalBox").hidden = true;
         cardList.appendChild(newCard);
@@ -487,17 +486,13 @@ function getDateString(time) {
 
 function fillCardBasic(card, portal) {
     card.getElementById("card").id = "card_" + portal.bsId;
-    card.getElementById("bsLink").href = bsWatermeterPath + portal.bsId;
     card.getElementById("portalImg").src = imagePath + portal.url;
+    card.getElementById("portalTitle").innerHTML = portal.name;
     card.getElementById("portalConfirmedTime").innerHTML = getDateString(portal.confirmedTime);
 }
 
 function fillCardFinal(card, portal, iconElement) {
     card.getElementById("card_" + portal.bsId).onclick = function() { easeToMarker(portal.lngLat); };
-    card.getElementById("portalTitle").hidden = true;
-    card.getElementById("portalTitleLink").innerHTML = portal.name;
-    card.getElementById("portalTitleLink").href = portal.intel;
-    card.getElementById("portalTitleLink").hidden = false;
     card.getElementById("portalInterval").innerHTML = Math.floor((portal.time - portal.confirmedTime) / (24 * 3600 * 1000)) + " days"
     card.getElementById("portalFinalTime").innerHTML = getDateString(portal.time);
     

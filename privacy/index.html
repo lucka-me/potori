@@ -15,7 +15,7 @@
     <body>
         <div class="flex-box bg-primary fullwidth">
             <div class="flex-box frame-16 flex-justify-c">
-                <a href="../"><img class="logo" src="../src/logo-white.svg"></img></a>
+                <a href="../"><img class="logo" src="../src/logo.svg"></img></a>
                 <h1 class="textwhite margin-left-8">Privacy Policy</h1>
             </div>
         </div>
@@ -23,27 +23,35 @@
         <div class="flex-box">
             <div class="frame-16">
                 <p>
-                    Briefly, PSCI would not collect or upload any of your data.<br/>
+                    Briefly, Potori would not collect or upload any of your data, except you save/upload the data file manually.<br/>
                     All of your data will be handled inside your browser, and deleted when you close the page.<br/>
-                    I'm trying to protect your privacy with my knowledge, if you have any suggestion, please contact me or open an issue.
+                    I'm trying to protect your privacy with my knowledge, if you have any suggestion, please feel free to contact me or open an issue.
                 </p>
                 <h2>Data Usage</h2>
                 <p>
                     <ul>
                         <li><strong>Mails related to Portal nomination</strong><br/>
-                            PSCI will obtain and analyze confirmation, acceptance and rejection mails only.
+                            Potori will obtain and analyze confirmation, acceptance and rejection mails only.
                         </li>
-                        <li><strong>Subject, timestamp and body of the mails</strong><br/>
-                            The subject is used to obtain the title of the Portal.<br/>
-                            The timestamp is used to show the confirmation/acceptance/rejection time of the Portal submission, and also used to calculate interval between them (or submission and now, for pending Portals).<br/>
-                            The body of the mail is used to obtain the URL of Portal's image, which is used as UID of each portal and calculate hash code to create link to Brainstorming watermeter page.<br/>
-                            The body of acceptance & rejection mail is also used to obtain the intel link and coordinate to display a marker on the map, the body of rejection mail is also used to detect the reason of being rejected.
+                        <li><strong>Subject, timestamp and body of the mails</strong>
+                            <ul>
+                                <li>The mail ID will be used to avoid obtaining and processing the same mail in the next time (<b>Only when you save & open / upload the data file</b>).</li>
+                                <li>The subject is used to obtain the title of the Portal.</li>
+                                <li>The timestamp is used to show the confirmation/acceptance/rejection time of the Portal submission, and also used to calculate interval between them (or submission and now, for pending Portals).</li>
+                                <li>The body of the mail is used to obtain the URL of Portal's image, which is used as UID of each portal and to calculate hash code to create link to Brainstorming watermeter page. For those Portals without coordinates, Potori will query Brainstorming Firebase with the hash code, anoymously.</li>
+                                <li>The body of acceptance & rejection mail from Scanner [REDACTED] is also used to obtain the Intel Map link and coordinate to display a marker on the map.</li>
+                                <li>The body of rejection mail is also used to detect the reason of being rejected.</li>
+                            </ul>                            
                         </li>
                     </ul>
                 </p>
+                <h3>About the Data File</h3>
+                <p>
+                    To reduce the network traffic and time useage, Potori provides a feature which allows you to save the data file and upload it to a private app folder in your own Google Drive where only Potori could access. The informations contained in the file are described above.
+                </p>
                 <hr/>
                 <p>
-                    简而言之，PSCI 不会收集或上传您的任何数据。<br/>
+                    简而言之，Potori 不会收集或上传您的任何数据，除非您手动保存或上传数据文件。<br/>
                     您的所有数据将在您的浏览器内进行处理，当您关闭页面时，数据也会被清除。<br/>
                     在下尽力设法保护您的数据，如果您有任何建议，欢迎联系我或提出 Issue。
                 </p>
@@ -51,15 +59,23 @@
                 <p>
                     <ul>
                         <li><strong>与申请 Portal 有关的邮件</strong><br/>
-                            PSCI 仅会获取和分析确认邮件、通过邮件和拒绝邮件。
+                            Potori 仅会获取和分析确认邮件、通过邮件和拒绝邮件。
                         </li>
-                        <li><strong>邮件的主题、时间戳与内容</strong><br/>
-                            主题用于获取 Portal 的标题。<br/>
-                            时间戳用于展示 Portal 申请的确认/通过/拒绝时间，以及计算它们之间的时间差（对于未出结果的，计算确认邮件与当前的时间差）。<br/>
-                            邮件内容用于获取 Portal 照片的 URL，用于显示照片以及作为每个 Portal 的唯一识别码，此外还用于计算打开 Brainstorming 水表页面所需的 hash code。<br/>
-                            结果邮件的内容还用于获取 Intel 链接和用于在地图上显示标记的坐标，拒绝邮件的内容还用于检测拒绝原因。
+                        <li><strong>邮件的主题、时间戳与内容</strong>
+                            <ul>
+                                <li>邮件 ID 将在下次运行时被用于避免获取和处理已处理过的邮件（<b>仅在保存并加载了/上传了数据文件的情况下</b>）。</li>
+                                <li>主题用于获取 Portal 的标题。</li>
+                                <li>时间戳用于展示 Portal 申请的确认/通过/拒绝时间，以及计算它们之间的时间差（对于未出结果的，计算确认邮件与当前的时间差）。</li>
+                                <li> 邮件内容用于获取 Portal 照片的 URL，用于显示照片以及作为每个 Portal 的唯一识别码，此外还用于计算打开 Brainstorming 水表页面所需的 hash code。对于没有坐标的 Portal，Potori 会使用 hash code 匿名地查询 Brainstorming 的 Firebase 数据库。</li>
+                                <li>来自 Scanner [REDACTED] 的结果邮件的内容还用于获取 Intel Map 链接和用于在地图上显示标记的坐标</li>
+                                <li>拒绝邮件的内容还用于检测拒绝原因。</li>
+                            </ul>
                         </li>
                     </ul>
+                </p>
+                <h3>关于数据文件</h3>
+                <p>
+                    为了减少网络使用和处理时间，Potori提供了一个功能让您能够保存数据文件或将其上传至您的Google Drive中的一个仅限Potori访问的私有应用文件夹。文件中包含的信息如前文所述。
                 </p>
             </div>
         </div>
@@ -67,7 +83,7 @@
         <div class="footer">
             <div class=" frame-16">
                 <div class="flex-box text-nowarp a-baseline">
-                    <a class="footer-item" href="https://github.com/lucka-me/PSCI/blob/master/CHANGELOG.md" title="Changelog">0.2.8</a>
+                    <a class="footer-item" href="https://github.com/lucka-me/PSCI/blob/master/CHANGELOG.md" title="Changelog">0.3.0</a>
                     <a class="footer-item" href="https://github.com/lucka-me/PSCI" title="GitHub">
                         <i class="fab fa-github fa-lg"></i>
                     </a>
