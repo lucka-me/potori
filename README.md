@@ -1,31 +1,17 @@
-<h1 align=center><img height=64px src="./src/logo.svg" link="#"/></h1>
+<h1 align=center><img height=64px src="./docs/src/logo.svg" link="#"/></h1>
 
-[![](https://img.shields.io/badge/version-0.2.8-green.svg)](./CHANGELOG.md "Changelog") [![](https://img.shields.io/badge/demo-unavailable-red.svg)](https://lucka.moe/PSCI "Demo") [![](https://img.shields.io/badge/author-Lucka-2578B5.svg)](https://lucka.moe "Author") [![](https://img.shields.io/badge/license-MIT-A31F34.svg)](./LICENSE "License")  
-[![](https://img.shields.io/badge/safari-support-brightgreen.svg)](https://www.apple.com/safari/ "Safari Support") [![](https://img.shields.io/badge/chrome-support-brightgreen.svg)]("https://www.google.com/chrome/ "Chrome Support")<!-- [![](https://img.shields.io/badge/firefox-support-brightgreen.svg)]("https://www.mozilla.org/firefox/ "Firefox Support") [![](https://img.shields.io/badge/edge-support-brightgreen.svg)]("https://www.microsoft.com/windows/microsoft-edge "Edge Support") [![](https://img.shields.io/badge/ie-broken-red.svg)]("http://microsoft.com/ie "IE Broken") [![](https://img.shields.io/badge/opera-support-brightgreen.svg)]("https://www.opera.com/ "Opera Support")-->
-
-Portal Submission Checker for Ingress  
-**Due to Google's policy, the demo page could not work until the OAuth screen is verified.**  
-You can download the repository to your computer [and host it](https://developers.google.com/gmail/api/quickstart/js "Browser Quickstart | Gmail API | Google Developers").
-</p>
+[![](https://img.shields.io/badge/version-0.3.0-brightgreen.svg)](./CHANGELOG.md "Changelog") [![](https://img.shields.io/badge/demo-available-brightgreen.svg)](https://lucka.moe/PSCI "Demo") [![](https://img.shields.io/badge/author-Lucka-2578B5.svg)](https://lucka.moe "Author") [![](https://img.shields.io/badge/license-MIT-A31F34.svg)](./LICENSE "License")  
+![](https://img.shields.io/badge/safari-support-brightgreen.svg) ![](https://img.shields.io/badge/chrome-support-brightgreen.svg)<!-- ![](https://img.shields.io/badge/firefox-support-brightgreen.svg) ![](https://img.shields.io/badge/edge-support-brightgreen.svg) ![](https://img.shields.io/badge/ie-broken-red.svg) ![](https://img.shields.io/badge/opera-support-brightgreen.svg)-->
 
 ## Description
 A web application to check the portal nomination mails from the gmail inbox and present their status.
 
 ## Notice
-I've got some ideas for the next major version of PSCI and am working on it. The files of version `0.2.8` are moved into the [/docs](./docs) folder and will be used to build the [demo page](https://lucka.moe/PSCI) for Google OAuth screen verification.
+**The OAuth screen has been verified, so the demo page could work now.**  
+**However, due to Google's policy (which aims to protect your data), some features related to 3rd-party were removed in the demo page.**  
+You can download the repository [and host the full version in the root folder](https://developers.google.com/gmail/api/quickstart/js "Browser Quickstart | Gmail API | Google Developers"), I'm working on the guideline.
 
-### The Next Version
-Here are some of my ideas for the next version.
-- [x] Re-organize the current code
-- [x] Support nominations from Ingress Prime
-- [x] Save/load data to/from file
-- [x] Saving/load data to/from Google Drive
-- [x] Fetch data (location) from OPR Brainstorming database
-- [ ] Design the new logo
-
-The mails of nominations from Ingress Prime is localized, so I need samples of mails in every language to find out the keywords used to query the mails and extract information from the body. The samples I've collected are saved in [/samples](./samples).
-
-## Requirement
+## Dependencies
 - [Lucka's CSS](https://github.com/lucka-me/toolkit/tree/master/Web/CSS)  
   Provides basic stylesheet for the page currently.
 - [Gmail API](https://developers.google.com/gmail/api/)  

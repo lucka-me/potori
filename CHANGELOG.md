@@ -1,5 +1,17 @@
 # Changelog
 ```markdown
+## [0.3.0] - 2018-06-27
+Support Prime
+
+### Added
+- Support for Prime, partly
+
+### Changed
+- Re-constructed code
+- A lite version in /docs to meet the criteria of Google Trust & Safety Team
+```
+
+```markdown
 ## [0.2.9] - 2018-06-25
 Removed all features related to 3rd-party
 

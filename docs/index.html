@@ -12,7 +12,7 @@
             integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"
         />
         <!-- Mapbox -->
-        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.css' rel='stylesheet' />
+        <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.css' rel='stylesheet' />
 
     </head>
     <body class="fullheight">
@@ -21,11 +21,17 @@
                 <img class="logo" src="./src/logo-white.svg"></img>
             </div>
             <div class="split"></div>
+            <button type="button" class="header-button bg-primary bgd-primary-ho textwhite" hidden="true" id="buttonOpenFile" title="Open file" onclick="fileKit.local.onOpenFile()">
+                <i class="frame-16 fas fa-folder-open fa-fw fa-lg"></i>
+            </button>
+            <button type="button" class="header-button bg-primary bgd-primary-ho textwhite" hidden="true" id="buttonSaveFile" title="Save file" onclick="fileKit.local.onSaveFile()">
+                <i class="frame-16 fas fa-save fa-fw fa-lg"></i>
+            </button>
             <button type="button" class="header-button bg-primary bgd-primary-ho textwhite" hidden="true" id="buttonAuth" title="Authorize">
-                <i class="frame-16 fas fa-sign-in-alt fa-lg"></i>
+                <i class="frame-16 fas fa-sign-in-alt fa-fw fa-lg"></i>
             </button>
             <button type="button" class="header-button bg-primary bgd-primary-ho textwhite" hidden="true" id="buttonSignout" title="Sign out">
-                <i class="frame-16 fas fa-sign-out-alt fa-lg"></i>
+                <i class="frame-16 fas fa-sign-out-alt fa-fw fa-lg"></i>
             </button>
         </div>
         <div class="flex-box bgl-primary fullwidth flex-just-c">
@@ -33,15 +39,17 @@
                 <caption class="at-c" id="controlStatus">Loading resource...</caption>
                 <tr id="controlReceivedRow" hidden>
                     <td>
-                        <i class="cursor-pointer fas fa-angle-double-up fa-fw" style="display:none;" id="controlCollapseAll" onclick="onClickCollapseAll()"></i>
+                        <i class="cursor-pointer fas fa-angle-double-up fa-fw" style="display:none;" id="controlCollapseAll" onclick="ui.event.collapse.all()"></i>
                     </td>
                     <td>Received</td>
+                    <td id="controlRecievedProgressCell" class="at-r"><span id="controlRecievedProgressRedacted">0</span><br/><span id="controlRecievedProgressPrime">0</span></td>
                     <td id="controlReceivedCount" class="at-r">0</td>
                     <td></td>
                 </tr>
                 <tr id="controlAcceptedRow" hidden>
                     <td></td>
                     <td>Accepted</td>
+                    <td id="controlAcceptedProgressCell" class="at-r"><span id="controlAcceptedProgressRedacted">0</span><br/><span id="controlAcceptedProgressPrime">0</span></td>
                     <td id="controlAcceptedCount" class="at-r">0</td>
                     <td>
                         <input type="checkbox" id="controlAcceptedCheckShow" class="margin-0" checked disabled/>
@@ -49,9 +57,10 @@
                 </tr>
                 <tr id="controlRejectedRow" hidden>
                     <td>
-                        <i class="cursor-pointer fas fa-angle-double-down fa-fw" style="display:none;" id="controlCollapseRejectedReasonAll" onclick="onClickCollapseRejectedReason()"></i>
+                        <i class="cursor-pointer fas fa-angle-double-down fa-fw" style="display:none;" id="controlCollapseRejectedReasonAll" onclick="ui.event.collapse.rejectedReason()"></i>
                     </td>
                     <td>Rejected</td>
+                    <td id="controlRejectedProgressCell" class="at-r"><span id="controlRejectedProgressRedacted">0</span><br/><span id="controlRejectedProgressPrime">0</span></td>
                     <td id="controlRejectedCount" class="at-r">0</td>
                     <td>
                         <input type="checkbox" id="controlRejectedCheckShow" class="margin-0" checked disabled/>
@@ -125,9 +134,9 @@
                                     <i class="fas fa-clock fa-fw"></i>
                                     <div class="margin-left-4" id="portalInterval">31 days</div>
                                 </div>
-                                <div class="flex-box a-c" id="portalFinalBox">
-                                    <i class="fas fa-check fa-fw" id="portalFinalIcon"></i>
-                                    <div class="margin-left-4" id="portalFinalTime">2019-02-01</div>
+                                <div class="flex-box a-c" id="portalResultBox">
+                                    <i class="fas fa-check fa-fw" id="portalResultIcon"></i>
+                                    <div class="margin-left-4" id="portalResultTime">2019-02-01</div>
                                 </div>
                             </div>
                         </div>
@@ -149,13 +158,16 @@
                     </a>
                     <a class="footer-item" href="https://lucka.moe" target="_blank" title="Blog" >Lucka</a>
                     |
-                    <a class="footer-item" href="https://github.com/lucka-me/PSCI/blob/master/CHANGELOG.md" target="_blank" title="Changelog">0.2.9</a>
+                    <a class="footer-item" href="https://github.com/lucka-me/PSCI/blob/master/CHANGELOG.md" target="_blank" title="Changelog">0.3.0 (Lite)</a>
                 </div>
             </div>
         </div>
         <!--Scripts-->
+        <script type="text/javascript" src="./lib/value.js"></script>
+        <script type="text/javascript" src="./lib/ui.js"></script>
+        <script type="text/javascript" src="./lib/fileKit.js"></script>
         <script type="text/javascript" src="./lib/main.js"></script>
-        <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
-        <script async defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.js" onload="loadMap()"></script>
+        <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};auth.handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+        <script async defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js" onload="ui.map.load()"></script>
     </body>
 </html>
