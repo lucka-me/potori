@@ -1,5 +1,13 @@
 # Changelog
 ```markdown
+## [0.3.1] - 2018-06-28
+Fixed Open File
+
+### Fixed
+- Open File doesn't work, caused by calling a function that has been moved
+```
+
+```markdown
 ## [0.3.0] - 2018-06-27
 Support Prime
 
