@@ -1,5 +1,13 @@
 # Changelog
 ```markdown
+## [0.3.2] - 2018-06-28
+Support confirmation in en and ja
+
+### Added
+- Support for confirmation mails in en an ja
+```
+
+```markdown
 ## [0.3.1] - 2018-06-28
 Fixed Open File
 

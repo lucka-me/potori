@@ -1,5 +1,8 @@
 # Mail Samples
 ## Conformation
+```
+from:nominations@portals.ingress.com (有機會加入 OR 数週間 OR (few weeks))
+```
 ### en
 ```
 Subject: [Portal submission confirmation: <PORTAL-TITLE>]
@@ -55,6 +58,9 @@ Subject: [能量塔提交確認：<PORTAL-TITLE>]
 ```
 
 ## Acceptance
+```
+from:nominations@portals.ingress.com Intel Map AP
+```
 ### zh
 ```
 Subject: [能量塔提交確認：<PORTAL-TITLE>]
@@ -72,6 +78,9 @@ Subject: [能量塔提交確認：<PORTAL-TITLE>]
 ```
 
 ## Rejection
+```
+from:nominations@portals.ingress.com 完畢: -AP
+```
 ### Undeclared
 #### zh
 ```

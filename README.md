@@ -1,6 +1,6 @@
 <h1 align=center><img height=64px src="./docs/src/logo.svg" link="#"/></h1>
 
-[![](https://img.shields.io/badge/version-0.3.1-brightgreen.svg)](./CHANGELOG.md "Changelog") [![](https://img.shields.io/badge/demo-available-brightgreen.svg)](https://lucka.moe/PSCI "Demo") [![](https://img.shields.io/badge/author-Lucka-2578B5.svg)](https://lucka.moe "Author") [![](https://img.shields.io/badge/license-MIT-A31F34.svg)](./LICENSE "License")  
+[![](https://img.shields.io/badge/version-0.3.2-brightgreen.svg)](./CHANGELOG.md "Changelog") [![](https://img.shields.io/badge/demo-available-brightgreen.svg)](https://lucka.moe/PSCI "Demo") [![](https://img.shields.io/badge/author-Lucka-2578B5.svg)](https://lucka.moe "Author") [![](https://img.shields.io/badge/license-MIT-A31F34.svg)](./LICENSE "License")  
 ![](https://img.shields.io/badge/safari-support-brightgreen.svg) ![](https://img.shields.io/badge/chrome-support-brightgreen.svg)<!-- ![](https://img.shields.io/badge/firefox-support-brightgreen.svg) ![](https://img.shields.io/badge/edge-support-brightgreen.svg) ![](https://img.shields.io/badge/ie-broken-red.svg) ![](https://img.shields.io/badge/opera-support-brightgreen.svg)-->
 
 ## Description
@@ -16,6 +16,8 @@ You can download the repository [and host the full version in the root folder](h
   Provides basic stylesheet for the page currently.
 - [Gmail API](https://developers.google.com/gmail/api/)  
   Access to gmail inbox.
+- [Google Drive API](https://developers.google.com/drive/api/v3/about-sdk)  
+  Save/load data to./from Google Drive.
 
 ## Changelog
 See [CHANGELOG.md](./CHANGELOG.md).
