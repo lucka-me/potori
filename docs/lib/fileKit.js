@@ -51,22 +51,27 @@ const fileKit = {
             alert(value.string.alert.openFileFailed);
             return;
         }
-        for (let portal of list) {
+        if (!fileKit.checkContent(list)) {
+            alert(value.string.alert.openFileStructError);
+            return;
+        }
+        portalList.push(...list);
+        ui.button.openFile.hidden = true;
+        ui.button.saveFile.hidden = false;
+        process.display();
+    },
+    checkContent: function(content) {
+        if (content.length === undefined) return false;
+        for (let portal of content) {
             if (portal.id === undefined
                 || portal.title === undefined
                 || portal.image === undefined
                 || portal.status === undefined
                 || portal.confirmedTime === undefined
                 || portal.confirmationMailId === undefined
-            ) {
-                alert(value.string.alert.openFileStructError);
-                return;
-            }
+            ) return false;
         }
-        portalList.push(...list);
-        ui.button.openFile.hidden = true;
-        ui.button.saveFile.hidden = false;
-        process.display();
+        return true;
     },
     getFileBlob: function() {
         let list = [];

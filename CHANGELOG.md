@@ -1,5 +1,13 @@
 # Changelog
 ```markdown
+## [0.3.3] - 2018-06-29
+Check structure when get file from Google Drive
+
+### Added
+- When get file from Google Drive, check the structure, which may be wrong in some situations
+```
+
+```markdown
 ## [0.3.2] - 2018-06-28
 Support confirmation in en and ja
 
