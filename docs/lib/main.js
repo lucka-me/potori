@@ -164,7 +164,7 @@ const process = {
                 if (header.name === "Subject") {
                     let subject = header.value;
                     let hwPos = subject.search(":");
-                    let fwPos = subject.search("ï¼š");
+                    let fwPos = subject.search("：");
                     portal.title = subject.slice((fwPos < 0 ? hwPos : (hwPos < 0 ? fwPos : (fwPos < hwPos ? fwPos : hwPos))) + 1).trim();
                     break;
                 }

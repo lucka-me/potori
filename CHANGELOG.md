@@ -1,5 +1,19 @@
 # Changelog
 ```markdown
+## [0.3.4] - 2018-06-29
+Added Navi Control and fixed title issue
+
+### Added
+- Navigation Control on map
+
+### Fixed
+- Can't extract title from subject correctly, caused by encoding of VS Code
+
+### Known Issue
+- CSS overflow-y: scroll doesn't work in Firefox, which make the page as long as the list
+```
+
+```markdown
 ## [0.3.3] - 2018-06-29
 Check structure when get file from Google Drive
 

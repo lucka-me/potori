@@ -72,6 +72,7 @@ const ui = {
         load: function() {
             mapboxgl.accessToken = value.string.mapbox.accessToken;
             ui.map.mapCtrl = new mapboxgl.Map({ container: "map", style: value.string.mapbox.style });
+            ui.map.mapCtrl.addControl(new mapboxgl.NavigationControl());
         },
         easeTo: function(lngLat) { ui.map.mapCtrl.easeTo({ center: lngLat, zoom: 16 }); },
     },
