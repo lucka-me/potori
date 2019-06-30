@@ -61,6 +61,22 @@ Subject: [能量塔提交確認：<PORTAL-TITLE>]
 ```
 from:nominations@portals.ingress.com Intel Map AP
 ```
+### en
+```
+Subject: [Portal submission confirmation: <PORTAL-TITLE>]
+----------
+
+PORTAL REVIEW COMPLETE: <PORTAL-TITLE>
+Good work, Agent: your submission has been accepted, and this Portal is now available on your Scanner and on the Intel Map. You have been awarded 1,000 AP as well as this Portal’s Key for your discovery.
+
+-NianticOps
+
+<PORTAL-TITLE>
+<PORTAL-DESCRIPTION>
+
+<PHOTO-URL>
+```
+
 ### zh
 ```
 Subject: [能量塔提交確認：<PORTAL-TITLE>]
