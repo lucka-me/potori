@@ -1,6 +1,6 @@
 # Changelog
 ```markdown
-## [0.3.5] - TBA
+## [0.3.5] - 2019
 Support rejection-undeclared-ja
 
 ### Added
@@ -11,7 +11,7 @@ Support rejection-undeclared-ja
 ```
 
 ```markdown
-## [0.3.4] - 2018-06-29
+## [0.3.4] - 2019-06-29
 Added Navi Control and fixed title issue
 
 ### Added
@@ -25,7 +25,7 @@ Added Navi Control and fixed title issue
 ```
 
 ```markdown
-## [0.3.3] - 2018-06-29
+## [0.3.3] - 2019-06-29
 Check structure when get file from Google Drive
 
 ### Added
@@ -33,7 +33,7 @@ Check structure when get file from Google Drive
 ```
 
 ```markdown
-## [0.3.2] - 2018-06-28
+## [0.3.2] - 2019-06-28
 Support confirmation in en and ja
 
 ### Added
@@ -41,7 +41,7 @@ Support confirmation in en and ja
 ```
 
 ```markdown
-## [0.3.1] - 2018-06-28
+## [0.3.1] - 2019-06-28
 Fixed Open File
 
 ### Fixed
@@ -49,7 +49,7 @@ Fixed Open File
 ```
 
 ```markdown
-## [0.3.0] - 2018-06-27
+## [0.3.0] - 2019-06-27
 Support Prime
 
 ### Added
@@ -61,7 +61,7 @@ Support Prime
 ```
 
 ```markdown
-## [0.2.9] - 2018-06-25
+## [0.2.9] - 2019-06-25
 Removed all features related to 3rd-party
 
 ### Removed
@@ -69,7 +69,7 @@ Removed all features related to 3rd-party
 ```
 
 ```markdown
-## [0.2.8] - 2018-05-19
+## [0.2.8] - 2019-05-19
 Hide rejection reason filters by default
 
 ### Add
@@ -80,7 +80,7 @@ Hide rejection reason filters by default
 ```
 
 ```markdown
-## [0.2.7] - 2018-05-13
+## [0.2.7] - 2019-05-13
 New feature: Filter & statics for rejected portals classified by the reason
 
 ### Add
@@ -92,7 +92,7 @@ New feature: Filter & statics for rejected portals classified by the reason
 ```
 
 ```markdown
-## [0.2.6] - 2018-05-13
+## [0.2.6] - 2019-05-13
 Collapsible in console
 
 ### Add
@@ -106,7 +106,7 @@ Collapsible in console
 ```
 
 ```markdown
-## [0.2.5] - 2018-05-11
+## [0.2.5] - 2019-05-11
 Fixed: scroll to card
 
 ### Fixed
@@ -114,7 +114,7 @@ Fixed: scroll to card
 ```
 
 ```markdown
-## [0.2.4] - 2018-05-11
+## [0.2.4] - 2019-05-11
 Fixed confirmation time of pending portals
 
 ### Fixed
@@ -122,7 +122,7 @@ Fixed confirmation time of pending portals
 ```
 
 ```markdown
-## [0.2.3] - 2018-05-06
+## [0.2.3] - 2019-05-06
 Fixed min-width
 
 ### Fixed
@@ -130,7 +130,7 @@ Fixed min-width
 ```
 
 ```markdown
-## [0.2.2] - 2018-05-06
+## [0.2.2] - 2019-05-06
 Optimized for portrait orientation like mobile phone
 
 ### Changed
@@ -138,7 +138,7 @@ Optimized for portrait orientation like mobile phone
 ```
 
 ```markdown
-## [0.2.1] - 2018-05-03
+## [0.2.1] - 2019-05-03
 New feature: Filter
 
 ### Added
@@ -150,7 +150,7 @@ New feature: Filter
 ```
 
 ```markdown
-## [0.2.0] - 2018-05-01
+## [0.2.0] - 2019-05-01
 UI updated with some new features
 
 ### Added
@@ -161,7 +161,7 @@ UI updated with some new features
 ```
 
 ```markdown
-## [0.1.7] - 2018-01-18
+## [0.1.7] - 2019-01-18
 Intel link added
 
 ### Added
@@ -172,7 +172,7 @@ Intel link added
 ```
 
 ```markdown
-## [0.1.6] - 2018-01-18
+## [0.1.6] - 2019-01-18
 Reason of rejection
 
 ### Added
@@ -184,7 +184,7 @@ Reason of rejection
 ```
 
 ```markdown
-## [0.1.5] - 2018-01-17
+## [0.1.5] - 2019-01-17
 Link to BS watermeter
 
 ### Added
@@ -192,7 +192,7 @@ Link to BS watermeter
 ```
 
 ```markdown
-## [0.1.4] - 2018-01-17
+## [0.1.4] - 2019-01-17
 UI fixed and policy updated
 
 ### Added
@@ -206,7 +206,7 @@ UI fixed and policy updated
 ```
 
 ```markdown
-## [0.1.3] - 2018-01-14
+## [0.1.3] - 2019-01-14
 UI improved
 
 ### Changed
@@ -214,7 +214,7 @@ UI improved
 ```
 
 ```markdown
-## [0.1.2] - 2018-01-12
+## [0.1.2] - 2019-01-12
 Bug fixed
 
 ### Fixed
@@ -222,7 +222,7 @@ Bug fixed
 ```
 
 ```markdown
-## [0.1.1] - 2018-01-12
+## [0.1.1] - 2019-01-12
 Bug fixed
 
 ### Fixed
@@ -230,6 +230,6 @@ Bug fixed
 ```
 
 ```markdown
-## [0.1] - 2018-01-12
+## [0.1] - 2019-01-12
 - Initial version with basic functions
 ```
