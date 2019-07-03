@@ -95,9 +95,54 @@ Subject: [能量塔提交確認：<PORTAL-TITLE>]
 
 ## Rejection
 ```
-from:nominations@portals.ingress.com 完畢: -AP
+from:nominations@portals.ingress.com (完畢: OR 審査の完了 OR (REVIEW COMPLETE)) -AP
 ```
 ### Undeclared
+#### en
+```
+Subject: [Portal review complete:<PORTAL-TITLE>]
+----------
+
+Your Portal submission has been reviewed and based on the votes from the Niantic’s player community, we have decided not to accept this candidate.
+
+At this time, we’re not able to provide specific rejection reasons for each submission we review; however, the following are common reasons for rejection:
+
+The candidate is on our PLEASE DON’T SUBMIT list.
+We couldn’t find evidence that the candidate meets any of our ACCEPTANCE CRITERIA.
+The candidate was submitted in an incorrect location, and we weren’t able to find the right location.
+Note that we will not be overturning the community’s decision. If you believe your New Portal submission should have been accepted, we suggest re-submitting the Portal candidate after improving the title, description, and/or photo.
+
+-NianticOps
+
+<PORTAL-TITLE>
+<PORTAL-DESCRIPTION>
+
+<PHOTO-URL>
+```
+
+#### ja
+```
+Subject: [Portal審査の完了:<PORTAL-TITLE>]
+----------
+
+PORTAL審査の完了: <PORTAL-TITLE>
+Portal申請を慎重に審査させていただきましたが、Nianticのプレイヤーコミュニティでの投票に基づき、申請された候補の承認を見送ることにいたしました。
+
+現時点では、審査した各申請について具体的な却下理由をお知らせすることはできませんが、一般的な却下理由には以下のようなものがあります。
+
+候補がNianticの申請できない場所のリストに含まれている
+候補がNianticの承認基準のいずれかを満たしている確証が見当たらない
+候補が誤って申請されたため、正しい場所を特定できなかった
+コミュニティの決定が覆されることはありません。新しいPortal申請が却下されたことに疑問をお持ちの場合は、タイトル、説明、写真を改善してPortal候補を再申請することをおすすめします。
+
+-NianticOps
+
+<PORTAL-TITLE>
+<PORTAL-DESCRIPTION>
+
+<PHOTO-URL>
+```
+
 #### zh
 ```
 Subject: [能量塔審查完畢：<PORTAL-TITLE>]

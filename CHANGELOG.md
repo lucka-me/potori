@@ -1,5 +1,16 @@
 # Changelog
 ```markdown
+## [0.3.5] - TBA
+Support rejection-undeclared-ja
+
+### Added
+- Support for rejection/undeclared ja and en
+
+### Changed
+- Remove all contents following "-NianticOps" before parse rejected reason
+```
+
+```markdown
 ## [0.3.4] - 2018-06-29
 Added Navi Control and fixed title issue
 
