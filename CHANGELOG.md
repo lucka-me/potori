@@ -1,6 +1,6 @@
 # Changelog
 ```markdown
-## [0.3.5] - 2019
+## [0.3.5] - 2019-07-03
 Support rejection-undeclared-ja
 
 ### Added
