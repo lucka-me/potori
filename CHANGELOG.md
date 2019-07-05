@@ -1,7 +1,19 @@
 # Changelog
 ```markdown
+## [0.3.6] - 2019-07-05
+Lite: Added an extended page for features related to 3rd-party
+
+### Added
+- Lite: Click the status icon to copy the bs ID
+- Lite: /ex page with bs database query, Intel Maps link and bs watermeter link, only processes the data file, no login required
+
+### Changed
+- Lite: JavaScript structure optimized
+```
+
+```markdown
 ## [0.3.5] - 2019-07-03
-Support rejection-undeclared-ja
+Support rejection-undeclared ja and en
 
 ### Added
 - Support for rejection/undeclared ja and en

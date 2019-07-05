@@ -2,6 +2,7 @@ const value = {
     string: {
         status: {
             authOrOpenFile: "Please authorize or open a file.",
+            openFile: "Please open a file.",
             processing: "Processing mails...",
             loading: "Loading...",
             waiting: "Waiting...",
@@ -19,7 +20,16 @@ const value = {
         },
         path: {
             image: "https://lh3.googleusercontent.com/",
+            bsWatermeter: "http://kitten-114.getforge.io/watermeter.html#",
             intel: "https://www.ingress.com/intel",
+            bsDatabase: "https://oprbrainstorming.firebaseio.com",
+            bsReference: "c/reviews/",
+            googleDrive: {
+                folder: "appDataFolder",
+                uploadParam: "?uploadType=multipart",
+                createFile: "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
+                updateFile: "https://www.googleapis.com/upload/drive/v3/files/",
+            },
         },
         file: {
             name: "nominations.json",
@@ -30,7 +40,6 @@ const value = {
             openFileEmpty: "The file is empty.",
             openFileStructError: "The file structure is wrong.",
             saveFileNoPortal: "There is nothing to save.",
-            uploaded: "Uploaded",
         },
         css: {
             collapse: {
