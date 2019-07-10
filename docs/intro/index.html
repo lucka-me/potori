@@ -36,23 +36,36 @@
                 <h2>Workflow</h2>
                 <p>
                     This part will describe how PSCI works.<br/>
-                    For those mails related to Portals nominated from Scanner [REDACTED], the subjects and contents are generated from several templates, some keywords are used to filter mails and extract informations.<br/>
+                    For those mails related to Portal nominations, the subjects and contents are generated from several templates, some keywords are used to filter mails and extract informations.<br/>
                 </p>
                 <ol>
+                    <li>
+                        <strong>Open the nomination data file</strong><br/>
+                        If you have saved a nomination data file, you can open it to review your nominations without login.
+                    </li>
                     <li><strong>Obtain the target mails with filters</strong><br/>
                         PSCI obtains mails with the following filters:<br/>
                         <table>
                             <tr>
                                 <td class="at-r">Confirmation mails:</td>
-                                <td><code>from:ingress-support@nianticlabs.com Portal submission confirmation -edit -photo</code></td>
+                                <td>
+                                    <code>from:ingress-support@nianticlabs.com Portal submission confirmation -edit -photo</code><br/>
+                                    <code>from:nominations@portals.ingress.com (有機會加入 OR 数週間 OR (few weeks))</code>
+                                </td>
                             </tr>
                             <tr>
                                 <td class="at-r">Acceptance mails:</td>
-                                <td><code>from:ingress-support@nianticlabs.com Portal review complete now available -edit -photo</code></td>
+                                <td>
+                                    <code>from:ingress-support@nianticlabs.com Portal review complete now available -edit -photo</code><br/>
+                                    <code>from:nominations@portals.ingress.com Intel Map AP</code>
+                                </td>
                             </tr>
                             <tr>
                                 <td class="at-r">Rejection mails:</td>
-                                <td><code>from:ingress-support@nianticlabs.com Portal review complete reviewed -edit -photo</code></td>
+                                <td>
+                                    <code>from:ingress-support@nianticlabs.com Portal review complete reviewed -edit -photo</code><br/>
+                                    <code>from:nominations@portals.ingress.com (完畢: OR 審査の完了 OR (REVIEW COMPLETE)) -AP</code>
+                                </td>
                             </tr>
                         </table>
                         <i>Tips: You can also create rules with these filter to label your mails automatically in Gmail.</i>
@@ -82,7 +95,10 @@
                                     </tr>
                                     <tr>
                                         <td class="at-r">Too close:</td>
-                                        <td><code>too close to an existing Portal</code></td>
+                                        <td>
+                                            <code>too close to an existing Portal</code><br/>
+                                            <code>能量塔過近</code>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="at-r">Undeclared:</td>
@@ -91,15 +107,24 @@
                                 </table>
                             </li>
                         </ul>
-                        
+
+                    </li>
+                    <li>
+                        <strong>Save the nomination data file</strong><br/>
+                        You can save the nomination data to your computer by clicking the <span><i class="fas fa-save fa-fw fa-lg"></i></span> button, a file named <code>Potori.json</code> will be downloaded.<br/>
                     </li>
                 </ol>
                 <p>
-                    That's how PSCI gets information of your Portal nominations from your inbox. You may have noticed that the workflow is aimed at nominations from Scanner [REDACTED], Ingress Prime uses localized templates, which makes it difficult to find the corrent keywords, I'm still working on it.
+                    That's how Potori gets information of your Portal nominations from your inbox. Ingress Prime uses localized templates, which makes it difficult to find the corrent keywords, I'm working on it.
                 </p>
-                <h2>Useage</h2>
+                <h2>About the <a class="link" href="../ex" title="Extend">Extend page</a></h2>
                 <p>
-                    After login, the process will start automatically, the status bar will display the progress.<br>
+                    Due to Google's policy, I have to remove all features related to 3rd parties including querying coordinates from Brainstorming database, and providing links to Intel Maps and Brainstorming watermeter.<br/>
+                    In order to save my efforts, I kept these features in the Extend page where you can only use it by opening the data file.
+                </p>
+                <h2>Usage</h2>
+                <p>
+                    After login or opening file, the process will start automatically, the status bar will display the progress.<br>
                     When it finishes, your nominations will be displayed as cards in the list and markers on the map, here is an example of the card:
                 </p>
                 <div style="max-width:500px;" >
@@ -158,7 +183,7 @@
         <div class="footer">
             <div class=" frame-16">
                 <div class="flex-box text-nowarp a-baseline">
-                    <a class="footer-item" href="https://github.com/lucka-me/PSCI/blob/master/CHANGELOG.md" title="Changelog">0.2.9</a>
+                    <a class="footer-item" href="https://github.com/lucka-me/PSCI/blob/master/CHANGELOG.md" title="Changelog">0.3.6 (Lite)</a>
                     <a class="footer-item" href="https://github.com/lucka-me/PSCI" title="GitHub">
                         <i class="fab fa-github fa-lg"></i>
                     </a>

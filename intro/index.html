@@ -31,11 +31,11 @@
                     Potori requires the following permission:
                     <ul>
                         <li>
-                            <b>Gmail: Read Only</b> (Required)<br/>
+                            <strong>Gmail: Read Only</strong> (Required)<br/>
                             This is the core permission on which Potori is dependent. Potori will obtain mails related to Ingress Portal nomination, then extract and display informations from them. The mail IDs will be saved in data file if you save / upload the data file in your computer / your Google Drive. Except that, non of your mail data will be sent out of your browser page.
                         </li>
                         <li>
-                            <b>Google Drive: Files</b> (Recommended)<br/>
+                            <strong>Google Drive: Files</strong> (Recommended)<br/>
                             Potori could upload your nomination data to your Google Drive manually, and after login, Potori will download the data. By using the data file, Potori will not obtain and process all mails every time, which could reduce the network traffic and time useage. The file will be storaged in a private app folder where only Potori can access.
                         </li>
                     </ul>
@@ -47,19 +47,19 @@
                 </p>
                 <ol>
                     <li>
-                        <b>Download / Open the nomination data file</b><br/>
+                        <strong>Download / Open the nomination data file</strong><br/>
                         If you have saved a nomination data file, you can open it to review your nominations without login.<br/>
                         After login, Potori will try to download nomination data from your Google Drive if you have uploaded before.
                     </li>
                     <li>
-                        <b>Obtain the target mails with filters</b><br/>
+                        <strong>Obtain the target mails with filters</strong><br/>
                         Potori will obtain mails with the following filters:<br/>
                         <table>
                             <tr>
                                 <td class="at-r">Confirmation mails:</td>
                                 <td>
                                     <code>from:ingress-support@nianticlabs.com Portal submission confirmation -edit -photo</code><br/>
-                                    <code>from:nominations@portals.ingress.com ?????</code>
+                                    <code>from:nominations@portals.ingress.com (有機會加入 OR 数週間 OR (few weeks))</code>
                                 </td>
                             </tr>
                             <tr>
@@ -73,32 +73,32 @@
                                 <td class="at-r">Rejection mails:</td>
                                 <td>
                                     <code>from:ingress-support@nianticlabs.com Portal review complete reviewed -edit -photo</code><br/>
-                                    <code>from:nominations@portals.ingress.com ??: -AP</code>
+                                    <code>from:nominations@portals.ingress.com (完畢: OR 審査の完了 OR (REVIEW COMPLETE)) -AP</code>
                                 </td>
                             </tr>
                         </table>
                         <i>Tips: You can also create rules with these filter to label your mails automatically in Gmail.</i>
                     </li>
                     <li>
-                        <b>Extract informations from the mails</b><br/>
+                        <strong>Extract informations from the mails</strong><br/>
                         <ul>
                             <li>
                                 The <i>mail ID</i> could be used to avoid obtaining and processing the same mail in the next time, if you save / upload the data file.
                             </li>
                             <li>
-                                The <i>subject</i> contains the <b>title</b> of the Portal.
+                                The <i>subject</i> contains the <strong>title</strong> of the Portal.
                             </li>
                             <li>
-                                The <i>timestamp</i> could be regarded as the <b>confirmation/acceptance/rejection time</b> of the Portal nomination.
+                                The <i>timestamp</i> could be regarded as the <strong>confirmation/acceptance/rejection time</strong> of the Portal nomination.
                             </li>
                             <li>
                                 The photo of the Portal is included in each mail, with its url in this format: <code>https://lh3.googleusercontent.com/a-very-long-uid</code><br/>
-                                The <i>very long uid</i> is important: it's used to not only show the photo along with the card, but also generate a <b>shorter uid</b>, a hash code, to identify the same Portal from different mails (such as confirmation mail and acceptance mail).<br/>
-                                Besides, the <b>shorter uid</b> could link to the data page (called <i>Watermeter</i>) in Brainstorming, a wondeful plugin for Ingress OPR, which may show you the opinions from some OPR volunteers who use the plugin.
+                                The <i>very long uid</i> is important: it's used to not only show the photo along with the card, but also generate a <strong>shorter uid</strong>, a hash code, to identify the same Portal from different mails (such as confirmation mail and acceptance mail).<br/>
+                                Besides, the <strong>shorter uid</strong> could link to the data page (called <i>Watermeter</i>) in Brainstorming, a wondeful plugin for Ingress OPR, which may show you the opinions from some OPR volunteers who use the plugin.
                             </li>
                             <li>
-                                In the result mails (acceptance and rejection mails) from Scanner [REDACTED], there is always an <i>Intel Map link</i>, which contains the <b>coordinate of the Portal</b>. Potori will extract the <b>coordinate</b> and display a <b>marker</b> on the map.<br/>
-                                For those Portals without coordinates (including pending nominations and <b>all nominations from Prime</b>) Potori will query the data from Brainstorming Firedase. The query is anoymous, Potori will not send or save your identity.
+                                In the result mails (acceptance and rejection mails) from Scanner [REDACTED], there is always an <i>Intel Map link</i>, which contains the <strong>coordinate of the Portal</strong>. Potori will extract the <strong>coordinate</strong> and display a <strong>marker</strong> on the map.<br/>
+                                For those Portals without coordinates (including pending nominations and <strong>all nominations from Prime</strong>) Potori will query the data from Brainstorming Firedase. The query is anoymous, Potori will not send or save your identity.
                             </li>
                             <li>
                                 As for the rejection mails, there are three templates (as I known so far) for each rejection reason, and each one colud be identified by matching the key words:
@@ -109,7 +109,10 @@
                                     </tr>
                                     <tr>
                                         <td class="at-r">Too close:</td>
-                                        <td><code>too close to an existing Portal</code></td>
+                                        <td>
+                                            <code>too close to an existing Portal</code><br/>
+                                            <code>能量塔過近</code>
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td class="at-r">Undeclared:</td>
@@ -120,9 +123,9 @@
                         </ul>
                     </li>
                     <li>
-                        <b>Save / upload the nomination data file</b><br/>
+                        <strong>Save / upload the nomination data file</strong><br/>
                         You can save the nomination data to your computer by clicking the <span><i class="fas fa-save fa-fw fa-lg"></i></span> button, a file called <code>Potori.json</code> will be downloaded.<br/>
-                        The nomination data will <b>NOT</b> be uploaded to your Google Drive automatically. If you have login, you can upload the data by clicking the <span><i class="fas fa-cloud-upload-alt fa-fw fa-lg"></i></span> button.
+                        The nomination data will <strong>NOT</strong> be uploaded to your Google Drive automatically. If you have login, you can upload the data by clicking the <span><i class="fas fa-cloud-upload-alt fa-fw fa-lg"></i></span> button.
                     </li>
                 </ol>
                 <p>
@@ -202,7 +205,7 @@
                     </a>
                     <a class="footer-item" href="https://lucka.moe" target="_blank" title="Blog" >Lucka</a>
                     |
-                    <a class="footer-item" href="https://github.com/lucka-me/PSCI/blob/master/CHANGELOG.md" target="_blank" title="Changelog">0.3.0</a>
+                    <a class="footer-item" href="https://github.com/lucka-me/PSCI/blob/master/CHANGELOG.md" target="_blank" title="Changelog">0.3.6 (Full)</a>
                 </div>
             </div>
         </div>
