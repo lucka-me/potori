@@ -1,6 +1,6 @@
 <h1 align=center><img height=90px src="./src/logo-bg.svg" link="#"/></h1>
 
-[![](https://img.shields.io/badge/version-0.3.7-brightgreen.svg)](./CHANGELOG.md "Changelog") [![](https://img.shields.io/badge/demo-available-brightgreen.svg)](https://lucka.moe/PSCI "Demo") [![](https://img.shields.io/badge/author-Lucka-2578B5.svg)](https://lucka.moe "Author") [![](https://img.shields.io/badge/license-MIT-A31F34.svg)](./LICENSE "License")  
+[![](https://img.shields.io/badge/version-0.3.7-brightgreen.svg)](./CHANGELOG.md "Changelog") [![](https://img.shields.io/badge/demo-available-brightgreen.svg)](https://lucka.moe/potori "Demo") [![](https://img.shields.io/badge/author-Lucka-2578B5.svg)](https://lucka.moe "Author") [![](https://img.shields.io/badge/license-MIT-A31F34.svg)](./LICENSE "License")  
 ![](https://img.shields.io/badge/safari-support-brightgreen.svg) ![](https://img.shields.io/badge/chrome-support-brightgreen.svg) ![](https://img.shields.io/badge/firefox-broken-red.svg)<!-- ![](https://img.shields.io/badge/edge-support-brightgreen.svg) ![](https://img.shields.io/badge/ie-broken-red.svg) ![](https://img.shields.io/badge/opera-support-brightgreen.svg)-->
 
 ## Description
@@ -25,4 +25,4 @@ See [CHANGELOG.md](./CHANGELOG.md).
 ## License
 The source code are [licensed under MIT](./LICENSE).
 
-Please notice that the API Key and Client ID included in the source code is owned by [Lucka](https://github.com/lucka-me) and **ONLY** for public useage in [the demo pages](http://lucka.moe/PSCI/).
+Please notice that the API Key and Client ID included in the source code is owned by [Lucka](https://github.com/lucka-me) and **ONLY** for public useage in [the demo pages](http://lucka.moe/potori/).
