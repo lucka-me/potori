@@ -13,10 +13,13 @@ const value = {
             style: "mapbox://styles/mapbox/streets-v11",
         },
         gapiOptions: {
-            apiKey: "AIzaSyBTuRN1Vs4bV9A3oZA1ksZsdDpS5eiLB1M",
-            clientId: "326067800963-49a04e410n6k156go9jk38916p1e5b7b.apps.googleusercontent.com",
-            discoveryDocs: ["https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest"],
-            scope: "https://www.googleapis.com/auth/gmail.readonly",
+            apiKey: "AIzaSyCqIaS8UizqjWrIKm5zV3_S8EffCWjKR-A",
+            clientId: "361295761775-qshg0f5buh495dhubp4v5bignk7i5dh1.apps.googleusercontent.com",
+            discoveryDocs: [
+                "https://www.googleapis.com/discovery/v1/apis/gmail/v1/rest",
+                "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"
+            ],
+            scope: "https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.appdata",
         },
         path: {
             image: "https://lh3.googleusercontent.com/",
@@ -40,6 +43,7 @@ const value = {
             openFileEmpty: "The file is empty.",
             openFileStructError: "The file structure is wrong.",
             saveFileNoPortal: "There is nothing to save.",
+            uploaded: "Uploaded",
         },
         css: {
             collapse: {

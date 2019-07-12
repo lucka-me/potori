@@ -2,8 +2,8 @@
 <html>
     <meta charset="utf-8" />
     <head>
-        <title>Portal Submission Checker for Ingress | Intro</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <title>Potori | Intro</title>
+        <meta name = "viewport" content = "user-scalable=no, width=device-width" />
         <!-- Stylesheet -->
         <link type="text/css" rel="stylesheet" href="https://lucka.moe/toolkit/css/common.css" />
         <link type="text/css" rel="stylesheet" href="../css/extended.css" />
@@ -15,7 +15,7 @@
     <body>
         <div class="flex-box bg-primary fullwidth">
             <div class="flex-box frame-16 flex-justify-c">
-                <a href="../"><img class="logo" src="../src/logo-white.svg"></img></a>
+                <a href="../"><img class="logo" src="../src/logo.svg"></img></a>
                 <h1 class="textwhite margin-left-8">Intro</h1>
             </div>
         </div>
@@ -23,28 +23,37 @@
         <div class="flex-box">
             <div class="frame-16">
                 <p>
-                    PSCI (Portal Submission Checker for Ingress) is a web application to visualize your Ingress Portal nominations. With PSCI, <br/>
-                    PSCI will obtain your mails related to Portal nominations from your Gmail inbox, so you must login with your account to use it.
+                    Potori is a web application to visualize your Ingress Portal nominations.<br/>
+                    Potori will obtain your mails related to Portal nominations from your Gmail inbox, so you must login with your account to use it.
                 </p>
                 <h2>Permission</h2>
                 <p>
-                    PSCI requires the following permission:
+                    Potori requires the following permission:
                     <ul>
-                        <li><b>Gmail: Read Only</b><br/>This is the core permission on which PSCI is dependent. PSCI will obtain mails related to Ingress Portal nomination, then extract and display informations from them. PSCI will not send any of your data outside the browser page.</li>
+                        <li>
+                            <strong>Gmail: Read Only</strong> (Required)<br/>
+                            This is the core permission on which Potori is dependent. Potori will obtain mails related to Ingress Portal nomination, then extract and display informations from them. The mail IDs will be saved in data file if you save / upload the data file in your computer / your Google Drive. Except that, non of your mail data will be sent out of your browser page.
+                        </li>
+                        <li>
+                            <strong>Google Drive: Files</strong> (Recommended)<br/>
+                            Potori could upload your nomination data to your Google Drive manually, and after login, Potori will download the data. By using the data file, Potori will not obtain and process all mails every time, which could reduce the network traffic and time useage. The file will be storaged in a private app folder where only Potori can access.
+                        </li>
                     </ul>
                 </p>
                 <h2>Workflow</h2>
                 <p>
-                    This part will describe how PSCI works.<br/>
+                    This part will describe how Potori works.<br/>
                     For those mails related to Portal nominations, the subjects and contents are generated from several templates, some keywords are used to filter mails and extract informations.<br/>
                 </p>
                 <ol>
                     <li>
-                        <strong>Open the nomination data file</strong><br/>
-                        If you have saved a nomination data file, you can open it to review your nominations without login.
+                        <strong>Download / Open the nomination data file</strong><br/>
+                        If you have saved a nomination data file, you can open it to review your nominations without login.<br/>
+                        After login, Potori will try to download nomination data from your Google Drive if you have uploaded before.
                     </li>
-                    <li><strong>Obtain the target mails with filters</strong><br/>
-                        PSCI obtains mails with the following filters:<br/>
+                    <li>
+                        <strong>Obtain the target mails with filters</strong><br/>
+                        Potori will obtain mails with the following filters:<br/>
                         <table>
                             <tr>
                                 <td class="at-r">Confirmation mails:</td>
@@ -70,21 +79,26 @@
                         </table>
                         <i>Tips: You can also create rules with these filter to label your mails automatically in Gmail.</i>
                     </li>
-                    <li><strong>Extract informations from the mails</strong><br/>
-                        
+                    <li>
+                        <strong>Extract informations from the mails</strong><br/>
                         <ul>
                             <li>
-                                The <i>subject</i> contains the <b>title</b> of the Portal.
+                                The <i>mail ID</i> could be used to avoid obtaining and processing the same mail in the next time, if you save / upload the data file.
                             </li>
                             <li>
-                                The <i>timestamp</i> could be regarded as the <b>confirmation/acceptance/rejection time</b> of the Portal nomination.
+                                The <i>subject</i> contains the <strong>title</strong> of the Portal.
+                            </li>
+                            <li>
+                                The <i>timestamp</i> could be regarded as the <strong>confirmation/acceptance/rejection time</strong> of the Portal nomination.
                             </li>
                             <li>
                                 The photo of the Portal is included in each mail, with its url in this format: <code>https://lh3.googleusercontent.com/a-very-long-uid</code><br/>
-                                The <i>very long uid</i> is important: it's used to not only show the photo along with the card, but also generate a <b>shorter uid</b>, a hash code, to identify the same Portal from different mails (such as confirmation mail and acceptance mail).
+                                The <i>very long uid</i> is important: it's used to not only show the photo along with the card, but also generate a <strong>shorter uid</strong>, a hash code, to identify the same Portal from different mails (such as confirmation mail and acceptance mail).<br/>
+                                Besides, the <strong>shorter uid</strong> could link to the data page (called <i>Watermeter</i>) in Brainstorming, a wondeful plugin for Ingress OPR, which may show you the opinions from some OPR volunteers who use the plugin.
                             </li>
                             <li>
-                                In the result mails (acceptance and rejection mails), there is always an <i>Intel Map link</i>, which contains the <b>coordinate of the Portal</b>. PSCI will extract the <b>coordinate</b> and display a <b>marker</b> on the map.
+                                In the result mails (acceptance and rejection mails) from Scanner [REDACTED], there is always an <i>Intel Map link</i>, which contains the <strong>coordinate of the Portal</strong>. Potori will extract the <strong>coordinate</strong> and display a <strong>marker</strong> on the map.<br/>
+                                For those Portals without coordinates (including pending nominations and <strong>all nominations from Prime</strong>) Potori will query the data from Brainstorming Firedase. The query is anoymous, Potori will not send or save your identity.
                             </li>
                             <li>
                                 As for the rejection mails, there are three templates (as I known so far) for each rejection reason, and each one colud be identified by matching the key words:
@@ -110,8 +124,9 @@
 
                     </li>
                     <li>
-                        <strong>Save the nomination data file</strong><br/>
-                        You can save the nomination data to your computer by clicking the <span><i class="fas fa-save fa-fw fa-lg"></i></span> button, a file named <code>Potori.json</code> will be downloaded.<br/>
+                        <strong>Save / upload the nomination data file</strong><br/>
+                        You can save the nomination data to your computer by clicking the <span><i class="fas fa-save fa-fw fa-lg"></i></span> button, a file called <code>Potori.json</code> will be downloaded.<br/>
+                        The nomination data will <strong>NOT</strong> be uploaded to your Google Drive automatically. If you have login, you can upload the data by clicking the <span><i class="fas fa-cloud-upload-alt fa-fw fa-lg"></i></span> button.
                     </li>
                 </ol>
                 <p>
@@ -167,7 +182,7 @@
                         And when click the marker, the list will scroll to the corresponding card.
                     </li>
                     <li>
-                        The status icon <span class="fa-stack status-accepted" id="statusIconSpan"><i class="fas fa-circle fa-stack-2x" style="vertical-align: top;"></i><i class="fas fa-check fa-stack-1x fa-inverse" id="statusIconStack"></i></span>  displays the status of the portal or the reason if the nomination is rejected.
+                        The status icon <span class="fa-stack status-accepted"><i class="fas fa-circle fa-stack-2x" style="vertical-align: top;"></i><i class="fas fa-check fa-stack-1x fa-inverse"></i></span> icon will display the reason if the nomination is rejected. You can also copy the bs ID by clicking the icon and search the portal in the Brainstorming watermeter.
                     </li>
                 </ul>
                 <p>
@@ -175,7 +190,11 @@
                 </p>
                 <h2>Data Useage & Privacy</h2>
                 <p>
-                    Briefly, PSCI would not collect or upload any of your data, for more information, please read <a class="link" href="../privacy" title="Portal Submission Checker for Ingress | Privacy Policy">Privacy Policy</a>.
+                    Briefly, Potori would not collect or upload any of your data, for more information, please read <a class="link" href="../privacy" title="Potori | Privacy Policy">Privacy Policy</a>.
+                </p>
+                <h2>Contact</h2>
+                <p>
+                    If you have any question, advice or want to help me improve Potori, please feel free to contact me directly via <a class="link" href="https://t.me/Seele585" title="Telegram@Seele585">Telegram</a>!
                 </p>
             </div>
         </div>
@@ -183,11 +202,13 @@
         <div class="footer">
             <div class=" frame-16">
                 <div class="flex-box text-nowarp a-baseline">
-                    <a class="footer-item" href="https://github.com/lucka-me/PSCI/blob/master/CHANGELOG.md" title="Changelog">0.3.6 (Lite)</a>
+                    <a class="footer-item" href="../privacy" target="_blank" title="Privacy Policy" >Privacy</a>
                     <a class="footer-item" href="https://github.com/lucka-me/PSCI" title="GitHub">
                         <i class="fab fa-github fa-lg"></i>
                     </a>
-                    <a class="footer-item" href="https://lucka.moe" title="Blog" >Lucka</a>
+                    <a class="footer-item" href="https://lucka.moe" target="_blank" title="Blog" >Lucka</a>
+                    |
+                    <a class="footer-item" href="https://github.com/lucka-me/PSCI/blob/master/CHANGELOG.md" target="_blank" title="Changelog">0.3.7 (Lite)</a>
                 </div>
             </div>
         </div>

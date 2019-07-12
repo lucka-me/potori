@@ -1,5 +1,17 @@
 # Changelog
 ```markdown
+## [0.3.7] - 2019-07-12
+Lite: Migrate to Potori
+
+### Added
+- Lite: Save data in Google Drive
+- Lite: Support for iOS full-screen mode
+
+### Changed
+- Lite: Migrate to Potori GCP project
+```
+
+```markdown
 ## [0.3.6] - 2019-07-05
 Lite: Added an extended page for features related to 3rd-party
 

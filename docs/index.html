@@ -2,8 +2,15 @@
 <html>
     <meta charset="utf-8" />
     <head>
-        <title>Portal Submission Checker for Ingress</title>
-        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1"/>
+        <title>Potori</title>
+        <meta name = "viewport" content = "user-scalable=no, width=device-width" />
+        <!-- for iOS full-screen mode -->
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <link rel="apple-touch-icon" sizes="120x120" href="./src/icon-120.png" />
+        <link rel="apple-touch-icon" sizes="152x152" href="./src/icon-152.png" />
+        <link rel="apple-touch-icon" sizes="167x167" href="./src/icon-167.png" />
+        <link rel="apple-touch-icon" sizes="180x180" href="./src/icon-180.png" />
         <!-- Stylesheet -->
         <link type="text/css" rel="stylesheet" href="https://lucka.moe/toolkit/css/common.css" />
         <link type="text/css" rel="stylesheet" href="./css/extended.css" />
@@ -18,7 +25,7 @@
     <body class="fullheight">
         <div class="flex-box bg-primary fullwidth">
             <div class="flex-box frame-16">
-                <img class="logo" src="./src/logo-white.svg"></img>
+                <img class="logo" src="./src/logo.svg"></img>
             </div>
             <div class="split"></div>
             <button type="button" class="header-button bg-primary bgd-primary-ho textwhite" hidden="true" id="buttonOpenFile" title="Open file" onclick="fileKit.local.onOpenFile()">
@@ -26,6 +33,9 @@
             </button>
             <button type="button" class="header-button bg-primary bgd-primary-ho textwhite" hidden="true" id="buttonSaveFile" title="Save file" onclick="fileKit.local.onSaveFile()">
                 <i class="frame-16 fas fa-save fa-fw fa-lg"></i>
+            </button>
+            <button type="button" class="header-button bg-primary bgd-primary-ho textwhite" hidden="true" id="buttonUploadFile" title="Upload file" onclick="fileKit.googleDrive.uploadFile()">
+                <i class="frame-16 fas fa-cloud-upload-alt fa-fw fa-lg"></i>
             </button>
             <button type="button" class="header-button bg-primary bgd-primary-ho textwhite" hidden="true" id="buttonAuth" title="Authorize">
                 <i class="frame-16 fas fa-sign-in-alt fa-fw fa-lg"></i>
@@ -160,7 +170,7 @@
                     </a>
                     <a class="footer-item" href="https://lucka.moe" target="_blank" title="Blog" >Lucka</a>
                     |
-                    <a class="footer-item" href="https://github.com/lucka-me/PSCI/blob/master/CHANGELOG.md" target="_blank" title="Changelog">0.3.6 (Lite)</a>
+                    <a class="footer-item" href="https://github.com/lucka-me/PSCI/blob/master/CHANGELOG.md" target="_blank" title="Changelog">0.3.7 (Lite)</a>
                 </div>
             </div>
         </div>

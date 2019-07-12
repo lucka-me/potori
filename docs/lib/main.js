@@ -23,6 +23,7 @@ const auth = {
         } else {
             ui.button.auth.hidden = false;
             ui.button.signout.hidden = true;
+            ui.button.uploadFile.hidden = true;
             ui.control.status.innerHTML = value.string.status.authOrOpenFile;
             ui.refresh();
             portalList.splice(0, portalList.length);
@@ -53,17 +54,21 @@ const process = {
         ui.button.saveFile.hidden = true;
         ui.control.status.innerHTML = value.string.status.processing;
 
-        // Ignore the mails those already in the list
-        process._ignoreMailIdList  = [];
-        for (let portal of portalList) {
-            process._ignoreMailIdList.push(portal.confirmationMailId);
-            if (portal.resultMailId) process._ignoreMailIdList.push(portal.resultMailId);
-        }
-        for (let scanner of Object.keys(value.string.key.scanner)) {
-            for (let type of Object.keys(value.string.key.type)) {
-                process.mails({ scanner: value.string.key.scanner[scanner], type: value.string.key.type[type] });
+        let onGetFileFinished = function() {
+            // Ignore the mails those already in the list
+            process._ignoreMailIdList  = [];
+            for (let portal of portalList) {
+                process._ignoreMailIdList.push(portal.confirmationMailId);
+                if (portal.resultMailId) process._ignoreMailIdList.push(portal.resultMailId);
             }
-        }
+            for (let scanner of Object.keys(value.string.key.scanner)) {
+                for (let type of Object.keys(value.string.key.type)) {
+                    process.mails({ scanner: value.string.key.scanner[scanner], type: value.string.key.type[type] });
+                }
+            }
+        };
+
+        fileKit.googleDrive.getFile(onGetFileFinished);
         
     },
     _ignoreMailIdList: [],
@@ -364,8 +369,6 @@ const process = {
             if (portal.lngLat) {
                 fillLngLatInfo(portal, card);
                 extendBounds(portal.lngLat);
-            } else {
-                card.getElementById("portalTitle").innerHTML = portal.title;
             }
 
             ui.cardList.appendChild(card);
@@ -421,6 +424,7 @@ const process = {
 
         ui.control.status.innerHTML = value.string.status.finished;
         ui.button.saveFile.hidden = false;
+        ui.button.uploadFile.hidden = !gapi.auth2.getAuthInstance().isSignedIn.get();
     },
 };
 

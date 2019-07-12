@@ -36,6 +36,74 @@ const fileKit = {
             document.body.removeChild(element);
         },
     },
+    googleDrive: {
+        _fileId: null,
+        getFile: function(onFinished) {
+            fileKit.googleDrive._fileId = null;
+            let onGetFileId = function(fileId) {
+                gapi.client.drive.files.get({
+                    fileId: fileId,
+                    alt: "media"
+                }).then(function(response) {
+                    if (fileKit.checkContent(response.result)) {
+                        portalList.splice(0, portalList.length);
+                        portalList.push(...response.result);
+                        fileKit.googleDrive._fileId = fileId;
+                    } else {
+                        gapi.client.drive.files.delete(fileId);
+                    }
+                    onFinished();
+                });
+            }
+
+            gapi.client.drive.files.list({
+                q: "name = 'potori.json'",
+                pageSize: 10,
+                spaces: value.string.path.googleDrive.folder,
+                fields: "files(id)"
+            }).then(function (response) {
+                let fileList = response.result.files;
+                if (!fileList || fileList.length < 1) {
+                    onFinished();
+                    return;
+                }
+                onGetFileId(fileList[0].id);
+            });
+        },
+        uploadFile: function() {
+            // Ref: https://gist.github.com/tanaikech/bd53b366aedef70e35a35f449c51eced
+            let url = "";
+            let method = "";
+            if (fileKit.googleDrive._fileId) {
+                method = "PATCH";
+                url = value.string.path.googleDrive.updateFile + fileKit.googleDrive._fileId + value.string.path.googleDrive.uploadParam;
+            } else {
+                method = "POST";
+                url = value.string.path.googleDrive.createFile;
+            }
+
+            let metadata = {
+                "name": value.string.file.name,
+                "mimeType": value.string.file.type,
+                parents: [value.string.path.googleDrive.folder],
+            };
+
+            let form = new FormData();
+            form.append("metadata", new Blob([JSON.stringify(metadata)], { type: value.string.file.type }));
+            form.append("file", fileKit.getFileBlob());
+            fetch(url, {
+                method: method,
+                headers: new Headers({
+                    "Authorization": "Bearer " + gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token
+                }),
+                body: form,
+            }).then(response => response.json()
+            ).then(response => {
+                fileKit.googleDrive._fileId = response.id;
+                alert(value.string.alert.uploaded);
+            });
+        },
+    },
     parseFile: function(content) {
         ui.refresh();
         portalList.splice(0, portalList.length);

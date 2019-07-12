@@ -2,6 +2,7 @@ const ui = {
     button: {
         openFile: document.getElementById("buttonOpenFile"),
         saveFile: document.getElementById("buttonSaveFile"),
+        uploadFile: document.getElementById("buttonUploadFile"),
         auth: document.getElementById("buttonAuth"),
         signout: document.getElementById("buttonSignout"),
     },
