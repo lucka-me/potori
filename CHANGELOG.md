@@ -1,5 +1,16 @@
 # Changelog
 ```markdown
+## [0.3.8] - 2019-07-20
+Fixed: Fail to upload file
+
+### Added
+- Error handling and alert correctly
+
+### Fixed
+- Fail to upload file caused by wrong parameter in Update method
+```
+
+```markdown
 ## [0.3.7] - 2019-07-12
 Lite: Migrate to Potori
 

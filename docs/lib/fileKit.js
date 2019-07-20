@@ -74,19 +74,19 @@ const fileKit = {
             // Ref: https://gist.github.com/tanaikech/bd53b366aedef70e35a35f449c51eced
             let url = "";
             let method = "";
+            let metadata = {
+                "name": value.string.file.name,
+                "mimeType": value.string.file.type,
+            };
+            // Using parent in Update will cause 403
             if (fileKit.googleDrive._fileId) {
                 method = "PATCH";
                 url = value.string.path.googleDrive.updateFile + fileKit.googleDrive._fileId + value.string.path.googleDrive.uploadParam;
             } else {
                 method = "POST";
                 url = value.string.path.googleDrive.createFile;
+                metadata.parents = [value.string.path.googleDrive.folder];
             }
-
-            let metadata = {
-                "name": value.string.file.name,
-                "mimeType": value.string.file.type,
-                parents: [value.string.path.googleDrive.folder],
-            };
 
             let form = new FormData();
             form.append("metadata", new Blob([JSON.stringify(metadata)], { type: value.string.file.type }));
@@ -99,9 +99,13 @@ const fileKit = {
                 body: form,
             }).then(response => response.json()
             ).then(response => {
-                fileKit.googleDrive._fileId = response.id;
-                alert(value.string.alert.uploaded);
-            });
+                if (response.id) {
+                    fileKit.googleDrive._fileId = response.id;
+                    alert(value.string.alert.uploaded);
+                } else {
+                    alert(value.string.alert.uploadFailed + "\n" + response.message);
+                }
+            }).catch(_ => alert(value.string.alert.uploadFailed));
         },
     },
     parseFile: function(content) {
