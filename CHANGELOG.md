@@ -1,5 +1,13 @@
 # Changelog
 ```markdown
+## [0.3.9] - 2019-07-24
+Fixed: CSS overflow-y: scroll doesn't work in Firefox
+
+### Fixed
+- CSS overflow-y issue in Firefox: add min-height: 0% in parent element
+```
+
+```markdown
 ## [0.3.8] - 2019-07-20
 Fixed: Fail to upload file
 

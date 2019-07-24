@@ -1,7 +1,7 @@
 <h1 align=center><img height=90px src="./src/logo-bg.svg" link="#"/></h1>
 
-[![](https://img.shields.io/badge/version-0.3.8-brightgreen.svg)](./CHANGELOG.md "Changelog") [![](https://img.shields.io/badge/demo-available-brightgreen.svg)](https://lucka.moe/potori "Demo") [![](https://img.shields.io/badge/author-Lucka-2578B5.svg)](https://lucka.moe "Author") [![](https://img.shields.io/badge/license-MIT-A31F34.svg)](./LICENSE "License")  
-![](https://img.shields.io/badge/safari-support-brightgreen.svg) ![](https://img.shields.io/badge/chrome-support-brightgreen.svg) ![](https://img.shields.io/badge/firefox-broken-red.svg)<!-- ![](https://img.shields.io/badge/edge-support-brightgreen.svg) ![](https://img.shields.io/badge/ie-broken-red.svg) ![](https://img.shields.io/badge/opera-support-brightgreen.svg)-->
+[![](https://img.shields.io/badge/version-0.3.9-brightgreen.svg)](./CHANGELOG.md "Changelog") [![](https://img.shields.io/badge/demo-available-brightgreen.svg)](https://lucka.moe/potori "Demo") [![](https://img.shields.io/badge/author-Lucka-2578B5.svg)](https://lucka.moe "Author") [![](https://img.shields.io/badge/license-MIT-A31F34.svg)](./LICENSE "License")  
+![](https://img.shields.io/badge/safari-support-brightgreen.svg) ![](https://img.shields.io/badge/chrome-support-brightgreen.svg) ![](https://img.shields.io/badge/firefox-support-brightgreen.svg)<!-- ![](https://img.shields.io/badge/edge-support-brightgreen.svg) ![](https://img.shields.io/badge/ie-broken-red.svg) ![](https://img.shields.io/badge/opera-support-brightgreen.svg)-->
 
 ## Description
 A web application to check the portal nomination mails from the gmail inbox and present their status.
