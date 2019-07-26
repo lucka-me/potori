@@ -9,6 +9,7 @@ Fixed: Deleting empty file in Google Drive will cause crash
 
 ### Fixed
 - Delete method with wrong params will cause crash
+- Two string values are missing
 ```
 
 ```markdown

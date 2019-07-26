@@ -6,6 +6,7 @@ const value = {
             processing: "Processing mails...",
             loading: "Loading...",
             waiting: "Waiting...",
+            queryingBs: "Querying database...",
             finished: "Process finished.",
         },
         mapbox: {
@@ -44,6 +45,7 @@ const value = {
             openFileStructError: "The file structure is wrong.",
             saveFileNoPortal: "There is nothing to save.",
             uploaded: "Uploaded",
+            uploadFailed: "Failed to upload.",
         },
         css: {
             collapse: {
