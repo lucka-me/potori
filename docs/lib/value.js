@@ -35,7 +35,7 @@ const value = {
             },
         },
         file: {
-            name: "nominations.json",
+            name: "potori.json",
             type: "application/json",
         },
         alert: {

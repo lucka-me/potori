@@ -1,5 +1,17 @@
 # Changelog
 ```markdown
+## [0.3.10] - 2019-07-27
+Fixed: Deleting empty file in Google Drive will cause crash
+
+### Changed
+- If there are more multiple files match the filename potori.json, Potori will search the correct one
+- Filename: nominations.json -> potori.json
+
+### Fixed
+- Delete method with wrong params will cause crash
+```
+
+```markdown
 ## [0.3.9] - 2019-07-24
 Fixed: CSS overflow-y: scroll doesn't work in Firefox
 
