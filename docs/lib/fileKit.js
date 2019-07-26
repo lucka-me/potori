@@ -51,7 +51,6 @@ const fileKit = {
                     fileId: fileId,
                     alt: "media"
                 }).then(function(response) {
-                    console.log(fileList);
                     if (!fileKit.checkContent(response.result)) {
                         gapi.client.drive.files.delete({ fileId: fileId }).then(function(response) { console.log(response); });
                         fileList.splice(0, 1);
