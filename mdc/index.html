@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+    <meta charset="utf-8" />
+    <head>
+        <title>Potori</title>
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1"/>
+        <!-- Stylesheet -->
+        <link type="text/css" rel="stylesheet" href="./extended.css" />
+        <!-- MDC -->
+        <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Material+Icons" />
+        <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+        <!-- Scripts -->
+        <script type="text/javascript" src="../lib/value.js"></script>
+        <script type="text/javascript" src="../lib/ui.js"></script>
+        <!-- Mapbox -->
+        <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.css" rel="stylesheet" />
+        <script async defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js" onload="ui.map.load()"></script>
+
+    </head>
+    <body class="mdc-typography">
+        <header class=" mdc-top-app-bar">
+            <div class="mdc-top-app-bar__row">
+                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                    <img class="logo" src="../src/logo.svg"></img><span class="mdc-top-app-bar__title">Potori</span>
+                </section>
+                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+                    <button class="mdc-icon-button material-icons mdc-top-app-bar__action-item--unbounded" aria-label="Open file" id="buttonOpenFile" onclick="">folder_open</button>
+                    <button class="mdc-icon-button material-icons mdc-top-app-bar__action-item--unbounded" aria-label="Save file" id="buttonSaveFile" onclick="">save</button>
+                    <button class="mdc-icon-button material-icons mdc-top-app-bar__action-item--unbounded" aria-label="Upload file" id="buttonUploadFile" onclick="">cloud_upload</button>
+                    <button class="mdc-icon-button material-icons mdc-top-app-bar__action-item--unbounded" aria-label="Sign in" id="buttonAuth" onclick="">account_circle</button>
+                    <button class="mdc-icon-button material-icons mdc-top-app-bar__action-item--unbounded" aria-label="Sign out" id="buttonSignout" onclick="">cancel</button>
+                </section>
+            </div>
+        </header>
+        
+        <div class="mdc-top-app-bar--fixed-adjust main-box">
+            <div id="map"></div>
+            <div id="cardList">
+
+                <div class="mdc-card">
+                    <div class="mdc-card__primary-action">
+                        <div class="mdc-card__media mdc-card__media--content">
+                            <div class="mdc-card-media">
+                                <img id="portalImage" src="https://lh3.googleusercontent.com/lniXADGbXbvQ4p3sJFpgMPT6zpawXGmI3V9mYMsSNNTY9YHn1hjV3BAolzYAtBis0Msst1KM-_FBKQdRfsFM">
+                                <div class="mdc-card-info-box">
+                                    <div class="mdc-typography--headline6 fullwidth" id="title">
+                                        福田站
+                                    </div>
+                                    <div class="mdc-typography--body2 mdc-card-info-content">
+                                        <i class="material-icons">arrow_upward</i> <span class="margin-l-4" id="confirmedTime">2019/02/02</span>
+                                    </div>
+                                    <div class="mdc-typography--body2 mdc-card-info-content">
+                                        <i class="material-icons">access_time</i> <span class="margin-l-4" id="interval"></span>25 Days
+                                    </div>
+                                    <div class="mdc-typography--body2 mdc-card-info-content" id="portalResultBox">
+                                        <i class="material-icons" id="resultIcon">check</i> <span class="margin-l-4" id="portalResultTime"></span>2019/02/27
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mdc-card__actions">
+                        <div class="mdc-card__action-buttons">
+                            <button class="mdc-button mdc-card__action mdc-card__action--button status-accepted" id="statusButton">
+                                <i class="material-icons mdc-button__icon" aria-hidden="true" id="statusIcon">check</i>
+                                <span class="mdc-button__label" id="statusLabel">Accepted</span>
+                            </button>
+                        </div>
+                        <div class="mdc-card__action-icons">
+                            <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon--unbounded" aria-label="Location" title="Location" id="locationIcon">place</button>
+                            <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon--unbounded" aria-label="Intel Map" title="Intel Map" id="intelIcon">map</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+        <!--Scripts-->
+    </body>
+</html>
