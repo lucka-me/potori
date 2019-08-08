@@ -10,12 +10,8 @@
         <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Material+Icons" />
         <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
-        <!-- Scripts -->
-        <script type="text/javascript" src="../lib/value.js"></script>
-        <script type="text/javascript" src="../lib/ui.js"></script>
         <!-- Mapbox -->
         <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.css" rel="stylesheet" />
-        <script async defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js" onload="ui.map.load()"></script>
 
     </head>
     <body class="mdc-typography">
@@ -25,6 +21,7 @@
                     <img class="logo" src="../src/logo.svg"></img><span class="mdc-top-app-bar__title">Potori</span>
                 </section>
                 <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+                    <button class="mdc-icon-button material-icons mdc-top-app-bar__action-item--unbounded" aria-label="Status" id="buttonStatus">equalizer</button>
                     <button class="mdc-icon-button material-icons mdc-top-app-bar__action-item--unbounded" aria-label="Open file" id="buttonOpenFile" onclick="">folder_open</button>
                     <button class="mdc-icon-button material-icons mdc-top-app-bar__action-item--unbounded" aria-label="Save file" id="buttonSaveFile" onclick="">save</button>
                     <button class="mdc-icon-button material-icons mdc-top-app-bar__action-item--unbounded" aria-label="Upload file" id="buttonUploadFile" onclick="">cloud_upload</button>
@@ -77,6 +74,113 @@
             </div>
 
         </div>
-        <!--Scripts-->
+        <!-- Dialogs -->
+        <div class="mdc-dialog mdc-dialog--scrollable" role="alertdialog" aria-modal="true" aria-labelledby="my-dialog-title" aria-describedby="my-dialog-content" id="dialogStatus">
+            <div class="mdc-dialog__container">
+                <div class="mdc-dialog__surface">
+                    <h2 class="mdc-dialog__title">Status</h2>
+                    <div class="mdc-dialog__content mdc-dialog-content">
+
+                        <div class="mdc-dialog-content-block">
+                            <div class="mdc-switch-box">
+                                <div class="mdc-switch mdc-switch--checked">
+                                    <div class="mdc-switch__track"></div>
+                                    <div class="mdc-switch__thumb-underlay">
+                                        <div class="mdc-switch__thumb">
+                                            <input type="checkbox" class="mdc-switch__native-control" role="switch" id="switchStatusAccepted" checked>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label for="switchStatusAccepted">Accepted 300 (30%)</label>
+                            </div>
+                            <div class="mdc-switch-box">
+                                <div class="mdc-switch mdc-switch--checked">
+                                    <div class="mdc-switch__track"></div>
+                                    <div class="mdc-switch__thumb-underlay">
+                                        <div class="mdc-switch__thumb">
+                                            <input type="checkbox" class="mdc-switch__native-control" role="switch" id="switchStatusRejected" checked>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label for="switchStatusRejected">Rejected 300 (30%)</label>
+                            </div>
+                            <div class="mdc-switch-box">
+                                <div class="mdc-switch mdc-switch--checked">
+                                    <div class="mdc-switch__track"></div>
+                                    <div class="mdc-switch__thumb-underlay">
+                                        <div class="mdc-switch__thumb">
+                                            <input type="checkbox" class="mdc-switch__native-control" role="switch" id="switchStatusPending" checked>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label for="switchStatusPending">Pending 300 (30%)</label>
+                            </div>
+                        </div>
+
+                        <div class="mdc-dialog-content-block">
+                            <div class="mdc-switch-box">
+                                <div class="mdc-switch mdc-switch--checked">
+                                    <div class="mdc-switch__track"></div>
+                                    <div class="mdc-switch__thumb-underlay">
+                                        <div class="mdc-switch__thumb">
+                                            <input type="checkbox" class="mdc-switch__native-control" role="switch" id="switchStatusAccepted" checked>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label for="switchStatusAccepted">Too Close 100 (33.3%)</label>
+                            </div>
+                            <div class="mdc-switch-box">
+                                <div class="mdc-switch mdc-switch--checked">
+                                    <div class="mdc-switch__track"></div>
+                                    <div class="mdc-switch__thumb-underlay">
+                                        <div class="mdc-switch__thumb">
+                                            <input type="checkbox" class="mdc-switch__native-control" role="switch" id="switchStatusRejected" checked>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label for="switchStatusRejected">Duplicated 100 (33.3%)</label>
+                            </div>
+                            <div class="mdc-switch-box">
+                                <div class="mdc-switch mdc-switch--checked">
+                                    <div class="mdc-switch__track"></div>
+                                    <div class="mdc-switch__thumb-underlay">
+                                        <div class="mdc-switch__thumb">
+                                            <input type="checkbox" class="mdc-switch__native-control" role="switch" id="switchStatusPending" checked>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label for="switchStatusPending">Undeclared 100 (33.3%)</label>
+                            </div>
+                        </div>
+
+                    </div>
+                    <footer class="mdc-dialog__actions">
+                        <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
+                            <span class="mdc-button__label">Cancel</span>
+                        </button>
+                        <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="yes">
+                            <span class="mdc-button__label">Apply</span>
+                        </button>
+                    </footer>
+                </div>
+            </div>
+            <div class="mdc-dialog__scrim"></div>
+        </div>
+        <!-- Scripts -->
+        <script type="text/javascript" src="../lib/value.js"></script>
+        <script type="text/javascript" src="../lib/ui.js"></script>
+        <script async defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.0.0/mapbox-gl.js" onload="ui.map.load()"></script>
+        <script>
+            window.onload = function() {
+                const buttonStatus = new mdc.ripple.MDCRipple(document.querySelector("#buttonStatus"));
+                buttonStatus.unbounded = true;
+                buttonStatus.listen("click", function(detail) {
+                    const dialog = new mdc.dialog.MDCDialog(document.querySelector("#dialogStatus"));
+                    dialog.open();
+                });
+                /*
+                buttonStatus.onclick = ;*/
+            };
+        </script>
     </body>
 </html>

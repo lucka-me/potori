@@ -2,6 +2,7 @@
 [hidden]{ display:none; }
 .fullwidth { width: 100%; }
 .margin-l-4 { margin-left: 4px; }
+.margin-l-8 { margin-left: 8px; }
 
 :root {
     --mdc-theme-primary: #3b1e5f !important;
@@ -85,4 +86,24 @@ body {
     object-position: center;
     width: 120px;
     height: 120px;
+}
+
+.mdc-dialog-content {
+    padding-top: 8px !important;
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.mdc-dialog-content-block {
+    margin: 0px 8px;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+.mdc-switch-box {
+    margin: 4px 0px;
+}
+
+.mdc-switch-box > label {
+    margin-left: 4px;
 }
