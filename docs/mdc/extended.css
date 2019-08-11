@@ -69,13 +69,15 @@ body {
 }
 
 .mdc-card-info-box {
-    padding: 16px;
+    padding: 8px;
     display: flex;
     flex-flow: row wrap;
+    align-items: flex-start;
+    align-content: flex-start;
 }
 
 .mdc-card-info-content {
-    margin-right: 16px;
+    margin-right: 8px;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
