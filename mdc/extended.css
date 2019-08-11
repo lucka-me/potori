@@ -1,5 +1,5 @@
 .flex-justify-space-between { justify-content: space-between; }
-[hidden]{ display:none; }
+[hidden]{ display:none !important; }
 .fullwidth { width: 100%; }
 .margin-l-4 { margin-left: 4px; }
 .margin-l-8 { margin-left: 8px; }
@@ -40,8 +40,8 @@ body {
 }
 
 @media screen and (max-width: 600px) {
-    #map { height: 40% !important; }
-    #cardList { height: 60% !important; }
+    #map { height: 30% !important; }
+    #cardList { height: 70% !important; }
 }
 
 #cardList {
