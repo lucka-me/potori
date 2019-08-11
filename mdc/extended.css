@@ -83,7 +83,7 @@ body {
     align-items: center;
 }
 
-#portalImage {
+#cardImage {
     object-fit: cover;
     object-position: center;
     width: 120px;

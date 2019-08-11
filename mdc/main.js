@@ -61,54 +61,15 @@ const process = {
     portalList: [],
     _ignoreMailIdList: [],
     status: {
-        redacted: {
-            confirmation: { total: -1, finished: 0, },
-            acceptance:   { total: -1, finished: 0, },
-            rejection:    { total: -1, finished: 0, },
-        },
-        prime: {
-            confirmation: { total: -1, finished: 0, },
-            acceptance:   { total: -1, finished: 0, },
-            rejection:    { total: -1, finished: 0, },
-        },
-        clear: function() {
-            for (let scanner of Object.keys(this)) {
-                for (let type of Object.keys(this[scanner])) {
-                    this[scanner][type].total = -1;
-                    this[scanner][type].finished = 0;
-                }
-            }
-        },
-        all: function() {
-            for (let scanner of Object.keys(this))
-                for (let type of Object.keys(this[scanner]))
-                    if (this[scanner][type].total < 0 || this[scanner][type].finished < this[scanner][type].total) return false;
-            return true;
-        },
-        progress: function() {
-            let count = 0;
-            let finished = 0;
-            for (let scanner of Object.keys(this)) {
-                for (let type of Object.keys(this[scanner])) {
-                    count += this[scanner][type].total < 0 ? 0 : this[scanner][type].total;
-                    finished += this[scanner][type].finished;
-                }
-            }
-            return finished / count;
-        },
-        bufferProgress: function() {
-            let finished = 0;
-            for (let scanner of Object.keys(this)) {
-                for (let type of Object.keys(this[scanner])) {
-                    finished += this[scanner][type].total < 0 ? 0 : 1;
-                }
-            }
-            return finished / 6;
-        }
+        list: 0,
+        total: 0,
+        finished: 0,
     },
     start: () => {
         ui.init();
-        process.status.clear();
+        process.status.list = 0;
+        process.status.total = 0;
+        process.status.finished = 0;
         ui.button.openFile.root_.hidden = true;
         ui.button.saveFile.root_.hidden = true;
         ui.progressBar.root_.hidden = false;
@@ -127,12 +88,9 @@ const process = {
             }
         };
 
-        //fileKit.googleDrive.getFile(onGetFileFinished);
-        onGetFileFinished();
-        
+        fileKit.googleDrive.getFile(onGetFileFinished);        
     },
     mails: (keys) => {
-        console.log("START");
         let query = value.string.mail.query[keys.scanner][keys.type.mail];
 
         const getListRequest = (pageToken) => {
@@ -162,9 +120,13 @@ const process = {
         };
 
         const processMailList = (list) => {
-            process.status[keys.scanner][keys.type.mail].total = list.length;
+            process.status.list += 1;
+            ui.progressBar.buffer = process.status.list / 6;
+            process.status.total += list.length;
 
-            const checkFinish = () => { if (process.status.all()) process.display(); };
+            const checkFinish = () => {
+                if (process.status.list === 6 && process.status.total === process.status.finished) process.display();
+            };
 
             checkFinish();
 
@@ -177,9 +139,8 @@ const process = {
                 });
                 request.execute((fullMail) => {
                     process.portalList.push(process.parse.mail(fullMail, keys));
-                    process.status[keys.scanner][keys.type.mail].finished += 1;
-                    ui.progressBar.buffer = process.status.bufferProgress();
-                    ui.progressBar.progress = process.status.progress();
+                    process.status.finished += 1;
+                    ui.progressBar.progress = process.status.finished / process.status.total;
                     checkFinish();
                 });
             }
@@ -262,10 +223,9 @@ const process = {
             };
         },
     },
-    display: function() {
+    display: () => {
+        console.log("Display()");
         // Merge duplicated portals
-        console.log("YEAH~~~");
-        console.log(this.portalList);
         for (let i = process.portalList.length - 1; i >= 0; i--) {
             let portal = process.portalList[i];
 
@@ -286,60 +246,58 @@ const process = {
             }
         }
 
-        ui.control.received.row.hidden = false;
-        ui.control.received.progress.cell.hidden = true;
-        ui.control.received.count.innerHTML = process.portalList.length;
-
-        for (let key of Object.keys(ui.control.portals)) {
-            ui.control.portals[key].row.hidden = false;
-            if (ui.control.portals[key].progress) {
-                ui.control.portals[key].progress.cell.hidden = true;
-            }
-        }
-
         // Sort by time
-        process.portalList.sort(function(a, b) {
-            let timeA = a.resultTime ? a.resultTime : a.confirmedTime;
-            let timeB = b.resultTime ? b.resultTime : b.confirmedTime;
+        process.portalList.sort((a, b) => {
+            const timeA = a.resultTime ? a.resultTime : a.confirmedTime;
+            const timeB = b.resultTime ? b.resultTime : b.confirmedTime;
             return timeA < timeB ? 1 : -1;
         });
 
-        let boundsNE = { lng: -181.0, lat: -91.0 };
-        let boundsSW = { lng: 181.0, lat: 91.0 };
+        const boundsNE = { lng: -181.0, lat: -91.0 };
+        const boundsSW = { lng: 181.0, lat: 91.0 };
 
-        let extendBounds = function(lngLat) {
+        const extendBounds = (lngLat) => {
             if (lngLat.lng > boundsNE.lng) boundsNE.lng = lngLat.lng;
             else if (lngLat.lng < boundsSW.lng) boundsSW.lng = lngLat.lng;
             if (lngLat.lat > boundsNE.lat) boundsNE.lat = lngLat.lat;
             else if (lngLat.lat < boundsSW.lat) boundsSW.lat = lngLat.lat;
         };
 
-        let getDateString = function(time) {
-            let date = new Date();
+        const getDateString = function(time) {
+            const date = new Date();
             date.setTime(time);
             return date.toLocaleDateString();
         };
 
-        let getIntervalString = (start, end) => Math.floor((end - start) / (24 * 3600 * 1000)) + " days";
+        const getIntervalString = (start, end) => {
+            const day = Math.floor((end - start) / (24 * 3600 * 1000));
+            return day + " day" + (day > 2 ? "s" : "");
+        }
 
         let fillLngLatInfo = function(portal, card) {
-            card.querySelector("#portalTitle").hidden = true;
-            let portalTitleLink = card.querySelector("#portalTitleLink");
-            portalTitleLink.innerHTML = portal.title;
-            portalTitleLink.href = toolkit.lngLatToIntel(portal.lngLat);
-            portalTitleLink.hidden = false;
-
-            card.querySelector("#card-" + portal.id).onclick = function() { ui.map.easeTo(portal.lngLat); };
-
-            let iconElement = card.querySelector("#statusIconStackDiv").cloneNode(true);
-            iconElement.onclick = function() { ui.event.scrollToCard(portal.id); };
-            portal.marker = new mapboxgl.Marker({ element: iconElement })
+            //const iconElement = card.querySelector("#cardStatusButtonIcon").cloneNode(true);
+            //iconElement.onclick = () => ui.event.scrollToCard(portal.id);
+            //portal.marker = new mapboxgl.Marker({ element: iconElement })
+            // TODO: Generate Icon
+            portal.marker = new mapboxgl.Marker()
                 .setLngLat(portal.lngLat)
                 .setPopup(new mapboxgl.Popup({ closeButton: false }).setText(portal.title))
                 .addTo(ui.map.mapCtrl);
+            
+            const locationButton = card.querySelector("#cardLocationButton");
+            locationButton.hidden = false;
+            const locationRipple = new mdc.ripple.MDCRipple(locationButton);
+            locationRipple.unbounded = true;
+            locationRipple.listen("click", () => ui.map.easeTo(portal.lngLat));
+
+            const intelButton = card.querySelector("#cardIntelButton");
+            intelButton.hidden = false;
+            const intelRipple = new mdc.ripple.MDCRipple(intelButton);
+            intelRipple.unbounded = true;
+            intelRipple.listen("click", () => window.open(toolkit.lngLatToIntel(portal.lngLat), "_blank"));
         };
 
-        let classifiedList = {
+        const classifiedList = {
             pending: [],
             accepted: [],
             rejected: [],
@@ -352,66 +310,72 @@ const process = {
         };
 
         // Create cards, extend bounds and classify
-        for (let i = 0; i < process.portalList.length; i++) {
-            let portal = process.portalList[i];
-            let card = document.getElementById("templateCard").content.cloneNode(true);
+        for (let portal of process.portalList) {
+            const card = document.getElementById("cardTemplate").content.cloneNode(true);
 
-            card.getElementById("card").id = "card-" + portal.id;
-            card.getElementById("bsLink").href = value.string.path.bsWatermeter + portal.id;
-            card.getElementById("portalImg").src = value.string.path.image + portal.image;
-            card.getElementById("portalConfirmedTime").innerHTML = getDateString(portal.confirmedTime);
-
+            card.querySelector(".mdc-card").id = "card-" + portal.id;
+            card.getElementById("cardImage").src = value.string.path.image + portal.image;
+            card.getElementById("cardTitle").innerHTML = portal.title;
+            card.getElementById("cardConfirmedTime").innerHTML = getDateString(portal.confirmedTime);
             if (portal.resultTime) {
-                card.getElementById("portalInterval").innerHTML = getIntervalString(portal.confirmedTime, portal.resultTime);
-                card.getElementById("portalResultTime").innerHTML = getDateString(portal.resultTime);
+                card.getElementById("cardInterval").innerHTML = getIntervalString(portal.confirmedTime, portal.resultTime);
+                card.getElementById("cardResultTime").innerHTML = getDateString(portal.resultTime);
             } else {
-                card.getElementById("portalInterval").innerHTML = getIntervalString(portal.confirmedTime, new Date().getTime());
-                card.getElementById("portalResultBox").hidden = true;
+                card.getElementById("cardInterval").innerHTML = getIntervalString(portal.confirmedTime, new Date().getTime());
+                card.getElementById("cardResultBox").hidden = true;
             }
+            const resultIcon        = card.getElementById("cardResultIcon");
+            const statusButton      = card.getElementById("cardStatusButton");
+            const statusButtonIcon  = card.getElementById("cardStatusButtonIcon");
+            const statusButtonLabel = card.getElementById("cardStatusButtonLabel");
 
-            let statusIconStack = card.getElementById("statusIconStack");
-            let statusIconSpan = card.getElementById("statusIconSpan");
-            let portalResultIcon = card.getElementById("portalResultIcon");
             switch (portal.status) {
                 case value.code.portalStatus.pending:
-                    statusIconSpan.className = value.string.css.statusIconSpan.pending;
-                    statusIconStack.className = value.string.css.statusIcon.pending;
+                    statusButton.className += " status-pending";
+                    statusButtonIcon.innerHTML = "access_time";
+                    statusButtonLabel.innerHTML = "Pending";
                     classifiedList.pending.push(portal);
                     break;
                 case value.code.portalStatus.accepted:
-                    statusIconSpan.className = value.string.css.statusIconSpan.accepted;
-                    statusIconStack.className = value.string.css.statusIcon.accepted;
-                    portalResultIcon.className = value.string.css.resultIcon.accepted;
+                    resultIcon.innerHTML = "check";
+                    statusButton.className += " status-accepted";
+                    statusButtonIcon.innerHTML = "check";
+                    statusButtonLabel.innerHTML = "Accepted";
                     classifiedList.accepted.push(portal);
                     break;
                 default:
                     switch (portal.status) {
                         case value.code.portalStatus.rejected.tooClose:
-                            statusIconStack.className = value.string.css.statusIcon.rejectedReason.tooClose;
-                            statusIconStack.title = value.string.rejectedReason.tooClose;
+                            statusButtonIcon.innerHTML = "compare_arrows";
+                            statusButtonLabel.innerHTML = "Too Close";
                             classifiedList.rejectedReason.tooClose.push(portal);
                             break;
                         case value.code.portalStatus.rejected.duplicated:
-                            statusIconStack.className = value.string.css.statusIcon.rejectedReason.duplicated;
-                            statusIconStack.title = value.string.rejectedReason.duplicated;
+                            statusButtonIcon.innerHTML = "filter_none";
+                            statusButtonLabel.innerHTML = "Duplicated";
                             classifiedList.rejectedReason.duplicated.push(portal);
                             break;
                         default:
-                            statusIconStack.className = value.string.css.statusIcon.rejectedReason.undeclared;
-                            statusIconStack.title = value.string.rejectedReason.undeclared;
+                            statusButtonIcon.innerHTML = "close";
+                            statusButtonLabel.innerHTML = "Rejected";
                             classifiedList.rejectedReason.undeclared.push(portal);
                             break;
                     }
-                    portalResultIcon.className = value.string.css.resultIcon.rejected;
+                    statusButton.className += " status-rejected";
+                    resultIcon.innerHTML = "close";
                     classifiedList.rejected.push(portal);
                     break;
             }
+            const statusRipple = new mdc.ripple.MDCRipple(statusButton);
+            statusRipple.unbounded = true;
+            statusRipple.listen("click", () => window.open(value.string.path.bsWatermeter + portal.id, "_blank"));
 
             if (portal.lngLat) {
-                fillLngLatInfo(portal, card);
                 extendBounds(portal.lngLat);
+                fillLngLatInfo(portal, card);
             } else {
-                card.getElementById("portalTitle").innerHTML = portal.title;
+                card.getElementById("cardLocationButton").hidden = true;
+                card.getElementById("cardIntelButton").hidden = true;
                 classifiedList.noLngLat.push(portal);
             }
 
@@ -425,67 +389,41 @@ const process = {
             });
         }
 
-        let getCountString = (list) => list.length === 0 ? "0 (0%)" : (list.length + " (" + (list.length / process.portalList.length * 100).toFixed(2) + "%)");
+        const getCountString = (portals) => portals.length === 0 ? "0 (0%)" : (portals.length + " (" + (portals.length / process.portalList.length * 100).toFixed(1) + "%)");
+        const getRejectedCountString = (portals) => portals.length === 0 ? "0 (0%)" : (portals.length + " (" + (portals.length / classifiedList.rejected.length * 100).toFixed(1) + "%)");
 
-        ui.control.portals.accepted.count.innerHTML = getCountString(classifiedList.accepted);
-        ui.control.portals.rejected.count.innerHTML = getCountString(classifiedList.rejected);
-        ui.control.portals.pending.row.hidden = false;
-        ui.control.portals.pending.count.innerHTML = getCountString(classifiedList.pending);
-
-        let initCheckBox = function(target, portals) {
-            target.disabled = false;
-            target.onchange = function() { ui.event.changeShow(portals, target.checked); };
-        };
+        ui.status.filter.accepted.label.innerHTML = getCountString(classifiedList.accepted);
+        ui.status.filter.accepted.switch.listen("change", (_) => ui.event.changeShow(classifiedList.accepted, ui.status.filter.accepted.switch.checked));
+        ui.status.filter.rejected.label.innerHTML = getCountString(classifiedList.rejected);
+        ui.status.filter.rejected.switch.listen("change", (_) => ui.event.changeShow(classifiedList.rejected, ui.status.filter.rejected.switch.checked));
+        ui.status.filter.pending.label.innerHTML  = getCountString(classifiedList.pending);
+        ui.status.filter.pending.switch.listen("change", (_) => ui.event.changeShow(classifiedList.pending, ui.status.filter.pending.switch.checked));
 
         for (let key of Object.keys(classifiedList.rejectedReason)) {
-            let portals = classifiedList.rejectedReason[key];
-            if (portals.length < 1) continue;
-            let count = classifiedList.rejectedReason[key].length;
-            ui.control.portals.rejectedReason.reasons[key].count.innerHTML = count + " (" + (count / classifiedList.rejected.length * 100).toFixed(2) + "%)";
-            initCheckBox(ui.control.portals.rejectedReason.reasons[key].checkShow, portals);
+            const portals = classifiedList.rejectedReason[key];
+            ui.status.filter[key].label.innerHTML = getRejectedCountString(portals);
+            ui.status.filter[key].switch.listen("change", (_) => ui.event.changeShow(portals, ui.status.filter[key].switch.checked));
         }
+        for (let key of Object.keys(ui.status.block)) ui.status.block[key].hidden = false;
 
-        if (classifiedList.accepted.length > 0) {
-            initCheckBox(ui.control.portals.accepted.checkShow, classifiedList.accepted);
-        }
-        if (classifiedList.rejected.length > 0) {
-            initCheckBox(ui.control.portals.rejected.checkShow, classifiedList.rejected);
-            ui.control.portals.rejected.checkShow.disabled = false;
-            ui.control.portals.rejected.checkShow.onchange = function() {
-                let checked = ui.control.portals.rejected.checkShow.checked;
-                for (let key of Object.keys(ui.control.portals.rejectedReason.reasons)) {
-                    ui.control.portals.rejectedReason.reasons[key].checkShow.checked = checked;
-                }
-                ui.event.changeShow(classifiedList.rejected, checked);
-            };
-            ui.control.portals.rejectedReason.row.hidden = false;
-            ui.control.portals.rejectedReason.collapse.style.display = "inline";
-        }
-        if (classifiedList.pending.length > 0) {
-            initCheckBox(ui.control.portals.pending.checkShow, classifiedList.pending);
-        }
-        ui.control.collapseAll.style.display = "inline";
-
-        let onFinished = function() {
-            ui.control.status.innerHTML = value.string.status.finished;
+        const onFinished = function() {
             ui.button.saveFile.root_.hidden = false;
             ui.button.uploadFile.root_.hidden = !gapi.auth2.getAuthInstance().isSignedIn.get();
+            ui.progressBar.root_.hidden = true;
         }
 
         if (classifiedList.noLngLat.length > 0) {
-            ui.control.status.innerHTML = value.string.status.queryingBs;
             let count = 0;
-            let countUp = function() {
+            const countUp = () => {
                 count += 1;
                 if (count === classifiedList.noLngLat.length) onFinished();
             };
             for (let portal of classifiedList.noLngLat) {
                 firebaseKit.queryLngLat(
                     portal.id,
-                    function(lngLat){
+                    (lngLat) => {
                         portal.lngLat = lngLat;
-                        let card = document.getElementById("card-" + portal.id).parentNode;
-                        fillLngLatInfo(portal, card);
+                        fillLngLatInfo(portal, document.getElementById("card-" + portal.id));
                         countUp();
                     },
                     countUp

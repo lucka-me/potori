@@ -39,10 +39,10 @@
             <div class="mdc-linear-progress__buffering-dots"></div>
             <div class="mdc-linear-progress__buffer"></div>
             <div class="mdc-linear-progress__bar mdc-linear"></div>
-            <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar mdc-linear-progress-bar-color--secondary" style="transform: scaleX(0.75);">
+            <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar mdc-linear-progress-bar-color--secondary">
                 <span class="mdc-linear-progress__bar-inner"></span>
             </div>
-            <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar" style="transform: scaleX(0.5);">
+            <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
                 <span class="mdc-linear-progress__bar-inner"></span>
             </div>
         </div>
@@ -51,39 +51,39 @@
             <div id="map"></div>
             <div id="cardList"></div>
             <template id="cardTemplate">
-                    <div class="mdc-card">
-                        <div class="mdc-card__primary-action">
-                            <div class="mdc-card__media mdc-card__media--content">
-                                <div class="mdc-card-media">
-                                    <img id="cardImage">
-                                    <div class="mdc-card-info-box">
-                                        <div class="mdc-typography--headline6 fullwidth" id="cardTitle"></div>
-                                        <div class="mdc-typography--body2 mdc-card-info-content">
-                                            <i class="material-icons">arrow_upward</i><span class="margin-l-4" id="cardConfirmedTime"></span>
-                                        </div>
-                                        <div class="mdc-typography--body2 mdc-card-info-content">
-                                            <i class="material-icons">access_time</i><span class="margin-l-4" id="cardInterval"></span> days
-                                        </div>
-                                        <div class="mdc-typography--body2 mdc-card-info-content" id="cardResultBox">
-                                            <i class="material-icons" id="cardResultIcon">check</i><span class="margin-l-4" id="cardResultTime"></span>
-                                        </div>
+                <div class="mdc-card" id="card-">
+                    <div class="mdc-card__primary-action">
+                        <div class="mdc-card__media mdc-card__media--content">
+                            <div class="mdc-card-media">
+                                <img id="cardImage">
+                                <div class="mdc-card-info-box">
+                                    <div class="mdc-typography--headline6 fullwidth" id="cardTitle"></div>
+                                    <div class="mdc-typography--body2 mdc-card-info-content">
+                                        <i class="material-icons">arrow_upward</i><span class="margin-l-4" id="cardConfirmedTime"></span>
+                                    </div>
+                                    <div class="mdc-typography--body2 mdc-card-info-content">
+                                        <i class="material-icons">access_time</i><span class="margin-l-4" id="cardInterval"></span>
+                                    </div>
+                                    <div class="mdc-typography--body2 mdc-card-info-content" id="cardResultBox">
+                                        <i class="material-icons" id="cardResultIcon">check</i><span class="margin-l-4" id="cardResultTime"></span>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="mdc-card__actions">
-                            <div class="mdc-card__action-buttons">
-                                <button class="mdc-button mdc-card__action mdc-card__action--button status-accepted" id="cardStatusButton">
-                                    <i class="material-icons mdc-button__icon" aria-hidden="true" id="cardStatusButtonIcon">check</i>
-                                    <span class="mdc-button__label" id="cardStatusButtonLabel">Accepted</span>
-                                </button>
-                            </div>
-                            <div class="mdc-card__action-icons">
-                                <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon--unbounded" title="Location" title="Location" id="cardLocationButton">place</button>
-                                <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon--unbounded" title="Intel Map" title="Intel Map" id="cardIntelButton">map</button>
-                            </div>
+                    </div>
+                    <div class="mdc-card__actions">
+                        <div class="mdc-card__action-buttons">
+                            <button class="mdc-button mdc-card__action mdc-card__action--button" id="cardStatusButton">
+                                <i class="material-icons mdc-button__icon" aria-hidden="true" id="cardStatusButtonIcon">check</i>
+                                <span class="mdc-button__label" id="cardStatusButtonLabel">Accepted</span>
+                            </button>
+                        </div>
+                        <div class="mdc-card__action-icons">
+                            <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon--unbounded" title="Location" title="Location" id="cardLocationButton">place</button>
+                            <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon--unbounded" title="Intel Map" title="Intel Map" id="cardIntelButton">map</button>
                         </div>
                     </div>
+                </div>
             </template>
         </div>
         <!-- Dialogs -->
@@ -175,11 +175,8 @@
                         </div>
                     </div>
                     <footer class="mdc-dialog__actions">
-                        <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="no">
-                            <span class="mdc-button__label">Cancel</span>
-                        </button>
                         <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="yes">
-                            <span class="mdc-button__label">Apply</span>
+                            <span class="mdc-button__label">Close</span>
                         </button>
                     </footer>
                 </div>
@@ -189,7 +186,7 @@
         <!-- Scripts -->
         <script type="text/javascript" src="../lib/value.js"></script>
         <script type="text/javascript" src="../lib/toolkit.js"></script>
-        <script type="text/javascript" src="../lib/fileKit.js"></script>
+        <script type="text/javascript" src="./fileKit.js"></script>
         <script type="text/javascript" src="./ui.js" onload="ui.event.init()"></script>
         <script type="text/javascript" src="./main.js"></script>
         <script async defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.2.1/mapbox-gl.js" onload="ui.map.load()"></script>

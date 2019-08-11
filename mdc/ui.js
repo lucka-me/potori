@@ -60,7 +60,6 @@ const ui = {
         for (let key of Object.keys(this.status.block)) this.status.block[key].hidden = true;
         this.cardList.innerHTML = "";
         for (let portal of process.portalList) if (portal.marker) portal.marker.remove();
-        console.log(this.progressBar);
         this.progressBar.root_.hidden = true;
         this.progressBar.buffer = 0;
         this.progressBar.progress = 0;
@@ -74,8 +73,8 @@ const ui = {
         },
         button: {
             status:     (_) => ui.dialog.status.open(),
-            openFile:   (_) => fileKit.local.onOpenFile(),
-            saveFile:   (_) => fileKit.local.onSaveFile(),
+            openFile:   (_) => fileKit.local.openFile(),
+            saveFile:   (_) => fileKit.local.saveFile(),
             uploadFile: (_) => fileKit.googleDrive.uploadFile(),
             auth:       (_) => { },
             signout:    (_) => { },
@@ -84,12 +83,12 @@ const ui = {
             if (show) {
                 for (let portal of portals) {
                     if (portal.marker) portal.marker.addTo(ui.map.mapCtrl);
-                    document.getElementById("card-" + portal.id).parentNode.style.display = "flex";
+                    document.getElementById("card-" + portal.id).hidden = false;
                 }
             } else {
                 for (let portal of portals) {
                     if (portal.marker) portal.marker.remove();
-                    document.getElementById("card-" + portal.id).parentNode.style.display = "none";
+                    document.getElementById("card-" + portal.id).hidden = true;
                 }
             }
         },
