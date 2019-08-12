@@ -224,7 +224,6 @@ const process = {
         },
     },
     display: () => {
-        console.log("Display()");
         // Merge duplicated portals
         for (let i = process.portalList.length - 1; i >= 0; i--) {
             let portal = process.portalList[i];
@@ -304,11 +303,12 @@ const process = {
                     break;
             }
             iconDiv.appendChild(icon);
+            iconDiv.onclick = () => ui.event.scrollToCard(portal.id);
             portal.marker = new mapboxgl.Marker({ element: iconDiv })
                 .setLngLat(portal.lngLat)
                 .setPopup(new mapboxgl.Popup({ closeButton: false }).setText(portal.title))
                 .addTo(ui.map.mapCtrl);
-            
+
             const locationButton = card.querySelector("#cardLocationButton");
             locationButton.hidden = false;
             const locationRipple = new mdc.ripple.MDCRipple(locationButton);

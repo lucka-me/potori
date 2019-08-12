@@ -82,18 +82,18 @@ const ui = {
         changeShow: (portals, show) => {
             if (show) {
                 for (let portal of portals) {
-                    if (portal.marker) portal.marker.addTo(ui.map.mapCtrl);
+                    if (portal.marker) portal.marker.getElement().hidden = false;
                     document.getElementById("card-" + portal.id).hidden = false;
                 }
             } else {
                 for (let portal of portals) {
-                    if (portal.marker) portal.marker.remove();
+                    if (portal.marker) portal.marker.getElement().hidden = true;
                     document.getElementById("card-" + portal.id).hidden = true;
                 }
             }
         },
         scrollToCard: (id) => {
-            ui.cardList.scrollTo(0, document.getElementById("card-" + id).parentNode.offsetTop - ui.cardList.offsetTop - 8);
+            ui.cardList.scrollTo(0, document.getElementById("card-" + id).offsetTop - ui.cardList.offsetTop - 8);
         },
     },
 };
