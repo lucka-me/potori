@@ -12,9 +12,13 @@
     --color-rejected: #B0373C;
 }
 
-.status-pending { color: #CAAF85 !important; }
-.status-accepted { color: #35C572 !important; }
-.status-rejected { color: #B0373C !important; }
+.status-pending  { color: var(--color-pending ) !important; }
+.status-accepted { color: var(--color-accepted) !important; }
+.status-rejected { color: var(--color-rejected) !important; }
+
+.status-pending-bg  { background-color: var(--color-pending ) !important; }
+.status-accepted-bg { background-color: var(--color-accepted) !important; }
+.status-rejected-bg { background-color: var(--color-rejected) !important; }
 
 body {
     height: 100vh;
@@ -119,4 +123,14 @@ body {
 
 .mdc-linear-progress__bar-inner {
     background-color: var(--mdc-theme-secondary, #6200ee) !important;
+}
+
+.map-marker {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
 }

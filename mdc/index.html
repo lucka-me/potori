@@ -79,14 +79,15 @@
                             </button>
                         </div>
                         <div class="mdc-card__action-icons">
-                            <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon--unbounded" title="Location" title="Location" id="cardLocationButton">place</button>
-                            <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon--unbounded" title="Intel Map" title="Intel Map" id="cardIntelButton">map</button>
+                            <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon--unbounded" title="Location" title="Location" id="cardLocationButton" data-mdc-ripple-is-unbounded="true">place</button>
+                            <button class="mdc-icon-button material-icons mdc-card__action mdc-card__action--icon--unbounded" title="Intel Map" title="Intel Map" id="cardIntelButton" data-mdc-ripple-is-unbounded="true">map</button>
                         </div>
                     </div>
                 </div>
             </template>
         </div>
         <!-- Dialogs -->
+        <!-- Status -->
         <div class="mdc-dialog mdc-dialog--scrollable" role="alertdialog" aria-modal="true" id="dialogStatus">
             <div class="mdc-dialog__container">
                 <div class="mdc-dialog__surface">
@@ -184,7 +185,7 @@
             <div class="mdc-dialog__scrim"></div>
         </div>
         <!-- Scripts -->
-        <script type="text/javascript" src="../lib/value.js"></script>
+        <script type="text/javascript" src="./value.js"></script>
         <script type="text/javascript" src="../lib/toolkit.js"></script>
         <script type="text/javascript" src="./fileKit.js"></script>
         <script type="text/javascript" src="./ui.js" onload="ui.event.init()"></script>

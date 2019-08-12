@@ -275,11 +275,36 @@ const process = {
         }
 
         let fillLngLatInfo = function(portal, card) {
-            //const iconElement = card.querySelector("#cardStatusButtonIcon").cloneNode(true);
-            //iconElement.onclick = () => ui.event.scrollToCard(portal.id);
-            //portal.marker = new mapboxgl.Marker({ element: iconElement })
-            // TODO: Generate Icon
-            portal.marker = new mapboxgl.Marker()
+            const iconDiv = document.createElement("div");
+            iconDiv.className = "map-marker";
+            const icon = document.createElement("span");
+            icon.className = "material-icons";
+            switch (portal.status) {
+                case value.code.portalStatus.pending:
+                    iconDiv.className += " status-pending-bg";
+                    icon.innerHTML = "access_time";
+                    break;
+                case value.code.portalStatus.accepted:
+                    iconDiv.className += " status-accepted-bg";
+                    icon.innerHTML = "check";
+                    break;
+                default:
+                    switch (portal.status) {
+                        case value.code.portalStatus.rejected.tooClose:
+                            icon.innerHTML = "compare_arrows";
+                            break;
+                        case value.code.portalStatus.rejected.duplicated:
+                            icon.innerHTML = "filter_none";
+                            break;
+                        default:
+                            icon.innerHTML = "close";
+                            break;
+                    }
+                    iconDiv.className += " status-rejected-bg";
+                    break;
+            }
+            iconDiv.appendChild(icon);
+            portal.marker = new mapboxgl.Marker({ element: iconDiv })
                 .setLngLat(portal.lngLat)
                 .setPopup(new mapboxgl.Popup({ closeButton: false }).setText(portal.title))
                 .addTo(ui.map.mapCtrl);
