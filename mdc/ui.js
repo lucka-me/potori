@@ -42,6 +42,14 @@ const ui = {
     },
     dialog: {
         status: new mdc.dialog.MDCDialog(document.querySelector("#dialogStatus")),
+        alert: new mdc.dialog.MDCDialog(document.querySelector("#dialogAlert")),
+        show: {
+            alert: (message, title = "Alert") => {
+                ui.dialog.alert.open();
+                ui.dialog.alert.root_.querySelector("#dialogAlertTitle").innerHTML = title;
+                ui.dialog.alert.root_.querySelector("#dialogAlertMessageBox").innerHTML = message;
+            },
+        }
     },
     progressBar: new mdc.linearProgress.MDCLinearProgress(document.querySelector("#progressBar")),
     map: {

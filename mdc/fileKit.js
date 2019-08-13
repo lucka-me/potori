@@ -7,7 +7,7 @@ const fileKit = {
             const onOpen = (event) => {
                 const file = event.target.files[0];
                 if (!file) {
-                    alert(value.string.alert.openFileFailed);
+                    ui.dialog.show.alert(value.string.alert.openFileFailed);
                     return;
                 }
                 const fileReader = new FileReader();
@@ -22,7 +22,7 @@ const fileKit = {
         },
         saveFile: () => {
             if (process.portalList.length < 1) {
-                alert(value.string.alert.saveFileNoPortal);
+                ui.dialog.show.alert(value.string.alert.saveFileNoPortal);
                 return;
             }
             const element = document.createElement("a");
@@ -107,11 +107,11 @@ const fileKit = {
             ).then(response => {
                 if (response.id) {
                     fileKit.googleDrive._fileId = response.id;
-                    alert(value.string.alert.uploaded);
+                    ui.dialog.show.alert(value.string.alert.uploaded);
                 } else {
-                    alert(value.string.alert.uploadFailed + "\n" + response.message);
+                    ui.dialog.show.alert(value.string.alert.uploadFailed + "\n" + response.message);
                 }
-            }).catch((_) => alert(value.string.alert.uploadFailed));
+            }).catch((_) => ui.dialog.show.alert(value.string.alert.uploadFailed));
         },
     },
     parseFile: (content) => {
@@ -122,15 +122,15 @@ const fileKit = {
         try {
             list = JSON.parse(content);
             if (list.length === 0) {
-                alert(value.string.alert.openFileEmpty);
+                ui.dialog.show.alert(value.string.alert.openFileEmpty);
                 return;
             }
         } catch(error) {
-            alert(value.string.alert.openFileFailed);
+            ui.dialog.show.alert(value.string.alert.openFileFailed);
             return;
         }
         if (!fileKit.checkContent(list)) {
-            alert(value.string.alert.openFileStructError);
+            ui.dialog.show.alert(value.string.alert.openFileStructError);
             return;
         }
         process.portalList.push(...list);

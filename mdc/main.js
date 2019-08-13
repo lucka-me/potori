@@ -12,7 +12,7 @@ const auth = {
                 ui.button.signout.listen("click", (_) => gapi.auth2.getAuthInstance().signOut());
                 auth.updateStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
             },
-            (error) => alert(JSON.stringify(error, null, 2))
+            (error) => ui.dialog.show.alert(JSON.stringify(error, null, 2))
         );
     },
     updateStatus: (isSignedIn) => {
