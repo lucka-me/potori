@@ -38,6 +38,23 @@ const value = {
             uploaded: "Uploaded",
             uploadFailed: "Failed to upload.",
         },
+        html: {
+            icon: {
+                accepted: "check",
+                pending: "access_time",
+                rejected: "close",
+                rejectedReason: {
+                    tooClose: "compare_arrows",
+                    duplicated: "filter_none",
+                    undeclared: "close",
+                },
+            },
+            css: {
+                accepted: " status-accepted",
+                pending: " status-pending",
+                rejected: " status-rejected",
+            }
+        },
         mail: {
             query: {
                 redacted: {

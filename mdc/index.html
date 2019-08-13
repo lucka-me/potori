@@ -14,7 +14,6 @@
         <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
         <!-- Mapbox -->
         <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v0.54.0/mapbox-gl.css" rel="stylesheet" />
-
     </head>
     <body class="mdc-typography">
         <header class=" mdc-top-app-bar">
@@ -59,13 +58,13 @@
                                 <div class="mdc-card-info-box">
                                     <div class="mdc-typography--headline6 fullwidth" id="cardTitle"></div>
                                     <div class="mdc-typography--body2 mdc-card-info-content">
-                                        <i class="material-icons">arrow_upward</i><span class="margin-l-4" id="cardConfirmedTime"></span>
+                                        <i class="material-icons">arrow_upward</i><span class="margin-l--4" id="cardConfirmedTime"></span>
                                     </div>
                                     <div class="mdc-typography--body2 mdc-card-info-content">
-                                        <i class="material-icons">access_time</i><span class="margin-l-4" id="cardInterval"></span>
+                                        <i class="material-icons">access_time</i><span class="margin-l--4" id="cardInterval"></span>
                                     </div>
                                     <div class="mdc-typography--body2 mdc-card-info-content" id="cardResultBox">
-                                        <i class="material-icons" id="cardResultIcon">check</i><span class="margin-l-4" id="cardResultTime"></span>
+                                        <i class="material-icons" id="cardResultIcon">check</i><span class="margin-l--4" id="cardResultTime"></span>
                                     </div>
                                 </div>
                             </div>
@@ -186,7 +185,7 @@
         </div>
         <!-- Scripts -->
         <script type="text/javascript" src="./value.js"></script>
-        <script type="text/javascript" src="../lib/toolkit.js"></script>
+        <script type="text/javascript" src="./toolkit.js"></script>
         <script type="text/javascript" src="./fileKit.js"></script>
         <script type="text/javascript" src="./ui.js" onload="ui.event.init()"></script>
         <script type="text/javascript" src="./main.js"></script>

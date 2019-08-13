@@ -1,8 +1,10 @@
-.flex-justify-space-between { justify-content: space-between; }
 [hidden]{ display:none !important; }
 .fullwidth { width: 100%; }
-.margin-l-4 { margin-left: 4px; }
-.margin-l-8 { margin-left: 8px; }
+.margin-l--4 { margin-left: 4px; }
+.margin-l--8 { margin-left: 8px; }
+
+/* Flexbox */
+.flex-justify-space-between { justify-content: space-between; }
 
 :root {
     --mdc-theme-primary: #3b1e5f !important;
@@ -16,10 +18,11 @@
 .status-accepted { color: var(--color-accepted) !important; }
 .status-rejected { color: var(--color-rejected) !important; }
 
-.status-pending-bg  { background-color: var(--color-pending ) !important; }
-.status-accepted-bg { background-color: var(--color-accepted) !important; }
-.status-rejected-bg { background-color: var(--color-rejected) !important; }
+.status-pending--bg  { background-color: var(--color-pending ) !important; }
+.status-accepted--bg { background-color: var(--color-accepted) !important; }
+.status-rejected--bg { background-color: var(--color-rejected) !important; }
 
+/* Contents */
 body {
     height: 100vh;
     min-height: 100vh;
@@ -28,7 +31,12 @@ body {
     display: flex;
     flex-direction: column;
 }
+
 .logo { height: 32px; }
+
+.mdc-linear-progress__bar-inner {
+    background-color: var(--mdc-theme-secondary, #6200ee) !important;
+}
 
 .main-box {
     flex: 1;
@@ -37,17 +45,30 @@ body {
     flex-flow: row wrap;
 }
 
+/* Optimize map and card list for mobile */
+@media screen and (max-width: 600px) {
+    #map { height: 30% !important; }
+    #cardList { height: 70% !important; }
+}
+
+/* Map */
 #map {
     flex: 2;
     height: 100%;
     min-width: 300px;
 }
 
-@media screen and (max-width: 600px) {
-    #map { height: 30% !important; }
-    #cardList { height: 70% !important; }
+.map-marker {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
 }
 
+/* Card List */
 #cardList {
     flex: 1;
     background-color: #E5E5E5;
@@ -61,6 +82,7 @@ body {
     -webkit-overflow-scrolling: touch;
 }
 
+/* Card */
 .mdc-card {
     margin: 4px 8px;
     flex-shrink: 0;
@@ -94,6 +116,7 @@ body {
     height: 120px;
 }
 
+/* Dialog */
 .mdc-dialog-content {
     padding-top: 8px !important;
     display: flex;
@@ -107,6 +130,7 @@ body {
     flex-grow: 1;
 }
 
+/* Switch */
 .mdc-switch-box {
     padding: 4px 0px;
     display: flex;
@@ -121,16 +145,5 @@ body {
     align-items: center;
 }
 
-.mdc-linear-progress__bar-inner {
-    background-color: var(--mdc-theme-secondary, #6200ee) !important;
-}
-
-.map-marker {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-}
+/* Icon */
+.material-icons.md-18 { font-size: 18px; }

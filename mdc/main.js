@@ -262,44 +262,33 @@ const process = {
             else if (lngLat.lat < boundsSW.lat) boundsSW.lat = lngLat.lat;
         };
 
-        const getDateString = function(time) {
-            const date = new Date();
-            date.setTime(time);
-            return date.toLocaleDateString();
-        };
-
-        const getIntervalString = (start, end) => {
-            const day = Math.floor((end - start) / (24 * 3600 * 1000));
-            return day + " day" + (day > 2 ? "s" : "");
-        }
-
-        let fillLngLatInfo = function(portal, card) {
+        const fillLngLatInfo = (portal, card) => {
             const iconDiv = document.createElement("div");
             iconDiv.className = "map-marker";
             const icon = document.createElement("span");
-            icon.className = "material-icons";
+            icon.className = "material-icons md-18";
             switch (portal.status) {
                 case value.code.portalStatus.pending:
-                    iconDiv.className += " status-pending-bg";
-                    icon.innerHTML = "access_time";
+                    iconDiv.className += value.string.html.css.pending + "--bg";
+                    icon.innerHTML = value.string.html.icon.pending;
                     break;
                 case value.code.portalStatus.accepted:
-                    iconDiv.className += " status-accepted-bg";
-                    icon.innerHTML = "check";
+                    iconDiv.className += value.string.html.css.accepted + "--bg";
+                    icon.innerHTML = value.string.html.icon.accepted;
                     break;
                 default:
                     switch (portal.status) {
                         case value.code.portalStatus.rejected.tooClose:
-                            icon.innerHTML = "compare_arrows";
+                            icon.innerHTML = value.string.html.icon.rejectedReason.tooClose;
                             break;
                         case value.code.portalStatus.rejected.duplicated:
-                            icon.innerHTML = "filter_none";
+                            icon.innerHTML = value.string.html.icon.rejectedReason.duplicated;
                             break;
                         default:
-                            icon.innerHTML = "close";
+                            icon.innerHTML = value.string.html.icon.rejectedReason.undeclared;
                             break;
                     }
-                    iconDiv.className += " status-rejected-bg";
+                    iconDiv.className += value.string.html.css.rejected + "--bg";
                     break;
             }
             iconDiv.appendChild(icon);
@@ -341,12 +330,12 @@ const process = {
             card.querySelector(".mdc-card").id = "card-" + portal.id;
             card.getElementById("cardImage").src = value.string.path.image + portal.image;
             card.getElementById("cardTitle").innerHTML = portal.title;
-            card.getElementById("cardConfirmedTime").innerHTML = getDateString(portal.confirmedTime);
+            card.getElementById("cardConfirmedTime").innerHTML = toolkit.getDateString(portal.confirmedTime);
             if (portal.resultTime) {
-                card.getElementById("cardInterval").innerHTML = getIntervalString(portal.confirmedTime, portal.resultTime);
-                card.getElementById("cardResultTime").innerHTML = getDateString(portal.resultTime);
+                card.getElementById("cardInterval").innerHTML = toolkit.getIntervalString(portal.confirmedTime, portal.resultTime);
+                card.getElementById("cardResultTime").innerHTML = toolkit.getDateString(portal.resultTime);
             } else {
-                card.getElementById("cardInterval").innerHTML = getIntervalString(portal.confirmedTime, new Date().getTime());
+                card.getElementById("cardInterval").innerHTML = toolkit.getIntervalString(portal.confirmedTime, new Date().getTime());
                 card.getElementById("cardResultBox").hidden = true;
             }
             const resultIcon        = card.getElementById("cardResultIcon");
@@ -356,38 +345,38 @@ const process = {
 
             switch (portal.status) {
                 case value.code.portalStatus.pending:
-                    statusButton.className += " status-pending";
-                    statusButtonIcon.innerHTML = "access_time";
+                    statusButton.className += value.string.html.css.pending;
+                    statusButtonIcon.innerHTML = value.string.html.icon.pending;
                     statusButtonLabel.innerHTML = "Pending";
                     classifiedList.pending.push(portal);
                     break;
                 case value.code.portalStatus.accepted:
-                    resultIcon.innerHTML = "check";
-                    statusButton.className += " status-accepted";
-                    statusButtonIcon.innerHTML = "check";
+                    resultIcon.innerHTML = value.string.html.icon.accepted;
+                    statusButton.className += value.string.html.css.accepted;
+                    statusButtonIcon.innerHTML = value.string.html.icon.accepted;
                     statusButtonLabel.innerHTML = "Accepted";
                     classifiedList.accepted.push(portal);
                     break;
                 default:
                     switch (portal.status) {
                         case value.code.portalStatus.rejected.tooClose:
-                            statusButtonIcon.innerHTML = "compare_arrows";
+                            statusButtonIcon.innerHTML = value.string.html.icon.rejectedReason.tooClose;
                             statusButtonLabel.innerHTML = "Too Close";
                             classifiedList.rejectedReason.tooClose.push(portal);
                             break;
                         case value.code.portalStatus.rejected.duplicated:
-                            statusButtonIcon.innerHTML = "filter_none";
+                            statusButtonIcon.innerHTML = value.string.html.icon.rejectedReason.duplicated;
                             statusButtonLabel.innerHTML = "Duplicated";
                             classifiedList.rejectedReason.duplicated.push(portal);
                             break;
                         default:
-                            statusButtonIcon.innerHTML = "close";
+                            statusButtonIcon.innerHTML = value.string.html.icon.rejectedReason.undeclared;
                             statusButtonLabel.innerHTML = "Rejected";
                             classifiedList.rejectedReason.undeclared.push(portal);
                             break;
                     }
-                    statusButton.className += " status-rejected";
-                    resultIcon.innerHTML = "close";
+                    statusButton.className += value.string.html.css.rejected;
+                    resultIcon.innerHTML = value.string.html.icon.rejected;
                     classifiedList.rejected.push(portal);
                     break;
             }
