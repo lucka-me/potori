@@ -113,7 +113,9 @@ body {
     object-fit: cover;
     object-position: center;
     width: 120px;
+    min-width: 120px;
     height: 120px;
+    min-height: 120px;
 }
 
 /* Dialog */
