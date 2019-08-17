@@ -1,19 +1,17 @@
 const fileKit = {
     local: {
-        onOpenFile: function() {
-            let element = document.createElement("input");
+        openFile: () => {
+            const element = document.createElement("input");
             element.type = "file";
             element.accpet = ".json";
-            let onOpen = function(event) {
-                let file = event.target.files[0];
+            const onOpen = (event) => {
+                const file = event.target.files[0];
                 if (!file) {
-                    alert(value.string.alert.openFileFailed);
+                    ui.dialog.show.alert(value.string.alert.openFileFailed);
                     return;
                 }
-                let fileReader = new FileReader();
-                fileReader.onload = function() {
-                    fileKit.parseFile(fileReader.result);
-                };
+                const fileReader = new FileReader();
+                fileReader.onload = () => fileKit.parseFile(fileReader.result);
                 fileReader.readAsText(file);
             };
             element.addEventListener('change', onOpen, false);
@@ -22,12 +20,12 @@ const fileKit = {
             element.click();
             document.body.removeChild(element);
         },
-        onSaveFile: function() {
-            if (portalList.length < 1) {
-                alert(value.string.alert.saveFileNoPortal);
+        saveFile: () => {
+            if (process.portalList.length < 1) {
+                ui.dialog.show.alert(value.string.alert.saveFileNoPortal);
                 return;
             }
-            let element = document.createElement("a");
+            const element = document.createElement("a");
             element.href = URL.createObjectURL(fileKit.getFileBlob());
             element.download = value.string.file.name;
             element.style.display = "none";
@@ -38,27 +36,27 @@ const fileKit = {
     },
     googleDrive: {
         _fileId: null,
-        getFile: function(onFinished) {
+        getFile: (onFinished) => {
             fileKit.googleDrive._fileId = null;
 
-            let onGetFileList = function(fileList) {
+            const onGetFileList = (fileList) => {
                 if (fileList.length < 1) {
                     onFinished();
                     return;
                 }
-                let fileId = fileList[0].id;
+                const fileId = fileList[0].id;
                 gapi.client.drive.files.get({
                     fileId: fileId,
                     alt: "media"
-                }).then(function(response) {
+                }).then((response) => {
                     if (!fileKit.checkContent(response.result)) {
-                        gapi.client.drive.files.delete({ fileId: fileId }).then(function(response) { console.log(response); });
+                        gapi.client.drive.files.delete({ fileId: fileId }).then((response) => console.log(response));
                         fileList.splice(0, 1);
                         onGetFileList(fileList);
                         return;
                     }
-                    portalList.splice(0, portalList.length);
-                    portalList.push(...response.result);
+                    process.portalList.splice(0, process.portalList.length);
+                    process.portalList.push(...response.result);
                     fileKit.googleDrive._fileId = fileId;
                     onFinished();
                 });
@@ -69,8 +67,8 @@ const fileKit = {
                 pageSize: 10,
                 spaces: value.string.path.googleDrive.folder,
                 fields: "files(id)"
-            }).then(function(response) {
-                let fileList = response.result.files;
+            }).then((response) => {
+                const fileList = response.result.files;
                 if (!fileList) {
                     onFinished();
                     return;
@@ -78,11 +76,11 @@ const fileKit = {
                 onGetFileList(fileList);
             });
         },
-        uploadFile: function() {
+        uploadFile: () => {
             // Ref: https://gist.github.com/tanaikech/bd53b366aedef70e35a35f449c51eced
             let url = "";
             let method = "";
-            let metadata = {
+            const metadata = {
                 "name": value.string.file.name,
                 "mimeType": value.string.file.type,
             };
@@ -96,7 +94,7 @@ const fileKit = {
                 metadata.parents = [value.string.path.googleDrive.folder];
             }
 
-            let form = new FormData();
+            const form = new FormData();
             form.append("metadata", new Blob([JSON.stringify(metadata)], { type: value.string.file.type }));
             form.append("file", fileKit.getFileBlob());
             fetch(url, {
@@ -109,38 +107,38 @@ const fileKit = {
             ).then(response => {
                 if (response.id) {
                     fileKit.googleDrive._fileId = response.id;
-                    alert(value.string.alert.uploaded);
+                    ui.dialog.show.alert(value.string.alert.uploaded);
                 } else {
-                    alert(value.string.alert.uploadFailed + "\n" + response.message);
+                    ui.dialog.show.alert(value.string.alert.uploadFailed + "\n" + response.message);
                 }
-            }).catch(_ => alert(value.string.alert.uploadFailed));
+            }).catch((_) => ui.dialog.show.alert(value.string.alert.uploadFailed));
         },
     },
-    parseFile: function(content) {
-        ui.refresh();
-        portalList.splice(0, portalList.length);
+    parseFile: (content) => {
+        ui.init();
+        process.portalList.splice(0, process.portalList.length);
 
-        let list = [];
+        const list = [];
         try {
             list = JSON.parse(content);
             if (list.length === 0) {
-                alert(value.string.alert.openFileEmpty);
+                ui.dialog.show.alert(value.string.alert.openFileEmpty);
                 return;
             }
         } catch(error) {
-            alert(value.string.alert.openFileFailed);
+            ui.dialog.show.alert(value.string.alert.openFileFailed);
             return;
         }
         if (!fileKit.checkContent(list)) {
-            alert(value.string.alert.openFileStructError);
+            ui.dialog.show.alert(value.string.alert.openFileStructError);
             return;
         }
-        portalList.push(...list);
-        ui.button.openFile.hidden = true;
-        ui.button.saveFile.hidden = false;
-        process.display();
+        process.portalList.push(...list);
+        ui.button.openFile.root_.hidden = true;
+        ui.button.saveFile.root_.hidden = false;
+        ui.display();
     },
-    checkContent: function(content) {
+    checkContent: (content) => {
         if (content.length === undefined) return false;
         for (let portal of content) {
             if (portal.id === undefined
@@ -153,10 +151,10 @@ const fileKit = {
         }
         return true;
     },
-    getFileBlob: function() {
-        let list = [];
-        for (let portal of portalList) {
-            let decyclic = {};
+    getFileBlob: () => {
+        const list = [];
+        for (let portal of process.portalList) {
+            const decyclic = {};
             for (let key of Object.keys(portal)) {
                 if (key !== "marker") decyclic[key] = portal[key];
             }

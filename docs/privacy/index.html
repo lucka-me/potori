@@ -2,96 +2,181 @@
 <html>
     <meta charset="utf-8" />
     <head>
-        <title>Portal Submission Checker for Ingress | Privacy Policy</title>
-        <meta name = "viewport" content = "user-scalable=no, width=device-width" />
+        <title>Potori | Privacy Policy</title>
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1"/>
         <!-- Stylesheet -->
-        <link type="text/css" rel="stylesheet" href="https://lucka.moe/toolkit/css/common.css" />
         <link type="text/css" rel="stylesheet" href="../css/extended.css" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Exo" />
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-            integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"
-        />
+        <!-- MDC -->
+        <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500|Material+Icons" rel="stylesheet">
+        <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Material+Icons" />-->
+        <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
     </head>
-    <body>
-        <div class="flex-box bg-primary fullwidth">
-            <div class="flex-box frame-16 flex-justify-c">
-                <a href="../"><img class="logo" src="../src/logo.svg"></img></a>
-                <h1 class="textwhite margin-left-8">Privacy Policy</h1>
+    <body class="mdc-typography">
+        <header class=" mdc-top-app-bar">
+            <div class="mdc-top-app-bar__row">
+                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                        <a class="logo" href="../"><img class="logo" src="../src/logo.svg"></img></a><span class="mdc-top-app-bar__title">Potori | Privacy Policy</span>
+                </section>
             </div>
+        </header>
+        
+        <div class="mdc-top-app-bar--fixed-adjust"></div>
+
+        <div class="padding--16">
+            <p class="mdc-typography--body1">
+                Briefly, Potori would not collect any of your data. All of your data will be handled inside your browser, and deleted when you close the page. You can save your data in your own Google Drive (where only Potori can access) or locally, they are totally under your control.<br/>
+            </p>
+
+            <p class="mdc-typography--body1">
+                I'm trying to protect your privacy with my knowledge, if you have any suggestion, please feel free to contact me or open an issue.
+            </p>
+
+            <h2 class="mdc-typography--headline2">Data Usage</h2>
+            <p class="mdc-typography--body1">
+                <ul>
+                    <li>
+                        <strong>Mails related to Portal nomination</strong><br/>
+                        Potori will obtain and analyze confirmation, acceptance and rejection mails only.
+                    </li>
+                    <li>
+                        <strong>Content of the mail</strong><br/>
+                        <div class="mdc-data-table">
+                            <table class="mdc-data-table__table" aria-label="Content Useage">
+                                <thead>
+                                    <tr class="mdc-data-table__header-row">
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Content</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Useage</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="mdc-data-table__content">
+                                    <tr class="mdc-data-table__row">
+                                        <td class="mdc-data-table__cell">Mail ID</td>
+                                        <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                            Avoid obtaining and processing the same mail every time, if you save or upload the data file.
+                                        </td>
+                                    </tr>
+                                    <tr class="mdc-data-table__row">
+                                        <td class="mdc-data-table__cell">Subject</td>
+                                        <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                            Extract title of Portal.
+                                        </td>
+                                    </tr>
+                                    <tr class="mdc-data-table__row">
+                                        <td class="mdc-data-table__cell">Timestamp</td>
+                                        <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                            Regarded as the confirmation / acceptance / rejection time of the nomination.
+                                        </td>
+                                    </tr>
+                                    <tr class="mdc-data-table__row">
+                                        <td class="mdc-data-table__cell">Photo URL</td>
+                                        <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                            Show photo in the card.<br/>
+                                            Generate a short UID as the ID of Portal and identify them in mails.<br/>
+                                            <span class="mdc-typography--caption">[FULL VERSION ONLY]</span> The short UID will be used to query Brainstorming database and generate link to Brainstorming watermeter.
+                                        </td>
+                                    </tr>
+                                    <tr class="mdc-data-table__row">
+                                        <td class="mdc-data-table__cell">Intel Map URL</td>
+                                        <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                            Extract the coordinate and display a marker on the map.
+                                        </td>
+                                    </tr>
+                                    <tr class="mdc-data-table__row">
+                                        <td class="mdc-data-table__cell">Mail Body</td>
+                                        <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                            Extract the rejection reason.
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </p>
+
+            <h3 class="mdc-typography--headline3">About the Data File</h3>
+            <p class="mdc-typography--body1">
+                To reduce the network traffic and time useage, Potori provides a feature which allows you to save the data file and upload it to a private app folder in your own Google Drive where only Potori could access. The informations contained in the file are described above.
+            </p>
+
+            <hr/>
+            <p class="mdc-typography--body1">
+                简而言之，Potori不会收集您的任何数据。您的所有数据将在您的浏览器内进行处理，当您关闭页面时，数据也会被清除。您可以将数据保存在您的Google Drive中（只有Potori能够访问的位置）或本地，它们完全处于您的控制之下。
+                
+            </p>
+            <p class="mdc-typography--body1">
+                在下尽力设法保护您的数据，如果您有任何建议，欢迎联系我或提出 Issue。
+            </p>
+            <h2 class="mdc-typography--headline2">数据使用</h2>
+            <p class="mdc-typography--body1">
+                <ul>
+                    <li>
+                        <strong>与申请Portal有关的邮件</strong><br/>
+                        Potori仅会获取和分析确认邮件、通过邮件和拒绝邮件。
+                    </li>
+                    <li>
+                        <strong>邮件的内容</strong><br/>
+                        <div class="mdc-data-table">
+                            <table class="mdc-data-table__table" aria-label="内容的使用">
+                                <thead>
+                                    <tr class="mdc-data-table__header-row">
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">内容</th>
+                                        <th class="mdc-data-table__header-cell" role="columnheader" scope="col">被用于</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="mdc-data-table__content">
+                                    <tr class="mdc-data-table__row">
+                                        <td class="mdc-data-table__cell">邮件ID</td>
+                                        <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                            如果您保存或上传数据文件，邮件ID可用于避免重复获取和处理相同的邮件。
+                                        </td>
+                                    </tr>
+                                    <tr class="mdc-data-table__row">
+                                        <td class="mdc-data-table__cell">标题</td>
+                                        <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                            获取能量塔名称。
+                                        </td>
+                                    </tr>
+                                    <tr class="mdc-data-table__row">
+                                        <td class="mdc-data-table__cell">时间戳</td>
+                                        <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                            作为提名的确认/接受/拒绝时间。
+                                        </td>
+                                    </tr>
+                                    <tr class="mdc-data-table__row">
+                                        <td class="mdc-data-table__cell">照片地址</td>
+                                        <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                            在卡片中显示照片<br/>
+                                            生成一个短UID，作为能量塔ID以及在邮件中识别它们。<br/>
+                                            <span class="mdc-typography--caption">[仅限完整版]</span> 短UID将被用于查询Brainstorming数据库以及生成Brainstorming水表墙的链接。
+                                        </td>
+                                    </tr>
+                                    <tr class="mdc-data-table__row">
+                                        <td class="mdc-data-table__cell">Intel Map地址</td>
+                                        <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                            获取坐标并在地图中显示标记。
+                                        </td>
+                                    </tr>
+                                    <tr class="mdc-data-table__row">
+                                        <td class="mdc-data-table__cell">邮件体</td>
+                                        <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                            获取拒绝原因。
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </li>
+                </ul>
+            </p>
+            <h3 class="mdc-typography--headline3">关于数据文件</h3>
+            <p class="mdc-typography--body1">
+                为了减少网络使用和处理时间，Potori提供了一个功能让您能够保存数据文件或将其上传至您的Google Drive中的一个仅限Potori访问的私有应用文件夹。文件中包含的信息如前文所述。
+            </p>
+
+
         </div>
 
-        <div class="flex-box">
-            <div class="frame-16">
-                <p>
-                    Briefly, Potori would not collect or upload any of your data, except you save/upload the data file manually.<br/>
-                    All of your data will be handled inside your browser, and deleted when you close the page.<br/>
-                    I'm trying to protect your privacy with my knowledge, if you have any suggestion, please feel free to contact me or open an issue.
-                </p>
-                <h2>Data Usage</h2>
-                <p>
-                    <ul>
-                        <li><strong>Mails related to Portal nomination</strong><br/>
-                            Potori will obtain and analyze confirmation, acceptance and rejection mails only.
-                        </li>
-                        <li><strong>Subject, timestamp and body of the mails</strong><br/>
-                            <ul>
-                                <li>The mail ID will be used to avoid obtaining and processing the same mail in the next time (<strong>Only when you save & open / upload the data file</strong>).</li>
-                                <li>The subject is used to obtain the title of the Portal.</li>
-                                <li>The timestamp is used to show the confirmation/acceptance/rejection time of the Portal submission, and also used to calculate interval between them (or submission and now, for pending Portals).</li>
-                                <li>The body of the mail is used to obtain the URL of Portal's image, which is used as UID of each portal.</li>
-                                <li>The body of acceptance & rejection mail from Scanner [REDACTED] is also used to obtain the Intel Map link and coordinate to display a marker on the map.</li>
-                                <li>The body of rejection mail is also used to detect the reason of being rejected.</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </p>
-                <h3>About the Data File</h3>
-                <p>
-                    To reduce the network traffic and time useage, Potori provides a feature which allows you to save the data file and upload it to a private app folder in your own Google Drive where only Potori could access. The informations contained in the file are described above.
-                </p>
-                <hr/>
-                <p>
-                    简而言之，Potori 不会收集或上传您的任何数据，除非您手动保存或上传数据文件。<br/>
-                    您的所有数据将在您的浏览器内进行处理，当您关闭页面时，数据也会被清除。<br/>
-                    在下尽力设法保护您的数据，如果您有任何建议，欢迎联系我或提出 Issue。
-                </p>
-                <h2>数据使用</h2>
-                <p>
-                    <ul>
-                        <li><strong>与申请 Portal 有关的邮件</strong><br/>
-                            Potori 仅会获取和分析确认邮件、通过邮件和拒绝邮件。
-                        </li>
-                        <li><strong>邮件的主题、时间戳与内容</strong>
-                            <ul>
-                                <li>邮件 ID 将在下次运行时被用于避免获取和处理已处理过的邮件（<strong>仅在保存并加载了/上传了数据文件的情况下</strong>）。</li>
-                                <li>主题用于获取 Portal 的标题。</li>
-                                <li>时间戳用于展示 Portal 申请的确认/通过/拒绝时间，以及计算它们之间的时间差（对于未出结果的，计算确认邮件与当前的时间差）。</li>
-                                <li> 邮件内容用于获取 Portal 照片的 URL，用于显示照片以及作为每个 Portal 的唯一识别码。</li>
-                                <li>来自 Scanner [REDACTED] 的结果邮件的内容还用于获取 Intel Map 链接和用于在地图上显示标记的坐标</li>
-                                <li>拒绝邮件的内容还用于检测拒绝原因。</li>
-                            </ul>
-                        </li>
-                    </ul>
-                </p>
-                <h3>关于数据文件</h3>
-                <p>
-                    为了减少网络使用和处理时间，Potori提供了一个功能让您能够保存数据文件或将其上传至您的Google Drive中的一个仅限Potori访问的私有应用文件夹。文件中包含的信息如前文所述。
-                </p>
-            </div>
-        </div>
-
-        <div class="footer">
-            <div class=" frame-16">
-                <div class="flex-box text-nowarp a-baseline">
-                    <a class="footer-item" href="../intro" target="_blank" title="Intro" >Intro</a>
-                    <a class="footer-item" href="https://github.com/lucka-me/potori" target="_blank" title="GitHub">
-                        <i class="fab fa-github fa-lg"></i>
-                    </a>
-                    <a class="footer-item" href="https://lucka.moe" target="_blank" title="Blog" >Lucka</a>
-                    |
-                    <a class="footer-item" href="https://github.com/lucka-me/potori/blob/master/CHANGELOG.md" target="_blank" title="Changelog">0.3.6 (Lite)</a>
-                </div>
-            </div>
-        </div>
     </body>
 </html>

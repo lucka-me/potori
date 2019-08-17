@@ -19,7 +19,7 @@ You can download the repository [and host the full version in the root folder](h
 - [Mapbox GL JS API](https://docs.mapbox.com/mapbox-gl-js/overview/)  
   Provides the map.
 - [Google Drive API](https://developers.google.com/drive/api/v3/about-sdk)  
-  Save/load data to./from Google Drive.
+  Save data in Google Drive.
 - [Firebase JavaScript SDK](https://firebase.google.com/docs/web/setup)  
   Access to Brainstorming database.
 

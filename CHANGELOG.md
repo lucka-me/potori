@@ -1,14 +1,18 @@
 # Changelog
 ```markdown
 ## [0.4.0] - 2019-08-17
-Full: Brand new Material Design UI
+Brand new Material Design UI
 
 ### Added
 - Full: Support for Safari mobile standalone mode
 
 ### Changed
-- Full: Re-designed UI with Material Components for the Web
-- Full: Updated Intro and Privacy
+- Re-designed UI with Material Components for the Web
+- Updated Intro and Privacy
+- Structure optimized, all files except ui.js are the same in Full and Lite
+
+### Fixed
+- Lite: Keyboard will show up when click the status button to copy bs ID
 ```
 
 ```markdown

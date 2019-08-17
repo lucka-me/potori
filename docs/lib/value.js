@@ -1,14 +1,5 @@
 const value = {
     string: {
-        status: {
-            authOrOpenFile: "Please authorize or open a file.",
-            openFile: "Please open a file.",
-            processing: "Processing mails...",
-            loading: "Loading...",
-            waiting: "Waiting...",
-            queryingBs: "Querying database...",
-            finished: "Process finished.",
-        },
         mapbox: {
             accessToken: "pk.eyJ1IjoibHVja2EtbWUiLCJhIjoiY2p2NDk5NmRvMHFreTQzbzduemM1MHV4cCJ9.7XGmxnEJRoCDr-i5BBmBfw",
             style: "mapbox://styles/mapbox/streets-v11",
@@ -21,6 +12,10 @@ const value = {
                 "https://www.googleapis.com/discovery/v1/apis/drive/v3/rest"
             ],
             scope: "https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.appdata",
+        },
+        version: {
+            full: "0.4.0 (Full)",
+            lite: "0.4.0 (Lite)",
         },
         path: {
             image: "https://lh3.googleusercontent.com/",
@@ -47,27 +42,21 @@ const value = {
             uploaded: "Uploaded",
             uploadFailed: "Failed to upload.",
         },
-        css: {
-            collapse: {
-                up: "cursor-pointer fas fa-angle-double-up fa-fw",
-                down: "cursor-pointer fas fa-angle-double-down fa-fw",
-            },
-            statusIconSpan: {
-                accepted: "fa-stack status-accepted",
-                pending: "fa-stack status-pending",
-            },
-            statusIcon: {
-                accepted: "fas fa-check fa-stack-1x fa-inverse",
-                pending: "fas fa-ellipsis-h fa-stack-1x fa-inverse",
+        html: {
+            icon: {
+                accepted: "check",
+                pending: "access_time",
+                rejected: "close",
                 rejectedReason: {
-                    undeclared: "fas fa-times fa-stack-1x fa-inverse",
-                    duplicated: "fas fa-clone fa-stack-1x fa-inverse",
-                    tooClose: "fas fa-arrows-alt-h fa-stack-1x fa-inverse",
+                    tooClose: "compare_arrows",
+                    duplicated: "filter_none",
+                    undeclared: "close",
                 },
             },
-            resultIcon: {
-                accepted: "fas fa-check fa-fw",
-                rejected: "fas fa-times fa-fw",
+            css: {
+                accepted: " status-accepted",
+                pending: " status-pending",
+                rejected: " status-rejected",
             }
         },
         mail: {
