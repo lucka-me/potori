@@ -1,5 +1,17 @@
 # Changelog
 ```markdown
+## [0.4.0] - 2019-08-17
+Full: Brand new Material Design UI
+
+### Added
+- Full: Support for Safari mobile standalone mode
+
+### Changed
+- Full: Re-designed UI with Material Components for the Web
+- Full: Updated Intro and Privacy
+```
+
+```markdown
 ## [0.3.10] - 2019-07-27
 Fixed: Deleting empty file in Google Drive will cause crash
 

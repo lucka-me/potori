@@ -3,211 +3,230 @@
     <meta charset="utf-8" />
     <head>
         <title>Potori | Intro</title>
-        <meta name = "viewport" content = "user-scalable=no, width=device-width" />
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1"/>
         <!-- Stylesheet -->
-        <link type="text/css" rel="stylesheet" href="https://lucka.moe/toolkit/css/common.css" />
         <link type="text/css" rel="stylesheet" href="../css/extended.css" />
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Exo" />
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-            integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous"
-        />
+        <!-- MDC -->
+        <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500|Material+Icons" rel="stylesheet">
+        <!--<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Material+Icons" />-->
+        <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
     </head>
-    <body>
-        <div class="flex-box bg-primary fullwidth">
-            <div class="flex-box frame-16 flex-justify-c">
-                <a href="../"><img class="logo" src="../src/logo.svg"></img></a>
-                <h1 class="textwhite margin-left-8">Intro</h1>
+    <body class="mdc-typography">
+        <header class=" mdc-top-app-bar">
+            <div class="mdc-top-app-bar__row">
+                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+                        <a class="logo" href="../"><img class="logo" src="../src/logo.svg"></img></a><span class="mdc-top-app-bar__title">Potori | Intro</span>
+                </section>
             </div>
-        </div>
+        </header>
+        
+        <div class="mdc-top-app-bar--fixed-adjust"></div>
 
-        <div class="flex-box">
-            <div class="frame-16">
-                <p>
-                    Potori is a web application to visualize your Ingress Portal nominations.<br/>
-                    Potori will obtain your mails related to Portal nominations from your Gmail inbox, so you must login with your account to use it.
-                </p>
-                <h2>Permission</h2>
-                <p>
-                    Potori requires the following permission:
-                    <ul>
-                        <li>
-                            <strong>Gmail: Read Only</strong> (Required)<br/>
-                            This is the core permission on which Potori is dependent. Potori will obtain mails related to Ingress Portal nomination, then extract and display informations from them. The mail IDs will be saved in data file if you save / upload the data file in your computer / your Google Drive. Except that, non of your mail data will be sent out of your browser page.
-                        </li>
-                        <li>
-                            <strong>Google Drive: Files</strong> (Recommended)<br/>
-                            Potori could upload your nomination data to your Google Drive manually, and after login, Potori will download the data. By using the data file, Potori will not obtain and process all mails every time, which could reduce the network traffic and time useage. The file will be storaged in a private app folder where only Potori can access.
-                        </li>
-                    </ul>
-                </p>
-                <h2>Workflow</h2>
-                <p>
-                    This part will describe how Potori works.<br/>
-                    For those mails related to Portal nominations, the subjects and contents are generated from several templates, some keywords are used to filter mails and extract informations.<br/>
-                </p>
-                <ol>
-                    <li>
-                        <strong>Download / Open the nomination data file</strong><br/>
-                        If you have saved a nomination data file, you can open it to review your nominations without login.<br/>
-                        After login, Potori will try to download nomination data from your Google Drive if you have uploaded before.
-                    </li>
-                    <li>
-                        <strong>Obtain the target mails with filters</strong><br/>
-                        Potori will obtain mails with the following filters:<br/>
-                        <table>
-                            <tr>
-                                <td class="at-r">Confirmation mails:</td>
-                                <td>
-                                    <code>from:ingress-support@nianticlabs.com Portal submission confirmation -edit -photo</code><br/>
-                                    <code>from:nominations@portals.ingress.com (有機會加入 OR 数週間 OR (few weeks))</code>
+        <div class="padding--16">
+            <p class="mdc-typography--body1">
+                Potori is a web application to gather and visualize your Ingress Portal nominations. Potori will obtain your mails related to Portal nominations from your Gmail inbox, so you must login with your account to use it.
+            </p>
+            <h2 class="mdc-typography--headline2">Permission</h2>
+            <p class="mdc-typography--body1">
+                Potori requires the following permissions:
+
+                <div class="mdc-data-table">
+                    <table class="mdc-data-table__table" aria-label="Permissions">
+                        <thead>
+                            <tr class="mdc-data-table__header-row">
+                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Permission</th>
+                                <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Describe</th>
+                            </tr>
+                        </thead>
+                        <tbody class="mdc-data-table__content">
+                            <tr class="mdc-data-table__row">
+                                <td class="mdc-data-table__cell">Gmail: Read Only<br/><span class="mdc-typography--caption">REQUIRED</span></td>
+                                <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                    This is the core permission on which Potori is dependent. Potori will obtain mails related to Ingress Portal nomination, then extract and display informations from them.<br/>
+                                    The mail IDs will be saved in data file if you save the data file in your computer or your Google Drive. Except that, non of your mail data will be sent out of your browser page.
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="at-r">Acceptance mails:</td>
-                                <td>
-                                    <code>from:ingress-support@nianticlabs.com Portal review complete now available -edit -photo</code><br/>
-                                    <code>from:nominations@portals.ingress.com Intel Map AP</code>
+                            <tr class="mdc-data-table__row">
+                                <td class="mdc-data-table__cell">Google Drive: Files<br/><span class="mdc-typography--caption">RECOMMENDED</span></td>
+                                <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                    Potori could upload your nomination data to your Google Drive manually, and download the data before fetching your mails.<br/>
+                                    By using the data file, Potori will not obtain and process all mails every time, which could reduce the network traffic and time useage.<br/>
+                                    The file will be storaged in a private app folder where only Potori can access.
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="at-r">Rejection mails:</td>
-                                <td>
-                                    <code>from:ingress-support@nianticlabs.com Portal review complete reviewed -edit -photo</code><br/>
-                                    <code>from:nominations@portals.ingress.com (完畢: OR 審査の完了 OR (REVIEW COMPLETE)) -AP</code>
-                                </td>
-                            </tr>
+                        </tbody>
+                        
+                    </table>
+                </div>
+
+            </p>
+            <h2 class="mdc-typography--headline2">Workflow</h2>
+            <p class="mdc-typography--body1">
+                This part will describe how Potori works.<br/>
+                For those mails related to Portal nominations, the subjects and contents are generated from several templates, some keywords are used to filter mails and extract informations.<br/>
+            </p>
+            <ol class="mdc-typography--body1">
+                <li>
+                    <strong>Open or download the nomination data file</strong><br/>
+                    If you have saved a nomination data file locally, you can open it to review your nominations without login.<br/>
+                    After login, Potori will try to download nomination data from your Google Drive if you have uploaded before.
+                </li>
+                <li>
+                    <strong>Obtain the target mails with filters</strong><br/>
+                    Potori will obtain mails with the following filters:<br/>
+
+                    <div class="mdc-data-table">
+                        <table class="mdc-data-table__table" aria-label="Mail Filters">
+                            <thead>
+                                <tr class="mdc-data-table__header-row">
+                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Mails</th>
+                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Filters</th>
+                                </tr>
+                            </thead>
+                            <tbody class="mdc-data-table__content">
+                                <tr class="mdc-data-table__row">
+                                    <td class="mdc-data-table__cell">Confirmation</td>
+                                    <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                        <code>from:ingress-support@nianticlabs.com Portal submission confirmation -edit -photo</code><br/>
+                                        <code>from:nominations@portals.ingress.com (有機會加入 OR 数週間 OR (few weeks))</code>
+                                    </td>
+                                </tr>
+                                <tr class="mdc-data-table__row">
+                                    <td class="mdc-data-table__cell">Acceptance</td>
+                                    <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                        <code>from:ingress-support@nianticlabs.com Portal review complete now available -edit -photo</code><br/>
+                                        <code>from:nominations@portals.ingress.com Intel Map AP</code>
+                                    </td>
+                                </tr>
+                                <tr class="mdc-data-table__row">
+                                    <td class="mdc-data-table__cell">Rejection</td>
+                                    <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                        <code>from:ingress-support@nianticlabs.com Portal review complete reviewed -edit -photo</code><br/>
+                                        <code>from:nominations@portals.ingress.com (完畢: OR 審査の完了 OR (REVIEW COMPLETE)) -AP</code>
+                                    </td>
+                                </tr>
+                            </tbody>
                         </table>
-                        <i>Tips: You can also create rules with these filter to label your mails automatically in Gmail.</i>
-                    </li>
-                    <li>
-                        <strong>Extract informations from the mails</strong><br/>
-                        <ul>
-                            <li>
-                                The <i>mail ID</i> could be used to avoid obtaining and processing the same mail in the next time, if you save / upload the data file.
-                            </li>
-                            <li>
-                                The <i>subject</i> contains the <strong>title</strong> of the Portal.
-                            </li>
-                            <li>
-                                The <i>timestamp</i> could be regarded as the <strong>confirmation/acceptance/rejection time</strong> of the Portal nomination.
-                            </li>
-                            <li>
-                                The photo of the Portal is included in each mail, with its url in this format: <code>https://lh3.googleusercontent.com/a-very-long-uid</code><br/>
-                                The <i>very long uid</i> is important: it's used to not only show the photo along with the card, but also generate a <strong>shorter uid</strong>, a hash code, to identify the same Portal from different mails (such as confirmation mail and acceptance mail).<br/>
-                                Besides, the <strong>shorter uid</strong> could link to the data page (called <i>Watermeter</i>) in Brainstorming, a wondeful plugin for Ingress OPR, which may show you the opinions from some OPR volunteers who use the plugin.
-                            </li>
-                            <li>
-                                In the result mails (acceptance and rejection mails) from Scanner [REDACTED], there is always an <i>Intel Map link</i>, which contains the <strong>coordinate of the Portal</strong>. Potori will extract the <strong>coordinate</strong> and display a <strong>marker</strong> on the map.<br/>
-                                For those Portals without coordinates (including pending nominations and <strong>all nominations from Prime</strong>) Potori will query the data from Brainstorming Firedase. The query is anoymous, Potori will not send or save your identity.
-                            </li>
-                            <li>
-                                As for the rejection mails, there are three templates (as I known so far) for each rejection reason, and each one colud be identified by matching the key words:
-                                <table>
-                                    <tr>
-                                        <td class="at-r">Duplicated: </td>
-                                        <td><code>duplicate of either an existing Portal</code></td>
-                                    </tr>
-                                    <tr>
-                                        <td class="at-r">Too close:</td>
-                                        <td>
-                                            <code>too close to an existing Portal</code><br/>
-                                            <code>能量塔過近</code>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="at-r">Undeclared:</td>
-                                        <td>(Match neither of the keywords above)</td>
-                                    </tr>
-                                </table>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <strong>Save / upload the nomination data file</strong><br/>
-                        You can save the nomination data to your computer by clicking the <span><i class="fas fa-save fa-fw fa-lg"></i></span> button, a file called <code>Potori.json</code> will be downloaded.<br/>
-                        The nomination data will <strong>NOT</strong> be uploaded to your Google Drive automatically. If you have login, you can upload the data by clicking the <span><i class="fas fa-cloud-upload-alt fa-fw fa-lg"></i></span> button.
-                    </li>
-                </ol>
-                <p>
-                    That's how Potori gets information of your Portal nominations from your inbox. Ingress Prime uses localized templates, which makes it difficult to find the corrent keywords, I'm working on it.
-                </p>
-                <h2>Useage</h2>
-                <p>
-                    After login, the process will start automatically, the status bar will display the progress.<br>
-                    When it finishes, your nominations will be displayed as cards in the list and markers on the map, here is an example of the card:
-                </p>
-                <div style="max-width:500px;" >
-                    <div class="list-item">
-                        <img id="portalImg" src="https://lh3.googleusercontent.com/lniXADGbXbvQ4p3sJFpgMPT6zpawXGmI3V9mYMsSNNTY9YHn1hjV3BAolzYAtBis0Msst1KM-_FBKQdRfsFM">
-                        <div class="card">
-                            <div class="frame-12 flex-box flex-dir-col">
-                                <div class="flex-box fullwidth a-c">
-                                    <a href="https://www.ingress.com/intel?ll=22.540779,114.051921&amp;amp;z=18" target="_blank" class="font-20" id="portalTitleLink">福田站</a>
-                                    <div class="split"></div>
-                                    <a href="http://kitten-114.getforge.io/watermeter.html#fbkqdrfsfm" target="_blank" id="bsLink">
-                                        <div>
-                                            <span class="fa-stack status-accepted" id="statusIconSpan">
-                                                <i class="fas fa-circle fa-stack-2x" style="vertical-align: top;"></i>
-                                                <i class="fas fa-check fa-stack-1x fa-inverse" id="statusIconStack"></i>
-                                            </span>
-                                        </div>
-                                    </a>
-                                </div>
-                                <div style="height:8px;width:100%;"></div>
-                                <div class="flex-box flex-dir-col fullwidth">
-                                    <div class="flex-box a-c margin-right-8">
-                                        <i class="fas fa-cloud-upload-alt fa-fw"></i>
-                                        <div class="margin-left-4">2019/2/2</div>
-                                    </div>
-                                    <div class="flex-box a-c margin-right-8">
-                                        <i class="fas fa-clock fa-fw"></i>
-                                        <div class="margin-left-4">25 days</div>
-                                    </div>
-                                    <div class="flex-box a-c">
-                                        <i class="fas fa-check fa-fw"></i>
-                                        <div class="margin-left-4">2019/2/27</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                     </div>
-                </div>
-                <ul>
-                    <li>
-                        When click the card, the map will fly to the corresponding location.<br/>
-                        And when click the marker, the list will scroll to the corresponding card.
-                    </li>
-                    <li>The title is linked to the Intel Map.</li>
-                    <li>
-                        The status icon <span class="fa-stack status-accepted"><i class="fas fa-circle fa-stack-2x" style="vertical-align: top;"></i><i class="fas fa-check fa-stack-1x fa-inverse"></i></span> is linked to the Brainstorming Watermeter, and the icon will display the reason if the nomination is rejected.
-                    </li>
-                </ul>
-                <p>
-                    Moreover, you can hide some nominations by unchecking the filter in the status bar.
-                </p>
-                <h2>Data Useage & Privacy</h2>
-                <p>
-                    Briefly, Potori would not collect or upload any of your data, for more information, please read <a class="link" href="../privacy" title="Potori | Privacy Policy">Privacy Policy</a>.
-                </p>
-                <h2>Contact</h2>
-                <p>
-                    If you have any question, advice or want to help me improve Potori, please feel free to contact me directly via <a class="link" href="https://t.me/Seele585" title="Telegram@Seele585">Telegram</a>!
-                </p>
-            </div>
+                    <br/>
+                    <i>Tips: You can also create rules with these filter to label your mails automatically in Gmail.</i>
+                </li>
+                <li>
+                    <strong>Extract informations from the mails</strong><br/>
+                    The contents will be used to extract information of the nomination.<br/>
+
+                    <div class="mdc-data-table">
+                        <table class="mdc-data-table__table" aria-label="Content Useage">
+                            <thead>
+                                <tr class="mdc-data-table__header-row">
+                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Content</th>
+                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Useage</th>
+                                </tr>
+                            </thead>
+                            <tbody class="mdc-data-table__content">
+                                <tr class="mdc-data-table__row">
+                                    <td class="mdc-data-table__cell">Mail ID</td>
+                                    <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                        Avoid obtaining and processing the same mail every time, if you save or upload the data file.
+                                    </td>
+                                </tr>
+                                <tr class="mdc-data-table__row">
+                                    <td class="mdc-data-table__cell">Subject</td>
+                                    <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                        Extract title of Portal.
+                                    </td>
+                                </tr>
+                                <tr class="mdc-data-table__row">
+                                    <td class="mdc-data-table__cell">Timestamp</td>
+                                    <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                        Regarded as the confirmation / acceptance / rejection time of the nomination.
+                                    </td>
+                                </tr>
+                                <tr class="mdc-data-table__row">
+                                    <td class="mdc-data-table__cell">Photo URL</td>
+                                    <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                        Show photo in the card.<br/>
+                                        Generate a short UID as the ID of Portal and identify them in mails.<br/>
+                                        <span class="mdc-typography--caption">[FULL VERSION ONLY]</span> The short UID will be used to query Brainstorming database and generate link to Brainstorming watermeter.
+                                    </td>
+                                </tr>
+                                <tr class="mdc-data-table__row">
+                                    <td class="mdc-data-table__cell">Intel Map URL</td>
+                                    <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                        Extract the coordinate and display a marker on the map.
+                                    </td>
+                                </tr>
+                                <tr class="mdc-data-table__row">
+                                    <td class="mdc-data-table__cell">Mail Body</td>
+                                    <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                        Extract the rejection reason.
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <br/>
+
+                    As for the rejection mails, there are several templates for each rejection reason, and each one colud be identified by matching the keywords:<br/>
+
+                    <div class="mdc-data-table">
+                        <table class="mdc-data-table__table" aria-label="Keywords of Rejected Reason">
+                            <thead>
+                                <tr class="mdc-data-table__header-row">
+                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Reason</th>
+                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">Filters</th>
+                                </tr>
+                            </thead>
+                            <tbody class="mdc-data-table__content">
+                                <tr class="mdc-data-table__row">
+                                    <td class="mdc-data-table__cell">Duplicated</td>
+                                    <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                        <code>duplicate of either an existing Portal</code>
+                                    </td>
+                                </tr>
+                                <tr class="mdc-data-table__row">
+                                    <td class="mdc-data-table__cell">Too Close</td>
+                                    <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                        <code>too close to an existing Portal</code><br/>
+                                        <code>能量塔過近</code>
+                                    </td>
+                                </tr>
+                                <tr class="mdc-data-table__row">
+                                    <td class="mdc-data-table__cell">Undeclared</td>
+                                    <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                        (Match neither of the keywords above)
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </li>
+                <li>
+                    <strong>Save or upload the nomination data file</strong><br/>
+                    You can save the nomination data to your computer by clicking the <i class="material-icons">save</i> button, a file named <code>Potori.json</code> will be downloaded.<br/>
+                    The nomination data will <strong>NOT</strong> be uploaded to your Google Drive automatically. If you have login, you can upload the data by clicking the <i class="material-icons">cloud_upload</i> button.
+                </li>
+            </ol>
+            <p class="mdc-typography--body1">
+                That's how Potori gets information of your Portal nominations from your inbox. Ingress Prime uses localized templates, which makes it difficult to find the corrent keywords, I'm working on it.
+            </p>
+            <h2 class="mdc-typography--headline2">Useage</h2>
+            <p class="mdc-typography--body1">
+                After login, the process will start automatically, there will be a progress bar to indicate the progress.<br>
+                When it finishes, your nominations will be displayed as cards in the list and markers on the map.<br/>
+                You can click the <i class="material-icons">equalizer</i> button to open the <i>Status & About</i> dialog and filter the Portals by status and rejected reason.
+            </p>
+
+            <h2 class="mdc-typography--headline2">Data Useage & Privacy</h2>
+            <p class="mdc-typography--body1">
+                Briefly, Potori would not collect or upload any of your data, for more information, please read <a class="link" href="../privacy" title="Potori | Privacy Policy">Privacy Policy</a>.
+            </p>
+            <h2 class="mdc-typography--headline2">Contact</h2>
+            <p class="mdc-typography--body1">
+                If you have any question, advice or want to help me improve Potori, please feel free to contact me directly via <a href="https://t.me/Seele585" title="Telegram@Seele585">Telegram</a> or <a href="https://twitter.com/lucka_me" title="Twitter@lucka_me">Twitter</a>!
+            </p>
         </div>
 
-        <div class="footer">
-            <div class=" frame-16">
-                <div class="flex-box text-nowarp a-baseline">
-                    <a class="footer-item" href="../privacy" target="_blank" title="Privacy Policy" >Privacy</a>
-                    <a class="footer-item" href="https://github.com/lucka-me/potori" title="GitHub">
-                        <i class="fab fa-github fa-lg"></i>
-                    </a>
-                    <a class="footer-item" href="https://lucka.moe" target="_blank" title="Blog" >Lucka</a>
-                    |
-                    <a class="footer-item" href="https://github.com/lucka-me/potori/blob/master/CHANGELOG.md" target="_blank" title="Changelog">0.3.7 (Full)</a>
-                </div>
-            </div>
-        </div>
     </body>
 </html>

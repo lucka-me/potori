@@ -72,6 +72,8 @@ button, .button { font-family: 'Exo', sans-serif; }
     overflow-y: scroll;
     min-width: 300px;
     height: 100%;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
 }
 
 .list-item {
