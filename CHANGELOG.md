@@ -1,5 +1,16 @@
 # Changelog
 ```markdown
+## [0.4.1] - 2019-08-17
+Support PWA
+
+### Added
+- Basic support for Progressive Web App (PWA)
+
+### Changed
+- Icon color
+```
+
+```markdown
 ## [0.4.0] - 2019-08-17
 Brand new Material Design UI
 

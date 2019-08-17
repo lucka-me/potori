@@ -14,8 +14,8 @@ const value = {
             scope: "https://www.googleapis.com/auth/gmail.readonly https://www.googleapis.com/auth/drive.file https://www.googleapis.com/auth/drive.appdata",
         },
         version: {
-            full: "0.4.0 (Full)",
-            lite: "0.4.0 (Lite)",
+            full: "0.4.1 (Full)",
+            lite: "0.4.1 (Lite)",
         },
         path: {
             image: "https://lh3.googleusercontent.com/",
