@@ -1,4 +1,3 @@
-/* FOR LITE */
 const ui = {
     button: {
         status:     new mdc.ripple.MDCRipple(document.querySelector("#buttonStatus")),
@@ -8,42 +7,58 @@ const ui = {
         auth:       new mdc.ripple.MDCRipple(document.querySelector("#buttonAuth")),
         signout:    new mdc.ripple.MDCRipple(document.querySelector("#buttonSignout")),
     },
-    status: {
-        block: {
-            all: document.getElementById("dialogStatusAll"),
-            rejectedReason: document.getElementById("dialogStatusRejectedReason"),
-        },
-        filter: {
-            accepted: {
-                switch: new mdc.switchControl.MDCSwitch(document.querySelector("#filterAcceptedSwitch")),
-                label:  document.getElementById("filterAcceptedLabel"),
-            },
-            rejected: {
-                switch: new mdc.switchControl.MDCSwitch(document.querySelector("#filterRejectedSwitch")),
-                label:  document.getElementById("filterRejectedLabel"),
-            },
-            pending: {
-                switch: new mdc.switchControl.MDCSwitch(document.querySelector("#filterPendingSwitch")),
-                label:  document.getElementById("filterPendingLabel"),
-            },
-            undeclared: {
-                switch: new mdc.switchControl.MDCSwitch(document.querySelector("#filterRejectedUndeclaredSwitch")),
-                label:  document.getElementById("filterRejectedUndeclaredLabel"),
-            },
-            duplicated: {
-                switch: new mdc.switchControl.MDCSwitch(document.querySelector("#filterRejectedDuplicatedSwitch")),
-                label:  document.getElementById("filterRejectedDuplicatedLabel"),
-            },
-            tooClose: {
-                switch: new mdc.switchControl.MDCSwitch(document.querySelector("#filterRejectedTooCloseSwitch")),
-                label:  document.getElementById("filterRejectedTooCloseLabel"),
-            },
-        },
-    },
     dialog: {
-        status: new mdc.dialog.MDCDialog(document.querySelector("#dialogStatus")),
-        alert: new mdc.dialog.MDCDialog(document.querySelector("#dialogAlert")),
+        status: new mdc.dialog.MDCDialog(document.querySelector("#dialog-status")),
+        portal: new mdc.dialog.MDCDialog(document.querySelector("#dialog-portal")),
+        alert:  new mdc.dialog.MDCDialog(document.querySelector("#dialog-alert")),
         show: {
+            portal: (portal) => {
+                const onOpened = () => {
+                    if (!ui.details.map.ctrl) ui.details.init();
+                    if (ui.details.map.marker) ui.details.map.marker.remove();
+                    ui.details.map.marker = null;
+                    if (portal.lngLat) {
+                        ui.details.map.marker = new mapboxgl.Marker()
+                            .setLngLat(portal.lngLat)
+                            .addTo(ui.details.map.ctrl);
+                        ui.details.map.ctrl.jumpTo({ center: portal.lngLat, zoom: 16 });
+                    }
+
+                    if (portal.status === value.code.status.pending) {
+                        ui.details.status.pending.radio.checked = true;
+                        ui.details.rejectedReasonSelect.root_.hidden = true;
+                        ui.details.resultDateField.root_.hidden = true;
+                        ui.details.resultTimeField.root_.hidden = true;
+                    } else {
+                        const dateTime = toolkit.getDateTimeISOString(portal.resultTime).split("T");
+                        ui.details.resultDateField.root_.hidden = false;
+                        ui.details.resultTimeField.root_.hidden = false;
+                        ui.details.resultDateField.value = dateTime[0];
+                        ui.details.resultTimeField.value = dateTime[1].slice(0, dateTime[1].lastIndexOf(":"));
+                        if (portal.status === value.code.status.accepted) {
+                            ui.details.status.accepted.radio.checked = true;
+                            ui.details.rejectedReasonSelect.root_.hidden = true;
+                        } else {
+                            ui.details.status.rejected.radio.checked = true;
+                            ui.details.rejectedReasonSelect.root_.hidden = false;
+                            ui.details.rejectedReasonSelect.selectedIndex = portal.status - value.code.status.rejected.undeclared;
+                        }
+                    }
+                };
+
+                const onClosed = (event) => {
+                    if (event.detail.action === "save") {
+                        // TODO: Check date and time, save, update card and marker
+                    }
+                };
+
+                ui.dialog.portal.listen("MDCDialog:opened", onOpened);
+                ui.dialog.portal.listen("MDCDialog:closed", onClosed);
+                ui.dialog.portal.root_.querySelector(".mdc-dialog__title").innerHTML = portal.title;
+                ui.dialog.portal.root_.querySelector("img").src = value.string.path.image + portal.image;
+                ui.dialog.portal.root_.querySelector("#dialogPortalConfirmedTime").innerHTML = toolkit.getDateTimeString(portal.confirmedTime);
+                ui.dialog.portal.open();
+            },
             alert: (message, title = "Alert") => {
                 ui.dialog.alert.open();
                 ui.dialog.alert.root_.querySelector("#dialogAlertTitle").innerHTML = title;
@@ -51,19 +66,115 @@ const ui = {
             },
         }
     },
+    // Status & About
+    status: {
+        block: {
+            all: document.getElementById("dialogStatusAll"),
+            rejectedReason: document.getElementById("dialogStatusRejectedReason"),
+        },
+        filter: {
+            all: {
+                accepted: { switch: null, label:  null, },
+                rejected: { switch: null, label:  null, },
+                pending:  { switch: null, label:  null, },
+            },
+            rejectedReason: {
+                undeclared: { switch: null, label:  null, },
+                duplicated: { switch: null, label:  null, },
+                tooClose:   { switch: null, label:  null, },
+            },
+        },
+        init: () => {
+            for (let block of Object.keys(ui.status.filter)) {
+                for (let key of (Object.keys(ui.status.filter[block]))) {
+                    ui.status.filter[block][key].switch = new mdc.switchControl.MDCSwitch(document.querySelector(`#switch-filter-${block}-${key}`));
+                    ui.status.filter[block][key].label = document.getElementById(`label-filter-${block}-${key}`);
+                }
+            }
+        },
+    },
+    // Portal Details
+    details: {
+        map: {
+            ctrl: null,
+            marker: null,
+            edit: null,
+            search: null,
+            delete: null,
+        },
+        status: {
+            accepted: { radio: null, field: null, },
+            rejected: { radio: null, field: null, },
+            pending:  { radio: null, field: null, },
+        },
+        rejectedReasonSelect: null,
+        resultDateField: null,
+        resultTimeField: null,
+        init: () => {
+            const dialogElement = ui.dialog.portal.root_;
+            ui.details.map.ctrl = new mapboxgl.Map({ container: "map-dialog-details", style: value.string.mapbox.style });
+            ui.details.map.ctrl.addControl(new mapboxgl.NavigationControl());
+
+            ui.details.map.edit = new mdc.ripple.MDCRipple(dialogElement.querySelector("#dialogPortalMapEditButton"));
+            ui.details.map.edit.unbounded = true;
+            if (versionKit.fullFeature) {
+                ui.details.map.search = new mdc.ripple.MDCRipple(dialogElement.querySelector("#dialogPortalMapSearchButton"));
+                ui.details.map.search.unbounded = true;
+            } else {
+                dialogElement.querySelector("#dialogPortalMapSearchButton").hidden = true;
+            }
+            ui.details.map.delete = new mdc.ripple.MDCRipple(dialogElement.querySelector("#dialogPortalMapDeleteButton"));
+            ui.details.map.delete.unbounded = true;
+
+            for (let key of Object.keys(ui.details.status)) {
+                const selector = `#field-dialog-details-status-${key}`;
+                ui.details.status[key].radio = new mdc.radio.MDCRadio(dialogElement.querySelector(`${selector} > .mdc-radio`));
+                ui.details.status[key].radio.disabled = true;   // TODO
+                ui.details.status[key].field = new mdc.formField.MDCFormField(dialogElement.querySelector(selector));
+                ui.details.status[key].field.input = ui.details.status[key].radio;
+            }
+
+            ui.details.rejectedReasonSelect = new mdc.select.MDCSelect(ui.dialog.portal.root_.querySelector("#dialogPortalRejectedReasonSelect"));
+            ui.details.rejectedReasonSelect.disabled = true;    // TODO
+
+            ui.details.resultDateField = new mdc.textField.MDCTextField(document.querySelector("#dialogPortalResultDateField"));
+            ui.details.resultDateField.disabled = true; // TODO
+            ui.details.resultTimeField = new mdc.textField.MDCTextField(document.querySelector("#dialogPortalResultTimeField"));
+            ui.details.resultTimeField.disabled = true; // TODO
+        },
+    },
     progressBar: new mdc.linearProgress.MDCLinearProgress(document.querySelector("#progressBar")),
-    map: {
-        mapCtrl: null,
+    mainMap: {
+        ctrl: null,
         load: () => {
             mapboxgl.accessToken = value.string.mapbox.accessToken;
-            ui.map.mapCtrl = new mapboxgl.Map({ container: "map", style: value.string.mapbox.style });
-            ui.map.mapCtrl.addControl(new mapboxgl.NavigationControl());
+            ui.mainMap.ctrl = new mapboxgl.Map({ container: "map-main", style: value.string.mapbox.style });
+            ui.mainMap.ctrl.addControl(new mapboxgl.NavigationControl());
         },
-        easeTo: (lngLat) => ui.map.mapCtrl.easeTo({ center: lngLat, zoom: 16 }),
     },
     cardList: document.getElementById("cardList"),
+    event: {
+        button: {
+            status:     (_) => ui.dialog.status.open(),
+            openFile:   (_) => fileKit.local.openFile(),
+            saveFile:   (_) => fileKit.local.saveFile(),
+            uploadFile: (_) => fileKit.googleDrive.uploadFile(),
+            auth:       (_) => { },
+            signout:    (_) => { },
+        },
+        changeShow: (portals, show) => {
+            for (let portal of portals) {
+                if (portal.marker) portal.marker.getElement().hidden = !show;
+                document.getElementById("card-" + portal.id).hidden = !show;
+            }
+        },
+        scrollToCard: (id) => {
+            ui.cardList.scrollTo(0, document.getElementById("card-" + id).offsetTop - ui.cardList.offsetTop - 8);
+        },
+    },
     init: () => {
-        document.getElementById("dialogStatusVersion").innerHTML = value.string.version.lite;
+        document.getElementById("dialogStatusVersion").innerHTML = value.string.version[versionKit.code];
+        ui.status.init();
         for (let key of Object.keys(ui.button)) {
             ui.button[key].unbounded = true;
             ui.button[key].listen("click", ui.event.button[key]);
@@ -79,61 +190,7 @@ const ui = {
         ui.progressBar.buffer = 0;
         ui.progressBar.progress = 0;
     },
-    event: {
-        button: {
-            status:     (_) => ui.dialog.status.open(),
-            openFile:   (_) => fileKit.local.openFile(),
-            saveFile:   (_) => fileKit.local.saveFile(),
-            uploadFile: (_) => fileKit.googleDrive.uploadFile(),
-            auth:       (_) => { },
-            signout:    (_) => { },
-        },
-        changeShow: (portals, show) => {
-            if (show) {
-                for (let portal of portals) {
-                    if (portal.marker) portal.marker.getElement().hidden = false;
-                    document.getElementById("card-" + portal.id).hidden = false;
-                }
-            } else {
-                for (let portal of portals) {
-                    if (portal.marker) portal.marker.getElement().hidden = true;
-                    document.getElementById("card-" + portal.id).hidden = true;
-                }
-            }
-        },
-        scrollToCard: (id) => {
-            ui.cardList.scrollTo(0, document.getElementById("card-" + id).offsetTop - ui.cardList.offsetTop - 8);
-        },
-    },
     display: () => {
-        // Merge duplicated portals
-        for (let i = process.portalList.length - 1; i >= 0; i--) {
-            const portal = process.portalList[i];
-
-            for (let j = 0; j < i; j++) {
-                if (portal.id !== process.portalList[j].id) continue;
-                const targetPortal = process.portalList[j];
-                if (targetPortal.status === value.code.portalStatus.pending) {
-                    targetPortal.status = portal.status;
-                    targetPortal.lngLat = portal.lngLat;
-                    targetPortal.resultTime = portal.resultTime;
-                    targetPortal.resultMailId = portal.resultMailId;
-                } else {
-                    targetPortal.confirmedTime = portal.confirmedTime;
-                    targetPortal.confirmationMailId = portal.confirmationMailId;
-                }
-                process.portalList.splice(i, 1);
-                break;
-            }
-        }
-
-        // Sort by time
-        process.portalList.sort((a, b) => {
-            const timeA = a.resultTime ? a.resultTime : a.confirmedTime;
-            const timeB = b.resultTime ? b.resultTime : b.confirmedTime;
-            return timeA < timeB ? 1 : -1;
-        });
-
         const boundsNE = { lng: -181.0, lat: -91.0 };
         const boundsSW = { lng: 181.0, lat: 91.0 };
 
@@ -145,46 +202,27 @@ const ui = {
         };
 
         const fillLngLatInfo = (portal, card) => {
-            const iconDiv = document.createElement("div");
-            iconDiv.className = "map-marker";
-            const icon = document.createElement("span");
-            icon.className = "material-icons md-18";
-            switch (portal.status) {
-                case value.code.portalStatus.pending:
-                    iconDiv.className += value.string.html.css.pending + "--bg";
-                    icon.innerHTML = value.string.html.icon.pending;
-                    break;
-                case value.code.portalStatus.accepted:
-                    iconDiv.className += value.string.html.css.accepted + "--bg";
-                    icon.innerHTML = value.string.html.icon.accepted;
-                    break;
-                default:
-                    switch (portal.status) {
-                        case value.code.portalStatus.rejected.tooClose:
-                            icon.innerHTML = value.string.html.icon.rejectedReason.tooClose;
-                            break;
-                        case value.code.portalStatus.rejected.duplicated:
-                            icon.innerHTML = value.string.html.icon.rejectedReason.duplicated;
-                            break;
-                        default:
-                            icon.innerHTML = value.string.html.icon.rejectedReason.undeclared;
-                            break;
-                    }
-                    iconDiv.className += value.string.html.css.rejected + "--bg";
-                    break;
-            }
-            iconDiv.appendChild(icon);
-            iconDiv.onclick = () => ui.event.scrollToCard(portal.id);
-            portal.marker = new mapboxgl.Marker({ element: iconDiv })
+            const icon = toolkit.getIconElement(portal);
+            icon.onclick = () => ui.event.scrollToCard(portal.id);
+            portal.marker = new mapboxgl.Marker({ element: icon })
                 .setLngLat(portal.lngLat)
                 .setPopup(new mapboxgl.Popup({ closeButton: false }).setText(portal.title))
-                .addTo(ui.map.mapCtrl);
+                .addTo(ui.mainMap.ctrl);
 
             const locationButton = card.querySelector("#cardLocationButton");
             locationButton.hidden = false;
             const locationRipple = new mdc.ripple.MDCRipple(locationButton);
             locationRipple.unbounded = true;
-            locationRipple.listen("click", () => ui.map.easeTo(portal.lngLat));
+            locationRipple.listen("click", () => ui.mainMap.ctrl.easeTo({ center: portal.lngLat, zoom: 16 }));
+
+            if (versionKit.fullFeature)
+            {
+                const intelButton = card.querySelector("#cardIntelButton");
+                intelButton.hidden = false;
+                const intelRipple = new mdc.ripple.MDCRipple(intelButton);
+                intelRipple.unbounded = true;
+                intelRipple.listen("click", () => window.open(toolkit.lngLatToIntel(portal.lngLat), "_blank"));
+            }
         };
 
         const classifiedList = {
@@ -204,6 +242,10 @@ const ui = {
             const card = document.getElementById("cardTemplate").content.cloneNode(true);
 
             card.querySelector(".mdc-card").id = "card-" + portal.id;
+
+            const mainAction = new mdc.ripple.MDCRipple(card.querySelector(".mdc-card__primary-action"));
+            mainAction.listen("click", () => ui.dialog.show.portal(portal));
+
             card.getElementById("cardImage").src = value.string.path.image + portal.image;
             card.getElementById("cardTitle").innerHTML = portal.title;
             card.getElementById("cardConfirmedTime").innerHTML = toolkit.getDateString(portal.confirmedTime);
@@ -220,13 +262,13 @@ const ui = {
             const statusButtonLabel = card.getElementById("cardStatusButtonLabel");
 
             switch (portal.status) {
-                case value.code.portalStatus.pending:
+                case value.code.status.pending:
                     statusButton.className += value.string.html.css.pending;
                     statusButtonIcon.innerHTML = value.string.html.icon.pending;
                     statusButtonLabel.innerHTML = "Pending";
                     classifiedList.pending.push(portal);
                     break;
-                case value.code.portalStatus.accepted:
+                case value.code.status.accepted:
                     resultIcon.innerHTML = value.string.html.icon.accepted;
                     statusButton.className += value.string.html.css.accepted;
                     statusButtonIcon.innerHTML = value.string.html.icon.accepted;
@@ -235,12 +277,12 @@ const ui = {
                     break;
                 default:
                     switch (portal.status) {
-                        case value.code.portalStatus.rejected.tooClose:
+                        case value.code.status.rejected.tooClose:
                             statusButtonIcon.innerHTML = value.string.html.icon.rejectedReason.tooClose;
                             statusButtonLabel.innerHTML = "Too Close";
                             classifiedList.rejectedReason.tooClose.push(portal);
                             break;
-                        case value.code.portalStatus.rejected.duplicated:
+                        case value.code.status.rejected.duplicated:
                             statusButtonIcon.innerHTML = value.string.html.icon.rejectedReason.duplicated;
                             statusButtonLabel.innerHTML = "Duplicated";
                             classifiedList.rejectedReason.duplicated.push(portal);
@@ -258,17 +300,21 @@ const ui = {
             }
             const statusRipple = new mdc.ripple.MDCRipple(statusButton);
             statusRipple.unbounded = true;
-            statusRipple.listen("click", () => {
-                const textarea = document.createElement("textarea");
-                textarea.value = portal.id;
-                textarea.readOnly = true;
-                document.body.appendChild(textarea);
-                textarea.select();
-                document.execCommand("copy");
-                ui.dialog.show.alert("Brainstorming ID copied: " + portal.id);
-                document.body.removeChild(textarea);
-            });
-
+            if (versionKit.fullFeature) {
+                statusRipple.listen("click", () => window.open(value.string.path.bsWatermeter + portal.id, "_blank"));
+            } else {
+                statusRipple.listen("click", () => {
+                    const textarea = document.createElement("textarea");
+                    textarea.value = portal.id;
+                    textarea.readOnly = true;
+                    document.body.appendChild(textarea);
+                    textarea.select();
+                    document.execCommand("copy");
+                    document.body.removeChild(textarea);
+                    ui.dialog.show.alert(`Brainstorming ID copied: ${portal.id}`);
+                });
+            }
+            
             if (portal.lngLat) {
                 extendBounds(portal.lngLat);
                 fillLngLatInfo(portal, card);
@@ -280,31 +326,32 @@ const ui = {
         }
 
         if (boundsNE.lng > -180 && boundsNE.lat > -90 && boundsSW.lng < 180 && boundsSW.lat < 90) {
-            ui.map.mapCtrl.fitBounds([boundsSW, boundsNE], {
+            ui.mainMap.ctrl.fitBounds([boundsSW, boundsNE], {
                 padding: 16,
                 linear: true
             });
         }
+        
+        const getCountString = (portals) => portals.length === 0 ? "0 (0%)" : `${portals.length} (${(portals.length / process.portalList.length * 100).toFixed(1)}%)`;
+        
+        const getRejectedCountString = (portals) => portals.length === 0 ? "0 (0%)" : `${portals.length} (${(portals.length / classifiedList.rejected.length * 100).toFixed(1)}%)`;
 
-        const getCountString = (portals) => portals.length === 0 ? "0 (0%)" : (portals.length + " (" + (portals.length / process.portalList.length * 100).toFixed(1) + "%)");
-        const getRejectedCountString = (portals) => portals.length === 0 ? "0 (0%)" : (portals.length + " (" + (portals.length / classifiedList.rejected.length * 100).toFixed(1) + "%)");
-
-        ui.status.filter.accepted.label.innerHTML = getCountString(classifiedList.accepted);
-        ui.status.filter.accepted.switch.listen("change", (_) => ui.event.changeShow(classifiedList.accepted, ui.status.filter.accepted.switch.checked));
-        ui.status.filter.rejected.label.innerHTML = getCountString(classifiedList.rejected);
-        ui.status.filter.rejected.switch.listen("change", (_) => {
+        ui.status.filter.all.accepted.label.innerHTML = getCountString(classifiedList.accepted);
+        ui.status.filter.all.accepted.switch.listen("change", (_) => ui.event.changeShow(classifiedList.accepted, ui.status.filter.all.accepted.switch.checked));
+        ui.status.filter.all.rejected.label.innerHTML = getCountString(classifiedList.rejected);
+        ui.status.filter.all.rejected.switch.listen("change", (_) => {
             for (let key of Object.keys(classifiedList.rejectedReason)) {
-                ui.status.filter[key].switch.checked = ui.status.filter.rejected.switch.checked;
+                ui.status.filter.rejectedReason[key].switch.checked = ui.status.filter.all.rejected.switch.checked;
             }
-            ui.event.changeShow(classifiedList.rejected, ui.status.filter.rejected.switch.checked);
+            ui.event.changeShow(classifiedList.rejected, ui.status.filter.all.rejected.switch.checked);
         });
-        ui.status.filter.pending.label.innerHTML  = getCountString(classifiedList.pending);
-        ui.status.filter.pending.switch.listen("change", (_) => ui.event.changeShow(classifiedList.pending, ui.status.filter.pending.switch.checked));
+        ui.status.filter.all.pending.label.innerHTML  = getCountString(classifiedList.pending);
+        ui.status.filter.all.pending.switch.listen("change", (_) => ui.event.changeShow(classifiedList.pending, ui.status.filter.all.pending.switch.checked));
 
         for (let key of Object.keys(classifiedList.rejectedReason)) {
             const portals = classifiedList.rejectedReason[key];
-            ui.status.filter[key].label.innerHTML = getRejectedCountString(portals);
-            ui.status.filter[key].switch.listen("change", (_) => ui.event.changeShow(portals, ui.status.filter[key].switch.checked));
+            ui.status.filter.rejectedReason[key].label.innerHTML = getRejectedCountString(portals);
+            ui.status.filter.rejectedReason[key].switch.listen("change", (_) => ui.event.changeShow(portals, ui.status.filter.rejectedReason[key].switch.checked));
         }
         for (let key of Object.keys(ui.status.block)) ui.status.block[key].hidden = false;
 
@@ -312,8 +359,27 @@ const ui = {
             ui.button.saveFile.root_.hidden = false;
             ui.button.uploadFile.root_.hidden = !gapi.auth2.getAuthInstance().isSignedIn.get();
             ui.progressBar.root_.hidden = true;
-        }
+        };
 
-        onFinished();
+        if (versionKit.fullFeature && (classifiedList.noLngLat.length > 0)) {
+            let count = 0;
+            const countUp = () => {
+                count += 1;
+                if (count === classifiedList.noLngLat.length) onFinished();
+            };
+            for (let portal of classifiedList.noLngLat) {
+                firebaseKit.queryLngLat(
+                    portal.id,
+                    (lngLat) => {
+                        portal.lngLat = lngLat;
+                        fillLngLatInfo(portal, document.getElementById("card-" + portal.id));
+                        countUp();
+                    },
+                    countUp
+                );
+            }
+        } else {
+            onFinished();
+        }
     },
 };

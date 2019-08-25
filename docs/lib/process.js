@@ -31,6 +31,42 @@ const process = {
 
         fileKit.googleDrive.getFile(onGetFileFinished);        
     },
+    finish: () => {
+        // Merge duplicated portals
+        for (let i = process.portalList.length - 1; i >= 0; i--) {
+            const portal = process.portalList[i];
+
+            for (let j = 0; j < i; j++) {
+                if (portal.id !== process.portalList[j].id) continue;
+                const targetPortal = process.portalList[j];
+                if (targetPortal.status === value.code.status.pending) {
+                    targetPortal.status = portal.status;
+                    targetPortal.lngLat = portal.lngLat;
+                    targetPortal.resultTime = portal.resultTime;
+                    targetPortal.resultMailId = portal.resultMailId;
+                } else {
+                    if (portal.confirmationMailId) {
+                        targetPortal.confirmedTime = portal.confirmedTime;
+                        targetPortal.confirmationMailId = portal.confirmationMailId;
+                    } else {
+                        portal.confirmedTime = targetPortal.confirmedTime;
+                        portal.confirmationMailId = targetPortal.confirmationMailId;
+                    }
+                }
+                process.portalList.splice(i, 1);
+                break;
+            }
+        }
+
+        // Sort by time
+        process.portalList.sort((a, b) => {
+            const timeA = a.resultTime ? a.resultTime : a.confirmedTime;
+            const timeB = b.resultTime ? b.resultTime : b.confirmedTime;
+            return timeA < timeB ? 1 : -1;
+        });
+
+        ui.display()
+    },
     mails: (keys) => {
 
         const getListRequest = (pageToken) => {
@@ -55,17 +91,17 @@ const process = {
                         }
                     }
                 }
+                process.status.list += 1;
+                ui.progressBar.buffer = process.status.list / 6;
                 processMailList(list);
             }
         };
 
         const processMailList = (list) => {
-            process.status.list += 1;
-            ui.progressBar.buffer = process.status.list / 6;
             process.status.total += list.length;
 
             const checkFinish = () => {
-                if (process.status.list === 6 && process.status.total === process.status.finished) ui.display();
+                if (process.status.list === 6 && process.status.total === process.status.finished) process.finish();
             };
 
             checkFinish();
@@ -80,7 +116,7 @@ const process = {
                 request.execute((fullMail) => {
                     process.portalList.push(process.parse.mail(fullMail, keys));
                     process.status.finished += 1;
-                    ui.progressBar.progress = process.status.finished / process.status.total;
+                    ui.progressBar.progress = process.status.finished / process.status.total * ui.progressBar.buffer;
                     checkFinish();
                 });
             }
@@ -96,11 +132,11 @@ const process = {
             const portal = {};
             if (keys.type === value.string.key.type.confirmation) {
                 portal.confirmedTime = parseInt(fullMail.internalDate);
-                portal.status = value.code.portalStatus.pending;
+                portal.status = value.code.status.pending;
                 portal.confirmationMailId = fullMail.id;
             } else {
                 portal.resultTime = parseInt(fullMail.internalDate);
-                portal.status = value.code.portalStatus.accepted;
+                portal.status = value.code.status.accepted;
                 portal.resultMailId = fullMail.id;
             }
 
@@ -141,15 +177,15 @@ const process = {
         },
         rejectedReason: (mailBody, scanner) => {
             const mainBody = mailBody.slice(0, mailBody.search("-NianticOps"));
-            let reason = value.code.portalStatus.rejected.undeclared;
+            let reason = value.code.status.rejected.undeclared;
             for (let key of Object.keys(value.string.mail.keyword[scanner].rejectedReason)) {
                 for (let keyword of value.string.mail.keyword[scanner].rejectedReason[key]) {
                     if (mainBody.search(keyword) > -1) {
-                        reason = value.code.portalStatus.rejected[key];
+                        reason = value.code.status.rejected[key];
                         break;
                     }
                 }
-                if (reason !== value.code.portalStatus.rejected.undeclared) break;
+                if (reason !== value.code.status.rejected.undeclared) break;
             }
             return reason;
         },

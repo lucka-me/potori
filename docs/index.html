@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1"/>
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+        <meta name=”theme-color” content="#3b1e5f" />
         <link rel="apple-touch-icon" sizes="120x120" href="./src/icon-120.png" />
         <link rel="apple-touch-icon" sizes="152x152" href="./src/icon-152.png" />
         <link rel="apple-touch-icon" sizes="167x167" href="./src/icon-167.png" />
@@ -20,7 +21,7 @@
         <!-- Mapbox -->
         <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.2.1/mapbox-gl.css" rel="stylesheet" />
     </head>
-    <body class="mdc-typography fullheight flex-box flex-box--col">
+    <body class="mdc-typography fullheight flex-box-col">
         <header class=" mdc-top-app-bar">
             <div class="mdc-top-app-bar__row">
                 <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
@@ -52,14 +53,14 @@
         </div>
 
         <div class="main-box">
-            <div id="map"></div>
+            <div id="map-main"></div>
             <div id="cardList"></div>
 
             <template id="cardTemplate">
-                <div class="mdc-card" id="card-">
+                <div class="mdc-card">
                     <div class="mdc-card__primary-action">
                         <div class="mdc-card__media mdc-card__media--content">
-                            <div class="flex-box flex-box--row-nowrap">
+                            <div class="flex-box-row--nowrap">
                                 <img id="cardImage">
                                 <div class="mdc-card-info-box">
                                     <div class="mdc-typography--headline6 fullwidth" id="cardTitle"></div>
@@ -93,8 +94,8 @@
 
         </div>
         <!-- Dialogs -->
-        <!-- Status -->
-        <div class="mdc-dialog mdc-dialog--scrollable" role="alertdialog" aria-modal="true" id="dialogStatus">
+        <!-- Status & About -->
+        <div class="mdc-dialog mdc-dialog--scrollable" role="dialog" aria-modal="true" id="dialog-status">
             <div class="mdc-dialog__container">
                 <div class="mdc-dialog__surface">
                     <h2 class="mdc-dialog__title">Status & About</h2>
@@ -103,7 +104,7 @@
                         <div class="mdc-dialog-content-block" id="dialogStatusAll">
                             <span class="mdc-typography--headline6">All Status</span>
                             <div class="mdc-switch-box">
-                                <div class="mdc-switch mdc-switch--checked" id="filterAcceptedSwitch">
+                                <div class="mdc-switch mdc-switch--checked" id="switch-filter-all-accepted">
                                     <div class="mdc-switch__track"></div>
                                     <div class="mdc-switch__thumb-underlay">
                                         <div class="mdc-switch__thumb">
@@ -111,10 +112,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <label for="filterAcceptedSwitch"><i class="material-icons status-accepted" title="Accepted">check</i> <span id="filterAcceptedLabel">300 (30%)</span></label>
+                                <label for="switch-filter-all-accepted"><i class="material-icons status-accepted" title="Accepted">check</i> <span id="label-filter-all-accepted">300 (30%)</span></label>
                             </div>
                             <div class="mdc-switch-box">
-                                <div class="mdc-switch mdc-switch--checked" id="filterRejectedSwitch" >
+                                <div class="mdc-switch mdc-switch--checked" id="switch-filter-all-rejected" >
                                     <div class="mdc-switch__track"></div>
                                     <div class="mdc-switch__thumb-underlay">
                                         <div class="mdc-switch__thumb">
@@ -122,10 +123,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <label for="filterRejectedSwitch"><i class="material-icons status-rejected" title="Rejected">close</i> <span id="filterRejectedLabel">300 (30%)</span></label>
+                                <label for="switch-filter-all-rejected"><i class="material-icons status-rejected" title="Rejected">close</i> <span id="label-filter-all-rejected">300 (30%)</span></label>
                             </div>
                             <div class="mdc-switch-box">
-                                <div class="mdc-switch mdc-switch--checked" id="filterPendingSwitch">
+                                <div class="mdc-switch mdc-switch--checked" id="switch-filter-all-pending">
                                     <div class="mdc-switch__track"></div>
                                     <div class="mdc-switch__thumb-underlay">
                                         <div class="mdc-switch__thumb">
@@ -133,14 +134,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <label for="filterPendingwitch"><i class="material-icons status-pending" title="Pending">access_time</i> <span id="filterPendingLabel">300 (30%)</span></label>
+                                <label for="switch-filter-all-pending"><i class="material-icons status-pending" title="Pending">access_time</i> <span id="label-filter-all-pending">300 (30%)</span></label>
                             </div>
                         </div>
 
                         <div class="mdc-dialog-content-block" id="dialogStatusRejectedReason">
                             <span class="mdc-typography--headline6">Rejected Reason</span>
                             <div class="mdc-switch-box">
-                                <div class="mdc-switch mdc-switch--checked" id="filterRejectedUndeclaredSwitch">
+                                <div class="mdc-switch mdc-switch--checked" id="switch-filter-rejectedReason-undeclared">
                                     <div class="mdc-switch__track"></div>
                                     <div class="mdc-switch__thumb-underlay">
                                         <div class="mdc-switch__thumb">
@@ -148,10 +149,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <label for="filterRejectedUndeclaredSwitch"><i class="material-icons status-rejected" title="Undeclared">help_outline</i> <span id="filterRejectedUndeclaredLabel">100 (33.3%)</span></label>
+                                <label for="switch-filter-rejectedReason-undeclared"><i class="material-icons status-rejected" title="Undeclared">help_outline</i> <span id="label-filter-rejectedReason-undeclared">100 (33.3%)</span></label>
                             </div>
                             <div class="mdc-switch-box">
-                                <div class="mdc-switch mdc-switch--checked" id="filterRejectedDuplicatedSwitch">
+                                <div class="mdc-switch mdc-switch--checked" id="switch-filter-rejectedReason-duplicated">
                                     <div class="mdc-switch__track"></div>
                                     <div class="mdc-switch__thumb-underlay">
                                         <div class="mdc-switch__thumb">
@@ -159,10 +160,10 @@
                                         </div>
                                     </div>
                                 </div>
-                                <label for="filterRejectedDuplicatedSwitch"><i class="material-icons status-rejected" title="Duplicated">filter_none</i> <span id="filterRejectedDuplicatedLabel">100 (33.3%)</span></label>
+                                <label for="switch-filter-rejectedReason-duplicated"><i class="material-icons status-rejected" title="Duplicated">filter_none</i> <span id="label-filter-rejectedReason-duplicated">100 (33.3%)</span></label>
                             </div>
                             <div class="mdc-switch-box">
-                                <div class="mdc-switch mdc-switch--checked" id="filterRejectedTooCloseSwitch">
+                                <div class="mdc-switch mdc-switch--checked" id="switch-filter-rejectedReason-tooClose">
                                     <div class="mdc-switch__track"></div>
                                     <div class="mdc-switch__thumb-underlay">
                                         <div class="mdc-switch__thumb">
@@ -170,19 +171,19 @@
                                         </div>
                                     </div>
                                 </div>
-                                <label for="filterRejectedTooCloseSwitch"><i class="material-icons status-rejected" title="Too Close">compare_arrows</i> <span id="filterRejectedTooCloseLabel">100 (33.3%)</span></label>
+                                <label for="switch-filter-rejectedReason-tooClose"><i class="material-icons status-rejected" title="Too Close">compare_arrows</i> <span id="label-filter-rejectedReason-tooClose">100 (33.3%)</span></label>
                             </div>
                         </div>
 
                         <div class="mdc-dialog-content-block fullwidth">
                             <span class="mdc-typography--headline6">About</span>
-                            <span ><a class="mdc-typography--body2" target="_blank" title="Intro" href="./intro">Intro</a> | <a class="mdc-typography--body2" target="_blank" title="Privacy" href="./privacy">Privacy</a></span>
-                            <span ><a class="mdc-typography--body2" href="https://github.com/lucka-me/potori" target="_blank" title="GitHub">GitHub Repo</a></span>
-                            <span ><a class="mdc-typography--body2" href="https://github.com/lucka-me/potori/blob/master/CHANGELOG.md" target="_blank" title="Changelog" id="dialogStatusVersion"></a> by <a class="mdc-typography--body2" href="https://lucka.moe" target="_blank" title="Blog" >Lucka</a></span>
+                            <span ><a class="mdc-typography--body2" target="_blank" rel="noopener" title="Intro" href="./intro">Intro</a> | <a class="mdc-typography--body2" target="_blank" rel="noopener" title="Privacy" href="./privacy">Privacy</a></span>
+                            <span ><a class="mdc-typography--body2" href="https://github.com/lucka-me/potori" target="_blank" rel="noopener" title="GitHub">GitHub Repo</a></span>
+                            <span ><a class="mdc-typography--body2" href="https://github.com/lucka-me/potori/blob/master/CHANGELOG.md" target="_blank" title="Changelog" id="dialogStatusVersion"></a> by <a class="mdc-typography--body2" href="https://lucka.moe" target="_blank" rel="noopener" title="Blog" >Lucka</a></span>
                         </div>
                     </div>
                     <footer class="mdc-dialog__actions">
-                        <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="yes">
+                        <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="close">
                             <span class="mdc-button__label">Close</span>
                         </button>
                     </footer>
@@ -190,14 +191,125 @@
             </div>
             <div class="mdc-dialog__scrim"></div>
         </div>
+        <!-- Portal Detail -->
+        <div class="mdc-dialog mdc-dialog--scrollable" role="dialog" aria-modal="true" id="dialog-portal">
+            <div class="mdc-dialog__container">
+                <div class="mdc-dialog__surface">
+                    <h2 class="mdc-dialog__title"></h2>
+                    <img src="" id="dialogPortalImage">
+                    <div class="mdc-dialog__content mdc-dialog-content--col">
+                        <div class="mdc-typography--body1 flex-box-row--nowrap flex-align-items--center">
+                            <i class="material-icons">arrow_upward</i><span class="margin-l--4" id="dialogPortalConfirmedTime"></span>
+                        </div>
+                        
+                        <div class="flex-box-row--nowrap fullwidth flex-justify-content--around">
+                            <div class="mdc-form-field" id="field-dialog-details-status-accepted">
+                                <div class="mdc-radio">
+                                    <input class="mdc-radio__native-control" type="radio" name="radio-dialog-details-status" id="radio-dialog-details-status-accepted" checked>
+                                    <div class="mdc-radio__background">
+                                        <div class="mdc-radio__outer-circle"></div>
+                                        <div class="mdc-radio__inner-circle"></div>
+                                    </div>
+                                </div>
+                                <label for="radio-dialog-details-status-accepted" class="material-icons status-accepted">check</label>
+                            </div>
+                            <div class="mdc-form-field" id="field-dialog-details-status-rejected">
+                                <div class="mdc-radio">
+                                    <input class="mdc-radio__native-control" type="radio" name="radio-dialog-details-status" id="radio-dialog-details-status-rejected">
+                                    <div class="mdc-radio__background">
+                                        <div class="mdc-radio__outer-circle"></div>
+                                        <div class="mdc-radio__inner-circle"></div>
+                                    </div>
+                                </div>
+                                <label for="radio-dialog-details-status-rejected" class="material-icons status-rejected">close</label>
+                            </div>
+                            <div class="mdc-form-field" id="field-dialog-details-status-pending">
+                                <div class="mdc-radio">
+                                    <input class="mdc-radio__native-control" type="radio" name="radio-dialog-details-status" id="radio-dialog-details-status-pending">
+                                    <div class="mdc-radio__background">
+                                        <div class="mdc-radio__outer-circle"></div>
+                                        <div class="mdc-radio__inner-circle"></div>
+                                    </div>
+                                </div>
+                                <label for="radio-dialog-details-status-pending" class="material-icons status-pending">access_time</label>
+                            </div>
+                        </div>
+
+                        <div class="flex-box-row--wrap">
+                            <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon margin-v--8 margin-h--4 flex-grow--1" id="dialogPortalResultDateField">
+                                <i class="material-icons mdc-text-field__icon">event</i>
+                                <input type="date" class="mdc-text-field__input" id="dialogPortalResultDateInput">
+                                <div class="mdc-notched-outline">
+                                    <div class="mdc-notched-outline__leading"></div>
+                                    <div class="mdc-notched-outline__notch">
+                                        <label for="dialogPortalResultDateInput" class="mdc-floating-label">Result Date</label>
+                                    </div>
+                                    <div class="mdc-notched-outline__trailing"></div>
+                                </div>
+                            </div>
+                            <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon margin-v--8 margin-h--4 flex-grow--1" id="dialogPortalResultTimeField">
+                                <i class="material-icons mdc-text-field__icon">access_time</i>
+                                <input type="time" class="mdc-text-field__input" id="dialogPortalResultTimeInput">
+                                <div class="mdc-notched-outline">
+                                    <div class="mdc-notched-outline__leading"></div>
+                                    <div class="mdc-notched-outline__notch">
+                                        <label for="dialogPortalResultTimeInput" class="mdc-floating-label">Result Time</label>
+                                    </div>
+                                    <div class="mdc-notched-outline__trailing"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mdc-select mdc-select--outlined margin-v--8 margin-h--4" id="dialogPortalRejectedReasonSelect">
+                            <input type="hidden" name="enhanced-select">
+                            <i class="mdc-select__dropdown-icon"></i>
+                            <div class="mdc-select__selected-text"></div>
+                            <div class="mdc-select__menu mdc-menu mdc-menu-surface demo-width-class">
+                                <ul class="mdc-list">
+                                    <li class="mdc-list-item mdc-list-item--selected" data-value="undeclared" aria-selected="true">Undeclared</li>
+                                    <li class="mdc-list-item" data-value="duplicated">Duplicated</li>
+                                    <li class="mdc-list-item" data-value="tooClose">Too Close</li>
+                                </ul>
+                            </div>
+                            <div class="mdc-notched-outline">
+                                <div class="mdc-notched-outline__leading"></div>
+                                <div class="mdc-notched-outline__notch">
+                                    <label class="mdc-floating-label">Reason</label>
+                                </div>
+                                <div class="mdc-notched-outline__trailing"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex-box-row--nowrap margin-v--8">
+                            <div class="flex-box-col flex-justify-content--around" hidden>
+                                <button class="mdc-icon-button material-icons" id="dialogPortalMapEditButton">edit</button>
+                                <button class="mdc-icon-button material-icons" id="dialogPortalMapSearchButton">search</button>
+                                <button class="mdc-icon-button material-icons" id="dialogPortalMapDeleteButton">delete</button>
+                            </div>
+                            <div id="map-dialog-details"></div>
+                        </div>
+                        
+                    </div>
+                    <footer class="mdc-dialog__actions">
+                        <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="close">
+                            <span class="mdc-button__label">Close</span>
+                        </button><!--
+                        <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="save">
+                            <span class="mdc-button__label">Save</span>
+                        </button>-->
+                    </footer>
+                </div>
+            </div>
+            <div class="mdc-dialog__scrim"></div>
+        </div>
         <!-- Alert -->
-        <div class="mdc-dialog mdc-dialog--scrollable" role="alertdialog" aria-modal="true" id="dialogAlert">
+        <div class="mdc-dialog mdc-dialog--scrollable" role="alertdialog" aria-modal="true" id="dialog-alert">
             <div class="mdc-dialog__container">
                 <div class="mdc-dialog__surface">
                     <h2 class="mdc-dialog__title" id="dialogAlertTitle">Alert</h2>
                     <div class="mdc-dialog__content" id="dialogAlertMessageBox"></div>
                     <footer class="mdc-dialog__actions">
-                        <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="yes">
+                        <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="close">
                             <span class="mdc-button__label">Close</span>
                         </button>
                     </footer>
@@ -206,6 +318,7 @@
             <div class="mdc-dialog__scrim"></div>
         </div>
         <!-- Scripts -->
+        <script type="text/javascript" src="./lib/versionKit.js"></script>
         <script type="text/javascript" src="./lib/value.js"></script>
         <script type="text/javascript" src="./lib/toolkit.js"></script>
         <script type="text/javascript" src="./lib/fileKit.js"></script>
@@ -213,7 +326,7 @@
         <script type="text/javascript" src="./lib/auth.js"></script>
         <script type="text/javascript" src="./lib/firebaseKit.js"></script>
         <script type="text/javascript" src="./lib/process.js"></script>
-        <script async defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.2.1/mapbox-gl.js" onload="ui.map.load()"></script>
+        <script async defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.2.1/mapbox-gl.js" onload="ui.mainMap.load()"></script>
         <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};auth.handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
         <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-app.js" onload="firebaseKit.init()"></script>
         <script async defer src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js" onload="firebaseKit.loadReference()"></script>
