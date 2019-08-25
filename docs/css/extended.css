@@ -65,7 +65,7 @@ body.fullheight {
 
 /* Optimize map and card list for mobile */
 @media screen and (max-width: 600px) {
-    #mainMap { height: 30% !important; }
+    #map-main { height: 30% !important; }
     #cardList { height: 70% !important; }
 }
 
