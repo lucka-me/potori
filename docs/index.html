@@ -27,14 +27,7 @@
                 <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
                     <img class="logo" src="./src/logo.svg"></img><span class="mdc-top-app-bar__title">Potori</span>
                 </section>
-                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
-                    <button class="mdc-icon-button material-icons mdc-top-app-bar__action-item--unbounded" title="Status & About" id="buttonStatus">equalizer</button>
-                    <button class="mdc-icon-button material-icons mdc-top-app-bar__action-item--unbounded" title="Open file" id="buttonOpenFile" hidden>folder_open</button>
-                    <button class="mdc-icon-button material-icons mdc-top-app-bar__action-item--unbounded" title="Save file" id="buttonSaveFile" hidden>save</button>
-                    <button class="mdc-icon-button material-icons mdc-top-app-bar__action-item--unbounded" title="Upload file" id="buttonUploadFile" hidden>cloud_upload</button>
-                    <button class="mdc-icon-button material-icons mdc-top-app-bar__action-item--unbounded" title="Sign in" id="buttonAuth" hidden>account_circle</button>
-                    <button class="mdc-icon-button material-icons mdc-top-app-bar__action-item--unbounded" title="Sign out" id="buttonSignout" hidden>cancel</button>
-                </section>
+                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end"></section>
             </div>
         </header>
         
@@ -55,43 +48,6 @@
         <div class="main-box">
             <div id="map-main"></div>
             <div id="cardList"></div>
-
-            <template id="cardTemplate">
-                <div class="mdc-card">
-                    <div class="mdc-card__primary-action">
-                        <div class="mdc-card__media mdc-card__media--content">
-                            <div class="flex-box-row--nowrap">
-                                <img id="cardImage">
-                                <div class="mdc-card-info-box">
-                                    <div class="mdc-typography--headline6 fullwidth" id="cardTitle"></div>
-                                    <div class="mdc-typography--body2 mdc-card-info-content">
-                                        <i class="material-icons">arrow_upward</i><span class="margin-l--4" id="cardConfirmedTime"></span>
-                                    </div>
-                                    <div class="mdc-typography--body2 mdc-card-info-content">
-                                        <i class="material-icons">access_time</i><span class="margin-l--4" id="cardInterval"></span>
-                                    </div>
-                                    <div class="mdc-typography--body2 mdc-card-info-content" id="cardResultBox">
-                                        <i class="material-icons" id="cardResultIcon">check</i><span class="margin-l--4" id="cardResultTime"></span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mdc-card__actions">
-                        <div class="mdc-card__action-buttons">
-                            <button class="mdc-button mdc-card__action mdc-card__action--button" id="cardStatusButton">
-                                <i class="material-icons mdc-button__icon" aria-hidden="true" id="cardStatusButtonIcon">check</i>
-                                <span class="mdc-button__label" id="cardStatusButtonLabel">Accepted</span>
-                            </button>
-                        </div>
-                        <div class="mdc-card__action-icons">
-                            <button class="material-icons mdc-icon-button mdc-card__action mdc-card__action--icon" title="Location" id="cardLocationButton" hidden>place</button>
-                            <button class="material-icons mdc-icon-button mdc-card__action mdc-card__action--icon" title="Intel Map" id="cardIntelButton" hidden>map</button>
-                        </div>
-                    </div>
-                </div>
-            </template>
-
         </div>
         <!-- Dialogs -->
         <!-- Status & About -->
@@ -101,78 +57,12 @@
                     <h2 class="mdc-dialog__title">Status & About</h2>
                     <div class="mdc-dialog__content mdc-dialog-content">
 
-                        <div class="mdc-dialog-content-block" id="dialogStatusAll">
+                        <div class="mdc-dialog-content-block" id="block-dialog-status-all">
                             <span class="mdc-typography--headline6">All Status</span>
-                            <div class="mdc-switch-box">
-                                <div class="mdc-switch mdc-switch--checked" id="switch-filter-all-accepted">
-                                    <div class="mdc-switch__track"></div>
-                                    <div class="mdc-switch__thumb-underlay">
-                                        <div class="mdc-switch__thumb">
-                                            <input type="checkbox" class="mdc-switch__native-control" role="switch" checked>
-                                        </div>
-                                    </div>
-                                </div>
-                                <label for="switch-filter-all-accepted"><i class="material-icons status-accepted" title="Accepted">check</i> <span id="label-filter-all-accepted">300 (30%)</span></label>
-                            </div>
-                            <div class="mdc-switch-box">
-                                <div class="mdc-switch mdc-switch--checked" id="switch-filter-all-rejected" >
-                                    <div class="mdc-switch__track"></div>
-                                    <div class="mdc-switch__thumb-underlay">
-                                        <div class="mdc-switch__thumb">
-                                            <input type="checkbox" class="mdc-switch__native-control" role="switch" checked>
-                                        </div>
-                                    </div>
-                                </div>
-                                <label for="switch-filter-all-rejected"><i class="material-icons status-rejected" title="Rejected">close</i> <span id="label-filter-all-rejected">300 (30%)</span></label>
-                            </div>
-                            <div class="mdc-switch-box">
-                                <div class="mdc-switch mdc-switch--checked" id="switch-filter-all-pending">
-                                    <div class="mdc-switch__track"></div>
-                                    <div class="mdc-switch__thumb-underlay">
-                                        <div class="mdc-switch__thumb">
-                                            <input type="checkbox" class="mdc-switch__native-control" role="switch" checked>
-                                        </div>
-                                    </div>
-                                </div>
-                                <label for="switch-filter-all-pending"><i class="material-icons status-pending" title="Pending">access_time</i> <span id="label-filter-all-pending">300 (30%)</span></label>
-                            </div>
                         </div>
 
-                        <div class="mdc-dialog-content-block" id="dialogStatusRejectedReason">
+                        <div class="mdc-dialog-content-block" id="block-dialog-status-rejectedReason">
                             <span class="mdc-typography--headline6">Rejected Reason</span>
-                            <div class="mdc-switch-box">
-                                <div class="mdc-switch mdc-switch--checked" id="switch-filter-rejectedReason-undeclared">
-                                    <div class="mdc-switch__track"></div>
-                                    <div class="mdc-switch__thumb-underlay">
-                                        <div class="mdc-switch__thumb">
-                                            <input type="checkbox" class="mdc-switch__native-control" role="switch" checked>
-                                        </div>
-                                    </div>
-                                </div>
-                                <label for="switch-filter-rejectedReason-undeclared"><i class="material-icons status-rejected" title="Undeclared">help_outline</i> <span id="label-filter-rejectedReason-undeclared">100 (33.3%)</span></label>
-                            </div>
-                            <div class="mdc-switch-box">
-                                <div class="mdc-switch mdc-switch--checked" id="switch-filter-rejectedReason-duplicated">
-                                    <div class="mdc-switch__track"></div>
-                                    <div class="mdc-switch__thumb-underlay">
-                                        <div class="mdc-switch__thumb">
-                                            <input type="checkbox" class="mdc-switch__native-control" role="switch" checked>
-                                        </div>
-                                    </div>
-                                </div>
-                                <label for="switch-filter-rejectedReason-duplicated"><i class="material-icons status-rejected" title="Duplicated">filter_none</i> <span id="label-filter-rejectedReason-duplicated">100 (33.3%)</span></label>
-                            </div>
-                            <div class="mdc-switch-box">
-                                <div class="mdc-switch mdc-switch--checked" id="switch-filter-rejectedReason-tooClose">
-                                    <div class="mdc-switch__track"></div>
-                                    <div class="mdc-switch__thumb-underlay">
-                                        <div class="mdc-switch__thumb">
-                                            <input type="checkbox" class="mdc-switch__native-control" role="switch" checked>
-                                        </div>
-                                    </div>
-                                </div>
-                                <label for="switch-filter-rejectedReason-tooClose"><i class="material-icons status-rejected" title="Too Close">compare_arrows</i> <span id="label-filter-rejectedReason-tooClose">100 (33.3%)</span></label>
-                            </div>
                         </div>
 
                         <div class="mdc-dialog-content-block fullwidth">
@@ -192,7 +82,7 @@
             <div class="mdc-dialog__scrim"></div>
         </div>
         <!-- Portal Detail -->
-        <div class="mdc-dialog mdc-dialog--scrollable" role="dialog" aria-modal="true" id="dialog-portal">
+        <div class="mdc-dialog mdc-dialog--scrollable" role="dialog" aria-modal="true" id="dialog-details">
             <div class="mdc-dialog__container">
                 <div class="mdc-dialog__surface">
                     <h2 class="mdc-dialog__title"></h2>
@@ -282,9 +172,9 @@
                         
                         <div class="flex-box-row--nowrap margin-v--8">
                             <div class="flex-box-col flex-justify-content--around" hidden>
-                                <button class="mdc-icon-button material-icons" id="dialogPortalMapEditButton">edit</button>
-                                <button class="mdc-icon-button material-icons" id="dialogPortalMapSearchButton">search</button>
-                                <button class="mdc-icon-button material-icons" id="dialogPortalMapDeleteButton">delete</button>
+                                <button class="mdc-icon-button material-icons" id="button-dialog-details-map-edit">edit</button>
+                                <button class="mdc-icon-button material-icons" id="button-dialog-details-map-search">search</button>
+                                <button class="mdc-icon-button material-icons" id="button-dialog-details-map-delete">delete</button>
                             </div>
                             <div id="map-dialog-details"></div>
                         </div>
@@ -317,6 +207,58 @@
             </div>
             <div class="mdc-dialog__scrim"></div>
         </div>
+
+        <!-- Templates -->
+        <template id="template-card">
+            <div class="mdc-card">
+                <div class="mdc-card__primary-action">
+                    <div class="mdc-card__media mdc-card__media--content">
+                        <div class="flex-box-row--nowrap">
+                            <img>
+                            <div class="mdc-card-info-box">
+                                <div class="mdc-typography--headline6 fullwidth" id="cardTitle"></div>
+                                <div class="mdc-typography--body2 mdc-card-info-content">
+                                    <i class="material-icons">arrow_upward</i><span class="margin-l--4" id="cardConfirmedTime"></span>
+                                </div>
+                                <div class="mdc-typography--body2 mdc-card-info-content">
+                                    <i class="material-icons">access_time</i><span class="margin-l--4" id="cardInterval"></span>
+                                </div>
+                                <div class="mdc-typography--body2 mdc-card-info-content" id="cardResultBox">
+                                    <i class="material-icons" id="cardResultIcon">check</i><span class="margin-l--4" id="cardResultTime"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="mdc-card__actions">
+                    <div class="mdc-card__action-buttons">
+                        <button class="mdc-button mdc-card__action mdc-card__action--button" id="cardStatusButton">
+                            <i class="material-icons mdc-button__icon" aria-hidden="true" id="cardStatusButtonIcon">check</i>
+                            <span class="mdc-button__label" id="cardStatusButtonLabel">Accepted</span>
+                        </button>
+                    </div>
+                    <div class="mdc-card__action-icons">
+                        <button class="material-icons mdc-icon-button mdc-card__action mdc-card__action--icon" title="Location" id="button-card-location" hidden>place</button>
+                        <button class="material-icons mdc-icon-button mdc-card__action mdc-card__action--icon" title="Intel Map" id="button-card-intel" hidden>map</button>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <template id="template-switchBox">
+            <div class="mdc-switch-box">
+                <div class="mdc-switch mdc-switch--checked">
+                    <div class="mdc-switch__track"></div>
+                    <div class="mdc-switch__thumb-underlay">
+                        <div class="mdc-switch__thumb">
+                            <input type="checkbox" class="mdc-switch__native-control" role="switch" checked>
+                        </div>
+                    </div>
+                </div>
+                <label><i class="material-icons"></i> <span></span></label>
+            </div>
+        </template>
+
         <!-- Scripts -->
         <script type="text/javascript" src="./lib/versionKit.js"></script>
         <script type="text/javascript" src="./lib/value.js"></script>

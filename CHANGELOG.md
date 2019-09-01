@@ -1,5 +1,21 @@
 # Changelog
 ```markdown
+## [0.4.3] - 2019-09-01
+I18n framework for Intro and Privacy
+
+### Added
+- A dialog to show details of portal, will be editable in future
+
+### Changed
+- Intergrate code of Full and Lite, the version-limited features are enabled / disabled by versionKit
+- Struct updated: Merge and sort Portals in process.finish()
+
+### Fixed
+- Markers are not be removed after logout
+- Progress Bar is not accurate when some mails are processed before other lists been fetched
+```
+
+```markdown
 ## [0.4.2] - 2019-08-25
 Add dialog: Portal Details
 

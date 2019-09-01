@@ -6,8 +6,8 @@ const auth = {
                 // Listen for sign-in state changes.
                 gapi.auth2.getAuthInstance().isSignedIn.listen(auth.updateStatus);
                 // Handle the initial sign-in state.
-                ui.button.auth.listen("click", (_) => gapi.auth2.getAuthInstance().signIn());
-                ui.button.signout.listen("click", (_) => gapi.auth2.getAuthInstance().signOut());
+                ui.appBar.auth.listen("click", (_) => gapi.auth2.getAuthInstance().signIn());
+                ui.appBar.signout.listen("click", (_) => gapi.auth2.getAuthInstance().signOut());
                 auth.updateStatus(gapi.auth2.getAuthInstance().isSignedIn.get());
             },
             (error) => ui.dialog.show.alert(JSON.stringify(error, null, 2))
@@ -15,15 +15,15 @@ const auth = {
     },
     updateStatus: (isSignedIn) => {
         if (isSignedIn) {
-            ui.button.auth.root_.hidden = true;
-            ui.button.signout.root_.hidden = false;
+            ui.appBar.auth.root_.hidden = true;
+            ui.appBar.signout.root_.hidden = false;
             process.start();
         } else {
             ui.refresh();
             process.portalList = [];
-            ui.button.auth.root_.hidden = false;
-            ui.button.signout.root_.hidden = true;
-            ui.button.uploadFile.root_.hidden = true;
+            ui.appBar.auth.root_.hidden = false;
+            ui.appBar.signout.root_.hidden = true;
+            ui.appBar.uploadFile.root_.hidden = true;
         }
     },
 };

@@ -125,7 +125,7 @@ body.fullheight {
     align-items: center;
 }
 
-#cardImage {
+.mdc-card img {
     object-fit: cover;
     object-position: center;
     width: 120px;
@@ -148,7 +148,7 @@ body.fullheight {
     flex-grow: 1;
 }
 
-#dialog-portal img {
+#dialog-details img {
     object-fit: cover;
     object-position: center;
     width: 100%;
