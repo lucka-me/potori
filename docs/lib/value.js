@@ -1,8 +1,8 @@
 const value = {
     string: {
         version: {
-            full: "0.4.3 (Full)",
-            lite: "0.4.3 (Lite)",
+            full: "0.4.4 (Full)",
+            lite: "0.4.4 (Lite)",
         },
         mapbox: {
             accessToken: "pk.eyJ1IjoibHVja2EtbWUiLCJhIjoiY2p2NDk5NmRvMHFreTQzbzduemM1MHV4cCJ9.7XGmxnEJRoCDr-i5BBmBfw",

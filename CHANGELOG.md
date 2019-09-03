@@ -1,5 +1,14 @@
 # Changelog
 ```markdown
+## [0.4.4] - 2019-09-03
+Fixed dialog issues
+
+### Fixed
+- Alert dialog can't show up
+- Details Dialog can't show up
+```
+
+```markdown
 ## [0.4.3] - 2019-09-01
 I18n framework for Intro and Privacy
 
