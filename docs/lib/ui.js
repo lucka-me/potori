@@ -1,11 +1,8 @@
 const ui = {
     appBar: {
         status:     null,
-        openFile:   null,
-        saveFile:   null,
-        uploadFile: null,
-        auth:       null,
-        signout:    null,
+        openFile:   null, saveFile: null, uploadFile: null,
+        auth:       null, signout:  null,
         init: () => {
             const appBarActionDiv = document.querySelector(".mdc-top-app-bar__section--align-end");
             for (const key of Object.keys(ui.appBar)) {
@@ -26,39 +23,49 @@ const ui = {
         status: {
             ctrl: new mdc.dialog.MDCDialog(document.querySelector("#dialog-status")),
             block: {
-                all:            document.getElementById("block-dialog-status-all"),
+                type:           document.getElementById("block-dialog-status-type"),
                 rejectedReason: document.getElementById("block-dialog-status-rejectedReason"),
             },
             filter: {
-                all: {
-                    accepted: { switch: null, label:  null, },
-                    rejected: { switch: null, label:  null, },
-                    pending:  { switch: null, label:  null, },
+                type: {
+                    accepted: { switch: null, label: null, portals: [], },
+                    rejected: { switch: null, label: null, portals: [], },
+                    pending:  { switch: null, label: null, portals: [], },
                 },
                 rejectedReason: {
-                    undeclared: { switch: null, label:  null, },
-                    duplicated: { switch: null, label:  null, },
-                    tooClose:   { switch: null, label:  null, },
+                    undeclared: { switch: null, label: null, portals: [], },
+                    duplicated: { switch: null, label: null, portals: [], },
+                    tooClose:   { switch: null, label: null, portals: [], },
                 },
             },
-            init : () => {
+            init: () => {
                 for (const block of Object.keys(ui.dialog.status.filter)) {
                     for (const key of (Object.keys(ui.dialog.status.filter[block]))) {
                         const switchId = `switch-filter-${block}-${key}`;
-
                         const switchBox = document.getElementById("template-switchBox").content.cloneNode(true);
                         const switchElement = switchBox.querySelector(".mdc-switch");
                         switchElement.id = switchId;
                         const switchLabel = switchBox.querySelector("label");
                         switchLabel.for = switchId;
                         const labelIcon = switchLabel.querySelector("i");
-                        labelIcon.className += value.string.html.css[block === "all" ? key : "rejected"];
+                        labelIcon.className += value.string.html.css[block === "type" ? key : "rejected"];
                         labelIcon.title = value.string.title.status[key];
                         labelIcon.innerHTML = value.string.html.icon[key];
                         ui.dialog.status.block[block].appendChild(switchBox);
 
-                        ui.dialog.status.filter[block][key].switch = new mdc.switchControl.MDCSwitch(switchElement);
-                        ui.dialog.status.filter[block][key].label  = switchLabel.querySelector("span");
+                        const filter = ui.dialog.status.filter[block][key];
+                        filter.switch = new mdc.switchControl.MDCSwitch(switchElement);
+                        filter.label  = switchLabel.querySelector("span");
+                        if (block === "type" && key === "rejected") {
+                            filter.switch.listen("change", (_) => {
+                                for (const key of Object.keys(ui.dialog.status.filter.rejectedReason)) {
+                                    ui.dialog.status.filter.rejectedReason[key].switch.checked = ui.dialog.status.filter.type.rejected.switch.checked;
+                                }
+                                ui.event.changeShow(filter);
+                            });
+                        } else {
+                            filter.switch.listen("change", (_) => ui.event.changeShow(filter));
+                        }
                     }
                     ui.dialog.status.block[block].hidden = true;
                 }
@@ -67,97 +74,146 @@ const ui = {
         details: {
             ctrl: new mdc.dialog.MDCDialog(document.querySelector("#dialog-details")),
             map: {
-                ctrl: null,
-                marker: null,
-                edit: null,
-                search: null,
-                delete: null,
+                ctrl: null, marker: null,
+                edit: null, search: null, delete: null,
             },
             status: {
-                accepted: { radio: null, field: null, },
-                rejected: { radio: null, field: null, },
-                pending:  { radio: null, field: null, },
+                accepted: null, rejected: null, pending: null,
             },
+            selectedStatus: null,
             rejectedReasonSelect: null,
-            resultDateField: null,
-            resultTimeField: null,
+            resultDateTimeField: null,
+            data: { portal: null, keys: null },
             init: () => {
                 const dialogElement = ui.dialog.details.ctrl.root_;
-                ui.dialog.details.map.ctrl = new mapboxgl.Map({ container: "map-dialog-details", style: value.string.mapbox.style });
-                ui.dialog.details.map.ctrl.addControl(new mapboxgl.NavigationControl());
+                const map = ui.dialog.details.map;
+                map.ctrl = new mapboxgl.Map({ container: "map-dialog-details", style: value.string.mapbox.style });
+                map.ctrl.addControl(new mapboxgl.NavigationControl());
     
-                ui.dialog.details.map.edit = new mdc.ripple.MDCRipple(dialogElement.querySelector("#button-dialog-details-map-edit"));
-                ui.dialog.details.map.edit.unbounded = true;
+                map.edit = new mdc.ripple.MDCRipple(dialogElement.querySelector("#button-dialog-details-map-edit"));
+                map.edit.unbounded = true;
                 if (versionKit.fullFeature) {
-                    ui.dialog.details.map.search = new mdc.ripple.MDCRipple(dialogElement.querySelector("#button-dialog-details-map-search"));
-                    ui.dialog.details.map.search.unbounded = true;
+                    map.search = new mdc.ripple.MDCRipple(dialogElement.querySelector("#button-dialog-details-map-search"));
+                    map.search.unbounded = true;
                 } else {
                     dialogElement.querySelector("#button-dialog-details-map-search").hidden = true;
                 }
-                ui.dialog.details.map.delete = new mdc.ripple.MDCRipple(dialogElement.querySelector("#button-dialog-details-map-delete"));
-                ui.dialog.details.map.delete.unbounded = true;
+                map.delete = new mdc.ripple.MDCRipple(dialogElement.querySelector("#button-dialog-details-map-delete"));
+                map.delete.unbounded = true;
     
-                for (let key of Object.keys(ui.dialog.details.status)) {
-                    const selector = `#field-dialog-details-status-${key}`;
-                    ui.dialog.details.status[key].radio = new mdc.radio.MDCRadio(dialogElement.querySelector(`${selector} > .mdc-radio`));
-                    ui.dialog.details.status[key].radio.disabled = true;   // TODO
-                    ui.dialog.details.status[key].field = new mdc.formField.MDCFormField(dialogElement.querySelector(selector));
-                    ui.dialog.details.status[key].field.input = ui.dialog.details.status[key].radio;
-                }
-    
+                ui.dialog.details.resultDateTimeField = new mdc.textField.MDCTextField(dialogElement.querySelector("#field-dialog-details-result-datetime"));
                 ui.dialog.details.rejectedReasonSelect = new mdc.select.MDCSelect(dialogElement.querySelector("#select-dialog-details-rejectedReason"));
-                ui.dialog.details.rejectedReasonSelect.disabled = true;    // TODO
-    
-                ui.dialog.details.resultDateField = new mdc.textField.MDCTextField(dialogElement.querySelector("#field-dialog-details-result-date"));
-                ui.dialog.details.resultDateField.disabled = true; // TODO
-                ui.dialog.details.resultTimeField = new mdc.textField.MDCTextField(dialogElement.querySelector("#field-dialog-details-result-time"));
-                ui.dialog.details.resultTimeField.disabled = true; // TODO
+
+                const onStatusRadioChange = (event) => {
+                    ui.dialog.details.selectedStatus = event.target.value;
+                    ui.dialog.details.resultDateTimeField.root_.hidden  =  (event.target.value === "pending" );
+                    ui.dialog.details.rejectedReasonSelect.root_.hidden = !(event.target.value === "rejected");
+                };
+
+                const statusRadiosBlock = dialogElement.querySelector("#block-dialog-details-status-radios");
+                for (let key of Object.keys(ui.dialog.details.status)) {
+                    const radioId = `radio-dialog-details-status-${key}`;
+                    const radioField = document.getElementById("template-radioField").content.cloneNode(true);
+                    const radioFieldElement = radioField.querySelector(".mdc-form-field");
+                    const radioInput = radioFieldElement.querySelector("input");
+                    const radioLabel = radioFieldElement.querySelector("label");
+                    radioInput.name = "radio-dialog-details-status";
+                    radioInput.id = radioId;
+                    radioInput.value = key;
+                    radioInput.addEventListener("change", onStatusRadioChange);
+                    radioLabel.for = radioId;
+                    radioLabel.className = `material-icons status-${key}`;
+                    radioLabel.innerHTML = value.string.html.icon[key];
+                    statusRadiosBlock.appendChild(radioFieldElement);
+
+                    ui.dialog.details.status[key] = new mdc.radio.MDCRadio(radioFieldElement.querySelector(".mdc-radio"));
+                    const formField = new mdc.formField.MDCFormField(radioFieldElement);
+                    formField.input = ui.dialog.details.status[key];
+                }
+            },
+            onOpened: () => {
+                const portal = ui.dialog.details.data.portal;
+                const keys = ui.dialog.details.data.keys;
+                const map = ui.dialog.details.map;
+                if (!map.ctrl) ui.dialog.details.init();
+                if (map.marker) map.marker.remove();
+                map.marker = null;
+                if (portal.lngLat) {
+                    map.marker = new mapboxgl.Marker()
+                        .setLngLat(portal.lngLat)
+                        .addTo(map.ctrl);
+                    map.ctrl.jumpTo({ center: portal.lngLat, zoom: 16 });
+                }
+
+                ui.dialog.details.status[keys.type].checked = true;
+                ui.dialog.details.selectedStatus = keys.type;
+
+                ui.dialog.details.resultDateTimeField.root_.hidden = (portal.status === value.code.status.pending);
+                const dateTime = toolkit.getLocalDateTimeISOString(portal.resultTime ? portal.resultTime : Date.now());
+                ui.dialog.details.resultDateTimeField.value = dateTime.slice(0, dateTime.lastIndexOf(":"));
+
+                ui.dialog.details.rejectedReasonSelect.root_.hidden = !(keys.type === value.string.key.status.rejected);
+                if (keys.type === value.string.key.status.rejected) {
+                    ui.dialog.details.rejectedReasonSelect.selectedIndex = portal.status - value.code.status.undeclared;
+                }
+            },
+            onClosed: (event) => {
+                const portal = ui.dialog.details.data.portal;
+                const keys = ui.dialog.details.data.keys;
+                const selectedStatus = ui.dialog.details.selectedStatus;
+                if (event.detail.action === "save") {
+                    let shouldRefresh = false;
+                    if (selectedStatus !== value.string.key.status.pending) {
+                        const time = Date.parse(ui.dialog.details.resultDateTimeField.value);
+                        if (!time) {
+                            ui.dialog.alert.show(value.string.alert.invalidDateTime);
+                            return;
+                        }
+                        portal.resultTime = time + toolkit.getLocalTimezoneOffset();
+                        shouldRefresh = true;
+                    }
+                    if (selectedStatus !== keys.type) {
+                        const filters = ui.dialog.status.filter;
+                        for (let i = 0; i < filters.type[keys.type].portals.length; i++) {
+                            if (filters.type[keys.type].portals[i].id === portal.id) {
+                                filters.type[keys.type].portals.slice(i, 1);
+                                break;
+                            }
+                        }
+                        filters.type[selectedStatus].portals.push(portal);
+                        filters.type[keys.type].label.innerHTML = toolkit.getCountString(filters.type[keys.type].portals, process.portalList);
+                        filters.type[selectedStatus].label.innerHTML = toolkit.getCountString(filters.type[selectedStatus].portals, process.portalList);
+
+                        if (keys.rejectedReason) {
+                            for (let i = 0; i < filters.rejectedReason[keys.rejectedReason].portals.length; i++) {
+                                if (filters.rejectedReason[keys.rejectedReason].portals[i].id === portal.id) {
+                                    filters.rejectedReason[keys.rejectedReason].portals.slice(i, 1);
+                                    break;
+                                }
+                            }
+                            filters.rejectedReason[keys.rejectedReason].label.innerHTML = toolkit.getCountString(filters.rejectedReason[keys.rejectedReason].portals, filters.type.rejected.portals);
+                        } else if (selectedStatus === value.string.key.status.rejected) {
+                            const rejectedReason = ui.dialog.details.rejectedReasonSelect.value
+                            filters.rejectedReason[rejectedReason].portals.push(portal);
+                            filters.rejectedReason[rejectedReason].label.innerHTML = toolkit.getCountString(filters.rejectedReason[rejectedReason].portals, filters.type.rejected.portals);
+                        }
+                        shouldRefresh = true;
+                    }
+                    if (shouldRefresh) {
+                        portal.status = value.code.status[(ui.dialog.details.selectedStatus !== value.string.key.status.rejected) ? ui.dialog.details.selectedStatus : ui.dialog.details.rejectedReasonSelect.value];
+                        const card = document.getElementById(`card-${portal.id}`);
+                        ui.fillCard(portal, card);
+                        if (portal.lngLat) ui.fillLocation(portal, card);
+                    }
+                }
             },
             show: (portal) => {
-                const onOpened = () => {
-                    if (!ui.dialog.details.map.ctrl) ui.dialog.details.init();
-                    if (ui.dialog.details.map.marker) ui.dialog.details.map.marker.remove();
-                    ui.dialog.details.map.marker = null;
-                    if (portal.lngLat) {
-                        ui.dialog.details.map.marker = new mapboxgl.Marker()
-                            .setLngLat(portal.lngLat)
-                            .addTo(ui.dialog.details.map.ctrl);
-                        ui.dialog.details.map.ctrl.jumpTo({ center: portal.lngLat, zoom: 16 });
-                    }
+                ui.dialog.details.data.portal = portal;
+                ui.dialog.details.data.keys = toolkit.parseStatusCodeToKeys(portal.status);
 
-                    if (portal.status === value.code.status.pending) {
-                        ui.dialog.details.status.pending.radio.checked = true;
-                        ui.dialog.details.rejectedReasonSelect.root_.hidden = true;
-                        ui.dialog.details.resultDateField.root_.hidden = true;
-                        ui.dialog.details.resultTimeField.root_.hidden = true;
-                    } else {
-                        const dateTime = toolkit.getDateTimeISOString(portal.resultTime).split("T");
-                        ui.dialog.details.resultDateField.root_.hidden = false;
-                        ui.dialog.details.resultTimeField.root_.hidden = false;
-                        ui.dialog.details.resultDateField.value = dateTime[0];
-                        ui.dialog.details.resultTimeField.value = dateTime[1].slice(0, dateTime[1].lastIndexOf(":"));
-                        if (portal.status === value.code.status.accepted) {
-                            ui.dialog.details.status.accepted.radio.checked = true;
-                            ui.dialog.details.rejectedReasonSelect.root_.hidden = true;
-                        } else {
-                            ui.dialog.details.status.rejected.radio.checked = true;
-                            ui.dialog.details.rejectedReasonSelect.root_.hidden = false;
-                            ui.dialog.details.rejectedReasonSelect.selectedIndex = portal.status - value.code.status.rejected.undeclared;
-                        }
-                    }
-                };
-
-                const onClosed = (event) => {
-                    if (event.detail.action === "save") {
-                        // TODO: Check date and time, save, update card and marker
-                    }
-                };
-
-                ui.dialog.details.ctrl.listen("MDCDialog:opened", onOpened);
-                ui.dialog.details.ctrl.listen("MDCDialog:closed", onClosed);
                 ui.dialog.details.ctrl.root_.querySelector(".mdc-dialog__title").innerHTML = portal.title;
                 ui.dialog.details.ctrl.root_.querySelector("img").src = value.string.path.image + portal.image;
-                ui.dialog.details.ctrl.root_.querySelector("#dialogPortalConfirmedTime").innerHTML = toolkit.getDateTimeString(portal.confirmedTime);
+                ui.dialog.details.ctrl.root_.querySelector("#text-dialog-details-confirmedTime").innerHTML = toolkit.getDateTimeString(portal.confirmedTime);
                 ui.dialog.details.ctrl.open();
             }
         },
@@ -189,10 +245,11 @@ const ui = {
             auth:       (_) => { },
             signout:    (_) => { },
         },
-        changeShow: (portals, show) => {
-            for (let portal of portals) {
-                if (portal.marker) portal.marker.getElement().hidden = !show;
-                document.getElementById(`card-${portal.id}`).hidden = !show;
+        changeShow: (filter) => {
+            const hidden = !filter.switch.checked;
+            for (const portal of filter.portals) {
+                if (portal.marker) portal.marker.getElement().hidden = hidden;
+                document.getElementById(`card-${portal.id}`).hidden = hidden;
             }
         },
         scrollToCard: (id) => {
@@ -200,9 +257,12 @@ const ui = {
         },
     },
     init: () => {
-        document.getElementById("dialogStatusVersion").innerHTML = value.string.version[versionKit.code];
+        document.getElementById("dialogStatusVersion").innerHTML = `${value.string.version}-${versionKit.code}`;
         ui.appBar.init();
         ui.dialog.status.init();
+
+        ui.dialog.details.ctrl.listen("MDCDialog:opened", ui.dialog.details.onOpened);
+        ui.dialog.details.ctrl.listen("MDCDialog:closed", ui.dialog.details.onClosed);
     },
     refresh: () => {
         ui.appBar.openFile.root_.hidden = false;
@@ -219,30 +279,9 @@ const ui = {
         iconDiv.className = "map-marker";
         const icon = document.createElement("span");
         icon.className = "material-icons md-18";
-        switch (portal.status) {
-            case value.code.status.pending:
-                iconDiv.className += `${value.string.html.css.pending}--bg`;
-                icon.innerHTML = value.string.html.icon.pending;
-                break;
-            case value.code.status.accepted:
-                iconDiv.className += `${value.string.html.css.accepted}--bg`;
-                icon.innerHTML = value.string.html.icon.accepted;
-                break;
-            default:
-                switch (portal.status) {
-                    case value.code.status.rejected.tooClose:
-                        icon.innerHTML = value.string.html.icon.tooClose;
-                        break;
-                    case value.code.status.rejected.duplicated:
-                        icon.innerHTML = value.string.html.icon.duplicated;
-                        break;
-                    default:
-                        icon.innerHTML = value.string.html.icon.undeclared;
-                        break;
-                }
-                iconDiv.className += `${value.string.html.css.rejected}--bg`;
-                break;
-        }
+        const keys = toolkit.parseStatusCodeToKeys(portal.status);
+        iconDiv.className += `${value.string.html.css[keys.type]}--bg`;
+        icon.innerHTML = value.string.html.icon[keys.rejectedReason ? keys.rejectedReason : keys.type];
         iconDiv.appendChild(icon);
         return iconDiv;
     },
@@ -269,6 +308,23 @@ const ui = {
             intelRipple.listen("click", () => window.open(toolkit.lngLatToIntel(portal.lngLat), "_blank", "noopener"));
         }
     },
+    fillCard: (portal, card) => {
+        if (portal.status != value.code.status.pending) {
+            card.querySelector("#cardInterval").innerHTML = toolkit.getIntervalString(portal.confirmedTime, portal.resultTime);
+            card.querySelector("#cardResultBox").hidden = false;
+            card.querySelector("#cardResultTime").innerHTML = toolkit.getDateString(portal.resultTime);
+        } else {
+            card.querySelector("#cardInterval").innerHTML = toolkit.getIntervalString(portal.confirmedTime, Date.now());
+            card.querySelector("#cardResultBox").hidden = true;
+        }
+
+        const keys = toolkit.parseStatusCodeToKeys(portal.status);
+        card.querySelector("#cardResultIcon").innerHTML = value.string.html.icon[keys.type];
+        card.querySelector("#cardStatusButton").className = `mdc-button mdc-card__action mdc-card__action--button ${value.string.html.css[keys.type]}`;
+        card.querySelector("#cardStatusButtonIcon").innerHTML = value.string.html.icon[keys.rejectedReason ? keys.rejectedReason : keys.type];
+        card.querySelector("#cardStatusButtonLabel").innerHTML = value.string.title.status[keys.rejectedReason ? keys.rejectedReason : keys.type];
+        return keys;
+    },
     display: () => {
         const boundsNE = { lng: -181.0, lat: -91.0 };
         const boundsSW = { lng: 181.0, lat: 91.0 };
@@ -280,20 +336,15 @@ const ui = {
             else if (lngLat.lat < boundsSW.lat) boundsSW.lat = lngLat.lat;
         };
 
-        const classifiedList = {
-            pending: [],
-            accepted: [],
-            rejected: [],
-            rejectedReason: {
-                undeclared: [],
-                duplicated: [],
-                tooClose: [],
-            },
-            noLngLat: [],
-        };
+        for (const block of Object.keys(ui.dialog.status.filter)) {
+            for (const key of Object.keys(ui.dialog.status.filter[block])) {
+                ui.dialog.status.filter[block][key].portals = [];
+            }
+        }
+        const noLatLngList = [];
 
         // Create cards, extend bounds and classify
-        for (let portal of process.portalList) {
+        for (const portal of process.portalList) {
             const card = document.getElementById("template-card").content.cloneNode(true);
 
             card.querySelector(".mdc-card").id = `card-${portal.id}`;
@@ -304,57 +355,11 @@ const ui = {
             card.querySelector("img").src = value.string.path.image + portal.image;
             card.querySelector("#cardTitle").innerHTML = portal.title;
             card.querySelector("#cardConfirmedTime").innerHTML = toolkit.getDateString(portal.confirmedTime);
-            if (portal.resultTime) {
-                card.querySelector("#cardInterval").innerHTML = toolkit.getIntervalString(portal.confirmedTime, portal.resultTime);
-                card.querySelector("#cardResultBox").hidden = false;
-                card.querySelector("#cardResultTime").innerHTML = toolkit.getDateString(portal.resultTime);
-            } else {
-                card.querySelector("#cardInterval").innerHTML = toolkit.getIntervalString(portal.confirmedTime, new Date().getTime());
-                card.querySelector("#cardResultBox").hidden = true;
-            }
-            const resultIcon        = card.querySelector("#cardResultIcon");
-            const statusButton      = card.querySelector("#cardStatusButton");
-            const statusButtonIcon  = card.querySelector("#cardStatusButtonIcon");
-            const statusButtonLabel = card.querySelector("#cardStatusButtonLabel");
+            const keys = ui.fillCard(portal, card);
+            ui.dialog.status.filter.type[keys.type].portals.push(portal);
+            if (keys.rejectedReason) ui.dialog.status.filter.rejectedReason[keys.rejectedReason].portals.push(portal);
 
-            switch (portal.status) {
-                case value.code.status.pending:
-                    statusButton.className += value.string.html.css.pending;
-                    statusButtonIcon.innerHTML = value.string.html.icon.pending;
-                    statusButtonLabel.innerHTML = "Pending";
-                    classifiedList.pending.push(portal);
-                    break;
-                case value.code.status.accepted:
-                    resultIcon.innerHTML = value.string.html.icon.accepted;
-                    statusButton.className += value.string.html.css.accepted;
-                    statusButtonIcon.innerHTML = value.string.html.icon.accepted;
-                    statusButtonLabel.innerHTML = "Accepted";
-                    classifiedList.accepted.push(portal);
-                    break;
-                default:
-                    switch (portal.status) {
-                        case value.code.status.rejected.tooClose:
-                            statusButtonIcon.innerHTML = value.string.html.icon.tooClose;
-                            statusButtonLabel.innerHTML = "Too Close";
-                            classifiedList.rejectedReason.tooClose.push(portal);
-                            break;
-                        case value.code.status.rejected.duplicated:
-                            statusButtonIcon.innerHTML = value.string.html.icon.duplicated;
-                            statusButtonLabel.innerHTML = "Duplicated";
-                            classifiedList.rejectedReason.duplicated.push(portal);
-                            break;
-                        default:
-                            statusButtonIcon.innerHTML = value.string.html.icon.undeclared;
-                            statusButtonLabel.innerHTML = "Rejected";
-                            classifiedList.rejectedReason.undeclared.push(portal);
-                            break;
-                    }
-                    statusButton.className += value.string.html.css.rejected;
-                    resultIcon.innerHTML = value.string.html.icon.rejected;
-                    classifiedList.rejected.push(portal);
-                    break;
-            }
-            const statusRipple = new mdc.ripple.MDCRipple(statusButton);
+            const statusRipple = new mdc.ripple.MDCRipple(card.querySelector("#cardStatusButton"));
             statusRipple.unbounded = true;
             if (versionKit.fullFeature) {
                 statusRipple.listen("click", () => window.open(value.string.path.bsWatermeter + portal.id, "_blank"));
@@ -370,14 +375,12 @@ const ui = {
                     ui.dialog.alert.show(`Brainstorming ID copied: ${portal.id}`);
                 });
             }
-            
             if (portal.lngLat) {
                 extendBounds(portal.lngLat);
                 ui.fillLocation(portal, card);
             } else {
-                classifiedList.noLngLat.push(portal);
+                noLatLngList.push(portal);
             }
-
             ui.cardList.appendChild(card);
         }
 
@@ -387,29 +390,15 @@ const ui = {
                 linear: true
             });
         }
-        
-        const getCountString = (portals) => portals.length === 0 ? "0 (0%)" : `${portals.length} (${(portals.length / process.portalList.length * 100).toFixed(1)}%)`;
-        
-        const getRejectedCountString = (portals) => portals.length === 0 ? "0 (0%)" : `${portals.length} (${(portals.length / classifiedList.rejected.length * 100).toFixed(1)}%)`;
 
-        ui.dialog.status.filter.all.accepted.label.innerHTML = getCountString(classifiedList.accepted);
-        ui.dialog.status.filter.all.accepted.switch.listen("change", (_) => ui.event.changeShow(classifiedList.accepted, ui.dialog.status.filter.all.accepted.switch.checked));
-        ui.dialog.status.filter.all.rejected.label.innerHTML = getCountString(classifiedList.rejected);
-        ui.dialog.status.filter.all.rejected.switch.listen("change", (_) => {
-            for (let key of Object.keys(classifiedList.rejectedReason)) {
-                ui.dialog.status.filter.rejectedReason[key].switch.checked = ui.dialog.status.filter.all.rejected.switch.checked;
-            }
-            ui.event.changeShow(classifiedList.rejected, ui.dialog.status.filter.all.rejected.switch.checked);
-        });
-        ui.dialog.status.filter.all.pending.label.innerHTML  = getCountString(classifiedList.pending);
-        ui.dialog.status.filter.all.pending.switch.listen("change", (_) => ui.event.changeShow(classifiedList.pending, ui.dialog.status.filter.all.pending.switch.checked));
-
-        for (let key of Object.keys(classifiedList.rejectedReason)) {
-            const portals = classifiedList.rejectedReason[key];
-            ui.dialog.status.filter.rejectedReason[key].label.innerHTML = getRejectedCountString(portals);
-            ui.dialog.status.filter.rejectedReason[key].switch.listen("change", (_) => ui.event.changeShow(portals, ui.dialog.status.filter.rejectedReason[key].switch.checked));
+        for (const key of Object.keys(ui.dialog.status.filter.type)) {
+            ui.dialog.status.filter.type[key].label.innerHTML = toolkit.getCountString(ui.dialog.status.filter.type[key].portals, process.portalList);
         }
-        for (let key of Object.keys(ui.dialog.status.block)) ui.dialog.status.block[key].hidden = false;
+        for (const key of Object.keys(ui.dialog.status.filter.rejectedReason)) {
+            const filter = ui.dialog.status.filter.rejectedReason[key];
+            ui.dialog.status.filter.rejectedReason[key].label.innerHTML = toolkit.getCountString(filter.portals, ui.dialog.status.filter.type.rejected.portals);
+        }
+        for (const key of Object.keys(ui.dialog.status.block)) ui.dialog.status.block[key].hidden = false;
 
         const onFinished = () => {
             ui.appBar.saveFile.root_.hidden = false;
@@ -417,13 +406,13 @@ const ui = {
             ui.progressBar.root_.hidden = true;
         };
 
-        if (versionKit.fullFeature && (classifiedList.noLngLat.length > 0)) {
+        if (versionKit.fullFeature && (noLatLngList.length > 0)) {
             let count = 0;
             const countUp = () => {
                 count += 1;
-                if (count === classifiedList.noLngLat.length) onFinished();
+                if (count === noLatLngList.length) onFinished();
             };
-            for (let portal of classifiedList.noLngLat) {
+            for (const portal of noLatLngList) {
                 firebaseKit.queryLngLat(
                     portal.id,
                     (lngLat) => {

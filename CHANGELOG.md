@@ -1,5 +1,17 @@
 # Changelog
 ```markdown
+## [0.4.5] - 2019-09-07
+Support editing in Details dialog
+
+### Added
+- BETA: Edit status, result time and rejected reason in Details dialog
+
+### Changed
+- Filter group in Status & About dialog: All -> Type
+- Code optimized
+```
+
+```markdown
 ## [0.4.4] - 2019-09-03
 Fixed dialog issues
 

@@ -1,18 +1,19 @@
 <h1 align=center><img height=90px src="./src/logo-bg.svg" link="#"/></h1>
 
-[![](https://img.shields.io/badge/version-0.4.4-brightgreen.svg)](./CHANGELOG.md "Changelog") [![](https://img.shields.io/badge/demo-available-brightgreen.svg)](https://lucka.moe/potori "Demo") [![](https://img.shields.io/badge/author-Lucka-2578B5.svg)](https://lucka.moe "Author") [![](https://img.shields.io/badge/license-MIT-A31F34.svg)](./LICENSE "License")  
+[![](https://img.shields.io/badge/version-0.4.5-brightgreen.svg)](./CHANGELOG.md "Changelog") [![](https://img.shields.io/badge/demo-online-brightgreen.svg)](https://lucka.moe/potori "Demo") [![](https://img.shields.io/badge/author-Lucka-2578B5.svg)](https://lucka.moe "Author") [![](https://img.shields.io/badge/license-MIT-A31F34.svg)](./LICENSE "License")  
 ![](https://img.shields.io/badge/safari-support-brightgreen.svg) ![](https://img.shields.io/badge/chrome-support-brightgreen.svg) ![](https://img.shields.io/badge/firefox-support-brightgreen.svg)<!-- ![](https://img.shields.io/badge/edge-support-brightgreen.svg) ![](https://img.shields.io/badge/ie-broken-red.svg) ![](https://img.shields.io/badge/opera-support-brightgreen.svg)-->
 
 ## Description
 Gather and visualize your Portal nominations from your Gmail inbox.
 
 ## Notice
-**The OAuth screen has been verified, so the online page could work now.**  
-**However, due to Google's policy (which aims to protect your data), some features related to 3rd-party were removed in the online page.**  
+**Due to Google's policy (which aims to protect user's data), some features related to were removed in the demo page (as a lite version).**  
 You can download the repository [and host the full version in the root folder](https://developers.google.com/gmail/api/quickstart/js "Browser Quickstart | Gmail API | Google Developers").
 
 ## TODO
 - [ ] Edit Portal information
+    - [x] Status, result time and rejected reason
+    - [ ] Location
 - [ ] Update the id of elements
 - [ ] i18n for Intro and Privacy
     - [x] Framework

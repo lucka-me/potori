@@ -8,8 +8,16 @@ const toolkit = {
     getDateString:          (time) => new Date(time).toLocaleDateString(),
     getDateTimeString:      (time) => new Date(time).toLocaleString(),
     getDateTimeISOString:   (time) => new Date(time).toISOString(),
+    getLocalDateTimeISOString: (time) => {
+        const date = new Date();
+        date.setTime(time - date.getTimezoneOffset() * 60000);
+        return date.toISOString();
+    },
+    getLocalTimezoneOffset: () => new Date().getTimezoneOffset() * 60000,
     getIntervalString: (start, end) => {
         const day = Math.floor((end - start) / (24 * 3600 * 1000));
         return `${day} day${(day > 1 ? "s" : "")}`;
     },
+    parseStatusCodeToKeys: (code) => value.map.statusCode.get(code),
+    getCountString: (list, ofList) => `${list.length} (${ofList.length > 0 ? (list.length / ofList.length * 100).toFixed(1) : 0}%)`,
 };

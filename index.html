@@ -57,8 +57,8 @@
                     <h2 class="mdc-dialog__title">Status & About</h2>
                     <div class="mdc-dialog__content mdc-dialog-content">
 
-                        <div class="mdc-dialog-content-block" id="block-dialog-status-all">
-                            <span class="mdc-typography--headline6">All Status</span>
+                        <div class="mdc-dialog-content-block" id="block-dialog-status-type">
+                            <span class="mdc-typography--headline6">Type</span>
                         </div>
 
                         <div class="mdc-dialog-content-block" id="block-dialog-status-rejectedReason">
@@ -89,87 +89,44 @@
                     <img src="" id="dialogPortalImage">
                     <div class="mdc-dialog__content mdc-dialog-content--col">
                         <div class="mdc-typography--body1 flex-box-row--nowrap flex-align-items--center">
-                            <i class="material-icons">arrow_upward</i><span class="margin-l--4" id="dialogPortalConfirmedTime"></span>
+                            <i class="material-icons">arrow_upward</i><span class="margin-l--4" id="text-dialog-details-confirmedTime"></span>
                         </div>
                         
-                        <div class="flex-box-row--nowrap fullwidth flex-justify-content--around">
-                            <div class="mdc-form-field" id="field-dialog-details-status-accepted">
-                                <div class="mdc-radio">
-                                    <input class="mdc-radio__native-control" type="radio" name="radio-dialog-details-status" id="radio-dialog-details-status-accepted" checked>
-                                    <div class="mdc-radio__background">
-                                        <div class="mdc-radio__outer-circle"></div>
-                                        <div class="mdc-radio__inner-circle"></div>
-                                    </div>
-                                </div>
-                                <label for="radio-dialog-details-status-accepted" class="material-icons status-accepted">check</label>
-                            </div>
-                            <div class="mdc-form-field" id="field-dialog-details-status-rejected">
-                                <div class="mdc-radio">
-                                    <input class="mdc-radio__native-control" type="radio" name="radio-dialog-details-status" id="radio-dialog-details-status-rejected">
-                                    <div class="mdc-radio__background">
-                                        <div class="mdc-radio__outer-circle"></div>
-                                        <div class="mdc-radio__inner-circle"></div>
-                                    </div>
-                                </div>
-                                <label for="radio-dialog-details-status-rejected" class="material-icons status-rejected">close</label>
-                            </div>
-                            <div class="mdc-form-field" id="field-dialog-details-status-pending">
-                                <div class="mdc-radio">
-                                    <input class="mdc-radio__native-control" type="radio" name="radio-dialog-details-status" id="radio-dialog-details-status-pending">
-                                    <div class="mdc-radio__background">
-                                        <div class="mdc-radio__outer-circle"></div>
-                                        <div class="mdc-radio__inner-circle"></div>
-                                    </div>
-                                </div>
-                                <label for="radio-dialog-details-status-pending" class="material-icons status-pending">access_time</label>
-                            </div>
-                        </div>
+                        <div class="flex-box-row--nowrap fullwidth flex-justify-content--around" id="block-dialog-details-status-radios"></div>
 
                         <div class="flex-box-row--wrap">
-                            <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon margin-v--8 margin-h--4 flex-grow--1" id="field-dialog-details-result-date">
+                            <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon margin-v--8 margin-h--4 flex-grow--1" id="field-dialog-details-result-datetime">
                                 <i class="material-icons mdc-text-field__icon">event</i>
-                                <input type="date" class="mdc-text-field__input" id="input-dialog-details-result-date">
+                                <input type="datetime-local" class="mdc-text-field__input" id="input-dialog-details-result-datetime">
                                 <div class="mdc-notched-outline">
                                     <div class="mdc-notched-outline__leading"></div>
                                     <div class="mdc-notched-outline__notch">
-                                        <label for="input-dialog-details-result-date" class="mdc-floating-label">Result Date</label>
+                                        <label for="input-dialog-details-result-datetime" class="mdc-floating-label">Result Time</label>
                                     </div>
                                     <div class="mdc-notched-outline__trailing"></div>
                                 </div>
                             </div>
-                            <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon margin-v--8 margin-h--4 flex-grow--1" id="field-dialog-details-result-time">
-                                <i class="material-icons mdc-text-field__icon">access_time</i>
-                                <input type="time" class="mdc-text-field__input" id="input-dialog-details-result-time">
+                            <div class="mdc-select mdc-select--outlined margin-v--8 margin-h--4" id="select-dialog-details-rejectedReason">
+                                <input type="hidden">
+                                <i class="mdc-select__dropdown-icon"></i>
+                                <div class="mdc-select__selected-text"></div>
+                                <div class="mdc-select__menu mdc-menu mdc-menu-surface">
+                                    <ul class="mdc-list">
+                                        <li class="mdc-list-item mdc-list-item--selected" data-value="undeclared" aria-selected="true">Undeclared</li>
+                                        <li class="mdc-list-item" data-value="duplicated">Duplicated</li>
+                                        <li class="mdc-list-item" data-value="tooClose">Too Close</li>
+                                    </ul>
+                                </div>
                                 <div class="mdc-notched-outline">
                                     <div class="mdc-notched-outline__leading"></div>
                                     <div class="mdc-notched-outline__notch">
-                                        <label for="input-dialog-details-result-time" class="mdc-floating-label">Result Time</label>
+                                        <label class="mdc-floating-label">Reason</label>
                                     </div>
                                     <div class="mdc-notched-outline__trailing"></div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="mdc-select mdc-select--outlined margin-v--8 margin-h--4" id="select-dialog-details-rejectedReason">
-                            <input type="hidden" name="enhanced-select">
-                            <i class="mdc-select__dropdown-icon"></i>
-                            <div class="mdc-select__selected-text"></div>
-                            <div class="mdc-select__menu mdc-menu mdc-menu-surface demo-width-class">
-                                <ul class="mdc-list">
-                                    <li class="mdc-list-item mdc-list-item--selected" data-value="undeclared" aria-selected="true">Undeclared</li>
-                                    <li class="mdc-list-item" data-value="duplicated">Duplicated</li>
-                                    <li class="mdc-list-item" data-value="tooClose">Too Close</li>
-                                </ul>
-                            </div>
-                            <div class="mdc-notched-outline">
-                                <div class="mdc-notched-outline__leading"></div>
-                                <div class="mdc-notched-outline__notch">
-                                    <label class="mdc-floating-label">Reason</label>
-                                </div>
-                                <div class="mdc-notched-outline__trailing"></div>
-                            </div>
-                        </div>
-                        
                         <div class="flex-box-row--nowrap margin-v--8">
                             <div class="flex-box-col flex-justify-content--around" hidden>
                                 <button class="mdc-icon-button material-icons" id="button-dialog-details-map-edit">edit</button>
@@ -183,10 +140,10 @@
                     <footer class="mdc-dialog__actions">
                         <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="close">
                             <span class="mdc-button__label">Close</span>
-                        </button><!--
+                        </button>
                         <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="save">
-                            <span class="mdc-button__label">Save</span>
-                        </button>-->
+                            <span class="mdc-button__label">Save (BETA)</span>
+                        </button>
                     </footer>
                 </div>
             </div>
@@ -256,6 +213,19 @@
                     </div>
                 </div>
                 <label><i class="material-icons"></i> <span></span></label>
+            </div>
+        </template>
+
+        <template id="template-radioField">
+            <div class="mdc-form-field">
+                <div class="mdc-radio">
+                    <input class="mdc-radio__native-control" type="radio">
+                    <div class="mdc-radio__background">
+                        <div class="mdc-radio__outer-circle"></div>
+                        <div class="mdc-radio__inner-circle"></div>
+                    </div>
+                </div>
+                <label></label>
             </div>
         </template>
 
