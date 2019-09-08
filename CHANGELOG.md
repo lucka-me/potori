@@ -1,5 +1,13 @@
 # Changelog
 ```markdown
+## [0.4.6] - 2019-09-08
+Support dark mode
+
+### Added
+- BETA: Support for dark mode, including css and map style
+```
+
+```markdown
 ## [0.4.5] - 2019-09-07
 Support editing in Details dialog
 

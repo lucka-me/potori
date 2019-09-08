@@ -14,6 +14,7 @@
         <link rel="manifest" href="./manifest.json" />
         <!-- Stylesheet -->
         <link type="text/css" rel="stylesheet" href="./css/extended.css" />
+        <link type="text/css" rel="stylesheet" href="./css/dark.css" />
         <!-- MDC -->
         <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500|Material+Icons" />
@@ -55,17 +56,17 @@
             <div class="mdc-dialog__container">
                 <div class="mdc-dialog__surface">
                     <h2 class="mdc-dialog__title">Status & About</h2>
-                    <div class="mdc-dialog__content mdc-dialog-content">
+                    <div class="mdc-dialog__content flex-box-row--wrap">
 
-                        <div class="mdc-dialog-content-block" id="block-dialog-status-type">
+                        <div class="flex-box-col margin-h--4 flex-grow--1" id="block-dialog-status-type">
                             <span class="mdc-typography--headline6">Type</span>
                         </div>
 
-                        <div class="mdc-dialog-content-block" id="block-dialog-status-rejectedReason">
+                        <div class="flex-box-col margin-h--4 flex-grow--1" id="block-dialog-status-rejectedReason">
                             <span class="mdc-typography--headline6">Rejected Reason</span>
                         </div>
 
-                        <div class="mdc-dialog-content-block fullwidth">
+                        <div class="flex-box-col margin-h--4 flex-grow--1 fullwidth">
                             <span class="mdc-typography--headline6">About</span>
                             <span class="mdc-typography--body2" ><a target="_blank" rel="noopener" title="Intro" href="./intro">Intro</a> | <a class="mdc-typography--body2" target="_blank" rel="noopener" title="Privacy" href="./privacy">Privacy</a></span>
                             <span class="mdc-typography--body2" ><a class="mdc-typography--body2" href="https://github.com/lucka-me/potori" target="_blank" rel="noopener" title="GitHub">GitHub Repo</a></span>
@@ -73,7 +74,7 @@
                         </div>
                     </div>
                     <footer class="mdc-dialog__actions">
-                        <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="close">
+                        <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="close" data-mdc-dialog-initial-focus>
                             <span class="mdc-button__label">Close</span>
                         </button>
                     </footer>
@@ -87,7 +88,7 @@
                 <div class="mdc-dialog__surface">
                     <h2 class="mdc-dialog__title" data-mdc-dialog-initial-focus></h2>
                     <img src="" id="dialogPortalImage">
-                    <div class="mdc-dialog__content mdc-dialog-content--col">
+                    <div class="mdc-dialog__content">
                         <div class="mdc-typography--body1 flex-box-row--nowrap flex-align-items--center">
                             <i class="material-icons">arrow_upward</i><span class="margin-l--4" id="text-dialog-details-confirmedTime"></span>
                         </div>
@@ -153,7 +154,7 @@
         <div class="mdc-dialog mdc-dialog--scrollable" role="alertdialog" aria-modal="true" id="dialog-alert">
             <div class="mdc-dialog__container">
                 <div class="mdc-dialog__surface">
-                    <h2 class="mdc-dialog__title" id="dialogAlertTitle">Alert</h2>
+                    <!--<h2 class="mdc-dialog__title" id="dialogAlertTitle">Alert</h2>-->
                     <div class="mdc-dialog__content" id="dialogAlertMessageBox"></div>
                     <footer class="mdc-dialog__actions">
                         <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="close">

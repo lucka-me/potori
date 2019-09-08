@@ -1,9 +1,12 @@
 const value = {
     string: {
-        version: "0.4.5",
+        version: "0.4.6",
         mapbox: {
             accessToken: "pk.eyJ1IjoibHVja2EtbWUiLCJhIjoiY2p2NDk5NmRvMHFreTQzbzduemM1MHV4cCJ9.7XGmxnEJRoCDr-i5BBmBfw",
-            style: "mapbox://styles/mapbox/streets-v11",
+            style: {
+                default: "mapbox://styles/mapbox/streets-v11",
+                dark: "mapbox://styles/mapbox/dark-v10",
+            },
         },
         gapiOptions: {
             apiKey: "AIzaSyCqIaS8UizqjWrIKm5zV3_S8EffCWjKR-A",
