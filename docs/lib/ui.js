@@ -163,11 +163,13 @@ const ui = {
                 const dateTime = toolkit.getLocalDateTimeISOString(portal.resultTime ? portal.resultTime : Date.now());
                 ui.dialog.details.resultDateTimeField.value = dateTime.slice(0, dateTime.lastIndexOf(":"));
                 ui.dialog.details.resultDateTimeField.root_.hidden = (portal.status === value.code.status.pending);
+                ui.dialog.details.resultDateTimeField.layout();
 
                 if (keys.type === value.string.key.status.rejected) {
                     ui.dialog.details.rejectedReasonSelect.selectedIndex = portal.status - value.code.status.undeclared;
                 }
                 ui.dialog.details.rejectedReasonSelect.root_.hidden = !(keys.type === value.string.key.status.rejected);
+                ui.dialog.details.rejectedReasonSelect.layout();
             },
             onClosed: (event) => {
                 const portal = ui.dialog.details.data.portal;
@@ -231,9 +233,8 @@ const ui = {
         },
         alert:  {
             ctrl: new mdc.dialog.MDCDialog(document.querySelector("#dialog-alert")),
-            show: (message, title = "Alert") => {
+            show: (message) => {
                 ui.dialog.alert.ctrl.open();
-                //ui.dialog.alert.ctrl.root_.querySelector("#dialogAlertTitle").innerHTML = title;
                 ui.dialog.alert.ctrl.root_.querySelector("#dialogAlertMessageBox").innerHTML = message;
             },
         },
