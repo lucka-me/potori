@@ -16,8 +16,16 @@
         background-color: #272727 !important;
     }
 
+    .mdc-icon-button::before, .mdc-icon-button::after {
+        background: #FFF !important;
+    }
+
     .mdc-card__action--icon:not(:disabled) {
         color: var(--mdc-theme-primary) !important;
+    }
+    
+    .mdc-card__primary-action::before, .mdc-card__primary-action::after {
+        background: #FFF !important;
     }
 
     .mdc-dialog .mdc-dialog__content,
