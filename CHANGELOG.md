@@ -1,5 +1,16 @@
 # Changelog
 ```markdown
+## [0.4.8] - 2019-09-10
+Fixed several bugs related to Details dialog
+
+### Fixed
+- Details dialog: Text field and select menu hide after the dialog opened
+- Details dialog: Labels of text field and select menu may disappear
+- Details dialog: Map doesn't always fit the container
+- Some filters are not updated after saving with changing the status and rejected reason
+```
+
+```markdown
 ## [0.4.7] - 2019-09-10
 Support editing location in Details dialog
 
