@@ -1,5 +1,16 @@
 # Changelog
 ```markdown
+## [0.4.7] - 2019-09-10
+Support editing location in Details dialog
+
+### Added
+- BETA: Add, edit, search and delete location in Details dialog
+
+### Fixed
+- Click events of Location button and Intel button will be triggered multiple times when clicked once after saving in Details dialog
+```
+
+```markdown
 ## [0.4.6] - 2019-09-08
 Support dark mode
 

@@ -4,7 +4,8 @@
         --mdc-theme-background: #121212 !important;
         --mdc-theme-surface: #1e1e1e !important;
         --mdc-theme-on-surface: #FFF !important;
-        --mdc-theme-text-primary-on-background: #FFF !important;
+        --mdc-theme-text-primary-on-light: #FFF !important;
+        --mdc-theme-text-disabled-on-light: rgba(255, 255, 255, 0.5) !important;
     }
 
     body {

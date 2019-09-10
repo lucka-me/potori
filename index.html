@@ -129,8 +129,8 @@
                         </div>
 
                         <div class="flex-box-row--nowrap margin-v--8">
-                            <div class="flex-box-col flex-justify-content--around" hidden>
-                                <button class="mdc-icon-button material-icons" id="button-dialog-details-map-edit">edit</button>
+                            <div class="flex-box-col flex-justify-content--around">
+                                <button class="mdc-icon-button material-icons" id="button-dialog-details-map-edit">add</button>
                                 <button class="mdc-icon-button material-icons" id="button-dialog-details-map-search">search</button>
                                 <button class="mdc-icon-button material-icons" id="button-dialog-details-map-delete">delete</button>
                             </div>
@@ -238,7 +238,7 @@
         <script type="text/javascript" src="./lib/auth.js"></script>
         <script type="text/javascript" src="./lib/firebaseKit.js"></script>
         <script type="text/javascript" src="./lib/process.js"></script>
-        <script async defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.2.1/mapbox-gl.js" onload="ui.mainMap.load()"></script>
+        <script async defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.js" onload="ui.mainMap.load()"></script>
         <script async defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};auth.handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
         <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-app.js" onload="firebaseKit.init()"></script>
         <script async defer src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js" onload="firebaseKit.loadReference()"></script>

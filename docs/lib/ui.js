@@ -85,6 +85,51 @@ const ui = {
             map: {
                 ctrl: null, marker: null,
                 edit: null, search: null, delete: null,
+                onEdit: () => {
+                    const map = ui.dialog.details.map;
+                    if (!map.marker) {
+                        map.marker = new mapboxgl.Marker()
+                            .setLngLat(map.ctrl.getCenter())
+                            .setDraggable(true)
+                            .addTo(map.ctrl);
+                        map.delete.root_.disabled = false;
+                        map.edit.root_.innerHTML = "edit";
+                    } else {
+                        map.marker.setDraggable(true);
+                    }
+                },
+                onSearch: () => {
+                    const map = ui.dialog.details.map;
+                    const onSuccess = (lngLat) => {
+                        if (!ui.dialog.details.ctrl.isOpen) return;
+                        if (!map.marker) {
+                            map.marker = new mapboxgl.Marker()
+                                .setLngLat(lngLat)
+                                .addTo(map.ctrl);
+                        } else {
+                            map.marker.setLngLat(lngLat);
+                        }
+                        map.marker.setDraggable(false);
+                        map.ctrl.easeTo({ center: lngLat, zoom: 16 });
+                        map.edit.root_.innerHTML = "edit";
+                        map.search.root_.disabled = false;
+                        map.delete.root_.disabled = false;
+                    };
+                    const onFailed = () => {
+                        if (!ui.dialog.details.ctrl.isOpen) return;
+                        ui.dialog.alert.show(value.string.alert.queryLngLatFailed);
+                        map.search.root_.disabled = false;
+                    }
+                    ui.dialog.details.map.search.root_.disabled = true;
+                    firebaseKit.queryLngLat(ui.dialog.details.data.portal.id, onSuccess, onFailed);
+                },
+                onDelete: () => {
+                    const map = ui.dialog.details.map;
+                    if (map.marker) map.marker.remove();
+                    map.marker = null;
+                    map.edit.root_.innerHTML = "add";
+                    map.delete.root_.disabled = true;
+                }
             },
             status: {
                 accepted: null, rejected: null, pending: null,
@@ -104,14 +149,17 @@ const ui = {
     
                 map.edit = new mdc.ripple.MDCRipple(dialogElement.querySelector("#button-dialog-details-map-edit"));
                 map.edit.unbounded = true;
+                map.edit.listen("click", map.onEdit);
                 if (versionKit.fullFeature) {
                     map.search = new mdc.ripple.MDCRipple(dialogElement.querySelector("#button-dialog-details-map-search"));
                     map.search.unbounded = true;
+                    map.search.listen("click", map.onSearch);
                 } else {
                     dialogElement.querySelector("#button-dialog-details-map-search").hidden = true;
                 }
                 map.delete = new mdc.ripple.MDCRipple(dialogElement.querySelector("#button-dialog-details-map-delete"));
                 map.delete.unbounded = true;
+                map.delete.listen("click", map.onDelete);
     
                 ui.dialog.details.resultDateTimeField = new mdc.textField.MDCTextField(dialogElement.querySelector("#field-dialog-details-result-datetime"));
                 ui.dialog.details.rejectedReasonSelect = new mdc.select.MDCSelect(dialogElement.querySelector("#select-dialog-details-rejectedReason"));
@@ -155,7 +203,13 @@ const ui = {
                         .setLngLat(portal.lngLat)
                         .addTo(map.ctrl);
                     map.ctrl.jumpTo({ center: portal.lngLat, zoom: 16 });
+                    map.delete.root_.disabled = false;
+                    map.edit.root_.innerHTML = "edit";
+                } else {
+                    map.delete.root_.disabled = true;
+                    map.edit.root_.innerHTML = "add";
                 }
+                ui.dialog.details.map.search.root_.disabled = false;
 
                 ui.dialog.details.status[keys.type].checked = true;
                 ui.dialog.details.selectedStatus = keys.type;
@@ -213,11 +267,21 @@ const ui = {
                         }
                         shouldRefresh = true;
                     }
+                    if (ui.dialog.details.map.marker) {
+                        const lngLat = ui.dialog.details.map.marker.getLngLat();
+                        if (!portal.lngLat || (portal.lngLat.lng !== lngLat.lng || portal.lngLat.lat !== lngLat.lat)) {
+                            portal.lngLat = lngLat;
+                            shouldRefresh = true;
+                        }
+                    } else if (portal.lngLat) {
+                        portal.lngLat = null;
+                        shouldRefresh = true;
+                    }
                     if (shouldRefresh) {
                         portal.status = value.code.status[(ui.dialog.details.selectedStatus !== value.string.key.status.rejected) ? ui.dialog.details.selectedStatus : ui.dialog.details.rejectedReasonSelect.value];
                         const card = document.getElementById(`card-${portal.id}`);
                         ui.fillCard(portal, card);
-                        if (portal.lngLat) ui.fillLocation(portal, card);
+                        ui.fillLocation(portal, card);
                     }
                 }
             },
@@ -306,26 +370,39 @@ const ui = {
         return iconDiv;
     },
     fillLocation: (portal, card) => {
-        const icon = ui.getIconElement(portal);
-        icon.onclick = () => ui.event.scrollToCard(portal.id);
         if (portal.marker) portal.marker.remove();
-        portal.marker = new mapboxgl.Marker({ element: icon })
-            .setLngLat(portal.lngLat)
-            .setPopup(new mapboxgl.Popup({ closeButton: false }).setText(portal.title))
-            .addTo(ui.mainMap.ctrl);
+        portal.marker = null;
+        if (portal.lngLat) {
+            const icon = ui.getIconElement(portal);
+            icon.onclick = () => ui.event.scrollToCard(portal.id);
+            portal.marker = new mapboxgl.Marker({ element: icon })
+                .setLngLat(portal.lngLat)
+                .setPopup(new mapboxgl.Popup({ closeButton: false }).setText(portal.title))
+                .addTo(ui.mainMap.ctrl);
+        }
 
-        const locationButton = card.querySelector("#button-card-location");
-        locationButton.hidden = false;
-        const locationRipple = new mdc.ripple.MDCRipple(locationButton);
-        locationRipple.unbounded = true;
-        locationRipple.listen("click", () => ui.mainMap.ctrl.easeTo({ center: portal.lngLat, zoom: 16 }));
+        const locationElement = card.querySelector("#button-card-location");
+        if (portal.lngLat) {
+            locationElement.hidden = false;
+            const locationRipple = new mdc.ripple.MDCRipple(locationElement);
+            locationRipple.unbounded = true;
+            locationRipple.root_.onclick = () => {
+                ui.mainMap.ctrl.easeTo({ center: portal.lngLat, zoom: 16 })
+            };
+        } else {
+            locationElement.hidden = true;
+        }
 
         if (versionKit.fullFeature) {
-            const intelButton = card.querySelector("#button-card-intel");
-            intelButton.hidden = false;
-            const intelRipple = new mdc.ripple.MDCRipple(intelButton);
-            intelRipple.unbounded = true;
-            intelRipple.listen("click", () => window.open(toolkit.lngLatToIntel(portal.lngLat), "_blank", "noopener"));
+            const intelElement = card.querySelector("#button-card-intel");
+            if (portal.lngLat) {
+                intelElement.hidden = false;
+                const intelRipple = new mdc.ripple.MDCRipple(intelElement);
+                intelRipple.unbounded = true;
+                intelRipple.root_.onclick = () => window.open(toolkit.lngLatToIntel(portal.lngLat), "_blank", "noopener");
+            } else {
+                intelElement.hidden = true;
+            }
         }
     },
     fillCard: (portal, card) => {
