@@ -1,5 +1,13 @@
 # Changelog
 ```markdown
+## [0.4.9] - 2019-09-11
+Fixed Details dialog not working properly in lite version
+
+### Fixed
+- Details dialog: Search button is not initiated in lite version, which leads to crashing during interactiong with dialog
+```
+
+```markdown
 ## [0.4.8] - 2019-09-10
 Fixed several bugs related to Details dialog
 

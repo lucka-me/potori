@@ -150,9 +150,9 @@ const ui = {
                 map.edit = new mdc.ripple.MDCRipple(dialogElement.querySelector("#button-dialog-details-map-edit"));
                 map.edit.unbounded = true;
                 map.edit.listen("click", map.onEdit);
+                map.search = new mdc.ripple.MDCRipple(dialogElement.querySelector("#button-dialog-details-map-search"));
+                map.search.unbounded = true;
                 if (versionKit.fullFeature) {
-                    map.search = new mdc.ripple.MDCRipple(dialogElement.querySelector("#button-dialog-details-map-search"));
-                    map.search.unbounded = true;
                     map.search.listen("click", map.onSearch);
                 } else {
                     dialogElement.querySelector("#button-dialog-details-map-search").hidden = true;
