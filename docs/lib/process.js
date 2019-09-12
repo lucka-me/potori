@@ -115,7 +115,7 @@ const process = {
                 request.execute((fullMail) => {
                     process.portalList.push(process.parse.mail(fullMail, keys));
                     process.status.finished += 1;
-                    ui.progressBar.progress = process.status.finished / process.status.total * ui.progressBar.buffer;
+                    ui.progressBar.progress = process.status.finished / process.status.total * (process.status.list / 6);
                     checkFinish();
                 });
             }

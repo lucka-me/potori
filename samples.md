@@ -1,7 +1,7 @@
 # Mail Samples
 ## Conformation
 ```
-from:nominations@portals.ingress.com (有機會加入 OR 数週間 OR (few weeks))
+from:nominations@portals.ingress.com (提交確認 OR 受領確認 OR (submission evaluated)) -AP
 ```
 ### en
 ```

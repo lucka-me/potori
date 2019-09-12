@@ -1,10 +1,21 @@
 # Changelog
 ```markdown
+## [0.4.10] - 2019-09-12
+Changed query for confirmation mails of Prime
+
+### Changed
+- Mail query for confirmation mails of Prime due to the launching of in-game edit / report feature
+
+### Fixed
+- Indicator in progress bar doesn't show up
+```
+
+```markdown
 ## [0.4.9] - 2019-09-11
 Fixed Details dialog not working properly in lite version
 
 ### Fixed
-- Details dialog: Search button is not initiated in lite version, which leads to crashing during interactiong with dialog
+- Details dialog: Search button is not initiated in lite version, which leads to crashing during interacting with dialog
 ```
 
 ```markdown
