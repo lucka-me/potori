@@ -181,6 +181,7 @@ const ui = {
                     selectList.appendChild(item);
                 }
                 ui.dialog.details.rejectedReasonSelect = new mdc.select.MDCSelect(rejectedReasonSelectElement);
+                ui.dialog.details.rejectedReasonSelect.selectedIndex = 0;
 
                 const onStatusRadioChange = (event) => {
                     ui.dialog.details.selectedStatus = event.target.value;
