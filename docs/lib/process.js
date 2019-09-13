@@ -1,30 +1,26 @@
 const process = {
     portalList: [],
     _ignoreMailIdList: [],
-    status: {
-        list: 0,
-        total: 0,
-        finished: 0,
-    },
+    progress: { list: 0, total: 0, finished: 0, },
     start: () => {
         ui.refresh();
-        process.status.list = 0;
-        process.status.total = 0;
-        process.status.finished = 0;
-        ui.appBar.openFile.root_.hidden = true;
-        ui.appBar.saveFile.root_.hidden = true;
+        process.progress.list = 0;
+        process.progress.total = 0;
+        process.progress.finished = 0;
+        ui.appBar.button.openFile.root_.hidden = true;
+        ui.appBar.button.saveFile.root_.hidden = true;
         ui.progressBar.root_.hidden = false;
 
         const onGetFileFinished = () => {
             // Ignore the mails those already in the list
             process._ignoreMailIdList  = [];
-            for (let portal of process.portalList) {
+            for (const portal of process.portalList) {
                 process._ignoreMailIdList.push(portal.confirmationMailId);
                 if (portal.resultMailId) process._ignoreMailIdList.push(portal.resultMailId);
             }
-            for (let scanner of Object.keys(value.string.key.scanner)) {
-                for (let type of Object.keys(value.string.key.type)) {
-                    process.mails({ scanner: value.string.key.scanner[scanner], type: value.string.key.type[type] });
+            for (const scanner of value.string.key.scanner) {
+                for (const type of value.string.key.type) {
+                    process.mails({ scanner: scanner, type: type });
                 }
             }
         };
@@ -39,7 +35,7 @@ const process = {
             for (let j = 0; j < i; j++) {
                 if (portal.id !== process.portalList[j].id) continue;
                 const targetPortal = process.portalList[j];
-                if (targetPortal.status === value.code.status.pending) {
+                if (targetPortal.status === value.data.type.pending.code) {
                     targetPortal.status = portal.status;
                     targetPortal.lngLat = portal.lngLat;
                     targetPortal.resultTime = portal.resultTime;
@@ -70,9 +66,9 @@ const process = {
 
         const getListRequest = (pageToken) => {
             return gapi.client.gmail.users.messages.list({
-                "userId": "me",
-                "q": value.string.mail.query[keys.scanner][keys.type.mail],
-                "pageToken": pageToken
+                'userId': 'me',
+                'q': value.data.type[keys.type].query[keys.scanner],
+                'pageToken': pageToken
             });
         };
 
@@ -90,32 +86,32 @@ const process = {
                         }
                     }
                 }
-                process.status.list += 1;
-                ui.progressBar.buffer = process.status.list / 6;
+                process.progress.list += 1;
+                ui.progressBar.buffer = process.progress.list / 6;
                 processMailList(list);
             }
         };
 
         const processMailList = (list) => {
-            process.status.total += list.length;
+            process.progress.total += list.length;
 
             const checkFinish = () => {
-                if (process.status.list === 6 && process.status.total === process.status.finished) process.finish();
+                if (process.progress.list === 6 && process.progress.total === process.progress.finished) process.finish();
             };
 
             checkFinish();
 
             for (let i = 0; i < list.length; i++) {
                 const request = gapi.client.gmail.users.messages.get({
-                    "userId": "me",
-                    "id": list[i].id,
-                    "format": "full",
-                    "metadataHeaders": ["Subject"]
+                    'userId': 'me',
+                    'id': list[i].id,
+                    'format': 'full',
+                    'metadataHeaders': ['Subject']
                 });
                 request.execute((fullMail) => {
                     process.portalList.push(process.parse.mail(fullMail, keys));
-                    process.status.finished += 1;
-                    ui.progressBar.progress = process.status.finished / process.status.total * (process.status.list / 6);
+                    process.progress.finished += 1;
+                    ui.progressBar.progress = process.progress.finished / process.progress.total * (process.progress.list / 6);
                     checkFinish();
                 });
             }
@@ -128,24 +124,22 @@ const process = {
     },
     parse: {
         mail: (fullMail, keys) => {
-            const portal = {};
-            if (keys.type === value.string.key.type.confirmation) {
+            const portal = { status: value.data.type[keys.type].code, };
+            if (keys.type === 'pending') {
                 portal.confirmedTime = parseInt(fullMail.internalDate);
-                portal.status = value.code.status.pending;
                 portal.confirmationMailId = fullMail.id;
             } else {
                 portal.resultTime = parseInt(fullMail.internalDate);
-                portal.status = value.code.status.accepted;
                 portal.resultMailId = fullMail.id;
             }
 
             // Subject -> Title
             for (let i = 0; i < fullMail.payload.headers.length; i++) {
                 const header = fullMail.payload.headers[i];
-                if (header.name === "Subject") {
+                if (header.name === 'Subject') {
                     const subject = header.value;
-                    const hwPos = subject.search(":");
-                    const fwPos = subject.search("：");
+                    const hwPos = subject.search(':');
+                    const fwPos = subject.search('：');
                     portal.title = subject.slice((fwPos < 0 ? hwPos : (hwPos < 0 ? fwPos : (fwPos < hwPos ? fwPos : hwPos))) + 1).trim();
                     break;
                 }
@@ -154,19 +148,19 @@ const process = {
             // Body -> image, id lngLat and rejectReason
             for (let i = 0; i < fullMail.payload.parts.length; i++) {
                 const part = fullMail.payload.parts[i];
-                if (part.partId === "1") {
+                if (part.partId === '1') {
                     const mailBody = toolkit.decodeBase64(part.body.data);
                     let imageTmp = mailBody.slice(mailBody.search(/googleusercontent\.com/));
-                    for (let keyword of ["\"", "\n"]) {
+                    for (const keyword of ['"', '\n']) {
                         const slicePos = imageTmp.search(keyword);
                         if (slicePos > 0) imageTmp = imageTmp.slice(0, slicePos);
                     }
-                    portal.image = imageTmp.replace("googleusercontent.com/", "");
+                    portal.image = imageTmp.replace('googleusercontent.com/', '');
                     portal.id = toolkit.getBsId(portal.image);
-                    if (keys.scanner === value.string.key.scanner.redacted && keys.type !== value.string.key.type.confirmation) {
+                    if (keys.scanner === 'redacted' && keys.type !== 'pending') {
                         portal.lngLat = process.parse.lngLat(mailBody);
                     }
-                    if (keys.type === value.string.key.type.rejection) {
+                    if (keys.type === 'rejected') {
                         portal.status = process.parse.rejectedReason(mailBody, keys.scanner);
                     }
                     break;
@@ -175,23 +169,23 @@ const process = {
             return portal;
         },
         rejectedReason: (mailBody, scanner) => {
-            const mainBody = mailBody.slice(0, mailBody.search("-NianticOps"));
-            let reason = value.code.status.undeclared;
-            for (let key of Object.keys(value.string.mail.keyword[scanner].rejectedReason)) {
-                for (let keyword of value.string.mail.keyword[scanner].rejectedReason[key]) {
+            const mainBody = mailBody.slice(0, mailBody.search('-NianticOps'));
+            let reason = value.data.rejectedReason.undeclared.code;
+            for (const key of Object.keys(value.data.rejectedReason)) {
+                for (const keyword of value.data.rejectedReason[key].keyword[scanner]) {
                     if (mainBody.search(keyword) > -1) {
-                        reason = value.code.status[key];
+                        reason = value.data.rejectedReason[key].code;
                         break;
                     }
                 }
-                if (reason !== value.code.status.undeclared) break;
+                if (reason !== value.data.rejectedReason.undeclared.code) break;
             }
             return reason;
         },
         lngLat: (mailBody) => {
             let intel = mailBody.slice(mailBody.search(value.string.path.intel));
-            intel = intel.slice(0, intel.search("\">"));
-            const lngLatPair = intel.slice(intel.search("ll=") + 3, intel.search("&z=18")).split(",");
+            intel = intel.slice(0, intel.search('">'));
+            const lngLatPair = intel.slice(intel.search('ll=') + 3, intel.search('&z=18')).split(',');
             return {
                 lng: parseFloat(lngLatPair[1]),
                 lat: parseFloat(lngLatPair[0])

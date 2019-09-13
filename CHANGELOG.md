@@ -1,5 +1,13 @@
 # Changelog
 ```markdown
+## [0.4.11] - 2019-09-13
+Updated code structure
+
+### Changed
+- Update code structure, make it easier to update for new rejected reason
+```
+
+```markdown
 ## [0.4.10] - 2019-09-12
 Changed query for confirmation mails of Prime
 
