@@ -393,7 +393,7 @@ const ui = {
         if (portal.lngLat) {
             const icon = ui.getIconElement(portal);
             icon.onclick = () => {
-                ui.cardList.scrollTo(0, document.getElementById(`card-${id}`).offsetTop - ui.cardList.offsetTop - 8);
+                ui.cardList.scrollTo(0, document.getElementById(`card-${portal.id}`).offsetTop - ui.cardList.offsetTop - 8);
             };
             portal.marker = new mapboxgl.Marker({ element: icon })
                 .setLngLat(portal.lngLat)
