@@ -18,9 +18,22 @@
         <!-- MDC -->
         <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500|Material+Icons" />
-        <script src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
         <!-- Mapbox -->
-        <link href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.2.1/mapbox-gl.css" rel="stylesheet" />
+        <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.2.1/mapbox-gl.css" />
+        <!-- Scripts -->
+        <script defer src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+        <script defer type="text/javascript" src="./lib/versionKit.js"></script>
+        <script defer type="text/javascript" src="./lib/value.js"></script>
+        <script defer type="text/javascript" src="./lib/toolkit.js"></script>
+        <script defer type="text/javascript" src="./lib/fileKit.js"></script>
+        <script defer type="text/javascript" src="./lib/ui.js" onload="ui.init()"></script>
+        <script defer type="text/javascript" src="./lib/auth.js"></script>
+        <script defer type="text/javascript" src="./lib/firebaseKit.js"></script>
+        <script defer type="text/javascript" src="./lib/process.js"></script>
+        <script defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.js" onload="ui.mainMap.load()"></script>
+        <script defer src="https://www.gstatic.com/firebasejs/5.10.1/firebase-app.js" onload="firebaseKit.init()"></script>
+        <script defer src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js" onload="firebaseKit.loadReference()"></script>
+        <script defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};auth.handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
     </head>
     <body class="mdc-typography fullheight flex-box-col">
         <header class="mdc-top-app-bar">
@@ -228,19 +241,5 @@
                 <label></label>
             </div>
         </template>
-
-        <!-- Scripts -->
-        <script type="text/javascript" src="./lib/versionKit.js"></script>
-        <script type="text/javascript" src="./lib/value.js"></script>
-        <script type="text/javascript" src="./lib/toolkit.js"></script>
-        <script type="text/javascript" src="./lib/fileKit.js"></script>
-        <script type="text/javascript" src="./lib/ui.js" onload="ui.init()"></script>
-        <script type="text/javascript" src="./lib/auth.js"></script>
-        <script type="text/javascript" src="./lib/firebaseKit.js"></script>
-        <script type="text/javascript" src="./lib/process.js"></script>
-        <script defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.3.1/mapbox-gl.js" onload="ui.mainMap.load()"></script>
-        <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-app.js" onload="firebaseKit.init()"></script>
-        <script defer src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js" onload="firebaseKit.loadReference()"></script>
-        <script defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};auth.handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
     </body>
 </html>

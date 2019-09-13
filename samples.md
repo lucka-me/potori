@@ -1,9 +1,11 @@
 # Mail Samples
-## Conformation
+## Confirmation
 ```
-from:nominations@portals.ingress.com (提交確認 OR 受領確認 OR (submission evaluated)) -AP
+from:nominations@portals.ingress.com subject:("能量塔提交確認" OR "Portal申請の受領確認" OR "Portal submission confirmation") -AP
 ```
-### en
+<details><summary>en</summary>
+<p>
+
 ```
 Subject: [Portal submission confirmation: <PORTAL-TITLE>]
 ----------
@@ -21,7 +23,12 @@ Your nomination will be evaluated by Niantic’s player community to ensure it m
 <PHOTO-URL>
 ```
 
-### ja
+</p>
+</details>
+
+<details><summary>ja</summary>
+<p>
+
 ```
 Subject: [Portal申請の受領確認: <PORTAL-TITLE>]
 ----------
@@ -39,7 +46,12 @@ Ingress Portalを申請していただき、ありがとうございます。こ
 <PHOTO-URL>
 ```
 
-### zh
+</p>
+</details>
+
+<details><summary>zh</summary>
+<p>
+
 ```
 Subject: [能量塔提交確認：<PORTAL-TITLE>]
 ----------
@@ -57,11 +69,16 @@ Subject: [能量塔提交確認：<PORTAL-TITLE>]
 <PHOTO-URL>
 ```
 
+</p>
+</details>
+
 ## Acceptance
 ```
 from:nominations@portals.ingress.com Intel Map AP
 ```
-### en
+<details><summary>en</summary>
+<p>
+
 ```
 Subject: [Portal submission confirmation: <PORTAL-TITLE>]
 ----------
@@ -77,7 +94,12 @@ Good work, Agent: your submission has been accepted, and this Portal is now avai
 <PHOTO-URL>
 ```
 
-### zh
+</p>
+</details>
+
+<details><summary>zh</summary>
+<p>
+
 ```
 Subject: [能量塔提交確認：<PORTAL-TITLE>]
 ----------
@@ -93,12 +115,33 @@ Subject: [能量塔提交確認：<PORTAL-TITLE>]
 <PHOTO-URL>
 ```
 
+```
+Subject: [能量塔審查完畢：<PORTAL-TITLE>]
+----------
+
+能量塔審查完畢：<PORTAL-TITLE>
+太棒了，特工：我們已接受您提交的能量塔，此能量塔現可在掃描儀和 Intel Map 找到。您獲得了 1,000 AP 以及這把能量塔鑰匙，作為發現新能量塔的獎勵。
+
+-NianticOps
+
+<PORTAL-TITLE>
+<PORTAL-DESCRIPTION>
+
+<PHOTO-URL>
+```
+
+</p>
+</details>
+
 ## Rejection
 ```
-from:nominations@portals.ingress.com (完畢: OR 審査の完了 OR (REVIEW COMPLETE)) -AP
+from:nominations@portals.ingress.com subject:("能量塔審查完畢" OR "Portal審査の完了" OR "Portal review complete") -AP
 ```
+
 ### Undeclared
-#### en
+<details><summary>en</summary>
+<p>
+
 ```
 Subject: [Portal review complete:<PORTAL-TITLE>]
 ----------
@@ -120,7 +163,12 @@ Note that we will not be overturning the community’s decision. If you believe 
 <PHOTO-URL>
 ```
 
-#### ja
+</p>
+</details>
+
+<details><summary>ja</summary>
+<p>
+
 ```
 Subject: [Portal審査の完了:<PORTAL-TITLE>]
 ----------
@@ -143,7 +191,12 @@ Portal申請を慎重に審査させていただきましたが、Nianticのプ�
 <PHOTO-URL>
 ```
 
-#### zh
+</p>
+</details>
+
+<details><summary>zh</summary>
+<p>
+
 ```
 Subject: [能量塔審查完畢：<PORTAL-TITLE>]
 ----------
@@ -166,8 +219,13 @@ Subject: [能量塔審查完畢：<PORTAL-TITLE>]
 <PHOTO-URL>
 ```
 
+</p>
+</details>
+
 ### Too Close
-#### zh
+<details><summary>zh</summary>
+<p>
+
 ```
 Subject: [能量塔審查完畢：<PORTAL-TITLE>]
 ----------
@@ -182,3 +240,6 @@ Subject: [能量塔審查完畢：<PORTAL-TITLE>]
 
 <PHOTO-URL>
 ```
+
+</p>
+</details>
