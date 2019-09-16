@@ -1,6 +1,9 @@
 const value = {
     string: {
-        version: '0.4.11',
+        version: {
+            code: '0.4.12',
+            data: '1',
+        },
         mapbox: {
             accessToken: 'pk.eyJ1IjoibHVja2EtbWUiLCJhIjoiY2p2NDk5NmRvMHFreTQzbzduemM1MHV4cCJ9.7XGmxnEJRoCDr-i5BBmBfw',
             style: {

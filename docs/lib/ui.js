@@ -356,7 +356,7 @@ const ui = {
     },
     cardList: document.getElementById('cardList'),
     init: () => {
-        document.getElementById('dialogStatusVersion').innerHTML = `${value.string.version}-${versionKit.code}`;
+        document.getElementById('dialogStatusVersion').innerHTML = `${value.string.version.code}d${value.string.version.data}-${versionKit.code}`;
         const darkMediaQueryList = window.matchMedia('(prefers-color-scheme: dark)');
         darkMediaQueryList.addListener(ui.dark.onMediaQueryChanged);
         ui.dark.onMediaQueryChanged(darkMediaQueryList);

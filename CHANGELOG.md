@@ -1,5 +1,13 @@
 # Changelog
 ```markdown
+## [0.4.12] - 2019-09-16
+Updated version format
+
+### Changed
+- Includes a data version, changing of data won't change the code version
+```
+
+```markdown
 ## [0.4.11] - 2019-09-13
 Updated code structure
 
