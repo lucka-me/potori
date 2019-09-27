@@ -44,6 +44,10 @@ code { font-size: 14px; }
 /* Contents */
 body { margin: 0; }
 
+h1, h2, h3, h4 { margin-block-end: 0; }
+a { color: var(--mdc-theme-text-primary-on-light); }
+.mdc-data-table { margin-block-start: 0.5rem; margin-block-end: 0.5rem; }
+
 body.fullheight {
     height: 100vh;
     min-height: 100vh;

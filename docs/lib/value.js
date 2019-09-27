@@ -1,7 +1,7 @@
 const value = {
     string: {
         version: {
-            code: '0.4.12',
+            code: '0.4.13',
             data: '1',
         },
         mapbox: {

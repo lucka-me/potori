@@ -1,6 +1,6 @@
 <h1 align=center><img height=90px src="./src/logo-bg.svg" link="#"/></h1>
 
-[![](https://img.shields.io/badge/version-0.4.12-brightgreen.svg)](./CHANGELOG.md "Changelog") [![](https://img.shields.io/badge/demo-online-brightgreen.svg)](https://lucka.moe/potori "Demo") [![](https://img.shields.io/badge/author-Lucka-2578B5.svg)](https://lucka.moe "Author") [![](https://img.shields.io/badge/license-MIT-A31F34.svg)](./LICENSE "License")  
+[![](https://img.shields.io/badge/version-0.4.13-brightgreen.svg)](./CHANGELOG.md "Changelog") [![](https://img.shields.io/badge/demo-online-brightgreen.svg)](https://lucka.moe/potori "Demo") [![](https://img.shields.io/badge/author-Lucka-2578B5.svg)](https://lucka.moe "Author") [![](https://img.shields.io/badge/license-MIT-A31F34.svg)](./LICENSE "License")  
 ![](https://img.shields.io/badge/safari-support-brightgreen.svg) ![](https://img.shields.io/badge/chrome-support-brightgreen.svg) ![](https://img.shields.io/badge/firefox-support-brightgreen.svg)<!-- ![](https://img.shields.io/badge/edge-support-brightgreen.svg) ![](https://img.shields.io/badge/ie-broken-red.svg) ![](https://img.shields.io/badge/opera-support-brightgreen.svg)-->
 
 ## Description
@@ -17,9 +17,9 @@ You can download the repository [and host the full version in the root folder](h
 - [x] Edit Portal information
     - [x] Status, result time and rejected reason
     - [x] Location
-- [ ] i18n for Intro and Privacy
+- [x] i18n for Intro & Privacy
     - [x] Framework
-    - [ ] Translate to zh-Hans (as example)
+    - [x] Translate to zh-Hans (as example)
 - [ ] Guideline for hosting the full version
 
 ## Dependencies

@@ -1,5 +1,14 @@
 # Changelog
 ```markdown
+## [0.4.13] - 2019-09-28
+UI optimized
+
+### Changed
+- UI optimized
+- Merged Intro and Privacy Policy
+```
+
+```markdown
 ## [0.4.12] - 2019-09-16
 Updated version format
 
