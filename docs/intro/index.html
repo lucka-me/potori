@@ -117,7 +117,7 @@
                 </div>
             </p>
 
-            <h2 class="mdc-typography--headline2" id="part-workflow">
+            <h2 class="mdc-typography--headline2">
                 <span lang="en">Workflow</span>
                 <span lang="zh-Hans" hidden>工作流程</span>
             </h2>
@@ -213,102 +213,13 @@
                 <li>
                     <span lang="en">
                         <strong>Extract informations from the mails</strong><br/>
-                        The contents will be used to extract information of the nomination.
+                        The contents will be used to extract information of the nomination, browse <a href="#data-useage">Data Useage</a> for more details.
                     </span>
                     <span lang="zh-Hans" hidden>
                         <strong>从邮件中提取信息</strong><br/>
-                        邮件内容将被用于提取提名信息。
+                        邮件内容将被用于提取提名信息，详情请见<a href="#part-data-useage">数据使用</a>部分。
                     </span>
                     <br/>
-
-                    <div class="mdc-data-table">
-                        <table class="mdc-data-table__table" aria-label="Content Useage">
-                            <thead>
-                                <tr class="mdc-data-table__header-row">
-                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">
-                                        <span lang="en">Content</span>
-                                        <span lang="zh-Hans" hidden>内容</span>
-                                    </th>
-                                    <th class="mdc-data-table__header-cell" role="columnheader" scope="col">
-                                        <span lang="en">Useage</span>
-                                        <span lang="zh-Hans" hidden>被用于</span>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody class="mdc-data-table__content">
-                                <tr class="mdc-data-table__row">
-                                    <td class="mdc-data-table__cell">
-                                        <span lang="en">Mail ID</span>
-                                        <span lang="zh-Hans" hidden>邮件ID</span>
-                                    </td>
-                                    <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
-                                        <span lang="en">Avoid obtaining and processing the same mail every time, if you save or upload the data file.</span>
-                                        <span lang="zh-Hans" hidden>如果您保存或上传数据文件，邮件ID可用于避免重复获取和处理相同的邮件。</span>
-                                    </td>
-                                </tr>
-                                <tr class="mdc-data-table__row">
-                                    <td class="mdc-data-table__cell">
-                                        <span lang="en">Subject</span>
-                                        <span lang="zh-Hans" hidden>标题</span>
-                                    </td>
-                                    <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
-                                        <span lang="en">Extract title of Portal.</span>
-                                        <span lang="zh-Hans" hidden>获取能量塔名称。</span>
-                                    </td>
-                                </tr>
-                                <tr class="mdc-data-table__row">
-                                    <td class="mdc-data-table__cell">
-                                        <span lang="en">Timestamp</span>
-                                        <span lang="zh-Hans" hidden>时间戳</span>
-                                    </td>
-                                    <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
-                                        <span lang="en">Regarded as the confirmation / acceptance / rejection time of the nomination.</span>
-                                        <span lang="zh-Hans" hidden>作为提名的确认/接受/拒绝时间。</span>
-                                    </td>
-                                </tr>
-                                <tr class="mdc-data-table__row">
-                                    <td class="mdc-data-table__cell">
-                                        <span lang="en">Photo URL</span>
-                                        <span lang="zh-Hans" hidden>照片地址</span>
-                                    </td>
-                                    <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
-                                        <span lang="en">
-                                            Show photo in the card.<br/>
-                                            Generate a short UID as the ID of Portal and identify them in mails.<br/>
-                                            <span class="mdc-typography--caption">[FULL VERSION ONLY]</span> The short UID will be used to query Brainstorming database and generate link to Brainstorming watermeter.
-                                        </span>
-                                        <span lang="zh-Hans" hidden>
-                                            在卡片中显示照片。<br/>
-                                            生成一个短UID，作为能量塔ID以及在邮件中识别它们。<br/>
-                                            <span class="mdc-typography--caption">[仅限完整版]</span> 短UID将被用于查询Brainstorming数据库以及生成Brainstorming水表墙的链接。
-                                        </span>
-                                    </td>
-                                </tr>
-                                <tr class="mdc-data-table__row">
-                                    <td class="mdc-data-table__cell">
-                                        <span lang="en">Intel Map URL</span>
-                                        <span lang="zh-Hans" hidden>Intel Map地址</span>
-                                    </td>
-                                    <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
-                                        <span lang="en">Extract the coordinate and display a marker on the map.</span>
-                                        <span lang="zh-Hans" hidden>获取坐标并在地图中显示标记。</span>
-                                    </td>
-                                </tr>
-                                <tr class="mdc-data-table__row">
-                                    <td class="mdc-data-table__cell">
-                                        <span lang="en">Mail Body</span>
-                                        <span lang="zh-Hans" hidden>邮件体</span>
-                                    </td>
-                                    <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
-                                        <span lang="en">Extract the rejection reason.</span>
-                                        <span lang="zh-Hans" hidden>获取拒绝原因。</span>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <br/>
-
                     <span lang="en">As for the rejection mails, there are several templates for each rejection reason, and each one colud be identified by matching the keywords:</span>
                     <span lang="zh-Hans" hidden>对于拒绝邮件，有几种不同的模版分别对应不同的拒绝原因，可以通过以下关键词来识别：</span>
                     <br/>
@@ -393,9 +304,9 @@
                 <span lang="zh-Hans" hidden>以上介绍了Potori如何从您的收件箱中获取您的能量塔提名信息。Ingress Prime使用了本地化的模版，这给确定关键词带来了难度，我正在尝试解决这个问题。</span>
             </p>
 
-            <h2 class="mdc-typography--headline2">
-                <span lang="en">Data Useage & Privacy</span>
-                <span lang="zh-Hans" hidden>数据使用 & 隐私</span>
+            <h2 class="mdc-typography--headline2" id="part-privacy">
+                <span lang="en">Privacy</span>
+                <span lang="zh-Hans" hidden>隐私</span>
             </h2>
             <p class="mdc-typography--body1">
                     <span lang="en">Briefly, Potori would not collect any of your data. All of your data will be handled inside your browser, and deleted when you close the page. You can save your data in your own Google Drive (where only Potori can access) or locally, they are totally under your control.</span>
@@ -406,7 +317,7 @@
                     <span lang="zh-Hans" hidden>在下尽力设法保护您的隐私，如果您有任何建议，欢迎联系我或提出issue。</span>
                 </p>
     
-                <h3 class="mdc-typography--headline3">
+                <h3 class="mdc-typography--headline3" id="part-privacy-data-useage">
                     <span lang="en">Data Usage</span>
                     <span lang="zh-Hans" hidden>数据使用</span>
                 </h3>
@@ -427,8 +338,92 @@
                                     <span lang="zh-Hans" hidden>邮件的内容</span>
                             </strong>
                             <br/>
-                            <span lang="en">Please read the <a href="#part-workflow">Workflow</a>.</span>
-                            <span lang="zh-Hans" hidden>请阅读<a href="#part-workflow">流程</a>部分。</span>
+                            <div class="mdc-data-table">
+                                <table class="mdc-data-table__table" aria-label="Content Useage">
+                                    <thead>
+                                        <tr class="mdc-data-table__header-row">
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">
+                                                <span lang="en">Content</span>
+                                                <span lang="zh-Hans" hidden>内容</span>
+                                            </th>
+                                            <th class="mdc-data-table__header-cell" role="columnheader" scope="col">
+                                                <span lang="en">Useage</span>
+                                                <span lang="zh-Hans" hidden>被用于</span>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="mdc-data-table__content">
+                                        <tr class="mdc-data-table__row">
+                                            <td class="mdc-data-table__cell">
+                                                <span lang="en">Mail ID</span>
+                                                <span lang="zh-Hans" hidden>邮件ID</span>
+                                            </td>
+                                            <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                                <span lang="en">Avoid obtaining and processing the same mail every time, if you save or upload the data file.</span>
+                                                <span lang="zh-Hans" hidden>如果您保存或上传数据文件，邮件ID可用于避免重复获取和处理相同的邮件。</span>
+                                            </td>
+                                        </tr>
+                                        <tr class="mdc-data-table__row">
+                                            <td class="mdc-data-table__cell">
+                                                <span lang="en">Subject</span>
+                                                <span lang="zh-Hans" hidden>标题</span>
+                                            </td>
+                                            <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                                <span lang="en">Extract title of Portal.</span>
+                                                <span lang="zh-Hans" hidden>获取能量塔名称。</span>
+                                            </td>
+                                        </tr>
+                                        <tr class="mdc-data-table__row">
+                                            <td class="mdc-data-table__cell">
+                                                <span lang="en">Timestamp</span>
+                                                <span lang="zh-Hans" hidden>时间戳</span>
+                                            </td>
+                                            <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                                <span lang="en">Regarded as the confirmation / acceptance / rejection time of the nomination.</span>
+                                                <span lang="zh-Hans" hidden>作为提名的确认/接受/拒绝时间。</span>
+                                            </td>
+                                        </tr>
+                                        <tr class="mdc-data-table__row">
+                                            <td class="mdc-data-table__cell">
+                                                <span lang="en">Photo URL</span>
+                                                <span lang="zh-Hans" hidden>照片地址</span>
+                                            </td>
+                                            <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                                <span lang="en">
+                                                    Show photo in the card.<br/>
+                                                    Generate a short UID as the ID of Portal and identify them in mails.<br/>
+                                                    <span class="mdc-typography--caption">[FULL VERSION ONLY]</span> The short UID will be used to query Brainstorming database and generate link to Brainstorming watermeter.
+                                                </span>
+                                                <span lang="zh-Hans" hidden>
+                                                    在卡片中显示照片。<br/>
+                                                    生成一个短UID，作为能量塔ID以及在邮件中识别它们。<br/>
+                                                    <span class="mdc-typography--caption">[仅限完整版]</span> 短UID将被用于查询Brainstorming数据库以及生成Brainstorming水表墙的链接。
+                                                </span>
+                                            </td>
+                                        </tr>
+                                        <tr class="mdc-data-table__row">
+                                            <td class="mdc-data-table__cell">
+                                                <span lang="en">Intel Map URL</span>
+                                                <span lang="zh-Hans" hidden>Intel Map地址</span>
+                                            </td>
+                                            <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                                <span lang="en">Extract the coordinate and display a marker on the map.</span>
+                                                <span lang="zh-Hans" hidden>获取坐标并在地图中显示标记。</span>
+                                            </td>
+                                        </tr>
+                                        <tr class="mdc-data-table__row">
+                                            <td class="mdc-data-table__cell">
+                                                <span lang="en">Mail Body</span>
+                                                <span lang="zh-Hans" hidden>邮件体</span>
+                                            </td>
+                                            <td class="mdc-data-table__cell mdc-data-table__cell--wrap">
+                                                <span lang="en">Extract the rejection reason.</span>
+                                                <span lang="zh-Hans" hidden>获取拒绝原因。</span>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
 
                         </li>
                     </ul>
