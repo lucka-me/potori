@@ -1,5 +1,17 @@
 # Changelog
 ```markdown
+## [0.4.14] - 2019-10-26
+Bug fixed
+
+### Added
+- Fullscreen control for map
+
+### Fixed
+- Map size in Safari
+- Accepted file type when open file
+```
+
+```markdown
 ## [0.4.13] - 2019-09-28
 UI optimized
 

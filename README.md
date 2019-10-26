@@ -1,6 +1,6 @@
 <h1 align=center><img height=90px src="./src/logo-bg.svg" link="#"/></h1>
 
-[![](https://img.shields.io/badge/version-0.4.13-brightgreen.svg)](./CHANGELOG.md "Changelog") [![](https://img.shields.io/badge/demo-online-brightgreen.svg)](https://lucka.moe/potori "Demo") [![](https://img.shields.io/badge/author-Lucka-2578B5.svg)](https://lucka.moe "Author") [![](https://img.shields.io/badge/license-MIT-A31F34.svg)](./LICENSE "License")  
+[![](https://img.shields.io/badge/version-0.4.14-brightgreen.svg)](./CHANGELOG.md "Changelog") [![](https://img.shields.io/website?down_message=offline&up_message=online&url=https%3A%2F%2Flucka.moe%2Fpotori))](https://lucka.moe/potori "Demo") [![](https://img.shields.io/badge/author-Lucka-2578B5.svg)](https://lucka.moe "Author") [![](https://img.shields.io/github/license/lucka-me/potori)](./LICENSE "License")  
 ![](https://img.shields.io/badge/safari-support-brightgreen.svg) ![](https://img.shields.io/badge/chrome-support-brightgreen.svg) ![](https://img.shields.io/badge/firefox-support-brightgreen.svg)<!-- ![](https://img.shields.io/badge/edge-support-brightgreen.svg) ![](https://img.shields.io/badge/ie-broken-red.svg) ![](https://img.shields.io/badge/opera-support-brightgreen.svg)-->
 
 ## Description
@@ -12,15 +12,8 @@ You can download the repository [and host the full version in the root folder](h
 
 **Potori is NOT fully compatible with Prime yet, we need more [mail samples](./samples.md) to figure out how to query all related and localized mails exactly, and how to identify each reason for rejection. If you have any trouble or want to help me, please contact me via Telegram@Seele585.**
 
-## TODO
-- [ ] Collect mail samples to update the query strings and reasons for rejection
-- [x] Edit Portal information
-    - [x] Status, result time and rejected reason
-    - [x] Location
-- [x] i18n for Intro & Privacy
-    - [x] Framework
-    - [x] Translate to zh-Hans (as example)
-- [ ] Guideline for hosting the full version
+## Future Style
+Since Niantic launched the Niantic Wayfarer which contains a nomination manager, I've thought a lot about the future of Potori. I've learned a lot from developing it and I do not want to stop. There are still many posibilities: re-writing the entire Potori with Angular, extending it to a data visualization tool, import from [Wayfarer Nomination Manage API response data](https://wayfarer.nianticlabs.com/api/v1/vault/manage)... I'm actually working on them, which is little bit tough for me, though.
 
 ## Dependencies
 - [Material Components Web](https://github.com/material-components/material-components-web)  
