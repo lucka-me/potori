@@ -1,4 +1,13 @@
 # Changelog
+
+```markdown
+## [0.4.15] - 2020-01-01
+Bug fixed
+
+### Fixed
+- Reject reason select menu broken
+```
+
 ```markdown
 ## [0.4.14] - 2019-10-26
 Bug fixed
