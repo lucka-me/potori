@@ -1,6 +1,18 @@
 # Changelog
 
 ```markdown
+## [0.4.16] - 2020-03-30
+Bug fixed & SDK upgraded
+
+### Changed
+- Specify the version of MDC-web: 5.1.0
+- Upgrade Mapbox GL JS to 1.9.0
+
+### Fixed
+- Position of icon in Detail dialog
+```
+
+```markdown
 ## [0.4.15] - 2020-01-01
 Bug fixed
 

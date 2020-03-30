@@ -16,12 +16,12 @@
         <link type="text/css" rel="stylesheet" href="./css/extended.css" />
         <link type="text/css" rel="stylesheet" href="./css/dark.css" />
         <!-- MDC -->
-        <link rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+        <link rel="stylesheet" href="https://unpkg.com/material-components-web@5.1.0/dist/material-components-web.min.css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500|Material+Icons" />
         <!-- Mapbox -->
-        <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.0/mapbox-gl.css" />
+        <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.css" />
         <!-- Scripts -->
-        <script defer src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+        <script defer src="https://unpkg.com/material-components-web@5.1.0/dist/material-components-web.min.js"></script>
         <script defer type="text/javascript" src="./lib/versionKit.js"></script>
         <script defer type="text/javascript" src="./lib/value.js"></script>
         <script defer type="text/javascript" src="./lib/toolkit.js"></script>
@@ -30,7 +30,7 @@
         <script defer type="text/javascript" src="./lib/auth.js"></script>
         <script defer type="text/javascript" src="./lib/firebaseKit.js"></script>
         <script defer type="text/javascript" src="./lib/process.js"></script>
-        <script defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.4.0/mapbox-gl.js" onload="ui.mainMap.load()"></script>
+        <script defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.9.0/mapbox-gl.js" onload="ui.mainMap.load()"></script>
         <script defer src="https://www.gstatic.com/firebasejs/5.10.1/firebase-app.js" onload="firebaseKit.init()"></script>
         <script defer src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js" onload="firebaseKit.loadReference()"></script>
         <script defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};auth.handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
@@ -110,7 +110,7 @@
 
                         <div class="flex-box-row--wrap">
                             <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon margin-v--8 margin-h--4 flex-grow--1" id="field-dialog-details-result-datetime">
-                                <i class="material-icons mdc-text-field__icon">event</i>
+                                <i class="material-icons mdc-text-field__icon mdc-text-field__icon--leading">event</i>
                                 <input type="datetime-local" class="mdc-text-field__input" id="input-dialog-details-result-datetime">
                                 <div class="mdc-notched-outline">
                                     <div class="mdc-notched-outline__leading"></div>

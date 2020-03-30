@@ -1,6 +1,6 @@
 <h1 align=center><img height=90px src="./src/logo-bg.svg" link="#"/></h1>
 
-[![](https://img.shields.io/badge/version-0.4.15-brightgreen.svg)](./CHANGELOG.md "Changelog") [![](https://img.shields.io/website?down_message=offline&up_message=online&url=https%3A%2F%2Flucka.moe%2Fpotori)](https://lucka.moe/potori "Demo") [![](https://img.shields.io/badge/author-Lucka-2578B5.svg)](https://lucka.moe "Author") [![](https://img.shields.io/github/license/lucka-me/potori)](./LICENSE "License")  
+[![](https://img.shields.io/badge/version-0.4.16-brightgreen.svg)](./CHANGELOG.md "Changelog") [![](https://img.shields.io/website?down_message=offline&up_message=online&url=https%3A%2F%2Flucka.moe%2Fpotori)](https://lucka.moe/potori "Demo") [![](https://img.shields.io/badge/author-Lucka-2578B5.svg)](https://lucka.moe "Author") [![](https://img.shields.io/github/license/lucka-me/potori)](./LICENSE "License")  
 ![](https://img.shields.io/badge/safari-support-brightgreen.svg) ![](https://img.shields.io/badge/chrome-support-brightgreen.svg) ![](https://img.shields.io/badge/firefox-support-brightgreen.svg)<!-- ![](https://img.shields.io/badge/edge-support-brightgreen.svg) ![](https://img.shields.io/badge/ie-broken-red.svg) ![](https://img.shields.io/badge/opera-support-brightgreen.svg)-->
 
 ## Description
@@ -19,11 +19,11 @@ Since Niantic launched the Niantic Wayfarer which contains a nomination manager,
 - [Material Components Web](https://github.com/material-components/material-components-web)  
   Provides Material Design UI.
 - [Gmail API](https://developers.google.com/gmail/api/)  
-  Access to gmail inbox.
+  Access to Gmail inbox.
 - [Mapbox GL JS API](https://docs.mapbox.com/mapbox-gl-js/overview/)  
   Provides the map.
 - [Google Drive API](https://developers.google.com/drive/api/v3/about-sdk)  
-  Save data in Google Drive.
+  Save / load data in Google Drive.
 - [Firebase JavaScript SDK](https://firebase.google.com/docs/web/setup)  
   Access to Brainstorming database.
 
