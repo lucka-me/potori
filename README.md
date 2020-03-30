@@ -10,7 +10,7 @@ Gather and visualize your Portal nominations from your Gmail inbox.
 **Due to Google's policy (which aims to protect user's data), some features related to were removed in the demo page (as a lite version).**  
 You can download the repository [and host the full version in the root folder](https://developers.google.com/gmail/api/quickstart/js "Browser Quickstart | Gmail API | Google Developers").
 
-**Potori is NOT fully compatible with Prime yet, we need more [mail samples](./samples.md) to figure out how to query all related and localized mails exactly, and how to identify each reason for rejection. If you have any trouble or want to help me, please contact me via Telegram@Seele585.**
+**Potori is NOT fully compatible with Prime yet, we need more [mail samples](./samples.md) to figure out how to query all related and localized mails exactly, and how to identify each reason for rejection. If you have any trouble or want to help me, please contact me via Telegram@SeeleUN.**
 
 ## Future Style
 Since Niantic launched the Niantic Wayfarer which contains a nomination manager, I've thought a lot about the future of Potori. I've learned a lot from developing it and I do not want to stop. There are still many posibilities: re-writing the entire Potori with ~~Angular~~ Vue, extending it to a data visualization tool, import from [Wayfarer Nomination Manage API response data](https://wayfarer.nianticlabs.com/api/v1/vault/manage)... I'm actually working on them, which is little bit tough for me, though.
