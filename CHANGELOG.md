@@ -6,6 +6,7 @@ Minor update
 
 ### Changed
 - Fetch version code from GitHub release
+- Minor update in Intro & Privacy
 ```
 
 ```markdown
