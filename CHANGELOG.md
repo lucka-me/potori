@@ -1,8 +1,16 @@
 # Changelog
 
 ```markdown
+## [0.4.17] - 2020-TBA
+Minor update
+
+### Changed
+- Fetch version code from GitHub release
+```
+
+```markdown
 ## [0.4.16] - 2020-03-30
-Bug fixed & SDK upgraded
+SDK upgraded
 
 ### Changed
 - Specify the version of MDC-web: 5.1.0
