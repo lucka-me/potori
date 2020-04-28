@@ -7,6 +7,9 @@ Minor update
 ### Changed
 - Fetch version code from GitHub release
 - Minor update in Intro & Privacy
+
+### Fixed
+- Dark mode for Mapbox
 ```
 
 ```markdown
