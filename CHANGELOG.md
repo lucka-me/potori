@@ -1,7 +1,7 @@
 # Changelog
 
 ```markdown
-## [0.4.17] - 2020-TBA
+## [0.4.17] - 2020-04-29
 Minor update
 
 ### Changed
