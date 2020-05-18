@@ -4,6 +4,9 @@
 ## [0.4.18] - 2020-05-TBA
 TBA
 
+### Changed
+- Display nominations as clusters on map
+
 ### Fixed
 - Page height on mobile devices
 ```
