@@ -1,6 +1,17 @@
 # Changelog
 
 ```markdown
+## [0.4.18] - 2020-05-18
+Cluster nominations on map
+
+### Changed
+- Display nominations as clusters on map
+
+### Fixed
+- Page height on mobile devices
+```
+
+```markdown
 ## [0.4.17] - 2020-04-29
 Minor update
 

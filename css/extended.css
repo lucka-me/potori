@@ -1,9 +1,13 @@
 :root {
     --mdc-theme-primary: #3b1e5f !important;
     --mdc-theme-secondary: #2578B5 !important;
+
     --color-pending: #CAAF85;
+    --color-pending--dark: #988058;
     --color-accepted: #35C572;
+    --color-accepted--dark: #009345;
     --color-rejected: #B0373C;
+    --color-rejected--dark: #7A0016;
 }
 
 .status-pending  { color: var(--color-pending ) !important; }
@@ -42,6 +46,8 @@ code { font-size: 14px; }
 .flex-shrink--1 { flex-shrink: 1; }
 
 /* Contents */
+html { height: 100%; }
+
 body {
     margin: 0;
     background-color: var(--mdc-theme-background) !important;
@@ -52,9 +58,9 @@ a { color: var(--mdc-theme-text-primary-on-light); }
 .mdc-data-table { margin-block-start: 0.5rem; margin-block-end: 0.5rem; }
 
 body.fullheight {
-    height: 100vh;
-    min-height: 100vh;
-    max-height: 100vh;
+    height: 100%;
+    min-height: 100%;
+    max-height: 100%;
 }
 
 .logo { height: 32px; }
@@ -83,14 +89,26 @@ body.fullheight {
     min-width: 300px;
 }
 
-.map-marker {
-    width: 28px;
-    height: 28px;
+.marker-nomination {
+    width: 0.8em;
+    height: 0.8em;
     border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
+    border: 0.2em solid;
+}
+
+.marker-pending  {
+    background-color: var(--color-pending );
+    border-color: var(--color-pending--dark );
+}
+
+.marker-accepted {
+    background-color: var(--color-accepted);
+    border-color: var(--color-accepted--dark);
+}
+
+.marker-rejected {
+    background-color: var(--color-rejected);
+    border-color: var(--color-rejected--dark);
 }
 
 /* Card List */
@@ -169,14 +187,11 @@ body.fullheight {
 }
 
 .mdc-switch-box > label {
-    margin-left: 8px;
+    margin-left: 1em;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
 }
-
-/* Icon */
-.material-icons.md-18 { font-size: 18px; }
 
 /* Data Table */
 .mdc-data-table__cell--wrap { white-space: normal !important; }
