@@ -27,11 +27,12 @@
         <script defer type="text/javascript" src="./lib/toolkit.js"></script>
         <script defer type="text/javascript" src="./lib/fileKit.js"></script>
         <script defer type="text/javascript" src="./lib/dialogKit.js"></script>
+        <script defer type="text/javascript" src="./lib/mapKit.js"></script>
         <script defer type="text/javascript" src="./lib/ui.js" onload="ui.init()"></script>
         <script defer type="text/javascript" src="./lib/auth.js"></script>
         <script defer type="text/javascript" src="./lib/firebaseKit.js"></script>
         <script defer type="text/javascript" src="./lib/process.js"></script>
-        <script defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js" onload="ui.mainMap.load()"></script>
+        <script defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js" onload="mapKit.load()"></script>
         <script defer src="https://www.gstatic.com/firebasejs/5.10.1/firebase-app.js" onload="firebaseKit.init()"></script>
         <script defer src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js" onload="firebaseKit.loadReference()"></script>
         <script defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};auth.handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
@@ -161,11 +162,43 @@
             </div>
             <div class="mdc-dialog__scrim"></div>
         </div>
+        <!-- Import -->
+        <div class="mdc-dialog mdc-dialog--scrollable" role="alertdialog" aria-modal="true" id="dialog-import">
+            <div class="mdc-dialog__container">
+                <div class="mdc-dialog__surface">
+                    <h2 class="mdc-dialog__title">Import</h2>
+                    <div class="mdc-dialog__content">
+                        <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea mdc-text-field--fullwidth">
+                            <textarea class="mdc-text-field__input code" id="input-dialog-import-wayfarer" rows="8" cols="80"></textarea>
+                            <div class="mdc-notched-outline">
+                                <div class="mdc-notched-outline__leading"></div>
+                                <div class="mdc-notched-outline__notch">
+                                    <label for="input-dialog-import-wayfarer" class="mdc-floating-label">JSON</label>
+                                </div>
+                                <div class="mdc-notched-outline__trailing"></div>
+                            </div>
+                        </div>
+                        <div class="mdc-text-field-helper-line">
+                            <div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent">From <a href="https://wayfarer.nianticlabs.com/api/v1/vault/manage" target="_blank" rel="noopener" title="Wayfarer API">Wayfarer API </a></div>
+                        </div>
+                    </div>
+                    <footer class="mdc-dialog__actions">
+                        <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="close">
+                            <span class="mdc-button__label">Close</span>
+                        </button>
+                        <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="import">
+                            <span class="mdc-button__label">Import</span>
+                        </button>
+                    </footer>
+                </div>
+            </div>
+            <div class="mdc-dialog__scrim"></div>
+        </div>
         <!-- Alert -->
         <div class="mdc-dialog mdc-dialog--scrollable" role="alertdialog" aria-modal="true" id="dialog-alert">
             <div class="mdc-dialog__container">
                 <div class="mdc-dialog__surface">
-                    <div class="mdc-dialog__content" id="dialogAlertMessageBox"></div>
+                    <div class="mdc-dialog__content" id="box-alert-message"></div>
                     <footer class="mdc-dialog__actions">
                         <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="close">
                             <span class="mdc-button__label">Close</span>

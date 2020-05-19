@@ -1,6 +1,20 @@
 # Changelog
 
 ```markdown
+## [0.4.19] - 2020-05-19
+Cluster all rejected nominations
+
+### Added
+- Import Wayfarer data to update title and location
+
+### Changed
+- Cluster rejected nominations in one source
+
+### Fixed
+- Error: Style is not done loading
+```
+
+```markdown
 ## [0.4.18] - 2020-05-18
 Cluster nominations on map
 
