@@ -89,28 +89,6 @@ body.fullheight {
     min-width: 300px;
 }
 
-.marker-nomination {
-    width: 0.8em;
-    height: 0.8em;
-    border-radius: 50%;
-    border: 0.2em solid;
-}
-
-.marker-pending  {
-    background-color: var(--color-pending );
-    border-color: var(--color-pending--dark );
-}
-
-.marker-accepted {
-    background-color: var(--color-accepted);
-    border-color: var(--color-accepted--dark);
-}
-
-.marker-rejected {
-    background-color: var(--color-rejected);
-    border-color: var(--color-rejected--dark);
-}
-
 /* Card List */
 #cardList {
     flex: 1;
