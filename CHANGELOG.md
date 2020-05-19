@@ -2,10 +2,13 @@
 
 ```markdown
 ## [0.4.19] - 2020-05-TBA
-TBA
+Cluster all rejected nominations
 
 ### Changed
-- Cluster rejected nominations in one layer
+- Cluster rejected nominations in one source
+
+### Fixed
+- GAPI error: Style is not done loading
 ```
 
 ```markdown
