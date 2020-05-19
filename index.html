@@ -27,11 +27,12 @@
         <script defer type="text/javascript" src="./lib/toolkit.js"></script>
         <script defer type="text/javascript" src="./lib/fileKit.js"></script>
         <script defer type="text/javascript" src="./lib/dialogKit.js"></script>
+        <script defer type="text/javascript" src="./lib/mapKit.js"></script>
         <script defer type="text/javascript" src="./lib/ui.js" onload="ui.init()"></script>
         <script defer type="text/javascript" src="./lib/auth.js"></script>
         <script defer type="text/javascript" src="./lib/firebaseKit.js"></script>
         <script defer type="text/javascript" src="./lib/process.js"></script>
-        <script defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js" onload="ui.mainMap.load()"></script>
+        <script defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js" onload="mapKit.load()"></script>
         <script defer src="https://www.gstatic.com/firebasejs/5.10.1/firebase-app.js" onload="firebaseKit.init()"></script>
         <script defer src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js" onload="firebaseKit.loadReference()"></script>
         <script defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};auth.handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
