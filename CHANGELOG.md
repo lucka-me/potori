@@ -1,7 +1,7 @@
 # Changelog
 
 ```markdown
-## [0.4.19] - 2020-05-TBA
+## [0.4.19] - 2020-05-19
 Cluster all rejected nominations
 
 ### Added
