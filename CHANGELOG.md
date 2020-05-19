@@ -4,11 +4,14 @@
 ## [0.4.19] - 2020-05-TBA
 Cluster all rejected nominations
 
+### Added
+- Import Wayfarer data to update title and location
+
 ### Changed
 - Cluster rejected nominations in one source
 
 ### Fixed
-- GAPI error: Style is not done loading
+- Error: Style is not done loading
 ```
 
 ```markdown

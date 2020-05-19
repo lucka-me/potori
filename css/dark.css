@@ -96,4 +96,8 @@
     .mdc-data-table__header-cell, .mdc-data-table__cell {
         color: var(--mdc-theme-text-primary-on-light) !important;
     }
+
+    .mdc-text-field-helper-text {
+        color: var(--mdc-theme-text-primary-on-light) !important;
+    }
 }

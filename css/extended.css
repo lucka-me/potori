@@ -156,6 +156,11 @@ body.fullheight {
     flex-grow: 1;
 }
 
+textarea.code {
+    font-family: monospace;
+    line-height: 1rem !important;
+}
+
 /* Switch */
 .mdc-switch-box {
     padding: 4px 0px;
