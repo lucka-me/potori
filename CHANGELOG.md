@@ -1,6 +1,14 @@
 # Changelog
 
 ```markdown
+## [0.4.21] - 2020-05-TBA
+Move some buttons to menu in app bar
+
+### Added
+- A menu to host actions in app bar
+```
+
+```markdown
 ## [0.4.20] - 2020-05-20
 Minor improvement
 
