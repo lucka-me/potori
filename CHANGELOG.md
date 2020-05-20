@@ -1,6 +1,14 @@
 # Changelog
 
 ```markdown
+## [0.4.20] - 2020-05-TBA
+Minor improvement
+
+### Changed
+- Remove classified portals data in status dialog
+```
+
+```markdown
 ## [0.4.19] - 2020-05-19
 Cluster all rejected nominations
 
