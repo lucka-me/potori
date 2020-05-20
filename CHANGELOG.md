@@ -2,10 +2,11 @@
 
 ```markdown
 ## [0.4.21] - 2020-05-TBA
-Move some buttons to menu in app bar
+Add menu and Restore time of quota
 
 ### Added
 - A menu to host actions in app bar
+- Time left for the quota to be restored
 ```
 
 ```markdown
