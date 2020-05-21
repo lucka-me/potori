@@ -28,6 +28,7 @@
         <script defer type="text/javascript" src="./lib/fileKit.js"></script>
         <script defer type="text/javascript" src="./lib/dialogKit.js"></script>
         <script defer type="text/javascript" src="./lib/mapKit.js"></script>
+        <script defer type="text/javascript" src="./lib/dashboard.js" onload="dashboard.init()"></script>
         <script defer type="text/javascript" src="./lib/ui.js" onload="ui.init()"></script>
         <script defer type="text/javascript" src="./lib/auth.js"></script>
         <script defer type="text/javascript" src="./lib/firebaseKit.js"></script>
@@ -62,31 +63,41 @@
         </div>
 
         <div class="main-box">
-            <div id="map-main"></div>
+
+            <div id="dashboard">
+
+                <div class="mdc-card flex--2 flex-shrink--1">
+                    <div id="map-card-map"></div>
+                </div>
+
+                <div class="mdc-card flex--1 flex-shrink--1 padding--8" id="card-filter">
+                    <span class="mdc-typography--headline6 margin-h--4">Filter</span>
+                    <div class="flex-box-row--wrap">
+                        <div class="flex-box-col margin-h--4 flex-grow--1" id="block-card-filter-type">
+                            <span class="mdc-typography--subtitle1">Type</span>
+                        </div>
+                        <div class="flex-box-col margin-h--4 flex-grow--1" id="block-card-filter-rejectedReason">
+                            <span class="mdc-typography--subtitle1">Rejected Reason</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
             <div id="cardList"></div>
         </div>
         <!-- Dialogs -->
-        <!-- Status & About -->
-        <div class="mdc-dialog mdc-dialog--scrollable" role="dialog" aria-modal="true" id="dialog-status">
+        <!-- About -->
+        <div class="mdc-dialog mdc-dialog--scrollable" role="dialog" aria-modal="true" id="dialog-about">
             <div class="mdc-dialog__container">
                 <div class="mdc-dialog__surface">
-                    <h2 class="mdc-dialog__title">Status & About</h2>
-                    <div class="mdc-dialog__content flex-box-row--wrap">
+                    <h2 class="mdc-dialog__title">About</h2>
+                    <div class="mdc-dialog__content flex-box-col">
 
-                        <div class="flex-box-col margin-h--4 flex-grow--1" id="block-dialog-status-type">
-                            <span class="mdc-typography--headline6">Type</span>
-                        </div>
+                        <span class="mdc-typography--body2"><a target="_blank" rel="noopener" title="Intro" href="./intro">Intro & Privacy</a></span>
+                        <span class="mdc-typography--body2"><a href="https://github.com/lucka-me/potori" target="_blank" rel="noopener" title="GitHub">GitHub Repo</a></span>
+                        <span class="mdc-typography--body2"><a href="https://github.com/lucka-me/potori/blob/master/CHANGELOG.md" target="_blank" title="Changelog" id="text-version"></a> by <a href="https://lucka.moe" target="_blank" rel="noopener" title="Blog" >Lucka</a></span>
 
-                        <div class="flex-box-col margin-h--4 flex-grow--1" id="block-dialog-status-rejectedReason">
-                            <span class="mdc-typography--headline6">Rejected Reason</span>
-                        </div>
-
-                        <div class="flex-box-col margin-h--4 flex-grow--1 fullwidth">
-                            <span class="mdc-typography--headline6">About</span>
-                            <span class="mdc-typography--body2"><a target="_blank" rel="noopener" title="Intro" href="./intro">Intro & Privacy</a></span>
-                            <span class="mdc-typography--body2"><a href="https://github.com/lucka-me/potori" target="_blank" rel="noopener" title="GitHub">GitHub Repo</a></span>
-                            <span class="mdc-typography--body2"><a href="https://github.com/lucka-me/potori/blob/master/CHANGELOG.md" target="_blank" title="Changelog" id="dialogStatusVersion"></a> by <a href="https://lucka.moe" target="_blank" rel="noopener" title="Blog" >Lucka</a></span>
-                        </div>
                     </div>
                     <footer class="mdc-dialog__actions">
                         <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="close" data-mdc-dialog-initial-focus>
@@ -210,7 +221,7 @@
         </div>
 
         <!-- Templates -->
-        <template id="template-card">
+        <template id="template-card-portal">
             <div class="mdc-card">
                 <div class="mdc-card__primary-action">
                     <div class="mdc-card__media mdc-card__media--content">

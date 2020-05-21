@@ -1,6 +1,15 @@
 # Changelog
 
 ```markdown
+## [0.TBA] - 2020-TBA
+TBA
+
+### Changed
+- A dashboard with map and filter card
+- Status & About dialog -> About dialog
+```
+
+```markdown
 ## [0.4.22] - 2020-05-21
 Minor improvement and bugs fixed
 

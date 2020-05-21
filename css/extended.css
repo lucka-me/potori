@@ -27,6 +27,7 @@ code { font-size: 14px; }
 .margin-h--4 { margin-left: 4px; margin-right: 4px; }
 .margin-v--8 { margin-top: 8px; margin-bottom: 8px; }
 
+.padding--8 { padding: 8px; }
 .padding--16 { padding: 16px; }
 
 /* Flexbox */
@@ -42,8 +43,11 @@ code { font-size: 14px; }
 .flex-align-items--start  { align-items: flex-start; }
 .flex-align-items--center { align-items: center; }
 /* Item */
+.flex--1 { flex: 1; }
+.flex--2 { flex: 2; }
 .flex-grow--1 { flex-grow: 1; }
-.flex-shrink--1 { flex-shrink: 1; }
+.flex-grow--2 { flex-grow: 2; }
+.flex-shrink--1 { flex-shrink: 1 !important; }
 
 /* Contents */
 html { height: 100%; }
@@ -78,15 +82,27 @@ body.fullheight {
 
 /* Optimize map and card list for mobile */
 @media screen and (max-width: 600px) {
-    #map-main { height: 30% !important; }
-    #cardList { height: 70% !important; }
+    .main-box { flex-flow: column nowrap; }
+    #dashboard { flex: 0; }
+    #cardList { flex: 0; }
 }
 
-/* Map */
-#map-main {
+/* Dashboard */
+#dashboard {
     flex: 2;
     height: 100%;
+
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+}
+
+#map-card-map {
+    height: 200px;
     min-width: 300px;
+    clip-path: inset(100% round 4px);
+    -webkit-clip-path: inset(0 round 4px);
 }
 
 /* Card List */
