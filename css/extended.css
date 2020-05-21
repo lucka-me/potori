@@ -85,6 +85,11 @@ body.fullheight {
     flex-flow: row wrap;
 }
 
+.main-box > div {
+    height: 100%;
+    box-sizing: border-box;
+}
+
 /* Dashboard */
 #dashboard {
     flex: 2;
@@ -94,10 +99,11 @@ body.fullheight {
     align-items: flex-start;
     align-content: flex-start;
 
+    padding: 4px;
+
     overflow-y: scroll;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
-    padding: 4px;
 }
 
 #dashboard > .mdc-card {
@@ -152,10 +158,10 @@ canvas.canvas-chart--v { height: 100% !important; }
 
 /* Submittions */
 #card-submittions {
-    flex: 2; flex-shrink: 1;
+    flex: 3; flex-shrink: 1;
     padding: 8px;
     height: 200px;
-    min-width: 200px;
+    min-width: 300px;
 }
 
 /* Quotas */
@@ -172,14 +178,14 @@ canvas.canvas-chart--v { height: 100% !important; }
     display: flex;
     flex-flow: column nowrap;
     align-content: flex-start;
-    overflow-y: scroll;
+
     min-width: 300px;
+    padding: 4px;
+
+    overflow-y: scroll;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
 }
-
-#card-list > :first-child { margin-top:    8px !important; }
-#card-list > :last-child  { margin-bottom: 8px !important; }
 
 /* Card */
 .mdc-card {
