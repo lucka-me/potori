@@ -4,10 +4,13 @@
 
     --color-pending: #CAAF85;
     --color-pending--dark: #988058;
+    --color-pending--light: #fEE1B5;
     --color-accepted: #35C572;
     --color-accepted--dark: #009345;
+    --color-accepted--light: #71F9A1;
     --color-rejected: #B0373C;
     --color-rejected--dark: #7A0016;
+    --color-rejected--light: #E76866;
 }
 
 .status-pending  { color: var(--color-pending ) !important; }
@@ -101,6 +104,14 @@ body.fullheight {
     margin: 4px !important;
 }
 
+.container-chart {
+    flex-grow: 1;
+}
+
+canvas.canvas-chart {
+    width: 100% !important;
+}
+
 /* Map */
 #card-map {
     flex: 2; flex-shrink: 1;
@@ -130,12 +141,13 @@ body.fullheight {
     min-width: 200px;
 }
 
-.chart-container {
-    flex-grow: 1;
-}
-
-canvas.canvas-chart {
-    width: 100% !important;
+/* Stats: Type */
+/* Stats: Rejected */
+#card-stats-type, #card-stats-rejected {
+    flex: 1; flex-shrink: 1;
+    padding: 8px;
+    height: 200px;
+    min-width: 200px;
 }
 
 /* Card List */
