@@ -4,8 +4,11 @@
 ## [0.TBA] - 2020-TBA
 TBA
 
+### Added
+- Quotas card
+
 ### Changed
-- A dashboard with map and filter card
+- A dashboard with map, filter and more cards 
 - Status & About dialog -> About dialog
 ```
 

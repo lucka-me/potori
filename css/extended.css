@@ -93,11 +93,37 @@ body.fullheight {
     align-content: flex-start;
 }
 
+/* Map */
+#card-map {
+    flex: 2; flex-shrink: 1;
+}
+
 #map-card-map {
     height: 200px;
     min-width: 300px;
     clip-path: inset(100% round 4px);
     -webkit-clip-path: inset(0 round 4px);
+}
+
+/* Filter */
+#card-filter {
+    flex: 1; flex-shrink: 1;
+    padding: 8px;
+}
+
+/* Quotas */
+#card-quotas {
+    flex: 1; flex-shrink: 1;
+    padding: 8px;
+}
+
+.chart-container {
+    height: 200px;
+    min-width: 200px;
+}
+
+canvas.canvas-chart {
+    width: 100% !important;
 }
 
 /* Card List */
