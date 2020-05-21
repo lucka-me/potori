@@ -106,15 +106,15 @@ body.fullheight {
 
 .container-chart {
     flex-grow: 1;
+    position: relative;
 }
 
-canvas.canvas-chart {
-    width: 100% !important;
-}
+canvas.canvas-chart--h { width: 100%  !important; }
+canvas.canvas-chart--v { height: 100% !important; }
 
 /* Map */
 #card-map {
-    flex: 2; flex-shrink: 1;
+    flex: 3; flex-shrink: 1;
     height: 200px;
     min-width: 300px;
 }
@@ -131,19 +131,27 @@ canvas.canvas-chart {
     flex: 1; flex-shrink: 1;
     padding: 8px;
     min-width: 200px;
+    min-height: 200px;
 }
 
-/* Quotas */
-#card-quotas {
+/* Stats: Type */
+#card-stats-type {
     flex: 1; flex-shrink: 1;
     padding: 8px;
     height: 200px;
     min-width: 200px;
 }
 
-/* Stats: Type */
 /* Stats: Rejected */
-#card-stats-type, #card-stats-rejected {
+#card-stats-rejected {
+    flex: 2; flex-shrink: 1;
+    padding: 8px;
+    height: 200px;
+    min-width: 250px;
+}
+
+/* Quotas */
+#card-quotas {
     flex: 1; flex-shrink: 1;
     padding: 8px;
     height: 200px;
