@@ -69,6 +69,8 @@ body.fullheight {
 
 .logo { height: 32px; }
 
+#button-appBar-view { display: none; }
+
 .mdc-linear-progress__bar-inner {
     background-color: var(--mdc-theme-secondary) !important;
 }
@@ -78,13 +80,6 @@ body.fullheight {
     display: flex;
     min-height: 0%;
     flex-flow: row wrap;
-}
-
-/* Optimize map and card list for mobile */
-@media screen and (max-width: 600px) {
-    .main-box { flex-flow: column nowrap; }
-    #dashboard { flex: 0; }
-    #cardList { flex: 0; }
 }
 
 /* Dashboard */
@@ -106,7 +101,7 @@ body.fullheight {
 }
 
 /* Card List */
-#cardList {
+#card-list {
     flex: 1;
     display: flex;
     flex-flow: column nowrap;
@@ -118,8 +113,8 @@ body.fullheight {
     -webkit-overflow-scrolling: touch;
 }
 
-#cardList > :first-child { margin-top:    8px !important; }
-#cardList > :last-child  { margin-bottom: 8px !important; }
+#card-list > :first-child { margin-top:    8px !important; }
+#card-list > :last-child  { margin-bottom: 8px !important; }
 
 /* Card */
 .mdc-card {
@@ -194,3 +189,9 @@ textarea.code {
 
 /* Data Table */
 .mdc-data-table__cell--wrap { white-space: normal !important; }
+
+/* Mobile View */
+@media screen and (max-width: 600px) {
+    .view-hide { display: none !important; }
+    #button-appBar-view { display: block; }
+}
