@@ -7,7 +7,7 @@
 Gather and visualize your Portal nominations from your Gmail inbox.
 
 ## Notice
-**Due to Google's policy (which aims to protect user's data), some features related to were removed in the demo page (as a lite version).**  
+**Due to Google's policy (which aims to protect user's data), some features related to 3rd-party were removed in the demo page (as a lite version).**  
 You can download the repository [and host the full version from the master branch](https://developers.google.com/gmail/api/quickstart/js "Browser Quickstart | Gmail API | Google Developers").
 
 **Potori is NOT fully compatible with Prime yet, we need more [mail samples](./samples.md) to figure out how to query all related and localized mails exactly, and how to identify each reason for rejection. If you have any trouble or want to help me, please contact me via Telegram@SeeleUN.**

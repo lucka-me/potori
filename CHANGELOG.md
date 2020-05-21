@@ -1,6 +1,17 @@
 # Changelog
 
 ```markdown
+## [0.4.22] - 2020-05-21
+Minor improvement and bugs fixed
+
+### Changed
+- Set text color of clusters to black in light mode
+
+### Fixed
+- Clusters disappear after switching dark/light mode
+```
+
+```markdown
 ## [0.4.21] - 2020-05-20
 Add menu and Restore time of quota
 
