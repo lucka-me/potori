@@ -25,6 +25,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css" />
 
         <!-- Scripts -->
+        <!-- Mapbox  -->
+        <script defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js"></script>
         <!-- MDC -->
         <script defer src="https://unpkg.com/material-components-web@5.1.0/dist/material-components-web.min.js"></script>
         <!-- Chart.js -->
@@ -36,13 +38,11 @@
         <script defer type="text/javascript" src="./lib/fileKit.js"></script>
         <script defer type="text/javascript" src="./lib/dialogKit.js"></script>
         <script defer type="text/javascript" src="./lib/mapKit.js"></script>
-        <script defer type="text/javascript" src="./lib/dashboard.js" onload="dashboard.init()"></script>
+        <script defer type="text/javascript" src="./lib/dashboard.js"></script>
         <script defer type="text/javascript" src="./lib/ui.js" onload="ui.init()"></script>
         <script defer type="text/javascript" src="./lib/auth.js"></script>
         <script defer type="text/javascript" src="./lib/firebaseKit.js"></script>
         <script defer type="text/javascript" src="./lib/process.js"></script>
-        <!-- Mapbox  -->
-        <script defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js" onload="mapKit.load()"></script>
         <!-- Firebase -->
         <script defer src="https://www.gstatic.com/firebasejs/5.10.1/firebase-app.js" onload="firebaseKit.init()"></script>
         <script defer src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js" onload="firebaseKit.loadReference()"></script>
@@ -93,7 +93,7 @@
                     </div>
                 </div>
                 <!-- Quotas -->
-                <div class="mdc-card" id="card-quotas">
+                <div class="mdc-card" id="card-quotas" hidden>
                     <span class="mdc-typography--headline6 margin-h--4">Quotas</span>
                     <div class="chart-container"><canvas class="canvas-chart"></canvas></div>
                 </div>
