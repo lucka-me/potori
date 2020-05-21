@@ -7,6 +7,7 @@ TBA
 ### Added
 - Stats: Type card
 - Stats: Rejected card
+- Submissions card
 - Quotas card
 
 ### Changed

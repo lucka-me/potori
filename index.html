@@ -30,6 +30,7 @@
         <!-- MDC -->
         <script defer src="https://unpkg.com/material-components-web@5.1.0/dist/material-components-web.min.js"></script>
         <!-- Chart.js -->
+        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.js"></script>
         <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
         <!-- Potori -->
         <script defer type="text/javascript" src="./lib/versionKit.js"></script>
@@ -101,6 +102,11 @@
                 <div class="mdc-card" id="card-stats-rejected" hidden>
                     <span class="mdc-typography--headline6 margin-h--4">Stats: Rejected</span>
                     <div class="container-chart"><canvas class="canvas-chart--v"></canvas></div>
+                </div>
+                <!-- Submissions -->
+                <div class="mdc-card" id="card-submittions" hidden>
+                    <span class="mdc-typography--headline6 margin-h--4">Submissions</span>
+                    <div class="container-chart"><canvas class="canvas-chart--h"></canvas></div>
                 </div>
                 <!-- Quotas -->
                 <div class="mdc-card" id="card-quotas" hidden>
