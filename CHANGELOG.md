@@ -1,6 +1,21 @@
 # Changelog
 
 ```markdown
+## [0.5.0] - 2020-05-22
+Introduce Dashboard, a view to show map and statistics
+
+### Added
+- Stats: Type card
+- Stats: Rejected card
+- Submissions card
+- Quotas card
+
+### Changed
+- A dashboard with map, filter and more cards
+- Status & About dialog -> About dialog
+```
+
+```markdown
 ## [0.4.22] - 2020-05-21
 Minor improvement and bugs fixed
 

@@ -12,6 +12,7 @@
         <link rel="apple-touch-icon" sizes="167x167" href="./src/icon-167.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="./src/icon-180.png" />
         <link rel="manifest" href="./manifest.json" />
+
         <!-- Stylesheet -->
         <link type="text/css" rel="stylesheet" href="./css/extended.css" />
         <link type="text/css" rel="stylesheet" href="./css/dark.css" />
@@ -20,21 +21,33 @@
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500|Material+Icons" />
         <!-- Mapbox -->
         <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css" />
+        <!-- Chart.js -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css" />
+
         <!-- Scripts -->
+        <!-- Mapbox  -->
+        <script defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js"></script>
+        <!-- MDC -->
         <script defer src="https://unpkg.com/material-components-web@5.1.0/dist/material-components-web.min.js"></script>
+        <!-- Chart.js -->
+        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.js"></script>
+        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+        <!-- Potori -->
         <script defer type="text/javascript" src="./lib/versionKit.js"></script>
         <script defer type="text/javascript" src="./lib/value.js"></script>
         <script defer type="text/javascript" src="./lib/toolkit.js"></script>
         <script defer type="text/javascript" src="./lib/fileKit.js"></script>
         <script defer type="text/javascript" src="./lib/dialogKit.js"></script>
         <script defer type="text/javascript" src="./lib/mapKit.js"></script>
+        <script defer type="text/javascript" src="./lib/dashboard.js"></script>
         <script defer type="text/javascript" src="./lib/ui.js" onload="ui.init()"></script>
         <script defer type="text/javascript" src="./lib/auth.js"></script>
         <script defer type="text/javascript" src="./lib/firebaseKit.js"></script>
         <script defer type="text/javascript" src="./lib/process.js"></script>
-        <script defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js" onload="mapKit.load()"></script>
+        <!-- Firebase -->
         <script defer src="https://www.gstatic.com/firebasejs/5.10.1/firebase-app.js" onload="firebaseKit.init()"></script>
         <script defer src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js" onload="firebaseKit.loadReference()"></script>
+        <!-- GAPI -->
         <script defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};auth.handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
     </head>
     <body class="mdc-typography fullheight flex-box-col">
@@ -62,31 +75,57 @@
         </div>
 
         <div class="main-box">
-            <div id="map-main"></div>
-            <div id="cardList"></div>
+
+            <div id="dashboard">
+                <!-- Map -->
+                <div class="mdc-card" id="card-map">
+                    <div id="map-card-map"></div>
+                </div>
+                <!-- Filter -->
+                <div class="mdc-card" id="card-filter" hidden>
+                    <span class="mdc-typography--headline6">Filter</span>
+                    <span class="mdc-typography--subtitle1">Type</span>
+                    <div class="flex-box-row--nowrap" id="block-card-filter-type"></div>
+                    <span class="mdc-typography--subtitle1">Rejected</span>
+                    <div class="flex-box-row--wrap" id="block-card-filter-reason"></div>
+                </div>
+                <!-- Stats: Type -->
+                <div class="mdc-card" id="card-stats-type" hidden>
+                    <span class="mdc-typography--headline6">Stats: Type</span>
+                    <div class="container-chart"><canvas class="canvas-chart--v"></canvas></div>
+                </div>
+                <!-- Stats: Rejected -->
+                <div class="mdc-card" id="card-stats-rejected" hidden>
+                    <span class="mdc-typography--headline6">Stats: Rejected</span>
+                    <div class="container-chart"><canvas class="canvas-chart--v"></canvas></div>
+                </div>
+                <!-- Submissions -->
+                <div class="mdc-card" id="card-submittions" hidden>
+                    <span class="mdc-typography--headline6">Submissions</span>
+                    <div class="container-chart"><canvas class="canvas-chart--h"></canvas></div>
+                </div>
+                <!-- Quotas -->
+                <div class="mdc-card" id="card-quotas" hidden>
+                    <span class="mdc-typography--headline6">Quotas</span>
+                    <div class="container-chart"><canvas class="canvas-chart--h"></canvas></div>
+                </div>
+            </div>
+
+            <div id="card-list" class="view-hide"></div>
+
         </div>
         <!-- Dialogs -->
-        <!-- Status & About -->
-        <div class="mdc-dialog mdc-dialog--scrollable" role="dialog" aria-modal="true" id="dialog-status">
+        <!-- About -->
+        <div class="mdc-dialog mdc-dialog--scrollable" role="dialog" aria-modal="true" id="dialog-about">
             <div class="mdc-dialog__container">
                 <div class="mdc-dialog__surface">
-                    <h2 class="mdc-dialog__title">Status & About</h2>
-                    <div class="mdc-dialog__content flex-box-row--wrap">
+                    <h2 class="mdc-dialog__title">About</h2>
+                    <div class="mdc-dialog__content flex-box-col">
 
-                        <div class="flex-box-col margin-h--4 flex-grow--1" id="block-dialog-status-type">
-                            <span class="mdc-typography--headline6">Type</span>
-                        </div>
+                        <span class="mdc-typography--body2"><a target="_blank" rel="noopener" title="Intro" href="./intro">Intro & Privacy</a></span>
+                        <span class="mdc-typography--body2"><a href="https://github.com/lucka-me/potori" target="_blank" rel="noopener" title="GitHub">GitHub Repo</a></span>
+                        <span class="mdc-typography--body2"><a href="https://github.com/lucka-me/potori/blob/master/CHANGELOG.md" target="_blank" title="Changelog" id="text-version"></a> by <a href="https://lucka.moe" target="_blank" rel="noopener" title="Blog" >Lucka</a></span>
 
-                        <div class="flex-box-col margin-h--4 flex-grow--1" id="block-dialog-status-rejectedReason">
-                            <span class="mdc-typography--headline6">Rejected Reason</span>
-                        </div>
-
-                        <div class="flex-box-col margin-h--4 flex-grow--1 fullwidth">
-                            <span class="mdc-typography--headline6">About</span>
-                            <span class="mdc-typography--body2"><a target="_blank" rel="noopener" title="Intro" href="./intro">Intro & Privacy</a></span>
-                            <span class="mdc-typography--body2"><a href="https://github.com/lucka-me/potori" target="_blank" rel="noopener" title="GitHub">GitHub Repo</a></span>
-                            <span class="mdc-typography--body2"><a href="https://github.com/lucka-me/potori/blob/master/CHANGELOG.md" target="_blank" title="Changelog" id="dialogStatusVersion"></a> by <a href="https://lucka.moe" target="_blank" rel="noopener" title="Blog" >Lucka</a></span>
-                        </div>
                     </div>
                     <footer class="mdc-dialog__actions">
                         <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="close" data-mdc-dialog-initial-focus>
@@ -122,7 +161,7 @@
                                     <div class="mdc-notched-outline__trailing"></div>
                                 </div>
                             </div>
-                            <div class="mdc-select mdc-select--outlined margin-v--8 margin-h--4" id="select-dialog-details-rejectedReason">
+                            <div class="mdc-select mdc-select--outlined margin-v--8 margin-h--4" id="select-dialog-details-reason">
                                 <div class="mdc-select__anchor">
                                     <i class="mdc-select__dropdown-icon"></i>
                                     <div class="mdc-select__selected-text"></div>
@@ -210,7 +249,7 @@
         </div>
 
         <!-- Templates -->
-        <template id="template-card">
+        <template id="template-card-portal">
             <div class="mdc-card">
                 <div class="mdc-card__primary-action">
                     <div class="mdc-card__media mdc-card__media--content">
@@ -250,7 +289,7 @@
         </template>
 
         <template id="template-switchBox">
-            <div class="mdc-switch-box">
+            <div class="mdc-switch-box margin-h--4">
                 <div class="mdc-switch mdc-switch--checked">
                     <div class="mdc-switch__track"></div>
                     <div class="mdc-switch__thumb-underlay">
@@ -259,7 +298,7 @@
                         </div>
                     </div>
                 </div>
-                <label><i class="material-icons"></i> <span></span></label>
+                <label></label>
             </div>
         </template>
 

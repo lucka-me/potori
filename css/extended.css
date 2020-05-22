@@ -4,10 +4,13 @@
 
     --color-pending: #CAAF85;
     --color-pending--dark: #988058;
+    --color-pending--light: #fEE1B5;
     --color-accepted: #35C572;
     --color-accepted--dark: #009345;
+    --color-accepted--light: #71F9A1;
     --color-rejected: #B0373C;
     --color-rejected--dark: #7A0016;
+    --color-rejected--light: #E76866;
 }
 
 .status-pending  { color: var(--color-pending ) !important; }
@@ -27,6 +30,7 @@ code { font-size: 14px; }
 .margin-h--4 { margin-left: 4px; margin-right: 4px; }
 .margin-v--8 { margin-top: 8px; margin-bottom: 8px; }
 
+.padding--8 { padding: 8px; }
 .padding--16 { padding: 16px; }
 
 /* Flexbox */
@@ -42,8 +46,11 @@ code { font-size: 14px; }
 .flex-align-items--start  { align-items: flex-start; }
 .flex-align-items--center { align-items: center; }
 /* Item */
+.flex--1 { flex: 1; }
+.flex--2 { flex: 2; }
 .flex-grow--1 { flex-grow: 1; }
-.flex-shrink--1 { flex-shrink: 1; }
+.flex-grow--2 { flex-grow: 2; }
+.flex-shrink--1 { flex-shrink: 1 !important; }
 
 /* Contents */
 html { height: 100%; }
@@ -65,6 +72,8 @@ body.fullheight {
 
 .logo { height: 32px; }
 
+#button-appBar-view { display: none; }
+
 .mdc-linear-progress__bar-inner {
     background-color: var(--mdc-theme-secondary) !important;
 }
@@ -76,34 +85,106 @@ body.fullheight {
     flex-flow: row wrap;
 }
 
-/* Optimize map and card list for mobile */
-@media screen and (max-width: 600px) {
-    #map-main { height: 30% !important; }
-    #cardList { height: 70% !important; }
+.main-box > div {
+    height: 100%;
+    box-sizing: border-box;
 }
 
-/* Map */
-#map-main {
+/* Dashboard */
+#dashboard {
     flex: 2;
-    height: 100%;
-    min-width: 300px;
-}
 
-/* Card List */
-#cardList {
-    flex: 1;
     display: flex;
-    flex-flow: column nowrap;
+    flex-flow: row wrap;
+    align-items: flex-start;
     align-content: flex-start;
+
+    padding: 4px;
+
     overflow-y: scroll;
-    min-width: 300px;
-    height: 100%;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
 }
 
-#cardList > :first-child { margin-top:    8px !important; }
-#cardList > :last-child  { margin-bottom: 8px !important; }
+#dashboard > .mdc-card {
+    margin: 4px !important;
+}
+
+.container-chart {
+    flex-grow: 1;
+    position: relative;
+}
+
+canvas.canvas-chart--h { width: 100%  !important; }
+canvas.canvas-chart--v { height: 100% !important; }
+
+/* Map */
+#card-map {
+    flex: 3; flex-shrink: 1;
+    height: 200px;
+    min-width: 300px;
+}
+
+#map-card-map {
+    width: 100%;
+    height: 100%;
+    clip-path: inset(100% round 4px);
+    -webkit-clip-path: inset(0 round 4px);
+}
+
+/* Filter */
+#card-filter {
+    flex: 1; flex-shrink: 0;
+    padding: 8px;
+    min-height: 200px;
+}
+
+/* Stats: Type */
+#card-stats-type {
+    flex: 1; flex-shrink: 1;
+    padding: 8px;
+    height: 200px;
+    min-width: 200px;
+}
+
+/* Stats: Rejected */
+#card-stats-rejected {
+    flex: 2; flex-shrink: 1;
+    padding: 8px;
+    height: 200px;
+    min-width: 250px;
+}
+
+/* Submittions */
+#card-submittions {
+    flex: 3; flex-shrink: 1;
+    padding: 8px;
+    height: 200px;
+    min-width: 300px;
+}
+
+/* Quotas */
+#card-quotas {
+    flex: 2; flex-shrink: 1;
+    padding: 8px;
+    height: 200px;
+    min-width: 200px;
+}
+
+/* Card List */
+#card-list {
+    flex: 1;
+    display: flex;
+    flex-flow: column nowrap;
+    align-content: flex-start;
+
+    min-width: 300px;
+    padding: 4px;
+
+    overflow-y: scroll;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+}
 
 /* Card */
 .mdc-card {
@@ -170,7 +251,7 @@ textarea.code {
 }
 
 .mdc-switch-box > label {
-    margin-left: 1em;
+    margin-left: 0.3em;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -178,3 +259,9 @@ textarea.code {
 
 /* Data Table */
 .mdc-data-table__cell--wrap { white-space: normal !important; }
+
+/* Mobile View */
+@media screen and (max-width: 600px) {
+    .view-hide { display: none !important; }
+    #button-appBar-view { display: block; }
+}
