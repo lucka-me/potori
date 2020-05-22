@@ -17,15 +17,17 @@ Since Niantic launched the Niantic Wayfarer which contains a nomination manager,
 
 ## Dependencies
 - [Material Components Web](https://github.com/material-components/material-components-web)  
-  Provides Material Design UI.
+  Material Design UI.
 - [Gmail API](https://developers.google.com/gmail/api/)  
-  Access to Gmail inbox.
+  Access Gmail inbox.
 - [Mapbox GL JS API](https://docs.mapbox.com/mapbox-gl-js/overview/)  
-  Provides the map.
+  Display map.
+- [Chart.js](https://www.chartjs.org)  
+  Display charts.
 - [Google Drive API](https://developers.google.com/drive/api/v3/about-sdk)  
   Save / load data in Google Drive.
 - [Firebase JavaScript SDK](https://firebase.google.com/docs/web/setup)  
-  Access to Brainstorming database.
+  Access Brainstorming database.
 
 ## Changelog
 See [CHANGELOG.md](./CHANGELOG.md).
