@@ -1,7 +1,7 @@
 # Changelog
 
 ```markdown
-## [0.5.0] - 2020-05-TBA
+## [0.5.0] - 2020-05-22
 Introduce Dashboard, a view to show map and statistics
 
 ### Added
@@ -11,7 +11,7 @@ Introduce Dashboard, a view to show map and statistics
 - Quotas card
 
 ### Changed
-- A dashboard with map, filter and more cards 
+- A dashboard with map, filter and more cards
 - Status & About dialog -> About dialog
 ```
 
