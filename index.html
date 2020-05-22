@@ -83,34 +83,30 @@
                 </div>
                 <!-- Filter -->
                 <div class="mdc-card" id="card-filter" hidden>
-                    <span class="mdc-typography--headline6 margin-h--4">Filter</span>
-                    <div class="flex-box-row--wrap">
-                        <div class="flex-box-col margin-h--4 flex-grow--1" id="block-card-filter-type">
-                            <span class="mdc-typography--subtitle1">Type</span>
-                        </div>
-                        <div class="flex-box-col margin-h--4 flex-grow--1" id="block-card-filter-reason">
-                            <span class="mdc-typography--subtitle1">Rejected</span>
-                        </div>
-                    </div>
+                    <span class="mdc-typography--headline6">Filter</span>
+                    <span class="mdc-typography--subtitle1">Type</span>
+                    <div class="flex-box-row--nowrap" id="block-card-filter-type"></div>
+                    <span class="mdc-typography--subtitle1">Rejected</span>
+                    <div class="flex-box-row--wrap" id="block-card-filter-reason"></div>
                 </div>
                 <!-- Stats: Type -->
                 <div class="mdc-card" id="card-stats-type" hidden>
-                    <span class="mdc-typography--headline6 margin-h--4">Stats: Type</span>
+                    <span class="mdc-typography--headline6">Stats: Type</span>
                     <div class="container-chart"><canvas class="canvas-chart--v"></canvas></div>
                 </div>
                 <!-- Stats: Rejected -->
                 <div class="mdc-card" id="card-stats-rejected" hidden>
-                    <span class="mdc-typography--headline6 margin-h--4">Stats: Rejected</span>
+                    <span class="mdc-typography--headline6">Stats: Rejected</span>
                     <div class="container-chart"><canvas class="canvas-chart--v"></canvas></div>
                 </div>
                 <!-- Submissions -->
                 <div class="mdc-card" id="card-submittions" hidden>
-                    <span class="mdc-typography--headline6 margin-h--4">Submissions</span>
+                    <span class="mdc-typography--headline6">Submissions</span>
                     <div class="container-chart"><canvas class="canvas-chart--h"></canvas></div>
                 </div>
                 <!-- Quotas -->
                 <div class="mdc-card" id="card-quotas" hidden>
-                    <span class="mdc-typography--headline6 margin-h--4">Quotas</span>
+                    <span class="mdc-typography--headline6">Quotas</span>
                     <div class="container-chart"><canvas class="canvas-chart--h"></canvas></div>
                 </div>
             </div>
@@ -293,7 +289,7 @@
         </template>
 
         <template id="template-switchBox">
-            <div class="mdc-switch-box">
+            <div class="mdc-switch-box margin-h--4">
                 <div class="mdc-switch mdc-switch--checked">
                     <div class="mdc-switch__track"></div>
                     <div class="mdc-switch__thumb-underlay">

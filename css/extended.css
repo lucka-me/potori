@@ -134,9 +134,8 @@ canvas.canvas-chart--v { height: 100% !important; }
 
 /* Filter */
 #card-filter {
-    flex: 2; flex-shrink: 1;
+    flex: 1; flex-shrink: 0;
     padding: 8px;
-    min-width: 200px;
     min-height: 200px;
 }
 
@@ -252,7 +251,7 @@ textarea.code {
 }
 
 .mdc-switch-box > label {
-    margin-left: 0.5em;
+    margin-left: 0.3em;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
