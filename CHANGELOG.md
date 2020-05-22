@@ -1,8 +1,8 @@
 # Changelog
 
 ```markdown
-## [0.TBA] - 2020-TBA
-TBA
+## [0.5.0] - 2020-05-TBA
+Introduce Dashboard, a view to show map and statistics
 
 ### Added
 - Stats: Type card
