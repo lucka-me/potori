@@ -6,6 +6,7 @@ TBA
 
 ### Changed
 - Submissions card -> Count by Month card including results
+- Card style: outlined
 ```
 
 ```markdown
