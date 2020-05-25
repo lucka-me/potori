@@ -1,14 +1,20 @@
 # Changelog
 
 ```markdown
-## [0.5.2] - 2020-TBA
-TBA
+## [0.5.2] - 2020-05-25
+Statistic for Brainstorming data
 
 ### Added
 - Save, open, update and download BS data
+- Brainstorming card
+- BS: Rates card
 
 ### Changed
 - Minor code optimized
+
+### Fixed
+- Error: Style is not done loading
+- Parsing portals file always fail
 ```
 
 ```markdown
