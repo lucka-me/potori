@@ -1,6 +1,24 @@
 # Changelog
 
 ```markdown
+## [0.5.2] - 2020-05-25
+Statistic for Brainstorming data
+
+### Added
+- Save, open, update and download BS data
+- Brainstorming card
+- BS: Rates card
+
+### Changed
+- Lite version is able to query location from local bs data
+- Minor code optimized
+
+### Fixed
+- Error: Style is not done loading
+- Parsing portals file always fail
+```
+
+```markdown
 ## [0.5.1] - 2020-05-25
 Submissions card -> Count by Month card
 

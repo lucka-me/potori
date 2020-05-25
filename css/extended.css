@@ -166,6 +166,19 @@ canvas.canvas-chart--v { height: 100% !important; }
     min-width: 200px;
 }
 
+/* BS: Basic */
+#card-bs-basic {
+    flex: 2; flex-shrink: 1;
+    min-width: 200px;
+}
+
+/* BS: Rates */
+#card-bs-rates {
+    flex: 2; flex-shrink: 1;
+    padding: 8px;
+    min-width: 250px;
+}
+
 /* Card List */
 #card-list {
     flex: 1;
