@@ -1,6 +1,14 @@
 # Changelog
 
 ```markdown
+## [0.5.2] - 2020-TBA
+TBA
+
+### Changed
+- Minor code optimized
+```
+
+```markdown
 ## [0.5.1] - 2020-05-25
 Submissions card -> Count by Month card
 
