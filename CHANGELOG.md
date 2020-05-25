@@ -4,6 +4,9 @@
 ## [0.5.2] - 2020-TBA
 TBA
 
+### Added
+- Save, open, update and download BS data
+
 ### Changed
 - Minor code optimized
 ```
