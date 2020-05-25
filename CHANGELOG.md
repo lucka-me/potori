@@ -1,6 +1,14 @@
 # Changelog
 
 ```markdown
+## [0.5.3] - 2020-05-25
+Fixed lite version can not finish process
+
+### Fixed
+- Query lntLat can't finish in lite version
+```
+
+```markdown
 ## [0.5.2] - 2020-05-25
 Statistic for Brainstorming data
 
