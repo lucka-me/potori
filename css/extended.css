@@ -107,6 +107,7 @@ body.fullheight {
 }
 
 #dashboard > .mdc-card {
+    height: 200px;
     margin: 4px !important;
 }
 
@@ -121,7 +122,6 @@ canvas.canvas-chart--v { height: 100% !important; }
 /* Map */
 #card-map {
     flex: 3; flex-shrink: 1;
-    height: 200px;
     min-width: 300px;
 }
 
@@ -136,14 +136,12 @@ canvas.canvas-chart--v { height: 100% !important; }
 #card-filter {
     flex: 1; flex-shrink: 0;
     padding: 8px;
-    min-height: 200px;
 }
 
 /* Stats: Type */
 #card-stats-type {
     flex: 1; flex-shrink: 1;
     padding: 8px;
-    height: 200px;
     min-width: 200px;
 }
 
@@ -151,15 +149,13 @@ canvas.canvas-chart--v { height: 100% !important; }
 #card-stats-rejected {
     flex: 2; flex-shrink: 1;
     padding: 8px;
-    height: 200px;
     min-width: 250px;
 }
 
-/* Submittions */
-#card-submittions {
+/* Counts by Month */
+#card-count-month {
     flex: 3; flex-shrink: 1;
     padding: 8px;
-    height: 200px;
     min-width: 300px;
 }
 
@@ -167,7 +163,6 @@ canvas.canvas-chart--v { height: 100% !important; }
 #card-quotas {
     flex: 2; flex-shrink: 1;
     padding: 8px;
-    height: 200px;
     min-width: 200px;
 }
 

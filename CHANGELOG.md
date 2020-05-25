@@ -1,6 +1,16 @@
 # Changelog
 
 ```markdown
+## [0.5.1] - 2020-05-25
+TBA
+
+### Changed
+- Submissions card -> Count by Month card including results
+- Card style: outlined
+- Minor code optimized
+```
+
+```markdown
 ## [0.5.0] - 2020-05-22
 Introduce Dashboard, a view to show map and statistics
 
