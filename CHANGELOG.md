@@ -10,6 +10,7 @@ Statistic for Brainstorming data
 - BS: Rates card
 
 ### Changed
+- Lite version is able to query location from local bs data
 - Minor code optimized
 
 ### Fixed
