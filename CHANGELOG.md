@@ -2,7 +2,7 @@
 
 ```markdown
 ## [0.5.1] - 2020-05-25
-TBA
+Submissions card -> Count by Month card
 
 ### Changed
 - Submissions card -> Count by Month card including results
