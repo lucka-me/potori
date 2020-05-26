@@ -6,6 +6,7 @@ TBA
 
 ### Changed
 - Display legend in Stats: Type card
+- Update Brainstorming card
 ```
 
 ```markdown
