@@ -10,6 +10,9 @@ TBA
 ### Changed
 - Display legend in Stats: Type card
 - Update Brainstorming card
+
+### Fixed
+- Map doesn't update after saving portal details
 ```
 
 ```markdown
