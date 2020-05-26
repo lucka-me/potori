@@ -1,6 +1,14 @@
 # Changelog
 
 ```markdown
+## [0.5.4] - 2020-05-TBA
+TBA
+
+### Changed
+- Display legend in Stats: Type card
+```
+
+```markdown
 ## [0.5.3] - 2020-05-25
 Fixed lite version can not finish process
 

@@ -140,9 +140,9 @@ canvas.canvas-chart--v { height: 100% !important; }
 
 /* Stats: Type */
 #card-stats-type {
-    flex: 1; flex-shrink: 1;
+    flex: 2; flex-shrink: 1;
     padding: 8px;
-    min-width: 200px;
+    min-width: 250px;
 }
 
 /* Stats: Rejected */
