@@ -4,6 +4,9 @@
 ## [0.5.4] - 2020-05-TBA
 TBA
 
+### Add
+- Query lastTime from Bs when open Detail dialog of pending portal
+
 ### Changed
 - Display legend in Stats: Type card
 - Update Brainstorming card
