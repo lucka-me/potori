@@ -33,6 +33,8 @@ code { font-size: 14px; }
 .padding--8 { padding: 8px; }
 .padding--16 { padding: 16px; }
 
+.text-nowrap { white-space: nowrap; }
+
 /* Flexbox */
 .flex-box { display: flex; }
 .flex-box-row--wrap   { display: flex; flex-flow: row      wrap; }
@@ -119,6 +121,12 @@ body.fullheight {
 canvas.canvas-chart--h { width: 100%  !important; }
 canvas.canvas-chart--v { height: 100% !important; }
 
+.stats-num {
+    font-size: 4.5rem;
+    line-height: 4.5rem;
+    font-weight: 300;
+}
+
 /* Map */
 #card-map {
     flex: 3; flex-shrink: 1;
@@ -140,9 +148,9 @@ canvas.canvas-chart--v { height: 100% !important; }
 
 /* Stats: Type */
 #card-stats-type {
-    flex: 1; flex-shrink: 1;
+    flex: 2; flex-shrink: 1;
     padding: 8px;
-    min-width: 200px;
+    min-width: 250px;
 }
 
 /* Stats: Rejected */
@@ -168,8 +176,7 @@ canvas.canvas-chart--v { height: 100% !important; }
 
 /* BS: Basic */
 #card-bs-basic {
-    flex: 2; flex-shrink: 1;
-    min-width: 200px;
+    flex: 1; flex-shrink: 1;
 }
 
 /* BS: Rates */
@@ -259,7 +266,7 @@ textarea.code {
 }
 
 .mdc-switch-box > label {
-    margin-left: 0.3em;
+    margin-left: 0.3rem;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;

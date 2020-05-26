@@ -1,6 +1,23 @@
 # Changelog
 
 ```markdown
+## [0.5.4] - 2020-05-26
+Bug fixed and minor enhancement
+
+### Add
+- Query lastTime from Bs when open Detail dialog of pending portal
+
+### Changed
+- Display legend in Stats: Type card
+- Update Brainstorming card
+
+### Fixed
+- Map doesn't update after saving portal details
+- Card doesn't follow filter after saving the portal details
+- Tooltips of radar chart display value as title
+```
+
+```markdown
 ## [0.5.3] - 2020-05-25
 Fixed lite version can not finish process
 
