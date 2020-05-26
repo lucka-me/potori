@@ -1,8 +1,8 @@
 # Changelog
 
 ```markdown
-## [0.5.4] - 2020-05-TBA
-TBA
+## [0.5.4] - 2020-05-26
+Bug fixed and minor enhancement
 
 ### Add
 - Query lastTime from Bs when open Detail dialog of pending portal
