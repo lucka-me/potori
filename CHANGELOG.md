@@ -14,6 +14,7 @@ TBA
 ### Fixed
 - Map doesn't update after saving portal details
 - Card doesn't follow filter after saving the portal details
+- Tooltips of radar chart display value as title
 ```
 
 ```markdown
