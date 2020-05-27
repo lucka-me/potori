@@ -7,6 +7,9 @@ Add new cards
 ### Add
 - Brainstorming Reviews card
 - process.analyseBs()
+
+### Changed
+- Code enhancement
 ```
 
 ```markdown
