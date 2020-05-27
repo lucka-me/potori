@@ -92,6 +92,11 @@ body.fullheight {
     box-sizing: border-box;
 }
 
+.mdc-card {
+    margin: 4px 8px;
+    flex-basis: auto;
+}
+
 /* Dashboard */
 #dashboard {
     flex: 2;
@@ -208,29 +213,28 @@ canvas.canvas-chart--v { height: 100% !important; }
     -webkit-overflow-scrolling: touch;
 }
 
-/* Card */
-.mdc-card {
-    margin: 4px 8px;
+/* Portal Card */
+.portal-card {
     flex-shrink: 0;
-    flex-basis: auto;
 }
 
-.mdc-card-info-box {
+.portal-card .info-box {
     padding: 8px;
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: column nowrap;
+    flex-grow: 1;
     align-items: flex-start;
     align-content: flex-start;
 }
 
-.mdc-card-info-content {
+.portal-card .info-content {
     margin-right: 8px;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
 }
 
-.mdc-card img {
+.portal-card img {
     object-fit: cover;
     object-position: center;
     width: 120px;

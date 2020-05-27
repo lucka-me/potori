@@ -64,7 +64,7 @@
         <header class="mdc-top-app-bar">
             <div class="mdc-top-app-bar__row">
                 <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-                    <img class="logo" src="./src/logo.svg"></img><span class="mdc-top-app-bar__title">Potori</span>
+                    <span class="mdc-top-app-bar__title">Potori</span>
                 </section>
                 <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end"></section>
             </div>
@@ -279,25 +279,25 @@
 
         <!-- Templates -->
         <template id="template-card-portal">
-            <div class="mdc-card mdc-card--outlined">
+            <div class="mdc-card mdc-card--outlined portal-card">
                 <div class="mdc-card__primary-action">
-                    <div class="mdc-card__media mdc-card__media--content">
-                        <div class="flex-box-row--nowrap">
-                            <img>
-                            <div class="mdc-card-info-box">
-                                <div class="mdc-typography--headline6 fullwidth"></div>
-                                <div class="mdc-typography--body2 mdc-card-info-content">
+                    <div class="flex-box-row--nowrap">
+                        <img/>
+                        <div class="info-box">
+                            <span class="mdc-typography--headline6"></span>
+                            <div class="mdc-typography--body2 flex-box-row--wrap">
+                                <span class="info-content">
                                     <i class="material-icons">arrow_upward</i><span class="margin-l--4" id="text-card-confirmed"></span>
-                                </div>
-                                <div class="mdc-typography--body2 mdc-card-info-content" id="box-card-restore">
+                                </span>
+                                <span class="info-content" id="box-card-restore">
                                     <i class="material-icons">restore</i><span class="margin-l--4" id="text-card-restore"></span>
-                                </div>
-                                <div class="mdc-typography--body2 mdc-card-info-content">
+                                </span>
+                                <span class="info-content">
                                     <i class="material-icons">access_time</i><span class="margin-l--4" id="text-card-interval"></span>
-                                </div>
-                                <div class="mdc-typography--body2 mdc-card-info-content" id="box-card-result">
+                                </span>
+                                <span class="info-content" id="box-card-result">
                                     <i class="material-icons" id="icon-card-result">check</i><span class="margin-l--4" id="text-card-result"></span>
-                                </div>
+                                </span>
                             </div>
                         </div>
                     </div>

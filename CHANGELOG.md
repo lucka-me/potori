@@ -7,6 +7,7 @@ Add new cards
 ### Add
 - Brainstorming Reviews card
 - process.analyseBs()
+- Alert when update bs data completed
 
 ### Changed
 - Code enhancement
