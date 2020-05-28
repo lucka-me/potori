@@ -1,6 +1,19 @@
 # Changelog
 
 ```markdown
+## [0.5.5] - 2020-05-TBA
+Add new cards
+
+### Add
+- Brainstorming Reviews card
+- process.analyseBs()
+- Alert when update bs data completed
+
+### Changed
+- Code enhancement
+```
+
+```markdown
 ## [0.5.4] - 2020-05-26
 Bug fixed and minor enhancement
 
