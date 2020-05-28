@@ -126,11 +126,7 @@ body.fullheight {
 canvas.canvas-chart--h { width: 100%  !important; }
 canvas.canvas-chart--v { height: 100% !important; }
 
-.stats-num {
-    font-size: 4.5rem;
-    line-height: 4.5rem;
-    font-weight: 300;
-}
+.stats-num { font-weight: 300; }
 
 /* Map */
 #card-map {
@@ -184,11 +180,16 @@ canvas.canvas-chart--v { height: 100% !important; }
     flex: 1; flex-shrink: 1;
 }
 
+#card-bs-basic .stats-num {
+    font-size: 4.5rem;
+    line-height: 4.5rem;
+}
+
 /* BS: Rates */
 #card-bs-rates {
-    flex: 2; flex-shrink: 1;
+    flex: 1; flex-shrink: 1;
     padding: 8px;
-    min-width: 250px;
+    min-width: 240px;
 }
 
 /* BS: Reviews */
@@ -196,6 +197,23 @@ canvas.canvas-chart--v { height: 100% !important; }
     flex: 3; flex-shrink: 1;
     padding: 8px;
     min-width: 300px;
+}
+
+/* BS: Synch */
+#card-bs-synch {
+    flex: 1; flex-shrink: 1;
+    justify-content: space-between;
+    padding: 8px;
+}
+
+#card-bs-synch .stats-num {
+    font-size: 6rem;
+    line-height: 6rem;
+}
+
+#card-bs-synch .stats-num + span {
+    font-size: 2rem;
+    line-height: 2rem;
 }
 
 /* Card List */
@@ -287,7 +305,7 @@ textarea.code {
 .mdc-data-table__cell--wrap { white-space: normal !important; }
 
 /* Mobile View */
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 620px) {
     .view-hide { display: none !important; }
     #button-appBar-view { display: block; }
 }

@@ -49,6 +49,7 @@
         <script defer type="text/javascript" src="./lib/dashboard/bs/basic.js"></script>
         <script defer type="text/javascript" src="./lib/dashboard/bs/rates.js"></script>
         <script defer type="text/javascript" src="./lib/dashboard/bs/reviews.js"></script>
+        <script defer type="text/javascript" src="./lib/dashboard/bs/synch.js"></script>
         <script defer type="text/javascript" src="./lib/ui.js" onload="ui.init()"></script>
         <script defer type="text/javascript" src="./lib/auth.js"></script>
         <script defer type="text/javascript" src="./lib/bsKit.js"></script>
@@ -122,7 +123,7 @@
 
                 <!-- BS: Basic -->
                 <div class="mdc-card mdc-card--outlined" id="card-bs-basic" hidden>
-                    <div class="flex-box-col padding--8 flex-grow--1">
+                    <div class="flex-box-col padding--8 flex-grow--1 flex-justify-content--between">
                         <span class="mdc-typography--headline6">Brainstorming</span>
                     </div>
                     <div class="mdc-card__actions">
@@ -140,6 +141,12 @@
                 <div class="mdc-card mdc-card--outlined" id="card-bs-reviews" hidden>
                     <span class="mdc-typography--headline6">Brainstorming Reviews</span>
                     <div class="container-chart"><canvas class="canvas-chart--h"></canvas></div>
+                </div>
+                <!-- BS: Synch -->
+                <div class="mdc-card mdc-card--outlined" id="card-bs-synch" hidden>
+                    <span class="mdc-typography--headline6">Brainstorming Synch</span>
+                    <span class="text-nowarp"><span class="stats-num">0.0</span><span>%</span></span>
+                    <span class="mdc-typography--caption text-nowarp">Reviews match the result</span>
                 </div>
 
             </div>
