@@ -1,12 +1,12 @@
 # Changelog
 
 ```markdown
-## [0.5.6] - 2020-05-TBA
-TBA
+## [0.5.6] - 2020-05-29
+UI improvement and bug fix
 
 ### Changed
 - Optimize the progress bar
-- Minor UI improvementw
+- Minor UI improvement
 
 ### Fixed
 - Map bound incorrect in desktop devices
