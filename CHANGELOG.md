@@ -1,6 +1,18 @@
 # Changelog
 
 ```markdown
+## [0.5.6] - 2020-05-29
+UI improvement and bug fix
+
+### Changed
+- Optimize the progress bar
+- Minor UI improvement
+
+### Fixed
+- Map bound incorrect in desktop devices
+```
+
+```markdown
 ## [0.5.5] - 2020-05-28
 Add new cards
 

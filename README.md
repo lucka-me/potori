@@ -1,7 +1,8 @@
 <h1 align=center><img height=90px src="./src/logo-bg.svg" link="#"/></h1>
 
 [![Release](https://img.shields.io/github/v/release/lucka-me/potori?include_prereleases)](https://github.com/lucka-me/potori/releases/latest "Last release") [![Demo](https://img.shields.io/website?down_message=offline&up_message=online&url=https%3A%2F%2Flucka.moe%2Fpotori)](https://lucka.moe/potori "Demo") [![](https://img.shields.io/badge/author-Lucka-2578B5.svg)](https://lucka.moe "Author") [![License](https://img.shields.io/github/license/lucka-me/potori)](./LICENSE "License")  
-![](https://img.shields.io/badge/safari-support-brightgreen.svg) ![](https://img.shields.io/badge/chrome-support-brightgreen.svg) ![](https://img.shields.io/badge/firefox-support-brightgreen.svg)<!-- ![](https://img.shields.io/badge/edge-support-brightgreen.svg) ![](https://img.shields.io/badge/ie-broken-red.svg) ![](https://img.shields.io/badge/opera-support-brightgreen.svg)-->
+![](https://img.shields.io/badge/safari-support-brightgreen.svg) ![](https://img.shields.io/badge/chrome-support-brightgreen.svg) ![](https://img.shields.io/badge/firefox-support-brightgreen.svg)<!-- ![](https://img.shields.io/badge/edge-support-brightgreen.svg) ![](https://img.shields.io/badge/ie-broken-red.svg) ![](https://img.shields.io/badge/opera-support-brightgreen.svg)-->  
+[![Telegram Channel](https://img.shields.io/badge/telegram-channel-37aee2)](https://t.me/potori "Telegram Channel")
 
 ## Description
 Gather and visualize your Portal nominations from your Gmail inbox.

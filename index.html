@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
     <head>
         <title>Potori</title>
-        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1"/>
+        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no"/>
         <meta name="apple-mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black" />
         <meta name=”theme-color” content="#3b1e5f" />
@@ -134,8 +134,12 @@
                         <span class="mdc-typography--headline6">Brainstorming</span>
                     </div>
                     <div class="mdc-card__actions">
-                        <div class="mdc-card__action-icons">
-                            <button class="material-icons mdc-icon-button mdc-card__action mdc-card__action--icon" title="Update" id="button-card-bs-update">refresh</button>
+                        <div class="mdc-card__action-buttons">
+                            <button class="mdc-button mdc-card__action mdc-card__action--button" id="button-card-bs-update">
+                                <div class="mdc-button__ripple"></div>
+                                <i class="material-icons mdc-button__icon" aria-hidden="true">refresh</i>
+                                <span class="mdc-button__label">Refresh</span>
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -144,16 +148,16 @@
                     <span class="mdc-typography--headline6">Brainstorming Rates</span>
                     <div class="container-chart"><canvas class="canvas-chart--h"></canvas></div>
                 </div>
-                <!-- BS: Reviews -->
-                <div class="mdc-card mdc-card--outlined" id="card-bs-reviews" hidden>
-                    <span class="mdc-typography--headline6">Brainstorming Reviews</span>
-                    <div class="container-chart"><canvas class="canvas-chart--h"></canvas></div>
-                </div>
                 <!-- BS: Synch -->
                 <div class="mdc-card mdc-card--outlined" id="card-bs-synch" hidden>
                     <span class="mdc-typography--headline6">Brainstorming Synch</span>
                     <span class="text-nowarp"><span class="stats-num">0.0</span><span>%</span></span>
-                    <span class="mdc-typography--caption text-nowarp">Reviews match the result</span>
+                    <span class="mdc-typography--body1 text-nowarp">Reviews match the result</span>
+                </div>
+                <!-- BS: Reviews -->
+                <div class="mdc-card mdc-card--outlined" id="card-bs-reviews" hidden>
+                    <span class="mdc-typography--headline6">Brainstorming Reviews</span>
+                    <div class="container-chart"><canvas class="canvas-chart--h"></canvas></div>
                 </div>
 
             </div>
@@ -319,6 +323,7 @@
                 <div class="mdc-card__actions">
                     <div class="mdc-card__action-buttons">
                         <button class="mdc-button mdc-card__action mdc-card__action--button" id="button-card-status">
+                            <div class="mdc-button__ripple"></div>
                             <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
                             <span class="mdc-button__label">Accepted</span>
                         </button>
