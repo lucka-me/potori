@@ -6,6 +6,9 @@ TBA
 
 ### Changed
 - Optimize the progress bar
+
+### Fixed
+- Map bound incorrect in desktop devices
 ```
 
 ```markdown
