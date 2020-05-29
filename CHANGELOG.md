@@ -6,6 +6,7 @@ TBA
 
 ### Changed
 - Optimize the progress bar
+- Minor UI improvementw
 
 ### Fixed
 - Map bound incorrect in desktop devices
