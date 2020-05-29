@@ -1,6 +1,14 @@
 # Changelog
 
 ```markdown
+## [0.5.6] - 2020-05-TBA
+TBA
+
+### Changed
+- Optimize the progress bar
+```
+
+```markdown
 ## [0.5.5] - 2020-05-28
 Add new cards
 
