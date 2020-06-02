@@ -169,23 +169,6 @@ canvas.canvas-chart--v { height: 100% !important; }
     min-width: 300px;
 }
 
-/* Quotas */
-#card-quotas {
-    flex: 2; flex-shrink: 1;
-    padding: 8px;
-    min-width: 200px;
-}
-
-/* BS: Basic */
-#card-bs-basic {
-    flex: 1; flex-shrink: 1;
-}
-
-#card-bs-basic .stats-num {
-    font-size: 4.5rem;
-    line-height: 4.5rem;
-}
-
 /* Card List */
 #card-list {
     flex: 1;
