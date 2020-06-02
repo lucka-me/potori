@@ -186,13 +186,6 @@ canvas.canvas-chart--v { height: 100% !important; }
     line-height: 4.5rem;
 }
 
-/* BS: Rates */
-#card-bs-rates {
-    flex: 1; flex-shrink: 1;
-    padding: 8px;
-    min-width: 240px;
-}
-
 /* Card List */
 #card-list {
     flex: 1;
