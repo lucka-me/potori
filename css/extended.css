@@ -193,23 +193,6 @@ canvas.canvas-chart--v { height: 100% !important; }
     min-width: 240px;
 }
 
-/* BS: Synch */
-#card-bs-synch {
-    flex: 1; flex-shrink: 1;
-    justify-content: space-between;
-    padding: 8px;
-}
-
-#card-bs-synch .stats-num {
-    font-size: 6rem;
-    line-height: 6rem;
-}
-
-#card-bs-synch .stats-num + span {
-    font-size: 2rem;
-    line-height: 2rem;
-}
-
 /* Card List */
 #card-list {
     flex: 1;
