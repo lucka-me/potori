@@ -1,6 +1,14 @@
 # Changelog
 
 ```markdown
+## [0.5.7] - 2020-06-TBA
+TBA
+
+### Fixed
+- Synch includes reviews for pending portals
+```
+
+```markdown
 ## [0.5.6] - 2020-05-29
 UI improvement and bug fix
 
