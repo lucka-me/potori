@@ -100,68 +100,6 @@
             <div id="dashboard"></div>
             <div id="card-list" class="view-hide"></div>
         </div>
-        <!-- Dialogs -->
-        <!-- Portal Detail -->
-        <div class="mdc-dialog mdc-dialog--scrollable" role="dialog" aria-modal="true" id="dialog-details">
-            <div class="mdc-dialog__container">
-                <div class="mdc-dialog__surface">
-                    <h2 class="mdc-dialog__title" data-mdc-dialog-initial-focus></h2>
-                    <img src="" id="dialogPortalImage">
-                    <div class="mdc-dialog__content">
-                        <div class="mdc-typography--body1 flex-box-row--nowrap flex-align-items--center">
-                            <i class="material-icons">arrow_upward</i><span class="margin-l--4" id="text-dialog-details-confirmedTime"></span>
-                        </div>
-                        
-                        <div class="flex-box-row--nowrap fullwidth flex-justify-content--around" id="block-dialog-details-status-radios"></div>
-
-                        <div class="flex-box-row--wrap">
-                            <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon margin-v--8 margin-h--4 flex-grow--1" id="field-dialog-details-result-datetime">
-                                <i class="material-icons mdc-text-field__icon mdc-text-field__icon--leading">event</i>
-                                <input type="datetime-local" class="mdc-text-field__input" id="input-dialog-details-result-datetime">
-                                <div class="mdc-notched-outline">
-                                    <div class="mdc-notched-outline__leading"></div>
-                                    <div class="mdc-notched-outline__notch">
-                                        <label for="input-dialog-details-result-datetime" class="mdc-floating-label">Result Time</label>
-                                    </div>
-                                    <div class="mdc-notched-outline__trailing"></div>
-                                </div>
-                            </div>
-                            <div class="mdc-select mdc-select--outlined margin-v--8 margin-h--4" id="select-dialog-details-reason">
-                                <div class="mdc-select__anchor">
-                                    <i class="mdc-select__dropdown-icon"></i>
-                                    <div class="mdc-select__selected-text"></div>
-                                    <div class="mdc-notched-outline">
-                                        <div class="mdc-notched-outline__leading"></div>
-                                        <div class="mdc-notched-outline__notch">
-                                            <label class="mdc-floating-label">Reason</label>
-                                        </div>
-                                        <div class="mdc-notched-outline__trailing"></div>
-                                      </div>
-                                </div>
-                                <div class="mdc-select__menu mdc-menu mdc-menu-surface">
-                                    <ul class="mdc-list"></ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flex-box-row--nowrap margin-v--8">
-                            <div class="flex-box-col flex-justify-content--around" id="box-bottons"></div>
-                            <div id="map-dialog-details"></div>
-                        </div>
-                        
-                    </div>
-                    <footer class="mdc-dialog__actions">
-                        <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="close">
-                            <span class="mdc-button__label">Close</span>
-                        </button>
-                        <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="save">
-                            <span class="mdc-button__label">Save</span>
-                        </button>
-                    </footer>
-                </div>
-            </div>
-            <div class="mdc-dialog__scrim"></div>
-        </div>
 
         <!-- Templates -->
         <template id="template-card-portal">
