@@ -50,6 +50,7 @@ code { font-size: 14px; }
 /* Item */
 .flex--1 { flex: 1; }
 .flex--2 { flex: 2; }
+.flex--3 { flex: 3; }
 .flex-grow--1 { flex-grow: 1; }
 .flex-grow--2 { flex-grow: 2; }
 .flex-shrink--1 { flex-shrink: 1 !important; }
@@ -190,13 +191,6 @@ canvas.canvas-chart--v { height: 100% !important; }
     flex: 1; flex-shrink: 1;
     padding: 8px;
     min-width: 240px;
-}
-
-/* BS: Reviews */
-#card-bs-reviews {
-    flex: 3; flex-shrink: 1;
-    padding: 8px;
-    min-width: 300px;
 }
 
 /* BS: Synch */
