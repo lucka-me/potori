@@ -42,37 +42,40 @@
     <script defer type="text/javascript" src="./lib/fileKit.js"></script>
 
     <script defer type="text/javascript" src="./lib/ui/eliKit.js"></script>
+    <script defer type="text/javascript" src="./lib/ui/prototype.js"></script>
 
-    <script defer type="text/javascript" src="./lib/ui/dialog/dialog.js"></script>
     <script defer type="text/javascript" src="./lib/ui/dialog/about.js"></script>
     <script defer type="text/javascript" src="./lib/ui/dialog/alert.js"></script>
     <script defer type="text/javascript" src="./lib/ui/dialog/details.js"></script>
     <script defer type="text/javascript" src="./lib/ui/dialog/import.js"></script>
+    <script defer type="text/javascript" src="./lib/ui/dialog/dialog.js"></script>
 
-    <script defer type="text/javascript" src="./lib/ui/dashboard/dashboard.js"></script>
+    <script defer type="text/javascript" src="./lib/ui/dashboard/bs/basic.js"></script>
+    <script defer type="text/javascript" src="./lib/ui/dashboard/bs/rates.js"></script>
+    <script defer type="text/javascript" src="./lib/ui/dashboard/bs/reviews.js"></script>
+    <script defer type="text/javascript" src="./lib/ui/dashboard/bs/synch.js"></script>
+    <script defer type="text/javascript" src="./lib/ui/dashboard/bs/bs.js"></script>
+
     <script defer type="text/javascript" src="./lib/ui/dashboard/map.js"></script>
     <script defer type="text/javascript" src="./lib/ui/dashboard/filter.js"></script>
     <script defer type="text/javascript" src="./lib/ui/dashboard/statsType.js"></script>
     <script defer type="text/javascript" src="./lib/ui/dashboard/statsRejected.js"></script>
     <script defer type="text/javascript" src="./lib/ui/dashboard/countMonth.js"></script>
     <script defer type="text/javascript" src="./lib/ui/dashboard/quotas.js"></script>
-    <script defer type="text/javascript" src="./lib/ui/dashboard/bs/bs.js"></script>
-    <script defer type="text/javascript" src="./lib/ui/dashboard/bs/basic.js"></script>
-    <script defer type="text/javascript" src="./lib/ui/dashboard/bs/rates.js"></script>
-    <script defer type="text/javascript" src="./lib/ui/dashboard/bs/reviews.js"></script>
-    <script defer type="text/javascript" src="./lib/ui/dashboard/bs/synch.js"></script>
+    <script defer type="text/javascript" src="./lib/ui/dashboard/dashboard.js"></script>
 
-    <script defer type="text/javascript" src="./lib/ui/ui.js"></script>
     <script defer type="text/javascript" src="./lib/ui/appBar.js"></script>
     <script defer type="text/javascript" src="./lib/ui/progress.js"></script>
     <script defer type="text/javascript" src="./lib/ui/dashboardKit.js"></script>
     <script defer type="text/javascript" src="./lib/ui/list.js"></script>
     <script defer type="text/javascript" src="./lib/ui/dialogKit.js"></script>
 
+    <script defer type="text/javascript" src="./lib/ui/ui.js" onload="ui.init()"></script>
+
     <script defer type="text/javascript" src="./lib/auth.js"></script>
     <script defer type="text/javascript" src="./lib/bsKit.js"></script>
     <script defer type="text/javascript" src="./lib/mariKit.js"></script>
-    <script defer type="text/javascript" src="./lib/process.js" onload="ui.init()"></script>
+    <script defer type="text/javascript" src="./lib/process.js"></script>
     <!-- Firebase -->
     <script defer src="https://www.gstatic.com/firebasejs/5.10.1/firebase-app.js" onload="bsKit.init()"></script>
     <script defer src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js" onload="bsKit.loadReference()"></script>
