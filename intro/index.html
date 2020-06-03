@@ -11,27 +11,22 @@
         <link rel="stylesheet" href="https://unpkg.com/material-components-web@5.1.0/dist/material-components-web.min.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500|Material+Icons" rel="stylesheet">
         <script defer src="https://unpkg.com/material-components-web@5.1.0/dist/material-components-web.min.js"></script>
+        
+        <script defer type="text/javascript" src="../lib/ui/eliKit.js"></script>
         <script defer type="text/javascript" src="../lib/i18n.js" onload="i18n.init()"></script>
     </head>
     <body class="mdc-typography">
         <header class=" mdc-top-app-bar">
             <div class="mdc-top-app-bar__row">
                 <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-                    <a class="logo" href="../"><img class="logo" src="../src/logo.svg"></img></a><span class="mdc-top-app-bar__title">
-                        Potori |
+                    <span class="mdc-top-app-bar__title">
+                        <a class="logo" href="../">Potori</a>
+                        |
                         <span lang="en">Intro & Privacy</span>
                         <span lang="zh-Hans" hidden>介绍 & 隐私</span>
                     </span>
                 </section>
-                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
-                    <button class="mdc-button mdc-button--unelevated mdc-top-app-bar__action-item--unbounded" id="button-appBar-language">
-                        <span class="mdc-button__label" id="label-button-appBar-language">English</span>
-                    </button>
-                    <div class="mdc-menu-surface--anchor">
-                        <div class="mdc-menu mdc-menu-surface" id="menu-language">
-                            <ul class="mdc-list" role="menu" aria-hidden="true" aria-orientation="vertical"></ul>
-                        </div>
-                    </div>
+                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
                 </section>
             </div>
         </header>

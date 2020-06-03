@@ -4,6 +4,9 @@
 ## [0.5.7] - 2020-06-TBA
 TBA
 
+### Changed
+- Build all HTML elements with eliKit
+
 ### Fixed
 - Synch includes reviews for pending portals
 ```
