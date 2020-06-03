@@ -27,6 +27,7 @@ code { font-size: 14px; }
 
 .margin-l--4 { margin-left: 4px; }
 .margin-l--8 { margin-left: 8px; }
+.margin-r--8 { margin-right: 8px;}
 .margin-h--4 { margin-left: 4px; margin-right: 4px; }
 .margin-v--8 { margin-top: 8px; margin-bottom: 8px; }
 
@@ -134,51 +135,6 @@ canvas.canvas-chart--v { height: 100% !important; }
     height: 100%;
     clip-path: inset(100% round 4px);
     -webkit-clip-path: inset(0 round 4px);
-}
-
-/* Card List */
-#card-list {
-    flex: 1;
-    display: flex;
-    flex-flow: column nowrap;
-    align-content: flex-start;
-
-    min-width: 300px;
-    padding: 4px;
-
-    overflow-y: scroll;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-}
-
-/* Portal Card */
-.portal-card {
-    flex-shrink: 0;
-}
-
-.portal-card .info-box {
-    padding: 8px;
-    display: flex;
-    flex-flow: column nowrap;
-    flex-grow: 1;
-    align-items: flex-start;
-    align-content: flex-start;
-}
-
-.portal-card .info-content {
-    margin-right: 8px;
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-}
-
-.portal-card img {
-    object-fit: cover;
-    object-position: center;
-    width: 120px;
-    min-width: 120px;
-    height: 120px;
-    min-height: 120px;
 }
 
 /* Dialog */
