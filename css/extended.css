@@ -121,11 +121,6 @@ canvas.canvas-chart--v { height: 100% !important; }
     flex-grow: 1;
 }
 
-#map-dialog-details {
-    min-height: 180px;
-    flex-grow: 1;
-}
-
 textarea.code {
     font-family: monospace;
     line-height: 1rem !important;
