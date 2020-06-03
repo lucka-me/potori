@@ -1,8 +1,11 @@
 # Changelog
 
 ```markdown
-## [0.5.7] - 2020-06-TBA
+## [0.6.0] - 2020-06-TBA
 TBA
+
+### Added
+- Automatically detect language in Intro
 
 ### Changed
 - Build all HTML elements with eliKit
