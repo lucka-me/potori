@@ -31,6 +31,7 @@ code { font-size: 14px; }
 .margin-h--4 { margin-left: 4px; margin-right: 4px; }
 .margin-v--8 { margin-top: 8px; margin-bottom: 8px; }
 
+.padding--4 { padding: 4px; }
 .padding--8 { padding: 8px; }
 .padding--16 { padding: 16px; }
 
@@ -48,6 +49,8 @@ code { font-size: 14px; }
 /* Cross Axis */
 .flex-align-items--start  { align-items: flex-start; }
 .flex-align-items--center { align-items: center; }
+/* Multi Axises */
+.flex-align-content--start { align-content: flex-start; }
 /* Item */
 .flex--1 { flex: 1; }
 .flex--2 { flex: 2; }
@@ -83,40 +86,13 @@ body.fullheight {
     background-color: var(--mdc-theme-secondary) !important;
 }
 
-.main-box {
-    flex: 1;
-    display: flex;
-    min-height: 0%;
-    flex-flow: row wrap;
-}
-
-.main-box > div {
-    height: 100%;
-    box-sizing: border-box;
-}
-
 .mdc-card {
     margin: 4px 8px;
     flex-basis: auto;
 }
 
 /* Dashboard */
-#dashboard {
-    flex: 2;
-
-    display: flex;
-    flex-flow: row wrap;
-    align-items: flex-start;
-    align-content: flex-start;
-
-    padding: 4px;
-
-    overflow-y: scroll;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-}
-
-#dashboard > .mdc-card {
+.dashboard > .mdc-card {
     height: 200px;
     margin: 4px !important;
     flex-basis: 0%;
