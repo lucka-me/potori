@@ -9,6 +9,7 @@ TBA
 
 ### Changed
 - Build all HTML elements with eliKit
+- Save bsData file after 2 sec
 
 ### Fixed
 - Synch includes reviews for pending portals
