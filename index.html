@@ -42,12 +42,10 @@
     <script defer type="text/javascript" src="./lib/value.js"></script>
     <script defer type="text/javascript" src="./lib/data.js"></script>
 
-    <script defer type="module" src="./lib/ui/UIKit.js"></script>
-
-    <script defer type="text/javascript" src="./lib/service/auth.js"></script>
     <script defer type="module" src="./lib/service/Service.js"></script>
+    <script defer type="module" src="./lib/ui/UIKit.js"></script>
     <!-- GAPI -->
-    <script defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};auth.handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+    <script defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};service.auth.handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
 </head>
 
 <body></body>
