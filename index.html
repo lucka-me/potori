@@ -44,7 +44,7 @@
 
     <script defer type="module" src="./lib/main.js"></script>
     <!-- GAPI -->
-    <script defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};service.auth.handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
+    <script defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};onGAPILoad();" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
 </head>
 
 <body></body>
