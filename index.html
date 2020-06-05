@@ -34,6 +34,9 @@
     <!-- Chart.js -->
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.js"></script>
     <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
+    <!-- Firebase -->
+    <script defer src="https://www.gstatic.com/firebasejs/5.10.1/firebase-app.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js"></script>
     <!-- Potori -->
     <script defer type="text/javascript" src="./lib/versionKit.js"></script>
     <script defer type="text/javascript" src="./lib/value.js"></script>
@@ -43,11 +46,7 @@
     <script defer type="module" src="./lib/ui/ui.js"></script>
 
     <script defer type="text/javascript" src="./lib/auth.js"></script>
-    <script defer type="text/javascript" src="./lib/bsKit.js"></script>
-    <script defer type="module" src="./lib/process.js"></script>
-    <!-- Firebase -->
-    <script defer src="https://www.gstatic.com/firebasejs/5.10.1/firebase-app.js" onload="bsKit.init()"></script>
-    <script defer src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js" onload="bsKit.loadReference()"></script>
+    <script defer type="module" src="./lib/process.js" onload="process.init()"></script>
     <!-- GAPI -->
     <script defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};auth.handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
 </head>
