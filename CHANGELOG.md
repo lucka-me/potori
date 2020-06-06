@@ -5,10 +5,11 @@
 TBA
 
 ### Added
+- A snackbar to show some alerts
 - Automatically detect language in Intro
 
 ### Changed
-- Modularize most sctipts
+- Modularize all scripts
 - Build all HTML elements with eliKit
 - Save bsData file after 2 sec
 
