@@ -8,6 +8,7 @@ TBA
 - Automatically detect language in Intro
 
 ### Changed
+- Modularize most sctipts
 - Build all HTML elements with eliKit
 - Save bsData file after 2 sec
 
