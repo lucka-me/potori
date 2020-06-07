@@ -1,366 +1,54 @@
 <!DOCTYPE html>
 <html>
-    <meta charset="utf-8" />
-    <head>
-        <title>Potori</title>
-        <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-        <meta name="apple-mobile-web-app-capable" content="yes" />
-        <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-        <meta name=”theme-color” content="#3b1e5f" />
-        <link rel="apple-touch-icon" sizes="120x120" href="./src/icon-120.png" />
-        <link rel="apple-touch-icon" sizes="152x152" href="./src/icon-152.png" />
-        <link rel="apple-touch-icon" sizes="167x167" href="./src/icon-167.png" />
-        <link rel="apple-touch-icon" sizes="180x180" href="./src/icon-180.png" />
-        <link rel="manifest" href="./manifest.json" />
-        <!-- Global site tag (gtag.js) - Google Analytics -->
-        <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167399687-2"></script>
-        <script>
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date()); gtag('config', 'UA-167399687-2');
-        </script>
 
-        <!-- Stylesheet -->
-        <link type="text/css" rel="stylesheet" href="./css/extended.css" />
-        <link type="text/css" rel="stylesheet" href="./css/dark.css" />
-        <!-- MDC -->
-        <link rel="stylesheet" href="https://unpkg.com/material-components-web@5.1.0/dist/material-components-web.min.css">
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500|Material+Icons" />
-        <!-- Mapbox -->
-        <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css" />
-        <!-- Chart.js -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.css" />
+<meta charset="utf-8" />
 
-        <!-- Scripts -->
-        <!-- Mapbox  -->
-        <script defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js"></script>
-        <!-- MDC -->
-        <script defer src="https://unpkg.com/material-components-web@5.1.0/dist/material-components-web.min.js"></script>
-        <!-- Chart.js -->
-        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.js"></script>
-        <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js"></script>
-        <!-- Potori -->
-        <script defer type="text/javascript" src="./lib/versionKit.js"></script>
-        <script defer type="text/javascript" src="./lib/value.js"></script>
-        <script defer type="text/javascript" src="./lib/toolkit.js"></script>
-        <script defer type="text/javascript" src="./lib/fileKit.js"></script>
-        <script defer type="text/javascript" src="./lib/dialogKit.js"></script>
-        <script defer type="text/javascript" src="./lib/mapKit.js"></script>
-        <script defer type="text/javascript" src="./lib/dashboard/dashboard.js"></script>
-        <script defer type="text/javascript" src="./lib/dashboard/filter.js"></script>
-        <script defer type="text/javascript" src="./lib/dashboard/statsType.js"></script>
-        <script defer type="text/javascript" src="./lib/dashboard/statsRejected.js"></script>
-        <script defer type="text/javascript" src="./lib/dashboard/countMonth.js"></script>
-        <script defer type="text/javascript" src="./lib/dashboard/quotas.js"></script>
-        <script defer type="text/javascript" src="./lib/dashboard/bs/bs.js"></script>
-        <script defer type="text/javascript" src="./lib/dashboard/bs/basic.js"></script>
-        <script defer type="text/javascript" src="./lib/dashboard/bs/rates.js"></script>
-        <script defer type="text/javascript" src="./lib/dashboard/bs/reviews.js"></script>
-        <script defer type="text/javascript" src="./lib/dashboard/bs/synch.js"></script>
-        <script defer type="text/javascript" src="./lib/ui.js" onload="ui.init()"></script>
-        <script defer type="text/javascript" src="./lib/auth.js"></script>
-        <script defer type="text/javascript" src="./lib/bsKit.js"></script>
-        <script defer type="text/javascript" src="./lib/mariKit.js"></script>
-        <script defer type="text/javascript" src="./lib/process.js"></script>
-        <!-- Firebase -->
-        <script defer src="https://www.gstatic.com/firebasejs/5.10.1/firebase-app.js" onload="bsKit.init()"></script>
-        <script defer src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js" onload="bsKit.loadReference()"></script>
-        <!-- GAPI -->
-        <script defer src="https://apis.google.com/js/api.js" onload="this.onload=function(){};auth.handleClientLoad()" onreadystatechange="if (this.readyState === 'complete') this.onload()"></script>
-    </head>
-    <body class="mdc-typography fullheight flex-box-col">
-        <header class="mdc-top-app-bar">
-            <div class="mdc-top-app-bar__row">
-                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-                    <span class="mdc-top-app-bar__title">Potori</span>
-                </section>
-                <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end"></section>
-            </div>
-        </header>
-        
-        <div class="mdc-top-app-bar--fixed-adjust"></div>
+<head>
+    <title>Potori</title>
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="dark" />
+    <meta name=”theme-color” content="#3b1e5f" />
+    <link rel="icon" href="./assets/icon.svg" />
+    <link rel="apple-touch-icon" href="./assets/icon-180.png" />
+    <link rel="manifest" href="./manifest.json" />
 
-        <div class="mdc-linear-progress" id="progress-bar" hidden>
-            <div class="mdc-linear-progress__buffering-dots"></div>
-            <div class="mdc-linear-progress__buffer"></div>
-            <div class="mdc-linear-progress__bar mdc-linear"></div>
-            <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar mdc-linear-progress-bar-color--secondary">
-                <span class="mdc-linear-progress__bar-inner"></span>
-            </div>
-            <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
-                <span class="mdc-linear-progress__bar-inner"></span>
-            </div>
-        </div>
+    <!-- Stylesheet -->
+    <link type="text/css" rel="stylesheet" href="./css/extended.css" />
+    <link type="text/css" rel="stylesheet" href="./css/dark.css" />
+    <!-- MDC -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/5.1.0/material-components-web.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500|Material+Icons" />
+    <!-- Mapbox -->
+    <link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.css" />
+    <!-- Chart.js -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.css" />
 
-        <div class="main-box">
+    <!-- Scripts -->
+    <!-- GAPI -->
+    <script defer src="https://apis.google.com/js/api.js"></script>
+    <!-- Mapbox  -->
+    <script defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js"></script>
+    <!-- MDC -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/5.1.0/material-components-web.min.js"></script>
+    <!-- Chart.js -->
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment.min.js"></script>
+    <script defer src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
+    <!-- Firebase -->
+    <script defer src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
+    <script defer src="https://www.gstatic.com/firebasejs/7.15.0/firebase-database.js"></script>
+    <!-- Potori -->
+    <script defer type="module" src="./src/potori.js"></script>
 
-            <div id="dashboard">
-                <!-- Map -->
-                <div class="mdc-card mdc-card--outlined" id="card-map">
-                    <div id="map-card-map"></div>
-                </div>
-                <!-- Filter -->
-                <div class="mdc-card mdc-card--outlined" id="card-filter" hidden>
-                    <span class="mdc-typography--headline6">Filter</span>
-                    <span class="mdc-typography--subtitle1">Type</span>
-                    <div class="flex-box-row--nowrap" id="block-card-filter-type"></div>
-                    <span class="mdc-typography--subtitle1">Rejected</span>
-                    <div class="flex-box-row--wrap" id="block-card-filter-reason"></div>
-                </div>
-                <!-- Stats: Type -->
-                <div class="mdc-card mdc-card--outlined" id="card-stats-type" hidden>
-                    <span class="mdc-typography--headline6">Stats: Type</span>
-                    <div class="container-chart"><canvas class="canvas-chart--v"></canvas></div>
-                </div>
-                <!-- Stats: Rejected -->
-                <div class="mdc-card mdc-card--outlined" id="card-stats-rejected" hidden>
-                    <span class="mdc-typography--headline6">Stats: Rejected</span>
-                    <div class="container-chart"><canvas class="canvas-chart--v"></canvas></div>
-                </div>
-                <!-- Counts by Month -->
-                <div class="mdc-card mdc-card--outlined" id="card-count-month" hidden>
-                    <span class="mdc-typography--headline6">Count by Month</span>
-                    <div class="container-chart"><canvas class="canvas-chart--h"></canvas></div>
-                </div>
-                <!-- Quotas -->
-                <div class="mdc-card mdc-card--outlined" id="card-quotas" hidden>
-                    <span class="mdc-typography--headline6">Quotas</span>
-                    <div class="container-chart"><canvas class="canvas-chart--h"></canvas></div>
-                </div>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-167399687-2"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date()); gtag('config', 'UA-167399687-2');
+    </script>
+</head>
 
-                <!-- BS: Basic -->
-                <div class="mdc-card mdc-card--outlined" id="card-bs-basic" hidden>
-                    <div class="flex-box-col padding--8 flex-grow--1 flex-justify-content--between">
-                        <span class="mdc-typography--headline6">Brainstorming</span>
-                    </div>
-                    <div class="mdc-card__actions">
-                        <div class="mdc-card__action-buttons">
-                            <button class="mdc-button mdc-card__action mdc-card__action--button" id="button-card-bs-update">
-                                <div class="mdc-button__ripple"></div>
-                                <i class="material-icons mdc-button__icon" aria-hidden="true">refresh</i>
-                                <span class="mdc-button__label">Refresh</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- BS: Rates -->
-                <div class="mdc-card mdc-card--outlined" id="card-bs-rates" hidden>
-                    <span class="mdc-typography--headline6">Brainstorming Rates</span>
-                    <div class="container-chart"><canvas class="canvas-chart--h"></canvas></div>
-                </div>
-                <!-- BS: Synch -->
-                <div class="mdc-card mdc-card--outlined" id="card-bs-synch" hidden>
-                    <span class="mdc-typography--headline6">Brainstorming Synch</span>
-                    <span class="text-nowarp"><span class="stats-num">0.0</span><span>%</span></span>
-                    <span class="mdc-typography--body1 text-nowarp">Reviews match the result</span>
-                </div>
-                <!-- BS: Reviews -->
-                <div class="mdc-card mdc-card--outlined" id="card-bs-reviews" hidden>
-                    <span class="mdc-typography--headline6">Brainstorming Reviews</span>
-                    <div class="container-chart"><canvas class="canvas-chart--h"></canvas></div>
-                </div>
+<body></body>
 
-            </div>
-
-            <div id="card-list" class="view-hide"></div>
-
-        </div>
-        <!-- Dialogs -->
-        <!-- About -->
-        <div class="mdc-dialog mdc-dialog--scrollable" role="dialog" aria-modal="true" id="dialog-about">
-            <div class="mdc-dialog__container">
-                <div class="mdc-dialog__surface">
-                    <h2 class="mdc-dialog__title">About</h2>
-                    <div class="mdc-dialog__content flex-box-col">
-
-                        <span class="mdc-typography--body2"><a target="_blank" rel="noopener" title="Intro" href="./intro">Intro & Privacy</a></span>
-                        <span class="mdc-typography--body2"><a href="https://github.com/lucka-me/potori" target="_blank" rel="noopener" title="GitHub">GitHub Repo</a></span>
-                        <span class="mdc-typography--body2"><a href="https://github.com/lucka-me/potori/blob/master/CHANGELOG.md" target="_blank" title="Changelog" id="text-version"></a> by <a href="https://lucka.moe" target="_blank" rel="noopener" title="Blog" >Lucka</a></span>
-
-                    </div>
-                    <footer class="mdc-dialog__actions">
-                        <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="close" data-mdc-dialog-initial-focus>
-                            <span class="mdc-button__label">Close</span>
-                        </button>
-                    </footer>
-                </div>
-            </div>
-            <div class="mdc-dialog__scrim"></div>
-        </div>
-        <!-- Portal Detail -->
-        <div class="mdc-dialog mdc-dialog--scrollable" role="dialog" aria-modal="true" id="dialog-details">
-            <div class="mdc-dialog__container">
-                <div class="mdc-dialog__surface">
-                    <h2 class="mdc-dialog__title" data-mdc-dialog-initial-focus></h2>
-                    <img src="" id="dialogPortalImage">
-                    <div class="mdc-dialog__content">
-                        <div class="mdc-typography--body1 flex-box-row--nowrap flex-align-items--center">
-                            <i class="material-icons">arrow_upward</i><span class="margin-l--4" id="text-dialog-details-confirmedTime"></span>
-                        </div>
-                        
-                        <div class="flex-box-row--nowrap fullwidth flex-justify-content--around" id="block-dialog-details-status-radios"></div>
-
-                        <div class="flex-box-row--wrap">
-                            <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--with-leading-icon margin-v--8 margin-h--4 flex-grow--1" id="field-dialog-details-result-datetime">
-                                <i class="material-icons mdc-text-field__icon mdc-text-field__icon--leading">event</i>
-                                <input type="datetime-local" class="mdc-text-field__input" id="input-dialog-details-result-datetime">
-                                <div class="mdc-notched-outline">
-                                    <div class="mdc-notched-outline__leading"></div>
-                                    <div class="mdc-notched-outline__notch">
-                                        <label for="input-dialog-details-result-datetime" class="mdc-floating-label">Result Time</label>
-                                    </div>
-                                    <div class="mdc-notched-outline__trailing"></div>
-                                </div>
-                            </div>
-                            <div class="mdc-select mdc-select--outlined margin-v--8 margin-h--4" id="select-dialog-details-reason">
-                                <div class="mdc-select__anchor">
-                                    <i class="mdc-select__dropdown-icon"></i>
-                                    <div class="mdc-select__selected-text"></div>
-                                    <div class="mdc-notched-outline">
-                                        <div class="mdc-notched-outline__leading"></div>
-                                        <div class="mdc-notched-outline__notch">
-                                            <label class="mdc-floating-label">Reason</label>
-                                        </div>
-                                        <div class="mdc-notched-outline__trailing"></div>
-                                      </div>
-                                </div>
-                                <div class="mdc-select__menu mdc-menu mdc-menu-surface">
-                                    <ul class="mdc-list"></ul>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="flex-box-row--nowrap margin-v--8">
-                            <div class="flex-box-col flex-justify-content--around" id="box-bottons"></div>
-                            <div id="map-dialog-details"></div>
-                        </div>
-                        
-                    </div>
-                    <footer class="mdc-dialog__actions">
-                        <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="close">
-                            <span class="mdc-button__label">Close</span>
-                        </button>
-                        <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="save">
-                            <span class="mdc-button__label">Save</span>
-                        </button>
-                    </footer>
-                </div>
-            </div>
-            <div class="mdc-dialog__scrim"></div>
-        </div>
-        <!-- Import -->
-        <div class="mdc-dialog mdc-dialog--scrollable" role="alertdialog" aria-modal="true" id="dialog-import">
-            <div class="mdc-dialog__container">
-                <div class="mdc-dialog__surface">
-                    <h2 class="mdc-dialog__title">Import</h2>
-                    <div class="mdc-dialog__content">
-                        <div class="mdc-text-field mdc-text-field--outlined mdc-text-field--textarea mdc-text-field--fullwidth">
-                            <textarea class="mdc-text-field__input code" id="input-dialog-import-wayfarer" rows="8" cols="80"></textarea>
-                            <div class="mdc-notched-outline">
-                                <div class="mdc-notched-outline__leading"></div>
-                                <div class="mdc-notched-outline__notch">
-                                    <label for="input-dialog-import-wayfarer" class="mdc-floating-label">JSON</label>
-                                </div>
-                                <div class="mdc-notched-outline__trailing"></div>
-                            </div>
-                        </div>
-                        <div class="mdc-text-field-helper-line">
-                            <div class="mdc-text-field-helper-text mdc-text-field-helper-text--persistent">From <a href="https://wayfarer.nianticlabs.com/api/v1/vault/manage" target="_blank" rel="noopener" title="Wayfarer API">Wayfarer API </a></div>
-                        </div>
-                    </div>
-                    <footer class="mdc-dialog__actions">
-                        <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="close">
-                            <span class="mdc-button__label">Close</span>
-                        </button>
-                        <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="import">
-                            <span class="mdc-button__label">Import</span>
-                        </button>
-                    </footer>
-                </div>
-            </div>
-            <div class="mdc-dialog__scrim"></div>
-        </div>
-        <!-- Alert -->
-        <div class="mdc-dialog mdc-dialog--scrollable" role="alertdialog" aria-modal="true" id="dialog-alert">
-            <div class="mdc-dialog__container">
-                <div class="mdc-dialog__surface">
-                    <div class="mdc-dialog__content" id="box-alert-message"></div>
-                    <footer class="mdc-dialog__actions">
-                        <button type="button" class="mdc-button mdc-dialog__button" data-mdc-dialog-action="close">
-                            <span class="mdc-button__label">Close</span>
-                        </button>
-                    </footer>
-                </div>
-            </div>
-            <div class="mdc-dialog__scrim"></div>
-        </div>
-
-        <!-- Templates -->
-        <template id="template-card-portal">
-            <div class="mdc-card mdc-card--outlined portal-card">
-                <div class="mdc-card__primary-action">
-                    <div class="flex-box-row--nowrap">
-                        <img/>
-                        <div class="info-box">
-                            <span class="mdc-typography--headline6"></span>
-                            <div class="mdc-typography--body2 flex-box-row--wrap">
-                                <span class="info-content">
-                                    <i class="material-icons">arrow_upward</i><span class="margin-l--4" id="text-card-confirmed"></span>
-                                </span>
-                                <span class="info-content" id="box-card-restore">
-                                    <i class="material-icons">restore</i><span class="margin-l--4" id="text-card-restore"></span>
-                                </span>
-                                <span class="info-content">
-                                    <i class="material-icons">access_time</i><span class="margin-l--4" id="text-card-interval"></span>
-                                </span>
-                                <span class="info-content" id="box-card-result">
-                                    <i class="material-icons" id="icon-card-result">check</i><span class="margin-l--4" id="text-card-result"></span>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="mdc-card__actions">
-                    <div class="mdc-card__action-buttons">
-                        <button class="mdc-button mdc-card__action mdc-card__action--button" id="button-card-status">
-                            <div class="mdc-button__ripple"></div>
-                            <i class="material-icons mdc-button__icon" aria-hidden="true">check</i>
-                            <span class="mdc-button__label">Accepted</span>
-                        </button>
-                    </div>
-                    <div class="mdc-card__action-icons">
-                        <button class="material-icons mdc-icon-button mdc-card__action mdc-card__action--icon" title="Location" id="button-card-location" hidden>place</button>
-                        <button class="material-icons mdc-icon-button mdc-card__action mdc-card__action--icon" title="Intel Map" id="button-card-intel" hidden>map</button>
-                    </div>
-                </div>
-            </div>
-        </template>
-
-        <template id="template-switchBox">
-            <div class="mdc-switch-box margin-h--4">
-                <div class="mdc-switch mdc-switch--checked">
-                    <div class="mdc-switch__track"></div>
-                    <div class="mdc-switch__thumb-underlay">
-                        <div class="mdc-switch__thumb">
-                            <input type="checkbox" class="mdc-switch__native-control" role="switch" checked>
-                        </div>
-                    </div>
-                </div>
-                <label></label>
-            </div>
-        </template>
-
-        <template id="template-radioField">
-            <div class="mdc-form-field">
-                <div class="mdc-radio">
-                    <input class="mdc-radio__native-control" type="radio">
-                    <div class="mdc-radio__background">
-                        <div class="mdc-radio__outer-circle"></div>
-                        <div class="mdc-radio__inner-circle"></div>
-                    </div>
-                </div>
-                <label></label>
-            </div>
-        </template>
-    </body>
 </html>

@@ -1,6 +1,23 @@
 # Changelog
 
 ```markdown
+## [0.6.0] - 2020-06-07
+Modularize Potori
+
+### Added
+- A snackbar to show some alerts
+- Automatically detect language in Intro
+
+### Changed
+- Modularize all scripts
+- Build all HTML elements with eliKit
+- Save bsData file after 2 sec
+
+### Fixed
+- Synch includes reviews for pending portals
+```
+
+```markdown
 ## [0.5.6] - 2020-05-29
 UI improvement and bug fix
 

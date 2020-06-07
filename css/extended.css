@@ -27,9 +27,11 @@ code { font-size: 14px; }
 
 .margin-l--4 { margin-left: 4px; }
 .margin-l--8 { margin-left: 8px; }
+.margin-r--8 { margin-right: 8px;}
 .margin-h--4 { margin-left: 4px; margin-right: 4px; }
 .margin-v--8 { margin-top: 8px; margin-bottom: 8px; }
 
+.padding--4 { padding: 4px; }
 .padding--8 { padding: 8px; }
 .padding--16 { padding: 16px; }
 
@@ -47,11 +49,15 @@ code { font-size: 14px; }
 /* Cross Axis */
 .flex-align-items--start  { align-items: flex-start; }
 .flex-align-items--center { align-items: center; }
+/* Multi Axises */
+.flex-align-content--start { align-content: flex-start; }
 /* Item */
 .flex--1 { flex: 1; }
 .flex--2 { flex: 2; }
+.flex--3 { flex: 3; }
 .flex-grow--1 { flex-grow: 1; }
 .flex-grow--2 { flex-grow: 2; }
+.flex-shrink--0 { flex-shrink: 0 !important; }
 .flex-shrink--1 { flex-shrink: 1 !important; }
 
 /* Contents */
@@ -80,42 +86,16 @@ body.fullheight {
     background-color: var(--mdc-theme-secondary) !important;
 }
 
-.main-box {
-    flex: 1;
-    display: flex;
-    min-height: 0%;
-    flex-flow: row wrap;
-}
-
-.main-box > div {
-    height: 100%;
-    box-sizing: border-box;
-}
-
 .mdc-card {
     margin: 4px 8px;
     flex-basis: auto;
 }
 
 /* Dashboard */
-#dashboard {
-    flex: 2;
-
-    display: flex;
-    flex-flow: row wrap;
-    align-items: flex-start;
-    align-content: flex-start;
-
-    padding: 4px;
-
-    overflow-y: scroll;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-}
-
-#dashboard > .mdc-card {
+.dashboard > .mdc-card {
     height: 200px;
     margin: 4px !important;
+    flex-basis: 0%;
 }
 
 .container-chart {
@@ -123,161 +103,14 @@ body.fullheight {
     position: relative;
 }
 
-canvas.canvas-chart--h { width: 100%  !important; }
+canvas.canvas-chart--h { width:  100% !important; }
 canvas.canvas-chart--v { height: 100% !important; }
-
-.stats-num { font-weight: 300; }
-
-/* Map */
-#card-map {
-    flex: 3; flex-shrink: 1;
-    min-width: 300px;
-}
-
-#map-card-map {
-    width: 100%;
-    height: 100%;
-    clip-path: inset(100% round 4px);
-    -webkit-clip-path: inset(0 round 4px);
-}
-
-/* Filter */
-#card-filter {
-    flex: 1; flex-shrink: 0;
-    padding: 8px;
-}
-
-/* Stats: Type */
-#card-stats-type {
-    flex: 2; flex-shrink: 1;
-    padding: 8px;
-    min-width: 250px;
-}
-
-/* Stats: Rejected */
-#card-stats-rejected {
-    flex: 2; flex-shrink: 1;
-    padding: 8px;
-    min-width: 250px;
-}
-
-/* Counts by Month */
-#card-count-month {
-    flex: 3; flex-shrink: 1;
-    padding: 8px;
-    min-width: 300px;
-}
-
-/* Quotas */
-#card-quotas {
-    flex: 2; flex-shrink: 1;
-    padding: 8px;
-    min-width: 200px;
-}
-
-/* BS: Basic */
-#card-bs-basic {
-    flex: 1; flex-shrink: 1;
-}
-
-#card-bs-basic .stats-num {
-    font-size: 4.5rem;
-    line-height: 4.5rem;
-}
-
-/* BS: Rates */
-#card-bs-rates {
-    flex: 1; flex-shrink: 1;
-    padding: 8px;
-    min-width: 240px;
-}
-
-/* BS: Reviews */
-#card-bs-reviews {
-    flex: 3; flex-shrink: 1;
-    padding: 8px;
-    min-width: 300px;
-}
-
-/* BS: Synch */
-#card-bs-synch {
-    flex: 1; flex-shrink: 1;
-    justify-content: space-between;
-    padding: 8px;
-}
-
-#card-bs-synch .stats-num {
-    font-size: 6rem;
-    line-height: 6rem;
-}
-
-#card-bs-synch .stats-num + span {
-    font-size: 2rem;
-    line-height: 2rem;
-}
-
-/* Card List */
-#card-list {
-    flex: 1;
-    display: flex;
-    flex-flow: column nowrap;
-    align-content: flex-start;
-
-    min-width: 300px;
-    padding: 4px;
-
-    overflow-y: scroll;
-    scroll-behavior: smooth;
-    -webkit-overflow-scrolling: touch;
-}
-
-/* Portal Card */
-.portal-card {
-    flex-shrink: 0;
-}
-
-.portal-card .info-box {
-    padding: 8px;
-    display: flex;
-    flex-flow: column nowrap;
-    flex-grow: 1;
-    align-items: flex-start;
-    align-content: flex-start;
-}
-
-.portal-card .info-content {
-    margin-right: 8px;
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-}
-
-.portal-card img {
-    object-fit: cover;
-    object-position: center;
-    width: 120px;
-    min-width: 120px;
-    height: 120px;
-    min-height: 120px;
-}
 
 /* Dialog */
 .mdc-dialog-content-block {
     padding: 0px 8px;
     display: flex;
     flex-flow: column nowrap;
-    flex-grow: 1;
-}
-
-#dialog-details img {
-    object-fit: cover;
-    object-position: center;
-    width: 100%;
-    height: 150px;
-}
-
-#map-dialog-details {
-    min-height: 180px;
     flex-grow: 1;
 }
 

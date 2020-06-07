@@ -1,20 +1,20 @@
-<h1 align=center><img height=90px src="./src/logo-bg.svg" link="#"/></h1>
+<h1 align=center><img height=90px src="./assets/icon.svg" link="#"/></h1>
 
 [![Release](https://img.shields.io/github/v/release/lucka-me/potori?include_prereleases)](https://github.com/lucka-me/potori/releases/latest "Last release") [![Demo](https://img.shields.io/website?down_message=offline&up_message=online&url=https%3A%2F%2Flucka.moe%2Fpotori)](https://lucka.moe/potori "Demo") [![](https://img.shields.io/badge/author-Lucka-2578B5.svg)](https://lucka.moe "Author") [![License](https://img.shields.io/github/license/lucka-me/potori)](./LICENSE "License")  
-![](https://img.shields.io/badge/safari-support-brightgreen.svg) ![](https://img.shields.io/badge/chrome-support-brightgreen.svg) ![](https://img.shields.io/badge/firefox-support-brightgreen.svg)<!-- ![](https://img.shields.io/badge/edge-support-brightgreen.svg) ![](https://img.shields.io/badge/ie-broken-red.svg) ![](https://img.shields.io/badge/opera-support-brightgreen.svg)-->  
+<!--![](https://img.shields.io/badge/safari-support-brightgreen.svg) ![](https://img.shields.io/badge/chrome-support-brightgreen.svg) ![](https://img.shields.io/badge/firefox-support-brightgreen.svg) ![](https://img.shields.io/badge/edge-support-brightgreen.svg) ![](https://img.shields.io/badge/ie-broken-red.svg) ![](https://img.shields.io/badge/opera-support-brightgreen.svg)-->  
 [![Telegram Channel](https://img.shields.io/badge/telegram-channel-37aee2)](https://t.me/potori "Telegram Channel")
 
 ## Description
 Gather and visualize your Portal nominations from your Gmail inbox.
 
 ## Notice
-**Due to Google's policy (which aims to protect user's data), some features related to 3rd-party were removed in the demo page (as a lite version).**  
+**Due to Google's policy (which aims to protect user's data), some features related to 3rd-party are removed in the demo page (as a lite version).**  
 You can download the repository [and host the full version from the master branch](https://developers.google.com/gmail/api/quickstart/js "Browser Quickstart | Gmail API | Google Developers").
 
 **Potori is NOT fully compatible with Prime yet, we need more [mail samples](./samples.md) to figure out how to query all related and localized mails exactly, and how to identify each reason for rejection. If you have any trouble or want to help me, please contact me via Telegram@SeeleUN.**
 
 ## Future Style
-Since Niantic launched the Niantic Wayfarer which contains a nomination manager, I've thought a lot about the future of Potori. I've learned a lot from developing it and I do not want to stop. There are still many posibilities: re-writing the entire Potori with ~~Angular~~ Vue, extending it to a data visualization tool, import from [Wayfarer Nomination Manage API response data](https://wayfarer.nianticlabs.com/api/v1/vault/manage)... I'm actually working on them, which is little bit tough for me, though.
+Since Niantic launched the Niantic Wayfarer which contains a nomination manager, I've thought a lot about the future of Potori. I've learned a lot from developing it and I do not want to stop. There are still many posibilities: re-writing the entire Potori with ~~Angular~~ Vue, extending it to a data visualization tool (done in `0.5.0`), import from [Wayfarer Nomination Manage API response data](https://wayfarer.nianticlabs.com/api/v1/vault/manage) (mostly done in `0.4.19`)... I'm actually working on them, which is little bit tough for me, though.
 
 ## Dependencies
 - [Material Components Web](https://github.com/material-components/material-components-web)  
