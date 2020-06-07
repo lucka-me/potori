@@ -1,15 +1,21 @@
 {
     "name": "Potori",
-    "start_url": ".",
+    "description": "Gather and visualize your Ingress Portal nominations from Gmail inbox.",
+    "start_url": "/",
+    "scope": "/",
     "display": "standalone",
     "background_color": "#fff",
-    "description": "Gather and visualize your Ingress Portal nominations from Gmail inbox.",
+    "theme_color": "#3b1e5f",
     "icons": [
         {
-            "src": "./assets/logo-bg.svg",
-            "sizes": "72x72 96x96 128x128 192x192 256x256 512x512"
+            "src": "./assets/icon-maskable.svg",
+            "sizes": "72x72 96x96 128x128 192x192 256x256 512x512",
+            "purpose": "maskable"
+        },
+        {
+            "src": "./assets/icon.svg",
+            "sizes": "72x72 96x96 128x128 192x192 256x256 512x512",
+            "purpose": "any"
         }
-    ],
-    "scope": ".",
-    "theme_color": "#3b1e5f"
+    ]
 }
