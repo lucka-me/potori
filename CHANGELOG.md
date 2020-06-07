@@ -1,8 +1,8 @@
 # Changelog
 
 ```markdown
-## [0.6.0] - 2020-06-TBA
-TBA
+## [0.6.0] - 2020-06-07
+Modularize Potori
 
 ### Added
 - A snackbar to show some alerts
