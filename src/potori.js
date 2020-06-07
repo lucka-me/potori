@@ -5,7 +5,3 @@ Service.init();
 const ui = new UIKit();
 ui.init();
 ui.linkService();
-
-window.onGAPILoad = () => {
-    Service.auth.handleClientLoad();
-}

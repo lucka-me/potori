@@ -1,8 +1,8 @@
 class Version {
     constructor() {
-        const isPublic = document.URL.includes('lucka.moe');
-        this.code = isPublic ? 'lite' : 'full';
-        this.fullFeature = !isPublic;
+        const lite = document.URL.includes('lucka.moe');
+        this.code = lite ? 'lite' : 'full';
+        this.fullFeature = !lite;
     }
 }
 

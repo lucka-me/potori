@@ -1,14 +1,14 @@
 <h1 align=center><img height=90px src="./assets/logo-bg.svg" link="#"/></h1>
 
 [![Release](https://img.shields.io/github/v/release/lucka-me/potori?include_prereleases)](https://github.com/lucka-me/potori/releases/latest "Last release") [![Demo](https://img.shields.io/website?down_message=offline&up_message=online&url=https%3A%2F%2Flucka.moe%2Fpotori)](https://lucka.moe/potori "Demo") [![](https://img.shields.io/badge/author-Lucka-2578B5.svg)](https://lucka.moe "Author") [![License](https://img.shields.io/github/license/lucka-me/potori)](./LICENSE "License")  
-![](https://img.shields.io/badge/safari-support-brightgreen.svg) ![](https://img.shields.io/badge/chrome-support-brightgreen.svg) ![](https://img.shields.io/badge/firefox-support-brightgreen.svg)<!-- ![](https://img.shields.io/badge/edge-support-brightgreen.svg) ![](https://img.shields.io/badge/ie-broken-red.svg) ![](https://img.shields.io/badge/opera-support-brightgreen.svg)-->  
+<!--![](https://img.shields.io/badge/safari-support-brightgreen.svg) ![](https://img.shields.io/badge/chrome-support-brightgreen.svg) ![](https://img.shields.io/badge/firefox-support-brightgreen.svg) ![](https://img.shields.io/badge/edge-support-brightgreen.svg) ![](https://img.shields.io/badge/ie-broken-red.svg) ![](https://img.shields.io/badge/opera-support-brightgreen.svg)-->  
 [![Telegram Channel](https://img.shields.io/badge/telegram-channel-37aee2)](https://t.me/potori "Telegram Channel")
 
 ## Description
 Gather and visualize your Portal nominations from your Gmail inbox.
 
 ## Notice
-**Due to Google's policy (which aims to protect user's data), some features related to 3rd-party were removed in the demo page (as a lite version).**  
+**Due to Google's policy (which aims to protect user's data), some features related to 3rd-party are removed in the demo page (as a lite version).**  
 You can download the repository [and host the full version from the master branch](https://developers.google.com/gmail/api/quickstart/js "Browser Quickstart | Gmail API | Google Developers").
 
 **Potori is NOT fully compatible with Prime yet, we need more [mail samples](./samples.md) to figure out how to query all related and localized mails exactly, and how to identify each reason for rejection. If you have any trouble or want to help me, please contact me via Telegram@SeeleUN.**

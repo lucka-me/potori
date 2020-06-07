@@ -6,7 +6,7 @@ class AuthKit {
         };
     }
 
-    handleClientLoad() {
+    init() {
         gapi.load('client:auth2', () => this.initClient());
     }
 

@@ -106,13 +106,6 @@ body.fullheight {
 canvas.canvas-chart--h { width:  100% !important; }
 canvas.canvas-chart--v { height: 100% !important; }
 
-#map-card-map {
-    width: 100%;
-    height: 100%;
-    clip-path: inset(100% round 4px);
-    -webkit-clip-path: inset(0 round 4px);
-}
-
 /* Dialog */
 .mdc-dialog-content-block {
     padding: 0px 8px;

@@ -121,6 +121,7 @@ class Service {
             this.event.alert(JSON.stringify(error, null, 2));
         }
 
+        this.auth.init();
         this.bs.init();
     }
 
