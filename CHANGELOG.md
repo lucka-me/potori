@@ -1,6 +1,14 @@
 # Changelog
 
 ```markdown
+## [0.6.1] - 2020-06-07
+Fixed view switching not work
+
+### Fixed
+- Can not switch view
+```
+
+```markdown
 ## [0.6.0] - 2020-06-07
 Modularize Potori
 

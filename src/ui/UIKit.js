@@ -153,7 +153,6 @@ class UIKit {
         const switchToList = this.appBar.button.view.root_.innerHTML === 'view_list';
         this.appBar.button.view.root_.innerHTML = switchToList ? 'dashboard' : 'view_list';
         this.appBar.button.view.root_.title = switchToList ? 'Dashboard' : 'List';
-        document.querySelector('#dashboard').classList.toggle('view-hide');
         this.dashboard.root.classList.toggle('view-hide');
         this.list.root.classList.toggle('view-hide');
     }
