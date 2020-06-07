@@ -2,7 +2,7 @@
 
 ```markdown
 ## [0.6.1] - 2020-06-07
-Bugs fixed
+Fixed view switching not work
 
 ### Fixed
 - Can not switch view
