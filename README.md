@@ -14,7 +14,7 @@ You can download the repository [and host the full version from the master branc
 **Potori is NOT fully compatible with Prime yet, we need more [mail samples](./samples.md) to figure out how to query all related and localized mails exactly, and how to identify each reason for rejection. If you have any trouble or want to help me, please contact me via Telegram@SeeleUN.**
 
 ## Future Style
-Since Niantic launched the Niantic Wayfarer which contains a nomination manager, I've thought a lot about the future of Potori. I've learned a lot from developing it and I do not want to stop. There are still many posibilities: re-writing the entire Potori with ~~Angular~~ Vue, extending it to a data visualization tool, import from [Wayfarer Nomination Manage API response data](https://wayfarer.nianticlabs.com/api/v1/vault/manage)... I'm actually working on them, which is little bit tough for me, though.
+Since Niantic launched the Niantic Wayfarer which contains a nomination manager, I've thought a lot about the future of Potori. I've learned a lot from developing it and I do not want to stop. There are still many posibilities: re-writing the entire Potori with ~~Angular~~ Vue, extending it to a data visualization tool (done in `0.5.0`), import from [Wayfarer Nomination Manage API response data](https://wayfarer.nianticlabs.com/api/v1/vault/manage) (mostly done in `0.4.19`)... I'm actually working on them, which is little bit tough for me, though.
 
 ## Dependencies
 - [Material Components Web](https://github.com/material-components/material-components-web)  
