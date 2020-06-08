@@ -1,18 +1,18 @@
-
 interface AuthKitEvents {
     authStatusChanged: (signedIn: boolean) => void;
     onerror: (message: string) => void;
 }
 
 class AuthKit {
+
+    events: AuthKitEvents;
+
     constructor() {
         this.events = {
             authStatusChanged: (signedIn: boolean) => { signedIn },
             onerror: (message: string) => { message },
         };
     }
-
-    events: AuthKitEvents;
 
     init() {
         gapi.load('client:auth2', () => this.initClient());
