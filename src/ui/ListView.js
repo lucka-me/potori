@@ -1,5 +1,5 @@
 import { UIKitPrototype } from './protorypes.js';
-import Eli from "./Eli.js";
+import Eli from "./Eli";
 import Toolkit from "./Toolkit.js";
 import FilterCard from './dashboard/FilterCard.js';
 import Version from '../service/Version';

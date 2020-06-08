@@ -1,6 +1,6 @@
 import { UIKitPrototype } from '../protorypes.js';
 import { DialogPrototype } from './prototypes.js';
-import Eli from "../Eli.js";
+import Eli from "../Eli";
 import Toolkit from "../Toolkit.js";
 import AlertDialog from './AlertDialog.js';
 import Dark from '../Dark.js';

@@ -1,5 +1,5 @@
 import { DialogPrototype } from './prototypes.js';
-import Eli from "../Eli.js";
+import Eli from "../Eli";
 import Version from '../../service/Version';
 
 class AboutDialog extends DialogPrototype {

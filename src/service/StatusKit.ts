@@ -83,7 +83,7 @@ class StatusKit {
         }
     }
 
-    matchStatus(code: number) {
+    matchStatus(code: number): Status {
         let result: Status = this.types.get('pending');
         if (code < 100) {
             if (code === 1) result = this.types.get('accepted');
@@ -98,7 +98,7 @@ class StatusKit {
         return result;
     }
 
-    typeMatched(status: number, type: number) {
+    typeMatched(status: number, type: number): boolean {
         if (type < 101) {
             return status === type;
         } else {
@@ -106,13 +106,13 @@ class StatusKit {
         }
     }
     
-    getTypeByCode(code: number) {
+    getTypeByCode(code: number): string {
         if (code === 0) return 'pending';
         if (code === 1) return 'accepted';
         return 'rejected';
     }
 
-    getReasonByCode(code: number) {
+    getReasonByCode(code: number): StatusReason {
         if (code < 100) return null;
         for (const value of this.reasons.values()) {
             if (value.code === code) return value;

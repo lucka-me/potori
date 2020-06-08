@@ -1,30 +1,28 @@
 class Eli {
-    static build(tag, options) {
+    static build(tag: string, options: any): HTMLElement {
         const element = document.createElement(tag);
-        for (const key of Object.keys(options)) {
+        for (const [key, value] of Object.entries(options)) {
             switch (key) {
                 case 'styleText':
-                    element.style.cssText = options[key];
+                    element.style.cssText = value as string;
                     break;
                 case 'children':
-                    for (const child of options[key]) {
-                        element.appendChild(child);
-                    }
+                    element.append(...value as Array<HTMLElement>);
                     break;
                 case 'dataset':
-                    for (const data of Object.keys(options[key])) {
-                        element.dataset[data] = options[key][data];
+                    for (const [dataKey, dataValue] of Object.entries(value)) {
+                        element.dataset[dataKey] = dataValue;
                     }
                     break;
                 default:
-                    element[key] = options[key];
+                    (element as any)[key] = value;
                     break;
             }
         }
         return element;
     }
 
-    static chartCard(title, canvas, flex, minWidth) {
+    static chartCard(title: string, canvas: HTMLCanvasElement, flex: string, minWidth: number): HTMLDivElement {
         return Eli.build('div', {
             className: `mdc-card mdc-card--outlined padding--8 flex--${flex} flex-shrink--1`,
             styleText: `min-width:${minWidth}px`,
@@ -38,31 +36,31 @@ class Eli {
                     children: [ canvas ],
                 }),
             ],
-        });
+        }) as HTMLDivElement;
     }
 
-    static link(href, title, text) {
+    static link(href: string, title: string, text: string): HTMLAnchorElement {
         return Eli.build('a', {
             href: href,
             title: title,
             target: '_blank',
             rel: 'noopener',
             innerHTML: text,
-        });
+        }) as HTMLAnchorElement;
     }
 
-    static text(text) {
+    static text(text: string): Text {
         return document.createTextNode(text);
     }
 
-    static icon(icon) {
+    static icon(icon: string): HTMLElement {
         return Eli.build('i', {
             className: 'material-icons',
             innerHTML: icon,
         });
     }
 
-    static dialog(contents) {
+    static dialog(contents: Array<HTMLElement>): HTMLDivElement {
         return Eli.build('div', {
             className: 'mdc-dialog mdc-dialog--scrollable',
             role: 'dialog',
@@ -79,10 +77,10 @@ class Eli {
                 }),
                 Eli.build('div', { className: 'mdc-dialog__scrim' }),
             ],
-        });
+        }) as HTMLDivElement;
     }
 
-    static dialogAction(action, text) {
+    static dialogAction(action: string, text: string): HTMLButtonElement {
         return Eli.build('button', {
             className: 'mdc-button mdc-dialog__button',
             dataset: { mdcDialogAction: action, },
@@ -91,10 +89,10 @@ class Eli {
                     className: 'mdc-button__label', innerHTML: text
                 }),
             ],
-        });
+        }) as HTMLButtonElement;
     }
 
-    static notchedOutline(labelOptions) {
+    static notchedOutline(labelOptions: any): HTMLDivElement {
         labelOptions.className = 'mdc-floating-label';
         return Eli.build('div', {
             className: 'mdc-notched-outline',
@@ -106,7 +104,7 @@ class Eli {
                 }),
                 Eli.build('div', { className: 'mdc-notched-outline__trailing' }),
             ],
-        });
+        }) as HTMLDivElement;
     }
 };
 

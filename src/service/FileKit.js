@@ -1,4 +1,4 @@
-import Eli from "../ui/Eli.js";
+import Eli from "../ui/Eli";
 
 class FileConst {
     static get type() { return 'application/json' }

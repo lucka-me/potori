@@ -1,5 +1,5 @@
 import { DashboardBsPrototype } from './prototypes.js';
-import Eli from "../../Eli.js";
+import Eli from "../../Eli";
 
 class BSSynchCard extends DashboardBsPrototype {
     constructor() {

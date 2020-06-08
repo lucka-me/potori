@@ -1,5 +1,5 @@
 import { DashboardBsChartPrototype } from './prototypes.js';
-import Eli from "../../Eli.js";
+import Eli from "../../Eli";
 import Toolkit from "../../Toolkit.js";
 
 class BSReviewsCard extends DashboardBsChartPrototype {

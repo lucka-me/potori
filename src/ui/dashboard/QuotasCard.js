@@ -1,5 +1,5 @@
 import { DashboardChartProtorype } from './prototypes.js';
-import Eli from "../Eli.js";
+import Eli from "../Eli";
 
 class QuotasCard extends DashboardChartProtorype {
     constructor() { super(); }

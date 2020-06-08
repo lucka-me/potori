@@ -1,5 +1,5 @@
 import { UIKitPrototype } from './protorypes.js';
-import Eli from "./Eli.js";
+import Eli from "./Eli";
 
 class Progress extends UIKitPrototype {
     constructor() {

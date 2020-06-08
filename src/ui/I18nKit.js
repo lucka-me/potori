@@ -1,4 +1,4 @@
-import Eli from "./Eli.js";
+import Eli from "./Eli";
 
 class I18nKit {
     constructor() {

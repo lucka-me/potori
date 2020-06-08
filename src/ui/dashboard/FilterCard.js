@@ -1,5 +1,5 @@
 import { DashboardPrototype } from './prototypes.js';
-import Eli from "../Eli.js";
+import Eli from "../Eli";
 import StatusKit from '../../service/StatusKit';
 
 class FilterCard extends DashboardPrototype {

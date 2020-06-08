@@ -1,4 +1,4 @@
-import Eli from "./Eli.js";
+import Eli from "./Eli";
 
 import Dark         from "./Dark.js";
 import AppBar       from './AppBar.js';
