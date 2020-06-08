@@ -64,34 +64,34 @@ class GoogleDriveFileKit {
                 return;
             }
             const fileId = fileList[0].id;
-            // gapi.client.drive.files.get({
-            //     fileId: fileId,
-            //     alt: "media"
-            // }).then((response: any) => {
-            //     if (!got(response.result, true)) {
-            //         gapi.client.drive.files.delete({ fileId: fileId });
-            //         fileList.splice(0, 1);
-            //         gotList(fileList);
-            //         return;
-            //     } else {
-            //         this.ids.set(filename, fileId);
-            //     }
-            // });
+            gapi.client.drive.files.get({
+                fileId: fileId,
+                alt: "media"
+            }).then((response: any) => {
+                if (!got(response.result, true)) {
+                    gapi.client.drive.files.delete({ fileId: fileId });
+                    fileList.splice(0, 1);
+                    gotList(fileList);
+                    return;
+                } else {
+                    this.ids.set(filename, fileId);
+                }
+            });
         };
 
-        // gapi.client.drive.files.list({
-        //     q: `name = '${filename}'`,
-        //     pageSize: 10,
-        //     spaces: GoogleDriveFileKit.folder,
-        //     fields: 'files(id)'
-        // }).then((response: any) => {
-        //     const files = response.result.files;
-        //     if (!files) {
-        //         got(null, false);
-        //         return;
-        //     }
-        //     gotList(files);
-        // });
+        gapi.client.drive.files.list({
+            q: `name = '${filename}'`,
+            pageSize: 10,
+            spaces: GoogleDriveFileKit.folder,
+            fields: 'files(id)'
+        }).then((response: any) => {
+            const files = response.result.files;
+            if (!files) {
+                got(null, false);
+                return;
+            }
+            gotList(files);
+        });
     }
 
     uploaded(filename: string, blob: Blob, finished: (response: any) => void) {

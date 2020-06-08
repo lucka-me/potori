@@ -19,6 +19,7 @@
     "@types/copy-webpack-plugin": "^6.0.0",
     "@types/gapi": "0.0.39",
     "@types/gapi.auth2": "0.0.52",
+    "@types/gapi.client.drive": "^3.0.7",
     "@types/lodash": "^4.14.155",
     "chart.js": "^2.9.3",
     "clean-webpack-plugin": "^3.0.0",
