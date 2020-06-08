@@ -1,7 +1,6 @@
 import { DialogPrototype } from './prototypes.js';
 import Eli from "../Eli.js";
 import Version from '../../service/Version.js';
-import StatusKit from '../../service/StatusKit.js';
 
 class AboutDialog extends DialogPrototype {
     constructor() {
@@ -12,7 +11,7 @@ class AboutDialog extends DialogPrototype {
     init(parent) {
         const linkVersion = Eli.link(
             'https://github.com/lucka-me/potori/blob/master/CHANGELOG.md',
-            'Changelog', ''
+            'Changelog', Version.text
         );
         const info = [
             Eli.build('span', {
@@ -55,12 +54,6 @@ class AboutDialog extends DialogPrototype {
         ]);
         parent.appendChild(element);
         this.ctrl = new mdc.dialog.MDCDialog(element);
-
-        fetch('https://api.github.com/repos/lucka-me/potori/releases/latest')
-            .then(response => response.json())
-            .then(response => {
-                linkVersion.innerHTML = `${response.name}d${StatusKit.version}-${Version.code}`;
-            });
     }
 
     open() { this.ctrl.open(); }
