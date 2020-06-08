@@ -1,7 +1,7 @@
 # Changelog
 
 ```markdown
-## [0.6.2] - 2020-06-TBA
+## [0.6.2] - 2020-06-08
 Bugs fixed
 
 ### Fixed
