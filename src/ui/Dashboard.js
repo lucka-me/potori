@@ -1,4 +1,4 @@
-import { UIKitPrototype } from './protorypes.js';
+import UIKitPrototype from './UIKitPrototype';
 import Eli from "./Eli";
 
 import MapCard              from './dashboard/MapCard.js';

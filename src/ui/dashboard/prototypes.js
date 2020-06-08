@@ -1,4 +1,4 @@
-import { UIKitPrototype } from "../protorypes.js";
+import UIKitPrototype from "../UIKitPrototype";
 
 export class DashboardPrototype extends UIKitPrototype {
     constructor() {

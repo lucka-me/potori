@@ -1,4 +1,4 @@
-import { UIKitPrototype } from './protorypes.js';
+import UIKitPrototype from './UIKitPrototype.js';
 
 import AboutDialog      from './dialog/AboutDialog.js';
 import AlertDialog      from './dialog/AlertDialog.js';

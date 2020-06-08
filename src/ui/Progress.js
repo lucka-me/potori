@@ -1,4 +1,4 @@
-import { UIKitPrototype } from './protorypes.js';
+import { UIKitPrototype } from './UIKitPrototype.js';
 import Eli from "./Eli";
 
 class Progress extends UIKitPrototype {

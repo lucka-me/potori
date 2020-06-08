@@ -1,4 +1,4 @@
-import { UIKitPrototype } from './protorypes.js';
+import UIKitPrototype from './UIKitPrototype';
 
 class Dark extends UIKitPrototype {
     constructor() {

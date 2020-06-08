@@ -1,3 +1,5 @@
+import Eli from "./Eli";
+
 class Toolkit {
     static lngLatToIntel(lngLat) {
         return `https://intel.ingress.com/intel?ll=${lngLat.lat},${lngLat.lng}&z=18`;

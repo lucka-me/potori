@@ -1,4 +1,4 @@
-import { DialogPrototype } from './prototypes.js';
+import DialogPrototype from './DialogPrototype.js';
 import Eli from "../Eli";
 import Version from '../../service/Version';
 

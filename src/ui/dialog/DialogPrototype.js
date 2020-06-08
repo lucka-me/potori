@@ -1,6 +1,6 @@
-import { UIKitPrototype } from "../protorypes.js";
+import UIKitPrototype from "../UIKitPrototype";
 
-export class DialogPrototype extends UIKitPrototype {
+export default class DialogPrototype extends UIKitPrototype {
     constructor() {
         super();
         this.ctrl = null;
