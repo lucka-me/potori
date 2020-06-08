@@ -1,4 +1,4 @@
-import AuthKit from "./AuthKit.js";
+import AuthKit from "./AuthKit";
 import Mari from "./Mari.js";
 import BrainstormingKit from "./BrainstormingKit.js";
 import FileKit, { FileConst } from "./FileKit.js";
@@ -109,7 +109,7 @@ class Service {
     }
 
     init() {
-        this.auth.event.authStatusChanged = (signedIn) => {
+        this.auth.events.authStatusChanged = (signedIn) => {
             this.event.authStatusChanged(signedIn);
             if (signedIn) {
                 this.startMail();
@@ -117,7 +117,7 @@ class Service {
                 this.portals = [];
             }
         };
-        this.auth.event.onerror = (error) => {
+        this.auth.events.onerror = (error) => {
             this.event.alert(JSON.stringify(error, null, 2));
         }
 

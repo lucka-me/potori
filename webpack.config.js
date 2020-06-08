@@ -4,6 +4,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
+const packages = require('./package.json');
+
 module.exports = {
   entry: {
     potori: './src/potori.js',
@@ -45,14 +47,14 @@ module.exports = {
       template: 'index.html',
       inject: false,
       scriptLoading: 'defer',
-      chunks: ['potori'],
+      chunks: [ 'potori' ],
       filename: 'index.html'
     }),
     new HtmlWebpackPlugin({
       template: 'intro.html',
       inject: false,
       scriptLoading: 'defer',
-      chunks: ['intro'],
+      chunks: [ 'intro' ],
       filename: 'intro/index.html'
     }),
     new CopyPlugin({

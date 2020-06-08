@@ -1,10 +1,18 @@
+
+interface AuthKitEvents {
+    authStatusChanged: (signedIn: boolean) => void;
+    onerror: (message: string) => void;
+}
+
 class AuthKit {
     constructor() {
-        this.event = {
-            authStatusChanged: (signedIn) => { signedIn },
-            onerror: (error) => { error },
+        this.events = {
+            authStatusChanged: (signedIn: boolean) => { signedIn },
+            onerror: (message: string) => { message },
         };
     }
+
+    events: AuthKitEvents;
 
     init() {
         gapi.load('client:auth2', () => this.initClient());
@@ -26,11 +34,11 @@ class AuthKit {
         }).then(
             () => {
                 // Listen for sign-in state changes.
-                gapi.auth2.getAuthInstance().isSignedIn.listen(this.event.authStatusChanged);
+                gapi.auth2.getAuthInstance().isSignedIn.listen(this.events.authStatusChanged);
                 // Handle the initial sign-in state.
-                this.event.authStatusChanged(gapi.auth2.getAuthInstance().isSignedIn.get());
+                this.events.authStatusChanged(gapi.auth2.getAuthInstance().isSignedIn.get());
             },
-            this.event.onerror
+            this.events.onerror
         );
     }
 
