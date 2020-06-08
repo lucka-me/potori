@@ -5,9 +5,12 @@ const CopyPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
-  entry: './src/potori.js',
+  entry: {
+    potori: './src/potori.js',
+    intro: './src/intro.js',
+  },
   output: {
-    filename: 'potori.js',
+    filename: 'lib/[name].js',
     path: path.resolve(__dirname, 'dist'),
   },
   module: {
@@ -28,20 +31,27 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
+    new MiniCssExtractPlugin({
+      filename: 'potori.css',
+    }),
     new HtmlWebpackPlugin({
       template: 'index.html',
       inject: false,
       scriptLoading: 'defer',
+      chunks: ['potori'],
+      filename: 'index.html'
     }),
-    new MiniCssExtractPlugin({
-      filename: 'potori.css',
+    new HtmlWebpackPlugin({
+      template: 'intro.html',
+      inject: false,
+      scriptLoading: 'defer',
+      chunks: ['intro'],
+      filename: 'intro/index.html'
     }),
     new CopyPlugin({
       patterns: [
         { from: 'assets', to: 'assets' },
         { from: 'manifest.json' },
-        { from: 'intro', to: 'intro' },
-        { from: 'src/ui/Eli.js', to: 'intro/Eli.js' },
       ],
     }),
   ],

@@ -4,14 +4,18 @@
     <head>
         <title>Potori | Intro & Privacy</title>
         <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1"/>
-        <!-- Stylesheet -->
-        <link type="text/css" rel="stylesheet" href="../potori.css" />
+        <!-- CSS -->
+        <% for (const css in htmlWebpackPlugin.files.css) { %>
+        <link href="<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet">
+        <% } %>
         <!-- MDC -->
         <link rel="stylesheet" href="https://unpkg.com/material-components-web@5.1.0/dist/material-components-web.min.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500|Material+Icons" rel="stylesheet">
         <script defer src="https://unpkg.com/material-components-web@5.1.0/dist/material-components-web.min.js"></script>
         
-        <script defer type="module" src="./I18nKit.js"></script>
+        <% for (const js in htmlWebpackPlugin.files.js) { %>
+        <script defer src="<%= htmlWebpackPlugin.files.js[js] %>"></script>
+        <% } %>
     </head>
     <body class="mdc-typography">
         <header class=" mdc-top-app-bar">

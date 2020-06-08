@@ -78,5 +78,4 @@ class I18nKit {
     }
 }
 
-const i18n = new I18nKit();
-i18n.init();
+export default new I18nKit();
