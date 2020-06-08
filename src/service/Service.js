@@ -123,6 +123,12 @@ class Service {
 
         this.auth.init();
         this.bs.init();
+
+        // Google Analytics
+        window.dataLayer = window.dataLayer || [];
+        const gtag = function() { dataLayer.push(arguments); };
+        gtag('js', new Date());
+        gtag('config', 'UA-167399687-2');
     }
 
     startMail() {
