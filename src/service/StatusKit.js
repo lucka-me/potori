@@ -1,4 +1,4 @@
-import  data from "../data/status.js";
+import data from "../data/status.json";
 
 class Status {
     constructor(code = 0, title = '', icon = '') {

@@ -7,6 +7,9 @@ class Version {
         this.text = `${potoriVersion}d${dataVersion}-${lite ? 'lite' : 'full'}`;
         this.fullFeature = !lite;
     }
+
+    text: string;
+    fullFeature: boolean;
 }
 
 export default new Version();

@@ -2,7 +2,7 @@ import { UIKitPrototype } from './protorypes.js';
 import Eli from "./Eli.js";
 import Toolkit from "./Toolkit.js";
 import FilterCard from './dashboard/FilterCard.js';
-import Version from '../service/Version.js';
+import Version from '../service/Version';
 import StatusKit from '../service/StatusKit.js';
 
 class ListView extends UIKitPrototype {

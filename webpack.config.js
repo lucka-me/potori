@@ -16,6 +16,10 @@ module.exports = {
   module: {
     rules: [
       {
+        test: /\.ts?$/,
+        use: 'ts-loader',
+      },
+      {
         test: /\.css$/,
         use: [
           { loader: MiniCssExtractPlugin.loader },
@@ -23,6 +27,9 @@ module.exports = {
         ],
       },
     ],
+  },
+  resolve: {
+    extensions: [ '.ts', '.js' ],
   },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),

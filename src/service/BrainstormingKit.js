@@ -1,4 +1,4 @@
-import Version from "./Version.js";
+import Version from "./Version";
 import StatusKit from "./StatusKit.js";
 
 class BrainstormingKit {
