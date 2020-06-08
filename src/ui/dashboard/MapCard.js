@@ -1,6 +1,6 @@
 import { DashboardPrototype } from './prototypes.js';
 import Eli from "../Eli";
-import Dark from '../Dark.js';
+import Dark from '../Dark';
 import FilterCard from './FilterCard.js';
 import StatusKit from '../../service/StatusKit';
 

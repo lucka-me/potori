@@ -1,6 +1,6 @@
 import Eli from "./Eli";
 
-import Dark         from "./Dark.js";
+import Dark         from "./Dark";
 import AppBar       from './AppBar.js';
 import Progress     from './Progress.js';
 import Dashboard    from './Dashboard.js';

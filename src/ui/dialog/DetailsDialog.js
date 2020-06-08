@@ -3,7 +3,7 @@ import DialogPrototype from './DialogPrototype.js';
 import Eli from "../Eli";
 import Toolkit from "../Toolkit.js";
 import AlertDialog from './AlertDialog.js';
-import Dark from '../Dark.js';
+import Dark from '../Dark';
 import Service from '../../service/Service.js';
 import { MapStyle } from '../dashboard/MapCard.js';
 import StatusKit from '../../service/StatusKit';
