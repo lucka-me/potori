@@ -40,6 +40,8 @@ module.exports = {
       patterns: [
         { from: 'assets', to: 'assets' },
         { from: 'manifest.json' },
+        { from: 'intro', to: 'intro' },
+        { from: 'src/ui/Eli.js', to: 'intro/Eli.js' },
       ],
     }),
   ],
