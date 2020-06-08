@@ -21,7 +21,6 @@ class Parser {
             return result;
         }
         result.matched = true;
-        result.portals = list;
         return result;
     }
 
