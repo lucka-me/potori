@@ -1,4 +1,4 @@
-import UIKitPrototype from './UIKitPrototype.js';
+import UIKitPrototype from './UIKitPrototype';
 import Eli from "./Eli";
 
 class AppBarMenu extends UIKitPrototype {

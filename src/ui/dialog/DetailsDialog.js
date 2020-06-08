@@ -1,4 +1,4 @@
-import UIKitPrototype from '../UIKitPrototype.js';
+import UIKitPrototype from '../UIKitPrototype';
 import DialogPrototype from './DialogPrototype.js';
 import Eli from "../Eli";
 import Toolkit from "../Toolkit.js";
