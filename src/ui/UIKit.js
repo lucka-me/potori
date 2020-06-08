@@ -10,9 +10,6 @@ import Dialog       from './Dialog.js';
 import Service from "../service/Service.js";
 import StatusKit from "../service/StatusKit.js";
 
-import '../../css/extended.css'
-import '../../css/dark.css'
-
 class UIKit {
     constructor() {
         this.dark       = Dark;
