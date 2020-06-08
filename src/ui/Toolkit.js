@@ -26,9 +26,6 @@ class Toolkit {
         const day = Math.floor((end - start) / (24 * 3600 * 1000));
         return `${day} day${(day > 1 ? "s" : "")}`;
     }
-    static getCountString(count, base) {
-        return `${count} (${base > 0 ? (count / base * 100).toFixed(1) : 0}%)`;
-    }
     static fillTimeDataMap(dataMap, min, max) {
         let scan = min;
         while (scan <= max) {
