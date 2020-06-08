@@ -27,7 +27,9 @@ class LocalFileKit {
         element.addEventListener('change', opened, false);
         document.body.appendChild(element);
         element.click();
-        document.body.removeChild(element);
+        setTimeout(() => {
+            document.body.removeChild(element);
+        }, 1000);
     }
 
     save(filename, blob) {

@@ -211,7 +211,6 @@ class Service {
             if (resultPortals.matched) {
                 this.portals = [];
                 this.portals.push(...resultPortals.portals);
-                console.log('open finish');
                 this.finish();
                 return;
             }
