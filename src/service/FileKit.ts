@@ -9,19 +9,22 @@ class FileConst {
 class LocalFileKit {
     constructor() {}
 
-    open(onload, onerror) {
+    open(onload: (result: string) => void, onerror: (message: string) => void) {
         const element = Eli.build('input', {
             styleText: 'display:none;',
             type: 'file', accept: 'json'
-        });
-        const opened = (event) => {
-            const file = event.target.files[0];
+        }) as HTMLInputElement;
+        const opened = (event: Event) => {
+            const file = (event.target as HTMLInputElement).files[0];
             if (!file) {
                 onerror('Failed to open file.');
                 return;
             }
             const fileReader = new FileReader();
-            fileReader.onload = () => onload(fileReader.result);
+            fileReader.onload = () => {
+                console.log(fileReader.result as string);
+                onload(fileReader.result as string);
+            };
             fileReader.readAsText(file);
         };
         element.addEventListener('change', opened, false);
@@ -30,7 +33,7 @@ class LocalFileKit {
         document.body.removeChild(element);
     }
 
-    save(filename, blob) {
+    save(filename: string, blob: Blob) {
         const element = Eli.build('a', {
             styleText: 'display:none',
             href: URL.createObjectURL(blob),
@@ -43,61 +46,64 @@ class LocalFileKit {
 }
 
 class GoogleDriveFileKit {
+
+    ids: Map<string, string>;
+
     constructor() {
-        this.idMap = new Map();
+        this.ids = new Map();
     }
 
     static get folder() { return 'appDataFolder' }
 
-    get(filename, onGet) {
-        const onGetFileList = (fileList) => {
+    get(filename: string, got: (reault: any, more: boolean) => boolean) {
+        const gotList = (fileList: Array<any>) => {
             if (fileList.length < 1) {
-                onGet(null, false);
+                got(null, false);
                 return;
             }
             const fileId = fileList[0].id;
-            gapi.client.drive.files.get({
-                fileId: fileId,
-                alt: "media"
-            }).then((response) => {
-                if (!onGet(response.result, true)) {
-                    gapi.client.drive.files.delete({ fileId: fileId });
-                    fileList.splice(0, 1);
-                    onGetFileList(fileList);
-                    return;
-                } else {
-                    this.idMap.set(filename, fileId);
-                }
-            });
+            // gapi.client.drive.files.get({
+            //     fileId: fileId,
+            //     alt: "media"
+            // }).then((response: any) => {
+            //     if (!got(response.result, true)) {
+            //         gapi.client.drive.files.delete({ fileId: fileId });
+            //         fileList.splice(0, 1);
+            //         gotList(fileList);
+            //         return;
+            //     } else {
+            //         this.ids.set(filename, fileId);
+            //     }
+            // });
         };
 
-        gapi.client.drive.files.list({
-            q: `name = '${filename}'`,
-            pageSize: 10,
-            spaces: GoogleDriveFileKit.folder,
-            fields: 'files(id)'
-        }).then((response) => {
-            const fileList = response.result.files;
-            if (!fileList) {
-                onGet(null, false);
-                return;
-            }
-            onGetFileList(fileList);
-        });
+        // gapi.client.drive.files.list({
+        //     q: `name = '${filename}'`,
+        //     pageSize: 10,
+        //     spaces: GoogleDriveFileKit.folder,
+        //     fields: 'files(id)'
+        // }).then((response: any) => {
+        //     const files = response.result.files;
+        //     if (!files) {
+        //         got(null, false);
+        //         return;
+        //     }
+        //     gotList(files);
+        // });
     }
 
-    uploaded(filename, blob, onFinished) {
+    uploaded(filename: string, blob: Blob, finished: (response: any) => void) {
         // Ref: https://gist.github.com/tanaikech/bd53b366aedef70e35a35f449c51eced
         let url = '';
         let method = '';
-        const metadata = {
+        const metadata: any = {
             name: filename,
             mimeType: FileConst.type,
         };
         // Using parent in Update will cause 403
-        if (this.idMap.has(filename)) {
+        if (this.ids.has(filename)) {
             method = 'PATCH';
-            url = `https://www.googleapis.com/upload/drive/v3/files/${this.idMap.get(filename)}?uploadType=multipart`;
+            url = `https://www.googleapis.com/upload/drive/v3/files/${this.ids.get(filename)}?uploadType=multipart`;
         } else {
             method = 'POST';
             url = 'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart';
@@ -113,12 +119,16 @@ class GoogleDriveFileKit {
             body: form,
         })
             .then(response => response.json())
-            .then(response => onFinished(response))
-            .catch((_) => onFinished(null));
+            .then(response => finished(response))
+            .catch((_) => finished(null));
     }
 }
 
 class FileKit {
+
+    local: LocalFileKit;
+    googleDrive: GoogleDriveFileKit;
+
     constructor() {
         this.local = new LocalFileKit;
         this.googleDrive = new GoogleDriveFileKit();

@@ -1,7 +1,7 @@
 import AuthKit from "./AuthKit";
 import Mari from "./Mari.js";
 import BrainstormingKit from "./BrainstormingKit.js";
-import FileKit, { FileConst } from "./FileKit.js";
+import FileKit, { FileConst } from "./FileKit";
 
 class Parser {
     static portals(content) {
