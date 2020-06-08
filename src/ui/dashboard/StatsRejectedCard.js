@@ -1,7 +1,7 @@
 import { DashboardChartProtorype } from './prototypes.js';
 import Eli from "../Eli.js";
 import Toolkit from "../Toolkit.js";
-import StatusKit from '../../service/StatusKit.js';
+import StatusKit from '../../service/StatusKit';
 
 class StatsRejectedCard extends DashboardChartProtorype {
     constructor() { super(); }

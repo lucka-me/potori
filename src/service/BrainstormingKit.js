@@ -1,5 +1,5 @@
 import Version from "./Version";
-import StatusKit from "./StatusKit.js";
+import StatusKit from "./StatusKit";
 
 class BrainstormingKit {
     constructor() {

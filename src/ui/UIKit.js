@@ -8,7 +8,7 @@ import ListView     from './ListView.js';
 import Dialog       from './Dialog.js';
 
 import Service from "../service/Service.js";
-import StatusKit from "../service/StatusKit.js";
+import StatusKit from "../service/StatusKit";
 
 class UIKit {
     constructor() {

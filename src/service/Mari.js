@@ -1,5 +1,5 @@
 import BrainstormingKit from "./BrainstormingKit.js";
-import StatusKit from "./StatusKit.js";
+import StatusKit from "./StatusKit";
 
 class Parser {
     static mail(fullMail, keys) {

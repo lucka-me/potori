@@ -2,7 +2,7 @@ import { DashboardPrototype } from './prototypes.js';
 import Eli from "../Eli.js";
 import Dark from '../Dark.js';
 import FilterCard from './FilterCard.js';
-import StatusKit from '../../service/StatusKit.js';
+import StatusKit from '../../service/StatusKit';
 
 class MapStyle {
     static get default() { return 'mapbox://styles/mapbox/streets-v11' }

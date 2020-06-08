@@ -6,7 +6,7 @@ import AlertDialog from './AlertDialog.js';
 import Dark from '../Dark.js';
 import Service from '../../service/Service.js';
 import { MapStyle } from '../dashboard/MapCard.js';
-import StatusKit from '../../service/StatusKit.js';
+import StatusKit from '../../service/StatusKit';
 
 class DetailsDialogMap extends UIKitPrototype {
     constructor() {
