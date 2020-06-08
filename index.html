@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
 
-<meta charset="utf-8" />
-
 <head>
+    <meta charset="utf-8" />
     <title>Potori</title>
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no"/>
     <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -13,9 +12,10 @@
     <link rel="apple-touch-icon" href="./assets/icon-180.png" />
     <link rel="manifest" href="./manifest.json" />
 
-    <!-- Stylesheet -->
-    <link type="text/css" rel="stylesheet" href="./css/extended.css" />
-    <link type="text/css" rel="stylesheet" href="./css/dark.css" />
+    <!-- CSS -->
+    <% for (const css in htmlWebpackPlugin.files.css) { %>
+    <link href="<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet">
+    <% } %>
     <!-- MDC -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-components-web/5.1.0/material-components-web.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500|Material+Icons" />
@@ -27,8 +27,6 @@
     <!-- Scripts -->
     <!-- GAPI -->
     <script defer src="https://apis.google.com/js/api.js"></script>
-    <!-- Google Analytics -->
-    <script defer src="https://www.googletagmanager.com/gtag/js?id=UA-167399687-2"></script>
     <!-- Mapbox  -->
     <script defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.10.1/mapbox-gl.js"></script>
     <!-- MDC -->
@@ -39,8 +37,9 @@
     <!-- Firebase -->
     <script defer src="https://www.gstatic.com/firebasejs/7.15.0/firebase-app.js"></script>
     <script defer src="https://www.gstatic.com/firebasejs/7.15.0/firebase-database.js"></script>
-    <!-- Potori -->
-    <script defer type="module" src="./src/potori.js"></script>
+    <% for (const js in htmlWebpackPlugin.files.js) { %>
+    <script defer src="<%= htmlWebpackPlugin.files.js[js] %>"></script>
+    <% } %>
 
 </head>
 
