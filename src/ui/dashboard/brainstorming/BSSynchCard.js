@@ -40,7 +40,7 @@ class BSSynchCard extends DashboardBsPrototype {
     }
 
     update(stats) {
-        const rate = stats.synch.synched / stats.synch.total;
+        const rate = stats.synch.total > 0 ? stats.synch.synched / stats.synch.total : 0.0;
         this.textSynch.innerHTML = `${(rate * 100).toFixed(1)}`;
     }
 }

@@ -1,6 +1,16 @@
 # Changelog
 
 ```markdown
+## [0.6.2] - 2020-06-08
+Bugs fixed
+
+### Fixed
+- Can not open Portal Data file
+- Synch is NaN% when no Brainstorming data
+- No response when open file in Safari
+```
+
+```markdown
 ## [0.6.1] - 2020-06-07
 Fixed view switching not work
 
