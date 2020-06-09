@@ -1,5 +1,6 @@
 import Version from "./Version";
 import StatusKit from "./StatusKit";
+import Nomination from "./Nomination";
 
 import firebase from "@firebase/app";
 import "@firebase/database";
@@ -50,11 +51,11 @@ class BrainstormingKit {
         }, failed);
     }
 
-    update(portals: Array<any>, finished: () => void) {
+    update(nominations: Array<Nomination>, finished: () => void) {
         const queryList = [];
-        for (const portal of portals) {
-            if ((portal.status < 1) || !this.data.has(portal.status)) {
-                queryList.push(portal.id);
+        for (const nomination of nominations) {
+            if ((nomination.status.code < 1) || !this.data.has(nomination.id)) {
+                queryList.push(nomination.id);
             }
         }
         let left = queryList.length;
@@ -79,10 +80,10 @@ class BrainstormingKit {
         }
     }
 
-    analyse(portals: Array<any>) {
+    analyse(nominations: Array<Nomination>) {
         const stats = {
             review: 0,
-            portal: 0,
+            nomination: 0,
             rate: {} as any,
             reviewTimes: [] as Array<number>,
             synch: { total: 0, synched: 0 },
@@ -96,9 +97,9 @@ class BrainstormingKit {
                 stats.rate[key].push(parseInt(rateJson[key]));
             }
         }
-        for (const portal of portals) {
-            if (!this.data.has(portal.id)) continue;
-            const bs = this.data.get(portal.id);
+        for (const nomination of nominations) {
+            if (!this.data.has(nomination.id)) continue;
+            const bs = this.data.get(nomination.id);
             const generals = [];
             for (const key of Object.keys(bs)) {
                 if (!key.startsWith('review')) continue;
@@ -111,15 +112,15 @@ class BrainstormingKit {
                     statsRate(rateJson, rateKey);
                 }
                 stats.reviewTimes.push(review.Timestamp);
-                if (portal.status === StatusKit.types.get('pending').code) continue;
+                if (nomination.status.code < 1) continue;
                 // Synch
                 stats.synch.total += 1;
-                if (BrainstormingKit.isSynched(review.stars, portal.status)) {
+                if (BrainstormingKit.isSynched(review.stars, nomination.status.code)) {
                     stats.synch.synched += 1;
                 }
             }
             if (generals.length < 1) continue;
-            stats.portal += 1;
+            stats.nomination += 1;
         }
         return stats;
     }
