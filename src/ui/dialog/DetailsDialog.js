@@ -327,7 +327,7 @@ class DetailsDialog extends DialogPrototype {
         const type = StatusKit.getTypeByCode(portal.status);
 
         this.ctrl.root_.querySelector('.mdc-dialog__title').innerHTML = portal.title;
-        this.ctrl.root_.querySelector('img').src = Toolkit.getImageUrl(portal.image);
+        this.ctrl.root_.querySelector('img').src = portal.imageUrl;
         this.textConfirmedTime.innerHTML = Toolkit.getDateTimeString(portal.confirmedTime);
 
         this.fieldResultTime.root_.hidden = (type === 'pending');

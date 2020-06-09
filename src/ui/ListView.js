@@ -125,7 +125,7 @@ class ListView extends UIKitPrototype {
                     children: [
                         Eli.build('img', {
                             styleText: styleTextImg,
-                            src: Toolkit.getImageUrl(portal.image),
+                            src: portal.imageUrl,
                         }),
                         Eli.build('div', {
                             className: [
@@ -200,7 +200,7 @@ class ListView extends UIKitPrototype {
             const actionIntel = new mdc.ripple.MDCRipple(elementActionIntel);
             actionIntel.unbounded = true;
             actionIntel.listen('click', () => {
-                window.open(Toolkit.lngLatToIntel(portal.lngLat), '_blank', 'noopener');
+                window.open(portal.intelUrl, '_blank', 'noopener');
             });
             actionIcons.push(elementActionIntel);
         }

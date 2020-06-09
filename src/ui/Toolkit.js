@@ -1,12 +1,6 @@
 import Eli from "./Eli";
 
 class Toolkit {
-    static lngLatToIntel(lngLat) {
-        return `https://intel.ingress.com/intel?ll=${lngLat.lat},${lngLat.lng}&z=18`;
-    }
-    static getImageUrl(image) {
-        return `https://lh3.googleusercontent.com/${image}`;
-    }
     static getDateString(time) {
         return new Date(time).toLocaleDateString();
     }
