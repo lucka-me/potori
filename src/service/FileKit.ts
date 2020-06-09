@@ -1,3 +1,4 @@
+import AuthKit from "./AuthKit";
 import Eli from "../ui/Eli";
 
 class FileConst {
@@ -111,7 +112,7 @@ class GoogleDriveFileKit {
         const form = new FormData();
         form.append('metadata', new Blob([JSON.stringify(metadata)], { type: FileConst.type }));
         form.append('file', blob);
-        const authHeader = `Bearer ${gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token}`;
+        const authHeader = `Bearer ${AuthKit.accessToken}`;
         fetch(url, {
             method: method,
             headers: new Headers({ Authorization: authHeader }),

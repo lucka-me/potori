@@ -44,9 +44,13 @@ class AuthKit {
         return gapi.auth2.getAuthInstance().isSignedIn.get();
     }
 
+    get accessToken() {
+        return gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
+    }
+
     signIn() { gapi.auth2.getAuthInstance().signIn(); }
 
     signOut() { gapi.auth2.getAuthInstance().signOut(); }
 }
 
-export default AuthKit;
+export default new AuthKit();

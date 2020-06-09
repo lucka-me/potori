@@ -89,10 +89,10 @@ interface ServiceEvents {
 
 class Service {
 
-    auth: AuthKit           = new AuthKit();
-    bs  : BrainstormingKit  = new BrainstormingKit();
-    file: FileKit           = new FileKit();
-    mari: Mari              = new Mari();
+    auth    = AuthKit;
+    bs      = new BrainstormingKit();
+    file    = new FileKit();
+    mari    = new Mari();
 
     nominations: Array<Nomination> = [];
 
