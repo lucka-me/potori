@@ -34,10 +34,14 @@ class AuthKit {
                 // Listen for sign-in state changes.
                 gapi.auth2.getAuthInstance().isSignedIn.listen(this.events.authStatusChanged);
                 // Handle the initial sign-in state.
-                this.events.authStatusChanged(gapi.auth2.getAuthInstance().isSignedIn.get());
+                this.events.authStatusChanged(this.signedIn);
             },
             this.events.onerror
         );
+    }
+
+    get signedIn() {
+        return gapi.auth2.getAuthInstance().isSignedIn.get();
     }
 
     signIn() { gapi.auth2.getAuthInstance().signIn(); }
