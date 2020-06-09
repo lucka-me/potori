@@ -1,11 +1,13 @@
 import Version from "./Version";
 import StatusKit from "./StatusKit";
 
-import * as firebase from "firebase";
+import firebase from "@firebase/app";
+import "@firebase/database";
+import { Reference } from "@firebase/database-types";
 
 class BrainstormingKit {
 
-    reference: firebase.database.Reference;
+    reference: Reference;
     data: Map<string, any>;
 
     constructor() {
@@ -14,8 +16,8 @@ class BrainstormingKit {
     }
 
     init() {
-        firebase.initializeApp({ databaseURL: 'https://oprbrainstorming.firebaseio.com' });
-        this.reference = firebase.database().ref('c/reviews/');
+        const app = firebase.initializeApp({ databaseURL: 'https://oprbrainstorming.firebaseio.com' });
+        this.reference = app.database().ref('c/reviews/');
     }
 
     query(bsId: string, succeed: (data: any) => void, failed: () => void) {
