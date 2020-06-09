@@ -2,7 +2,7 @@ import UIKitPrototype from './UIKitPrototype';
 
 class Dark extends UIKitPrototype {
 
-    enabled: boolean = false;
+    enabled = false;
     changed: (enabled: boolean) => void = () => {};
 
     constructor() {

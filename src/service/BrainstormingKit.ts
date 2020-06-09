@@ -1,10 +1,10 @@
-import Version from "./Version";
-import StatusKit from "./StatusKit";
-import Nomination, { LngLat } from "./Nomination";
-
 import firebase from "@firebase/app";
 import "@firebase/database";
 import { Reference } from "@firebase/database-types";
+
+import Nomination, { LngLat } from "./Nomination";
+import StatusKit from "./StatusKit";
+import Version from "./Version";
 
 class BrainstormingKit {
 

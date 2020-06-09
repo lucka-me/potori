@@ -6,14 +6,14 @@ interface LngLat {
 }
 
 class Nomination {
-    id: string = '';
-    title: string = '';
-    image: string = '';
+    id = '';
+    title = '';
+    image = '';
 
     status: Status = StatusKit.codes.get(0);
 
-    confirmedTime: number = 0;
-    confirmationMailId: string = '';
+    confirmedTime = 0;
+    confirmationMailId = '';
     resultTime: number = null;
     resultMailId: string = null;
 

@@ -85,7 +85,7 @@ const AppBarActions = {
 
 class AppBar extends UIKitPrototype {
 
-    menu: AppBarMenu = new AppBarMenu();
+    menu = new AppBarMenu();
     actions: Map<string, HTMLButtonElement> = new Map();
     events: Map<string, () => void> = new Map();
 

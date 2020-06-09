@@ -131,8 +131,8 @@ class GoogleDriveFileKit {
 
 class FileKit {
 
-    local: LocalFileKit = new LocalFileKit();
-    googleDrive: GoogleDriveFileKit = new GoogleDriveFileKit();
+    local       = new LocalFileKit();
+    googleDrive = new GoogleDriveFileKit();
 
     constructor() { }
 }
