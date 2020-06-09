@@ -1,6 +1,6 @@
 import AuthKit from "./AuthKit";
 import Mari from "./Mari.js";
-import BrainstormingKit from "./BrainstormingKit.js";
+import BrainstormingKit from "./BrainstormingKit";
 import FileKit, { FileConst } from "./FileKit";
 
 class Parser {

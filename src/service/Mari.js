@@ -1,4 +1,4 @@
-import BrainstormingKit from "./BrainstormingKit.js";
+import BrainstormingKit from "./BrainstormingKit";
 import StatusKit from "./StatusKit";
 
 class Parser {

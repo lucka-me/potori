@@ -1,6 +1,6 @@
 import { DashboardBsChartPrototype } from './prototypes.js';
 import Eli from "../../Eli";
-import BrainstormingKit from '../../../service/BrainstormingKit.js';
+import BrainstormingKit from '../../../service/BrainstormingKit';
 
 class BSRatesCard extends DashboardBsChartPrototype {
     constructor() { super(); }
