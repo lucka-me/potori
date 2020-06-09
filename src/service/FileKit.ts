@@ -1,9 +1,9 @@
 import Eli from "../ui/Eli";
 
 class FileConst {
-    static get type() { return 'application/json' }
-    static get portals() { return 'potori.json' }
-    static get bsData() { return 'bsdata.json' }
+    static type = 'application/json';
+    static portals = 'potori.json';
+    static bsData = 'bsdata.json';
 }
 
 class LocalFileKit {
