@@ -2,11 +2,13 @@ import * as data from "../data/status.json";
 
 class Status {
 
+    key: string;
     code: number;
     title: string;
     icon: string;
 
-    constructor(code: number, title: string, icon: string) {
+    constructor(key: string, code: number, title: string, icon: string) {
+        this.key = key;
         this.code = code;
         this.title = title;
         this.icon = icon;
@@ -28,8 +30,8 @@ class StatusType extends Status {
 
     query: MailQuery;
 
-    constructor(code: number, title: string, icon: string, query: MailQuery) {
-        super(code, title, icon);
+    constructor(key: string, code: number, title: string, icon: string, query: MailQuery) {
+        super(key, code, title, icon);
         this.query = query;
     }
 }
@@ -50,8 +52,8 @@ class StatusReason extends Status {
     color: string;
     keyword: ReasonKeyword
 
-    constructor(code: number, title: string, icon: string, color: string, keyword: ReasonKeyword) {
-        super(code, title, icon);
+    constructor(key: string, code: number, title: string, icon: string, color: string, keyword: ReasonKeyword) {
+        super(key, code, title, icon);
         this.color = color;
         this.keyword = keyword;
     }
@@ -60,42 +62,35 @@ class StatusReason extends Status {
 class StatusKit {
 
     version: string;
+    
     types: Map<string, StatusType>;
     reasons: Map<string, StatusReason>;
+    codes: Map<number, Status>;
 
     constructor() {
         this.version = data.version;
-        this.types = new Map();
-        this.types.clear();
-        for (const type of data.types) {
-            this.types.set(type.key, new StatusType(
-                type.code, type.title, type.icon,
-                new MailQuery(type.query.redacted, type.query.prime)
-            ));
-        }
-        this.reasons = new Map();
-        this.reasons.clear();
-        for (const reason of data.reasons) {
-            this.reasons.set(reason.key, new StatusReason(
-                reason.code, reason.title, reason.icon, reason.color,
-                new ReasonKeyword(reason.keyword.redacted, reason.keyword.prime)
-            ));
-        }
-    }
 
-    matchStatus(code: number): Status {
-        let result: Status = this.types.get('pending');
-        if (code < 100) {
-            if (code === 1) result = this.types.get('accepted');
-        } else {
-            for (const reason of this.reasons.values()) {
-                if (reason.code === code) {
-                    result = reason;
-                    break; 
-                }
-            }
+        this.codes = new Map();
+
+        this.types = new Map();
+        for (const type of data.types) {
+            const status = new StatusType(
+                type.key, type.code, type.title, type.icon,
+                new MailQuery(type.query.redacted, type.query.prime)
+            );
+            this.types.set(type.key, status);
+            this.codes.set(type.code, status);
         }
-        return result;
+
+        this.reasons = new Map();
+        for (const reason of data.reasons) {
+            const status = new StatusReason(
+                reason.key, reason.code, reason.title, reason.icon, reason.color,
+                new ReasonKeyword(reason.keyword.redacted, reason.keyword.prime)
+            );
+            this.reasons.set(reason.key, status);
+            this.codes.set(reason.code, status);
+        }
     }
 
     typeMatched(status: number, type: number): boolean {
@@ -122,3 +117,4 @@ class StatusKit {
 }
 
 export default new StatusKit();
+export { Status };
