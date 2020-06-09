@@ -1,4 +1,4 @@
-import I18nKit from "./ui/I18nKit.js";
+import I18nKit from "./ui/I18nKit";
 
 import '../css/extended.css'
 import '../css/dark.css'
