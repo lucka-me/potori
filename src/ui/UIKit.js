@@ -1,8 +1,8 @@
 import Eli from "./Eli";
 
-import Dark         from "./Dark";
-import AppBar       from './AppBar.js';
-import Progress     from './Progress';
+import Dark from "./Dark";
+import AppBar, { AppBarMenuItems, AppBarActions } from './AppBar';
+import Progress from './Progress';
 import Dashboard    from './Dashboard.js';
 import ListView     from './ListView.js';
 import Dialog       from './Dialog.js';
@@ -34,14 +34,28 @@ class UIKit {
         this.dark.init();
 
         // AppBar
-        this.appBar.event.view              = () => this.switchView();
-        this.appBar.event.signin            = () => Service.auth.signIn();
-        this.appBar.menu.event.openFile     = () => Service.open(),
-        this.appBar.menu.event.saveFile     = () => Service.save(),
-        this.appBar.menu.event.uploadFile   = () => Service.upload(),
-        this.appBar.menu.event.import       = () => this.dialog.import.open(),
-        this.appBar.menu.event.about        = () => this.dialog.about.open(),
-        this.appBar.menu.event.signout      = () => Service.auth.signOut();
+        this.appBar.events.view     = () => this.switchView();
+        this.appBar.events.signin   = () => Service.auth.signIn();
+
+        console.log(AppBarMenuItems);
+        this.appBar.menu.events.set(
+            AppBarMenuItems.open.key, () => Service.open()
+        );
+        this.appBar.menu.events.set(
+            AppBarMenuItems.save.key, () => Service.save()
+        );
+        this.appBar.menu.events.set(
+            AppBarMenuItems.upload.key, () => Service.upload()
+        );
+        this.appBar.menu.events.set(
+            AppBarMenuItems.import.key, () => this.dialog.import.open()
+        );
+        this.appBar.menu.events.set(
+            AppBarMenuItems.about.key, () => this.dialog.about.open()
+        );
+        this.appBar.menu.events.set(
+            AppBarMenuItems.signout.key, () => Service.auth.signOut()
+        );
         this.appBar.init(body);
 
         // Progress
@@ -108,14 +122,14 @@ class UIKit {
         // Service
         Service.events.authStatusChanged = (signedIn) => {
             if (signedIn) {
-                this.appBar.button.signin.root_.hidden = true;
-                this.appBar.menu.item.signout.hidden = false;
+                this.appBar.actions.get(AppBarActions.signin.key).hidden = true;
+                this.appBar.menu.items.get(AppBarMenuItems.signout.key).hidden = false;
             } else {
                 this.clear();
-                this.appBar.button.signin.root_.hidden = false;
-                this.appBar.menu.item.signout.hidden = true;
-                this.appBar.menu.item.uploadFile.hidden = true;
-                this.appBar.menu.item.import.hidden = true;
+                this.appBar.actions.get(AppBarActions.signin.key).hidden = false;
+                this.appBar.menu.items.get(AppBarMenuItems.signout.key).hidden = true;
+                this.appBar.menu.items.get(AppBarMenuItems.upload.key).hidden = true;
+                this.appBar.menu.items.get(AppBarMenuItems.import.key).hidden = true;
             }
         }
         Service.events.progressUpdate = (percent) => {
@@ -150,16 +164,17 @@ class UIKit {
     }
 
     switchView() {
-        const switchToList = this.appBar.button.view.root_.innerHTML === 'view_list';
-        this.appBar.button.view.root_.innerHTML = switchToList ? 'dashboard' : 'view_list';
-        this.appBar.button.view.root_.title = switchToList ? 'Dashboard' : 'List';
+        const actionView = this.appBar.actions.get(AppBarActions.view.key);
+        const switchToList = actionView.innerHTML === 'view_list';
+        actionView.innerHTML = switchToList ? 'dashboard' : 'view_list';
+        actionView.title = switchToList ? 'Dashboard' : 'List';
         this.dashboard.root.classList.toggle('view-hide');
         this.list.root.classList.toggle('view-hide');
     }
 
     clear() {
-        this.appBar.menu.item.openFile.hidden = false;
-        this.appBar.menu.item.saveFile.hidden = true;
+        this.appBar.menu.items.get(AppBarMenuItems.open.key).hidden = false;
+        this.appBar.menu.items.get(AppBarMenuItems.save.key).hidden = true;
 
         this.dashboard.setVisible(false);
         this.list.clear();
@@ -185,10 +200,10 @@ class UIKit {
         if (boundsSW.lng > -181) {
             this.dashboard.map.ctrl.fitBounds([boundsSW, boundsNE], { linear: true });
         }
-        this.appBar.menu.item.openFile.hidden = true;
-        this.appBar.menu.item.saveFile.hidden = false;
-        this.appBar.menu.item.uploadFile.hidden = !gapi.auth2.getAuthInstance().isSignedIn.get();
-        this.appBar.menu.item.import.hidden = false;
+        this.appBar.menu.items.get(AppBarMenuItems.open.key).hidden = true;
+        this.appBar.menu.items.get(AppBarMenuItems.save.key).hidden = false;
+        this.appBar.menu.items.get(AppBarMenuItems.upload.key).hidden = !Service.auth.signedIn;
+        this.appBar.menu.items.get(AppBarMenuItems.import.key).hidden = false;
         this.progress.ctrl.root_.hidden = true;
     }
 
