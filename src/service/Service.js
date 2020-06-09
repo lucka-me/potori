@@ -1,5 +1,5 @@
 import AuthKit from "./AuthKit";
-import Mari from "./Mari.js";
+import Mari from "./Mari";
 import BrainstormingKit from "./BrainstormingKit";
 import FileKit, { FileConst } from "./FileKit";
 
@@ -123,6 +123,8 @@ class Service {
         this.auth.init();
         this.bs.init();
 
+        this.mari.events.finished = () => this.finish();
+
         // Google Analytics
         window.dataLayer = window.dataLayer || [];
         const gtag = function() { dataLayer.push(arguments); };
@@ -134,7 +136,7 @@ class Service {
         this.event.clear();
         this.event.showProgress();
         this.download(() => {
-            this.mari.start(this.portals, () => this.finish());
+            this.mari.start(this.portals);
         });
     }
 

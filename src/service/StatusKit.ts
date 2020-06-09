@@ -15,47 +15,31 @@ class Status {
     }
 }
 
-class MailQuery {
-
-    redacted: string;
-    prime: string;
-
-    constructor(redacted: string, prime: string) {
-        this.redacted = redacted;
-        this.prime = prime;
-    }
-}
-
 class StatusType extends Status {
 
-    query: MailQuery;
+    queries: Map<string, string>;
 
-    constructor(key: string, code: number, title: string, icon: string, query: MailQuery) {
+    constructor(
+        key: string, code: number, title: string, icon: string,
+        queries: Map<string, string>
+    ) {
         super(key, code, title, icon);
-        this.query = query;
-    }
-}
-
-class ReasonKeyword {
-
-    redacted: Array<string>;
-    prime: Array<string>;
-
-    constructor(redacted: Array<string>, prime: Array<string>) {
-        this.redacted = redacted;
-        this.prime = prime;
+        this.queries = queries;
     }
 }
 
 class StatusReason extends Status {
 
     color: string;
-    keyword: ReasonKeyword
+    keywords: Map<string, Array<string>>;
 
-    constructor(key: string, code: number, title: string, icon: string, color: string, keyword: ReasonKeyword) {
+    constructor(
+        key: string, code: number, title: string, icon: string,
+        color: string, keyword: Map<string, Array<string>>
+    ) {
         super(key, code, title, icon);
         this.color = color;
-        this.keyword = keyword;
+        this.keywords = keyword;
     }
 }
 
@@ -76,7 +60,7 @@ class StatusKit {
         for (const type of data.types) {
             const status = new StatusType(
                 type.key, type.code, type.title, type.icon,
-                new MailQuery(type.query.redacted, type.query.prime)
+                new Map(type.queries as Array<[string, string]>)
             );
             this.types.set(type.key, status);
             this.codes.set(type.code, status);
@@ -86,7 +70,7 @@ class StatusKit {
         for (const reason of data.reasons) {
             const status = new StatusReason(
                 reason.key, reason.code, reason.title, reason.icon, reason.color,
-                new ReasonKeyword(reason.keyword.redacted, reason.keyword.prime)
+                new Map(reason.keywords as Array<[string, Array<string>]>)
             );
             this.reasons.set(reason.key, status);
             this.codes.set(reason.code, status);

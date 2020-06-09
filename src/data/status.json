@@ -1,35 +1,53 @@
 {
-    "version": "1",
+    "version": "2",
     "types": [
         {
             "key": "pending",
             "code": 0,
             "title": "Pending",
             "icon":  "access_time",
-            "query": {
-                "redacted": "from:ingress-support@nianticlabs.com Portal submission confirmation -edit -photo",
-                "prime":    "from:nominations@portals.ingress.com subject:(\"能量塔提交確認\" OR \"Portal申請の受領確認\" OR \"Portal submission confirmation\") -AP"
-            }
+            "queries": [
+                [
+                    "redacted",
+                    "from:ingress-support@nianticlabs.com Portal submission confirmation -edit -photo"
+                ],
+                [
+                    "prime",
+                    "from:nominations@portals.ingress.com subject:(\"能量塔提交確認\" OR \"Portal申請の受領確認\" OR \"Portal submission confirmation\") -AP"
+                ]
+            ]
         },
         {
             "key": "accepted",
             "code": 1,
             "title": "Accepted",
             "icon":  "check",
-            "query": {
-                "redacted": "from:ingress-support@nianticlabs.com Portal review complete now available -edit -photo",
-                "prime":    "from:nominations@portals.ingress.com Intel Map AP"
-            }
+            "queries": [
+                [
+                    "redacted",
+                    "from:ingress-support@nianticlabs.com Portal review complete now available -edit -photo"
+                ],
+                [
+                    "prime",
+                    "from:nominations@portals.ingress.com Intel Map AP"
+                ]
+            ]
         },
         {
             "key": "rejected",
             "code": 101,
             "title": "Rejected",
             "icon":  "close",
-            "query": {
-                "redacted": "from:ingress-support@nianticlabs.com Portal review complete reviewed -edit -photo",
-                "prime":    "from:nominations@portals.ingress.com subject:(\"能量塔審查完畢\" OR \"Portal審査の完了\" OR \"Portal review complete\") -AP"
-            }
+            "queries": [
+                [
+                    "redacted",
+                    "from:ingress-support@nianticlabs.com Portal review complete reviewed -edit -photo"
+                ],
+                [
+                    "prime",
+                    "from:nominations@portals.ingress.com subject:(\"能量塔審查完畢\" OR \"Portal審査の完了\" OR \"Portal review complete\") -AP"
+                ]
+            ]
         }
     ],
     "reasons": [
@@ -39,7 +57,10 @@
             "title": "Undeclared",
             "icon":  "close",
             "color": "#B0373C",
-            "keyword": { "redacted": [], "prime": [] }
+            "keywords": [
+                [ "redacted", [] ],
+                [ "prime", [] ]
+            ]
         },
         {
             "key": "duplicated",
@@ -47,10 +68,13 @@
             "title": "Duplicated",
             "icon":  "filter_none",
             "color": "#5E90B8",
-            "keyword": {
-                "redacted": ["duplicate of either an existing Portal"],
-                "prime":    []
-            }
+            "keywords": [
+                [
+                    "redacted",
+                    [ "duplicate of either an existing Portal" ]
+                ],
+                [ "prime", [] ]
+            ]
         },
         {
             "key": "tooClose",
@@ -58,10 +82,16 @@
             "title": "Too Close",
             "icon":  "compare_arrows",
             "color": "#009345",
-            "keyword": {
-                "redacted": ["too close to an existing Portal"],
-                "prime":    ["能量塔過近"]
-            }
+            "keywords": [
+                [
+                    "redacted",
+                    ["too close to an existing Portal"]
+                ],
+                [
+                    "prime",
+                    ["能量塔過近"]
+                ]
+            ]
         }
     ]
 }

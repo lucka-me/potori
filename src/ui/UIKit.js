@@ -141,10 +141,10 @@ class UIKit {
         }
 
         // Mari
-        Service.mari.event.bufferUpdate = (percent) => {
+        Service.mari.events.bufferUpdate = (percent) => {
             this.progress.ctrl.buffer = percent;
         };
-        Service.mari.event.progressUpdate = (percent) => {
+        Service.mari.events.progressUpdate = (percent) => {
             this.progress.ctrl.progress = percent * 0.9;
         }
     }
