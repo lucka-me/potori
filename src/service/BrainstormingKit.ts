@@ -1,7 +1,13 @@
 import Version from "./Version";
 import StatusKit from "./StatusKit";
 
+import * as firebase from "firebase";
+
 class BrainstormingKit {
+
+    reference: firebase.database.Reference;
+    data: Map<string, any>;
+
     constructor() {
         this.reference = null;
         this.data = new Map();
@@ -12,13 +18,13 @@ class BrainstormingKit {
         this.reference = firebase.database().ref('c/reviews/');
     }
 
-    query(bsId, onSuccess, onFailed) {
+    query(bsId: string, succeed: (data: any) => void, failed: () => void) {
         if (this.data.has(bsId)) {
-            onSuccess(this.data.get(bsId));
+            succeed(this.data.get(bsId));
             return;
         }
         if (!Version.fullFeature) {
-            onFailed();
+            failed();
             return;
         }
         this.reference.child(bsId).once(
@@ -26,23 +32,23 @@ class BrainstormingKit {
             (data) => {
                 const val = data.val();
                 if (!val) {
-                    onFailed();
+                    failed();
                     return;
                 }
                 this.data.set(bsId, val);
-                onSuccess(val);
+                succeed(val);
             },
-            (_) => onFailed(),
+            (_) => failed(),
         );
     }
 
-    queryLngLat(bsId, onSuccess, onFailed) {
+    queryLngLat(bsId: string, succeed: (lngLat: { lng: number, lat: number }) => void, failed: () => void) {
         this.query(bsId, (data) => {
-            onSuccess({ lng: parseFloat(data.lng), lat: parseFloat(data.lat) });
-        }, onFailed);
+            succeed({ lng: parseFloat(data.lng), lat: parseFloat(data.lat) });
+        }, failed);
     }
 
-    update(portals, finished) {
+    update(portals: Array<any>, finished: () => void) {
         const queryList = [];
         for (const portal of portals) {
             if ((portal.status < 1) || !this.data.has(portal.status)) {
@@ -71,18 +77,19 @@ class BrainstormingKit {
         }
     }
 
-    analyse(portals) {
+    analyse(portals: Array<any>) {
         const stats = {
-            review: 0, portal: 0,
-            rate: { },
-            reviewTimes: [],
+            review: 0,
+            portal: 0,
+            rate: {} as any,
+            reviewTimes: [] as Array<number>,
             synch: { total: 0, synched: 0 },
         };
         const rateKeys = Object.keys(BrainstormingKit.rateKeys);
         for (const key of rateKeys) {
             stats.rate[key] = [];
         }
-        const statsRate = (rateJson, key) => {
+        const statsRate = (rateJson: any, key: string) => {
             if (rateJson[key]) {
                 stats.rate[key].push(parseInt(rateJson[key]));
             }
@@ -115,7 +122,7 @@ class BrainstormingKit {
         return stats;
     }
 
-    static getId(imgUrl) {
+    static getId(imgUrl: string) {
         return imgUrl.replace(/[^a-zA-Z0-9]/g, '').slice(- 10).toLowerCase();
     }
 
@@ -130,7 +137,7 @@ class BrainstormingKit {
         };
     }
 
-    static isSynched(stars, status) {
+    static isSynched(stars: string, status: number) {
         const reasons = StatusKit.reasons;
         if (stars === 'D' && status === reasons.get('duplicated').code) {
             return true;

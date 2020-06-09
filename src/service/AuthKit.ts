@@ -18,7 +18,7 @@ class AuthKit {
         gapi.load('client:auth2', () => this.initClient());
     }
 
-    initClient() {
+    private initClient() {
         gapi.client.init({
             apiKey: 'AIzaSyCqIaS8UizqjWrIKm5zV3_S8EffCWjKR-A',
             clientId: '361295761775-qshg0f5buh495dhubp4v5bignk7i5dh1.apps.googleusercontent.com',
