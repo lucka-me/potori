@@ -2,7 +2,7 @@ import Eli from "./Eli";
 
 import Dark         from "./Dark";
 import AppBar       from './AppBar.js';
-import Progress     from './Progress.js';
+import Progress     from './Progress';
 import Dashboard    from './Dashboard.js';
 import ListView     from './ListView.js';
 import Dialog       from './Dialog.js';

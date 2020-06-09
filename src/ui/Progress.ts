@@ -1,13 +1,17 @@
+import { MDCLinearProgress } from "@material/linear-progress";
+
 import UIKitPrototype from './UIKitPrototype';
 import Eli from "./Eli";
 
 class Progress extends UIKitPrototype {
+
+    ctrl: MDCLinearProgress = null;
+
     constructor() {
         super();
-        this.ctrl = null;
     }
 
-    init(parent) {
+    init(parent: HTMLElement) {
         const element = Eli.build('div', {
             className: 'mdc-linear-progress',
             hidden: true,
@@ -34,7 +38,7 @@ class Progress extends UIKitPrototype {
             ],
         });
         parent.appendChild(element);
-        this.ctrl = new mdc.linearProgress.MDCLinearProgress(element);
+        this.ctrl = new MDCLinearProgress(element);
     }
 }
 
