@@ -1,6 +1,6 @@
 import { DashboardBsPrototype } from './prototypes.js';
 import Eli from "../../Eli";
-import Service from '../../../service/Service.js';
+import Service from '../../../service/Service';
 
 class BSBasicCard extends DashboardBsPrototype {
     constructor() {

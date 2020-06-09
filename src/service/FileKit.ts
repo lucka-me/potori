@@ -2,7 +2,7 @@ import Eli from "../ui/Eli";
 
 class FileConst {
     static type = 'application/json';
-    static portals = 'potori.json';
+    static nominations = 'potori.json';
     static bsData = 'bsdata.json';
 }
 
@@ -22,7 +22,6 @@ class LocalFileKit {
             }
             const fileReader = new FileReader();
             fileReader.onload = () => {
-                console.log(fileReader.result as string);
                 onload(fileReader.result as string);
             };
             fileReader.readAsText(file);
@@ -57,8 +56,8 @@ class GoogleDriveFileKit {
 
     static get folder() { return 'appDataFolder' }
 
-    get(filename: string, got: (reault: any, more: boolean) => boolean) {
-        const gotList = (fileList: Array<any>) => {
+    get(filename: string, got: (file: gapi.client.drive.File, more: boolean) => boolean) {
+        const gotList = (fileList: Array<gapi.client.drive.File>) => {
             if (fileList.length < 1) {
                 got(null, false);
                 return;
@@ -67,7 +66,7 @@ class GoogleDriveFileKit {
             gapi.client.drive.files.get({
                 fileId: fileId,
                 alt: "media"
-            }).then((response: any) => {
+            }).then((response: gapi.client.Response<gapi.client.drive.File>) => {
                 if (!got(response.result, true)) {
                     gapi.client.drive.files.delete({ fileId: fileId });
                     fileList.splice(0, 1);
@@ -84,7 +83,7 @@ class GoogleDriveFileKit {
             pageSize: 10,
             spaces: GoogleDriveFileKit.folder,
             fields: 'files(id)'
-        }).then((response: any) => {
+        }).then((response: gapi.client.Response<gapi.client.drive.FileList>) => {
             const files = response.result.files;
             if (!files) {
                 got(null, false);
@@ -94,7 +93,7 @@ class GoogleDriveFileKit {
         });
     }
 
-    uploaded(filename: string, blob: Blob, finished: (response: any) => void) {
+    upload(filename: string, blob: Blob, finished: (response: any) => void) {
         // Ref: https://gist.github.com/tanaikech/bd53b366aedef70e35a35f449c51eced
         let url = '';
         let method = '';
@@ -121,8 +120,13 @@ class GoogleDriveFileKit {
             body: form,
         })
             .then(response => response.json())
-            .then(response => finished(response))
-            .catch((_) => finished(null));
+            .then(response => {
+                if (response && response.id) {
+                    this.ids.set(filename, response.id);
+                }
+                finished(response);
+            })
+            .catch(() => finished(null));
     }
 }
 

@@ -1,6 +1,6 @@
 import DialogPrototype from './DialogPrototype.js';
 import Eli from "../Eli";
-import Service from '../../service/Service.js';
+import Service from '../../service/Service';
 
 class ImportDialog extends DialogPrototype {
     constructor() {

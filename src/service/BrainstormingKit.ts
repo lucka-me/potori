@@ -1,6 +1,6 @@
 import Version from "./Version";
 import StatusKit from "./StatusKit";
-import Nomination from "./Nomination";
+import Nomination, { LngLat } from "./Nomination";
 
 import firebase from "@firebase/app";
 import "@firebase/database";
@@ -45,7 +45,7 @@ class BrainstormingKit {
         );
     }
 
-    queryLngLat(bsId: string, succeed: (lngLat: { lng: number, lat: number }) => void, failed: () => void) {
+    queryLngLat(bsId: string, succeed: (lngLat: LngLat) => void, failed: () => void) {
         this.query(bsId, (data) => {
             succeed({ lng: parseFloat(data.lng), lat: parseFloat(data.lat) });
         }, failed);

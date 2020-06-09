@@ -7,7 +7,7 @@ import Dashboard    from './Dashboard.js';
 import ListView     from './ListView.js';
 import Dialog       from './Dialog.js';
 
-import Service from "../service/Service.js";
+import Service from "../service/Service";
 import StatusKit from "../service/StatusKit";
 
 class UIKit {
@@ -69,22 +69,22 @@ class UIKit {
         }
         this.dashboard.filter.event.switchType = (type, visible) => {
             const code = StatusKit.types.get(type).code;
-            for (const portal of Service.portals) {
+            for (const portal of Service.nominations) {
                 if (StatusKit.typeMatched(portal.status, code)) {
                     document.getElementById(`card-${portal.id}`).hidden = !visible;
                 }
             }
             if (type === 'rejected') {
-                this.dashboard.map.updateRejected(Service.portals);
+                this.dashboard.map.updateRejected(Service.nominations);
             }
             this.dashboard.map.setTypeVisible(type, visible);
         };
         this.dashboard.filter.event.switchReason = (reason, visible) => {
-            for (const portal of Service.portals) {
+            for (const portal of Service.nominations) {
                 if (portal.status !== StatusKit.reasons.get(reason).code) continue;
                 document.getElementById(`card-${portal.id}`).hidden = !visible;
             }
-            this.dashboard.map.updateRejected(Service.portals);
+            this.dashboard.map.updateRejected(Service.nominations);
         };
         this.dashboard.init(mainBox);
 
@@ -106,7 +106,7 @@ class UIKit {
 
     linkService() {
         // Service
-        Service.event.authStatusChanged = (signedIn) => {
+        Service.events.authStatusChanged = (signedIn) => {
             if (signedIn) {
                 this.appBar.button.signin.root_.hidden = true;
                 this.appBar.menu.item.signout.hidden = false;
@@ -118,25 +118,25 @@ class UIKit {
                 this.appBar.menu.item.import.hidden = true;
             }
         }
-        Service.event.progressUpdate = (percent) => {
+        Service.events.progressUpdate = (percent) => {
             this.progress.ctrl.progress = percent;
         }
-        Service.event.updateBs = () => {
-            this.dashboard.bs.update(Service.portals);
+        Service.events.updateBs = () => {
+            this.dashboard.bs.update(Service.nominations);
         }
-        Service.event.showProgress = () => {
+        Service.events.showProgress = () => {
             this.progress.ctrl.root_.hidden = false;
         };
-        Service.event.show = () => {
+        Service.events.show = () => {
             this.show();
         };
-        Service.event.clear = () => {
+        Service.events.clear = () => {
             this.clear();
         };
-        Service.event.alert = (message) => {
+        Service.events.alert = (message) => {
             this.dialog.alert.open(message);
         }
-        Service.event.info = (message) => {
+        Service.events.info = (message) => {
             this.dialog.shackbar.open(message);
         }
 
@@ -163,7 +163,7 @@ class UIKit {
 
         this.dashboard.setVisible(false);
         this.list.clear();
-        if (this.dashboard.map.loaded()) this.dashboard.map.update(Service.portals);
+        if (this.dashboard.map.loaded()) this.dashboard.map.update(Service.nominations);
         this.progress.ctrl.root_.hidden = true;
         this.progress.ctrl.buffer = 0;
         this.progress.ctrl.progress = 0;
@@ -172,15 +172,15 @@ class UIKit {
     show() {
         const boundsNE = { lng: -181.0, lat: -91.0 };
         const boundsSW = { lng:  181.0, lat:  91.0 };
-        for (const portal of Service.portals) {
+        for (const portal of Service.nominations) {
             if (!portal.lngLat) continue;
             if (portal.lngLat.lng > boundsNE.lng) boundsNE.lng = portal.lngLat.lng;
             else if (portal.lngLat.lng < boundsSW.lng) boundsSW.lng = portal.lngLat.lng;
             if (portal.lngLat.lat > boundsNE.lat) boundsNE.lat = portal.lngLat.lat;
             else if (portal.lngLat.lat < boundsSW.lat) boundsSW.lat = portal.lngLat.lat;
         }
-        this.list.show(Service.portals);
-        this.dashboard.refresh(Service.portals);
+        this.list.show(Service.nominations);
+        this.dashboard.refresh(Service.nominations);
         this.dashboard.setVisible(true);
         if (boundsSW.lng > -181) {
             this.dashboard.map.ctrl.fitBounds([boundsSW, boundsNE], { linear: true });

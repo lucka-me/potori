@@ -4,7 +4,7 @@ import BSBasicCard      from './brainstorming/BSBasicCard.js';
 import BSRatesCard      from './brainstorming/BSRatesCard.js';
 import BSSynchCard      from './brainstorming/BSSynchCard.js';
 import BSReviewsCard    from './brainstorming/BSReviewsCard.js';
-import Service from '../../service/Service.js';
+import Service from '../../service/Service';
 
 class BSGroup extends DashboardPrototype {
     constructor() {

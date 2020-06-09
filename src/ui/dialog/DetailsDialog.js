@@ -4,7 +4,7 @@ import Eli from "../Eli";
 import Toolkit from "../Toolkit.js";
 import AlertDialog from './AlertDialog.js';
 import Dark from '../Dark';
-import Service from '../../service/Service.js';
+import Service from '../../service/Service';
 import { MapStyle } from '../dashboard/MapCard.js';
 import StatusKit from '../../service/StatusKit';
 

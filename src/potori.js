@@ -1,4 +1,4 @@
-import Service from "./service/Service.js";
+import Service from "./service/Service";
 import UIKit from "./ui/UIKit.js";
 
 import '../css/extended.css'

@@ -252,7 +252,6 @@ class ListView extends UIKitPrototype {
             boxResult.hidden = true;
         }
         const buttonStatus = card.querySelector('.mdc-card__action-buttons > button');
-        console.log(portal);
         buttonStatus.className = `mdc-button mdc-card__action mdc-card__action--button status-${type}`;
         buttonStatus.querySelector('i').innerHTML = portal.status.icon;
         buttonStatus.querySelector('span').innerHTML = portal.status.title;
