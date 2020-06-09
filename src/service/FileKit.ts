@@ -48,11 +48,9 @@ class LocalFileKit {
 
 class GoogleDriveFileKit {
 
-    ids: Map<string, string>;
+    ids: Map<string, string> = new Map();
 
-    constructor() {
-        this.ids = new Map();
-    }
+    constructor() { }
 
     static get folder() { return 'appDataFolder' }
 
@@ -132,13 +130,10 @@ class GoogleDriveFileKit {
 
 class FileKit {
 
-    local: LocalFileKit;
-    googleDrive: GoogleDriveFileKit;
+    local: LocalFileKit = new LocalFileKit();
+    googleDrive: GoogleDriveFileKit = new GoogleDriveFileKit();
 
-    constructor() {
-        this.local = new LocalFileKit;
-        this.googleDrive = new GoogleDriveFileKit();
-    }
+    constructor() { }
 }
 
 export default FileKit;

@@ -8,13 +8,10 @@ import { Reference } from "@firebase/database-types";
 
 class BrainstormingKit {
 
-    reference: Reference;
-    data: Map<string, any>;
+    reference: Reference = null;
+    data: Map<string, any> = new Map();
 
-    constructor() {
-        this.reference = null;
-        this.data = new Map();
-    }
+    constructor() { }
 
     init() {
         const app = firebase.initializeApp({ databaseURL: 'https://oprbrainstorming.firebaseio.com' });

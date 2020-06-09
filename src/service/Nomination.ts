@@ -6,18 +6,18 @@ interface LngLat {
 }
 
 class Nomination {
-    id: string;
-    title: string;
-    image: string;
+    id: string = '';
+    title: string = '';
+    image: string = '';
 
-    status: Status;
+    status: Status = StatusKit.codes.get(0);
 
-    confirmedTime: number;
-    confirmationMailId: string;
-    resultTime?: number;
-    resultMailId?: string;
+    confirmedTime: number = 0;
+    confirmationMailId: string = '';
+    resultTime: number = null;
+    resultMailId: string = null;
 
-    lngLat?: LngLat;
+    lngLat: LngLat = null;
 
     get imageUrl(): string {
         return `https://lh3.googleusercontent.com/${this.image}`;

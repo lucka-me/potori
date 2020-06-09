@@ -3,8 +3,8 @@ import { version as dataVersion } from "../data/status.json";
 
 class Version {
 
-    text: string;
-    fullFeature: boolean;
+    text: string = '';
+    fullFeature: boolean = false;
 
     constructor() {
         const lite = document.URL.includes('lucka.moe');

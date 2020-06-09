@@ -45,18 +45,13 @@ class StatusReason extends Status {
 
 class StatusKit {
 
-    version: string;
+    version: string = data.version;
     
-    types: Map<string, StatusType>;
-    reasons: Map<string, StatusReason>;
-    codes: Map<number, Status>;
+    types: Map<string, StatusType>      = new Map();
+    reasons: Map<string, StatusReason>  = new Map();
+    codes: Map<number, Status>          = new Map();
 
     constructor() {
-        this.version = data.version;
-
-        this.codes = new Map();
-
-        this.types = new Map();
         for (const type of data.types) {
             const status = new StatusType(
                 type.key, type.code, type.title, type.icon,
@@ -66,7 +61,6 @@ class StatusKit {
             this.codes.set(type.code, status);
         }
 
-        this.reasons = new Map();
         for (const reason of data.reasons) {
             const status = new StatusReason(
                 reason.key, reason.code, reason.title, reason.icon, reason.color,

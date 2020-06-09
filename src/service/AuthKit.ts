@@ -5,14 +5,12 @@ interface AuthKitEvents {
 
 class AuthKit {
 
-    events: AuthKitEvents;
+    events: AuthKitEvents = {
+        authStatusChanged: (signedIn: boolean) => { signedIn },
+        onerror: (message: string) => { message },
+    };
 
-    constructor() {
-        this.events = {
-            authStatusChanged: (signedIn: boolean) => { signedIn },
-            onerror: (message: string) => { message },
-        };
-    }
+    constructor() { }
 
     init() {
         gapi.load('client:auth2', () => this.initClient());

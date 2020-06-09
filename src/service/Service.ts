@@ -89,36 +89,27 @@ interface ServiceEvents {
 
 class Service {
 
-    auth: AuthKit;
-    bs  : BrainstormingKit;
-    file: FileKit;
-    mari: Mari;
+    auth: AuthKit           = new AuthKit();
+    bs  : BrainstormingKit  = new BrainstormingKit();
+    file: FileKit           = new FileKit();
+    mari: Mari              = new Mari();
 
-    nominations: Array<Nomination>;
+    nominations: Array<Nomination> = [];
 
-    events: ServiceEvents;
+    events: ServiceEvents = {
+        authStatusChanged:  (signedIn) => signedIn,
+        progressUpdate:     (percent) => percent,
+        updateBs:           () => {},
+        showProgress:       () => {},
+        
+        show:   () => {},
+        clear:  () => {},
+        
+        alert:  (message) => message,
+        info:   (message) => message,
+    };
 
-    constructor() {
-        this.auth   = new AuthKit();
-        this.bs     = new BrainstormingKit();
-        this.file   = new FileKit();
-        this.mari   = new Mari();
-
-        this.nominations = [];
-
-        this.events = {
-            authStatusChanged:  (signedIn) => signedIn,
-            progressUpdate:     (percent) => percent,
-            updateBs:           () => {},
-            showProgress:       () => {},
-            
-            show:   () => {},
-            clear:  () => {},
-            
-            alert:  (message) => message,
-            info:   (message) => message,
-        };
-    }
+    constructor() { }
 
     init() {
         this.auth.events.authStatusChanged = (signedIn) => {

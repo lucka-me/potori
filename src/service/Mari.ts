@@ -100,27 +100,24 @@ interface MariEvents {
     progressUpdate: (percent: number) => void,
 }
 
+interface MariProgress {
+    list: number, total: number, finished: number,
+}
+
 class Mari {
 
-    ignoreMailIdList: Array<string>;
-    nominations: Array<Nomination>;
-    progress: { 
-        list: number, total: number, finished: number,
-    }
-    events: MariEvents;
+    ignoreMailIdList: Array<string> = [];
+    nominations: Array<Nomination> = [];
+    progress: MariProgress = {
+        list: 0, total: 0, finished: 0,
+    };
+    events: MariEvents = {
+        finished: () => {},
+        bufferUpdate: () => {},
+        progressUpdate: () => {},
+    };
 
-    constructor() {
-        this.ignoreMailIdList = [];
-        this.nominations = [];
-        this.progress = {
-            list: 0, total: 0, finished: 0,
-        };
-        this.events = {
-            finished: () => {},
-            bufferUpdate: () => {},
-            progressUpdate: () => {},
-        }
-    }
+    constructor() { }
 
     static get scanners() {
         return ['redacted', 'prime'];
