@@ -1,3 +1,5 @@
+import * as mapboxgl from 'mapbox-gl';
+
 import UIKitPrototype from '../UIKitPrototype';
 import DialogPrototype from './DialogPrototype.js';
 import Eli from "../Eli";
@@ -5,7 +7,7 @@ import Toolkit from "../Toolkit.js";
 import AlertDialog from './AlertDialog.js';
 import Dark from '../Dark';
 import Service from '../../service/Service';
-import { MapStyle } from '../dashboard/MapCard.js';
+import { MapStyle } from '../dashboard/MapCard';
 import StatusKit from '../../service/StatusKit';
 
 class DetailsDialogMap extends UIKitPrototype {

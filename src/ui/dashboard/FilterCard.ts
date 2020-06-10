@@ -1,7 +1,7 @@
 import { MDCSwitch } from "@material/switch";
 
 import { DashboardPrototype, Eli } from './prototypes';
-import StatusKit, { Status } from '../../service/StatusKit';
+import StatusKit, { Status, StatusType, StatusReason } from '../../service/StatusKit';
 
 interface FilterCardBlock {
     root: HTMLDivElement;
@@ -19,8 +19,8 @@ class FilterCard extends DashboardPrototype {
         reason  : { root: null } as FilterCardBlock,
     }
 
-    types: Map<string, MDCSwitch> = new Map();
-    reasons: Map<string, MDCSwitch> = new Map();
+    types: Map<StatusType, MDCSwitch> = new Map();
+    reasons: Map<StatusReason, MDCSwitch> = new Map();
 
     events: FilterCardEvents = {
         switchType:     () => { },
@@ -61,12 +61,12 @@ class FilterCard extends DashboardPrototype {
             switchCtrl.listen('change', () => {
                 this.switchReason(reason, switchCtrl.checked);
             });
-            this.reasons.set(reason.key, switchCtrl);
+            this.reasons.set(reason, switchCtrl);
         }
         for (const type of StatusKit.types.values()) {
             const switchCtrl = FilterCard.buildSwitch(this.block.type, type, type.key);
             switchCtrl.listen('change', (_) => this.switchType(type, switchCtrl.checked));
-            this.types.set(type.key, switchCtrl);
+            this.types.set(type, switchCtrl);
         }
     }
 
@@ -82,8 +82,8 @@ class FilterCard extends DashboardPrototype {
     switchReason(reason: Status, checked: boolean) {
         this.events.switchReason(reason, checked);
         const statusRejected = StatusKit.types.get('rejected');
-        if (checked && !this.types.get(statusRejected.key).checked) {
-            this.types.get(statusRejected.key).checked = true;
+        if (checked && !this.types.get(statusRejected).checked) {
+            this.types.get(statusRejected).checked = true;
             this.events.switchType(statusRejected, true);
         }
     }

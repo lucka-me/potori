@@ -1,25 +1,33 @@
-import { DashboardPrototype } from './prototypes';
-import Eli from "../Eli";
+import * as mapboxgl from 'mapbox-gl';
+
 import Dark from '../Dark';
+import { DashboardPrototype, Eli } from './prototypes';
 import FilterCard from './FilterCard';
+import Nomination from '../../service/Nomination';
+import Service from '../../service/Service';
 import StatusKit from '../../service/StatusKit';
 
-class MapStyle {
-    static get default() { return 'mapbox://styles/mapbox/streets-v11' }
-    static get dark() { return 'mapbox://styles/mapbox/dark-v10' }
+const MapStyle = {
+    default: 'mapbox://styles/mapbox/streets-v11',
+    dark: 'mapbox://styles/mapbox/dark-v10',
+}
+
+interface MapCardEvents {
+    focus: (id: string) => void,
 }
 
 class MapCard extends DashboardPrototype {
-    constructor() {
-        super();
-        this.ctrl = null;
 
-        this.event = {
-            focus: (id) => { id },
-        }
+    ctrl: mapboxgl.Map = null;
+    events: MapCardEvents = {
+        focus: () => { },
     }
 
-    init(parent) {
+    constructor() {
+        super();
+    }
+
+    init(parent: HTMLElement) {
         const elementMap = Eli.build('div', {
             styleText: [
                 'width: 100%',
@@ -48,52 +56,54 @@ class MapCard extends DashboardPrototype {
         return this.ctrl && this.ctrl.isStyleLoaded();
     }
 
-    update(portals) {
-        this.updateRejected(portals);
+    update(nominations: Array<Nomination>) {
+        this.updateRejected(nominations);
         this.updateSource(
             'accepted',
-            MapCard.generateGeoJSON(portals, [ StatusKit.types.get('accepted').code ])
+            MapCard.generateGeoJSON(nominations, [ StatusKit.types.get('accepted').code ])
         );
         this.updateSource(
             'pending',
-            MapCard.generateGeoJSON(portals, [ StatusKit.types.get('pending').code ])
+            MapCard.generateGeoJSON(nominations, [ StatusKit.types.get('pending').code ])
         );
     }
 
-    updateRejected(portals) {
-        const codes = [];
-        for (const key of Object.keys(FilterCard.reason)) {
-            if (!FilterCard.reason[key].checked) continue;
-            codes.push(StatusKit.reasons.get(key).code);
+    updateRejected(nominations: Array<Nomination>) {
+        const codes: Array<number> = [];
+        for (const [key, value] of FilterCard.reasons.entries()) {
+            if (!value.checked) continue;
+            codes.push(key.code);
         }
-        this.updateSource('rejected', MapCard.generateGeoJSON(portals, codes));
+        this.updateSource('rejected', MapCard.generateGeoJSON(nominations, codes));
     }
 
-    static generateGeoJSON(portals, codes) {
-        const geoJson = { type: 'FeatureCollection', features: [], };
+    static generateGeoJSON(nominations: Array<Nomination>, codes: Array<number>) {
+        const geoJson: GeoJSON.FeatureCollection<GeoJSON.Geometry> = {
+            type: 'FeatureCollection', features: [],
+        };
         if (codes.length < 1) return geoJson;
-        for (const portal of portals) {
-            if (!codes.includes(portal.status)) continue;
-            if (!portal.lngLat) continue;
+        for (const nomination of nominations) {
+            if (!codes.includes(nomination.status.code)) continue;
+            if (!nomination.lngLat) continue;
             geoJson.features.push({
                 type: 'Feature',
                 properties: {
-                    id: portal.id,
-                    title: portal.title,
-                    status: portal.status
+                    id: nomination.id,
+                    title: nomination.title,
+                    status: nomination.status
                 },
                 geometry: {
                     type: 'Point',
-                    coordinates: [portal.lngLat.lng, portal.lngLat.lat]
+                    coordinates: [nomination.lngLat.lng, nomination.lngLat.lat],
                 }
             });
         }
         return geoJson;
     }
 
-    updateSource(type, data) {
+    updateSource(type: string, data: GeoJSON.FeatureCollection<GeoJSON.Geometry>) {
         const id = `potori-${type}`;
-        const source = this.ctrl.getSource(id);
+        const source = this.ctrl.getSource(id) as mapboxgl.GeoJSONSource;
         if (source) {
             source.setData(data);
             return;
@@ -156,17 +166,21 @@ class MapCard extends DashboardPrototype {
                 event.point, { layers: [`${id}-cluster`] }
             );
             const clusterId = features[0].properties.cluster_id;
-            this.ctrl.getSource(id).getClusterExpansionZoom(
+            (this.ctrl.getSource(id) as mapboxgl.GeoJSONSource).getClusterExpansionZoom(
                 clusterId,
                 (err, zoom) => {
                     if (err) return;
-                    this.ctrl.easeTo({ center: features[0].geometry.coordinates, zoom: zoom});
+                    this.ctrl.easeTo({
+                        center: (features[0].geometry as GeoJSON.Point).coordinates as [number, number],
+                        zoom: zoom
+                    });
                 }
             );
         });
 
         this.ctrl.on('click', `${id}-unclustered`, event => {
-            const coordinates = event.features[0].geometry.coordinates.slice();
+            (event.features[0].geometry as GeoJSON.Point).coordinates as [number, number]
+            const coordinates = (event.features[0].geometry as GeoJSON.Point).coordinates as [number, number];
             while (Math.abs(event.lngLat.lng - coordinates[0]) > 180) {
                 coordinates[0] += event.lngLat.lng > coordinates[0] ? 360 : -360;
             }
@@ -175,24 +189,24 @@ class MapCard extends DashboardPrototype {
                 .setLngLat(coordinates)
                 .setText(event.features[0].properties.title)
                 .addTo(this.ctrl);
-            this.event.focus(event.features[0].properties.id);
+            this.events.focus(event.features[0].properties.id);
         });
     }
 
     updateStyle() {
         if (!this.loaded()) return;
         this.ctrl.setStyle(MapStyle[Dark.enabled ? 'dark' : 'default']);
-        this.ctrl.once('render', () => this.update());
+        this.update(Service.nominations);
     }
 
-    setTypeVisible(type, visible) {
+    setTypeVisible(type: string, visible: boolean) {
         const visibility = visible ? 'visible' : 'none';
         this.ctrl.setLayoutProperty(`potori-${type}-cluster`    , 'visibility', visibility);
         this.ctrl.setLayoutProperty(`potori-${type}-count`      , 'visibility', visibility);
         this.ctrl.setLayoutProperty(`potori-${type}-unclustered`, 'visibility', visibility);
     }
 
-    setVisible(_) { }
+    setVisible() { }
 }
 
 export default MapCard;

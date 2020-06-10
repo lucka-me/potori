@@ -1,3 +1,4 @@
+import * as moment from 'moment';
 import Eli from "./Eli";
 
 class Toolkit {

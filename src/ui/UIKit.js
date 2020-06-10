@@ -1,3 +1,5 @@
+import * as mapboxgl from 'mapbox-gl';
+
 import Eli from "./Eli";
 
 import Dark from "./Dark";
@@ -37,7 +39,6 @@ class UIKit {
         this.appBar.events.view     = () => this.switchView();
         this.appBar.events.signin   = () => Service.auth.signIn();
 
-        console.log(AppBarMenuItems);
         this.appBar.menu.events.set(
             AppBarMenuItems.open.key, () => Service.open()
         );
@@ -75,13 +76,13 @@ class UIKit {
         body.appendChild(mainBox);
 
         // Dashboard
-        this.dashboard.map.event.focus = (id) => {
+        this.dashboard.map.events.focus = (id) => {
             const top = this.list.root.offsetTop + 8;
             this.list.root.scrollTo(
                 0, document.getElementById(`card-${id}`).offsetTop - top
             );
         }
-        this.dashboard.filter.event.switchType = (type, visible) => {
+        this.dashboard.filter.events.switchType = (type, visible) => {
             for (const nomination of Service.nominations) {
                 if (StatusKit.typeMatched(nomination.status.code, type.code)) {
                     document.getElementById(`card-${nomination.id}`).hidden = !visible;
@@ -92,7 +93,7 @@ class UIKit {
             }
             this.dashboard.map.setTypeVisible(type, visible);
         };
-        this.dashboard.filter.event.switchReason = (reason, visible) => {
+        this.dashboard.filter.events.switchReason = (reason, visible) => {
             for (const nomination of Service.nominations) {
                 if (nomination.status.code !== reason.code) continue;
                 document.getElementById(`card-${nomination.id}`).hidden = !visible;

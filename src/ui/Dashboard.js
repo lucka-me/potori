@@ -1,7 +1,7 @@
 import UIKitPrototype from './UIKitPrototype';
 import Eli from "./Eli";
 
-import MapCard              from './dashboard/MapCard.js';
+import MapCard              from './dashboard/MapCard';
 import FilterCard           from './dashboard/FilterCard';
 import StatsTypeCard        from './dashboard/StatsTypeCard';
 import StatsRejectedCard    from './dashboard/StatsRejectedCard';
@@ -75,6 +75,7 @@ class Dashboard extends UIKitPrototype {
         this.forEach((card) => {
             card.updateStyle();
         });
+        //this.map.update(portals);
     }
 
     setVisible(visible) {

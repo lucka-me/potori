@@ -30,12 +30,7 @@ class AppBarMenu extends UIKitPrototype {
             role: 'menu',
             ariaOrientation: 'vertical',
         });
-        console.log(AppBarMenuItems);
-        console.log(Object.keys(AppBarMenuItems));
-        console.log(Object.values(AppBarMenuItems));
-        console.log(Object.entries(AppBarMenuItems));
         for (const value of Object.values(AppBarMenuItems)) {
-            console.log(value.key);
             const element = Eli.build('li', {
                 className: 'mdc-list-item',
                 role: 'menuitem',

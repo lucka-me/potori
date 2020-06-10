@@ -95,4 +95,4 @@ class StatusKit {
 }
 
 export default new StatusKit();
-export { Status };
+export { Status, StatusType, StatusReason };
