@@ -1,4 +1,4 @@
-import { DashboardPrototype } from './prototypes.js';
+import { DashboardPrototype } from './prototypes';
 
 import BSBasicCard      from './brainstorming/BSBasicCard.js';
 import BSRatesCard      from './brainstorming/BSRatesCard.js';

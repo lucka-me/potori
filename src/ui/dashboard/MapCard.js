@@ -1,4 +1,4 @@
-import { DashboardPrototype } from './prototypes.js';
+import { DashboardPrototype } from './prototypes';
 import Eli from "../Eli";
 import Dark from '../Dark';
 import FilterCard from './FilterCard.js';

@@ -1,4 +1,4 @@
-import { DashboardBsPrototype } from './prototypes.js';
+import { DashboardBsPrototype } from './prototypes';
 import Eli from "../../Eli";
 import Service from '../../../service/Service';
 

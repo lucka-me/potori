@@ -1,4 +1,4 @@
-import { DashboardChartProtorype } from './prototypes.js';
+import { DashboardChartProtorype } from './prototypes';
 import Eli from "../Eli";
 import Toolkit from "../Toolkit.js";
 
