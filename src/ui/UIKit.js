@@ -36,8 +36,8 @@ class UIKit {
         this.dark.init();
 
         // AppBar
-        this.appBar.events.view     = () => this.switchView();
-        this.appBar.events.signin   = () => Service.auth.signIn();
+        this.appBar.events.set('view'   , () => this.switchView());
+        this.appBar.events.set('signin' , () => Service.auth.signIn());
 
         this.appBar.menu.events.set(
             AppBarMenuItems.open.key, () => Service.open()
@@ -115,7 +115,7 @@ class UIKit {
         this.list.init(mainBox);
 
         // Dialog
-        this.dialog.details.event.update = (portal) => {
+        this.dialog.details.events.update = (portal) => {
             this.update(portal);
         }
         this.dialog.init(body);
