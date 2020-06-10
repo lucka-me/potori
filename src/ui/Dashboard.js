@@ -7,7 +7,7 @@ import StatsTypeCard        from './dashboard/StatsTypeCard';
 import StatsRejectedCard    from './dashboard/StatsRejectedCard';
 import CountByMonthCard     from './dashboard/CountByMonthCard';
 import QuotasCard           from './dashboard/QuotasCard';
-import BSGroup              from './dashboard/BSGroup.js';
+import BSGroup              from './dashboard/BSGroup';
 
 class Dashboard extends UIKitPrototype {
     constructor() {
