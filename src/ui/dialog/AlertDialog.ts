@@ -1,16 +1,18 @@
-import DialogPrototype from './DialogPrototype';
-import Eli from "../Eli";
+import DialogPrototype, { Eli, MDCDialog } from './DialogPrototype';
 
 class AlertDialog extends DialogPrototype {
+
+    textMessage: HTMLDivElement = null;
+
     constructor() {
         super();
         this.textMessage = null;
     }
 
-    init(parent) {
+    init(parent: HTMLElement) {
         this.textMessage = Eli.build('div', {
             className: 'mdc-dialog__content',
-        });
+        }) as HTMLDivElement;
         const element = Eli.dialog([
             this.textMessage,
             Eli.build('footer', {
@@ -19,10 +21,10 @@ class AlertDialog extends DialogPrototype {
             }),
         ]);
         parent.appendChild(element);
-        this.ctrl = new mdc.dialog.MDCDialog(element);
+        this.ctrl = new MDCDialog(element);
     }
 
-    open(message) {
+    open(message: string) {
         this.ctrl.open();
         this.textMessage.innerHTML = message;
     }

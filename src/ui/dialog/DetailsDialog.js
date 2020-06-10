@@ -4,7 +4,7 @@ import UIKitPrototype from '../UIKitPrototype';
 import DialogPrototype from './DialogPrototype';
 import Eli from "../Eli";
 import Toolkit from "../Toolkit.js";
-import AlertDialog from './AlertDialog.js';
+import AlertDialog from './AlertDialog';
 import Dark from '../Dark';
 import Service from '../../service/Service';
 import { MapStyle } from '../dashboard/MapCard';

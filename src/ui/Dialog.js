@@ -1,7 +1,7 @@
 import UIKitPrototype from './UIKitPrototype';
 
 import AboutDialog      from './dialog/AboutDialog.js';
-import AlertDialog      from './dialog/AlertDialog.js';
+import AlertDialog      from './dialog/AlertDialog';
 import DetailsDialog    from './dialog/DetailsDialog.js';
 import ImportDialog     from './dialog/ImportDialog.js';
 import Snackbar         from './dialog/Snackbar.js';

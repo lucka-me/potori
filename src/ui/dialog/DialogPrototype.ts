@@ -1,5 +1,5 @@
 import { MDCDialog } from "@material/dialog";
-import UIKitPrototype from "../UIKitPrototype";
+import UIKitPrototype, { Eli } from "../UIKitPrototype";
 
 export default class DialogPrototype extends UIKitPrototype {
 
@@ -9,5 +9,6 @@ export default class DialogPrototype extends UIKitPrototype {
         super();
     }
     init(parent: HTMLElement) { parent }
-    open() { }
 }
+
+export { Eli, MDCDialog };
