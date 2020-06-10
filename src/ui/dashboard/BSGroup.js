@@ -3,7 +3,7 @@ import { DashboardPrototype } from './prototypes';
 import BSBasicCard      from './brainstorming/BSBasicCard.js';
 import BSRatesCard      from './brainstorming/BSRatesCard.js';
 import BSSynchCard      from './brainstorming/BSSynchCard';
-import BSReviewsCard    from './brainstorming/BSReviewsCard.js';
+import BSReviewsCard    from './brainstorming/BSReviewsCard';
 import Service from '../../service/Service';
 
 class BSGroup extends DashboardPrototype {
@@ -26,7 +26,7 @@ class BSGroup extends DashboardPrototype {
     update(portals) {
         const stats = Service.bs.analyse(portals);
         for (const key of Object.keys(this.card)) {
-            this.card[key].update(stats);
+            this.card[key].updateStatus(stats);
         }
     }
 

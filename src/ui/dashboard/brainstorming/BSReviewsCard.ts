@@ -1,3 +1,7 @@
+import * as Chart from 'chart.js';
+import * as moment from 'moment';
+
+import { BrainstormingStats } from "../../../service/BrainstormingKit";
 import { DashboardBsChartPrototype } from './prototypes';
 import Eli from "../../Eli";
 import Toolkit from "../../Toolkit.js";
@@ -5,8 +9,8 @@ import Toolkit from "../../Toolkit.js";
 class BSReviewsCard extends DashboardBsChartPrototype {
     constructor() { super(); }
 
-    init(parent) {
-        const canvasChart = Eli.build('canvas', { className: 'canvas-chart--h' });
+    init(parent: HTMLElement) {
+        const canvasChart = Eli.build('canvas', { className: 'canvas-chart--h' }) as HTMLCanvasElement;
         this.root = Eli.chartCard('Brainstorming Reviews', canvasChart, 3, 300);
         this.setVisible(false);
         parent.appendChild(this.root);
@@ -42,7 +46,7 @@ class BSReviewsCard extends DashboardBsChartPrototype {
         });
     }
 
-    update(stats) {
+    updateStats(stats: BrainstormingStats) {
         if (stats.reviewTimes.length < 1) {
             this.chart.data.datasets[0].data = [];
             this.chart.update();
@@ -62,7 +66,7 @@ class BSReviewsCard extends DashboardBsChartPrototype {
             }
         }
         Toolkit.fillTimeDataMap(mapTimes, min, max);
-        const dataTimes = [];
+        const dataTimes: Array<{ t: number, y: number }> = [];
         mapTimes.forEach((value, key) => {
             dataTimes.push({ t: key, y: value, });
         })
