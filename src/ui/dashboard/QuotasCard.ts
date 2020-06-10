@@ -1,11 +1,13 @@
 import { DashboardChartProtorype } from './prototypes';
 import Eli from "../Eli";
+import * as Chart from 'chart.js';
+import Nomination from '../../service/Nomination';
 
 class QuotasCard extends DashboardChartProtorype {
     constructor() { super(); }
 
-    init(parent) {
-        const canvasChart = Eli.build('canvas', { className: 'canvas-chart--h' });
+    init(parent: HTMLElement) {
+        const canvasChart = Eli.build('canvas', { className: 'canvas-chart--h' }) as HTMLCanvasElement;
         this.root = Eli.chartCard('Quotas', canvasChart, 2, 200);
 
         this.setVisible(false);
@@ -41,13 +43,13 @@ class QuotasCard extends DashboardChartProtorype {
         });
     }
 
-    update(portals) {
+    update(nominations: Array<Nomination>) {
         const data = new Array(14).fill(0);
-        const timeNow = Date.now();
-        for (const portal of portals) {
-            const restoreTime = portal.confirmedTime + (14 * 24 * 3600 * 1000);
-            if (restoreTime > timeNow) {
-                data[Math.floor((restoreTime - timeNow) / (24 * 3600 * 1000))] += 1;
+        const now = Date.now();
+        for (const nomination of nominations) {
+            const restoreTime = nomination.confirmedTime + (14 * 24 * 3600 * 1000);
+            if (restoreTime > now) {
+                data[Math.floor((restoreTime - now) / (24 * 3600 * 1000))] += 1;
             }
         }
         this.chart.data.datasets[0].data = data;

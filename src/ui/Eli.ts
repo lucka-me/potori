@@ -22,7 +22,7 @@ class Eli {
         return element;
     }
 
-    static chartCard(title: string, canvas: HTMLCanvasElement, flex: string, minWidth: number): HTMLDivElement {
+    static chartCard(title: string, canvas: HTMLCanvasElement, flex: number, minWidth: number): HTMLDivElement {
         return Eli.build('div', {
             className: `mdc-card mdc-card--outlined padding--8 flex--${flex} flex-shrink--1`,
             styleText: `min-width:${minWidth}px`,
