@@ -30,6 +30,24 @@ class Dashboard extends UIKitPrototype {
         Chart.defaults.global.legend.labels.boxWidth = 10;
         Chart.defaults.global.maintainAspectRatio = false;
         Chart.defaults.line.tooltips = { intersect: false, };
+        Chart.defaults.doughnut.tooltips = {
+            callbacks: {
+                label: (item, data) => {
+                    const dataset = data.datasets[item.datasetIndex];
+                    const meta = (dataset as any)._meta;
+                    const metadata = meta[Object.keys(meta)[0]].data;
+                    const total = (dataset.data as number[]).reduce(
+                        (acc: number, cur: number, index: number) => {
+                            return acc + (metadata[index].hidden ? 0 : cur);
+                        },
+                        0
+                    );
+                    const value = dataset.data[item.index] as number;
+                    const percentage = ((value / total) * 100).toFixed(2);
+                    return `${data.labels[item.index]}: ${value} (${percentage}%)`;
+                },
+            },
+        } as Chart.ChartTooltipOptions;
         // Fix for #6890, should remove when upgrade to 3.0
         Chart.defaults.radar.tooltips = {
             intersect: false,

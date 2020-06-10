@@ -177,7 +177,11 @@ class ListView extends UIKitPrototype {
             });
         } else {
             actionStatus.listen('click', () => {
-                Toolkit.copyText(nomination.id);
+                const textarea = Eli.build('textarea', { value: nomination.id, readOnly: true });
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
                 AlertDialog.open(`Brainstorming ID copied: ${nomination.id}`);
             });
         }

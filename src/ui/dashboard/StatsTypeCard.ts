@@ -1,7 +1,7 @@
-import { DashboardChartProtorype, Eli, Nomination } from './prototypes';
-import Toolkit from "../Toolkit.js";
-import StatusKit from '../../service/StatusKit';
 import * as Chart from 'chart.js';
+
+import { DashboardChartProtorype, Eli, Nomination } from './prototypes';
+import StatusKit from '../../service/StatusKit';
 
 class StatsTypeCard extends DashboardChartProtorype {
     constructor() { super(); }
@@ -39,9 +39,6 @@ class StatsTypeCard extends DashboardChartProtorype {
             },
             options: {
                 legend: { display: true, position: 'right', },
-                tooltips: {
-                    callbacks: { label: Toolkit.tooltipsLabelCallback, },
-                },
             }
         });
     }

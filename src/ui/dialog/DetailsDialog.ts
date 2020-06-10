@@ -349,7 +349,7 @@ class DetailsDialog extends DialogPrototype {
                 AlertDialog.open('Invalid DateTime.');
                 return;
             }
-            const newTime = time + Toolkit.getLocalTimezoneOffset();
+            const newTime = time + (new Date().getTimezoneOffset() * 60000);
             if (!this.nomination.resultTime || (Math.floor(this.nomination.resultTime / 60000) !== Math.floor(newTime / 60000))) {
                 this.nomination.resultTime = newTime;
                 shouldUpdate = true;
@@ -390,7 +390,7 @@ class DetailsDialog extends DialogPrototype {
 
         this.headingTitle.innerHTML = nomination.title;
         this.image.src = nomination.imageUrl;
-        this.textConfirmedTime.innerHTML = Toolkit.getDateTimeString(nomination.confirmedTime);
+        this.textConfirmedTime.innerHTML = new Date(nomination.confirmedTime).toLocaleString();
 
         this.fieldResultTime.root_.hidden = (type === 'pending');
         const resultTimeString = Toolkit.getLocalDateTimeISOString(
