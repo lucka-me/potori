@@ -4,7 +4,6 @@ import Dark from '../Dark';
 import { DashboardPrototype, Eli } from './prototypes';
 import FilterCard from './FilterCard';
 import Nomination from '../../service/Nomination';
-import Service from '../../service/Service';
 import StatusKit from '../../service/StatusKit';
 
 const MapStyle = {
@@ -52,11 +51,12 @@ class MapCard extends DashboardPrototype {
         this.ctrl.addControl(new mapboxgl.FullscreenControl());
     }
 
-    loaded() {
+    get loaded() {
         return this.ctrl && this.ctrl.isStyleLoaded();
     }
 
     update(nominations: Array<Nomination>) {
+        if (!this.loaded) return;
         this.updateRejected(nominations);
         this.updateSource(
             'accepted',
@@ -194,9 +194,8 @@ class MapCard extends DashboardPrototype {
     }
 
     updateStyle() {
-        if (!this.loaded()) return;
+        if (!this.loaded) return;
         this.ctrl.setStyle(MapStyle[Dark.enabled ? 'dark' : 'default']);
-        this.update(Service.nominations);
     }
 
     setTypeVisible(type: string, visible: boolean) {

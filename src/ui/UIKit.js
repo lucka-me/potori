@@ -2,10 +2,10 @@ import * as mapboxgl from 'mapbox-gl';
 
 import Eli from "./Eli";
 
-import Dark from "./Dark";
 import AppBar, { AppBarMenuItems, AppBarActions } from './AppBar';
-import Progress from './Progress';
-import Dashboard    from './Dashboard.js';
+import Dark         from "./Dark";
+import Progress     from './Progress';
+import Dashboard    from './Dashboard';
 import ListView     from './ListView.js';
 import Dialog       from './Dialog.js';
 

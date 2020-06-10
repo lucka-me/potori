@@ -1,29 +1,33 @@
-import UIKitPrototype from './UIKitPrototype';
-import Eli from "./Eli";
+import * as Chart from 'chart.js';
 
-import MapCard              from './dashboard/MapCard';
-import FilterCard           from './dashboard/FilterCard';
-import StatsTypeCard        from './dashboard/StatsTypeCard';
-import StatsRejectedCard    from './dashboard/StatsRejectedCard';
-import CountByMonthCard     from './dashboard/CountByMonthCard';
-import QuotasCard           from './dashboard/QuotasCard';
 import BSGroup              from './dashboard/BSGroup';
+import CountByMonthCard     from './dashboard/CountByMonthCard';
+import FilterCard           from './dashboard/FilterCard';
+import MapCard              from './dashboard/MapCard';
+import QuotasCard           from './dashboard/QuotasCard';
+import StatsRejectedCard    from './dashboard/StatsRejectedCard';
+import StatsTypeCard        from './dashboard/StatsTypeCard';
+import UIKitPrototype, { Eli } from './UIKitPrototype';
+import { DashboardPrototype, Nomination } from './dashboard/prototypes';
+import Service from '../service/Service';
 
 class Dashboard extends UIKitPrototype {
+
+    root: HTMLDivElement = null;
+
+    map             = new MapCard;
+    filter          = FilterCard;
+    statsType       = new StatsTypeCard();
+    statsRejected   = new StatsRejectedCard();
+    countByMonth    = new CountByMonthCard();
+    quotas          = new QuotasCard();
+    bs              = new BSGroup();
+
     constructor() {
         super();
-        this.root = null;
-
-        this.map            = new MapCard();
-        this.filter         = FilterCard;
-        this.statsType      = new StatsTypeCard();
-        this.statsRejected  = new StatsRejectedCard();
-        this.countByMonth   = new CountByMonthCard();
-        this.quotas         = new QuotasCard();
-        this.bs             = new BSGroup();
     }
 
-    init(parent) {
+    init(parent: HTMLElement) {
         Chart.defaults.global.legend.labels.boxWidth = 10;
         Chart.defaults.global.maintainAspectRatio = false;
         Chart.defaults.line.tooltips = { intersect: false, };
@@ -32,8 +36,8 @@ class Dashboard extends UIKitPrototype {
             intersect: false,
             callbacks: {
                 title: (items, data) => data.labels[items[0].index],
-            }
-        }
+            },
+        } as Chart.ChartTooltipOptions;
 
         this.root = Eli.build('div', {
             className: [
@@ -51,44 +55,44 @@ class Dashboard extends UIKitPrototype {
                 'scroll-behavior: smooth',
                 '-webkit-overflow-scrolling: touch',
             ].join(';'),
-        });
+        }) as HTMLDivElement;
         parent.appendChild(this.root);
         this.forEach((card) => {
             card.init(this.root);
         });
     }
 
-    refresh(portals) {
+    refresh(nominations: Array<Nomination>) {
         this.forEach((card) => {
-            card.update(portals);
+            card.update(nominations);
         });
     }
 
-    update(portals) {
-        this.map.update(portals);
-        this.statsType.update(portals);
-        this.statsRejected.update(portals);
-        this.countMonth.update(portals);
+    update(nominations: Array<Nomination>) {
+        this.map.update(nominations);
+        this.statsType.update(nominations);
+        this.statsRejected.update(nominations);
+        this.countByMonth.update(nominations);
     }
 
     updateStyle() {
         this.forEach((card) => {
             card.updateStyle();
         });
-        //this.map.update(portals);
+        this.map.update(Service.nominations);
     }
 
-    setVisible(visible) {
+    setVisible(visible: boolean) {
         this.forEach((card) => {
             card.setVisible(visible);
         });
-        if (this.map.loaded()) this.map.ctrl.resize();
+        if (this.map.loaded) this.map.ctrl.resize();
     }
 
-    forEach(callback) {
-        for (const key of Object.keys(this)) {
+    forEach(callback: (card: DashboardPrototype) => void) {
+        for (const [key, value] of Object.entries(this)) {
             if (key === 'root') continue;
-            callback(this[key]);
+            callback(value);
         }
     }
 }
