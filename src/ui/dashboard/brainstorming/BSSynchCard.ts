@@ -1,13 +1,16 @@
 import { DashboardBsPrototype } from './prototypes';
 import Eli from "../../Eli";
+import { BrainstormingStats } from '../../../service/BrainstormingKit';
 
 class BSSynchCard extends DashboardBsPrototype {
+
+    textSynch: HTMLSpanElement = null;
+
     constructor() {
         super();
-        this.textSynch = null;
     }
 
-    init(parent) {
+    init(parent: HTMLElement) {
         this.textSynch = Eli.build('span', {
             styleText: 'font-weight:300;font-size:6rem;line-height:6rem;',
             innerHTML: '0.0',
@@ -39,7 +42,7 @@ class BSSynchCard extends DashboardBsPrototype {
         parent.appendChild(this.root);
     }
 
-    update(stats) {
+    updateStats(stats: BrainstormingStats) {
         const rate = stats.synch.total > 0 ? stats.synch.synched / stats.synch.total : 0.0;
         this.textSynch.innerHTML = `${(rate * 100).toFixed(1)}`;
     }

@@ -2,7 +2,7 @@ import { DashboardPrototype } from './prototypes';
 
 import BSBasicCard      from './brainstorming/BSBasicCard.js';
 import BSRatesCard      from './brainstorming/BSRatesCard.js';
-import BSSynchCard      from './brainstorming/BSSynchCard.js';
+import BSSynchCard      from './brainstorming/BSSynchCard';
 import BSReviewsCard    from './brainstorming/BSReviewsCard.js';
 import Service from '../../service/Service';
 
