@@ -40,6 +40,56 @@ class DetailsDialogMap extends UIKitPrototype {
         super();
     }
 
+    init(parent: HTMLElement) {
+        const mapButtons = [];
+        for (const [key, value] of Object.entries(this.buttons)) {
+            value.root = Eli.build('button', {
+                className: 'mdc-icon-button material-icons',
+                innerHTML: key,
+            }) as HTMLButtonElement;
+            const ctrl = new MDCRipple(value.root);
+            ctrl.unbounded = true;
+            ctrl.listen('click', value.clicked);
+            mapButtons.push(value.root);
+        }
+        const elementMap = Eli.build('div', {
+            className: 'flex-grow--1',
+            styleText: 'min-height: 180px',
+        });
+
+        const elementContent = Eli.build('div', {
+            className: 'flex-box-row--nowrap margin-v--8',
+            children: [
+                Eli.build('div', {
+                    className: 'flex-box-col flex-justify-content--around',
+                    children: mapButtons,
+                }),
+                elementMap,
+            ],
+        });
+
+        parent.append(elementContent);
+
+        this.ctrl = new mapboxgl.Map({
+            container: elementMap,
+            style: MapStyle[Dark.enabled ? 'dark' : 'default'],
+        });
+        this.ctrl.addControl(new mapboxgl.NavigationControl());
+    }
+
+    set(nomination: Nomination) {
+        this.nomination = nomination;
+        this.delete();
+        if (this.nomination.lngLat) {
+            this.marker = new mapboxgl.Marker();
+            this.marker.setLngLat(this.nomination.lngLat).addTo(this.ctrl);
+            this.ctrl.jumpTo({ center: this.nomination.lngLat, zoom: 16 });
+            this.buttons.delete.root.disabled = false;
+            this.buttons.edit.root.innerHTML = 'edit';
+        }
+        this.buttons.search.root.disabled = false;
+    }
+
     edit() {
         if (!this.marker) {
             this.marker = new mapboxgl.Marker()
@@ -115,6 +165,20 @@ class DetailsDialog extends DialogPrototype {
     }
 
     init(parent: HTMLElement) {
+
+        this.headingTitle = Eli.build('h2', {
+            className: 'mdc-dialog__title',
+            dataset: { mdcDialogInitialFocus: '' },
+            innerHTML: 'Import',
+        }) as HTMLHeadingElement;
+
+        this.image = Eli.build('img', {
+            styleText: [
+                'object-fit:cover', 'object-position:center',
+                'width:100%', 'height:150px;'
+            ].join(';')
+        }) as HTMLImageElement;
+
         this.textConfirmedTime = Eli.build('span', {
             className: 'margin-l--4'
         });
@@ -226,68 +290,30 @@ class DetailsDialog extends DialogPrototype {
         this.selectReason = new MDCSelect(this.elementReason);
         this.selectReason.selectedIndex = 0;
 
-        const mapButtons = [];
-        for (const [key, value] of Object.entries(this.map.buttons)) {
-            value.root = Eli.build('button', {
-                className: 'mdc-icon-button material-icons',
-                innerHTML: key,
-            }) as HTMLButtonElement;
-            const ctrl = new MDCRipple(value.root);
-            ctrl.unbounded = true;
-            ctrl.listen('click', value.clicked);
-            mapButtons.push(value.root);
-        }
-        const elementMap = Eli.build('div', {
-            className: 'flex-grow--1',
-            styleText: 'min-height: 180px',
+        const elementContents = Eli.build('div', {
+            className: 'mdc-dialog__content',
+            children: [
+                Eli.build('div', {
+                    className: 'mdc-typography--body1 flex-box-row--nowrap flex-align-items--center',
+                    children: [
+                        Eli.icon('arrow_upward'), this.textConfirmedTime,
+                    ],
+                }),
+                Eli.build('div', {
+                    className: 'flex-box-row--nowrap fullwidth flex-justify-content--around',
+                    children: statusRadios,
+                }),
+                Eli.build('div', {
+                    className: 'flex-box-row--wrap',
+                    children: [ elementResultTime, this.elementReason ],
+                }),
+            ],
         });
-
-        this.headingTitle = Eli.build('h2', {
-            className: 'mdc-dialog__title',
-            dataset: { mdcDialogInitialFocus: '' },
-            innerHTML: 'Import',
-        }) as HTMLHeadingElement;
-
-        this.image = Eli.build('img', {
-            styleText: [
-                'object-fit:cover', 'object-position:center',
-                'width:100%', 'height:150px;'
-            ].join(';')
-        }) as HTMLImageElement;
-
-        const contents = [
-            Eli.build('div', {
-                className: 'mdc-typography--body1 flex-box-row--nowrap flex-align-items--center',
-                children: [
-                    Eli.icon('arrow_upward'), this.textConfirmedTime,
-                ],
-            }),
-            Eli.build('div', {
-                className: 'flex-box-row--nowrap fullwidth flex-justify-content--around',
-                children: statusRadios,
-            }),
-            Eli.build('div', {
-                className: 'flex-box-row--wrap',
-                children: [ elementResultTime, this.elementReason ],
-            }),
-            Eli.build('div', {
-                className: 'flex-box-row--nowrap margin-v--8',
-                children: [
-                    Eli.build('div', {
-                        className: 'flex-box-col flex-justify-content--around',
-                        children: mapButtons,
-                    }),
-                    elementMap,
-                ],
-            }),
-        ];
+        this.map.init(elementContents);
         const elementDialog = Eli.dialog([
             this.headingTitle,
             this.image,
-            Eli.build('div', {
-                className: 'mdc-dialog__content',
-                children: contents,
-            }),
+            elementContents,
             Eli.build('footer', {
                 className: 'mdc-dialog__actions',
                 children: [
@@ -300,13 +326,7 @@ class DetailsDialog extends DialogPrototype {
         this.ctrl = new MDCDialog(elementDialog);
         this.ctrl.listen('MDCDialog:opened', () => this.opened());
         this.ctrl.listen('MDCDialog:closed', (event: CustomEvent) => this.closed(event));
-
         this.map.dialog = this.ctrl;
-        this.map.ctrl = new mapboxgl.Map({
-            container: elementMap,
-            style: MapStyle[Dark.enabled ? 'dark' : 'default'],
-        });
-        this.map.ctrl.addControl(new mapboxgl.NavigationControl());
     }
 
     opened() {
@@ -365,7 +385,7 @@ class DetailsDialog extends DialogPrototype {
 
     open(nomination: Nomination) {
         this.nomination = nomination;
-        this.map.nomination = nomination;
+        this.map.set(nomination);
         const type = StatusKit.getTypeByCode(nomination.status.code);
 
         this.headingTitle.innerHTML = nomination.title;
@@ -389,16 +409,6 @@ class DetailsDialog extends DialogPrototype {
                 this.fieldResultTime.layout();
             }, () => null);
         }
-
-        this.map.delete();
-        if (this.nomination.lngLat) {
-            this.map.marker = new mapboxgl.Marker();
-            this.map.marker.setLngLat(this.nomination.lngLat).addTo(this.map.ctrl);
-            this.map.ctrl.jumpTo({ center: this.nomination.lngLat, zoom: 16 });
-            this.map.buttons.delete.root.disabled = false;
-            this.map.buttons.edit.root.innerHTML = 'edit';
-        }
-        this.map.buttons.search.root.disabled = false;
 
         this.status.get(type).checked = true;
         this.selectedStatus = type;
