@@ -375,9 +375,9 @@ class DetailsDialog extends DialogPrototype {
         }
         if (shouldUpdate) {
             if (this.selectedStatus !== 'rejected') {
-                this.nomination.status.code = StatusKit.types.get(this.selectedStatus).code;
+                this.nomination.status = StatusKit.types.get(this.selectedStatus);
             } else {
-                this.nomination.status.code = StatusKit.reasons.get(this.selectReason.value).code;
+                this.nomination.status = StatusKit.reasons.get(this.selectReason.value);
             }
             this.events.update(this.nomination);
         }

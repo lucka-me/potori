@@ -6,7 +6,7 @@ import AppBar, { AppBarMenuItems, AppBarActions } from './AppBar';
 import Dark         from "./Dark";
 import Progress     from './Progress';
 import Dashboard    from './Dashboard';
-import ListView     from './ListView.js';
+import ListView     from './ListView';
 import Dialog       from './Dialog';
 
 import Service from "../service/Service";
@@ -106,10 +106,10 @@ class UIKit {
         this.dashboard.init(mainBox);
 
         // List
-        this.list.event.focus = (portal) => {
+        this.list.events.focus = (portal) => {
             this.dashboard.map.ctrl.easeTo({ center: portal.lngLat });
         }
-        this.list.event.openDetails = (portal) => {
+        this.list.events.openDetails = (portal) => {
             this.dialog.details.open(portal);
         }
         this.list.init(mainBox);

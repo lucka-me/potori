@@ -45,7 +45,7 @@ class QuotasCard extends DashboardChartProtorype {
         const data = new Array(14).fill(0);
         const now = Date.now();
         for (const nomination of nominations) {
-            const restoreTime = nomination.confirmedTime + (14 * 24 * 3600 * 1000);
+            const restoreTime = nomination.restoreTime;
             if (restoreTime > now) {
                 data[Math.floor((restoreTime - now) / (24 * 3600 * 1000))] += 1;
             }

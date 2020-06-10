@@ -1,5 +1,5 @@
 class Eli {
-    static build(tag: string, options: any): HTMLElement {
+    static build<K extends keyof HTMLElementTagNameMap>(tag: K, options: any): HTMLElementTagNameMap[K] {
         const element = document.createElement(tag);
         for (const [key, value] of Object.entries(options)) {
             switch (key) {
@@ -36,7 +36,7 @@ class Eli {
                     children: [ canvas ],
                 }),
             ],
-        }) as HTMLDivElement;
+        });
     }
 
     static link(href: string, title: string, text: string): HTMLAnchorElement {
@@ -46,7 +46,7 @@ class Eli {
             target: '_blank',
             rel: 'noopener',
             innerHTML: text,
-        }) as HTMLAnchorElement;
+        });
     }
 
     static text(text: string): Text {
@@ -77,7 +77,7 @@ class Eli {
                 }),
                 Eli.build('div', { className: 'mdc-dialog__scrim' }),
             ],
-        }) as HTMLDivElement;
+        });
     }
 
     static dialogAction(action: string, text: string): HTMLButtonElement {
@@ -89,7 +89,7 @@ class Eli {
                     className: 'mdc-button__label', innerHTML: text
                 }),
             ],
-        }) as HTMLButtonElement;
+        });
     }
 
     static notchedOutline(labelOptions: any): HTMLDivElement {
@@ -104,7 +104,7 @@ class Eli {
                 }),
                 Eli.build('div', { className: 'mdc-notched-outline__trailing' }),
             ],
-        }) as HTMLDivElement;
+        });
     }
 };
 

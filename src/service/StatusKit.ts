@@ -2,10 +2,10 @@ import * as data from "../data/status.json";
 
 class Status {
 
-    key: string;
-    code: number;
-    title: string;
-    icon: string;
+    readonly key: string;
+    readonly code: number;
+    readonly title: string;
+    readonly icon: string;
 
     constructor(key: string, code: number, title: string, icon: string) {
         this.key = key;
@@ -17,7 +17,7 @@ class Status {
 
 class StatusType extends Status {
 
-    queries: Map<string, string>;
+    readonly queries: Map<string, string>;
 
     constructor(
         key: string, code: number, title: string, icon: string,
@@ -30,8 +30,8 @@ class StatusType extends Status {
 
 class StatusReason extends Status {
 
-    color: string;
-    keywords: Map<string, Array<string>>;
+    readonly color: string;
+    readonly keywords: Map<string, Array<string>>;
 
     constructor(
         key: string, code: number, title: string, icon: string,
@@ -45,11 +45,11 @@ class StatusReason extends Status {
 
 class StatusKit {
 
-    version: string = data.version;
+    readonly version: string = data.version;
     
-    types: Map<string, StatusType>      = new Map();
-    reasons: Map<string, StatusReason>  = new Map();
-    codes: Map<number, Status>          = new Map();
+    readonly types: Map<string, StatusType>      = new Map();
+    readonly reasons: Map<string, StatusReason>  = new Map();
+    readonly codes: Map<number, Status>          = new Map();
 
     constructor() {
         for (const type of data.types) {

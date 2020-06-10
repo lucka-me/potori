@@ -27,6 +27,14 @@ class Nomination {
         return `https://intel.ingress.com/intel?ll=${this.lngLat.lat},${this.lngLat.lng}&z=18`;
     }
 
+    get bsUrl(): string {
+        return `http://brainstorming.azurewebsites.net/watermeter.html#${this.id}`;
+    }
+
+    get restoreTime(): number {
+        return this.confirmedTime + (14 * 24 * 3600 * 1000);
+    }
+
     get json(): any {
         let json: any = {
             title: this.title,

@@ -1,23 +1,33 @@
-import UIKitPrototype from './UIKitPrototype';
-import Eli from "./Eli";
-import Toolkit from "./Toolkit.js";
+import { MDCRipple } from "@material/ripple";
+
+import AlertDialog from "./dialog/AlertDialog";
 import FilterCard from './dashboard/FilterCard';
+import Nomination from '../service/Nomination';
+import StatusKit, { StatusReason, StatusType } from '../service/StatusKit';
+import Toolkit from "./Toolkit.js";
+import UIKitPrototype, { Eli } from './UIKitPrototype';
 import Version from '../service/Version';
-import StatusKit from '../service/StatusKit';
+
+interface ListViewEvents {
+    focus: (nomination: Nomination) => void;
+    openDetails: (nomination: Nomination) => void;
+}
 
 class ListView extends UIKitPrototype {
+
+    root: HTMLDivElement = null;
+    now = Date.now();
+
+    events: ListViewEvents = {
+        focus:          () => { },
+        openDetails:    () => { },
+    };
+
     constructor() {
         super();
-        this.root = null;
-        this.now = Date.now();
-
-        this.event = {
-            focus: (portal) => { portal },
-            openDetails: (portal) => { portal },
-        };
     }
 
-    init(parent) {
+    init(parent: HTMLElement) {
         this.root = Eli.build('div', {
             className: [
                 'flex--1',
@@ -39,26 +49,23 @@ class ListView extends UIKitPrototype {
 
     clear() { this.root.innerHTML = ''; }
 
-    show(portals) {
+    show(nominations: Array<Nomination>) {
         this.clear();
-
-        for (const portal of portals) {
-            const card = this.buildCard(portal);
+        for (const nomination of nominations) {
+            const card = this.buildCard(nomination);
             this.root.appendChild(card);
         }
     }
 
-    updateVisibility(portal, card) {
-        const type = StatusKit.getTypeByCode(portal.status);
-        if (type === 'rejected') {
-            const reason = StatusKit.getReasonByCode(portal.status);
-            card.hidden = !FilterCard.reason[reason].checked;
-        } else {
-            card.hidden = !FilterCard.type[type].checked;
+    updateVisibility(nomination: Nomination, card: HTMLDivElement) {
+        if (nomination.status instanceof StatusReason) {
+            card.hidden = !FilterCard.reasons.get(nomination.status).checked;
+        } else if (nomination.status instanceof StatusType) {
+            card.hidden = !FilterCard.types.get(nomination.status).checked;
         }
     }
 
-    buildCard(portal) {
+    buildCard(nomination: Nomination) {
         const classNameInfoContent = [
             'margin-r--8',
             'flex-box-row--nowrap',
@@ -71,11 +78,11 @@ class ListView extends UIKitPrototype {
                 Eli.icon('arrow_upward'),
                 Eli.build('span', {
                     className: 'margin-l--4',
-                    innerHTML: Toolkit.getDateString(portal.confirmedTime),
+                    innerHTML: Toolkit.getDateString(nomination.confirmedTime),
                 }),
             ],
         }));
-        const restoreTime = portal.confirmedTime + (14 * 24 * 3600 * 1000);
+        const restoreTime = nomination.restoreTime;
         if (restoreTime > this.now) {
             contentsInfo.push(Eli.build('span', {
                 className: classNameInfoContent,
@@ -94,13 +101,13 @@ class ListView extends UIKitPrototype {
                 Eli.icon('access_time'),
                 Eli.build('span', {
                     className: 'margin-l--4',
-                    id: 'text-card-portal-interval',
+                    id: 'text-card-nomination-interval',
                 }),
             ],
         }));
         contentsInfo.push(Eli.build('span', {
             className: classNameInfoContent,
-            id: 'box-card-portal-result',
+            id: 'box-card-nomination-result',
             children: [
                 Eli.icon('check'),
                 Eli.build('span', {
@@ -125,17 +132,19 @@ class ListView extends UIKitPrototype {
                     children: [
                         Eli.build('img', {
                             styleText: styleTextImg,
-                            src: portal.imageUrl,
+                            src: nomination.imageUrl,
                         }),
                         Eli.build('div', {
                             className: [
-                                'padding--8', 'flex-box--col',
-                                'flex-align-items--start', 'flex-justify-content--start'
+                                'padding--8',
+                                'flex-box--col',
+                                'flex-align-items--start',
+                                'flex-justify-content--start'
                             ].join(' '),
                             children: [
                                 Eli.build('span', {
                                     className: 'mdc-typography--headline6',
-                                    innerHTML: portal.title,
+                                    innerHTML: nomination.title,
                                 }),
                                 Eli.build('div', {
                                     className: 'mdc-typography--body2 flex-box-row--wrap',
@@ -147,8 +156,8 @@ class ListView extends UIKitPrototype {
                 }),
             ],
         });
-        const primaryAction = new mdc.ripple.MDCRipple(elementPrimaryAction);
-        primaryAction.listen('click', () => this.event.openDetails(portal));
+        const primaryAction = new MDCRipple(elementPrimaryAction);
+        primaryAction.listen('click', () => this.events.openDetails(nomination));
 
         const elementActionStatus = Eli.build('button', {
             className: 'mdc-button mdc-card__action mdc-card__action--button',
@@ -160,19 +169,16 @@ class ListView extends UIKitPrototype {
                 Eli.build('span', { className: 'mdc-button__label' }),
             ],
         });
-        const actionStatus = new mdc.ripple.MDCRipple(elementActionStatus);
+        const actionStatus = new MDCRipple(elementActionStatus);
         actionStatus.unbounded = true;
         if (Version.fullFeature) {
             actionStatus.listen('click', () => {
-                window.open(
-                    `http://brainstorming.azurewebsites.net/watermeter.html#${portal.id}`,
-                    '_blank', 'noopener'
-                );
+                window.open(nomination.bsUrl, '_blank', 'noopener');
             });
         } else {
             actionStatus.listen('click', () => {
-                Toolkit.copyText(portal.id);
-                AlertDialog.open(`Brainstorming ID copied: ${portal.id}`);
+                Toolkit.copyText(nomination.id);
+                AlertDialog.open(`Brainstorming ID copied: ${nomination.id}`);
             });
         }
 
@@ -180,34 +186,34 @@ class ListView extends UIKitPrototype {
         const elementActionLocation = Eli.build('button', {
             className: 'material-icons mdc-icon-button mdc-card__action mdc-card__action--icon',
             title: 'Location',
-            id: 'button-card-portal-location',
+            id: 'button-card-nomination-location',
             hidden: true,
             innerHTML: 'place',
         });
-        const actionLocation = new mdc.ripple.MDCRipple(elementActionLocation);
+        const actionLocation = new MDCRipple(elementActionLocation);
         actionLocation.unbounded = true;
-        actionLocation.listen('click', () => this.event.focus(portal));
+        actionLocation.listen('click', () => this.events.focus(nomination));
         actionIcons.push(elementActionLocation);
 
         if (Version.fullFeature) {
             const elementActionIntel = Eli.build('button', {
                 className: 'material-icons mdc-icon-button mdc-card__action mdc-card__action--icon',
                 title: 'Intel Map',
-                id: 'button-card-portal-intel',
+                id: 'button-card-nomination-intel',
                 hidden: true,
                 innerHTML: 'map',
             });
-            const actionIntel = new mdc.ripple.MDCRipple(elementActionIntel);
+            const actionIntel = new MDCRipple(elementActionIntel);
             actionIntel.unbounded = true;
             actionIntel.listen('click', () => {
-                window.open(portal.intelUrl, '_blank', 'noopener');
+                window.open(nomination.intelUrl, '_blank', 'noopener');
             });
             actionIcons.push(elementActionIntel);
         }
 
         const elementCard = Eli.build('div', {
-            className: 'mdc-card mdc-card--outlined portal-card flex-shrink--0',
-            id: `card-${portal.id}`,
+            className: 'mdc-card mdc-card--outlined flex-shrink--0',
+            id: `card-${nomination.id}`,
             children: [
                 elementPrimaryAction,
                 Eli.build('div', {
@@ -225,45 +231,45 @@ class ListView extends UIKitPrototype {
                 }),
             ],
         });
-        this.updateCard(portal, elementCard);
-        if (portal.lngLat) {
-            this.updateLocation(portal, elementCard);
+        this.updateCard(nomination, elementCard);
+        if (nomination.lngLat) {
+            this.updateLocation(nomination, elementCard);
         }
         return elementCard;
     }
 
-    update(portal) {
-        const card = document.getElementById(`card-${portal.id}`);
-        this.updateCard(portal, card);
-        this.updateLocation(portal, card);
-        this.updateVisibility(portal, card);
+    update(nomination: Nomination) {
+        const card = this.root.querySelector(`#card-${nomination.id}`) as HTMLDivElement;
+        this.updateCard(nomination, card);
+        this.updateLocation(nomination, card);
+        this.updateVisibility(nomination, card);
     }
 
-    updateCard(portal, card) {
-        const boxResult = card.querySelector('#box-card-portal-result');
-        const type = StatusKit.getTypeByCode(portal.status);
-        if (portal.status > 0) {
-            card.querySelector('#text-card-portal-interval').innerHTML = Toolkit.getIntervalString(portal.confirmedTime, portal.resultTime);
+    updateCard(nomination: Nomination, card: HTMLDivElement) {
+        const boxResult = card.querySelector('#box-card-nomination-result') as HTMLSpanElement;
+        const type = StatusKit.getTypeByCode(nomination.status.code);
+        if (nomination.status.code > 0) {
+            card.querySelector('#text-card-nomination-interval').innerHTML = Toolkit.getIntervalString(nomination.confirmedTime, nomination.resultTime);
             boxResult.hidden = false;
             boxResult.querySelector('i').innerHTML = StatusKit.types.get(type).icon;
-            boxResult.querySelector('span').innerHTML = Toolkit.getDateString(portal.resultTime);
+            boxResult.querySelector('span').innerHTML = Toolkit.getDateString(nomination.resultTime);
         } else {
-            card.querySelector('#text-card-portal-interval').innerHTML = Toolkit.getIntervalString(portal.confirmedTime, this.now);
+            card.querySelector('#text-card-nomination-interval').innerHTML = Toolkit.getIntervalString(nomination.confirmedTime, this.now);
             boxResult.hidden = true;
         }
         const buttonStatus = card.querySelector('.mdc-card__action-buttons > button');
         buttonStatus.className = `mdc-button mdc-card__action mdc-card__action--button status-${type}`;
-        buttonStatus.querySelector('i').innerHTML = portal.status.icon;
-        buttonStatus.querySelector('span').innerHTML = portal.status.title;
+        buttonStatus.querySelector('i').innerHTML = nomination.status.icon;
+        buttonStatus.querySelector('span').innerHTML = nomination.status.title;
     }
 
-    updateLocation(portal, card) {
-        const hidden = portal.lngLat ? false : true;
-        const elementLocation = card.querySelector('#button-card-portal-location');
+    updateLocation(nomination: Nomination, card: HTMLDivElement) {
+        const hidden = nomination.lngLat ? false : true;
+        const elementLocation = card.querySelector('#button-card-nomination-location') as HTMLButtonElement;
         elementLocation.hidden = hidden;
 
         if (!Version.fullFeature) return;
-        const elementIntel = card.querySelector('#button-card-portal-intel');
+        const elementIntel = card.querySelector('#button-card-nomination-intel') as HTMLButtonElement;
         elementIntel.hidden = hidden;
     }
 };
