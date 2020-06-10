@@ -1,5 +1,5 @@
 import Service from "./service/Service";
-import UIKit from "./ui/UIKit.js";
+import UIKit from "./ui/UIKit";
 
 import '../css/extended.css'
 import '../css/dark.css'

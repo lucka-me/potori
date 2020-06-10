@@ -1,4 +1,4 @@
-import * as Chart from 'chart.js';
+import Chart from 'chart.js';
 
 import { DashboardChartProtorype, Eli, Nomination } from './prototypes';
 import StatusKit from '../../service/StatusKit';

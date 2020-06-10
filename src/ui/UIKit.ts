@@ -1,26 +1,26 @@
-import * as mapboxgl from 'mapbox-gl';
-
-import Eli from "./Eli";
+import mapboxgl from 'mapbox-gl';
 
 import AppBar, { AppBarMenuItems, AppBarActions } from './AppBar';
 import Dark         from "./Dark";
-import Progress     from './Progress';
 import Dashboard    from './Dashboard';
-import ListView     from './ListView';
 import Dialog       from './Dialog';
-
-import Service from "../service/Service";
-import StatusKit from "../service/StatusKit";
+import Eli          from "./Eli";
+import ListView     from './ListView';
+import Progress     from './Progress';
+import Service      from "../service/Service";
+import StatusKit    from "../service/StatusKit";
+import Nomination from '../service/Nomination';
 
 class UIKit {
-    constructor() {
-        this.dark       = Dark;
-        this.appBar     = new AppBar();
-        this.progress   = new Progress();
-        this.dashboard  = new Dashboard();
-        this.list       = new ListView();
-        this.dialog     = new Dialog();
-    }
+
+    dark        = Dark;
+    appBar      = new AppBar();
+    progress    = new Progress();
+    dashboard   = new Dashboard();
+    list        = new ListView();
+    dialog      = new Dialog();
+
+    constructor() {}
 
     init() {
         mapboxgl.accessToken = 'pk.eyJ1IjoibHVja2EtbWUiLCJhIjoiY2p2NDk5NmRvMHFreTQzbzduemM1MHV4cCJ9.7XGmxnEJRoCDr-i5BBmBfw';
@@ -33,7 +33,7 @@ class UIKit {
             this.dashboard.updateStyle();
             this.dialog.details.updateStyle();
         };
-        this.dark.init();
+        this.dark.init(body);
 
         // AppBar
         this.appBar.events.set('view'   , () => this.switchView());
@@ -91,10 +91,10 @@ class UIKit {
                     document.getElementById(`card-${nomination.id}`).hidden = !visible;
                 }
             }
-            if (type === 'rejected') {
+            if (type.key === 'rejected') {
                 this.dashboard.map.updateRejected(Service.nominations);
             }
-            this.dashboard.map.setTypeVisible(type, visible);
+            this.dashboard.map.setTypeVisible(type.key, visible);
         };
         this.dashboard.filter.events.switchReason = (reason, visible) => {
             for (const nomination of Service.nominations) {
@@ -106,17 +106,17 @@ class UIKit {
         this.dashboard.init(mainBox);
 
         // List
-        this.list.events.focus = (portal) => {
-            this.dashboard.map.ctrl.easeTo({ center: portal.lngLat });
+        this.list.events.focus = (nomination) => {
+            this.dashboard.map.ctrl.easeTo({ center: nomination.lngLat });
         }
-        this.list.events.openDetails = (portal) => {
-            this.dialog.details.open(portal);
+        this.list.events.openDetails = (nomination) => {
+            this.dialog.details.open(nomination);
         }
         this.list.init(mainBox);
 
         // Dialog
-        this.dialog.details.events.update = (portal) => {
-            this.update(portal);
+        this.dialog.details.events.update = (nomination) => {
+            this.update(nomination);
         }
         this.dialog.init(body);
     }
@@ -142,7 +142,7 @@ class UIKit {
             this.dashboard.bs.update(Service.nominations);
         }
         Service.events.showProgress = () => {
-            this.progress.ctrl.root_.hidden = false;
+            this.progress.root.hidden = false;
         };
         Service.events.show = () => {
             this.show();
@@ -182,37 +182,26 @@ class UIKit {
         this.dashboard.setVisible(false);
         this.list.clear();
         if (this.dashboard.map.loaded) this.dashboard.map.update(Service.nominations);
-        this.progress.ctrl.root_.hidden = true;
+        this.progress.root.hidden = true;
         this.progress.ctrl.buffer = 0;
         this.progress.ctrl.progress = 0;
     }
 
     show() {
-        const boundsNE = { lng: -181.0, lat: -91.0 };
-        const boundsSW = { lng:  181.0, lat:  91.0 };
-        for (const portal of Service.nominations) {
-            if (!portal.lngLat) continue;
-            if (portal.lngLat.lng > boundsNE.lng) boundsNE.lng = portal.lngLat.lng;
-            else if (portal.lngLat.lng < boundsSW.lng) boundsSW.lng = portal.lngLat.lng;
-            if (portal.lngLat.lat > boundsNE.lat) boundsNE.lat = portal.lngLat.lat;
-            else if (portal.lngLat.lat < boundsSW.lat) boundsSW.lat = portal.lngLat.lat;
-        }
+        this.dashboard.map.fit(Service.nominations);
         this.list.show(Service.nominations);
         this.dashboard.refresh(Service.nominations);
         this.dashboard.setVisible(true);
-        if (boundsSW.lng > -181) {
-            this.dashboard.map.ctrl.fitBounds([boundsSW, boundsNE], { linear: true });
-        }
         this.appBar.menu.items.get(AppBarMenuItems.open.key).hidden = true;
         this.appBar.menu.items.get(AppBarMenuItems.save.key).hidden = false;
         this.appBar.menu.items.get(AppBarMenuItems.upload.key).hidden = !Service.auth.signedIn;
         this.appBar.menu.items.get(AppBarMenuItems.import.key).hidden = false;
-        this.progress.ctrl.root_.hidden = true;
+        this.progress.root.hidden = true;
     }
 
-    update(portal) {
-        this.list.update(portal);
-        this.dashboard.update(portals);
+    update(nomination: Nomination) {
+        this.list.update(nomination);
+        this.dashboard.update(Service.nominations);
     }
 }
 

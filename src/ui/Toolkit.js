@@ -1,5 +1,4 @@
-import * as moment from 'moment';
-import Eli from "./Eli";
+import moment from 'moment';
 
 class Toolkit {
     static getDateString(time) {

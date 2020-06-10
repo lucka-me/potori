@@ -1,4 +1,4 @@
-import * as Chart from 'chart.js';
+import Chart from 'chart.js';
 
 import { DashboardBsChartPrototype, Eli, BrainstormingStats } from './prototypes';
 import { RateItems } from '../../../service/BrainstormingKit';

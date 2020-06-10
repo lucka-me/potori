@@ -1,5 +1,5 @@
-import * as Chart from 'chart.js';
-import * as moment from 'moment';
+import Chart from 'chart.js';
+import moment from 'moment';
 
 import { DashboardChartProtorype, Eli, Nomination } from './prototypes';
 import Toolkit from "../Toolkit.js";

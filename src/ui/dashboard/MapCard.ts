@@ -1,4 +1,4 @@
-import * as mapboxgl from 'mapbox-gl';
+import mapboxgl from 'mapbox-gl';
 
 import Dark from '../Dark';
 import { DashboardPrototype, Eli, Nomination } from './prototypes';
@@ -54,6 +54,21 @@ class MapCard extends DashboardPrototype {
 
     get loaded() {
         return this.ctrl && this.ctrl.isStyleLoaded();
+    }
+
+    fit(nominations: Array<Nomination>) {
+        const boundsNE = { lng: -181.0, lat: -91.0 };
+        const boundsSW = { lng:  181.0, lat:  91.0 };
+        for (const nomination of nominations) {
+            if (!nomination.lngLat) continue;
+            if (nomination.lngLat.lng > boundsNE.lng) boundsNE.lng = nomination.lngLat.lng;
+            else if (nomination.lngLat.lng < boundsSW.lng) boundsSW.lng = nomination.lngLat.lng;
+            if (nomination.lngLat.lat > boundsNE.lat) boundsNE.lat = nomination.lngLat.lat;
+            else if (nomination.lngLat.lat < boundsSW.lat) boundsSW.lat = nomination.lngLat.lat;
+        }
+        if (boundsSW.lng > -181) {
+            this.ctrl.fitBounds([boundsSW, boundsNE], { linear: true });
+        }
     }
 
     update(nominations: Array<Nomination>) {

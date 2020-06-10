@@ -1,4 +1,4 @@
-import * as data from "../data/status.json";
+import data from "../data/status.json";
 
 class Status {
 

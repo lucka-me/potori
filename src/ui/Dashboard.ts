@@ -1,4 +1,4 @@
-import * as Chart from 'chart.js';
+import Chart from 'chart.js';
 
 import BSGroup              from './dashboard/BSGroup';
 import CountByMonthCard     from './dashboard/CountByMonthCard';

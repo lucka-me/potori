@@ -1,4 +1,4 @@
-import * as mapboxgl from 'mapbox-gl';
+import mapboxgl from 'mapbox-gl';
 import { MDCFormField } from "@material/form-field";
 import { MDCRadio } from "@material/radio";
 import { MDCRipple } from "@material/ripple";
