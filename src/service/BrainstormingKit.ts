@@ -6,10 +6,19 @@ import Nomination, { LngLat } from "./Nomination";
 import StatusKit from "./StatusKit";
 import Version from "./Version";
 
+const RateItems = {
+    quality: 'Quality',
+    description: 'Description',
+    cultural: 'Cultural',
+    uniqueness: 'Uniqueness',
+    safety: 'Safety',
+    location: 'Location',
+};
+
 interface BrainstormingStats {
     review: number,
     nomination: number,
-    rate: any,
+    rate: Map<string, Array<number>>,
     reviewTimes: Array<number>,
     synch: {
         total: number, synched: number
@@ -91,17 +100,17 @@ class BrainstormingKit {
         const stats: BrainstormingStats = {
             review: 0,
             nomination: 0,
-            rate: {} as any,
-            reviewTimes: [] as Array<number>,
+            rate: new Map(),
+            reviewTimes: [],
             synch: { total: 0, synched: 0 },
         };
-        const rateKeys = Object.keys(BrainstormingKit.rateKeys);
+        const rateKeys = Object.keys(RateItems);
         for (const key of rateKeys) {
-            stats.rate[key] = [];
+            stats.rate.set(key, []);
         }
         const statsRate = (rateJson: any, key: string) => {
             if (rateJson[key]) {
-                stats.rate[key].push(parseInt(rateJson[key]));
+                stats.rate.get(key).push(parseInt(rateJson[key]));
             }
         }
         for (const nomination of nominations) {
@@ -136,17 +145,6 @@ class BrainstormingKit {
         return imgUrl.replace(/[^a-zA-Z0-9]/g, '').slice(- 10).toLowerCase();
     }
 
-    static get rateKeys() {
-        return {
-            quality: 'Quality',
-            description: 'Description',
-            cultural: 'Cultural',
-            uniqueness: 'Uniqueness',
-            safety: 'Safety',
-            location: 'Location',
-        };
-    }
-
     static isSynched(stars: string, status: number) {
         const reasons = StatusKit.reasons;
         if (stars === 'D' && status === reasons.get('duplicated').code) {
@@ -169,4 +167,4 @@ class BrainstormingKit {
 }
 
 export default BrainstormingKit;
-export { BrainstormingStats };
+export { RateItems, BrainstormingStats };

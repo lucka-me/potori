@@ -1,21 +1,22 @@
-import { DashboardBsChartPrototype } from './prototypes';
-import Eli from "../../Eli";
-import BrainstormingKit from '../../../service/BrainstormingKit';
+import * as Chart from 'chart.js';
+
+import { DashboardBsChartPrototype, Eli, BrainstormingStats } from './prototypes';
+import { RateItems } from '../../../service/BrainstormingKit';
 
 class BSRatesCard extends DashboardBsChartPrototype {
     constructor() { super(); }
 
-    init(parent) {
-        const canvasChart = Eli.build('canvas', { className: 'canvas-chart--h' });
+    init(parent: HTMLElement) {
+        const canvasChart = Eli.build('canvas', { className: 'canvas-chart--h' }) as HTMLCanvasElement;
         this.root = Eli.chartCard('Brainstorming Rates', canvasChart, 1, 240);
         this.setVisible(false);
         parent.appendChild(this.root);
 
-        const labels = [];
-        
-        for (const key of Object.keys(BrainstormingKit.rateKeys)) {
-            labels.push(BrainstormingKit.rateKeys[key]);
+        const labels: Array<string> = [];
+        for (const value of Object.values(RateItems)) {
+            labels.push(value);
         }
+
         const style = getComputedStyle(document.documentElement);
         this.chart = new Chart(canvasChart.getContext('2d'), {
             type: 'radar',
@@ -45,10 +46,11 @@ class BSRatesCard extends DashboardBsChartPrototype {
         });
     }
 
-    update(stats) {
+    updateStats(stats: BrainstormingStats) {
         const data = [];
-        for (const rate of Object.keys(BrainstormingKit.rateKeys)) {
-            const avg = stats.rate[rate].reduce((pre, cur) => pre + cur, 0) / stats.rate[rate].length;
+        for (const rate of Object.keys(RateItems)) {
+            const list = stats.rate.get(rate);
+            const avg = list.reduce((pre, cur) => pre + cur, 0) / list.length;
             data.push(parseFloat(avg.toFixed(2)));
         }
         this.chart.data.datasets[0].data = data;
