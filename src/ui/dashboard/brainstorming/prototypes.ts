@@ -1,13 +1,18 @@
 import { DashboardPrototype } from "../prototypes.js";
+import { BrainstormingStats } from "../../../service/BrainstormingKit.js";
 
 export class DashboardBsPrototype extends DashboardPrototype {
-    constructor() { super(); }
-    update(stats) { stats }
+    constructor() {
+        super();
+    }
+    updateStats(stats: BrainstormingStats ) { stats }
 }
 
 export class DashboardBsChartPrototype extends DashboardBsPrototype {
+
+    chart: Chart = null;
+
     constructor() {
         super();
-        this.chart = null;
     }
 }

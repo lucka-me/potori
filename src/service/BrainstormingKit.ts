@@ -6,6 +6,16 @@ import Nomination, { LngLat } from "./Nomination";
 import StatusKit from "./StatusKit";
 import Version from "./Version";
 
+interface BrainstormingStats {
+    review: number,
+    nomination: number,
+    rate: any,
+    reviewTimes: Array<number>,
+    synch: {
+        total: number, synched: number
+    },
+}
+
 class BrainstormingKit {
 
     reference: Reference = null;
@@ -77,8 +87,8 @@ class BrainstormingKit {
         }
     }
 
-    analyse(nominations: Array<Nomination>) {
-        const stats = {
+    analyse(nominations: Array<Nomination>): BrainstormingStats {
+        const stats: BrainstormingStats = {
             review: 0,
             nomination: 0,
             rate: {} as any,
@@ -159,3 +169,4 @@ class BrainstormingKit {
 }
 
 export default BrainstormingKit;
+export { BrainstormingStats };

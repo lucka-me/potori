@@ -16,6 +16,7 @@
   "license": "MIT",
   "dependencies": {},
   "devDependencies": {
+    "@types/chart.js": "^2.9.21",
     "@types/copy-webpack-plugin": "^6.0.0",
     "@types/gapi": "0.0.39",
     "@types/gapi.auth2": "0.0.52",

@@ -1,20 +1,25 @@
 import UIKitPrototype from "../UIKitPrototype";
+import Nomination from "../../service/Nomination";
 
 export class DashboardPrototype extends UIKitPrototype {
+
+    root: HTMLElement = null;
+
     constructor() {
         super();
-        this.root = null;
     }
-    init(parent) { parent }
-    update(portals) { portals }
+    init(parent: HTMLElement) { parent }
+    update(nominations: Array<Nomination>) { nominations }
     updateStyle() { }
-    setVisible(visible) { this.root.hidden = !visible; }
+    setVisible(visible: boolean) { this.root.hidden = !visible; }
 }
 
 export class DashboardChartProtorype extends DashboardPrototype {
+
+    chart: Chart = null;
+
     constructor() {
         super();
-        this.chart = null;
     }
 
     static get color() {
