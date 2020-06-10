@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-class Toolkit {
+class TimeKit {
     static fillTimeDataMap(dataMap: Map<number, number>, min: number, max: number) {
         let scan = min;
         while (scan <= max) {
@@ -12,4 +12,4 @@ class Toolkit {
     }
 }
 
-export default Toolkit;
+export default TimeKit;

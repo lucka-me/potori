@@ -2,7 +2,7 @@ import Chart from 'chart.js';
 import moment from 'moment';
 
 import { DashboardBsChartPrototype, BrainstormingStats, Eli } from './prototypes';
-import Toolkit from "../../Toolkit";
+import TimeKit from "../../TimeKit";
 
 class BSReviewsCard extends DashboardBsChartPrototype {
     constructor() { super(); }
@@ -63,7 +63,7 @@ class BSReviewsCard extends DashboardBsChartPrototype {
                 mapTimes.set(sub, 1);
             }
         }
-        Toolkit.fillTimeDataMap(mapTimes, min, max);
+        TimeKit.fillTimeDataMap(mapTimes, min, max);
         const dataTimes: Array<{ t: number, y: number }> = [];
         mapTimes.forEach((value, key) => {
             dataTimes.push({ t: key, y: value, });
