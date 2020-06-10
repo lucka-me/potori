@@ -1,7 +1,7 @@
 import { DashboardPrototype } from './prototypes';
 import Eli from "../Eli";
 import Dark from '../Dark';
-import FilterCard from './FilterCard.js';
+import FilterCard from './FilterCard';
 import StatusKit from '../../service/StatusKit';
 
 class MapStyle {

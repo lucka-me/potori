@@ -82,10 +82,9 @@ class UIKit {
             );
         }
         this.dashboard.filter.event.switchType = (type, visible) => {
-            const code = StatusKit.types.get(type).code;
-            for (const portal of Service.nominations) {
-                if (StatusKit.typeMatched(portal.status, code)) {
-                    document.getElementById(`card-${portal.id}`).hidden = !visible;
+            for (const nomination of Service.nominations) {
+                if (StatusKit.typeMatched(nomination.status.code, type.code)) {
+                    document.getElementById(`card-${nomination.id}`).hidden = !visible;
                 }
             }
             if (type === 'rejected') {
@@ -94,9 +93,9 @@ class UIKit {
             this.dashboard.map.setTypeVisible(type, visible);
         };
         this.dashboard.filter.event.switchReason = (reason, visible) => {
-            for (const portal of Service.nominations) {
-                if (portal.status !== StatusKit.reasons.get(reason).code) continue;
-                document.getElementById(`card-${portal.id}`).hidden = !visible;
+            for (const nomination of Service.nominations) {
+                if (nomination.status.code !== reason.code) continue;
+                document.getElementById(`card-${nomination.id}`).hidden = !visible;
             }
             this.dashboard.map.updateRejected(Service.nominations);
         };

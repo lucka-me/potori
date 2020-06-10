@@ -1,7 +1,7 @@
 import UIKitPrototype from './UIKitPrototype';
 import Eli from "./Eli";
 import Toolkit from "./Toolkit.js";
-import FilterCard from './dashboard/FilterCard.js';
+import FilterCard from './dashboard/FilterCard';
 import Version from '../service/Version';
 import StatusKit from '../service/StatusKit';
 
@@ -12,7 +12,7 @@ class ListView extends UIKitPrototype {
         this.now = Date.now();
 
         this.event = {
-            focus: (portal) => { pportal },
+            focus: (portal) => { portal },
             openDetails: (portal) => { portal },
         };
     }

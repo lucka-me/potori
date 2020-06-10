@@ -2,7 +2,7 @@ import UIKitPrototype from './UIKitPrototype';
 import Eli from "./Eli";
 
 import MapCard              from './dashboard/MapCard.js';
-import FilterCard           from './dashboard/FilterCard.js';
+import FilterCard           from './dashboard/FilterCard';
 import StatsTypeCard        from './dashboard/StatsTypeCard';
 import StatsRejectedCard    from './dashboard/StatsRejectedCard';
 import CountByMonthCard     from './dashboard/CountByMonthCard';
