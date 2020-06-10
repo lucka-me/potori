@@ -1,9 +1,8 @@
 import * as mapboxgl from 'mapbox-gl';
 
 import Dark from '../Dark';
-import { DashboardPrototype, Eli } from './prototypes';
+import { DashboardPrototype, Eli, Nomination } from './prototypes';
 import FilterCard from './FilterCard';
-import Nomination from '../../service/Nomination';
 import StatusKit from '../../service/StatusKit';
 
 const MapStyle = {
@@ -13,6 +12,7 @@ const MapStyle = {
 
 interface MapCardEvents {
     focus: (id: string) => void,
+    styleLoaded: () => Array<Nomination>,
 }
 
 class MapCard extends DashboardPrototype {
@@ -20,6 +20,7 @@ class MapCard extends DashboardPrototype {
     ctrl: mapboxgl.Map = null;
     events: MapCardEvents = {
         focus: () => { },
+        styleLoaded: () => [],
     }
 
     constructor() {
@@ -196,6 +197,7 @@ class MapCard extends DashboardPrototype {
     updateStyle() {
         if (!this.loaded) return;
         this.ctrl.setStyle(MapStyle[Dark.enabled ? 'dark' : 'default']);
+        this.ctrl.once('load', () => { this.update(this.events.styleLoaded())});
     }
 
     setTypeVisible(type: string, visible: boolean) {

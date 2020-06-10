@@ -82,6 +82,9 @@ class UIKit {
                 0, document.getElementById(`card-${id}`).offsetTop - top
             );
         }
+        this.dashboard.map.events.styleLoaded = () => {
+            return Service.nominations;
+        }
         this.dashboard.filter.events.switchType = (type, visible) => {
             for (const nomination of Service.nominations) {
                 if (StatusKit.typeMatched(nomination.status.code, type.code)) {

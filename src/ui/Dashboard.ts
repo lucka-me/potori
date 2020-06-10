@@ -9,7 +9,6 @@ import StatsRejectedCard    from './dashboard/StatsRejectedCard';
 import StatsTypeCard        from './dashboard/StatsTypeCard';
 import UIKitPrototype, { Eli } from './UIKitPrototype';
 import { DashboardPrototype, Nomination } from './dashboard/prototypes';
-import Service from '../service/Service';
 
 class Dashboard extends UIKitPrototype {
 
@@ -79,7 +78,6 @@ class Dashboard extends UIKitPrototype {
         this.forEach((card) => {
             card.updateStyle();
         });
-        this.map.update(Service.nominations);
     }
 
     setVisible(visible: boolean) {
