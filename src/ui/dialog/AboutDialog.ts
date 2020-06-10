@@ -1,14 +1,12 @@
-import DialogPrototype from './DialogPrototype';
-import Eli from "../Eli";
+import DialogPrototype, { Eli, MDCDialog } from './DialogPrototype';
 import Version from '../../service/Version';
 
 class AboutDialog extends DialogPrototype {
     constructor() {
         super();
-        this.textareaJSON = null;
     }
 
-    init(parent) {
+    init(parent: HTMLElement) {
         const linkVersion = Eli.link(
             'https://github.com/lucka-me/potori/blob/master/CHANGELOG.md',
             'Changelog', Version.text
@@ -53,7 +51,7 @@ class AboutDialog extends DialogPrototype {
             }),
         ]);
         parent.appendChild(element);
-        this.ctrl = new mdc.dialog.MDCDialog(element);
+        this.ctrl = new MDCDialog(element);
     }
 
     open() { this.ctrl.open(); }
