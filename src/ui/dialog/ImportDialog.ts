@@ -1,14 +1,17 @@
-import DialogPrototype from './DialogPrototype';
-import Eli from "../Eli";
+import { MDCTextField } from "@material/textfield";
+
+import DialogPrototype, { Eli, MDCDialog } from './DialogPrototype';
 import Service from '../../service/Service';
 
 class ImportDialog extends DialogPrototype {
+
+    textField: MDCTextField = null;
+
     constructor() {
         super();
-        this.textField = null;
     }
 
-    init(parent) {
+    init(parent: HTMLElement) {
         const elementTextField = Eli.build('div', {
             className: 'mdc-text-field mdc-text-field--outlined mdc-text-field--textarea mdc-text-field--fullwidth',
             children: [
@@ -72,14 +75,16 @@ class ImportDialog extends DialogPrototype {
             }),
         ]);
         parent.appendChild(elementDialog);
-        this.ctrl = new mdc.dialog.MDCDialog(elementDialog);
-        this.textField = new mdc.textField.MDCTextField(elementTextField);
-        this.ctrl.listen('MDCDialog:closed', (event) => this.closed(event));
+        this.ctrl = new MDCDialog(elementDialog);
+        this.textField = new MDCTextField(elementTextField);
+        this.ctrl.listen('MDCDialog:closed', (event: CustomEvent) => {
+            this.closed(event);
+        });
     }
 
     open() { this.ctrl.open(); }
 
-    closed(event) {
+    closed(event: CustomEvent) {
         if (event.detail.action === 'import') {
             Service.import(this.textField.value);
         }

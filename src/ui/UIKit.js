@@ -178,7 +178,7 @@ class UIKit {
 
         this.dashboard.setVisible(false);
         this.list.clear();
-        if (this.dashboard.map.loaded()) this.dashboard.map.update(Service.nominations);
+        if (this.dashboard.map.loaded) this.dashboard.map.update(Service.nominations);
         this.progress.ctrl.root_.hidden = true;
         this.progress.ctrl.buffer = 0;
         this.progress.ctrl.progress = 0;

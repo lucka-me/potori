@@ -1,17 +1,20 @@
-import DialogPrototype from './DialogPrototype';
-import Eli from "../Eli";
+import { MDCSnackbar } from "@material/snackbar";
+import UIKitPrototype , { Eli } from '../UIKitPrototype';
 
-class Snackbar extends DialogPrototype {
+class Snackbar extends UIKitPrototype {
+
+    ctrl: MDCSnackbar = null;
+    textMessage: HTMLDivElement = null;
+
     constructor() {
         super();
-        this.textMessage = null;
     }
 
-    init(parent) {
+    init(parent: HTMLElement) {
         this.textMessage = Eli.build('div', {
             className: 'mdc-snackbar__label',
             role: 'status', ariaLive: 'polite',
-        });
+        }) as HTMLDivElement;
         const elementActions = Eli.build('div', {
             className: 'mdc-snackbar__actions',
             children: [
@@ -35,10 +38,10 @@ class Snackbar extends DialogPrototype {
             ],
         });
         parent.appendChild(element);
-        this.ctrl = new mdc.snackbar.MDCSnackbar(element);
+        this.ctrl = new MDCSnackbar(element);
     }
 
-    open(message) {
+    open(message: string) {
         this.textMessage.innerHTML = message;
         this.ctrl.open();
     }

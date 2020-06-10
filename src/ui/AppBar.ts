@@ -102,7 +102,7 @@ class AppBar extends UIKitPrototype {
             sectionActions.appendChild(elementAction);
             const ripple = new MDCRipple(elementAction);
             ripple.unbounded = true;
-            ripple.listen('click', (this.events as any)[value.key]);
+            ripple.listen('click', this.events.get(value.key));
             elementAction.hidden = true;
             this.actions.set(value.key, elementAction);
         }
