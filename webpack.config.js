@@ -6,8 +6,8 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 module.exports = {
   entry: {
-    potori: './src/potori.js',
-    intro: './src/intro.js',
+    potori: './src/potori.ts',
+    intro: './src/intro.ts',
   },
   output: {
     filename: 'lib/[name].js',

@@ -2,7 +2,7 @@ import Chart from 'chart.js';
 import moment from 'moment';
 
 import { DashboardChartProtorype, Eli, Nomination } from './prototypes';
-import Toolkit from "../Toolkit.js";
+import Toolkit from "../Toolkit";
 
 class CountByMonthCard extends DashboardChartProtorype {
     constructor() { super(); }
@@ -58,8 +58,8 @@ class CountByMonthCard extends DashboardChartProtorype {
             this.chart.update();
             return;
         }
-        const mapSub = new Map();
-        const mapRet = new Map();
+        const mapSub = new Map<number, number>();
+        const mapRet = new Map<number, number>();
         let min = moment(nominations[0].confirmedTime).startOf('month').valueOf();
         let max = min;
         for (const nomination of nominations) {

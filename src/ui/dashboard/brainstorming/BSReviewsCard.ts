@@ -2,7 +2,7 @@ import Chart from 'chart.js';
 import moment from 'moment';
 
 import { DashboardBsChartPrototype, BrainstormingStats, Eli } from './prototypes';
-import Toolkit from "../../Toolkit.js";
+import Toolkit from "../../Toolkit";
 
 class BSReviewsCard extends DashboardBsChartPrototype {
     constructor() { super(); }

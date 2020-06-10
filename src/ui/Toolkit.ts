@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 class Toolkit {
-    static fillTimeDataMap(dataMap, min, max) {
+    static fillTimeDataMap(dataMap: Map<number, number>, min: number, max: number) {
         let scan = min;
         while (scan <= max) {
             const month = moment(scan + 1000).startOf('month');
