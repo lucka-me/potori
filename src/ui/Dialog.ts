@@ -7,19 +7,21 @@ import ImportDialog     from './dialog/ImportDialog';
 import Snackbar         from './dialog/Snackbar';
 
 class Dialog extends UIKitPrototype {
+
+    about       = new AboutDialog;
+    alert       = AlertDialog;
+    details     = new DetailsDialog;
+    import      = new ImportDialog;
+
+    shackbar    = Snackbar;
+
     constructor() {
         super();
-        this.about      = new AboutDialog;
-        this.alert      = AlertDialog;
-        this.details    = new DetailsDialog;
-        this.import     = new ImportDialog;
-
-        this.shackbar   = Snackbar;
     }
 
-    init(parent) {
-        for (const key of Object.keys(this)) {
-            this[key].init(parent);
+    init(parent: HTMLElement) {
+        for (const value of Object.values(this)) {
+            value.init(parent);
         }
     }
 }

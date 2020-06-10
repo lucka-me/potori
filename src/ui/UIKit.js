@@ -7,7 +7,7 @@ import Dark         from "./Dark";
 import Progress     from './Progress';
 import Dashboard    from './Dashboard';
 import ListView     from './ListView.js';
-import Dialog       from './Dialog.js';
+import Dialog       from './Dialog';
 
 import Service from "../service/Service";
 import StatusKit from "../service/StatusKit";
