@@ -1,12 +1,16 @@
+import * as Chart from 'chart.js';
+import * as moment from 'moment';
+
 import { DashboardChartProtorype } from './prototypes';
 import Eli from "../Eli";
 import Toolkit from "../Toolkit.js";
+import Nomination from '../../service/Nomination';
 
 class CountByMonthCard extends DashboardChartProtorype {
     constructor() { super(); }
 
-    init(parent) {
-        const canvasChart = Eli.build('canvas', { className: 'canvas-chart--h' });
+    init(parent: HTMLElement) {
+        const canvasChart = Eli.build('canvas', { className: 'canvas-chart--h' }) as HTMLCanvasElement;
         this.root = Eli.chartCard('Count by Month', canvasChart, 3, 300);
         this.setVisible(false);
         parent.appendChild(this.root);
@@ -49,8 +53,8 @@ class CountByMonthCard extends DashboardChartProtorype {
         });
     }
 
-    update(portals) {
-        if (portals.length === 0) {
+    update(nominations: Array<Nomination>) {
+        if (nominations.length === 0) {
             this.chart.data.datasets[0].data = [];
             this.chart.data.datasets[1].data = [];
             this.chart.update();
@@ -58,10 +62,10 @@ class CountByMonthCard extends DashboardChartProtorype {
         }
         const mapSub = new Map();
         const mapRet = new Map();
-        let min = moment(portals[0].confirmedTime).startOf('month').valueOf();
+        let min = moment(nominations[0].confirmedTime).startOf('month').valueOf();
         let max = min;
-        for (const portal of portals) {
-            const sub = moment(portal.confirmedTime).startOf('month').valueOf();
+        for (const nomination of nominations) {
+            const sub = moment(nomination.confirmedTime).startOf('month').valueOf();
             if (sub < min) min = sub;
             else if (sub > max) max = sub;
             if (mapSub.has(sub)) {
@@ -69,8 +73,8 @@ class CountByMonthCard extends DashboardChartProtorype {
             } else {
                 mapSub.set(sub, 1);
             }
-            if (!portal.resultTime) continue;
-            const ret = moment(portal.resultTime).startOf('month').valueOf();
+            if (!nomination.resultTime) continue;
+            const ret = moment(nomination.resultTime).startOf('month').valueOf();
             if (ret > max) max = ret;
             if (mapRet.has(ret)) {
                 mapRet.set(ret, mapRet.get(ret) + 1);
@@ -81,8 +85,8 @@ class CountByMonthCard extends DashboardChartProtorype {
         // Fill the empty months
         Toolkit.fillTimeDataMap(mapSub, min, max);
         Toolkit.fillTimeDataMap(mapRet, min, max);
-        const dataSub = [];
-        const dataRet = [];
+        const dataSub: Array<{ t: number, y: number }> = [];
+        const dataRet: Array<{ t: number, y: number }> = [];
         mapSub.forEach((value, key) => {
             dataSub.push({ t: key, y: value, });
         });

@@ -5,7 +5,7 @@ import MapCard              from './dashboard/MapCard.js';
 import FilterCard           from './dashboard/FilterCard.js';
 import StatsTypeCard        from './dashboard/StatsTypeCard';
 import StatsRejectedCard    from './dashboard/StatsRejectedCard';
-import CountByMonthCard     from './dashboard/CountByMonthCard.js';
+import CountByMonthCard     from './dashboard/CountByMonthCard';
 import QuotasCard           from './dashboard/QuotasCard';
 import BSGroup              from './dashboard/BSGroup.js';
 
