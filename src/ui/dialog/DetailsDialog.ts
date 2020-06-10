@@ -12,7 +12,6 @@ import { MapStyle } from '../dashboard/MapCard';
 import Nomination, { LngLat } from '../../service/Nomination';
 import Service from '../../service/Service';
 import StatusKit from '../../service/StatusKit';
-import Toolkit from "../Toolkit.js";
 import UIKitPrototype, { Eli } from '../UIKitPrototype';
 
 class DetailsDialogMap extends UIKitPrototype {
@@ -393,7 +392,12 @@ class DetailsDialog extends DialogPrototype {
         this.textConfirmedTime.innerHTML = new Date(nomination.confirmedTime).toLocaleString();
 
         this.fieldResultTime.root_.hidden = (type === 'pending');
-        const resultTimeString = Toolkit.getLocalDateTimeISOString(
+        const getLocalDateTimeISOString = (time: number) => {
+            const date = new Date();
+            date.setTime(time - date.getTimezoneOffset() * 60000);
+            return date.toISOString();
+        }
+        const resultTimeString = getLocalDateTimeISOString(
             nomination.resultTime ? nomination.resultTime : Date.now()
         );
         this.fieldResultTime.value = resultTimeString.slice(0, resultTimeString.lastIndexOf(':'));
@@ -404,7 +408,7 @@ class DetailsDialog extends DialogPrototype {
         }
         if (type === 'pending') {
             Service.bs.query(nomination.id, (data) => {
-                const timeString = Toolkit.getLocalDateTimeISOString(data.lastTime);
+                const timeString = getLocalDateTimeISOString(data.lastTime);
                 this.fieldResultTime.value = timeString.slice(0, timeString.lastIndexOf(':'));
                 this.fieldResultTime.layout();
             }, () => null);

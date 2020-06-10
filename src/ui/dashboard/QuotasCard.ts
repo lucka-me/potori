@@ -12,7 +12,7 @@ class QuotasCard extends DashboardChartProtorype {
         parent.appendChild(this.root);
 
         const labels = [];
-        for (let i = 1; i < 15; i++) {
+        for (let i = 0; i < 14; i++) {
             labels.push(`${i}`);
         }
         const style = getComputedStyle(document.documentElement);

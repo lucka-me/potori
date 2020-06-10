@@ -1,5 +1,7 @@
 import StatusKit, { Status } from "./StatusKit";
 
+const now = Date.now();
+
 interface LngLat {
     lng: number;
     lat: number;
@@ -33,6 +35,25 @@ class Nomination {
 
     get restoreTime(): number {
         return this.confirmedTime + (14 * 24 * 3600 * 1000);
+    }
+
+    get confirmedDateString(): string {
+        return new Date(this.confirmedTime).toLocaleDateString();
+    }
+
+    get resultDateString(): string {
+        return new Date(this.restoreTime).toLocaleDateString();
+    }
+
+    get intervalString(): string {
+        const end = this.resultTime ? this.resultTime : now;
+        const day = Math.floor((end - this.confirmedTime) / (24 * 3600 * 1000));
+        return `${day} day${(day > 1 ? "s" : "")}`;
+    }
+
+    get restoreIntervalString(): string {
+        const day = Math.floor((this.restoreTime - now) / (24 * 3600 * 1000));
+        return `${day} day${(day > 1 ? "s" : "")}`;
     }
 
     get json(): any {

@@ -4,7 +4,6 @@ import AlertDialog from "./dialog/AlertDialog";
 import FilterCard from './dashboard/FilterCard';
 import Nomination from '../service/Nomination';
 import StatusKit, { StatusReason, StatusType } from '../service/StatusKit';
-import Toolkit from "./Toolkit.js";
 import UIKitPrototype, { Eli } from './UIKitPrototype';
 import Version from '../service/Version';
 
@@ -78,7 +77,7 @@ class ListView extends UIKitPrototype {
                 Eli.icon('arrow_upward'),
                 Eli.build('span', {
                     className: 'margin-l--4',
-                    innerHTML: Toolkit.getDateString(nomination.confirmedTime),
+                    innerHTML: nomination.confirmedDateString,
                 }),
             ],
         }));
@@ -90,7 +89,7 @@ class ListView extends UIKitPrototype {
                     Eli.icon('restore'),
                     Eli.build('span', {
                         className: 'margin-l--4',
-                        innerHTML:  Toolkit.getIntervalString(this.now, restoreTime),
+                        innerHTML: nomination.restoreIntervalString,
                     }),
                 ],
             }));
@@ -252,13 +251,12 @@ class ListView extends UIKitPrototype {
     updateCard(nomination: Nomination, card: HTMLDivElement) {
         const boxResult = card.querySelector('#box-card-nomination-result') as HTMLSpanElement;
         const type = StatusKit.getTypeByCode(nomination.status.code);
+        card.querySelector('#text-card-nomination-interval').innerHTML = nomination.intervalString;
         if (nomination.status.code > 0) {
-            card.querySelector('#text-card-nomination-interval').innerHTML = Toolkit.getIntervalString(nomination.confirmedTime, nomination.resultTime);
             boxResult.hidden = false;
             boxResult.querySelector('i').innerHTML = StatusKit.types.get(type).icon;
-            boxResult.querySelector('span').innerHTML = Toolkit.getDateString(nomination.resultTime);
+            boxResult.querySelector('span').innerHTML = nomination.resultDateString;
         } else {
-            card.querySelector('#text-card-nomination-interval').innerHTML = Toolkit.getIntervalString(nomination.confirmedTime, this.now);
             boxResult.hidden = true;
         }
         const buttonStatus = card.querySelector('.mdc-card__action-buttons > button');
