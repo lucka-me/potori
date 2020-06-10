@@ -2,12 +2,14 @@ import { DashboardChartProtorype } from './prototypes';
 import Eli from "../Eli";
 import Toolkit from "../Toolkit.js";
 import StatusKit from '../../service/StatusKit';
+import * as Chart from 'chart.js';
+import Nomination from '../../service/Nomination';
 
 class StatsTypeCard extends DashboardChartProtorype {
     constructor() { super(); }
 
-    init(parent) {
-        const canvasChart = Eli.build('canvas', { className: 'canvas-chart--v' });
+    init(parent: HTMLElement) {
+        const canvasChart = Eli.build('canvas', { className: 'canvas-chart--v' }) as HTMLCanvasElement;
         this.root = Eli.chartCard('Stats: Type', canvasChart, 2, 250);
         this.setVisible(false);
         parent.appendChild(this.root);
@@ -46,13 +48,13 @@ class StatsTypeCard extends DashboardChartProtorype {
         });
     }
 
-    update(portals) {
+    update(nominations: Array<Nomination>) {
         const data = new Array(3).fill(0);
-        for (const portal of portals) {
-            if (portal.status > 100) {
+        for (const nomination of nominations) {
+            if (nomination.status.code > 100) {
                 data[2] += 1;
             } else {
-                data[portal.status] += 1;
+                data[nomination.status.code] += 1;
             }
         }
         this.chart.data.datasets[0].data = data;

@@ -3,7 +3,7 @@ import Eli from "./Eli";
 
 import MapCard              from './dashboard/MapCard.js';
 import FilterCard           from './dashboard/FilterCard.js';
-import StatsTypeCard        from './dashboard/StatsTypeCard.js';
+import StatsTypeCard        from './dashboard/StatsTypeCard';
 import StatsRejectedCard    from './dashboard/StatsRejectedCard.js';
 import CountByMonthCard     from './dashboard/CountByMonthCard.js';
 import QuotasCard           from './dashboard/QuotasCard';
