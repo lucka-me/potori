@@ -1,16 +1,23 @@
-import { DashboardBsPrototype } from './prototypes';
+import { MDCRipple } from "@material/ripple";
+
+import { DashboardBsPrototype, BrainstormingStats } from './prototypes';
 import Eli from "../../Eli";
-import Service from '../../../service/Service';
 
 class BSBasicCard extends DashboardBsPrototype {
+
+    textReviews     : HTMLSpanElement   = null;
+    textSubtitle    : HTMLSpanElement   = null;
+    buttonRefresh   : HTMLButtonElement = null;
+
+    events = {
+        refresh: () => {},
+    };
+
     constructor() {
         super();
-        this.textReviews = null;
-        this.textSubtitle = null;
-        this.buttonRefresh = null;
     }
 
-    init(parent) {
+    init(parent: HTMLElement) {
 
         this.textReviews = Eli.build('span', {
             styleText: 'font-weight:300;font-size:4.5rem;line-height:4.5rem;',
@@ -29,12 +36,12 @@ class BSBasicCard extends DashboardBsPrototype {
                 Eli.build('i', { className: 'material-icons mdc-button__icon', innerHTML: 'refresh' }),
                 Eli.build('span', { className: 'mdc-button__label', innerHTML: 'Refresh' }),
             ],
-        });
-        const rippleRefresh = new mdc.ripple.MDCRipple(this.buttonRefresh);
+        }) as HTMLButtonElement;
+        const rippleRefresh = new MDCRipple(this.buttonRefresh);
         rippleRefresh.unbounded = true;
         rippleRefresh.listen('click', () => {
             this.buttonRefresh.disabled = true;
-            Service.updateBsData();
+            this.events.refresh();
         });
 
         this.root = Eli.build('div', {
@@ -67,9 +74,12 @@ class BSBasicCard extends DashboardBsPrototype {
         parent.appendChild(this.root);
     }
 
-    update(stats) {
+    updateStats(stats: BrainstormingStats) {
         this.textReviews.innerHTML = `${stats.review}`;
-        this.textSubtitle.innerHTML = `${stats.review < 2 ? 'Review' : 'Reviews'} for ${stats.portal} ${stats.portal < 2 ? 'Portal' : 'Portals'}`;
+        this.textSubtitle.innerHTML = [
+            `${stats.review < 2 ? 'Review' : 'Reviews'} for `,
+            `${stats.nomination} ${stats.nomination < 2 ? 'Portal' : 'Portals'}`
+        ].join('');
         this.buttonRefresh.disabled = false;
     }
 }

@@ -1,7 +1,7 @@
 import { DashboardPrototype } from './prototypes';
 
 import BSBasicCard      from './brainstorming/BSBasicCard.js';
-import BSRatesCard      from './brainstorming/BSRatesCard.js';
+import BSRatesCard      from './brainstorming/BSRatesCard';
 import BSSynchCard      from './brainstorming/BSSynchCard';
 import BSReviewsCard    from './brainstorming/BSReviewsCard';
 import Service from '../../service/Service';
@@ -21,6 +21,9 @@ class BSGroup extends DashboardPrototype {
         for (const card of Object.keys(this.card)) {
             this.card[card].init(parent);
         }
+        this.card.basic.events.refresh = () => {
+            Service.updateBsData();
+        };
     }
 
     update(portals) {

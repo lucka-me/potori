@@ -16,3 +16,5 @@ export class DashboardBsChartPrototype extends DashboardBsPrototype {
         super();
     }
 }
+
+export { BrainstormingStats };
