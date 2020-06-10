@@ -1,4 +1,4 @@
-import UIKitPrototype from "../UIKitPrototype";
+import UIKitPrototype, { Eli } from "../UIKitPrototype";
 import Nomination from "../../service/Nomination";
 
 export class DashboardPrototype extends UIKitPrototype {
@@ -29,3 +29,5 @@ export class DashboardChartProtorype extends DashboardPrototype {
         };
     }
 }
+
+export { Eli, Nomination };

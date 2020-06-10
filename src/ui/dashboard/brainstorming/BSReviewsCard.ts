@@ -1,8 +1,7 @@
 import * as Chart from 'chart.js';
 import * as moment from 'moment';
 
-import { DashboardBsChartPrototype, BrainstormingStats } from './prototypes';
-import Eli from "../../Eli";
+import { DashboardBsChartPrototype, BrainstormingStats, Eli } from './prototypes';
 import Toolkit from "../../Toolkit.js";
 
 class BSReviewsCard extends DashboardBsChartPrototype {

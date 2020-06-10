@@ -1,9 +1,7 @@
-import { DashboardChartProtorype } from './prototypes';
-import Eli from "../Eli";
+import { DashboardChartProtorype, Eli, Nomination } from './prototypes';
 import Toolkit from "../Toolkit.js";
 import StatusKit from '../../service/StatusKit';
 import * as Chart from 'chart.js';
-import Nomination from '../../service/Nomination';
 
 class StatsTypeCard extends DashboardChartProtorype {
     constructor() { super(); }

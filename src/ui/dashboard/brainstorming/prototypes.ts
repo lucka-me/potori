@@ -1,4 +1,4 @@
-import { DashboardPrototype } from "../prototypes";
+import { DashboardPrototype, Eli } from "../prototypes";
 import { BrainstormingStats } from "../../../service/BrainstormingKit.js";
 
 export class DashboardBsPrototype extends DashboardPrototype {
@@ -17,4 +17,4 @@ export class DashboardBsChartPrototype extends DashboardBsPrototype {
     }
 }
 
-export { BrainstormingStats };
+export { BrainstormingStats, Eli };

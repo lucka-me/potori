@@ -1,7 +1,6 @@
 import { MDCRipple } from "@material/ripple";
 
-import { DashboardBsPrototype, BrainstormingStats } from './prototypes';
-import Eli from "../../Eli";
+import { DashboardBsPrototype, BrainstormingStats, Eli } from './prototypes';
 
 class BSBasicCard extends DashboardBsPrototype {
 

@@ -1,10 +1,8 @@
 import * as Chart from 'chart.js';
 
-import { DashboardChartProtorype } from './prototypes';
-import Eli from "../Eli";
+import { DashboardChartProtorype, Eli, Nomination } from './prototypes';
 import Toolkit from "../Toolkit.js";
 import StatusKit from '../../service/StatusKit';
-import Nomination from '../../service/Nomination';
 
 class StatsRejectedCard extends DashboardChartProtorype {
     constructor() { super(); }

@@ -1,10 +1,8 @@
 import * as Chart from 'chart.js';
 import * as moment from 'moment';
 
-import { DashboardChartProtorype } from './prototypes';
-import Eli from "../Eli";
+import { DashboardChartProtorype, Eli, Nomination } from './prototypes';
 import Toolkit from "../Toolkit.js";
-import Nomination from '../../service/Nomination';
 
 class CountByMonthCard extends DashboardChartProtorype {
     constructor() { super(); }

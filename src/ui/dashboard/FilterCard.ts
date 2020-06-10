@@ -1,7 +1,6 @@
 import { MDCSwitch } from "@material/switch";
 
-import { DashboardPrototype } from './prototypes';
-import Eli from "../Eli";
+import { DashboardPrototype, Eli } from './prototypes';
 import StatusKit, { Status } from '../../service/StatusKit';
 
 interface FilterCardBlock {

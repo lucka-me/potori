@@ -1,6 +1,4 @@
-import { DashboardBsPrototype } from './prototypes';
-import Eli from "../../Eli";
-import { BrainstormingStats } from '../../../service/BrainstormingKit';
+import { DashboardBsPrototype, BrainstormingStats, Eli } from './prototypes';
 
 class BSSynchCard extends DashboardBsPrototype {
 
