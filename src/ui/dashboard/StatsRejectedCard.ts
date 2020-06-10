@@ -1,20 +1,23 @@
+import * as Chart from 'chart.js';
+
 import { DashboardChartProtorype } from './prototypes';
 import Eli from "../Eli";
 import Toolkit from "../Toolkit.js";
 import StatusKit from '../../service/StatusKit';
+import Nomination from '../../service/Nomination';
 
 class StatsRejectedCard extends DashboardChartProtorype {
     constructor() { super(); }
 
-    init(parent) {
-        const canvasChart = Eli.build('canvas', { className: 'canvas-chart--v' });
+    init(parent: HTMLElement) {
+        const canvasChart = Eli.build('canvas', { className: 'canvas-chart--v' }) as HTMLCanvasElement;
         this.root = Eli.chartCard('Stats: Rejected', canvasChart, 2, 250);
         this.setVisible(false);
         parent.appendChild(this.root);
 
         const labels = [];
         const colors = [];
-        
+
         for (const reason of StatusKit.reasons.values()) {
             labels.push(reason.title);
             colors.push(reason.color)
@@ -41,11 +44,11 @@ class StatsRejectedCard extends DashboardChartProtorype {
         });
     }
 
-    update(portals) {
+    update(nominations: Array<Nomination>) {
         const data = new Array(StatusKit.reasons.size).fill(0);
-        for (const portal of portals) {
-            if (portal.status > 100) {
-                data[portal.status - 101] += 1;
+        for (const nomination of nominations) {
+            if (nomination.status.code > 100) {
+                data[nomination.status.code - 101] += 1;
             }
         }
         this.chart.data.datasets[0].data = data;
