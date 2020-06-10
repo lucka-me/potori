@@ -1,4 +1,4 @@
-import DialogPrototype from './DialogPrototype.js';
+import DialogPrototype from './DialogPrototype';
 import Eli from "../Eli";
 
 class Snackbar extends DialogPrototype {

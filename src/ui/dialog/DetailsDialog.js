@@ -1,7 +1,7 @@
 import * as mapboxgl from 'mapbox-gl';
 
 import UIKitPrototype from '../UIKitPrototype';
-import DialogPrototype from './DialogPrototype.js';
+import DialogPrototype from './DialogPrototype';
 import Eli from "../Eli";
 import Toolkit from "../Toolkit.js";
 import AlertDialog from './AlertDialog.js';
