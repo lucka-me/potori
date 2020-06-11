@@ -33,7 +33,7 @@ class ListView extends UIKitPrototype {
                 'flex-box-col',
                 'view-hide',
             ].join(' '),
-            styleText: [
+            cssTest: [
                 'height: 100%',
                 'min-width: 300px',
                 'padding: 4px',
@@ -73,49 +73,45 @@ class ListView extends UIKitPrototype {
         const contentsInfo = [];
         contentsInfo.push(Eli.build('span', {
             className: classNameInfoContent,
-            children: [
-                Eli.icon('arrow_upward'),
-                Eli.build('span', {
-                    className: 'margin-l--4',
-                    innerHTML: nomination.confirmedDateString,
-                }),
-            ],
-        }));
+        }, [
+            Eli.icon('arrow_upward'),
+            Eli.build('span', {
+                className: 'margin-l--4',
+                innerHTML: nomination.confirmedDateString,
+            }),
+        ]));
         const restoreTime = nomination.restoreTime;
         if (restoreTime > this.now) {
             contentsInfo.push(Eli.build('span', {
                 className: classNameInfoContent,
-                children: [
-                    Eli.icon('restore'),
-                    Eli.build('span', {
-                        className: 'margin-l--4',
-                        innerHTML: nomination.restoreIntervalString,
-                    }),
-                ],
-            }));
+            }, [
+                Eli.icon('restore'),
+                Eli.build('span', {
+                    className: 'margin-l--4',
+                    innerHTML: nomination.restoreIntervalString,
+                }),
+            ]));
         }
         contentsInfo.push(Eli.build('span', {
             className: classNameInfoContent,
-            children: [
-                Eli.icon('access_time'),
-                Eli.build('span', {
-                    className: 'margin-l--4',
-                    id: 'text-card-nomination-interval',
-                }),
-            ],
-        }));
+        }, [
+            Eli.icon('access_time'),
+            Eli.build('span', {
+                className: 'margin-l--4',
+                id: 'text-card-nomination-interval',
+            }),
+        ]));
         contentsInfo.push(Eli.build('span', {
             className: classNameInfoContent,
             id: 'box-card-nomination-result',
-            children: [
-                Eli.icon('check'),
-                Eli.build('span', {
-                    className: 'margin-l--4',
-                }),
-            ],
-        }));
+        }, [
+            Eli.icon('check'),
+            Eli.build('span', {
+                className: 'margin-l--4',
+            }),
+        ]));
 
-        const styleTextImg = [
+        const cssTestImg = [
             'object-fit: cover',
             'object-position: center',
             'width: 120px',
@@ -125,49 +121,44 @@ class ListView extends UIKitPrototype {
         ].join(';');
         const elementPrimaryAction = Eli.build('div', {
             className: 'mdc-card__primary-action',
-            children: [
-                Eli.build('div', {
-                    className: 'flex-box-row--nowrap',
-                    children: [
-                        Eli.build('img', {
-                            styleText: styleTextImg,
-                            src: nomination.imageUrl,
-                        }),
-                        Eli.build('div', {
-                            className: [
-                                'padding--8',
-                                'flex-box--col',
-                                'flex-align-items--start',
-                                'flex-justify-content--start'
-                            ].join(' '),
-                            children: [
-                                Eli.build('span', {
-                                    className: 'mdc-typography--headline6',
-                                    innerHTML: nomination.title,
-                                }),
-                                Eli.build('div', {
-                                    className: 'mdc-typography--body2 flex-box-row--wrap',
-                                    children: contentsInfo,
-                                }),
-                            ],
-                        }),
-                    ],
+        }, [
+            Eli.build('div', {
+                className: 'flex-box-row--nowrap',
+            }, [
+                Eli.build('img', {
+                    cssTest: cssTestImg,
+                    src: nomination.imageUrl,
                 }),
-            ],
-        });
+                Eli.build('div', {
+                    className: [
+                        'padding--8',
+                        'flex-box--col',
+                        'flex-align-items--start',
+                        'flex-justify-content--start'
+                    ].join(' '),
+                }, [
+                    Eli.build('span', {
+                        className: 'mdc-typography--headline6',
+                        innerHTML: nomination.title,
+                    }),
+                    Eli.build('div', {
+                        className: 'mdc-typography--body2 flex-box-row--wrap',
+                    }, contentsInfo),
+                ]),
+            ]),
+        ]);
         const primaryAction = new MDCRipple(elementPrimaryAction);
         primaryAction.listen('click', () => this.events.openDetails(nomination));
 
         const elementActionStatus = Eli.build('button', {
             className: 'mdc-button mdc-card__action mdc-card__action--button',
-            children: [
-                Eli.build('div', { className: 'mdc-button__ripple' }),
-                Eli.build('i', {
-                    className: 'material-icons mdc-button__icon',
-                }),
-                Eli.build('span', { className: 'mdc-button__label' }),
-            ],
-        });
+        }, [
+            Eli.build('div', { className: 'mdc-button__ripple' }),
+            Eli.build('i', {
+                className: 'material-icons mdc-button__icon',
+            }),
+            Eli.build('span', { className: 'mdc-button__label' }),
+        ]);
         const actionStatus = new MDCRipple(elementActionStatus);
         actionStatus.unbounded = true;
         if (Version.fullFeature) {
@@ -176,7 +167,9 @@ class ListView extends UIKitPrototype {
             });
         } else {
             actionStatus.listen('click', () => {
-                const textarea = Eli.build('textarea', { value: nomination.id, readOnly: true });
+                const textarea = Eli.build('textarea', {
+                    value: nomination.id, readOnly: true
+                });
                 document.body.appendChild(textarea);
                 textarea.select();
                 document.execCommand('copy');
@@ -186,8 +179,14 @@ class ListView extends UIKitPrototype {
         }
 
         const actionIcons = [];
+        const classNameAction = [
+            'material-icons',
+            'mdc-icon-button',
+            'mdc-card__action',
+            'mdc-card__action--icon'
+        ].join(' ');
         const elementActionLocation = Eli.build('button', {
-            className: 'material-icons mdc-icon-button mdc-card__action mdc-card__action--icon',
+            className: classNameAction,
             title: 'Location',
             id: 'button-card-nomination-location',
             hidden: true,
@@ -200,7 +199,7 @@ class ListView extends UIKitPrototype {
 
         if (Version.fullFeature) {
             const elementActionIntel = Eli.build('button', {
-                className: 'material-icons mdc-icon-button mdc-card__action mdc-card__action--icon',
+                className: classNameAction,
                 title: 'Intel Map',
                 id: 'button-card-nomination-intel',
                 hidden: true,
@@ -217,23 +216,19 @@ class ListView extends UIKitPrototype {
         const elementCard = Eli.build('div', {
             className: 'mdc-card mdc-card--outlined flex-shrink--0',
             id: `card-${nomination.id}`,
-            children: [
-                elementPrimaryAction,
+        }, [
+            elementPrimaryAction,
+            Eli.build('div', {
+                className: 'mdc-card__actions',
+            }, [
                 Eli.build('div', {
-                    className: 'mdc-card__actions',
-                    children: [
-                        Eli.build('div', {
-                            className: 'mdc-card__action-buttons',
-                            children: [ elementActionStatus ],
-                        }),
-                        Eli.build('div', {
-                            className: 'mdc-card__action-icons',
-                            children: actionIcons,
-                        }),
-                    ],
-                }),
-            ],
-        });
+                    className: 'mdc-card__action-buttons',
+                }, [ elementActionStatus ]),
+                Eli.build('div', {
+                    className: 'mdc-card__action-icons',
+                }, actionIcons),
+            ]),
+        ]);
         this.updateCard(nomination, elementCard);
         if (nomination.lngLat) {
             this.updateLocation(nomination, elementCard);

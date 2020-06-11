@@ -69,7 +69,7 @@ class UIKit {
                 'flex-box-row--wrap',
                 'main-box'
             ].join(' '),
-            styleText: [
+            cssTest: [
                 'min-height: 0%',
             ].join(';'),
         });

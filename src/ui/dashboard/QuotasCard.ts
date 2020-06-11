@@ -5,7 +5,7 @@ class QuotasCard extends DashboardChartProtorype {
     constructor() { super(); }
 
     init(parent: HTMLElement) {
-        const canvasChart = Eli.build('canvas', { className: 'canvas-chart--h' }) as HTMLCanvasElement;
+        const canvasChart = Eli.build('canvas', { className: 'canvas-chart--h' });
         this.root = Eli.chartCard('Quotas', canvasChart, 2, 200);
 
         this.setVisible(false);

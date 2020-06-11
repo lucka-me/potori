@@ -65,14 +65,14 @@ class Dashboard extends UIKitPrototype {
                 'padding--4',
                 'dashboard',
             ].join(' '),
-            styleText: [
+            cssTest: [
                 'height: 100%',
                 'box-sizing: border-box',
                 'overflow-y: scroll',
                 'scroll-behavior: smooth',
                 '-webkit-overflow-scrolling: touch',
             ].join(';'),
-        }) as HTMLDivElement;
+        });
         parent.appendChild(this.root);
         this.forEach((card) => {
             card.init(this.root);

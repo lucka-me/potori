@@ -32,27 +32,32 @@ class FilterCard extends DashboardPrototype {
     }
 
     init(parent: HTMLElement) {
-        this.block.type.root = Eli.build('div', { className: 'flex-box-row--nowrap' }) as HTMLDivElement;
-        this.block.reason.root = Eli.build('div', { className: 'flex-box-row--nowrap' }) as HTMLDivElement;
+        this.block.type.root = Eli.build('div', { className: 'flex-box-row--nowrap' });
+        this.block.reason.root = Eli.build('div', { className: 'flex-box-row--nowrap' });
         this.root = Eli.build('div', {
-            className: 'mdc-card mdc-card--outlined padding--8 flex--1 flex-shrink--0',
-            children: [
-                Eli.build('span', {
-                    className: 'mdc-typography--headline6',
-                    innerHTML: 'Filter'
-                }),
-                Eli.build('span', {
-                    className: 'mdc-typography--subtitle1',
-                    innerHTML: 'Type'
-                }),
-                this.block.type.root,
-                Eli.build('span', {
-                    className: 'mdc-typography--subtitle1',
-                    innerHTML: 'Rejected'
-                }),
-                this.block.reason.root,
-            ],
-        });
+            className: [
+                'mdc-card',
+                'mdc-card--outlined',
+                'padding--8',
+                'flex--1',
+                'flex-shrink--0'
+            ].join(' '),
+        }, [
+            Eli.build('span', {
+                className: 'mdc-typography--headline6',
+                innerHTML: 'Filter'
+            }),
+            Eli.build('span', {
+                className: 'mdc-typography--subtitle1',
+                innerHTML: 'Type'
+            }),
+            this.block.type.root,
+            Eli.build('span', {
+                className: 'mdc-typography--subtitle1',
+                innerHTML: 'Rejected'
+            }),
+            this.block.reason.root,
+        ]);
         this.setVisible(false);
         parent.appendChild(this.root);
         
@@ -90,40 +95,32 @@ class FilterCard extends DashboardPrototype {
 
     static buildSwitch(block: FilterCardBlock, status: Status, type: string) {
         const id = `switch-filter-${status.key}`;
-        const element = Eli.build('div', {
-            className: 'mdc-switch',
-            children: [
-                Eli.build('div', { className: 'mdc-switch__track' }),
-                Eli.build('div', {
-                    className: 'mdc-switch__thumb-underlay',
-                    id: id,
-                    children: [
-                        Eli.build('div', {
-                            className: 'mdc-switch__thumb',
-                            children: [
-                                Eli.build('input', {
-                                    type: 'checkbox',
-                                    className: 'mdc-switch__native-control',
-                                    role: 'switch',
-                                }),
-                            ],
-                        }),
-                    ],
-                }),
-            ],
-        });
+        const element = Eli.build('div', { className: 'mdc-switch' }, [
+            Eli.build('div', { className: 'mdc-switch__track' }),
+            Eli.build('div', {
+                className: 'mdc-switch__thumb-underlay',
+                id: id,
+            }, [
+                Eli.build('div', { className: 'mdc-switch__thumb' }, [
+                    Eli.build('input', {
+                        type: 'checkbox',
+                        className: 'mdc-switch__native-control',
+                        role: 'switch',
+                    }),
+                ]),
+            ]),
+        ]);
         const container = Eli.build('div', {
             className: 'mdc-switch-box margin-h--4',
-            children: [
-                element,
-                Eli.build('label', {
-                    className: `material-icons status-${type}`,
-                    for: id,
-                    title: status.title,
-                    innerHTML: status.icon,
-                })
-            ],
-        });
+        }, [
+            element,
+            Eli.build('label', {
+                className: `material-icons status-${type}`,
+                for: id,
+                title: status.title,
+                innerHTML: status.icon,
+            })
+        ]);
         block.root.appendChild(container);
         const ctrl = new MDCSwitch(element);
         ctrl.checked = true;

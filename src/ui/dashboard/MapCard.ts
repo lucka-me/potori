@@ -29,7 +29,7 @@ class MapCard extends DashboardPrototype {
 
     init(parent: HTMLElement) {
         const elementMap = Eli.build('div', {
-            styleText: [
+            cssTest: [
                 'width: 100%',
                 'height: 100%',
                 'clip-path: inset(100% round 4px)',
@@ -38,9 +38,8 @@ class MapCard extends DashboardPrototype {
         });
         this.root = Eli.build('div', {
             className: 'mdc-card mdc-card--outlined flex--3 flex-shrink--1',
-            styleText: 'min-width: 300px;',
-            children: [ elementMap ],
-        });
+            cssTest: 'min-width: 300px;',
+        }, [ elementMap ]);
         parent.appendChild(this.root);
 
         this.ctrl = new mapboxgl.Map({ 

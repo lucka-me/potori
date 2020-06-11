@@ -14,27 +14,24 @@ class AboutDialog extends DialogPrototype {
         const info = [
             Eli.build('span', {
                 className: 'mdc-typography--body2',
-                children: [
-                    Eli.link('./intro', 'Intro', 'Intro & Privacy')
-                ],
-            }),
+            }, [
+                Eli.link('./intro', 'Intro', 'Intro & Privacy')
+            ]),
             Eli.build('span', {
                 className: 'mdc-typography--body2',
-                children: [
-                    Eli.link(
-                        'https://github.com/lucka-me/potori',
-                        'GitHub', 'GitHub Repo'
-                    ),
-                ],
-            }),
+            }, [
+                Eli.link(
+                    'https://github.com/lucka-me/potori',
+                    'GitHub', 'GitHub Repo'
+                ),
+            ]),
             Eli.build('span', {
                 className: 'mdc-typography--body2',
-                children: [
-                    linkVersion,
-                    Eli.text(' by '),
-                    Eli.link('https://lucka.moe', 'Blog', 'Lucka'),
-                ],
-            }),
+            }, [
+                linkVersion,
+                ' by ',
+                Eli.link('https://lucka.moe', 'Blog', 'Lucka'),
+            ]),
         ];
         const element = Eli.dialog([
             Eli.build('h2', {
@@ -43,12 +40,10 @@ class AboutDialog extends DialogPrototype {
             }),
             Eli.build('div', {
                 className: 'mdc-dialog__content flex-box-col',
-                children: info,
-            }),
+            }, info),
             Eli.build('footer', {
                 className: 'mdc-dialog__actions',
-                children: [ Eli.dialogAction('close', 'Close') ],
-            }),
+            }, [ Eli.dialogAction('close', 'Close') ]),
         ]);
         parent.appendChild(element);
         this.ctrl = new MDCDialog(element);

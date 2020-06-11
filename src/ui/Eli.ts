@@ -1,13 +1,12 @@
 class Eli {
-    static build<K extends keyof HTMLElementTagNameMap>(tag: K, options: any): HTMLElementTagNameMap[K] {
+    static build<K extends keyof HTMLElementTagNameMap>(
+        tag: K, options: any, children?: Array<HTMLElement | string>
+    ): HTMLElementTagNameMap[K] {
         const element = document.createElement(tag);
         for (const [key, value] of Object.entries(options)) {
             switch (key) {
-                case 'styleText':
+                case 'cssTest':
                     element.style.cssText = value as string;
-                    break;
-                case 'children':
-                    element.append(...value as Array<HTMLElement>);
                     break;
                 case 'dataset':
                     for (const [dataKey, dataValue] of Object.entries(value)) {
@@ -19,24 +18,23 @@ class Eli {
                     break;
             }
         }
+        if (children) element.append(...children);
         return element;
     }
 
     static chartCard(title: string, canvas: HTMLCanvasElement, flex: number, minWidth: number): HTMLDivElement {
         return Eli.build('div', {
             className: `mdc-card mdc-card--outlined padding--8 flex--${flex} flex-shrink--1`,
-            styleText: `min-width:${minWidth}px`,
-            children: [
-                Eli.build('span', {
-                    className: 'mdc-typography--headline6',
-                    innerHTML: title,
-                }),
-                Eli.build('div', {
-                    className: 'container-chart',
-                    children: [ canvas ],
-                }),
-            ],
-        });
+            cssTest: `min-width:${minWidth}px`,
+        }, [
+            Eli.build('span', {
+                className: 'mdc-typography--headline6',
+                innerHTML: title,
+            }),
+            Eli.build('div', {
+                className: 'container-chart',
+            }, [ canvas ]),
+        ]);
     }
 
     static link(href: string, title: string, text: string): HTMLAnchorElement {
@@ -47,10 +45,6 @@ class Eli {
             rel: 'noopener',
             innerHTML: text,
         });
-    }
-
-    static text(text: string): Text {
-        return document.createTextNode(text);
     }
 
     static icon(icon: string): HTMLElement {
@@ -65,46 +59,34 @@ class Eli {
             className: 'mdc-dialog mdc-dialog--scrollable',
             role: 'dialog',
             ariaModal: true,
-            children: [
-                Eli.build('div', {
-                    className: 'mdc-dialog__container',
-                    children: [
-                        Eli.build('div', {
-                            className: 'mdc-dialog__surface',
-                            children: contents,
-                        }),
-                    ],
-                }),
-                Eli.build('div', { className: 'mdc-dialog__scrim' }),
-            ],
-        });
+        }, [
+            Eli.build('div', { className: 'mdc-dialog__container' }, [
+                Eli.build('div', { className: 'mdc-dialog__surface' }, contents),
+            ]),
+            Eli.build('div', { className: 'mdc-dialog__scrim' }),
+        ]);
     }
 
     static dialogAction(action: string, text: string): HTMLButtonElement {
         return Eli.build('button', {
             className: 'mdc-button mdc-dialog__button',
             dataset: { mdcDialogAction: action, },
-            children: [
-                Eli.build('span', {
-                    className: 'mdc-button__label', innerHTML: text
-                }),
-            ],
-        });
+        }, [
+            Eli.build('span', {
+                className: 'mdc-button__label', innerHTML: text
+            }),
+        ]);
     }
 
     static notchedOutline(labelOptions: any): HTMLDivElement {
         labelOptions.className = 'mdc-floating-label';
-        return Eli.build('div', {
-            className: 'mdc-notched-outline',
-            children: [
-                Eli.build('div', { className: 'mdc-notched-outline__leading' }),
-                Eli.build('div', {
-                    className: 'mdc-notched-outline__notch',
-                    children: [ Eli.build('label', labelOptions), ],
-                }),
-                Eli.build('div', { className: 'mdc-notched-outline__trailing' }),
-            ],
-        });
+        return Eli.build('div', { className: 'mdc-notched-outline' }, [
+            Eli.build('div', { className: 'mdc-notched-outline__leading' }),
+            Eli.build('div', {
+                className: 'mdc-notched-outline__notch',
+            }, [ Eli.build('label', labelOptions), ]),
+            Eli.build('div', { className: 'mdc-notched-outline__trailing' }),
+        ]);
     }
 };
 

@@ -12,13 +12,12 @@ class AlertDialog extends DialogPrototype {
     init(parent: HTMLElement) {
         this.textMessage = Eli.build('div', {
             className: 'mdc-dialog__content',
-        }) as HTMLDivElement;
+        });
         const element = Eli.dialog([
             this.textMessage,
-            Eli.build('footer', {
-                className: 'mdc-dialog__actions',
-                children: [ Eli.dialogAction('close', 'Close') ],
-            }),
+            Eli.build('footer', { className: 'mdc-dialog__actions' }, [
+                Eli.dialogAction('close', 'Close')
+            ]),
         ]);
         parent.appendChild(element);
         this.ctrl = new MDCDialog(element);

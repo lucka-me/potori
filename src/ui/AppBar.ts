@@ -36,13 +36,12 @@ class AppBarMenu extends UIKitPrototype {
                 role: 'menuitem',
                 dataset: { code : value.key },
                 hidden: true,
-                children: [
-                    Eli.build('span', {
-                        className: 'mdc-list-item__text',
-                        innerHTML: value.title,
-                    }),
-                ],
-            }) as HTMLLIElement;
+            }, [
+                Eli.build('span', {
+                    className: 'mdc-list-item__text',
+                    innerHTML: value.title,
+                }),
+            ]);
             this.items.set(value.key, element);
             menuList.appendChild(element);
         }
@@ -50,12 +49,10 @@ class AppBarMenu extends UIKitPrototype {
 
         const menuSurface = Eli.build('div', {
             className: 'mdc-menu mdc-menu-surface',
-            children: [ menuList ],
-        });
+        }, [ menuList ]);
         const menuAnchor = Eli.build('div', {
             className: 'mdc-menu-surface--anchor',
-            children: [ menuSurface ],
-        });
+        }, [ menuSurface ]);
         parent.appendChild(menuAnchor);
 
         this.ctrl = new MDCMenu(menuSurface);
@@ -91,14 +88,17 @@ class AppBar extends UIKitPrototype {
 
     init(parent: HTMLElement) {
         const sectionActions = Eli.build('section', {
-            className: 'mdc-top-app-bar__section mdc-top-app-bar__section--align-end',
+            className: [
+                'mdc-top-app-bar__section',
+                'mdc-top-app-bar__section--align-end'
+            ].join(' '),
         });
         for (const value of Object.values(AppBarActions)) {
             const elementAction = Eli.build('button', {
                 className: 'mdc-icon-button material-icons',
                 title: value.title,
                 innerHTML: value.icon,
-            }) as HTMLButtonElement;
+            });
             sectionActions.appendChild(elementAction);
             const ripple = new MDCRipple(elementAction);
             ripple.unbounded = true;
@@ -113,30 +113,29 @@ class AppBar extends UIKitPrototype {
 
         const elementAppBar = Eli.build('header', {
             className: 'mdc-top-app-bar',
-            children: [
-                Eli.build('div', {
-                    className: 'mdc-top-app-bar__row',
-                    children: [
-                        Eli.build('section', {
-                            className: [
-                                'mdc-top-app-bar__section',
-                                'mdc-top-app-bar__section--align-start'
-                            ].join(' '),
-                            children: [
-                                Eli.build('span', {
-                                    className: 'mdc-top-app-bar__title',
-                                    innerHTML: 'Potori',
-                                }),
-                            ],
-                        }),
-                        sectionActions,
-                    ],
-                }),
-            ],
-        });
+        }, [
+            Eli.build('div', {
+                className: 'mdc-top-app-bar__row',
+            }, [
+                Eli.build('section', {
+                    className: [
+                        'mdc-top-app-bar__section',
+                        'mdc-top-app-bar__section--align-start'
+                    ].join(' '),
+                }, [
+                    Eli.build('span', {
+                        className: 'mdc-top-app-bar__title',
+                        innerHTML: 'Potori',
+                    }),
+                ]),
+                sectionActions,
+            ]),
+        ]);
 
         parent.appendChild(elementAppBar);
-        parent.appendChild(Eli.build('div', { className: 'mdc-top-app-bar--fixed-adjust' }));
+        parent.appendChild(Eli.build('div', {
+            className: 'mdc-top-app-bar--fixed-adjust'
+        }));
         new MDCTopAppBar(elementAppBar);
     }
 }

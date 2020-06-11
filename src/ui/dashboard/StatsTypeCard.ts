@@ -7,7 +7,7 @@ class StatsTypeCard extends DashboardChartProtorype {
     constructor() { super(); }
 
     init(parent: HTMLElement) {
-        const canvasChart = Eli.build('canvas', { className: 'canvas-chart--v' }) as HTMLCanvasElement;
+        const canvasChart = Eli.build('canvas', { className: 'canvas-chart--v' });
         this.root = Eli.chartCard('Stats: Type', canvasChart, 2, 250);
         this.setVisible(false);
         parent.appendChild(this.root);

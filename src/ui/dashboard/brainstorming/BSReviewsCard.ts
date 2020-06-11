@@ -8,7 +8,7 @@ class BSReviewsCard extends DashboardBsChartPrototype {
     constructor() { super(); }
 
     init(parent: HTMLElement) {
-        const canvasChart = Eli.build('canvas', { className: 'canvas-chart--h' }) as HTMLCanvasElement;
+        const canvasChart = Eli.build('canvas', { className: 'canvas-chart--h' });
         this.root = Eli.chartCard('Brainstorming Reviews', canvasChart, 3, 300);
         this.setVisible(false);
         parent.appendChild(this.root);

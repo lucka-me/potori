@@ -14,29 +14,22 @@ class Snackbar extends UIKitPrototype {
         this.textMessage = Eli.build('div', {
             className: 'mdc-snackbar__label',
             role: 'status', ariaLive: 'polite',
-        }) as HTMLDivElement;
+        });
         const elementActions = Eli.build('div', {
-            className: 'mdc-snackbar__actions',
-            children: [
-                Eli.build('button', {
-                    className: 'mdc-icon-button mdc-snackbar__dismiss material-icons',
-                    title: 'Dismiss',
-                    innerHTML: 'close',
-                }),
-            ],
-        });
-        const element = Eli.build('div', {
-            className: 'mdc-snackbar',
-            children: [
-                Eli.build('div', {
-                    className: 'mdc-snackbar__surface',
-                    children: [
-                        this.textMessage,
-                        elementActions,
-                    ],
-                }),
-            ],
-        });
+            className: 'mdc-snackbar__actions'
+        }, [
+            Eli.build('button', {
+                className: 'mdc-icon-button mdc-snackbar__dismiss material-icons',
+                title: 'Dismiss',
+                innerHTML: 'close',
+            }),
+        ]);
+        const element = Eli.build('div', { className: 'mdc-snackbar' }, [
+            Eli.build('div', { className: 'mdc-snackbar__surface' }, [
+                this.textMessage,
+                elementActions,
+            ]),
+        ]);
         parent.appendChild(element);
         this.ctrl = new MDCSnackbar(element);
     }

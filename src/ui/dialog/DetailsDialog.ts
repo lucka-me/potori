@@ -45,7 +45,7 @@ class DetailsDialogMap extends UIKitPrototype {
             value.root = Eli.build('button', {
                 className: 'mdc-icon-button material-icons',
                 innerHTML: key,
-            }) as HTMLButtonElement;
+            });
             const ctrl = new MDCRipple(value.root);
             ctrl.unbounded = true;
             ctrl.listen('click', value.clicked);
@@ -53,19 +53,17 @@ class DetailsDialogMap extends UIKitPrototype {
         }
         const elementMap = Eli.build('div', {
             className: 'flex-grow--1',
-            styleText: 'min-height: 180px',
+            cssTest: 'min-height: 180px',
         });
 
         const elementContent = Eli.build('div', {
             className: 'flex-box-row--nowrap margin-v--8',
-            children: [
-                Eli.build('div', {
-                    className: 'flex-box-col flex-justify-content--around',
-                    children: mapButtons,
-                }),
-                elementMap,
-            ],
-        });
+        }, [
+            Eli.build('div', {
+                className: 'flex-box-col flex-justify-content--around',
+            }, mapButtons),
+            elementMap,
+        ]);
 
         parent.append(elementContent);
 
@@ -169,14 +167,14 @@ class DetailsDialog extends DialogPrototype {
             className: 'mdc-dialog__title',
             dataset: { mdcDialogInitialFocus: '' },
             innerHTML: 'Import',
-        }) as HTMLHeadingElement;
+        });
 
         this.image = Eli.build('img', {
-            styleText: [
+            cssTest: [
                 'object-fit:cover', 'object-position:center',
                 'width:100%', 'height:150px;'
             ].join(';')
-        }) as HTMLImageElement;
+        });
 
         this.textConfirmedTime = Eli.build('span', {
             className: 'margin-l--4'
@@ -191,7 +189,7 @@ class DetailsDialog extends DialogPrototype {
                 className: 'mdc-radio__native-control',
                 name: 'radio-dialog-details-status',
                 value: key,
-            }) as HTMLInputElement;
+            });
             inputRadio.addEventListener('change', (event: Event) => {
                 const target = event.target as HTMLInputElement;
                 this.selectedStatus = target.value;
@@ -203,28 +201,25 @@ class DetailsDialog extends DialogPrototype {
             });
             const elementRadio = Eli.build('div', {
                 className: 'mdc-radio',
-                children: [
-                    inputRadio,
-                    Eli.build('div', {
-                        className: 'mdc-radio__background',
-                        children: [
-                            Eli.build('div', { className: 'mdc-radio__outer-circle' }),
-                            Eli.build('div', { className: 'mdc-radio__inner-circle' }),
-                        ],
-                    }),
-                ],
-            });
+            }, [
+                inputRadio,
+                Eli.build('div', {
+                    className: 'mdc-radio__background',
+                }, [
+                    Eli.build('div', { className: 'mdc-radio__outer-circle' }),
+                    Eli.build('div', { className: 'mdc-radio__inner-circle' }),
+                ]),
+            ]);
             const elementField = Eli.build('div', {
                 className: 'mdc-form-field',
-                children: [
-                    elementRadio,
-                    Eli.build('label', {
-                        for: radioId,
-                        className: `material-icons status-${key}`,
-                        innerHTML: StatusKit.types.get(key).icon,
-                    }),
-                ],
-            }) as HTMLDivElement;
+            }, [
+                elementRadio,
+                Eli.build('label', {
+                    for: radioId,
+                    className: `material-icons status-${key}`,
+                    innerHTML: StatusKit.types.get(key).icon,
+                }),
+            ]);
 
             const radioCtrl = new MDCRadio(elementRadio);
             this.status.set(key, radioCtrl);
@@ -235,26 +230,32 @@ class DetailsDialog extends DialogPrototype {
 
         const elementResultTime = Eli.build('div', {
             className: [
-                'mdc-text-field', 'mdc-text-field--outlined',
+                'mdc-text-field',
+                'mdc-text-field--outlined',
                 'mdc-text-field--with-leading-icon',
-                'margin-v--8', 'margin-h--4','flex-grow--1'
+                'margin-v--8',
+                'margin-h--4',
+                'flex-grow--1'
             ].join(' '),
-            children: [
-                Eli.build('i', {
-                    className: 'material-icons mdc-text-field__icon mdc-text-field__icon--leading',
-                    innerHTML: 'event',
-                }),
-                Eli.build('input', {
-                    type: 'datetime-local',
-                    className: 'mdc-text-field__input',
-                    id: 'input-dialog-details-result-time',
-                }),
-                Eli.notchedOutline({
-                    for: 'input-dialog-details-result-time',
-                    innerHTML: 'Result Time',
-                }),
-            ],
-        });
+        }, [
+            Eli.build('i', {
+                className: [
+                    'material-icons',
+                    'mdc-text-field__icon',
+                    'mdc-text-field__icon--leading'
+                ].join(' '),
+                innerHTML: 'event',
+            }),
+            Eli.build('input', {
+                type: 'datetime-local',
+                className: 'mdc-text-field__input',
+                id: 'input-dialog-details-result-time',
+            }),
+            Eli.notchedOutline({
+                for: 'input-dialog-details-result-time',
+                innerHTML: 'Result Time',
+            }),
+        ]);
         this.fieldResultTime = new MDCTextField(elementResultTime);
 
         const itemsSelectReason = [];
@@ -266,48 +267,54 @@ class DetailsDialog extends DialogPrototype {
             }));
         }
         this.elementReason = Eli.build('div', {
-            className: 'mdc-select mdc-select--outlined margin-v--8 margin-h--4',
-            children: [
-                Eli.build('div', {
-                    className: 'mdc-select__anchor',
-                    children: [
-                        Eli.build('i', { className: 'mdc-select__dropdown-icon' }),
-                        Eli.build('div', { className: 'mdc-select__selected-text' }),
-                        Eli.notchedOutline({ innerHTML: 'Reason' }),
-                    ],
-                }),
-                Eli.build('div', {
-                    className: 'mdc-select__menu mdc-menu mdc-menu-surface',
-                    children: [
-                        Eli.build('ul', {
-                            className: 'mdc-list', children: itemsSelectReason
-                        }),
-                    ],
-                }),
-            ],
-        }) as HTMLDivElement;
+            className: [
+                'mdc-select',
+                'mdc-select--outlined',
+                'margin-v--8',
+                'margin-h--4'
+            ].join(' '),
+        }, [
+            Eli.build('div', {
+                className: 'mdc-select__anchor',
+            }, [
+                Eli.build('i', { className: 'mdc-select__dropdown-icon' }),
+                Eli.build('div', { className: 'mdc-select__selected-text' }),
+                Eli.notchedOutline({ innerHTML: 'Reason' }),
+            ]),
+            Eli.build('div', {
+                className: 'mdc-select__menu mdc-menu mdc-menu-surface',
+            }, [
+                Eli.build('ul', {
+                    className: 'mdc-list'
+                }, itemsSelectReason),
+            ]),
+        ]);
         this.selectReason = new MDCSelect(this.elementReason);
         this.selectReason.selectedIndex = 0;
 
         const elementContents = Eli.build('div', {
             className: 'mdc-dialog__content',
-            children: [
-                Eli.build('div', {
-                    className: 'mdc-typography--body1 flex-box-row--nowrap flex-align-items--center',
-                    children: [
-                        Eli.icon('arrow_upward'), this.textConfirmedTime,
-                    ],
-                }),
-                Eli.build('div', {
-                    className: 'flex-box-row--nowrap fullwidth flex-justify-content--around',
-                    children: statusRadios,
-                }),
-                Eli.build('div', {
-                    className: 'flex-box-row--wrap',
-                    children: [ elementResultTime, this.elementReason ],
-                }),
-            ],
-        });
+        }, [
+            Eli.build('div', {
+                className: [
+                    'mdc-typography--body1',
+                    'flex-box-row--nowrap',
+                    'flex-align-items--center'
+                ].join(' '),
+            }, [
+                Eli.icon('arrow_upward'), this.textConfirmedTime,
+            ]),
+            Eli.build('div', {
+                className: [
+                    'fullwidth',
+                    'flex-box-row--nowrap',
+                    'flex-justify-content--around'
+                ].join(' '),
+            }, statusRadios),
+            Eli.build('div', {
+                className: 'flex-box-row--wrap',
+            }, [ elementResultTime, this.elementReason ]),
+        ]);
         this.map.init(elementContents);
         const elementDialog = Eli.dialog([
             this.headingTitle,
@@ -315,11 +322,10 @@ class DetailsDialog extends DialogPrototype {
             elementContents,
             Eli.build('footer', {
                 className: 'mdc-dialog__actions',
-                children: [
-                    Eli.dialogAction('close', 'Close'),
-                    Eli.dialogAction('save' , 'Save' ),
-                ],
-            }),
+            }, [
+                Eli.dialogAction('close', 'Close'),
+                Eli.dialogAction('save' , 'Save' ),
+            ]),
         ]);
         parent.appendChild(elementDialog);
         this.ctrl = new MDCDialog(elementDialog);

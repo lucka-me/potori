@@ -12,9 +12,9 @@ class LocalFileKit {
 
     open(onload: (result: string) => void, onerror: (message: string) => void) {
         const element = Eli.build('input', {
-            styleText: 'display:none;',
+            cssTest: 'display:none;',
             type: 'file', accept: 'json'
-        }) as HTMLInputElement;
+        });
         const opened = (event: Event) => {
             const file = (event.target as HTMLInputElement).files[0];
             if (!file) {
@@ -37,7 +37,7 @@ class LocalFileKit {
 
     save(filename: string, blob: Blob) {
         const element = Eli.build('a', {
-            styleText: 'display:none',
+            cssTest: 'display:none',
             href: URL.createObjectURL(blob),
             download: filename,
         });

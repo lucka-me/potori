@@ -27,8 +27,7 @@ class I18nKit {
         });
         const elementButtonMenu = Eli.build('button', {
             className: 'mdc-button mdc-button--unelevated mdc-top-app-bar__action-item',
-            children: [ this.labelButton ],
-        });
+        }, [ this.labelButton ]);
         parent.appendChild(elementButtonMenu);
         const buttonMenu = new MDCRipple(elementButtonMenu);
         buttonMenu.listen("click", () => this.openMenu());
@@ -44,23 +43,20 @@ class I18nKit {
                 className: 'mdc-list-item',
                 role: 'menuitem',
                 dataset: { code : key },
-                children: [
-                    Eli.build('span', {
-                        className: 'mdc-list-item__text',
-                        innerHTML: value.name,
-                    }),
-                ],
-            }));
+            }, [
+                Eli.build('span', {
+                    className: 'mdc-list-item__text',
+                    innerHTML: value.name,
+                }),
+            ]));
         }
 
         const menuSurface = Eli.build('div', {
             className: 'mdc-menu mdc-menu-surface',
-            children: [ menuList ],
-        });
+        }, [ menuList ]);
         const menuAnchor = Eli.build('div', {
             className: 'mdc-menu-surface--anchor',
-            children: [ menuSurface ],
-        });
+        }, [ menuSurface ]);
         parent.appendChild(menuAnchor);
         this.menu = new MDCMenu(menuSurface);
         this.menu.listen('MDCMenu:selected', (event: CustomEvent) => {
