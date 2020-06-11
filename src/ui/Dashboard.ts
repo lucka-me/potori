@@ -102,7 +102,7 @@ class Dashboard extends UIKitPrototype {
         this.forEach((card) => {
             card.setVisible(visible);
         });
-        if (this.map.loaded) this.map.ctrl.resize();
+        this.map.resize();
     }
 
     forEach(callback: (card: DashboardPrototype) => void) {

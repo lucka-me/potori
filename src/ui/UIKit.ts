@@ -107,7 +107,7 @@ class UIKit {
 
         // List
         this.list.events.focus = (nomination) => {
-            this.dashboard.map.ctrl.easeTo({ center: nomination.lngLat });
+            this.dashboard.map.easeTo(nomination.lngLat);
         }
         this.list.events.openDetails = (nomination) => {
             this.dialog.details.open(nomination);
@@ -181,7 +181,7 @@ class UIKit {
 
         this.dashboard.setVisible(false);
         this.list.clear();
-        if (this.dashboard.map.loaded) this.dashboard.map.update(Service.nominations);
+        this.dashboard.map.update(Service.nominations);
         this.progress.root.hidden = true;
         this.progress.ctrl.buffer = 0;
         this.progress.ctrl.progress = 0;

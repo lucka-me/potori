@@ -1,8 +1,9 @@
 import mapboxgl from 'mapbox-gl';
 
 import Dark from '../Dark';
-import { DashboardPrototype, Eli, Nomination } from './prototypes';
+import { DashboardPrototype, Eli } from './prototypes';
 import FilterCard from './FilterCard';
+import Nomination, { LngLat } from '../../service/Nomination';
 import StatusKit from '../../service/StatusKit';
 
 const MapStyle = {
@@ -22,6 +23,7 @@ class MapCard extends DashboardPrototype {
         focus: () => { },
         styleLoaded: () => [],
     }
+    private tasks: Array<() => void> = [];
 
     constructor() {
         super();
@@ -46,7 +48,10 @@ class MapCard extends DashboardPrototype {
             container: elementMap,
             style: MapStyle[Dark.enabled ? 'dark' : 'default']
         });
-        this.ctrl.once('load', () => this.ctrl.resize());
+        this.ctrl.once('load', () => {
+            this.executeTasks();
+            this.ctrl.resize();
+        });
         this.ctrl.addControl(new mapboxgl.NavigationControl());
         this.ctrl.addControl(new mapboxgl.FullscreenControl());
     }
@@ -55,7 +60,67 @@ class MapCard extends DashboardPrototype {
         return this.ctrl && this.ctrl.isStyleLoaded();
     }
 
+    update(nominations: Array<Nomination>) {
+        if (!this.loaded) {
+            this.tasks.push(() => this.update(nominations));
+            return;
+        }
+        this.updateRejected(nominations);
+        this.updateSource(
+            'accepted',
+            MapCard.generateGeoJSON(nominations, [ StatusKit.types.get('accepted').code ])
+        );
+        this.updateSource(
+            'pending',
+            MapCard.generateGeoJSON(nominations, [ StatusKit.types.get('pending').code ])
+        );
+    }
+
+    updateStyle() {
+        if (!this.loaded) {
+            this.tasks.push(() => this.updateStyle());
+            return;
+        }
+        this.ctrl.setStyle(MapStyle[Dark.enabled ? 'dark' : 'default']);
+        this.ctrl.once('load', () => {
+            this.update(this.events.styleLoaded());
+        });
+    }
+
+    setTypeVisible(type: string, visible: boolean) {
+        if (!this.loaded) {
+            this.tasks.push(() => this.setTypeVisible(type, visible));
+            return;
+        }
+        const visibility = visible ? 'visible' : 'none';
+        this.ctrl.setLayoutProperty(`potori-${type}-cluster`    , 'visibility', visibility);
+        this.ctrl.setLayoutProperty(`potori-${type}-count`      , 'visibility', visibility);
+        this.ctrl.setLayoutProperty(`potori-${type}-unclustered`, 'visibility', visibility);
+    }
+
+    setVisible() { }
+
+    easeTo(center: LngLat) {
+        if (!this.loaded) {
+            this.tasks.push(() => this.easeTo(center));
+            return;
+        }
+        this.ctrl.easeTo({ center: center });
+    }
+
+    resize() {
+        if (!this.loaded) {
+            this.tasks.push(() => this.resize());
+            return;
+        }
+        this.ctrl.resize();
+    }
+
     fit(nominations: Array<Nomination>) {
+        if (!this.loaded) {
+            this.tasks.push(() => this.fit(nominations));
+            return;
+        }
         const boundsNE = { lng: -181.0, lat: -91.0 };
         const boundsSW = { lng:  181.0, lat:  91.0 };
         for (const nomination of nominations) {
@@ -70,20 +135,11 @@ class MapCard extends DashboardPrototype {
         }
     }
 
-    update(nominations: Array<Nomination>) {
-        if (!this.loaded) return;
-        this.updateRejected(nominations);
-        this.updateSource(
-            'accepted',
-            MapCard.generateGeoJSON(nominations, [ StatusKit.types.get('accepted').code ])
-        );
-        this.updateSource(
-            'pending',
-            MapCard.generateGeoJSON(nominations, [ StatusKit.types.get('pending').code ])
-        );
-    }
-
     updateRejected(nominations: Array<Nomination>) {
+        if (!this.loaded) {
+            this.tasks.push(() => this.updateRejected(nominations));
+            return;
+        }
         const codes: Array<number> = [];
         for (const [key, value] of FilterCard.reasons.entries()) {
             if (!value.checked) continue;
@@ -92,31 +148,13 @@ class MapCard extends DashboardPrototype {
         this.updateSource('rejected', MapCard.generateGeoJSON(nominations, codes));
     }
 
-    static generateGeoJSON(nominations: Array<Nomination>, codes: Array<number>) {
-        const geoJson: GeoJSON.FeatureCollection<GeoJSON.Geometry> = {
-            type: 'FeatureCollection', features: [],
-        };
-        if (codes.length < 1) return geoJson;
-        for (const nomination of nominations) {
-            if (!codes.includes(nomination.status.code)) continue;
-            if (!nomination.lngLat) continue;
-            geoJson.features.push({
-                type: 'Feature',
-                properties: {
-                    id: nomination.id,
-                    title: nomination.title,
-                    status: nomination.status
-                },
-                geometry: {
-                    type: 'Point',
-                    coordinates: [nomination.lngLat.lng, nomination.lngLat.lat],
-                }
-            });
+    private executeTasks() {
+        while(this.tasks.length > 0) {
+            this.tasks.shift()();
         }
-        return geoJson;
     }
 
-    updateSource(type: string, data: GeoJSON.FeatureCollection<GeoJSON.Geometry>) {
+    private updateSource(type: string, data: GeoJSON.FeatureCollection<GeoJSON.Geometry>) {
         const id = `potori-${type}`;
         const source = this.ctrl.getSource(id) as mapboxgl.GeoJSONSource;
         if (source) {
@@ -208,20 +246,29 @@ class MapCard extends DashboardPrototype {
         });
     }
 
-    updateStyle() {
-        if (!this.loaded) return;
-        this.ctrl.setStyle(MapStyle[Dark.enabled ? 'dark' : 'default']);
-        this.ctrl.once('load', () => { this.update(this.events.styleLoaded())});
+    private static generateGeoJSON(nominations: Array<Nomination>, codes: Array<number>) {
+        const geoJson: GeoJSON.FeatureCollection<GeoJSON.Geometry> = {
+            type: 'FeatureCollection', features: [],
+        };
+        if (codes.length < 1) return geoJson;
+        for (const nomination of nominations) {
+            if (!codes.includes(nomination.status.code)) continue;
+            if (!nomination.lngLat) continue;
+            geoJson.features.push({
+                type: 'Feature',
+                properties: {
+                    id: nomination.id,
+                    title: nomination.title,
+                    status: nomination.status
+                },
+                geometry: {
+                    type: 'Point',
+                    coordinates: [nomination.lngLat.lng, nomination.lngLat.lat],
+                }
+            });
+        }
+        return geoJson;
     }
-
-    setTypeVisible(type: string, visible: boolean) {
-        const visibility = visible ? 'visible' : 'none';
-        this.ctrl.setLayoutProperty(`potori-${type}-cluster`    , 'visibility', visibility);
-        this.ctrl.setLayoutProperty(`potori-${type}-count`      , 'visibility', visibility);
-        this.ctrl.setLayoutProperty(`potori-${type}-unclustered`, 'visibility', visibility);
-    }
-
-    setVisible() { }
 }
 
 export default MapCard;
