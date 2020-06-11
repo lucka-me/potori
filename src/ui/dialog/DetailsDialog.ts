@@ -1,13 +1,9 @@
 import mapboxgl from 'mapbox-gl';
-import { MDCFormField } from "@material/form-field";
-import { MDCRadio } from "@material/radio";
-import { MDCRipple } from "@material/ripple";
-import { MDCSelect } from "@material/select";
-import { MDCTextField } from "@material/textfield";
+import { formField, radio, ripple, select, textField } from "material-components-web";
 
 import AlertDialog from './AlertDialog';
 import Dark from '../Dark';
-import DialogPrototype, { MDCDialog } from './DialogPrototype';
+import DialogPrototype, { dialog } from './DialogPrototype';
 import { MapStyle } from '../dashboard/MapCard';
 import Nomination, { LngLat } from '../../service/Nomination';
 import Service from '../../service/Service';
@@ -18,7 +14,7 @@ class DetailsDialogMap extends UIKitPrototype {
 
     ctrl: mapboxgl.Map = null;
     marker: mapboxgl.Marker = null;
-    dialog: MDCDialog = null;
+    dialog: dialog.MDCDialog = null;
     nomination: Nomination = null;
     buttons = {
         edit: {
@@ -46,7 +42,7 @@ class DetailsDialogMap extends UIKitPrototype {
                 className: 'mdc-icon-button material-icons',
                 innerHTML: key,
             });
-            const ctrl = new MDCRipple(value.root);
+            const ctrl = new ripple.MDCRipple(value.root);
             ctrl.unbounded = true;
             ctrl.listen('click', value.clicked);
             mapButtons.push(value.root);
@@ -145,10 +141,10 @@ class DetailsDialog extends DialogPrototype {
     image: HTMLImageElement = null;
     textConfirmedTime: HTMLSpanElement = null;
 
-    status = new Map<string, MDCRadio>();
+    status = new Map<string, radio.MDCRadio>();
     selectedStatus: string = null;
-    fieldResultTime: MDCTextField = null;
-    selectReason: MDCSelect = null;
+    fieldResultTime: textField.MDCTextField = null;
+    selectReason: select.MDCSelect = null;
     elementReason: HTMLDivElement = null;
 
     map = new DetailsDialogMap();
@@ -221,9 +217,9 @@ class DetailsDialog extends DialogPrototype {
                 }),
             ]);
 
-            const radioCtrl = new MDCRadio(elementRadio);
+            const radioCtrl = new radio.MDCRadio(elementRadio);
             this.status.set(key, radioCtrl);
-            const field = new MDCFormField(elementField);
+            const field = new formField.MDCFormField(elementField);
             field.input = radioCtrl;
             statusRadios.push(elementField);
         }
@@ -256,7 +252,7 @@ class DetailsDialog extends DialogPrototype {
                 innerHTML: 'Result Time',
             }),
         ]);
-        this.fieldResultTime = new MDCTextField(elementResultTime);
+        this.fieldResultTime = new textField.MDCTextField(elementResultTime);
 
         const itemsSelectReason = [];
         for (const [key, value] of StatusKit.reasons.entries()) {
@@ -289,7 +285,7 @@ class DetailsDialog extends DialogPrototype {
                 }, itemsSelectReason),
             ]),
         ]);
-        this.selectReason = new MDCSelect(this.elementReason);
+        this.selectReason = new select.MDCSelect(this.elementReason);
         this.selectReason.selectedIndex = 0;
 
         const elementContents = Eli.build('div', {
@@ -328,7 +324,7 @@ class DetailsDialog extends DialogPrototype {
             ]),
         ]);
         parent.appendChild(elementDialog);
-        this.ctrl = new MDCDialog(elementDialog);
+        this.ctrl = new dialog.MDCDialog(elementDialog);
         this.ctrl.listen('MDCDialog:opened', () => this.opened());
         this.ctrl.listen('MDCDialog:closed', (event: CustomEvent) => this.closed(event));
         this.map.dialog = this.ctrl;

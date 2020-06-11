@@ -1,6 +1,6 @@
-import firebase from "@firebase/app";
-import "@firebase/database";
-import { Reference } from "@firebase/database-types";
+// import firebase from "firebase/app";
+// import "firebase/database";
+import firebase from "firebase";
 
 import Nomination, { LngLat } from "./Nomination";
 import StatusKit from "./StatusKit";
@@ -27,7 +27,7 @@ interface BrainstormingStats {
 
 class BrainstormingKit {
 
-    reference: Reference = null;
+    reference: firebase.database.Reference = null;
     data: Map<string, any> = new Map();
 
     constructor() { }

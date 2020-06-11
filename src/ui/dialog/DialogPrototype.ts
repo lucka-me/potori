@@ -1,9 +1,9 @@
-import { MDCDialog } from "@material/dialog";
+import { dialog } from "material-components-web";
 import UIKitPrototype, { Eli } from "../UIKitPrototype";
 
 export default class DialogPrototype extends UIKitPrototype {
 
-    ctrl: MDCDialog = null;
+    ctrl: dialog.MDCDialog = null;
 
     constructor() {
         super();
@@ -11,4 +11,4 @@ export default class DialogPrototype extends UIKitPrototype {
     init(parent: HTMLElement) { parent }
 }
 
-export { Eli, MDCDialog };
+export { Eli, dialog };

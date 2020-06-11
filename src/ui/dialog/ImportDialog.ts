@@ -1,11 +1,11 @@
-import { MDCTextField } from "@material/textfield";
+import { textField } from "material-components-web";
 
-import DialogPrototype, { Eli, MDCDialog } from './DialogPrototype';
+import DialogPrototype, { Eli, dialog } from './DialogPrototype';
 import Service from '../../service/Service';
 
 class ImportDialog extends DialogPrototype {
 
-    textField: MDCTextField = null;
+    textField: textField.MDCTextField = null;
 
     constructor() {
         super();
@@ -73,8 +73,8 @@ class ImportDialog extends DialogPrototype {
             ]),
         ]);
         parent.appendChild(elementDialog);
-        this.ctrl = new MDCDialog(elementDialog);
-        this.textField = new MDCTextField(elementTextField);
+        this.ctrl = new dialog.MDCDialog(elementDialog);
+        this.textField = new textField.MDCTextField(elementTextField);
         this.ctrl.listen('MDCDialog:closed', (event: CustomEvent) => {
             this.closed(event);
         });

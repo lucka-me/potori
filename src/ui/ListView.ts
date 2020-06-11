@@ -1,4 +1,4 @@
-import { MDCRipple } from "@material/ripple";
+import { ripple } from "material-components-web";
 
 import AlertDialog from "./dialog/AlertDialog";
 import FilterCard from './dashboard/FilterCard';
@@ -147,7 +147,7 @@ class ListView extends UIKitPrototype {
                 ]),
             ]),
         ]);
-        const primaryAction = new MDCRipple(elementPrimaryAction);
+        const primaryAction = new ripple.MDCRipple(elementPrimaryAction);
         primaryAction.listen('click', () => this.events.openDetails(nomination));
 
         const elementActionStatus = Eli.build('button', {
@@ -159,7 +159,7 @@ class ListView extends UIKitPrototype {
             }),
             Eli.build('span', { className: 'mdc-button__label' }),
         ]);
-        const actionStatus = new MDCRipple(elementActionStatus);
+        const actionStatus = new ripple.MDCRipple(elementActionStatus);
         actionStatus.unbounded = true;
         if (Version.fullFeature) {
             actionStatus.listen('click', () => {
@@ -192,7 +192,7 @@ class ListView extends UIKitPrototype {
             hidden: true,
             innerHTML: 'place',
         });
-        const actionLocation = new MDCRipple(elementActionLocation);
+        const actionLocation = new ripple.MDCRipple(elementActionLocation);
         actionLocation.unbounded = true;
         actionLocation.listen('click', () => this.events.focus(nomination));
         actionIcons.push(elementActionLocation);
@@ -205,7 +205,7 @@ class ListView extends UIKitPrototype {
                 hidden: true,
                 innerHTML: 'map',
             });
-            const actionIntel = new MDCRipple(elementActionIntel);
+            const actionIntel = new ripple.MDCRipple(elementActionIntel);
             actionIntel.unbounded = true;
             actionIntel.listen('click', () => {
                 window.open(nomination.intelUrl, '_blank', 'noopener');

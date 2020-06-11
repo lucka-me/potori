@@ -3,6 +3,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const WebpackCdnPlugin = require('webpack-cdn-plugin');
 
 module.exports = {
   entry: {
@@ -40,6 +41,42 @@ module.exports = {
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
       filename: 'potori.css',
+    }),
+    new WebpackCdnPlugin({
+      modules: [
+        {
+          name:   'Chart.js',
+          path:   'Chart.min.js',
+          style:  'Chart.min.css',
+        },
+        {
+          name: 'firebase',
+          prodUrl: 'https://www.gstatic.com/:name/:version/:path',
+          cdn: 'firebasejs',
+          paths: [
+            'firebase-app.js', 'firebase-database.js'
+          ]
+        },
+        {
+          name: 'mapbox-gl',
+          var: 'mapboxgl',
+          prodUrl: 'https://api.tiles.mapbox.com/:name/v:version/:path',
+          cdn: 'mapbox-gl-js',
+          path: 'mapbox-gl.js',
+          style: 'mapbox-gl.css',
+        },
+        {
+          name:   'material-components-web',
+          path:   'material-components-web.min.js',
+          style:  'material-components-web.min.css',
+        },
+        {
+          name: 'moment',
+          cdn:  'moment.js',
+          path: 'moment.min.js',
+        },
+      ],
+      prodUrl: 'https://cdnjs.cloudflare.com/ajax/libs/:name/:version/:path'
     }),
     new HtmlWebpackPlugin({
       template: 'index.html',

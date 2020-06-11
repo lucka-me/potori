@@ -27,6 +27,7 @@ class Dashboard extends UIKitPrototype {
     }
 
     init(parent: HTMLElement) {
+        Chart.platform.disableCSSInjection = true;
         Chart.defaults.global.legend.labels.boxWidth = 10;
         Chart.defaults.global.maintainAspectRatio = false;
         Chart.defaults.line.tooltips = { intersect: false, };

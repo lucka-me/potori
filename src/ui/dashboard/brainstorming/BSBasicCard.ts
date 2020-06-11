@@ -1,4 +1,4 @@
-import { MDCRipple } from "@material/ripple";
+import { ripple } from "material-components-web";
 
 import { DashboardBsPrototype, BrainstormingStats, Eli } from './prototypes';
 
@@ -35,7 +35,7 @@ class BSBasicCard extends DashboardBsPrototype {
             Eli.build('i', { className: 'material-icons mdc-button__icon', innerHTML: 'refresh' }),
             Eli.build('span', { className: 'mdc-button__label', innerHTML: 'Refresh' }),
         ]);
-        const rippleRefresh = new MDCRipple(this.buttonRefresh);
+        const rippleRefresh = new ripple.MDCRipple(this.buttonRefresh);
         rippleRefresh.unbounded = true;
         rippleRefresh.listen('click', () => {
             this.buttonRefresh.disabled = true;

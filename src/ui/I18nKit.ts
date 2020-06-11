@@ -1,5 +1,4 @@
-import { MDCMenu } from "@material/menu";
-import { MDCRipple } from "@material/ripple";
+import { menu, ripple } from "material-components-web";
 
 import Eli from "./Eli";
 
@@ -11,7 +10,7 @@ interface LanguagePack {
 class I18nKit {
 
     languages: Map<string, LanguagePack> = new Map();
-    menu: MDCMenu = null;
+    menu: menu.MDCMenu = null;
     labelButton: HTMLSpanElement = null;
 
     constructor() {
@@ -29,7 +28,7 @@ class I18nKit {
             className: 'mdc-button mdc-button--unelevated mdc-top-app-bar__action-item',
         }, [ this.labelButton ]);
         parent.appendChild(elementButtonMenu);
-        const buttonMenu = new MDCRipple(elementButtonMenu);
+        const buttonMenu = new ripple.MDCRipple(elementButtonMenu);
         buttonMenu.listen("click", () => this.openMenu());
 
         const menuList = Eli.build('ul', {
@@ -58,7 +57,7 @@ class I18nKit {
             className: 'mdc-menu-surface--anchor',
         }, [ menuSurface ]);
         parent.appendChild(menuAnchor);
-        this.menu = new MDCMenu(menuSurface);
+        this.menu = new menu.MDCMenu(menuSurface);
         this.menu.listen('MDCMenu:selected', (event: CustomEvent) => {
             this.selected(event.detail.item.dataset.code);
         });

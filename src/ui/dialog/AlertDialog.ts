@@ -1,4 +1,4 @@
-import DialogPrototype, { Eli, MDCDialog } from './DialogPrototype';
+import DialogPrototype, { Eli, dialog } from './DialogPrototype';
 
 class AlertDialog extends DialogPrototype {
 
@@ -20,7 +20,7 @@ class AlertDialog extends DialogPrototype {
             ]),
         ]);
         parent.appendChild(element);
-        this.ctrl = new MDCDialog(element);
+        this.ctrl = new dialog.MDCDialog(element);
     }
 
     open(message: string) {
