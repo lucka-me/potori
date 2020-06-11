@@ -67,6 +67,7 @@ module.exports = {
         },
         {
           name:   'material-components-web',
+          var:    'mdc',
           path:   'material-components-web.min.js',
           style:  'material-components-web.min.css',
         },
