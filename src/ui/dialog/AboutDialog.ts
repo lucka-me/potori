@@ -15,7 +15,7 @@ class AboutDialog extends DialogPrototype {
             Eli.build('span', {
                 className: 'mdc-typography--body2',
             }, [
-                Eli.link('./intro', 'Intro', 'Intro & Privacy')
+                Eli.link('./docs', 'Documents', 'Documents')
             ]),
             Eli.build('span', {
                 className: 'mdc-typography--body2',
