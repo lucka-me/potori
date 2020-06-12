@@ -24,6 +24,9 @@ class Dashboard extends UIKitPrototype {
 
     constructor() {
         super();
+        Object.defineProperty(this, 'root', {
+            enumerable: false,
+        });
     }
 
     init(parent: HTMLElement) {
@@ -107,9 +110,8 @@ class Dashboard extends UIKitPrototype {
     }
 
     forEach(callback: (card: DashboardPrototype) => void) {
-        for (const [key, value] of Object.entries(this)) {
-            if (key === 'root') continue;
-            callback(value);
+        for (const card of Object.values(this)) {
+            callback(card);
         }
     }
 }

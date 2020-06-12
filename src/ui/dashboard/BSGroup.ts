@@ -48,9 +48,8 @@ class BSGroup extends DashboardPrototype {
     }
 
     forEach(callback: (card: DashboardBsPrototype) => void) {
-        for (const [key, value] of Object.entries(this)) {
-            if (key === 'root') continue;
-            callback(value);
+        for (const card of Object.values(this)) {
+            callback(card);
         }
     }
 }

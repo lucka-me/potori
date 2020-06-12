@@ -7,6 +7,9 @@ export class DashboardPrototype extends UIKitPrototype {
 
     constructor() {
         super();
+        Object.defineProperty(this, 'root', {
+            enumerable: false,
+        });
     }
     init(parent: HTMLElement) { parent }
     update(nominations: Array<Nomination>) { nominations }
