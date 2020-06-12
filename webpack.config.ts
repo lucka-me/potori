@@ -57,19 +57,15 @@ module.exports = {
         },
         {
           name: 'firebase',
-          prodUrl: 'https://www.gstatic.com/:name/:version/:path',
-          cdn: 'firebasejs',
           paths: [
-            'firebase-app.js', 'firebase-database.js'
+            'firebase-app.min.js', 'firebase-database.min.js'
           ]
         },
         {
           name: 'mapbox-gl',
           var: 'mapboxgl',
-          prodUrl: 'https://api.tiles.mapbox.com/:name/v:version/:path',
-          cdn: 'mapbox-gl-js',
-          path: 'mapbox-gl.js',
-          style: 'mapbox-gl.css',
+          path: 'mapbox-gl.min.js',
+          style: 'mapbox-gl.min.css',
         },
         {
           name:   'material-components-web',

@@ -14,7 +14,10 @@ export class DashboardPrototype extends UIKitPrototype {
     update(nominations: Array<Nomination>) { nominations }
     updateStyle() { }
     setVisible(visible: boolean) {
-        if (!this.root) this.render();
+        if (!this.root) {
+            if (!visible) return;
+            this.render();
+        }
         this.root.hidden = !visible;
     }
 }
