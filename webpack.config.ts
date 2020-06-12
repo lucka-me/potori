@@ -8,7 +8,6 @@ const WebpackCdnPlugin = require('webpack-cdn-plugin');
 module.exports = {
   entry: {
     potori: './src/potori.ts',
-    intro: './src/intro.ts',
   },
   output: {
     filename: 'lib/[name].js',
@@ -45,7 +44,7 @@ module.exports = {
     new WebpackCdnPlugin({
       modules: [
         {
-          name:   'Chart.js',
+          name:   'chart.js',
           path:   'Chart.min.js',
           style:  'Chart.min.css',
         },
@@ -85,13 +84,6 @@ module.exports = {
       scriptLoading: 'defer',
       chunks: [ 'potori' ],
       filename: 'index.html'
-    }),
-    new HtmlWebpackPlugin({
-      template: 'intro.html',
-      inject: false,
-      scriptLoading: 'defer',
-      chunks: [ 'intro' ],
-      filename: 'intro/index.html'
     }),
     new CopyPlugin({
       patterns: [
