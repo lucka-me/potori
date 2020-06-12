@@ -13,6 +13,11 @@ class Progress extends UIKitPrototype {
     }
 
     init(parent: HTMLElement) {
+        super.init(parent);
+        this.render();
+    }
+
+    render() {
         this.root = Eli.build('div', {
             className: 'mdc-linear-progress',
             hidden: true
@@ -35,7 +40,7 @@ class Progress extends UIKitPrototype {
                 Eli.build('span', { className: 'mdc-linear-progress__bar-inner' }),
             ]),
         ]);
-        parent.appendChild(this.root);
+        this.parent.appendChild(this.root);
         this.ctrl = new linearProgress.MDCLinearProgress(this.root);
     }
 }

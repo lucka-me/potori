@@ -2,11 +2,8 @@ import DialogPrototype, { Eli, dialog } from './DialogPrototype';
 import Version from '../../service/Version';
 
 class AboutDialog extends DialogPrototype {
-    constructor() {
-        super();
-    }
 
-    init(parent: HTMLElement) {
+    render() {
         const linkVersion = Eli.link(
             'https://github.com/lucka-me/potori/blob/master/CHANGELOG.md',
             'Changelog', Version.text
@@ -45,11 +42,14 @@ class AboutDialog extends DialogPrototype {
                 className: 'mdc-dialog__actions',
             }, [ Eli.dialogAction('close', 'Close') ]),
         ]);
-        parent.appendChild(element);
+        this.parent.appendChild(element);
         this.ctrl = new dialog.MDCDialog(element);
     }
 
-    open() { this.ctrl.open(); }
+    open() {
+        if (!this.ctrl) this.render();
+        this.ctrl.open();
+    }
 };
 
 export default AboutDialog;

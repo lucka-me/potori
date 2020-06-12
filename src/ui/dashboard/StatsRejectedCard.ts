@@ -6,11 +6,11 @@ import StatusKit from '../../service/StatusKit';
 class StatsRejectedCard extends DashboardChartProtorype {
     constructor() { super(); }
 
-    init(parent: HTMLElement) {
+    render() {
         const canvasChart = Eli.build('canvas', { className: 'canvas-chart--v' });
         this.root = Eli.chartCard('Stats: Rejected', canvasChart, 2, 250);
         this.setVisible(false);
-        parent.appendChild(this.root);
+        this.parent.appendChild(this.root);
 
         const labels = [];
         const colors = [];

@@ -2,14 +2,12 @@ import { DashboardChartProtorype, Eli, Nomination } from './prototypes';
 import Chart from 'chart.js';
 
 class QuotasCard extends DashboardChartProtorype {
-    constructor() { super(); }
-
-    init(parent: HTMLElement) {
+    render() {
         const canvasChart = Eli.build('canvas', { className: 'canvas-chart--h' });
         this.root = Eli.chartCard('Quotas', canvasChart, 2, 200);
 
         this.setVisible(false);
-        parent.appendChild(this.root);
+        this.parent.appendChild(this.root);
 
         const labels = [];
         for (let i = 0; i < 14; i++) {

@@ -31,11 +31,12 @@ class DetailsDialogMap extends UIKitPrototype {
         },
     };
 
-    constructor() {
-        super();
+    init(parent: HTMLElement) {
+        super.init(parent);
+        this.render();
     }
 
-    init(parent: HTMLElement) {
+    render() {
         const mapButtons = [];
         for (const [key, value] of Object.entries(this.buttons)) {
             value.root = Eli.build('button', {
@@ -61,7 +62,7 @@ class DetailsDialogMap extends UIKitPrototype {
             elementMap,
         ]);
 
-        parent.append(elementContent);
+        this.parent.append(elementContent);
 
         this.ctrl = new mapboxgl.Map({
             container: elementMap,
@@ -152,13 +153,8 @@ class DetailsDialog extends DialogPrototype {
     events: DetailsDialogEvents = {
         update: () => { },
     };
-    
-    constructor() {
-        super();
-    }
 
-    init(parent: HTMLElement) {
-
+    render() {
         this.headingTitle = Eli.build('h2', {
             className: 'mdc-dialog__title',
             dataset: { mdcDialogInitialFocus: '' },
@@ -323,7 +319,7 @@ class DetailsDialog extends DialogPrototype {
                 Eli.dialogAction('save' , 'Save' ),
             ]),
         ]);
-        parent.appendChild(elementDialog);
+        this.parent.appendChild(elementDialog);
         this.ctrl = new dialog.MDCDialog(elementDialog);
         this.ctrl.listen('MDCDialog:opened', () => this.opened());
         this.ctrl.listen('MDCDialog:closed', (event: CustomEvent) => this.closed(event));
@@ -385,6 +381,7 @@ class DetailsDialog extends DialogPrototype {
     }
 
     open(nomination: Nomination) {
+        if (!this.ctrl) this.render();
         this.nomination = nomination;
         this.map.set(nomination);
         const type = StatusKit.getTypeByCode(nomination.status.code);

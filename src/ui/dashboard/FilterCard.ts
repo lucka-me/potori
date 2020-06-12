@@ -27,11 +27,7 @@ class FilterCard extends DashboardPrototype {
         switchReason:   () => { },
     }
 
-    constructor() {
-        super();
-    }
-
-    init(parent: HTMLElement) {
+    render() {
         this.block.type.root = Eli.build('div', { className: 'flex-box-row--nowrap' });
         this.block.reason.root = Eli.build('div', { className: 'flex-box-row--nowrap' });
         this.root = Eli.build('div', {
@@ -59,7 +55,7 @@ class FilterCard extends DashboardPrototype {
             this.block.reason.root,
         ]);
         this.setVisible(false);
-        parent.appendChild(this.root);
+        this.parent.appendChild(this.root);
         
         for (const reason of StatusKit.reasons.values()) {
             const switchCtrl = FilterCard.buildSwitch(this.block.reason, reason, 'rejected');

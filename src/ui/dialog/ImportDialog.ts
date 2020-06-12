@@ -7,11 +7,7 @@ class ImportDialog extends DialogPrototype {
 
     textField: textField.MDCTextField = null;
 
-    constructor() {
-        super();
-    }
-
-    init(parent: HTMLElement) {
+    render() {
         const elementTextField = Eli.build('div', {
             className: [
                 'mdc-text-field',
@@ -72,7 +68,7 @@ class ImportDialog extends DialogPrototype {
                 Eli.dialogAction('import', 'Import'),
             ]),
         ]);
-        parent.appendChild(elementDialog);
+        this.parent.appendChild(elementDialog);
         this.ctrl = new dialog.MDCDialog(elementDialog);
         this.textField = new textField.MDCTextField(elementTextField);
         this.ctrl.listen('MDCDialog:closed', (event: CustomEvent) => {
@@ -80,7 +76,10 @@ class ImportDialog extends DialogPrototype {
         });
     }
 
-    open() { this.ctrl.open(); }
+    open() {
+        if (!this.ctrl) this.render();
+        this.ctrl.open();
+    }
 
     closed(event: CustomEvent) {
         if (event.detail.action === 'import') {

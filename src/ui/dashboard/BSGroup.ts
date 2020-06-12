@@ -15,10 +15,6 @@ class BSGroup extends DashboardPrototype {
     synch   = new BSSynchCard();
     reviews = new BSReviewsCard();
 
-    constructor() {
-        super();
-    }
-    
     init(parent: HTMLElement) {
         this.forEach((card) => {
             card.init(parent);

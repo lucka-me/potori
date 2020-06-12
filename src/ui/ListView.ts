@@ -27,6 +27,11 @@ class ListView extends UIKitPrototype {
     }
 
     init(parent: HTMLElement) {
+        super.init(parent);
+        this.render();
+    }
+
+    render() {
         this.root = Eli.build('div', {
             className: [
                 'flex--1',
@@ -43,7 +48,7 @@ class ListView extends UIKitPrototype {
                 '-webkit-overflow-scrolling: touch',
             ].join(';'),
         });
-        parent.appendChild(this.root);
+        this.parent.appendChild(this.root);
     }
 
     clear() { this.root.innerHTML = ''; }

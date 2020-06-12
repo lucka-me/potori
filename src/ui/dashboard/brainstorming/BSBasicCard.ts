@@ -12,12 +12,7 @@ class BSBasicCard extends DashboardBsPrototype {
         refresh: () => {},
     };
 
-    constructor() {
-        super();
-    }
-
-    init(parent: HTMLElement) {
-
+    render() {
         this.textReviews = Eli.build('span', {
             cssTest: 'font-weight:300;font-size:4.5rem;line-height:4.5rem;',
             innerHTML: '0',
@@ -75,7 +70,7 @@ class BSBasicCard extends DashboardBsPrototype {
         ]);
 
         this.setVisible(false);
-        parent.appendChild(this.root);
+        this.parent.appendChild(this.root);
     }
 
     updateStats(stats: BrainstormingStats) {

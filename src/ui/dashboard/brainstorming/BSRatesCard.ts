@@ -4,13 +4,11 @@ import { DashboardBsChartPrototype, Eli, BrainstormingStats } from './prototypes
 import { RateItems } from '../../../service/BrainstormingKit';
 
 class BSRatesCard extends DashboardBsChartPrototype {
-    constructor() { super(); }
-
-    init(parent: HTMLElement) {
+    render() {
         const canvasChart = Eli.build('canvas', { className: 'canvas-chart--h' });
         this.root = Eli.chartCard('Brainstorming Rates', canvasChart, 1, 240);
         this.setVisible(false);
-        parent.appendChild(this.root);
+        this.parent.appendChild(this.root);
 
         const labels: Array<string> = [];
         for (const value of Object.values(RateItems)) {

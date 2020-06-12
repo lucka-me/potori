@@ -15,11 +15,8 @@ class Dialog extends UIKitPrototype {
 
     shackbar    = Snackbar;
 
-    constructor() {
-        super();
-    }
-
     init(parent: HTMLElement) {
+        super.init(parent);
         for (const value of Object.values(this)) {
             value.init(parent);
         }

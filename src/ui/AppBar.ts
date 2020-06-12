@@ -19,11 +19,12 @@ class AppBarMenu extends UIKitPrototype {
     items: Map<string, HTMLLIElement> = new Map();
     events: Map<string, () => void> = new Map();
 
-    constructor() {
-        super();
+    init(parent: HTMLElement) {
+        super.init(parent);
+        this.render();
     }
 
-    init(parent: HTMLElement) {
+    render() {
         const menuList = Eli.build('ul', {
             className: 'mdc-list',
             role: 'menu',
@@ -52,7 +53,7 @@ class AppBarMenu extends UIKitPrototype {
         const menuAnchor = Eli.build('div', {
             className: 'mdc-menu-surface--anchor',
         }, [ menuSurface ]);
-        parent.appendChild(menuAnchor);
+        this.parent.appendChild(menuAnchor);
 
         this.ctrl = new menu.MDCMenu(menuSurface);
         this.ctrl.listen(

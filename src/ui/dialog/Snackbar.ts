@@ -7,11 +7,7 @@ class Snackbar extends UIKitPrototype {
     ctrl: snackbar.MDCSnackbar = null;
     textMessage: HTMLDivElement = null;
 
-    constructor() {
-        super();
-    }
-
-    init(parent: HTMLElement) {
+    render() {
         this.textMessage = Eli.build('div', {
             className: 'mdc-snackbar__label',
             role: 'status', ariaLive: 'polite',
@@ -31,11 +27,12 @@ class Snackbar extends UIKitPrototype {
                 elementActions,
             ]),
         ]);
-        parent.appendChild(element);
+        this.parent.appendChild(element);
         this.ctrl = new snackbar.MDCSnackbar(element);
     }
 
     open(message: string) {
+        if (!this.ctrl) this.render();
         this.textMessage.innerHTML = message;
         this.ctrl.open();
     }

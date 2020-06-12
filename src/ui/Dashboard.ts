@@ -30,6 +30,7 @@ class Dashboard extends UIKitPrototype {
     }
 
     init(parent: HTMLElement) {
+        super.init(parent);
         Chart.platform.disableCSSInjection = true;
         Chart.defaults.global.legend.labels.boxWidth = 10;
         Chart.defaults.global.maintainAspectRatio = false;
@@ -60,6 +61,13 @@ class Dashboard extends UIKitPrototype {
             },
         } as Chart.ChartTooltipOptions;
 
+        this.render();
+        this.forEach((card) => {
+            card.init(this.root);
+        });
+    }
+
+    render() {
         this.root = Eli.build('div', {
             className: [
                 'flex--2',
@@ -77,10 +85,7 @@ class Dashboard extends UIKitPrototype {
                 '-webkit-overflow-scrolling: touch',
             ].join(';'),
         });
-        parent.appendChild(this.root);
-        this.forEach((card) => {
-            card.init(this.root);
-        });
+        this.parent.appendChild(this.root);
     }
 
     refresh(nominations: Array<Nomination>) {

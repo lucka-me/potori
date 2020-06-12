@@ -4,11 +4,7 @@ class BSSynchCard extends DashboardBsPrototype {
 
     textSynch: HTMLSpanElement = null;
 
-    constructor() {
-        super();
-    }
-
-    init(parent: HTMLElement) {
+    render() {
         this.textSynch = Eli.build('span', {
             cssTest: 'font-weight:300;font-size:6rem;line-height:6rem;',
             innerHTML: '0.0',
@@ -40,7 +36,7 @@ class BSSynchCard extends DashboardBsPrototype {
             }),
         ]);
         this.setVisible(false);
-        parent.appendChild(this.root);
+        this.parent.appendChild(this.root);
     }
 
     updateStats(stats: BrainstormingStats) {

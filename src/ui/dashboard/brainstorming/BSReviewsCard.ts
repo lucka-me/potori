@@ -5,13 +5,11 @@ import { DashboardBsChartPrototype, BrainstormingStats, Eli } from './prototypes
 import TimeKit from "../../TimeKit";
 
 class BSReviewsCard extends DashboardBsChartPrototype {
-    constructor() { super(); }
-
-    init(parent: HTMLElement) {
+    render() {
         const canvasChart = Eli.build('canvas', { className: 'canvas-chart--h' });
         this.root = Eli.chartCard('Brainstorming Reviews', canvasChart, 3, 300);
         this.setVisible(false);
-        parent.appendChild(this.root);
+        this.parent.appendChild(this.root);
 
         const style = getComputedStyle(document.documentElement);
         this.chart = new Chart(canvasChart.getContext('2d'), {

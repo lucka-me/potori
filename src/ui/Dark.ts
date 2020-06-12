@@ -5,11 +5,8 @@ class Dark extends UIKitPrototype {
     enabled = false;
     changed: (enabled: boolean) => void = () => {};
 
-    constructor() {
-        super();
-    }
-
-    init(_: HTMLElement) {
+    init(parent: HTMLElement) {
+        super.init(parent);
         const darkMediaQueryList = window.matchMedia('(prefers-color-scheme: dark)');
         const changed = (event: MediaQueryListEvent) => {
             this.enabled = event.matches;

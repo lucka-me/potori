@@ -11,10 +11,12 @@ export class DashboardPrototype extends UIKitPrototype {
             enumerable: false,
         });
     }
-    init(parent: HTMLElement) { parent }
     update(nominations: Array<Nomination>) { nominations }
     updateStyle() { }
-    setVisible(visible: boolean) { this.root.hidden = !visible; }
+    setVisible(visible: boolean) {
+        if (!this.root) this.render();
+        this.root.hidden = !visible;
+    }
 }
 
 export class DashboardChartProtorype extends DashboardPrototype {
