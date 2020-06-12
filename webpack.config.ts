@@ -44,7 +44,14 @@ module.exports = {
     new WebpackCdnPlugin({
       modules: [
         {
+          name: 'moment',
+          cdn:  'moment.js',
+          path: 'moment.min.js',
+        },
+        {
           name:   'chart.js',
+          var:    'Chart',
+          cdn:    'Chart.js',
           path:   'Chart.min.js',
           style:  'Chart.min.css',
         },
@@ -69,11 +76,6 @@ module.exports = {
           var:    'mdc',
           path:   'material-components-web.min.js',
           style:  'material-components-web.min.css',
-        },
-        {
-          name: 'moment',
-          cdn:  'moment.js',
-          path: 'moment.min.js',
         },
       ],
       prodUrl: 'https://cdnjs.cloudflare.com/ajax/libs/:name/:version/:path'
