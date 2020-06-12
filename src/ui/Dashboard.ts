@@ -110,9 +110,7 @@ class Dashboard extends UIKitPrototype {
     }
 
     forEach(callback: (card: DashboardPrototype) => void) {
-        for (const card of Object.values(this)) {
-            callback(card);
-        }
+        Object.values(this).forEach(callback);
     }
 }
 
