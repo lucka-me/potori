@@ -41,16 +41,6 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'potori.css',
     }),
-    new HtmlWebpackPlugin({
-      title: 'Redirecting',
-      filename: 'intro/index.html',
-      meta: {
-        redirect: {
-          'http-equiv': 'refresh',
-          content: '0; url=https://lucka.moe/potori/docs',
-        },
-      },
-    }),
     new WebpackCdnPlugin({
       modules: [
         {
@@ -93,8 +83,19 @@ module.exports = {
       chunks: [ 'potori' ],
       filename: 'index.html'
     }),
+    new HtmlWebpackPlugin({
+      title: 'Redirecting',
+      filename: 'intro/index.html',
+      meta: {
+        redirect: {
+          'http-equiv': 'refresh',
+          content: '0; url=https://lucka.moe/potori/docs',
+        },
+      },
+    }),
     new CopyPlugin({
       patterns: [
+        { from: 'docs', to: 'docs' },
         { from: 'assets', to: 'assets' },
         { from: 'manifest.json' },
       ],
