@@ -185,9 +185,9 @@ class UIKit {
     }
 
     show() {
-        this.dashboard.map.fit(Service.nominations);
         this.list.show(Service.nominations);
         this.dashboard.setVisible(true);
+        this.dashboard.map.fit(Service.nominations);
         this.dashboard.refresh(Service.nominations);
         this.appBar.menu.items.get(AppBarMenuItems.open.key).hidden = true;
         this.appBar.menu.items.get(AppBarMenuItems.save.key).hidden = false;
