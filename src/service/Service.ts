@@ -360,6 +360,10 @@ class Service {
             this.events.info(i18next.t('message:Brainstorming Data updated.'));
         });
     }
+
+    clearBsData() {
+        this.bs.clear();
+    }
 }
 
 export default new Service();

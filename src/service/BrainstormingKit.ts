@@ -96,6 +96,10 @@ class BrainstormingKit {
         }
     }
 
+    clear() {
+        this.data.clear();
+    }
+
     analyse(nominations: Array<Nomination>): BrainstormingStats {
         const stats: BrainstormingStats = {
             review: 0,

@@ -2,14 +2,20 @@ import { ripple } from "material-components-web";
 
 import { DashboardBsPrototype, BrainstormingStats, Eli, i18next } from './prototypes';
 
+interface BSBasicCardEvents {
+    refresh:    () => void,
+    clear:      () => void;
+}
+
 class BSBasicCard extends DashboardBsPrototype {
 
     textReviews     : HTMLSpanElement   = null;
     textSubtitle    : HTMLSpanElement   = null;
-    buttonRefresh   : HTMLButtonElement = null;
+    actionRefresh   : HTMLButtonElement = null;
 
-    events = {
-        refresh: () => {},
+    events: BSBasicCardEvents = {
+        refresh:    () => {},
+        clear:      () => {},
     };
 
     render() {
@@ -22,7 +28,7 @@ class BSBasicCard extends DashboardBsPrototype {
             innerHTML: i18next.t('Reviews for Portals', { count: 0 }),
         });
 
-        this.buttonRefresh = Eli.build('button', {
+        this.actionRefresh = Eli.build('button', {
             className: 'mdc-button mdc-card__action mdc-card__action--button',
             disabled: true,
         }, [
@@ -30,11 +36,28 @@ class BSBasicCard extends DashboardBsPrototype {
             Eli.build('i', { className: 'material-icons mdc-button__icon', innerHTML: 'refresh' }),
             Eli.build('span', { className: 'mdc-button__label', innerHTML: i18next.t('Refresh') }),
         ]);
-        const rippleRefresh = new ripple.MDCRipple(this.buttonRefresh);
+        const rippleRefresh = new ripple.MDCRipple(this.actionRefresh);
         rippleRefresh.unbounded = true;
         rippleRefresh.listen('click', () => {
-            this.buttonRefresh.disabled = true;
+            this.actionRefresh.disabled = true;
             this.events.refresh();
+        });
+
+        const actionClaer = Eli.build('button', {
+            className: [
+                'material-icons',
+                'mdc-icon-button',
+                'mdc-card__action',
+                'mdc-card__action--icon'
+            ].join(' '),
+            title: i18next.t('Clear'),
+            id: 'button-card-nomination-location',
+            innerHTML: 'delete',
+        });
+        const rippleClear = new ripple.MDCRipple(actionClaer);
+        rippleClear.unbounded = true;
+        rippleClear.listen('click', () => {
+            this.events.clear();
         });
 
         this.root = Eli.build('div', {
@@ -65,7 +88,10 @@ class BSBasicCard extends DashboardBsPrototype {
             }, [
                 Eli.build('div', {
                     className: 'mdc-card__action-buttons',
-                }, [ this.buttonRefresh ]),
+                }, [ this.actionRefresh ]),
+                Eli.build('div', {
+                    className: 'mdc-card__action-icons',
+                }, [ actionClaer ]),
             ]),
         ]);
 
@@ -77,7 +103,7 @@ class BSBasicCard extends DashboardBsPrototype {
         
         this.textReviews.innerHTML = `${stats.review}`;
         this.textSubtitle.innerHTML = i18next.t('Reviews for Portals', { count: stats.nomination });
-        this.buttonRefresh.disabled = false;
+        this.actionRefresh.disabled = false;
     }
 }
 

@@ -19,9 +19,15 @@ class BSGroup extends DashboardPrototype {
         this.forEach((card) => {
             card.init(parent);
         });
-        this.basic.events.refresh = () => {
-            Service.updateBsData();
-        };
+        this.basic.events = {
+            refresh: () => {
+                Service.updateBsData();
+            },
+            clear: () => {
+                Service.clearBsData();
+                this.update([]);
+            }
+        }
     }
 
     update(nominations: Array<Nomination>) {
