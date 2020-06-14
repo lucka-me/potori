@@ -1,3 +1,5 @@
+import i18next from "i18next";
+
 import AuthKit from "./AuthKit";
 import Eli from "../ui/Eli";
 
@@ -18,7 +20,7 @@ class LocalFileKit {
         const opened = (event: Event) => {
             const file = (event.target as HTMLInputElement).files[0];
             if (!file) {
-                onerror('Failed to open file.');
+                onerror(i18next.t('Failed to open file.'));
                 return;
             }
             const fileReader = new FileReader();

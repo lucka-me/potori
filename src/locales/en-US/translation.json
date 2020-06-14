@@ -1,0 +1,98 @@
+{
+    "status": "",
+    "Pending": "Pending",
+    "Accepted": "Accepted",
+    "Rejected": "Rejected",
+    "Undeclared": "Undeclared",
+    "Duplicated": "Duplicated",
+    "Too Close": "Too Close",
+
+    "Service": "",
+    "Failed to parse as Nomination List": "Failed to parse as Nomination List.",
+    "Failed to parse as Brainstorming Data": "Failed to parse as Brainstorming Data.",
+    "No Nomination to save.": "No Nomination to save.",
+    "Uploaded.": "Uploaded.",
+    "Unable to upload Nomination List.": "Unable to upload Nomination List.",
+    "Unable to upload Brainstorming Data.": "Unable to upload Brainstorming Data.",
+    "Unable to parse the code.": "Unable to parse the code.",
+    "Invalid data.": "Invalid data.",
+    "Brainstorming Data updated.": "Brainstorming Data updated.",
+
+    "BrainstormingKit": "",
+    "Quality": "Quality",
+    "Description": "Description",
+    "Cultural": "Cultural",
+    "Uniqueness": "Uniqueness",
+    "Safety": "Safety",
+    "Location": "Location",
+
+    "FileKit": "",
+    "Failed to open file.": "Failed to open file.",
+
+    "AppBar": "",
+    "Open": "Open",
+    "Save": "Save",
+    "Upload": "Upload",
+    "Import": "Import",
+    "About": "About",
+    "Sign Out": "Sign Out",
+    "List": "List",
+    "Dashboard": "Dashboard",
+    "Sign In": "Sign In",
+    "Menu": "Menu",
+
+    "NominationCard": "",
+    "Brainstorming ID copied:": "Brainstorming ID copied: {{id}}",
+    "Intel Map": "Intel Map",
+
+    "Dialogs": "",
+    "Close": "Close",
+
+    "AboutDialog": "",
+    "Changelog": "Changelog",
+    "Documents": "Documents",
+    "GitHub Repo": "GitHub Repo",
+    "Blog": "Blog",
+
+    "DetailsDialog": "",
+    "Unable to query the location.": "Unable to query the location.",
+    "Result Time": "Result Time",
+    "Reason": "Reason",
+    "Invalid DateTime.": "Invalid DateTime.",
+
+    "ImportDialog": "",
+    "JSON": "JSON",
+    "From ": "From ",
+    "Wayfarer API": "Wayfarer API",
+
+    "Snackbar": "",
+    "Dismiss": "Dismiss",
+
+    "Dashboard Cards": "",
+    "Count by Month": "Count by Month",
+    "Submissions": "Submissions",
+    "Results": "Results",
+
+    "Filter": "Filter",
+    "Type": "Type",
+
+    "Quotas": "Quotas",
+    "Day": "Day",
+
+    "Stats Rejected": "Stats: Rejected",
+
+    "Stats Type": "Stats: Type",
+
+    "BSGroup": "",
+    "BSBasicCard": "",
+    "Brainstorming": "Brainstorming",
+    "Reviews for Portals": "Reviews for {{count}} Nominations",
+
+    "Brainstorming Rates": "Brainstorming Rates",
+
+    "Brainstorming Reviews": "Brainstorming Reviews",
+    "Reviews": "Reviews",
+
+    "Brainstorming Synch": "Brainstorming Synch",
+    "Reviews match the result": "Reviews match the result"
+}

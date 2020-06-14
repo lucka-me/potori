@@ -8,7 +8,7 @@ import { MapStyle } from '../dashboard/MapCard';
 import Nomination, { LngLat } from '../../service/Nomination';
 import Service from '../../service/Service';
 import StatusKit from '../../service/StatusKit';
-import UIKitPrototype, { Eli } from '../UIKitPrototype';
+import UIKitPrototype, { Eli, i18next } from '../UIKitPrototype';
 
 class DetailsDialogMap extends UIKitPrototype {
 
@@ -115,7 +115,7 @@ class DetailsDialogMap extends UIKitPrototype {
         };
         const failed = () => {
             if (!this.dialog.isOpen) return;
-            AlertDialog.open('Unable to query the location.');
+            AlertDialog.open(i18next.t('Unable to query the location.'));
             this.buttons.search.root.disabled = false;
         }
         this.buttons.search.root.disabled = true;
@@ -158,7 +158,7 @@ class DetailsDialog extends DialogPrototype {
         this.headingTitle = Eli.build('h2', {
             className: 'mdc-dialog__title',
             dataset: { mdcDialogInitialFocus: '' },
-            innerHTML: 'Import',
+            innerHTML: '',
         });
 
         this.image = Eli.build('img', {
@@ -245,7 +245,7 @@ class DetailsDialog extends DialogPrototype {
             }),
             Eli.notchedOutline({
                 for: 'input-dialog-details-result-time',
-                innerHTML: 'Result Time',
+                innerHTML: i18next.t('Result Time'),
             }),
         ]);
         this.fieldResultTime = new textField.MDCTextField(elementResultTime);
@@ -255,7 +255,7 @@ class DetailsDialog extends DialogPrototype {
             itemsSelectReason.push(Eli.build('li', {
                 className: 'mdc-list-item',
                 dataset: { value: key },
-                innerHTML: value.title,
+                innerHTML: i18next.t(value.title),
             }));
         }
         this.elementReason = Eli.build('div', {
@@ -271,7 +271,7 @@ class DetailsDialog extends DialogPrototype {
             }, [
                 Eli.build('i', { className: 'mdc-select__dropdown-icon' }),
                 Eli.build('div', { className: 'mdc-select__selected-text' }),
-                Eli.notchedOutline({ innerHTML: 'Reason' }),
+                Eli.notchedOutline({ innerHTML: i18next.t('Reason') }),
             ]),
             Eli.build('div', {
                 className: 'mdc-select__menu mdc-menu mdc-menu-surface',
@@ -343,7 +343,7 @@ class DetailsDialog extends DialogPrototype {
         if (selectedStatus !== 'pending') {
             const time = Date.parse(this.fieldResultTime.value);
             if (!time) {
-                AlertDialog.open('Invalid DateTime.');
+                AlertDialog.open(i18next.t('Invalid DateTime.'));
                 return;
             }
             const newTime = time + (new Date().getTimezoneOffset() * 60000);

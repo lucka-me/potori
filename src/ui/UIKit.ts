@@ -9,7 +9,7 @@ import ListView     from './ListView';
 import Progress     from './Progress';
 import Service      from "../service/Service";
 import StatusKit    from "../service/StatusKit";
-import Nomination from '../service/Nomination';
+import Nomination   from '../service/Nomination';
 
 class UIKit {
 
@@ -167,10 +167,7 @@ class UIKit {
     }
 
     switchView() {
-        const actionView = this.appBar.actions.get(AppBarActions.view.key);
-        const switchToList = actionView.innerHTML === 'view_list';
-        actionView.innerHTML = switchToList ? 'dashboard' : 'view_list';
-        actionView.title = switchToList ? 'Dashboard' : 'List';
+        this.appBar.switchView();
         this.dashboard.root.classList.toggle('view-hide');
         this.list.root.classList.toggle('view-hide');
     }

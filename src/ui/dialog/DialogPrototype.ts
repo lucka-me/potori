@@ -1,8 +1,8 @@
 import { dialog } from "material-components-web";
-import UIKitPrototype, { Eli } from "../UIKitPrototype";
+import UIKitPrototype, { Eli, i18next } from "../UIKitPrototype";
 
 export default class DialogPrototype extends UIKitPrototype {
     ctrl: dialog.MDCDialog = null;
 }
 
-export { Eli, dialog };
+export { Eli, dialog, i18next };

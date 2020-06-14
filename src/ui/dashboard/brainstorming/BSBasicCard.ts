@@ -1,6 +1,6 @@
 import { ripple } from "material-components-web";
 
-import { DashboardBsPrototype, BrainstormingStats, Eli } from './prototypes';
+import { DashboardBsPrototype, BrainstormingStats, Eli, i18next } from './prototypes';
 
 class BSBasicCard extends DashboardBsPrototype {
 
@@ -19,7 +19,7 @@ class BSBasicCard extends DashboardBsPrototype {
         });
         this.textSubtitle = Eli.build('span', {
             className: 'mdc-typography--body1 text-nowrap',
-            innerHTML: 'Review for 0 Portal',
+            innerHTML: i18next.t('Reviews for Portals', { count: 0 }),
         });
 
         this.buttonRefresh = Eli.build('button', {
@@ -55,7 +55,7 @@ class BSBasicCard extends DashboardBsPrototype {
             }, [
                 Eli.build('span', {
                     className: 'mdc-typography--headline6',
-                    innerHTML: 'Brainstorming',
+                    innerHTML: i18next.t('Brainstorming'),
                 }),
                 this.textReviews,
                 this.textSubtitle,
@@ -74,11 +74,9 @@ class BSBasicCard extends DashboardBsPrototype {
     }
 
     updateStats(stats: BrainstormingStats) {
+        
         this.textReviews.innerHTML = `${stats.review}`;
-        this.textSubtitle.innerHTML = [
-            `${stats.review < 2 ? 'Review' : 'Reviews'} for `,
-            `${stats.nomination} ${stats.nomination < 2 ? 'Portal' : 'Portals'}`
-        ].join('');
+        this.textSubtitle.innerHTML = i18next.t('Reviews for Portals', { count: stats.nomination });
         this.buttonRefresh.disabled = false;
     }
 }

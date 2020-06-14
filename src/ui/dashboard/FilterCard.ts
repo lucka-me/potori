@@ -1,6 +1,6 @@
 import { switchControl } from "material-components-web";
 
-import { DashboardPrototype, Eli } from './prototypes';
+import { DashboardPrototype, Eli, i18next } from './prototypes';
 import StatusKit, { Status, StatusType, StatusReason } from '../../service/StatusKit';
 
 interface FilterCardBlock {
@@ -41,16 +41,16 @@ class FilterCard extends DashboardPrototype {
         }, [
             Eli.build('span', {
                 className: 'mdc-typography--headline6',
-                innerHTML: 'Filter'
+                innerHTML: i18next.t('Filter')
             }),
             Eli.build('span', {
                 className: 'mdc-typography--subtitle1',
-                innerHTML: 'Type'
+                innerHTML: i18next.t('Type')
             }),
             this.block.type.root,
             Eli.build('span', {
                 className: 'mdc-typography--subtitle1',
-                innerHTML: 'Rejected'
+                innerHTML: i18next.t('Rejected')
             }),
             this.block.reason.root,
         ]);
@@ -66,7 +66,7 @@ class FilterCard extends DashboardPrototype {
         }
         for (const type of StatusKit.types.values()) {
             const switchCtrl = FilterCard.buildSwitch(this.block.type, type, type.key);
-            switchCtrl.listen('change', (_) => this.switchType(type, switchCtrl.checked));
+            switchCtrl.listen('change', () => this.switchType(type, switchCtrl.checked));
             this.types.set(type, switchCtrl);
         }
     }
@@ -113,7 +113,7 @@ class FilterCard extends DashboardPrototype {
             Eli.build('label', {
                 className: `material-icons status-${type}`,
                 for: id,
-                title: status.title,
+                title: i18next.t(status.title),
                 innerHTML: status.icon,
             })
         ]);

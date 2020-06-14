@@ -1,8 +1,6 @@
-
 import { menu, ripple, topAppBar } from "material-components-web";
 
-import UIKitPrototype from './UIKitPrototype';
-import Eli from "./Eli";
+import UIKitPrototype, { Eli, i18next } from './UIKitPrototype';
 
 const AppBarMenuItems = {
     open     : { key: 'open'    , title: 'Open'       },
@@ -39,7 +37,7 @@ class AppBarMenu extends UIKitPrototype {
             }, [
                 Eli.build('span', {
                     className: 'mdc-list-item__text',
-                    innerHTML: value.title,
+                    innerHTML: i18next.t(value.title),
                 }),
             ]);
             this.items.set(value.key, element);
@@ -70,9 +68,9 @@ class AppBarMenu extends UIKitPrototype {
 }
 
 const AppBarActions = {
-    view: { key: 'view'   , title: 'List'     , icon: 'view_list'         },
+    view:   { key: 'view'   , title: 'List'     , icon: 'view_list'         },
     signin: { key: 'signin' , title: 'Sign In'  , icon: 'account_circle'    },
-    menu: { key: 'menu'   , title: 'Menu'     , icon: 'more_vert'         },
+    menu:   { key: 'menu'   , title: 'Menu'     , icon: 'more_vert'         },
 };
 
 class AppBar extends UIKitPrototype {
@@ -87,6 +85,11 @@ class AppBar extends UIKitPrototype {
     }
 
     init(parent: HTMLElement) {
+        super.init(parent);
+        this.render();
+    }
+
+    render() {
         const sectionActions = Eli.build('section', {
             className: [
                 'mdc-top-app-bar__section',
@@ -96,7 +99,7 @@ class AppBar extends UIKitPrototype {
         for (const value of Object.values(AppBarActions)) {
             const elementAction = Eli.build('button', {
                 className: 'mdc-icon-button material-icons',
-                title: value.title,
+                title: i18next.t(value.title),
                 innerHTML: value.icon,
             });
             sectionActions.appendChild(elementAction);
@@ -132,11 +135,18 @@ class AppBar extends UIKitPrototype {
             ]),
         ]);
 
-        parent.appendChild(elementAppBar);
-        parent.appendChild(Eli.build('div', {
+        this.parent.appendChild(elementAppBar);
+        this.parent.appendChild(Eli.build('div', {
             className: 'mdc-top-app-bar--fixed-adjust'
         }));
         new topAppBar.MDCTopAppBar(elementAppBar);
+    }
+
+    switchView() {
+        const actionView = this.actions.get(AppBarActions.view.key);
+        const switchToList = actionView.innerHTML === 'view_list';
+        actionView.innerHTML = switchToList ? 'dashboard' : 'view_list';
+        actionView.title = i18next.t(switchToList ? 'Dashboard' : 'List');
     }
 }
 

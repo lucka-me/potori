@@ -1,13 +1,13 @@
 import Chart from 'chart.js';
 import moment from 'moment';
 
-import { DashboardChartProtorype, Eli, Nomination } from './prototypes';
+import { DashboardChartProtorype, Eli, Nomination, i18next } from './prototypes';
 import TimeKit from "../TimeKit";
 
 class CountByMonthCard extends DashboardChartProtorype {
     render() {
         const canvasChart = Eli.build('canvas', { className: 'canvas-chart--h' });
-        this.root = Eli.chartCard('Count by Month', canvasChart, 3, 300);
+        this.root = Eli.chartCard(i18next.t('Count by Month'), canvasChart, 3, 300);
         this.setVisible(false);
         this.parent.appendChild(this.root);
 
@@ -17,13 +17,13 @@ class CountByMonthCard extends DashboardChartProtorype {
             data: {
                 labels: [],
                 datasets: [{
-                    label: 'Submissions',
+                    label: i18next.t('Submissions'),
                     data: [],
                     borderColor: style.getPropertyValue('--mdc-theme-primary'),
                     pointHoverBorderColor: style.getPropertyValue('--mdc-theme-primary'),
                     fill: false,
                 }, {
-                    label: 'Results',
+                    label: i18next.t('Results'),
                     data: [],
                     borderColor: style.getPropertyValue('--mdc-theme-secondary'),
                     pointHoverBorderColor: style.getPropertyValue('--mdc-theme-secondary'),

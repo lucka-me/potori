@@ -1,4 +1,4 @@
-import DialogPrototype, { Eli, dialog } from './DialogPrototype';
+import DialogPrototype, { Eli, dialog, i18next } from './DialogPrototype';
 import Version from '../../service/Version';
 
 class AboutDialog extends DialogPrototype {
@@ -6,20 +6,20 @@ class AboutDialog extends DialogPrototype {
     render() {
         const linkVersion = Eli.link(
             'https://github.com/lucka-me/potori/blob/master/CHANGELOG.md',
-            'Changelog', Version.text
+            i18next.t('Changelog'), Version.text
         );
         const info = [
             Eli.build('span', {
                 className: 'mdc-typography--body2',
             }, [
-                Eli.link('./docs', 'Documents', 'Documents')
+                Eli.link('./docs', i18next.t('Documents'), i18next.t('Documents'))
             ]),
             Eli.build('span', {
                 className: 'mdc-typography--body2',
             }, [
                 Eli.link(
                     'https://github.com/lucka-me/potori',
-                    'GitHub', 'GitHub Repo'
+                    i18next.t('GitHub Repo'), i18next.t('GitHub Repo')
                 ),
             ]),
             Eli.build('span', {
@@ -27,20 +27,20 @@ class AboutDialog extends DialogPrototype {
             }, [
                 linkVersion,
                 ' by ',
-                Eli.link('https://lucka.moe', 'Blog', 'Lucka'),
+                Eli.link('https://lucka.moe', i18next.t('Blog'), 'Lucka'),
             ]),
         ];
         const element = Eli.dialog([
             Eli.build('h2', {
                 className: 'mdc-dialog__title',
-                innerHTML: 'About'
+                innerHTML: i18next.t('About')
             }),
             Eli.build('div', {
                 className: 'mdc-dialog__content flex-box-col',
             }, info),
             Eli.build('footer', {
                 className: 'mdc-dialog__actions',
-            }, [ Eli.dialogAction('close', 'Close') ]),
+            }, [ Eli.dialogAction('close', i18next.t('Close')) ]),
         ]);
         this.parent.appendChild(element);
         this.ctrl = new dialog.MDCDialog(element);

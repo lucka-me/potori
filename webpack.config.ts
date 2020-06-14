@@ -39,7 +39,7 @@ module.exports = {
   plugins: [
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'potori.css',
+      filename: 'css/potori.css',
     }),
     new WebpackCdnPlugin({
       modules: [

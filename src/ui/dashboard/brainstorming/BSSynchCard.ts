@@ -1,4 +1,4 @@
-import { DashboardBsPrototype, BrainstormingStats, Eli } from './prototypes';
+import { DashboardBsPrototype, BrainstormingStats, Eli, i18next } from './prototypes';
 
 class BSSynchCard extends DashboardBsPrototype {
 
@@ -21,7 +21,7 @@ class BSSynchCard extends DashboardBsPrototype {
         }, [
             Eli.build('span', {
                 className: 'mdc-typography--headline6',
-                innerHTML: 'Brainstorming Synch',
+                innerHTML: i18next.t('Brainstorming Synch'),
             }),
             Eli.build('span', { className: 'text-nowarp' }, [
                 this.textSynch,
@@ -32,7 +32,7 @@ class BSSynchCard extends DashboardBsPrototype {
             ]),
             Eli.build('span', {
                 className: 'mdc-typography--body1 text-nowarp',
-                innerHTML: 'Reviews match the result',
+                innerHTML: i18next.t('Reviews match the result'),
             }),
         ]);
         this.setVisible(false);

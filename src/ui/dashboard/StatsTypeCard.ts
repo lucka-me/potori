@@ -1,6 +1,6 @@
 import Chart from 'chart.js';
 
-import { DashboardChartProtorype, Eli, Nomination } from './prototypes';
+import { DashboardChartProtorype, Eli, Nomination, i18next } from './prototypes';
 import StatusKit from '../../service/StatusKit';
 
 class StatsTypeCard extends DashboardChartProtorype {
@@ -8,7 +8,7 @@ class StatsTypeCard extends DashboardChartProtorype {
 
     render() {
         const canvasChart = Eli.build('canvas', { className: 'canvas-chart--v' });
-        this.root = Eli.chartCard('Stats: Type', canvasChart, 2, 250);
+        this.root = Eli.chartCard(i18next.t('Stats Type'), canvasChart, 2, 250);
         this.setVisible(false);
         this.parent.appendChild(this.root);
 
@@ -19,7 +19,7 @@ class StatsTypeCard extends DashboardChartProtorype {
         const style = getComputedStyle(document.documentElement);
         
         for (const [key, value] of StatusKit.types.entries()) {
-            labels.push(value.title);
+            labels.push(i18next.t(value.title));
             colors.push(style.getPropertyValue(`--color-${key}`));
             colorsLight.push(style.getPropertyValue(`--color-${key}--light`));
             colorsDark.push(style.getPropertyValue(`--color-${key}--dark`));

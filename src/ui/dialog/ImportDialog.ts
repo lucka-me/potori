@@ -1,6 +1,6 @@
 import { textField } from "material-components-web";
 
-import DialogPrototype, { Eli, dialog } from './DialogPrototype';
+import DialogPrototype, { Eli, dialog, i18next } from './DialogPrototype';
 import Service from '../../service/Service';
 
 class ImportDialog extends DialogPrototype {
@@ -45,10 +45,10 @@ class ImportDialog extends DialogPrototype {
                 Eli.build('div', {
                     className: 'mdc-text-field-helper-text mdc-text-field-helper-text--persistent',
                 }, [
-                    'From ',
+                    i18next.t('From '),
                     Eli.link(
                         'https://wayfarer.nianticlabs.com/api/v1/vault/manage',
-                        'Wayfarer API', 'Wayfarer API'
+                        i18next.t('Wayfarer API'), i18next.t('Wayfarer API')
                     ),
                 ]),
             ]),
@@ -56,7 +56,7 @@ class ImportDialog extends DialogPrototype {
         const elementDialog = Eli.dialog([
             Eli.build('h2', {
                 className: 'mdc-dialog__title',
-                innerHTML: 'Import'
+                innerHTML: i18next.t('Import')
             }),
             Eli.build('div', {
                 className: 'mdc-dialog__content',
@@ -64,8 +64,8 @@ class ImportDialog extends DialogPrototype {
             Eli.build('footer', {
                 className: 'mdc-dialog__actions',
             }, [
-                Eli.dialogAction('close' , 'Close' ),
-                Eli.dialogAction('import', 'Import'),
+                Eli.dialogAction('close' , i18next.t('Close' )),
+                Eli.dialogAction('import', i18next.t('Import')),
             ]),
         ]);
         this.parent.appendChild(elementDialog);

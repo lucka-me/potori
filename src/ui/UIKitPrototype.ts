@@ -1,3 +1,4 @@
+import i18next from 'i18next';
 import Eli from "./Eli";
 
 export default class UIKitPrototype {
@@ -17,4 +18,4 @@ export default class UIKitPrototype {
     render() { }
 }
 
-export { Eli };
+export { Eli, i18next };

@@ -1,13 +1,13 @@
 import Chart from 'chart.js';
 import moment from 'moment';
 
-import { DashboardBsChartPrototype, BrainstormingStats, Eli } from './prototypes';
+import { DashboardBsChartPrototype, BrainstormingStats, Eli, i18next } from './prototypes';
 import TimeKit from "../../TimeKit";
 
 class BSReviewsCard extends DashboardBsChartPrototype {
     render() {
         const canvasChart = Eli.build('canvas', { className: 'canvas-chart--h' });
-        this.root = Eli.chartCard('Brainstorming Reviews', canvasChart, 3, 300);
+        this.root = Eli.chartCard(i18next.t('Brainstorming Reviews'), canvasChart, 3, 300);
         this.setVisible(false);
         this.parent.appendChild(this.root);
 
@@ -17,7 +17,7 @@ class BSReviewsCard extends DashboardBsChartPrototype {
             data: {
                 labels: [],
                 datasets: [{
-                    label: 'Reviews',
+                    label: i18next.t('Reviews'),
                     data: [],
                     borderColor: style.getPropertyValue('--mdc-theme-primary'),
                     pointHoverBorderColor: style.getPropertyValue('--mdc-theme-primary'),

@@ -1,6 +1,6 @@
 import { snackbar } from "material-components-web";
 
-import UIKitPrototype , { Eli } from '../UIKitPrototype';
+import UIKitPrototype , { Eli, i18next } from '../UIKitPrototype';
 
 class Snackbar extends UIKitPrototype {
 
@@ -17,7 +17,7 @@ class Snackbar extends UIKitPrototype {
         }, [
             Eli.build('button', {
                 className: 'mdc-icon-button mdc-snackbar__dismiss material-icons',
-                title: 'Dismiss',
+                title: i18next.t('Dismiss'),
                 innerHTML: 'close',
             }),
         ]);

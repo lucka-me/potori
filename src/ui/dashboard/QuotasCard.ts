@@ -1,10 +1,10 @@
-import { DashboardChartProtorype, Eli, Nomination } from './prototypes';
+import { DashboardChartProtorype, Eli, Nomination, i18next } from './prototypes';
 import Chart from 'chart.js';
 
 class QuotasCard extends DashboardChartProtorype {
     render() {
         const canvasChart = Eli.build('canvas', { className: 'canvas-chart--h' });
-        this.root = Eli.chartCard('Quotas', canvasChart, 2, 200);
+        this.root = Eli.chartCard(i18next.t('Quotas'), canvasChart, 2, 200);
 
         this.setVisible(false);
         this.parent.appendChild(this.root);
@@ -31,7 +31,7 @@ class QuotasCard extends DashboardChartProtorype {
                     xAxes: [{
                         scaleLabel: {
                             display: true,
-                            labelString: 'Day'
+                            labelString: i18next.t('Day')
                         },
                     }],
                 },
