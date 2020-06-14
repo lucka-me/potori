@@ -28,7 +28,7 @@ class BSBasicCard extends DashboardBsPrototype {
         }, [
             Eli.build('div', { className: 'mdc-button__ripple' }),
             Eli.build('i', { className: 'material-icons mdc-button__icon', innerHTML: 'refresh' }),
-            Eli.build('span', { className: 'mdc-button__label', innerHTML: 'Refresh' }),
+            Eli.build('span', { className: 'mdc-button__label', innerHTML: i18next.t('Refresh') }),
         ]);
         const rippleRefresh = new ripple.MDCRipple(this.buttonRefresh);
         rippleRefresh.unbounded = true;

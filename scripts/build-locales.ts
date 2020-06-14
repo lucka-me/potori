@@ -28,8 +28,7 @@ class LanguageData {
                 return `${file.replace('.json', '')}: ${this.moduleName(file)},`
             }).join('\n        ')
         }
-    },
-        `
+    },`
     }
 }
 

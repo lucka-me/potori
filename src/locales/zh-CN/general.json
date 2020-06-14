@@ -69,7 +69,8 @@
     "BSGroup": "",
     "BSBasicCard": "",
     "Brainstorming": "Brainstorming",
-    "Reviews for Portals": "个评估，涵盖{{count}}个提名。",
+    "Refresh": "刷新",
+    "Reviews for Portals": "涵盖{{count}}个提名的评估",
 
     "Brainstorming Rates": "Brainstorming评分",
 
@@ -77,5 +78,5 @@
     "Reviews": "评估",
 
     "Brainstorming Synch": "Brainstorming同步率",
-    "Reviews match the result": "个评估与结果相符"
+    "Reviews match the result": "评估与结果相符"
 }
