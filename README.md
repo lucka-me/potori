@@ -1,7 +1,6 @@
 <h1 align=center><img height=90px src="./assets/icon.svg" link="#"/></h1>
 
 [![Release](https://img.shields.io/github/v/release/lucka-me/potori?include_prereleases)](https://github.com/lucka-me/potori/releases/latest "Last release") [![Demo](https://img.shields.io/website?down_message=offline&up_message=online&url=https%3A%2F%2Flucka.moe%2Fpotori)](https://lucka.moe/potori "Demo") [![](https://img.shields.io/badge/author-Lucka-2578B5.svg)](https://lucka.moe "Author") [![License](https://img.shields.io/github/license/lucka-me/potori)](./LICENSE "License")  
-<!--![](https://img.shields.io/badge/safari-support-brightgreen.svg) ![](https://img.shields.io/badge/chrome-support-brightgreen.svg) ![](https://img.shields.io/badge/firefox-support-brightgreen.svg) ![](https://img.shields.io/badge/edge-support-brightgreen.svg) ![](https://img.shields.io/badge/ie-broken-red.svg) ![](https://img.shields.io/badge/opera-support-brightgreen.svg)-->  
 [![Telegram Channel](https://img.shields.io/badge/telegram-channel-37aee2)](https://t.me/potori "Telegram Channel")
 
 ## Description
@@ -31,7 +30,7 @@ Since Niantic launched the Niantic Wayfarer which contains a nomination manager,
   Partly done in `0.5.0`
 - [ ] Build with Webpack  
   Ready in `0.7.0`
-- [ ] Convert to TypeScript
+- [ ] Convert to TypeScript  
   Ready in `0.7.0`
 - [ ] Update [document](https://github.com/lucka-me/potori-docs)
 - [ ] A new logo
@@ -46,7 +45,7 @@ Since Niantic launched the Niantic Wayfarer which contains a nomination manager,
 - [Chart.js](https://www.chartjs.org)  
   Display charts.
 - [Google Drive API](https://developers.google.com/drive/api/v3/about-sdk)  
-  Save / load data in Google Drive.
+  Access data in Google Drive.
 - [Firebase JavaScript SDK](https://firebase.google.com/docs/web/setup)  
   Access Brainstorming database.
 
