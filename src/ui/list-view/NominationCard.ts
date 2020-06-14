@@ -123,7 +123,7 @@ class NominationCard {
                 textarea.select();
                 document.execCommand('copy');
                 document.body.removeChild(textarea);
-                AlertDialog.open(i18next.t('Brainstorming ID copied:', { id: nomination.id }));
+                AlertDialog.open(i18next.t('message:Brainstorming ID copied:', { id: nomination.id }));
             });
         }
 

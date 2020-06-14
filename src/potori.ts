@@ -14,8 +14,8 @@ i18next
         fallbackLng: 'en-US',
         keySeparator: false,
         resources: translations,
-        ns: ["translations"],
-        defaultNS: "translations",
+        ns: ['general', 'message'],
+        defaultNS: 'general',
     });
 
 Service.init();

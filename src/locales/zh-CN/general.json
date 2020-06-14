@@ -7,17 +7,6 @@
     "Duplicated": "重复",
     "Too Close": "过近",
 
-    "Service": "",
-    "Failed to parse as Nomination List": "无法解析为提名列表。",
-    "Failed to parse as Brainstorming Data": "无法解析为Brainstorming数据。",
-    "No Nomination to save.": "没有提名。",
-    "Uploaded.": "已上传。",
-    "Unable to upload Nomination List.": "无法上传提名列表。",
-    "Unable to upload Brainstorming Data.": "无法上传Brainstorming数据。",
-    "Unable to parse the code.": "无法解析代码。",
-    "Invalid data.": "数据无效。",
-    "Brainstorming Data updated.": "Brainstorming数据已更新。",
-
     "BrainstormingKit": "",
     "Quality": "质量",
     "Description": "描述",
@@ -25,9 +14,6 @@
     "Uniqueness": "独特",
     "Safety": "安全",
     "Location": "位置",
-
-    "FileKit": "FileKit",
-    "Failed to open file.": "无法打开文件。",
 
     "AppBar": "",
     "Open"  : "打开",
@@ -42,7 +28,6 @@
     "Menu": "菜单",
 
     "NominationCard": "",
-    "Brainstorming ID copied:": "已复制Brainstorming ID：{{id}}",
     "Intel Map": "情报地图",
 
     "Dialogs": "",
@@ -55,10 +40,8 @@
     "Blog": "博客",
 
     "DetailsDialog": "",
-    "Unable to query the location.": "无法查询位置。",
     "Result Time": "结果时间",
     "Reason": "原因",
-    "Invalid DateTime.": "时间无效。",
 
     "ImportDialog": "",
     "JSON": "JSON",

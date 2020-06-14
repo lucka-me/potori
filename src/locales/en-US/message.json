@@ -1,0 +1,22 @@
+{
+    "Service": "",
+    "Failed to parse as Nomination List": "Failed to parse as Nomination List.",
+    "Failed to parse as Brainstorming Data": "Failed to parse as Brainstorming Data.",
+    "No Nomination to save.": "No Nomination to save.",
+    "Uploaded.": "Uploaded.",
+    "Unable to upload Nomination List.": "Unable to upload Nomination List.",
+    "Unable to upload Brainstorming Data.": "Unable to upload Brainstorming Data.",
+    "Unable to parse the code.": "Unable to parse the code.",
+    "Invalid data.": "Invalid data.",
+    "Brainstorming Data updated.": "Brainstorming Data updated.",
+
+    "FileKit": "",
+    "Failed to open file.": "Failed to open file.",
+
+    "NominationCard": "",
+    "Brainstorming ID copied": "Brainstorming ID copied: {{id}}",
+
+    "DetailsDialog": "",
+    "Unable to query the location.": "Unable to query the location.",
+    "Invalid DateTime.": "Invalid DateTime."
+}

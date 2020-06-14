@@ -7,17 +7,6 @@
     "Duplicated": "Duplicated",
     "Too Close": "Too Close",
 
-    "Service": "",
-    "Failed to parse as Nomination List": "Failed to parse as Nomination List.",
-    "Failed to parse as Brainstorming Data": "Failed to parse as Brainstorming Data.",
-    "No Nomination to save.": "No Nomination to save.",
-    "Uploaded.": "Uploaded.",
-    "Unable to upload Nomination List.": "Unable to upload Nomination List.",
-    "Unable to upload Brainstorming Data.": "Unable to upload Brainstorming Data.",
-    "Unable to parse the code.": "Unable to parse the code.",
-    "Invalid data.": "Invalid data.",
-    "Brainstorming Data updated.": "Brainstorming Data updated.",
-
     "BrainstormingKit": "",
     "Quality": "Quality",
     "Description": "Description",
@@ -25,9 +14,6 @@
     "Uniqueness": "Uniqueness",
     "Safety": "Safety",
     "Location": "Location",
-
-    "FileKit": "",
-    "Failed to open file.": "Failed to open file.",
 
     "AppBar": "",
     "Open": "Open",
@@ -42,7 +28,6 @@
     "Menu": "Menu",
 
     "NominationCard": "",
-    "Brainstorming ID copied:": "Brainstorming ID copied: {{id}}",
     "Intel Map": "Intel Map",
 
     "Dialogs": "",
@@ -55,10 +40,8 @@
     "Blog": "Blog",
 
     "DetailsDialog": "",
-    "Unable to query the location.": "Unable to query the location.",
     "Result Time": "Result Time",
     "Reason": "Reason",
-    "Invalid DateTime.": "Invalid DateTime.",
 
     "ImportDialog": "",
     "JSON": "JSON",
