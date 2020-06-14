@@ -128,12 +128,6 @@ class Service {
         this.bs.init();
 
         this.mari.events.finished = () => this.finish();
-
-        // Google Analytics
-        // window.dataLayer = window.dataLayer || [];
-        // const gtag = function() { dataLayer.push(arguments); };
-        // gtag('js', new Date());
-        // gtag('config', 'UA-167399687-2');
     }
 
     startMail() {
