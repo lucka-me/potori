@@ -107,11 +107,12 @@ class Service {
 
     init() {
         this.auth.events.authStatusChanged = (signedIn) => {
+            if (!signedIn) {
+                this.nominations = [];
+            }
             this.events.authStatusChanged(signedIn);
             if (signedIn) {
                 this.startMail();
-            } else {
-                this.nominations = [];
             }
         };
         this.auth.events.onerror = (error) => {
