@@ -92,6 +92,8 @@ module.exports = {
           content: '0; url=https://lucka.moe/potori/docs',
         },
       },
+      cdnModule: false,
+      chunks: [],
     }),
     new CopyPlugin({
       patterns: [
