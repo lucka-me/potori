@@ -13,7 +13,7 @@ import Nomination   from '../service/Nomination';
 
 class UIKit {
 
-    dark        = Dark;
+    dark        = new Dark();
     appBar      = new AppBar();
     progress    = new Progress();
     dashboard   = new Dashboard();

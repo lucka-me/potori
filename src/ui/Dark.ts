@@ -18,4 +18,4 @@ class Dark extends UIKitPrototype {
     }
 }
 
-export default new Dark();
+export default Dark;
