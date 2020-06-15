@@ -1,8 +1,10 @@
 const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
+
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const WebpackCdnPlugin = require('webpack-cdn-plugin');
 
 module.exports = {
@@ -38,11 +40,21 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
+    new BundleAnalyzerPlugin(),
     new MiniCssExtractPlugin({
       filename: 'css/potori.css',
     }),
     new WebpackCdnPlugin({
       modules: [
+        {
+          name: 'i18next',
+          path: 'i18next.min.js'
+        },
+        {
+          name: 'i18next-browser-languagedetector',
+          var:  'i18nextBrowserLanguageDetector',
+          path: 'i18nextBrowserLanguageDetector.min.js'
+        },
         {
           name: 'moment',
           cdn:  'moment.js',
