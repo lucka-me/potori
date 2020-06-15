@@ -2,9 +2,7 @@ import mapboxgl from 'mapbox-gl';
 import { formField, radio, ripple, select, textField } from "material-components-web";
 
 import AlertDialog from './AlertDialog';
-import Dark from '../Dark';
 import DialogPrototype, { dialog } from './DialogPrototype';
-import { MapStyle } from '../dashboard/MapCard';
 import Nomination, { LngLat } from '../../service/Nomination';
 import Service from '../../service/Service';
 import StatusKit from '../../service/StatusKit';
@@ -66,7 +64,7 @@ class DetailsDialogMap extends UIKitPrototype {
 
         this.ctrl = new mapboxgl.Map({
             container: elementMap,
-            style: MapStyle[Dark.enabled ? 'dark' : 'default'],
+            style: `mapbox:${getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim()}`,
         });
         this.ctrl.addControl(new mapboxgl.NavigationControl());
     }
@@ -421,7 +419,7 @@ class DetailsDialog extends DialogPrototype {
 
     updateStyle() {
         if (!this.map.ctrl) return;
-        this.map.ctrl.setStyle(MapStyle[Dark.enabled ? 'dark' : 'default']);
+        this.map.ctrl.setStyle(`mapbox:${getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim()}`);
     }
 }
 

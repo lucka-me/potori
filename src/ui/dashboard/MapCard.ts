@@ -1,15 +1,9 @@
 import mapboxgl from 'mapbox-gl';
 
-import Dark from '../Dark';
 import { DashboardPrototype, Eli } from './prototypes';
 import FilterCard from './FilterCard';
 import Nomination, { LngLat } from '../../service/Nomination';
 import StatusKit from '../../service/StatusKit';
-
-const MapStyle = {
-    default: 'mapbox://styles/mapbox/streets-v11',
-    dark: 'mapbox://styles/mapbox/dark-v10',
-}
 
 interface MapCardEvents {
     focus: (id: string) => void,
@@ -44,10 +38,9 @@ class MapCard extends DashboardPrototype {
             cssTest: 'min-width: 300px;',
         }, [ elementMap ]);
         this.parent.appendChild(this.root);
-
         this.ctrl = new mapboxgl.Map({ 
             container: elementMap,
-            style: MapStyle[Dark.enabled ? 'dark' : 'default']
+            style: `mapbox:${getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim()}`
         });
         this.ctrl.once('load', () => {
             this.executeTasks();
@@ -82,7 +75,7 @@ class MapCard extends DashboardPrototype {
             this.tasks.push(() => this.updateStyle());
             return;
         }
-        this.ctrl.setStyle(MapStyle[Dark.enabled ? 'dark' : 'default']);
+        this.ctrl.setStyle(`mapbox:${getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim()}`);
         this.ctrl.once('load', () => {
             this.update(this.events.styleLoaded());
         });
@@ -199,7 +192,7 @@ class MapCard extends DashboardPrototype {
                 'text-size': 12,
             },
             paint: {
-                'text-color': Dark.enabled ? '#FFF' : '#000',
+                'text-color': getComputedStyle(document.documentElement).getPropertyValue('--mdc-theme-on-surface'),
             }
         });
         this.ctrl.addLayer({
@@ -273,4 +266,3 @@ class MapCard extends DashboardPrototype {
 }
 
 export default MapCard;
-export { MapStyle };

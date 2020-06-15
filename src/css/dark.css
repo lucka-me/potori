@@ -6,6 +6,8 @@
         --mdc-theme-on-surface: #FFF !important;
         --mdc-theme-text-primary-on-light: #FFF !important;
         --mdc-theme-text-disabled-on-light: rgba(255, 255, 255, 0.5) !important;
+
+        --map-style: //styles/mapbox/dark-v10
     }
 
     body {

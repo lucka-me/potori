@@ -5,8 +5,8 @@ import translations from "./locales";
 import Service from "./service/Service";
 import UIKit from "./ui/UIKit";
 
-import '../css/extended.css'
-import '../css/dark.css'
+import './css/extended.css'
+import './css/dark.css'
 
 i18next
     .use(LanguageDetector)

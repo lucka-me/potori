@@ -11,6 +11,8 @@
     --color-rejected: #B0373C;
     --color-rejected--dark: #7A0016;
     --color-rejected--light: #E76866;
+
+    --map-style: //styles/mapbox/streets-v11
 }
 
 .status-pending  { color: var(--color-pending ) !important; }
