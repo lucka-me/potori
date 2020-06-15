@@ -1,4 +1,4 @@
-[submodule "intro"]
-	path = intro
+[submodule "docs"]
+	path = docs
 	url = https://github.com/lucka-me/potori-docs.git
 	branch = gh-pages
