@@ -4,7 +4,6 @@ import { DashboardChartProtorype, Eli, Nomination, i18next } from './prototypes'
 import StatusKit from '../../service/StatusKit';
 
 class StatsTypeCard extends DashboardChartProtorype {
-    constructor() { super(); }
 
     render() {
         const canvasChart = Eli.build('canvas', { className: 'canvas-chart--v' });

@@ -8,10 +8,6 @@ class Progress extends UIKitPrototype {
     ctrl: linearProgress.MDCLinearProgress = null;
     root: HTMLDivElement = null;
 
-    constructor() {
-        super();
-    }
-
     init(parent: HTMLElement) {
         super.init(parent);
         this.render();

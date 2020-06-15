@@ -26,10 +26,6 @@ export class DashboardChartProtorype extends DashboardPrototype {
 
     chart: Chart = null;
 
-    constructor() {
-        super();
-    }
-
     static get color() {
         return {
             border: 'rgba(0, 0, 0, 0.2)',

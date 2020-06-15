@@ -19,10 +19,6 @@ class ListView extends UIKitPrototype {
         openDetails:    () => { },
     };
 
-    constructor() {
-        super();
-    }
-
     init(parent: HTMLElement) {
         super.init(parent);
         this.render();
