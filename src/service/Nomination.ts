@@ -42,7 +42,7 @@ class Nomination {
     }
 
     get resultDateString(): string {
-        return new Date(this.restoreTime).toLocaleDateString();
+        return new Date(this.resultTime).toLocaleDateString();
     }
 
     get intervalString(): string {
