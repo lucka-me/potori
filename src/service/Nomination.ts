@@ -58,6 +58,7 @@ class Nomination {
 
     get json(): any {
         let json: any = {
+            id: this.id,
             title: this.title,
             image: this.image,
             status: this.status.code,
@@ -75,7 +76,7 @@ class Nomination {
         return json;
     }
 
-    static from(json: any) {
+    static from(json: any): Nomination {
         const nomination = new Nomination();
         nomination.id = json.id;
         nomination.title = json.title;
