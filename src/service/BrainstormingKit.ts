@@ -30,8 +30,6 @@ class BrainstormingKit {
     reference: firebase.database.Reference = null;
     data: Map<string, any> = new Map();
 
-    constructor() { }
-
     init() {
         const app = firebase.initializeApp({ databaseURL: 'https://oprbrainstorming.firebaseio.com' });
         this.reference = app.database().ref('c/reviews/');

@@ -1,7 +1,7 @@
 {
   "name": "potori",
   "version": "0.7.0",
-  "description": "Web app to gather and visualize Portal nominations from Gmail inbox",
+  "description": "Web App to Visualize Ingress Nominations",
   "main": "src/potori.js",
   "scripts": {
     "postinstall": "ts-node ./scripts/build-locales.ts",

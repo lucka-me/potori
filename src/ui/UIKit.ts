@@ -20,8 +20,6 @@ class UIKit {
     list        = new ListView();
     dialog      = new Dialog();
 
-    constructor() {}
-
     init() {
         mapboxgl.accessToken = 'pk.eyJ1IjoibHVja2EtbWUiLCJhIjoiY2p2NDk5NmRvMHFreTQzbzduemM1MHV4cCJ9.7XGmxnEJRoCDr-i5BBmBfw';
 

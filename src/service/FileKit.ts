@@ -10,8 +10,6 @@ class FileConst {
 }
 
 class LocalFileKit {
-    constructor() {}
-
     open(onload: (result: string) => void, onerror: (message: string) => void) {
         const element = Eli.build('input', {
             cssTest: 'display:none;',
@@ -52,8 +50,6 @@ class LocalFileKit {
 class GoogleDriveFileKit {
 
     ids: Map<string, string> = new Map();
-
-    constructor() { }
 
     static get folder() { return 'appDataFolder' }
 
@@ -132,11 +128,8 @@ class GoogleDriveFileKit {
 }
 
 class FileKit {
-
     local       = new LocalFileKit();
     googleDrive = new GoogleDriveFileKit();
-
-    constructor() { }
 }
 
 export default FileKit;
