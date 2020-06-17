@@ -5,7 +5,7 @@
             "key": "pending",
             "code": 0,
             "title": "Pending",
-            "icon":  "access_time",
+            "icon":  "\uf017",
             "queries": [
                 [
                     "redacted",
@@ -21,7 +21,7 @@
             "key": "accepted",
             "code": 1,
             "title": "Accepted",
-            "icon":  "check",
+            "icon":  "\uf00c",
             "queries": [
                 [
                     "redacted",
@@ -37,7 +37,7 @@
             "key": "rejected",
             "code": 101,
             "title": "Rejected",
-            "icon":  "close",
+            "icon":  "\uf00d",
             "queries": [
                 [
                     "redacted",
@@ -55,7 +55,7 @@
             "key": "undeclared",
             "code": 101,
             "title": "Undeclared",
-            "icon":  "close",
+            "icon":  "\uf00d",
             "color": "#B0373C",
             "keywords": [
                 [ "redacted", [] ],
@@ -66,7 +66,7 @@
             "key": "duplicated",
             "code": 102,
             "title": "Duplicated",
-            "icon":  "filter_none",
+            "icon":  "\uf24d",
             "color": "#5E90B8",
             "keywords": [
                 [
@@ -80,7 +80,7 @@
             "key": "tooClose",
             "code": 103,
             "title": "Too Close",
-            "icon":  "compare_arrows",
+            "icon":  "\uf547",
             "color": "#009345",
             "keywords": [
                 [

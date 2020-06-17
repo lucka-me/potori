@@ -68,9 +68,9 @@ class AppBarMenu extends UIKitPrototype {
 }
 
 const AppBarActions = {
-    view:   { key: 'view'   , title: 'List'     , icon: 'view_list'         },
-    signin: { key: 'signin' , title: 'Sign In'  , icon: 'account_circle'    },
-    menu:   { key: 'menu'   , title: 'Menu'     , icon: 'more_vert'         },
+    view:   { key: 'view'   , title: 'List'     , icon: '\uf00b' },
+    signin: { key: 'signin' , title: 'Sign In'  , icon: '\uf2bd' },
+    menu:   { key: 'menu'   , title: 'Menu'     , icon: '\uf142' },
 };
 
 class AppBar extends UIKitPrototype {
@@ -98,7 +98,7 @@ class AppBar extends UIKitPrototype {
         });
         for (const value of Object.values(AppBarActions)) {
             const elementAction = Eli.build('button', {
-                className: 'mdc-icon-button material-icons',
+                className: 'fa mdc-icon-button',
                 title: i18next.t(value.title),
                 innerHTML: value.icon,
             });
@@ -145,7 +145,7 @@ class AppBar extends UIKitPrototype {
     switchView() {
         const actionView = this.actions.get(AppBarActions.view.key);
         const switchToList = actionView.innerHTML === 'view_list';
-        actionView.innerHTML = switchToList ? 'dashboard' : 'view_list';
+        actionView.innerHTML = switchToList ? '\uf3fd' : '\uf00b';
         actionView.title = i18next.t(switchToList ? 'Dashboard' : 'List');
     }
 }

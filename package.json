@@ -25,6 +25,7 @@
     "moment": "^2.26.0"
   },
   "devDependencies": {
+    "@fortawesome/fontawesome-free": "^5.13.0",
     "@types/chart.js": "^2.9.21",
     "@types/copy-webpack-plugin": "^6.0.0",
     "@types/gapi": "0.0.39",

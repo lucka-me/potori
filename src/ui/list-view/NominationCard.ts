@@ -23,7 +23,7 @@ class NominationCard {
         contentsInfo.push(Eli.build('span', {
             className: classNameInfoContent,
         }, [
-            Eli.icon('arrow_upward'),
+            Eli.icon('&#xf062'),
             Eli.build('span', {
                 className: 'margin-l--4',
                 innerHTML: nomination.confirmedDateString,
@@ -34,7 +34,7 @@ class NominationCard {
             contentsInfo.push(Eli.build('span', {
                 className: classNameInfoContent,
             }, [
-                Eli.icon('restore'),
+                Eli.icon('&#xf2f9'),
                 Eli.build('span', {
                     className: 'margin-l--4',
                     innerHTML: nomination.restoreIntervalString,
@@ -44,7 +44,7 @@ class NominationCard {
         contentsInfo.push(Eli.build('span', {
             className: classNameInfoContent,
         }, [
-            Eli.icon('access_time'),
+            Eli.icon('&#xf017'),
             Eli.build('span', {
                 className: 'margin-l--4',
                 id: 'text-card-nomination-interval',
@@ -54,7 +54,7 @@ class NominationCard {
             className: classNameInfoContent,
             id: 'box-card-nomination-result',
         }, [
-            Eli.icon('check'),
+            Eli.icon('&#xf00c'),
             Eli.build('span', {
                 className: 'margin-l--4',
             }),
@@ -104,7 +104,7 @@ class NominationCard {
         }, [
             Eli.build('div', { className: 'mdc-button__ripple' }),
             Eli.build('i', {
-                className: 'material-icons mdc-button__icon',
+                className: 'far fa-fw mdc-button__icon',
             }),
             Eli.build('span', { className: 'mdc-button__label' }),
         ]);
@@ -129,7 +129,7 @@ class NominationCard {
 
         const actionIcons = [];
         const classNameAction = [
-            'material-icons',
+            'far',
             'mdc-icon-button',
             'mdc-card__action',
             'mdc-card__action--icon'
@@ -139,7 +139,7 @@ class NominationCard {
             title: i18next.t('Location'),
             id: 'button-card-nomination-location',
             hidden: true,
-            innerHTML: 'place',
+            innerHTML: '&#xf3c5',
         });
         const actionLocation = new ripple.MDCRipple(elementActionLocation);
         actionLocation.unbounded = true;
@@ -152,7 +152,7 @@ class NominationCard {
                 title: i18next.t('Intel Map'),
                 id: 'button-card-nomination-intel',
                 hidden: true,
-                innerHTML: 'map',
+                innerHTML: '&#xf279',
             });
             const actionIntel = new ripple.MDCRipple(elementActionIntel);
             actionIntel.unbounded = true;

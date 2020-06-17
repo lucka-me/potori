@@ -40,7 +40,7 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    new BundleAnalyzerPlugin(),
+    //new BundleAnalyzerPlugin(),
     new MiniCssExtractPlugin({
       filename: 'css/potori.css',
     }),
@@ -85,6 +85,12 @@ module.exports = {
           path:   'material-components-web.min.js',
           style:  'material-components-web.min.css',
         },
+        {
+          name:     '@fortawesome/fontawesome-free',
+          cdn:      'font-awesome',
+          cssOnly:  true,
+          style:    'css/all.min.css'
+        }
       ],
       prodUrl: 'https://cdnjs.cloudflare.com/ajax/libs/:name/:version/:path'
     }),

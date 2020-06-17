@@ -16,9 +16,9 @@ class Snackbar extends UIKitPrototype {
             className: 'mdc-snackbar__actions'
         }, [
             Eli.build('button', {
-                className: 'mdc-icon-button mdc-snackbar__dismiss material-icons',
+                className: 'far mdc-icon-button mdc-snackbar__dismiss',
                 title: i18next.t('Dismiss'),
-                innerHTML: 'close',
+                innerHTML: '&#xf00d',
             }),
         ]);
         const element = Eli.build('div', { className: 'mdc-snackbar' }, [

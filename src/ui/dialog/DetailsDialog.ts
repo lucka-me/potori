@@ -17,14 +17,17 @@ class DetailsDialogMap extends UIKitPrototype {
     buttons = {
         edit: {
             root: null as HTMLButtonElement,
+            icon: '\uf044',
             clicked: () => this.edit(),
         },
         search: {
             root: null as HTMLButtonElement,
+            icon: '\uf002',
             clicked: () => this.search(),
         },
         delete: {
             root: null as HTMLButtonElement,
+            icon: '\uf1f8',
             clicked: () => this.delete(),
         },
     };
@@ -36,10 +39,10 @@ class DetailsDialogMap extends UIKitPrototype {
 
     render() {
         const mapButtons = [];
-        for (const [key, value] of Object.entries(this.buttons)) {
+        for (const value of Object.values(this.buttons)) {
             value.root = Eli.build('button', {
-                className: 'mdc-icon-button material-icons',
-                innerHTML: key,
+                className: 'far mdc-icon-button',
+                innerHTML: value.icon,
             });
             const ctrl = new ripple.MDCRipple(value.root);
             ctrl.unbounded = true;
@@ -77,7 +80,7 @@ class DetailsDialogMap extends UIKitPrototype {
             this.marker.setLngLat(this.nomination.lngLat).addTo(this.ctrl);
             this.ctrl.jumpTo({ center: this.nomination.lngLat, zoom: 16 });
             this.buttons.delete.root.disabled = false;
-            this.buttons.edit.root.innerHTML = 'edit';
+            this.buttons.edit.root.innerHTML = '\uf044';
         }
         this.buttons.search.root.disabled = false;
     }
@@ -89,7 +92,7 @@ class DetailsDialogMap extends UIKitPrototype {
                 .setDraggable(true)
                 .addTo(this.ctrl);
             this.buttons.delete.root.disabled = false;
-            this.buttons.edit.root.innerHTML = 'edit';
+            this.buttons.edit.root.innerHTML = '\uf044';
         } else {
             this.marker.setDraggable(true);
         }
@@ -107,7 +110,7 @@ class DetailsDialogMap extends UIKitPrototype {
             }
             this.marker.setDraggable(false);
             this.ctrl.easeTo({ center: lngLat, zoom: 16 });
-            this.buttons.edit.root.innerHTML = 'edit';
+            this.buttons.edit.root.innerHTML = '\uf044';
             this.buttons.search.root.disabled = false;
             this.buttons.delete.root.disabled = false;
         };
@@ -123,7 +126,7 @@ class DetailsDialogMap extends UIKitPrototype {
     delete() {
         if (this.marker) this.marker.remove();
         this.marker = null;
-        this.buttons.edit.root.innerHTML = 'add';
+        this.buttons.edit.root.innerHTML = '\uf067';
         this.buttons.delete.root.disabled = true;
     }
 }
@@ -206,7 +209,7 @@ class DetailsDialog extends DialogPrototype {
                 elementRadio,
                 Eli.build('label', {
                     for: radioId,
-                    className: `material-icons status-${key}`,
+                    className: `far status-${key}`,
                     innerHTML: StatusKit.types.get(key).icon,
                 }),
             ]);
@@ -230,11 +233,11 @@ class DetailsDialog extends DialogPrototype {
         }, [
             Eli.build('i', {
                 className: [
-                    'material-icons',
+                    'fa',
                     'mdc-text-field__icon',
                     'mdc-text-field__icon--leading'
                 ].join(' '),
-                innerHTML: 'event',
+                innerHTML: '\uf073',
             }),
             Eli.build('input', {
                 type: 'datetime-local',
@@ -292,7 +295,7 @@ class DetailsDialog extends DialogPrototype {
                     'flex-align-items--center'
                 ].join(' '),
             }, [
-                Eli.icon('arrow_upward'), this.textConfirmedTime,
+                Eli.icon('&#xf062'), this.textConfirmedTime,
             ]),
             Eli.build('div', {
                 className: [

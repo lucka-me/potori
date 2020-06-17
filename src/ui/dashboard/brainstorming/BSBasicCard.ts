@@ -33,7 +33,7 @@ class BSBasicCard extends DashboardBsPrototype {
             disabled: true,
         }, [
             Eli.build('div', { className: 'mdc-button__ripple' }),
-            Eli.build('i', { className: 'material-icons mdc-button__icon', innerHTML: 'refresh' }),
+            Eli.build('i', { className: 'far fa-fw mdc-button__icon', innerHTML: '\uf2f1' }),
             Eli.build('span', { className: 'mdc-button__label', innerHTML: i18next.t('Refresh') }),
         ]);
         const rippleRefresh = new ripple.MDCRipple(this.actionRefresh);
@@ -45,14 +45,14 @@ class BSBasicCard extends DashboardBsPrototype {
 
         const actionClaer = Eli.build('button', {
             className: [
-                'material-icons',
+                'far',
                 'mdc-icon-button',
                 'mdc-card__action',
                 'mdc-card__action--icon'
             ].join(' '),
             title: i18next.t('Clear'),
             id: 'button-card-nomination-location',
-            innerHTML: 'delete',
+            innerHTML: '\uf1f8',
         });
         const rippleClear = new ripple.MDCRipple(actionClaer);
         rippleClear.unbounded = true;

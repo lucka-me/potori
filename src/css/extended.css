@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Roboto:300,400,500");
+
 :root {
     --mdc-theme-primary: #3b1e5f !important;
     --mdc-theme-secondary: #2578B5 !important;
@@ -88,6 +90,11 @@ body.fullheight {
     background-color: var(--mdc-theme-secondary) !important;
 }
 
+.fa.mdc-icon-button,
+.far.mdc-icon-button {
+    font-size: 18px;
+}
+
 .mdc-card {
     margin: 4px 8px;
     flex-basis: auto;
@@ -130,10 +137,7 @@ textarea.code {
 }
 
 .mdc-switch-box > label {
-    margin-left: 0.3rem;
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
+    margin-left: 0.6rem;
 }
 
 /* Data Table */
