@@ -99,7 +99,11 @@ class MapCard extends DashboardPrototype {
             this.tasks.push(() => this.easeTo(center));
             return;
         }
-        this.ctrl.easeTo({ center: center });
+        const zoom = this.ctrl.getZoom();
+        this.ctrl.easeTo({
+            center: center,
+            zoom: zoom < 15 ? 15 : zoom,
+        });
     }
 
     resize() {
@@ -120,9 +124,9 @@ class MapCard extends DashboardPrototype {
         for (const nomination of nominations) {
             if (!nomination.lngLat) continue;
             if (nomination.lngLat.lng > boundsNE.lng) boundsNE.lng = nomination.lngLat.lng;
-            else if (nomination.lngLat.lng < boundsSW.lng) boundsSW.lng = nomination.lngLat.lng;
+            if (nomination.lngLat.lng < boundsSW.lng) boundsSW.lng = nomination.lngLat.lng;
             if (nomination.lngLat.lat > boundsNE.lat) boundsNE.lat = nomination.lngLat.lat;
-            else if (nomination.lngLat.lat < boundsSW.lat) boundsSW.lat = nomination.lngLat.lat;
+            if (nomination.lngLat.lat < boundsSW.lat) boundsSW.lat = nomination.lngLat.lat;
         }
         if (boundsSW.lng > -181) {
             this.ctrl.fitBounds([boundsSW, boundsNE], { linear: true });
