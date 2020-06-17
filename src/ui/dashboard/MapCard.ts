@@ -76,7 +76,7 @@ class MapCard extends DashboardPrototype {
             return;
         }
         this.ctrl.setStyle(`mapbox:${getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim()}`);
-        this.ctrl.once('load', () => {
+        this.ctrl.once('idle', () => {
             this.update(this.events.styleLoaded());
         });
     }
