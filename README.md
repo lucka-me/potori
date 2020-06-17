@@ -14,6 +14,8 @@ $ npm install
 $ npm start
 ```
 
+Before `npm start`, you may need to fix `@type/gapi.client.gmail` by following [this PR](DefinitelyTyped/DefinitelyTyped/pull/45380).
+
 Open `http://localhost:8000` in browser.
 
 ## Notice
