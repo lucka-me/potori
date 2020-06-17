@@ -13,25 +13,19 @@ import Nomination   from '../service/Nomination';
 
 class UIKit {
 
-    dark        = new Dark();
     appBar      = new AppBar();
     progress    = new Progress();
     dashboard   = new Dashboard();
     list        = new ListView();
     dialog      = new Dialog();
 
+    dark        = new Dark();
+
     init() {
         mapboxgl.accessToken = 'pk.eyJ1IjoibHVja2EtbWUiLCJhIjoiY2p2NDk5NmRvMHFreTQzbzduemM1MHV4cCJ9.7XGmxnEJRoCDr-i5BBmBfw';
 
         const body = document.body;
         body.className = 'mdc-typography fullheight flex-box-col';
-
-        // Dark
-        this.dark.changed = () => {
-            this.dashboard.updateStyle();
-            this.dialog.details.updateStyle();
-        };
-        this.dark.init(body);
 
         // AppBar
         this.appBar.events.set('view'   , () => this.switchView());
@@ -117,6 +111,13 @@ class UIKit {
             this.update(nomination);
         }
         this.dialog.init(body);
+
+        // Dark
+        this.dark.changed = () => {
+            this.dashboard.updateStyle();
+            this.dialog.details.updateStyle();
+        };
+        this.dark.init(body);
     }
 
     linkService() {
