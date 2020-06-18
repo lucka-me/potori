@@ -1,5 +1,3 @@
-import { app } from "firebase";
-
 const path = require('path');
 
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
@@ -42,7 +40,7 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    //new BundleAnalyzerPlugin(),
+    new BundleAnalyzerPlugin(),
     new MiniCssExtractPlugin({
       filename: 'css/potori.[hash].css',
     }),

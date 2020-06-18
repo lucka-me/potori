@@ -18,7 +18,7 @@ class LocalFileKit {
         const opened = (event: Event) => {
             const file = (event.target as HTMLInputElement).files[0];
             if (!file) {
-                onerror(i18next.t('message:Failed to open file.'));
+                onerror(i18next.t('message:Failed to open file'));
                 return;
             }
             const fileReader = new FileReader();
