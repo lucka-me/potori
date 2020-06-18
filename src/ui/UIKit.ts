@@ -138,6 +138,12 @@ class UIKit {
             this.dialog.details.updateStyle();
         };
         this.dark.init(body);
+
+        // Google Analytics
+        (window as any).dataLayer = (window as any).dataLayer || [];
+        function gtag(..._: any[]) { (window as any).dataLayer.push(arguments); };
+        gtag('js', new Date());
+        gtag('config', 'UA-167399687-2');
     }
 
     linkService() {
