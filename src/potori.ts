@@ -17,6 +17,7 @@ i18next
         ns: ['general', 'message'],
         defaultNS: 'general',
     });
+document.documentElement.lang = i18next.language;
 
 Service.init();
 const ui = new UIKit();

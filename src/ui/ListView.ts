@@ -48,7 +48,7 @@ class ListView extends UIKitPrototype {
 
     show(nominations: Array<Nomination>) {
         this.clear();
-        for (const nomination of nominations) {
+        const cards = nominations.map((nomination) => {
             const card = NominationCard.build(nomination, this.now, {
                 openDetails: () => this.events.openDetails(nomination),
                 focus: () => { console.log('focus');this.events.focus(nomination) },
@@ -57,8 +57,9 @@ class ListView extends UIKitPrototype {
             if (nomination.lngLat) {
                 NominationCard.updateLocation(nomination, card);
             }
-            this.root.append(card);
-        }
+            return card;
+        });
+        this.root.append(...cards);
     }
 
     updateVisibility(nomination: Nomination, card: HTMLDivElement) {

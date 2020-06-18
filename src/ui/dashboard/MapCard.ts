@@ -19,11 +19,6 @@ class MapCard extends DashboardPrototype {
     }
     private tasks: Array<() => void> = [];
 
-    init(parent: HTMLElement) {
-        super.init(parent);
-        this.render();
-    }
-
     render() {
         const elementMap = Eli.build('div', {
             cssText: [
@@ -42,12 +37,10 @@ class MapCard extends DashboardPrototype {
             container: elementMap,
             style: `mapbox:${getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim()}?optimize=true`
         });
-        this.ctrl.once('load', () => {
-            this.executeTasks();
-            this.ctrl.resize();
-        });
+        this.ctrl.on('idle', () => this.executeTasks());
         this.ctrl.addControl(new mapboxgl.NavigationControl());
         this.ctrl.addControl(new mapboxgl.FullscreenControl());
+        this.resize();
     }
 
     get loaded() {
@@ -76,9 +69,7 @@ class MapCard extends DashboardPrototype {
             return;
         }
         this.ctrl.setStyle(`mapbox:${getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim()}?optimize=true`);
-        this.ctrl.once('idle', () => {
-            this.update(this.events.styleLoaded());
-        });
+        this.update(this.events.styleLoaded());
     }
 
     setTypeVisible(type: string, visible: boolean) {
@@ -91,8 +82,6 @@ class MapCard extends DashboardPrototype {
         this.ctrl.setLayoutProperty(`potori-${type}-count`      , 'visibility', visibility);
         this.ctrl.setLayoutProperty(`potori-${type}-unclustered`, 'visibility', visibility);
     }
-
-    setVisible() { }
 
     easeTo(center: LngLat) {
         if (!this.loaded) {
@@ -147,7 +136,8 @@ class MapCard extends DashboardPrototype {
     }
 
     private executeTasks() {
-        while(this.tasks.length > 0) {
+        const count = this.tasks.length;
+        for (let i = 0; i < count; i++) {
             this.tasks.shift()();
         }
     }

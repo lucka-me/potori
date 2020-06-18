@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-US">
 
 <head>
     <meta charset="utf-8" />
     <title>Potori</title>
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no"/>
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="dark" />
-    <meta name=”theme-color” content="#3b1e5f" />
+    <% for (const [name, content] of Object.entries(htmlWebpackPlugin.options.meta)) { %>
+    <meta name="<%= name %>" content="<%= content %>"/>
+    <% } %>
     <link rel="icon" href="./assets/icon.svg" />
     <link rel="apple-touch-icon" href="./assets/icon-180.png" />
     <link rel="manifest" href="./manifest.json" />
 
     <!-- CSS -->
-    <% for (const css in htmlWebpackPlugin.files.css) { %>
-    <link href="<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet">
+    <% for (const css of htmlWebpackPlugin.files.css) { %>
+    <link href="<%= css %>" rel="stylesheet">
     <% } %>
     <!-- Scripts -->
     <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -27,11 +26,13 @@
     </script>
 
     <script defer src="https://apis.google.com/js/api.js"></script>
-    <% for (const js in htmlWebpackPlugin.files.js) { %>
-    <script defer src="<%= htmlWebpackPlugin.files.js[js] %>"></script>
+    <% for (const js of htmlWebpackPlugin.files.js) { %>
+    <script defer src="<%= js %>"></script>
     <% } %>
 </head>
 
-<body></body>
+<body>
+    <noscript>Potori requires JavaScript.</noscript>
+</body>
 
 </html>

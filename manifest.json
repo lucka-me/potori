@@ -1,6 +1,7 @@
 {
     "name": "Potori",
-    "description": "Gather and visualize your Ingress Portal nominations from Gmail inbox.",
+    "short_name": "Potori",
+    "description": "Web App to Visualize Ingress Nominations",
     "start_url": "/",
     "scope": "/",
     "display": "standalone",
@@ -8,13 +9,23 @@
     "theme_color": "#3b1e5f",
     "icons": [
         {
-            "src": "./assets/icon-maskable.svg",
+            "src": "./assets/icon-maskable.png",
             "sizes": "72x72 96x96 128x128 192x192 256x256 512x512",
             "purpose": "maskable"
         },
         {
-            "src": "./assets/icon.svg",
+            "src": "./assets/icon-maskable.svg",
+            "sizes": "513x513",
+            "purpose": "maskable"
+        },
+        {
+            "src": "./assets/icon.png",
             "sizes": "72x72 96x96 128x128 192x192 256x256 512x512",
+            "purpose": "any"
+        },
+        {
+            "src": "./assets/icon.svg",
+            "sizes": "513x513",
             "purpose": "any"
         }
     ]

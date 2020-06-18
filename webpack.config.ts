@@ -1,3 +1,5 @@
+import { app } from "firebase";
+
 const path = require('path');
 
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
@@ -98,7 +100,15 @@ module.exports = {
       inject: false,
       scriptLoading: 'defer',
       chunks: [ 'potori' ],
-      filename: 'index.html'
+      filename: 'index.html',
+      meta: {
+        'description' : 'Web App to Visualize Ingress Nominations',
+        'viewport'    : 'width=device-width, height=device-height, initial-scale=1',
+        'theme-color' : '#3b1e5f',
+
+        'apple-mobile-web-app-capable'          : 'yes',
+        'apple-mobile-web-app-status-bar-style' : 'dark',
+      },
     }),
     new HtmlWebpackPlugin({
       title: 'Redirecting',
