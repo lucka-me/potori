@@ -109,7 +109,10 @@ class UIKit {
         // Dialog
         this.dialog.details.events.update = (nomination) => {
             this.update(nomination);
-        }
+        };
+        this.dialog.import.events.import = (raw: string) => {
+            Service.import(raw);
+        };
         this.dialog.init(body);
 
         // Dark

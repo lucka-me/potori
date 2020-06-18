@@ -1,11 +1,18 @@
 import { textField } from "material-components-web";
 
 import DialogPrototype, { Eli, dialog, i18next } from './DialogPrototype';
-import Service from '../../service/Service';
+
+interface ImportDialogEvents {
+    import: (raw: string) => void;
+}
 
 class ImportDialog extends DialogPrototype {
 
     textField: textField.MDCTextField = null;
+
+    events: ImportDialogEvents = {
+        import: (raw: string) => { },
+    };
 
     render() {
         const elementTextField = Eli.build('div', {
@@ -83,7 +90,7 @@ class ImportDialog extends DialogPrototype {
 
     closed(event: CustomEvent) {
         if (event.detail.action === 'import') {
-            Service.import(this.textField.value);
+            this.events.import(this.textField.value);
         }
     }
 }
