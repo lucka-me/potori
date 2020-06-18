@@ -16,14 +16,20 @@ class Parser {
         try {
             const jsonList = JSON.parse(content);
             if (jsonList.length === 0) {
-                result.message = 'List is empty.';
+                result.message = i18next.t('message:List is empty');
                 return result;
             }
             for (const json of jsonList) {
+                const nomination = Nomination.from(json);
+                if (!nomination.id) {
+                    result.nominations = [];
+                    result.message = i18next.t('message:Failed to parse as Nomination List');
+                    return result;
+                }
                 result.nominations.push(Nomination.from(json));
             }
         } catch(error) {
-            result.message = i18next.t('message:Failed to parse as Nomination List.');
+            result.message = i18next.t('message:Failed to parse as Nomination List');
             return result;
         }
         result.matched = true;
@@ -40,7 +46,7 @@ class Parser {
             result.data = new Map(JSON.parse(content));
             result.matched = true;
         } catch (error) {
-            result.message = i18next.t('message:Failed to parse as Brainstorming Data.');
+            result.message = i18next.t('message:Failed to parse as Brainstorming Data');
         }
 
         return result;
@@ -210,6 +216,7 @@ class Service {
                 if (this.nominations.length > 0) {
                     this.events.updateBs();
                 }
+                this.events.info(i18next.t('message:Load as Brainstorming Data'));
                 return;
             }
             // Parse as other contents
@@ -219,7 +226,7 @@ class Service {
 
     save() {
         if (this.nominations.length < 1) {
-            this.events.alert(i18next.t('message:No Nomination to save.'));
+            this.events.alert(i18next.t('message:No Nomination to save'));
             return;
         }
         this.file.local.save(FileConst.nominations, BlobGenerator.nominations(this.nominations));
@@ -287,7 +294,7 @@ class Service {
 
         const checkFinish = () => {
             if (uploadedNominations && uploadedBsData) {
-                this.events.info(i18next.t('message:Uploaded.'));
+                this.events.info(i18next.t('message:Uploaded'));
             };
         };
 
@@ -297,9 +304,9 @@ class Service {
             (response) => {
                 uploadedNominations = true;
                 if (!response) {
-                    this.events.alert(i18next.t('message:Unable to upload Nomination List.'));
+                    this.events.alert(i18next.t('message:Unable to upload Nomination List'));
                 } else if (!response.id) {
-                    this.events.alert(`${i18next.t('message:Unable to upload Nomination List.')}\n${response.message}`);
+                    this.events.alert(`${i18next.t('message:Unable to upload Nomination List')}\n${response.message}`);
                     return;
                 }
                 checkFinish();
@@ -312,9 +319,9 @@ class Service {
             (response) => {
                 uploadedBsData = true;
                 if (!response) {
-                    this.events.alert(i18next.t('message:Unable to upload Brainstorming Data.'));
+                    this.events.alert(i18next.t('message:Unable to upload Brainstorming Data'));
                 } else if (!response.id) {
-                    this.events.alert(`${i18next.t('message:Unable to upload Brainstorming Data.')}\n${response.message}`);
+                    this.events.alert(`${i18next.t('message:Unable to upload Brainstorming Data')}\n${response.message}`);
                     return;
                 }
                 checkFinish();
@@ -328,11 +335,11 @@ class Service {
         try {
             parsed = JSON.parse(raw);
         } catch (error) {
-            this.events.alert(i18next.t('message:Unable to parse the code.'));
+            this.events.alert(i18next.t('message:Unable to parse the code'));
             return;
         }
         if (!parsed.result || parsed.result.length < 1) {
-            this.events.alert(i18next.t('message:Invalid data.'));
+            this.events.alert(i18next.t('message:Invalid data'));
         }
         const mapNomination = new Map();
         for (const monination of this.nominations) {
@@ -356,7 +363,7 @@ class Service {
     updateBsData() {
         this.bs.update(this.nominations, () => {
             this.events.updateBs();
-            this.events.info(i18next.t('message:Brainstorming Data updated.'));
+            this.events.info(i18next.t('message:Brainstorming Data updated'));
         });
     }
 

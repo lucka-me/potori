@@ -123,7 +123,7 @@ class DetailsDialogMap extends UIKitPrototype {
         };
         const failed = () => {
             if (!this.dialog.isOpen) return;
-            AlertDialog.open(i18next.t('message:Unable to query the location.'));
+            AlertDialog.open(i18next.t('message:Unable to query the location'));
             this.buttons.search.root.disabled = false;
         }
         this.buttons.search.root.disabled = true;
@@ -353,7 +353,7 @@ class DetailsDialog extends DialogPrototype {
         if (selectedStatus !== 'pending') {
             const time = Date.parse(this.fieldResultTime.value);
             if (!time) {
-                AlertDialog.open(i18next.t('message:Invalid DateTime.'));
+                AlertDialog.open(i18next.t('message:Invalid DateTime'));
                 return;
             }
             const newTime = time + (new Date().getTimezoneOffset() * 60000);
