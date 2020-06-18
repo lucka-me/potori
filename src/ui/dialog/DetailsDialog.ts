@@ -58,7 +58,7 @@ class DetailsDialogMap extends UIKitPrototype {
         }
         const elementMap = Eli.build('div', {
             className: 'flex-grow--1',
-            cssTest: 'min-height: 180px',
+            cssText: 'min-height: 180px',
         });
 
         const elementContent = Eli.build('div', {
@@ -74,7 +74,7 @@ class DetailsDialogMap extends UIKitPrototype {
 
         this.ctrl = new mapboxgl.Map({
             container: elementMap,
-            style: `mapbox:${getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim()}`,
+            style: `mapbox:${getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim()}?optimize=true`,
         });
         this.ctrl.addControl(new mapboxgl.NavigationControl());
     }
@@ -172,7 +172,7 @@ class DetailsDialog extends DialogPrototype {
         });
 
         this.image = Eli.build('img', {
-            cssTest: [
+            cssText: [
                 'object-fit:cover', 'object-position:center',
                 'width:100%', 'height:150px;'
             ].join(';')
@@ -431,7 +431,7 @@ class DetailsDialog extends DialogPrototype {
 
     updateStyle() {
         if (!this.map.ctrl) return;
-        this.map.ctrl.setStyle(`mapbox:${getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim()}`);
+        this.map.ctrl.setStyle(`mapbox:${getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim()}?optimize=true`);
     }
 }
 

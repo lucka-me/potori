@@ -6,7 +6,7 @@ class BSSynchCard extends DashboardBsPrototype {
 
     render() {
         this.textSynch = Eli.build('span', {
-            cssTest: 'font-weight:300;font-size:6rem;line-height:6rem;',
+            cssText: 'font-weight:300;font-size:6rem;line-height:6rem;',
             innerHTML: '0.0',
         })
         this.root = Eli.build('div', {
@@ -26,7 +26,7 @@ class BSSynchCard extends DashboardBsPrototype {
             Eli.build('span', { className: 'text-nowarp' }, [
                 this.textSynch,
                 Eli.build('span', {
-                    cssTest: 'font-size:2rem;line-height:2rem;',
+                    cssText: 'font-size:2rem;line-height:2rem;',
                     innerHTML: '%'
                 }),
             ]),

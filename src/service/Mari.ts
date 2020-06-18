@@ -117,8 +117,6 @@ class Mari {
         progressUpdate: () => {},
     };
 
-    constructor() { }
-
     static get scanners() {
         return ['redacted', 'prime'];
     }

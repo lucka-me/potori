@@ -31,7 +31,7 @@ class ListView extends UIKitPrototype {
                 'flex-box-col',
                 'view-hide',
             ].join(' '),
-            cssTest: [
+            cssText: [
                 'height: 100%',
                 'min-width: 300px',
                 'padding: 4px',

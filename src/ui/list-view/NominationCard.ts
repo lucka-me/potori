@@ -60,7 +60,7 @@ class NominationCard {
             }),
         ]));
 
-        const cssTestImg = [
+        const cssTextImg = [
             'object-fit: cover',
             'object-position: center',
             'width: 120px',
@@ -75,7 +75,7 @@ class NominationCard {
                 className: 'flex-box-row--nowrap',
             }, [
                 Eli.build('img', {
-                    cssTest: cssTestImg,
+                    cssText: cssTextImg,
                     src: nomination.imageUrl,
                 }),
                 Eli.build('div', {

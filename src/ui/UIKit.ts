@@ -30,7 +30,6 @@ class UIKit {
         // AppBar
         this.appBar.events.set('view'   , () => this.switchView());
         this.appBar.events.set('signin' , () => Service.auth.signIn());
-
         this.appBar.menu.events.set(
             AppBarMenuItems.open.key, () => Service.open()
         );
@@ -61,7 +60,7 @@ class UIKit {
                 'flex-box-row--wrap',
                 'main-box'
             ].join(' '),
-            cssTest: [
+            cssText: [
                 'min-height: 0%',
             ].join(';'),
         });

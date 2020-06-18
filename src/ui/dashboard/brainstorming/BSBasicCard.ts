@@ -20,7 +20,7 @@ class BSBasicCard extends DashboardBsPrototype {
 
     render() {
         this.textReviews = Eli.build('span', {
-            cssTest: 'font-weight:300;font-size:4.5rem;line-height:4.5rem;',
+            cssText: 'font-weight:300;font-size:4.5rem;line-height:4.5rem;',
             innerHTML: '0',
         });
         this.textSubtitle = Eli.build('span', {

@@ -26,7 +26,7 @@ class MapCard extends DashboardPrototype {
 
     render() {
         const elementMap = Eli.build('div', {
-            cssTest: [
+            cssText: [
                 'width: 100%',
                 'height: 100%',
                 'clip-path: inset(100% round 4px)',
@@ -35,12 +35,12 @@ class MapCard extends DashboardPrototype {
         });
         this.root = Eli.build('div', {
             className: 'mdc-card mdc-card--outlined flex--3 flex-shrink--1',
-            cssTest: 'min-width: 300px;',
+            cssText: 'min-width: 300px;',
         }, [ elementMap ]);
         this.parent.append(this.root);
-        this.ctrl = new mapboxgl.Map({ 
+        this.ctrl = new mapboxgl.Map({
             container: elementMap,
-            style: `mapbox:${getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim()}`
+            style: `mapbox:${getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim()}?optimize=true`
         });
         this.ctrl.once('load', () => {
             this.executeTasks();
@@ -75,7 +75,7 @@ class MapCard extends DashboardPrototype {
             this.tasks.push(() => this.updateStyle());
             return;
         }
-        this.ctrl.setStyle(`mapbox:${getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim()}`);
+        this.ctrl.setStyle(`mapbox:${getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim()}?optimize=true`);
         this.ctrl.once('idle', () => {
             this.update(this.events.styleLoaded());
         });

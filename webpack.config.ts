@@ -12,7 +12,7 @@ module.exports = {
     potori: './src/potori.ts',
   },
   output: {
-    filename: 'lib/[name].js',
+    filename: 'lib/[name].[hash].js',
     path: path.resolve(__dirname, 'dist'),
   },
   module: {
@@ -42,7 +42,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     //new BundleAnalyzerPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'css/potori.css',
+      filename: 'css/potori.[hash].css',
     }),
     new WebpackCdnPlugin({
       modules: [
@@ -65,7 +65,6 @@ module.exports = {
           var:    'Chart',
           cdn:    'Chart.js',
           path:   'Chart.min.js',
-          style:  'Chart.min.css',
         },
         {
           name: 'firebase',

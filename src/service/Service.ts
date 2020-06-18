@@ -103,8 +103,6 @@ class Service {
         info:   (message) => message,
     };
 
-    constructor() { }
-
     init() {
         this.auth.events.authStatusChanged = (signedIn) => {
             if (!signedIn) {

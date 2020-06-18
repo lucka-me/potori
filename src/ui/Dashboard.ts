@@ -31,7 +31,6 @@ class Dashboard extends UIKitPrototype {
 
     init(parent: HTMLElement) {
         super.init(parent);
-        Chart.platform.disableCSSInjection = true;
         Chart.defaults.global.legend.labels.boxWidth = 10;
         Chart.defaults.global.maintainAspectRatio = false;
         Chart.defaults.line.tooltips = { intersect: false, };
@@ -77,7 +76,7 @@ class Dashboard extends UIKitPrototype {
                 'padding--4',
                 'dashboard',
             ].join(' '),
-            cssTest: [
+            cssText: [
                 'height: 100%',
                 'box-sizing: border-box',
                 'overflow-y: scroll',

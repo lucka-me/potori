@@ -5,7 +5,7 @@ class Eli {
         const element = document.createElement(tag);
         for (const [key, value] of Object.entries(options)) {
             switch (key) {
-                case 'cssTest':
+                case 'cssText':
                     element.style.cssText = value as string;
                     break;
                 case 'dataset':
@@ -33,7 +33,7 @@ class Eli {
                 `flex--${flex}`,
                 'flex-shrink--1'
             ].join(' '),
-            cssTest: `min-width:${minWidth}px`,
+            cssText: `min-width:${minWidth}px`,
         }, [
             Eli.build('span', {
                 className: 'mdc-typography--headline6',

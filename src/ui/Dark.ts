@@ -14,7 +14,6 @@ class Dark extends UIKitPrototype {
         };
         darkMediaQueryList.addListener(changed);
         this.enabled = darkMediaQueryList.matches;
-        this.changed(this.enabled);
     }
 }
 

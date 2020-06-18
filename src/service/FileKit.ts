@@ -12,7 +12,7 @@ class FileConst {
 class LocalFileKit {
     open(onload: (result: string) => void, onerror: (message: string) => void) {
         const element = Eli.build('input', {
-            cssTest: 'display:none;',
+            cssText: 'display:none;',
             type: 'file', accept: 'json'
         });
         const opened = (event: Event) => {
@@ -37,7 +37,7 @@ class LocalFileKit {
 
     save(filename: string, blob: Blob) {
         const element = Eli.build('a', {
-            cssTest: 'display:none',
+            cssText: 'display:none',
             href: URL.createObjectURL(blob),
             download: filename,
         });
