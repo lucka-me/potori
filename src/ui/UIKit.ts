@@ -95,6 +95,18 @@ class UIKit {
             }
             this.dashboard.map.updateRejected(Service.nominations);
         };
+        this.dashboard.bs.events.analyse = (nominations) => {
+            return Service.bs.analyse(nominations);
+        }
+        this.dashboard.bs.basic.events = {
+            refresh: () => {
+                Service.updateBsData();
+            },
+            clear: () => {
+                Service.clearBsData();
+                this.dashboard.bs.basic.update([]);
+            }
+        }
         this.dashboard.init(mainBox);
 
         // List
@@ -109,6 +121,12 @@ class UIKit {
         // Dialog
         this.dialog.details.events.update = (nomination) => {
             this.update(nomination);
+        };
+        this.dialog.details.events.query = (bsId, succeed, failed) => {
+            Service.bs.query(bsId, succeed, failed);
+        };
+        this.dialog.details.map.events.queryLngLat = (bsId, succeed, failed) => {
+            Service.bs.queryLngLat(bsId, succeed, failed);
         };
         this.dialog.import.events.import = (raw: string) => {
             Service.import(raw);

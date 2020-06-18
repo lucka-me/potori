@@ -4,9 +4,12 @@ import { formField, radio, ripple, select, textField } from "material-components
 import AlertDialog from './AlertDialog';
 import DialogPrototype, { dialog } from './DialogPrototype';
 import Nomination, { LngLat } from '../../service/Nomination';
-import Service from '../../service/Service';
 import StatusKit from '../../service/StatusKit';
 import UIKitPrototype, { Eli, i18next } from '../UIKitPrototype';
+
+interface DetailsDialogMapEvents {
+    queryLngLat: (bsId: string, succeed: (lngLat: LngLat) => void, failed: () => void) => void;
+}
 
 class DetailsDialogMap extends UIKitPrototype {
 
@@ -30,6 +33,10 @@ class DetailsDialogMap extends UIKitPrototype {
             icon: '\uf1f8',
             clicked: () => this.delete(),
         },
+    };
+
+    events: DetailsDialogMapEvents = {
+        queryLngLat : () => { },
     };
 
     init(parent: HTMLElement) {
@@ -120,7 +127,7 @@ class DetailsDialogMap extends UIKitPrototype {
             this.buttons.search.root.disabled = false;
         }
         this.buttons.search.root.disabled = true;
-        Service.bs.queryLngLat(this.nomination.id, succeed, failed);
+        this.events.queryLngLat(this.nomination.id, succeed, failed);
     }
 
     delete() {
@@ -132,7 +139,8 @@ class DetailsDialogMap extends UIKitPrototype {
 }
 
 interface DetailsDialogEvents {
-    update: (nomination: Nomination) => void,
+    update: (nomination: Nomination) => void;
+    query: (bsId: string, succeed: (data: any) => void, failed: () => void) => void;
 }
 
 class DetailsDialog extends DialogPrototype {
@@ -152,7 +160,8 @@ class DetailsDialog extends DialogPrototype {
     map = new DetailsDialogMap();
 
     events: DetailsDialogEvents = {
-        update: () => { },
+        update      : () => { },
+        query       : () => { },
     };
 
     render() {
@@ -407,11 +416,11 @@ class DetailsDialog extends DialogPrototype {
             this.selectReason.selectedIndex = nomination.status.code - StatusKit.types.get(type).code;
         }
         if (type === 'pending') {
-            Service.bs.query(nomination.id, (data) => {
+            this.events.query(nomination.id, (data) => {
                 const timeString = getLocalDateTimeISOString(data.lastTime);
                 this.fieldResultTime.value = timeString.slice(0, timeString.lastIndexOf(':'));
                 this.fieldResultTime.layout();
-            }, () => null);
+            }, () => {});
         }
 
         this.status.get(type).checked = true;

@@ -11,7 +11,7 @@ class ImportDialog extends DialogPrototype {
     textField: textField.MDCTextField = null;
 
     events: ImportDialogEvents = {
-        import: (raw: string) => { },
+        import: () => { },
     };
 
     render() {
