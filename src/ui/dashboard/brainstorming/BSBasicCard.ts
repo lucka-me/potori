@@ -43,7 +43,7 @@ class BSBasicCard extends DashboardBsPrototype {
             this.events.refresh();
         });
 
-        const actionClaer = Eli.build('button', {
+        const actionClear = Eli.build('button', {
             className: [
                 'far',
                 'mdc-icon-button',
@@ -54,7 +54,7 @@ class BSBasicCard extends DashboardBsPrototype {
             id: 'button-card-nomination-location',
             innerHTML: '\uf1f8',
         });
-        const rippleClear = new ripple.MDCRipple(actionClaer);
+        const rippleClear = new ripple.MDCRipple(actionClear);
         rippleClear.unbounded = true;
         rippleClear.listen('click', () => {
             this.events.clear();
@@ -91,16 +91,15 @@ class BSBasicCard extends DashboardBsPrototype {
                 }, [ this.actionRefresh ]),
                 Eli.build('div', {
                     className: 'mdc-card__action-icons',
-                }, [ actionClaer ]),
+                }, [ actionClear ]),
             ]),
         ]);
 
         this.setVisible(false);
-        this.parent.appendChild(this.root);
+        this.parent.append(this.root);
     }
 
     updateStats(stats: BrainstormingStats) {
-        
         this.textReviews.innerHTML = `${stats.review}`;
         this.textSubtitle.innerHTML = i18next.t('Reviews for Portals', { count: stats.nomination });
         this.actionRefresh.disabled = false;

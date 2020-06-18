@@ -36,7 +36,7 @@ class BSSynchCard extends DashboardBsPrototype {
             }),
         ]);
         this.setVisible(false);
-        this.parent.appendChild(this.root);
+        this.parent.append(this.root);
     }
 
     updateStats(stats: BrainstormingStats) {

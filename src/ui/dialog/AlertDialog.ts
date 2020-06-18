@@ -14,7 +14,7 @@ class AlertDialog extends DialogPrototype {
                 Eli.dialogAction('close', i18next.t('Close'))
             ]),
         ]);
-        this.parent.appendChild(element);
+        this.parent.append(element);
         this.ctrl = new dialog.MDCDialog(element);
     }
 

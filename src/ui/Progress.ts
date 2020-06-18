@@ -36,7 +36,7 @@ class Progress extends UIKitPrototype {
                 Eli.build('span', { className: 'mdc-linear-progress__bar-inner' }),
             ]),
         ]);
-        this.parent.appendChild(this.root);
+        this.parent.append(this.root);
         this.ctrl = new linearProgress.MDCLinearProgress(this.root);
     }
 }

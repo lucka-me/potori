@@ -85,7 +85,7 @@ class Dashboard extends UIKitPrototype {
                 '-webkit-overflow-scrolling: touch',
             ].join(';'),
         });
-        this.parent.appendChild(this.root);
+        this.parent.append(this.root);
     }
 
     refresh(nominations: Array<Nomination>) {

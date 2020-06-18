@@ -119,10 +119,10 @@ class NominationCard {
                 const textarea = Eli.build('textarea', {
                     value: nomination.id, readOnly: true
                 });
-                document.body.appendChild(textarea);
+                document.body.append(textarea);
                 textarea.select();
                 document.execCommand('copy');
-                document.body.removeChild(textarea);
+                textarea.remove();
                 AlertDialog.open(i18next.t('message:Brainstorming ID copied:', { id: nomination.id }));
             });
         }

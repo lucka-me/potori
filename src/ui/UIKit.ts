@@ -65,7 +65,7 @@ class UIKit {
                 'min-height: 0%',
             ].join(';'),
         });
-        body.appendChild(mainBox);
+        body.append(mainBox);
 
         // Dashboard
         this.dashboard.map.events.focus = (id) => {
@@ -128,7 +128,7 @@ class UIKit {
         this.dialog.details.map.events.queryLngLat = (bsId, succeed, failed) => {
             Service.bs.queryLngLat(bsId, succeed, failed);
         };
-        this.dialog.import.events.import = (raw: string) => {
+        this.dialog.import.events.import = (raw) => {
             Service.import(raw);
         };
         this.dialog.init(body);

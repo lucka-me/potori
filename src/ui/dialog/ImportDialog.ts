@@ -44,22 +44,6 @@ class ImportDialog extends DialogPrototype {
                 Eli.build('div', { className: 'mdc-notched-outline__trailing' }),
             ]),
         ]);
-        const contents = [
-            elementTextField,
-            Eli.build('div', {
-                className: 'mdc-text-field-helper-line',
-            }, [
-                Eli.build('div', {
-                    className: 'mdc-text-field-helper-text mdc-text-field-helper-text--persistent',
-                }, [
-                    i18next.t('From '),
-                    Eli.link(
-                        'https://wayfarer.nianticlabs.com/api/v1/vault/manage',
-                        i18next.t('Wayfarer API'), i18next.t('Wayfarer API')
-                    ),
-                ]),
-            ]),
-        ];
         const elementDialog = Eli.dialog([
             Eli.build('h2', {
                 className: 'mdc-dialog__title',
@@ -67,7 +51,22 @@ class ImportDialog extends DialogPrototype {
             }),
             Eli.build('div', {
                 className: 'mdc-dialog__content',
-            }, contents),
+            }, [
+                elementTextField,
+                Eli.build('div', {
+                    className: 'mdc-text-field-helper-line',
+                }, [
+                    Eli.build('div', {
+                        className: 'mdc-text-field-helper-text mdc-text-field-helper-text--persistent',
+                    }, [
+                        i18next.t('From '),
+                        Eli.link(
+                            'https://wayfarer.nianticlabs.com/api/v1/vault/manage',
+                            i18next.t('Wayfarer API'), i18next.t('Wayfarer API')
+                        ),
+                    ]),
+                ]),
+            ]),
             Eli.build('footer', {
                 className: 'mdc-dialog__actions',
             }, [
@@ -75,7 +74,7 @@ class ImportDialog extends DialogPrototype {
                 Eli.dialogAction('import', i18next.t('Import')),
             ]),
         ]);
-        this.parent.appendChild(elementDialog);
+        this.parent.append(elementDialog);
         this.ctrl = new dialog.MDCDialog(elementDialog);
         this.textField = new textField.MDCTextField(elementTextField);
         this.ctrl.listen('MDCDialog:closed', (event: CustomEvent) => {

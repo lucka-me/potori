@@ -7,7 +7,7 @@ class QuotasCard extends DashboardChartProtorype {
         this.root = Eli.chartCard(i18next.t('Quotas'), canvasChart, 2, 200);
 
         this.setVisible(false);
-        this.parent.appendChild(this.root);
+        this.parent.append(this.root);
 
         const labels = [];
         for (let i = 0; i < 14; i++) {

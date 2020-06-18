@@ -27,7 +27,7 @@ class Snackbar extends UIKitPrototype {
                 elementActions,
             ]),
         ]);
-        this.parent.appendChild(element);
+        this.parent.append(element);
         this.ctrl = new snackbar.MDCSnackbar(element);
     }
 

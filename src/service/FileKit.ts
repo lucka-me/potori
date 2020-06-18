@@ -28,10 +28,10 @@ class LocalFileKit {
             fileReader.readAsText(file);
         };
         element.addEventListener('change', opened, false);
-        document.body.appendChild(element);
+        document.body.append(element);
         element.click();
         setTimeout(() => {
-            document.body.removeChild(element);
+            element.remove();
         }, 1000);
     }
 
@@ -41,9 +41,9 @@ class LocalFileKit {
             href: URL.createObjectURL(blob),
             download: filename,
         });
-        document.body.appendChild(element);
+        document.body.append(element);
         element.click();
-        document.body.removeChild(element);
+        element.remove();
     }
 }
 

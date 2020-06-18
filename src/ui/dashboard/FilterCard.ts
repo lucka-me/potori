@@ -55,7 +55,7 @@ class FilterCard extends DashboardPrototype {
             this.block.reason.root,
         ]);
         this.setVisible(false);
-        this.parent.appendChild(this.root);
+        this.parent.append(this.root);
         
         for (const reason of StatusKit.reasons.values()) {
             const switchCtrl = FilterCard.buildSwitch(this.block.reason, reason, 'rejected');
@@ -117,7 +117,7 @@ class FilterCard extends DashboardPrototype {
                 innerHTML: status.icon,
             })
         ]);
-        block.root.appendChild(container);
+        block.root.append(container);
         const ctrl = new switchControl.MDCSwitch(element);
         ctrl.checked = true;
         return ctrl;

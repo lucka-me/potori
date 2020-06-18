@@ -47,9 +47,9 @@ class StatusKit {
 
     readonly version: string = data.version;
     
-    readonly types: Map<string, StatusType>      = new Map();
-    readonly reasons: Map<string, StatusReason>  = new Map();
-    readonly codes: Map<number, Status>          = new Map();
+    readonly types  : Map<string, StatusType>   = new Map();
+    readonly reasons: Map<string, StatusReason> = new Map();
+    readonly codes  : Map<number, Status>       = new Map();
 
     constructor() {
         for (const type of data.types) {

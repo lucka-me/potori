@@ -329,7 +329,7 @@ class DetailsDialog extends DialogPrototype {
                 Eli.dialogAction('save' , 'Save' ),
             ]),
         ]);
-        this.parent.appendChild(elementDialog);
+        this.parent.append(elementDialog);
         this.ctrl = new dialog.MDCDialog(elementDialog);
         this.ctrl.listen('MDCDialog:opened', () => this.opened());
         this.ctrl.listen('MDCDialog:closed', (event: CustomEvent) => this.closed(event));

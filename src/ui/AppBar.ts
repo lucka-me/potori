@@ -41,7 +41,7 @@ class AppBarMenu extends UIKitPrototype {
                 }),
             ]);
             this.items.set(value.key, element);
-            menuList.appendChild(element);
+            menuList.append(element);
         }
         this.items.get(AppBarMenuItems.about.key).hidden = false;
 
@@ -51,7 +51,7 @@ class AppBarMenu extends UIKitPrototype {
         const menuAnchor = Eli.build('div', {
             className: 'mdc-menu-surface--anchor',
         }, [ menuSurface ]);
-        this.parent.appendChild(menuAnchor);
+        this.parent.append(menuAnchor);
 
         this.ctrl = new menu.MDCMenu(menuSurface);
         this.ctrl.listen(
@@ -102,7 +102,7 @@ class AppBar extends UIKitPrototype {
                 title: i18next.t(value.title),
                 innerHTML: value.icon,
             });
-            sectionActions.appendChild(elementAction);
+            sectionActions.append(elementAction);
             const rippleAction = new ripple.MDCRipple(elementAction);
             rippleAction.unbounded = true;
             rippleAction.listen('click', this.events.get(value.key));
@@ -135,8 +135,8 @@ class AppBar extends UIKitPrototype {
             ]),
         ]);
 
-        this.parent.appendChild(elementAppBar);
-        this.parent.appendChild(Eli.build('div', {
+        this.parent.append(elementAppBar);
+        this.parent.append(Eli.build('div', {
             className: 'mdc-top-app-bar--fixed-adjust'
         }));
         new topAppBar.MDCTopAppBar(elementAppBar);

@@ -8,7 +8,7 @@ class BSRatesCard extends DashboardBsChartPrototype {
         const canvasChart = Eli.build('canvas', { className: 'canvas-chart--h' });
         this.root = Eli.chartCard(i18next.t('Brainstorming Rates'), canvasChart, 1, 240);
         this.setVisible(false);
-        this.parent.appendChild(this.root);
+        this.parent.append(this.root);
 
         const labels: Array<string> = [];
         for (const value of Object.values(RateItems)) {

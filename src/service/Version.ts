@@ -3,13 +3,13 @@ import { version as dataVersion } from "../data/status.json";
 
 class Version {
 
-    text = '';
-    fullFeature = false;
+    text: string;
+    fullFeature: boolean;
 
     constructor() {
-        const lite = document.URL.includes('lucka.moe');
-        this.text = `${potoriVersion}d${dataVersion}-${lite ? 'lite' : 'full'}`;
-        this.fullFeature = !lite;
+        const published = document.URL.includes('lucka.moe');
+        this.text = `${potoriVersion}d${dataVersion}-${published ? 'lite' : 'full'}`;
+        this.fullFeature = !published;
     }
 }
 

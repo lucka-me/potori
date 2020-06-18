@@ -37,7 +37,7 @@ class MapCard extends DashboardPrototype {
             className: 'mdc-card mdc-card--outlined flex--3 flex-shrink--1',
             cssTest: 'min-width: 300px;',
         }, [ elementMap ]);
-        this.parent.appendChild(this.root);
+        this.parent.append(this.root);
         this.ctrl = new mapboxgl.Map({ 
             container: elementMap,
             style: `mapbox:${getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim()}`

@@ -41,7 +41,7 @@ class ListView extends UIKitPrototype {
                 '-webkit-overflow-scrolling: touch',
             ].join(';'),
         });
-        this.parent.appendChild(this.root);
+        this.parent.append(this.root);
     }
 
     clear() { this.root.innerHTML = ''; }
@@ -57,7 +57,7 @@ class ListView extends UIKitPrototype {
             if (nomination.lngLat) {
                 NominationCard.updateLocation(nomination, card);
             }
-            this.root.appendChild(card);
+            this.root.append(card);
         }
     }
 

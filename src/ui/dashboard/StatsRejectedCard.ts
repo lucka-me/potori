@@ -9,7 +9,7 @@ class StatsRejectedCard extends DashboardChartProtorype {
         const canvasChart = Eli.build('canvas', { className: 'canvas-chart--v' });
         this.root = Eli.chartCard(i18next.t('Stats Rejected'), canvasChart, 2, 250);
         this.setVisible(false);
-        this.parent.appendChild(this.root);
+        this.parent.append(this.root);
 
         const labels = [];
         const colors = [];
