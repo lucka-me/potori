@@ -1,10 +1,12 @@
 import i18next from "i18next";
+import LanguageDetector from "i18next-browser-languagedetector";
 
 import AuthKit from "./AuthKit";
 import Mari from "./Mari";
 import BrainstormingKit from "./BrainstormingKit";
 import FileKit, { FileConst } from "./FileKit";
 import Nomination from "./Nomination";
+import translations from "../locales";
 
 class Parser {
     static nominations(content: string) {
@@ -110,6 +112,16 @@ class Service {
     };
 
     init() {
+        i18next
+            .use(LanguageDetector)
+            .init({
+                fallbackLng: 'en-US',
+                keySeparator: false,
+                resources: translations,
+                ns: ['general', 'message'],
+                defaultNS: 'general',
+            });
+
         this.auth.events.authStatusChanged = (signedIn) => {
             if (!signedIn) {
                 this.nominations = [];

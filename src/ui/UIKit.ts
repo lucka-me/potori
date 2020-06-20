@@ -1,3 +1,4 @@
+import i18next from 'i18next';
 import mapboxgl from 'mapbox-gl';
 
 import AppBar, { AppBarMenuItems, AppBarActions } from './AppBar';
@@ -22,6 +23,7 @@ class UIKit {
     dark        = new Dark();
 
     init() {
+        document.documentElement.lang = i18next.language;
         mapboxgl.accessToken = 'pk.eyJ1IjoibHVja2EtbWUiLCJhIjoiY2p2NDk5NmRvMHFreTQzbzduemM1MHV4cCJ9.7XGmxnEJRoCDr-i5BBmBfw';
 
         const body = document.body;
