@@ -30,8 +30,8 @@ class UIKit {
         body.className = 'mdc-typography fullheight flex-box-col';
 
         // AppBar
-        this.appBar.events.set('view'   , () => this.switchView());
-        this.appBar.events.set('signin' , () => Service.auth.signIn());
+        this.appBar.events.set(AppBarActions.view.key   , () => this.switchView());
+        this.appBar.events.set(AppBarActions.signin.key , () => Service.auth.signIn());
         this.appBar.menu.events.set(
             AppBarMenuItems.open.key, () => Service.open()
         );
