@@ -144,7 +144,7 @@ class AppBar extends UIKitPrototype {
 
     switchView() {
         const actionView = this.actions.get(AppBarActions.view.key);
-        const switchToList = actionView.innerHTML === 'view_list';
+        const switchToList = actionView.innerHTML === '\uf00b';
         actionView.innerHTML = switchToList ? '\uf3fd' : '\uf00b';
         actionView.title = i18next.t(switchToList ? 'Dashboard' : 'List');
     }
