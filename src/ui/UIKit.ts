@@ -183,6 +183,13 @@ class UIKit {
         Service.events.info = (message) => {
             this.dialog.shackbar.open(message);
         }
+        // FileKit
+        Service.file.local.events.openUI = (opened) => {
+            this.openFileUI(opened);
+        }
+        Service.file.local.events.saveUI = (filename, href) => {
+            this.saveFileUI(filename, href);
+        }
 
         // Mari
         Service.mari.events.bufferUpdate = (percent) => {
@@ -226,6 +233,30 @@ class UIKit {
     update(nomination: Nomination) {
         this.list.update(nomination);
         this.dashboard.update(Service.nominations);
+    }
+
+    openFileUI(opened: (event: Event) => void) {
+        const element = Eli.build('input', {
+            cssText: 'display:none;',
+            type: 'file', accept: 'json'
+        });
+        element.addEventListener('change', opened, false);
+        document.body.append(element);
+        element.click();
+        setTimeout(() => {
+            element.remove();
+        }, 1000);
+    }
+
+    saveFileUI(filename: string, href: string) {
+        const element = Eli.build('a', {
+            cssText: 'display:none',
+            href: href,
+            download: filename,
+        });
+        document.body.append(element);
+        element.click();
+        element.remove();
     }
 }
 

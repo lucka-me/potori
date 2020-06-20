@@ -1,7 +1,6 @@
 import i18next from "i18next";
 
 import AuthKit from "./AuthKit";
-import Eli from "../ui/Eli";
 
 class FileConst {
     static type = 'application/json';
@@ -9,13 +8,20 @@ class FileConst {
     static bsData = 'bsdata.json';
 }
 
+interface LocalFileKitEvents {
+    openUI: (opened: (event: Event) => void) => void;
+    saveUI: (filename: string, href: string) => void;
+}
+
 class LocalFileKit {
+
+    events: LocalFileKitEvents = {
+        openUI: () => {},
+        saveUI: () => {},
+    }
+
     open(onload: (result: string) => void, onerror: (message: string) => void) {
-        const element = Eli.build('input', {
-            cssText: 'display:none;',
-            type: 'file', accept: 'json'
-        });
-        const opened = (event: Event) => {
+        this.events.openUI((event: Event) => {
             const file = (event.target as HTMLInputElement).files[0];
             if (!file) {
                 onerror(i18next.t('message:Failed to open file'));
@@ -26,24 +32,11 @@ class LocalFileKit {
                 onload(fileReader.result as string);
             };
             fileReader.readAsText(file);
-        };
-        element.addEventListener('change', opened, false);
-        document.body.append(element);
-        element.click();
-        setTimeout(() => {
-            element.remove();
-        }, 1000);
+        });
     }
 
     save(filename: string, blob: Blob) {
-        const element = Eli.build('a', {
-            cssText: 'display:none',
-            href: URL.createObjectURL(blob),
-            download: filename,
-        });
-        document.body.append(element);
-        element.click();
-        element.remove();
+        this.events.saveUI(filename, URL.createObjectURL(blob));
     }
 }
 
