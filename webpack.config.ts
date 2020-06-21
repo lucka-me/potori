@@ -14,6 +14,7 @@ module.exports = {
   output: {
     filename: 'lib/[name].[hash].js',
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/potori/',
   },
   module: {
     rules: [
@@ -122,7 +123,6 @@ module.exports = {
     }),
     new CopyPlugin({
       patterns: [
-        { from: 'docs', to: 'docs' },
         { from: 'assets', to: 'assets' },
         { from: 'manifest.json' },
       ],
