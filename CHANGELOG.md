@@ -5,7 +5,7 @@
 Migrate to Webpack and TypeScript
 
 ### Added
-- Documents build wit VuePress
+- Documents build with VuePress
 - Internationalization for zh-CN and zh-TW
 
 ### Changed
