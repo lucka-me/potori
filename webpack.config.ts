@@ -38,19 +38,32 @@ module.exports = {
     splitChunks: {
       chunks: 'all',
       cacheGroups: {
+        data: {
+          test: /[\\/]src[\\/]data[\\/]/,
+          name: 'data',
+          minSize: 1,
+          priority: 20,
+        },
+        locales: {
+          test: /[\\/]src[\\/]locales[\\/]/,
+          name: 'locales',
+          minSize: 1,
+          priority: 20,
+        },
         mdc: {
           test: /[\\/]node_modules[\\/]@material/,
           name: 'mdc',
-          priority: 2,
+          priority: 20,
           reuseExistingChunk: true,
         },
         common: {
           test: /[\\/]node_modules[\\/]/,
           name: 'common',
-          priority: 1,
+          minSize: 1,
+          priority: 10,
           reuseExistingChunk: true,
         },
-      }
+      },
     },
   },
   devServer: {
@@ -94,10 +107,10 @@ module.exports = {
           ]
         },
         {
-          name: 'mapbox-gl',
-          var: 'mapboxgl',
-          path: 'mapbox-gl.min.js',
-          style: 'mapbox-gl.min.css',
+          name:   'mapbox-gl',
+          var:    'mapboxgl',
+          path:   'mapbox-gl.min.js',
+          style:  'mapbox-gl.min.css',
         },
         {
           name:     '@fortawesome/fontawesome-free',
@@ -112,7 +125,7 @@ module.exports = {
       template: 'index.html',
       inject: false,
       scriptLoading: 'defer',
-      chunks: [ 'potori', 'mdc', 'common' ],
+      chunks: [ 'potori', 'data', 'locales', 'mdc', 'common' ],
       filename: 'index.html',
       meta: {
         'description' : 'Web App to Visualize Ingress Nominations',
