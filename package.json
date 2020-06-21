@@ -8,6 +8,8 @@
     "start": "webpack-dev-server",
     "dev": "webpack --mode development",
     "build": "webpack --mode production",
+    "dev:docs": "vuepress dev docs",
+    "build:docs": "vuepress build docs",
     "deploy": "gh-pages -d dist -m \"$(date)\""
   },
   "repository": {
@@ -45,6 +47,7 @@
     "ts-loader": "^7.0.5",
     "ts-node": "^8.10.2",
     "typescript": "^3.9.5",
+    "vuepress": "^1.5.2",
     "webpack": "^4.43.0",
     "webpack-bundle-analyzer": "^3.8.0",
     "webpack-cdn-plugin": "^3.3.1",

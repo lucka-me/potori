@@ -31,11 +31,13 @@ Since Niantic launched the Niantic Wayfarer which contains a nomination manager,
 - [x] Extend to a data visualization tool  
   Partly done in `0.5.0`
 - [ ] Build with Webpack  
-  Ready in `0.7.0`
+  Ready for `0.7.0`
 - [ ] Convert to TypeScript  
-  Ready in `0.7.0`
-- [ ] Update [document](https://github.com/lucka-me/potori-docs)
-- [ ] A new logo
+  Ready for `0.7.0`
+- [ ] Update [document](https://github.com/lucka-me/potori-docs)  
+  Ready for `0.7.0`
+- [ ] A new logo  
+  Ready for `0.7.0`
 
 ## Dependencies
 - [Material Components Web](https://github.com/material-components/material-components-web)  
