@@ -57,7 +57,7 @@ class Eli {
 
     static icon(icon: string): HTMLElement {
         return Eli.build('i', {
-            className: `far fa-fw`,
+            className: 'far fa-fw',
             innerHTML: icon,
         });
     }

@@ -1,4 +1,4 @@
-import { ripple } from "material-components-web";
+import { MDCRipple } from "@material/ripple";
 
 import { DashboardBsPrototype, BrainstormingStats, Eli, i18next } from './prototypes';
 
@@ -36,7 +36,7 @@ class BSBasicCard extends DashboardBsPrototype {
             Eli.build('i', { className: 'far fa-fw mdc-button__icon', innerHTML: '\uf2f1' }),
             Eli.build('span', { className: 'mdc-button__label', innerHTML: i18next.t('Refresh') }),
         ]);
-        const rippleRefresh = new ripple.MDCRipple(this.actionRefresh);
+        const rippleRefresh = new MDCRipple(this.actionRefresh);
         rippleRefresh.unbounded = true;
         rippleRefresh.listen('click', () => {
             this.actionRefresh.disabled = true;
@@ -54,7 +54,7 @@ class BSBasicCard extends DashboardBsPrototype {
             id: 'button-card-nomination-location',
             innerHTML: '\uf1f8',
         });
-        const rippleClear = new ripple.MDCRipple(actionClear);
+        const rippleClear = new MDCRipple(actionClear);
         rippleClear.unbounded = true;
         rippleClear.listen('click', () => {
             this.events.clear();

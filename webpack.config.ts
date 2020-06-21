@@ -34,6 +34,25 @@ module.exports = {
   resolve: {
     extensions: [ '.ts', '.js' ],
   },
+  optimization: {
+    splitChunks: {
+      chunks: 'all',
+      cacheGroups: {
+        mdc: {
+          test: /[\\/]node_modules[\\/]@material/,
+          name: 'mdc',
+          priority: 2,
+          reuseExistingChunk: true,
+        },
+        common: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'common',
+          priority: 1,
+          reuseExistingChunk: true,
+        },
+      }
+    },
+  },
   devServer: {
     contentBase: path.join(__dirname, 'dist'),
     host: '0.0.0.0',
@@ -42,7 +61,7 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin(),
-    //new BundleAnalyzerPlugin(),
+    new BundleAnalyzerPlugin(),
     new MiniCssExtractPlugin({
       filename: 'css/potori.[hash].css',
     }),
@@ -82,8 +101,7 @@ module.exports = {
         },
         {
           name:   'material-components-web',
-          var:    'mdc',
-          path:   'material-components-web.min.js',
+          cssOnly:  true,
           style:  'material-components-web.min.css',
         },
         {
@@ -99,7 +117,7 @@ module.exports = {
       template: 'index.html',
       inject: false,
       scriptLoading: 'defer',
-      chunks: [ 'potori' ],
+      chunks: [ 'potori', 'mdc', 'common' ],
       filename: 'index.html',
       meta: {
         'description' : 'Web App to Visualize Ingress Nominations',

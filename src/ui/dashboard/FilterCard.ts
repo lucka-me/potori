@@ -1,4 +1,4 @@
-import { switchControl } from "material-components-web";
+import { MDCSwitch } from "@material/switch";
 
 import { DashboardPrototype, Eli, i18next } from './prototypes';
 import StatusKit, { Status, StatusType, StatusReason } from '../../service/StatusKit';
@@ -19,8 +19,8 @@ class FilterCard extends DashboardPrototype {
         reason  : { root: null } as FilterCardBlock,
     }
 
-    types: Map<StatusType, switchControl.MDCSwitch> = new Map();
-    reasons: Map<StatusReason, switchControl.MDCSwitch> = new Map();
+    types: Map<StatusType, MDCSwitch> = new Map();
+    reasons: Map<StatusReason, MDCSwitch> = new Map();
 
     events: FilterCardEvents = {
         switchType:     () => { },
@@ -118,7 +118,7 @@ class FilterCard extends DashboardPrototype {
             })
         ]);
         block.root.append(container);
-        const ctrl = new switchControl.MDCSwitch(element);
+        const ctrl = new MDCSwitch(element);
         ctrl.checked = true;
         return ctrl;
     }

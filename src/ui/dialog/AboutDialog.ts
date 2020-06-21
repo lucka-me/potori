@@ -1,4 +1,4 @@
-import DialogPrototype, { Eli, dialog, i18next } from './DialogPrototype';
+import DialogPrototype, { Eli, MDCDialog, i18next } from './DialogPrototype';
 import Version from '../../service/Version';
 
 class AboutDialog extends DialogPrototype {
@@ -41,7 +41,7 @@ class AboutDialog extends DialogPrototype {
             }, [ Eli.dialogAction('close', i18next.t('Close')) ]),
         ]);
         this.parent.append(element);
-        this.ctrl = new dialog.MDCDialog(element);
+        this.ctrl = new MDCDialog(element);
     }
 
     open() {

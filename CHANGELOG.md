@@ -1,6 +1,14 @@
 # Changelog
 
 ```markdown
+## [0.7.1] - 2020-TBA
+TBA
+
+### Fixed
+- Wrong start_url and scope in manifest.json
+```
+
+```markdown
 ## [0.7.0] - 2020-06-21
 Migrate to Webpack and TypeScript
 

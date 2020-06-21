@@ -1,10 +1,10 @@
-import { snackbar } from "material-components-web";
+import { MDCSnackbar } from "@material/snackbar";
 
 import UIKitPrototype , { Eli, i18next } from '../UIKitPrototype';
 
 class Snackbar extends UIKitPrototype {
 
-    ctrl: snackbar.MDCSnackbar = null;
+    ctrl: MDCSnackbar = null;
     textMessage: HTMLDivElement = null;
 
     render() {
@@ -28,7 +28,7 @@ class Snackbar extends UIKitPrototype {
             ]),
         ]);
         this.parent.append(element);
-        this.ctrl = new snackbar.MDCSnackbar(element);
+        this.ctrl = new MDCSnackbar(element);
     }
 
     open(message: string) {

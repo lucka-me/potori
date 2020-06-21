@@ -1,11 +1,11 @@
-import { linearProgress } from "material-components-web";
+import { MDCLinearProgress } from "@material/linear-progress";
 
 import UIKitPrototype from './UIKitPrototype';
 import Eli from "./Eli";
 
 class Progress extends UIKitPrototype {
 
-    ctrl: linearProgress.MDCLinearProgress = null;
+    ctrl: MDCLinearProgress = null;
     root: HTMLDivElement = null;
 
     init(parent: HTMLElement) {
@@ -37,7 +37,7 @@ class Progress extends UIKitPrototype {
             ]),
         ]);
         this.parent.append(this.root);
-        this.ctrl = new linearProgress.MDCLinearProgress(this.root);
+        this.ctrl = new MDCLinearProgress(this.root);
     }
 }
 

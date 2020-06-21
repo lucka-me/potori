@@ -1,4 +1,6 @@
-import { menu, ripple, topAppBar } from "material-components-web";
+import { MDCMenu } from "@material/menu";
+import { MDCRipple } from "@material/ripple";
+import { MDCTopAppBar } from "@material/top-app-bar";
 
 import UIKitPrototype, { Eli, i18next } from './UIKitPrototype';
 
@@ -13,7 +15,7 @@ const AppBarMenuItems = {
 
 class AppBarMenu extends UIKitPrototype {
 
-    ctrl: menu.MDCMenu = null;
+    ctrl: MDCMenu = null;
     items: Map<string, HTMLLIElement> = new Map();
     events: Map<string, () => void> = new Map();
 
@@ -53,7 +55,7 @@ class AppBarMenu extends UIKitPrototype {
         }, [ menuSurface ]);
         this.parent.append(menuAnchor);
 
-        this.ctrl = new menu.MDCMenu(menuSurface);
+        this.ctrl = new MDCMenu(menuSurface);
         this.ctrl.listen(
             'MDCMenu:selected',
             (event: CustomEvent) => {
@@ -103,7 +105,7 @@ class AppBar extends UIKitPrototype {
                 innerHTML: value.icon,
             });
             sectionActions.append(elementAction);
-            const rippleAction = new ripple.MDCRipple(elementAction);
+            const rippleAction = new MDCRipple(elementAction);
             rippleAction.unbounded = true;
             rippleAction.listen('click', this.events.get(value.key));
             elementAction.hidden = true;
@@ -139,7 +141,7 @@ class AppBar extends UIKitPrototype {
         this.parent.append(Eli.build('div', {
             className: 'mdc-top-app-bar--fixed-adjust'
         }));
-        new topAppBar.MDCTopAppBar(elementAppBar);
+        new MDCTopAppBar(elementAppBar);
     }
 
     switchView() {

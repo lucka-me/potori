@@ -1,4 +1,4 @@
-import DialogPrototype, { Eli, dialog, i18next } from './DialogPrototype';
+import DialogPrototype, { Eli, MDCDialog, i18next } from './DialogPrototype';
 
 class AlertDialog extends DialogPrototype {
 
@@ -15,7 +15,7 @@ class AlertDialog extends DialogPrototype {
             ]),
         ]);
         this.parent.append(element);
-        this.ctrl = new dialog.MDCDialog(element);
+        this.ctrl = new MDCDialog(element);
     }
 
     open(message: string) {

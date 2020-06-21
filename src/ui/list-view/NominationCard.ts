@@ -1,5 +1,5 @@
 import i18next from "i18next";
-import { ripple } from "material-components-web";
+import { MDCRipple } from "@material/ripple";
 
 import AlertDialog from "../dialog/AlertDialog";
 import Eli from "../Eli";
@@ -96,7 +96,7 @@ class NominationCard {
                 ]),
             ]),
         ]);
-        const primaryAction = new ripple.MDCRipple(elementPrimaryAction);
+        const primaryAction = new MDCRipple(elementPrimaryAction);
         primaryAction.listen('click', events.openDetails);
 
         const elementActionStatus = Eli.build('button', {
@@ -108,7 +108,7 @@ class NominationCard {
             }),
             Eli.build('span', { className: 'mdc-button__label' }),
         ]);
-        const actionStatus = new ripple.MDCRipple(elementActionStatus);
+        const actionStatus = new MDCRipple(elementActionStatus);
         actionStatus.unbounded = true;
         if (Version.fullFeature) {
             actionStatus.listen('click', () => {
@@ -141,7 +141,7 @@ class NominationCard {
             hidden: true,
             innerHTML: '&#xf3c5',
         });
-        const actionLocation = new ripple.MDCRipple(elementActionLocation);
+        const actionLocation = new MDCRipple(elementActionLocation);
         actionLocation.unbounded = true;
         actionLocation.listen('click', events.focus);
         actionIcons.push(elementActionLocation);
@@ -154,7 +154,7 @@ class NominationCard {
                 hidden: true,
                 innerHTML: '&#xf279',
             });
-            const actionIntel = new ripple.MDCRipple(elementActionIntel);
+            const actionIntel = new MDCRipple(elementActionIntel);
             actionIntel.unbounded = true;
             actionIntel.listen('click', () => {
                 window.open(nomination.intelUrl, '_blank', 'noopener');
