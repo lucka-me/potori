@@ -143,7 +143,7 @@ module.exports = {
       meta: {
         redirect: {
           'http-equiv': 'refresh',
-          content: '0; url=https://lucka.moe/potori/docs',
+          content: '0; url=/potori/docs',
         },
       },
       cdnModule: false,
