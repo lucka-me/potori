@@ -37,17 +37,16 @@ module.exports = {
   optimization: {
     splitChunks: {
       chunks: 'all',
+      minSize: 1,
       cacheGroups: {
         data: {
           test: /[\\/]src[\\/]data[\\/]/,
           name: 'data',
-          minSize: 1,
           priority: 20,
         },
         locales: {
           test: /[\\/]src[\\/]locales[\\/]/,
           name: 'locales',
-          minSize: 1,
           priority: 20,
         },
         mdc: {
@@ -59,7 +58,6 @@ module.exports = {
         common: {
           test: /[\\/]node_modules[\\/]/,
           name: 'common',
-          minSize: 1,
           priority: 10,
           reuseExistingChunk: true,
         },
@@ -116,7 +114,10 @@ module.exports = {
           name:     '@fortawesome/fontawesome-free',
           cdn:      'font-awesome',
           cssOnly:  true,
-          style:    'css/all.min.css'
+          styles: [
+            'css/regular.min.css',
+            'css/solid.min.css'
+          ],
         }
       ],
       prodUrl: 'https://cdnjs.cloudflare.com/ajax/libs/:name/:version/:path'
