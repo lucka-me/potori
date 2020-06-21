@@ -63,7 +63,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new BundleAnalyzerPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'css/potori.[hash].css',
+      filename: 'css/[name].[hash].css',
     }),
     new WebpackCdnPlugin({
       modules: [
@@ -98,11 +98,6 @@ module.exports = {
           var: 'mapboxgl',
           path: 'mapbox-gl.min.js',
           style: 'mapbox-gl.min.css',
-        },
-        {
-          name:   'material-components-web',
-          cssOnly:  true,
-          style:  'material-components-web.min.css',
         },
         {
           name:     '@fortawesome/fontawesome-free',
