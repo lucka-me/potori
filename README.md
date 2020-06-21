@@ -16,7 +16,7 @@ $ npm start
 
 Before `npm start`, you may need to fix `@type/gapi.client.gmail` by following [this PR](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/45380).
 
-Open `http://localhost:8000` in browser.
+Open `http://localhost:8000/potori` in browser.
 
 ## Notice
 Due to Google's policy (which aims to protect user's data), some features related to 3rd-party are suspended in the demo page (as a lite version).
@@ -30,28 +30,14 @@ Since Niantic launched the Niantic Wayfarer which contains a nomination manager,
   Done in `0.4.19`
 - [x] Extend to a data visualization tool  
   Partly done in `0.5.0`
-- [ ] Build with Webpack  
-  Ready for `0.7.0`
-- [ ] Convert to TypeScript  
-  Ready for `0.7.0`
-- [ ] Update [document](https://github.com/lucka-me/potori-docs)  
-  Ready for `0.7.0`
-- [ ] A new logo  
-  Ready for `0.7.0`
-
-## Dependencies
-- [Material Components Web](https://github.com/material-components/material-components-web)  
-  Material Design UI.
-- [Gmail API](https://developers.google.com/gmail/api/)  
-  Access Gmail inbox.
-- [Mapbox GL JS API](https://docs.mapbox.com/mapbox-gl-js/overview/)  
-  Display map.
-- [Chart.js](https://www.chartjs.org)  
-  Display charts.
-- [Google Drive API](https://developers.google.com/drive/api/v3/about-sdk)  
-  Access data in Google Drive.
-- [Firebase JavaScript SDK](https://firebase.google.com/docs/web/setup)  
-  Access Brainstorming database.
+- [x] Build with Webpack  
+  Partly done in `0.7.0`
+- [x] Convert to TypeScript  
+  Done in `0.7.0`
+- [x] Update [document](https://github.com/lucka-me/potori-docs)  
+  Done in `0.7.0`
+- [x] A new logo  
+  Done in `0.7.0`
 
 ## Changelog
 See [CHANGELOG.md](./CHANGELOG.md).
