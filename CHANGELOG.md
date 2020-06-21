@@ -1,6 +1,26 @@
 # Changelog
 
 ```markdown
+## [0.7.0] - 2020-06-21
+Migrate to Webpack and TypeScript
+
+### Added
+- Documents build wit VuePress
+- Internationalization for zh-CN and zh-TW
+
+### Changed
+- Build with Webpack
+- Convert JavaScript to TypeScript
+- Replace Material Icons with FontAwesome
+- Speed up page loading
+- Improve support for PWA
+- Update status data structure
+
+### Fixed
+- Various bugs related to Map Card
+```
+
+```markdown
 ## [0.6.2] - 2020-06-08
 Bugs fixed
 
