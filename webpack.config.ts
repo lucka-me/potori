@@ -38,7 +38,18 @@ module.exports = {
     splitChunks: {
       chunks: 'all',
       minSize: 1,
+      maxInitialRequests: 6,
       cacheGroups: {
+        service: {
+          test: /[\\/]src[\\/]service[\\/]/,
+          name: 'service',
+          priority: 30,
+        },
+        ui: {
+          test: /[\\/]src[\\/]ui[\\/]/,
+          name: 'ui',
+          priority: 30,
+        },
         data: {
           test: /[\\/]src[\\/]data[\\/]/,
           name: 'data',
@@ -52,7 +63,7 @@ module.exports = {
         mdc: {
           test: /[\\/]node_modules[\\/]@material/,
           name: 'mdc',
-          priority: 20,
+          priority: 10,
           reuseExistingChunk: true,
         },
         common: {
@@ -126,7 +137,7 @@ module.exports = {
       template: 'index.html',
       inject: false,
       scriptLoading: 'defer',
-      chunks: [ 'potori', 'data', 'locales', 'mdc', 'common' ],
+      chunks: [ 'potori', 'service', 'ui', 'data', 'locales', 'mdc', 'common' ],
       filename: 'index.html',
       meta: {
         'description' : 'Web App to Visualize Ingress Nominations',
