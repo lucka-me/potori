@@ -359,7 +359,7 @@ class Service {
         }
         for (const nomination of parsed.result) {
             const imageUrl = nomination.imageUrl.replace('https://lh3.googleusercontent.com/', '');
-            const id = BrainstormingKit.getId(imageUrl);
+            const id = Nomination.parseId(imageUrl);
             if (!mapNomination.has(id)) continue;
 
             const monination = mapNomination.get(id);

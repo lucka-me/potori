@@ -98,6 +98,10 @@ class Nomination {
         }
         return nomination;
     }
+
+    static parseId(imgUrl: string) {
+        return imgUrl.replace(/[^a-zA-Z0-9]/g, '').slice(- 10).toLowerCase();
+    }
 }
 
 export default Nomination;

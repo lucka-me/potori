@@ -143,10 +143,6 @@ class BrainstormingKit {
         return stats;
     }
 
-    static getId(imgUrl: string) {
-        return imgUrl.replace(/[^a-zA-Z0-9]/g, '').slice(- 10).toLowerCase();
-    }
-
     static isSynched(stars: string, status: number) {
         const reasons = StatusKit.reasons;
         if (stars === 'D' && status === reasons.get('duplicated').code) {

@@ -1,4 +1,3 @@
-import BrainstormingKit from "./BrainstormingKit";
 import StatusKit from "./StatusKit";
 import Nomination, { LngLat } from "./Nomination";
 
@@ -43,7 +42,7 @@ class Parser {
                     if (slicePos > 0) imageTmp = imageTmp.slice(0, slicePos);
                 }
                 nomination.image = imageTmp.replace('googleusercontent.com/', '');
-                nomination.id = BrainstormingKit.getId(nomination.image);
+                nomination.id = Nomination.parseId(nomination.image);
                 if (keys.scanner === 'redacted' && keys.type !== 'pending') {
                     nomination.lngLat = this.lngLat(mailBody);
                 }
