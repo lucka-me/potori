@@ -5,6 +5,7 @@ const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const WebpackCdnPlugin = require('webpack-cdn-plugin');
 
 module.exports = {
@@ -35,6 +36,17 @@ module.exports = {
     extensions: [ '.ts', '.js' ],
   },
   optimization: {
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        terserOptions: {
+          output: {
+            comments: false,
+          },
+        },
+        extractComments: false,
+      }),
+    ],
     splitChunks: {
       chunks: 'all',
       minSize: 1,
@@ -43,32 +55,32 @@ module.exports = {
         service: {
           test: /[\\/]src[\\/]service[\\/]/,
           name: 'service',
-          priority: 30,
+          priority: 40,
         },
         ui: {
           test: /[\\/]src[\\/]ui[\\/]/,
           name: 'ui',
-          priority: 30,
+          priority: 40,
         },
         data: {
           test: /[\\/]src[\\/]data[\\/]/,
           name: 'data',
-          priority: 20,
+          priority: 30,
         },
         locales: {
           test: /[\\/]src[\\/]locales[\\/]/,
           name: 'locales',
-          priority: 20,
+          priority: 30,
         },
         mdc: {
           test: /[\\/]node_modules[\\/]@material/,
           name: 'mdc',
-          priority: 10,
+          priority: 20,
           reuseExistingChunk: true,
         },
-        common: {
+        modules: {
           test: /[\\/]node_modules[\\/]/,
-          name: 'common',
+          name: 'modules',
           priority: 10,
           reuseExistingChunk: true,
         },
@@ -137,7 +149,7 @@ module.exports = {
       template: 'index.html',
       inject: false,
       scriptLoading: 'defer',
-      chunks: [ 'potori', 'service', 'ui', 'data', 'locales', 'mdc', 'common' ],
+      chunks: [ 'potori' ],
       filename: 'index.html',
       meta: {
         'description' : 'Web App to Visualize Ingress Nominations',
