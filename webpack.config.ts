@@ -44,13 +44,13 @@ module.exports = {
             comments: false,
           },
         },
-        extractComments: false,
+        extractComments: true,
       }),
     ],
     splitChunks: {
       chunks: 'all',
       minSize: 1,
-      maxInitialRequests: 6,
+      maxInitialRequests: 7,
       cacheGroups: {
         service: {
           test: /[\\/]src[\\/]service[\\/]/,
@@ -81,7 +81,7 @@ module.exports = {
         modules: {
           test: /[\\/]node_modules[\\/]/,
           name: 'modules',
-          priority: 10,
+          priority: 15,
           reuseExistingChunk: true,
         },
       },
