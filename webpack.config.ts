@@ -138,6 +138,7 @@ module.exports = {
           cdn:      'font-awesome',
           cssOnly:  true,
           styles: [
+            'css/fontawesome.min.css',
             'css/regular.min.css',
             'css/solid.min.css'
           ],
