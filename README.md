@@ -14,8 +14,6 @@ $ npm install
 $ npm start
 ```
 
-Before `npm start`, you may need to fix `@type/gapi.client.gmail` by following [this PR](https://github.com/DefinitelyTyped/DefinitelyTyped/pull/45380).
-
 Open `http://localhost:8000/potori` in browser.
 
 ## Notice
