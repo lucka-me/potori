@@ -1,11 +1,18 @@
 # Changelog
 
 ```markdown
-## [0.7.1] - 2020-TBA
-TBA
+## [0.7.1] - 2020-06-24
+
+### Added
+- Ability to support more scanners i.e. Pokémon GO
+
+### Changed
+- Split code to multiple chunks
+- Pack mdc-web to improve page loading speed
 
 ### Fixed
 - Wrong start_url and scope in manifest.json
+- Some icons are missing in Chrome and Firefox
 ```
 
 ```markdown
