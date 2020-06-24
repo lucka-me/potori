@@ -105,7 +105,10 @@ interface MariProgress {
 
 class Mari {
 
-    ignoreMailIdList: Array<string> = [];
+    private types: Array<string> = [];
+
+    private scanners: Array<string> = [];
+    private ignoreMailIdList: Array<string> = [];
     nominations: Array<Nomination> = [];
     progress: MariProgress = {
         list: 0, total: 0, finished: 0,
@@ -116,12 +119,13 @@ class Mari {
         progressUpdate: () => {},
     };
 
-    static get scanners() {
-        return ['redacted', 'prime'];
-    }
-
-    static get types() {
-        return ['accepted', 'rejected', 'pending'];
+    constructor() {
+        for (const type of StatusKit.types.keys()) {
+            this.types.push(type);
+        }
+        for (const scanner of StatusKit.types.get(this.types[0]).queries.keys()) {
+            this.scanners.push(scanner);
+        }
     }
 
     start(nominations: Array<Nomination>) {
@@ -137,8 +141,8 @@ class Mari {
             this.ignoreMailIdList.push(nomination.confirmationMailId);
             if (nomination.resultMailId) this.ignoreMailIdList.push(nomination.resultMailId);
         }
-        for (const scanner of Mari.scanners) {
-            for (const type of Mari.types) {
+        for (const scanner of this.scanners) {
+            for (const type of this.types) {
                 this.query({ scanner: scanner, type: type });
             }
         }
@@ -183,7 +187,7 @@ class Mari {
                 }
             }
             this.progress.list += 1;
-            this.events.bufferUpdate(this.progress.list / 6);
+            this.events.bufferUpdate(this.progress.list / this.scanners.length);
             this.processList(keys, list);
         }
     }
@@ -192,7 +196,8 @@ class Mari {
         this.progress.total += list.length;
 
         const checkFinish = () => {
-            if (this.progress.list === 6 && this.progress.total === this.progress.finished) {
+            if (this.progress.list === this.scanners.length
+                && this.progress.total === this.progress.finished) {
                 this.events.finished();
             }
         };
@@ -209,7 +214,7 @@ class Mari {
                 this.nominations.push(Parser.mail(response.result, keys));
                 this.progress.finished += 1;
                 this.events.progressUpdate(
-                    this.progress.finished / this.progress.total * (this.progress.list / 6)
+                    this.progress.finished / this.progress.total * (this.progress.list / this.scanners.length)
                 );
                 checkFinish();
             });
