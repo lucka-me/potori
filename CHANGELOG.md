@@ -2,6 +2,7 @@
 
 ```markdown
 ## [0.7.1] - 2020-06-24
+- Bugs fixed
 
 ### Added
 - Ability to support more scanners i.e. Pokémon GO
