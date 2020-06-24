@@ -104,7 +104,7 @@ class NominationCard {
         }, [
             Eli.build('div', { className: 'mdc-button__ripple' }),
             Eli.build('i', {
-                className: 'far fa-fw mdc-button__icon',
+                className: 'fa fa-fw mdc-button__icon',
             }),
             Eli.build('span', { className: 'mdc-button__label' }),
         ]);
@@ -129,7 +129,7 @@ class NominationCard {
 
         const actionIcons = [];
         const classNameAction = [
-            'far',
+            'fa',
             'mdc-icon-button',
             'mdc-card__action',
             'mdc-card__action--icon'

@@ -52,7 +52,7 @@ class DetailsDialogMap extends UIKitPrototype {
         const mapButtons = [];
         for (const value of Object.values(this.buttons)) {
             value.root = Eli.build('button', {
-                className: 'far mdc-icon-button',
+                className: 'fa mdc-icon-button',
                 innerHTML: value.icon,
             });
             const ctrl = new MDCRipple(value.root);
@@ -222,7 +222,7 @@ class DetailsDialog extends DialogPrototype {
                 elementRadio,
                 Eli.build('label', {
                     for: radioId,
-                    className: `far status-${key}`,
+                    className: `fa status-${key}`,
                     innerHTML: StatusKit.types.get(key).icon,
                 }),
             ]);

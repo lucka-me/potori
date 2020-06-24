@@ -139,7 +139,6 @@ module.exports = {
           cssOnly:  true,
           styles: [
             'css/fontawesome.min.css',
-            'css/regular.min.css',
             'css/solid.min.css'
           ],
         }

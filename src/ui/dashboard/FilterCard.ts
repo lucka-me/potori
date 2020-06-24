@@ -111,7 +111,7 @@ class FilterCard extends DashboardPrototype {
         }, [
             element,
             Eli.build('label', {
-                className: `far fa-fw status-${type}`,
+                className: `fa fa-fw status-${type}`,
                 for: id,
                 title: i18next.t(status.title),
                 innerHTML: status.icon,

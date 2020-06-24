@@ -33,7 +33,7 @@ class BSBasicCard extends DashboardBsPrototype {
             disabled: true,
         }, [
             Eli.build('div', { className: 'mdc-button__ripple' }),
-            Eli.build('i', { className: 'far fa-fw mdc-button__icon', innerHTML: '\uf2f1' }),
+            Eli.build('i', { className: 'fa fa-fw mdc-button__icon', innerHTML: '\uf2f1' }),
             Eli.build('span', { className: 'mdc-button__label', innerHTML: i18next.t('Refresh') }),
         ]);
         const rippleRefresh = new MDCRipple(this.actionRefresh);
@@ -45,7 +45,7 @@ class BSBasicCard extends DashboardBsPrototype {
 
         const actionClear = Eli.build('button', {
             className: [
-                'far',
+                'fa',
                 'mdc-icon-button',
                 'mdc-card__action',
                 'mdc-card__action--icon'
