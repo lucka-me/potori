@@ -2,10 +2,11 @@
 
 ```markdown
 ## [0.7.2] - 2020-07-13
-- Fixed mail processing can't finish
+- Fixed bugs
 
 ### Fixed
 - Mail processing may be blocked when there are new mails
+- Unable to open alert dialog
 ```
 
 ```markdown

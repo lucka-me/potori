@@ -19,7 +19,7 @@ class AlertDialog extends DialogPrototype {
     }
 
     open(message: string) {
-        if (!this.parent) this.render();
+        if (!this.ctrl) this.render();
         this.ctrl.open();
         this.textMessage.innerHTML = message;
     }
