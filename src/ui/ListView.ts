@@ -51,7 +51,7 @@ class ListView extends UIKitPrototype {
         const cards = nominations.map((nomination) => {
             const card = NominationCard.build(nomination, this.now, {
                 openDetails: () => this.events.openDetails(nomination),
-                focus: () => { console.log('focus');this.events.focus(nomination) },
+                focus: () => { this.events.focus(nomination) },
             });
             NominationCard.update(nomination, card);
             if (nomination.lngLat) {

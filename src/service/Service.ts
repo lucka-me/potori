@@ -185,10 +185,10 @@ class Service {
         };
 
         // Query locations
-        const listNoLocation = this.nominations.reduce((list, nomination) => {
+        const listNoLocation: Array<Nomination> = this.nominations.reduce((list, nomination) => {
             if (!nomination.lngLat) list.push(nomination);
             return list;
-        }, [] as Array<Nomination>);
+        }, []);
         if (listNoLocation.length < 1) {
             finished();
             return;
