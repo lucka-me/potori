@@ -7,6 +7,7 @@
 ### Fixed
 - Mail processing may be blocked when there are new mails
 - Unable to open alert dialog
+- Content of copy brainstorming id alert
 ```
 
 ```markdown
