@@ -13,7 +13,7 @@ module.exports = {
     potori: './src/potori.ts',
   },
   output: {
-    filename: 'lib/[name].[hash].js',
+    filename: 'lib/[name].[chunkhash].js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/potori/',
   },
@@ -97,7 +97,7 @@ module.exports = {
     new CleanWebpackPlugin(),
     new BundleAnalyzerPlugin(),
     new MiniCssExtractPlugin({
-      filename: 'css/[name].[hash].css',
+      filename: 'css/[name].[contenthash].css',
     }),
     new WebpackCdnPlugin({
       modules: [
