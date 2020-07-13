@@ -196,7 +196,7 @@ class Mari {
         this.progress.total += list.length;
 
         const checkFinish = () => {
-            if (this.progress.list === this.scanners.length
+            if (this.progress.list === this.scanners.length * this.types.length
                 && this.progress.total === this.progress.finished) {
                 this.events.finished();
             }

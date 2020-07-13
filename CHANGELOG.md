@@ -1,6 +1,14 @@
 # Changelog
 
 ```markdown
+## [0.7.2] - 2020-07-13
+- Fixed mail processing can't finish
+
+### Fixed
+- Mail processing may be blocked when there are new mails
+```
+
+```markdown
 ## [0.7.1] - 2020-06-24
 - Bugs fixed
 
