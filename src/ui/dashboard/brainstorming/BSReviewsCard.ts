@@ -20,7 +20,7 @@ class BSReviewsCard extends DashboardBsChartPrototype {
                     label: i18next.t('Reviews'),
                     data: [],
                     borderColor: style.getPropertyValue('--mdc-theme-primary'),
-                    pointHoverBorderColor: style.getPropertyValue('--mdc-theme-primary'),
+                    pointRadius: 0,
                 }],
             },
             options: {
@@ -75,7 +75,6 @@ class BSReviewsCard extends DashboardBsChartPrototype {
         if (!this.chart) return;
         const style = getComputedStyle(document.documentElement);
         this.chart.data.datasets[0].borderColor = style.getPropertyValue('--mdc-theme-primary');
-        this.chart.data.datasets[0].hoverBorderColor = style.getPropertyValue('--mdc-theme-primary');
         this.chart.update();
     }
 }

@@ -23,7 +23,7 @@ class BSRatesCard extends DashboardBsChartPrototype {
                 datasets: [{
                     data: [],
                     borderColor: style.getPropertyValue('--mdc-theme-primary'),
-                    hoverBorderColor: style.getPropertyValue('--mdc-theme-primary'),
+                    pointRadius: 0,
                 }],
             },
             options: {
@@ -59,7 +59,6 @@ class BSRatesCard extends DashboardBsChartPrototype {
         if (!this.chart) return;
         const style = getComputedStyle(document.documentElement);
         this.chart.data.datasets[0].borderColor = style.getPropertyValue('--mdc-theme-primary');
-        this.chart.data.datasets[0].hoverBorderColor = style.getPropertyValue('--mdc-theme-primary');
         this.chart.options.scale.angleLines.color = style.getPropertyValue('--mdc-theme-text-disabled-on-light');
         this.chart.options.scale.gridLines.color = style.getPropertyValue('--mdc-theme-text-disabled-on-light');
         this.chart.update();

@@ -6,6 +6,7 @@
 
 ### Changed
 - Set chart type of Quotas from line to bar
+- Remove points in line and radar charts
 ```
 
 ```markdown

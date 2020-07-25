@@ -12,6 +12,8 @@ class CountByMonthCard extends DashboardChartProtorype {
         this.parent.append(this.root);
 
         const style = getComputedStyle(document.documentElement);
+        const colorPrimary = style.getPropertyValue('--mdc-theme-primary');
+        const colorSecondary = style.getPropertyValue('--mdc-theme-secondary');
         this.chart = new Chart(canvasChart.getContext('2d'), {
             type: 'line',
             data: {
@@ -19,14 +21,16 @@ class CountByMonthCard extends DashboardChartProtorype {
                 datasets: [{
                     label: i18next.t('Submissions'),
                     data: [],
-                    borderColor: style.getPropertyValue('--mdc-theme-primary'),
-                    pointHoverBorderColor: style.getPropertyValue('--mdc-theme-primary'),
+                    borderColor: colorPrimary,
+                    pointBackgroundColor: colorPrimary,
+                    pointRadius: 0,
                     fill: false,
                 }, {
                     label: i18next.t('Results'),
                     data: [],
-                    borderColor: style.getPropertyValue('--mdc-theme-secondary'),
-                    pointHoverBorderColor: style.getPropertyValue('--mdc-theme-secondary'),
+                    borderColor: colorSecondary,
+                    pointBackgroundColor: colorSecondary,
+                    pointRadius: 0,
                     fill: false,
                 }],
             },
@@ -100,9 +104,7 @@ class CountByMonthCard extends DashboardChartProtorype {
         if (!this.chart) return;
         const style = getComputedStyle(document.documentElement);
         this.chart.data.datasets[0].borderColor = style.getPropertyValue('--mdc-theme-primary');
-        this.chart.data.datasets[0].hoverBorderColor = style.getPropertyValue('--mdc-theme-primary');
         this.chart.data.datasets[1].borderColor = style.getPropertyValue('--mdc-theme-secondary');
-        this.chart.data.datasets[1].hoverBorderColor = style.getPropertyValue('--mdc-theme-secondary');
         this.chart.update();
     }
 }
