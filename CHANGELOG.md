@@ -1,6 +1,14 @@
 # Changelog
 
 ```markdown
+## [0.7.3] - 2020-TBA
+- Improve UI
+
+### Changed
+- Set chart type of Quotas from line to bar
+```
+
+```markdown
 ## [0.7.2] - 2020-07-13
 - Fixed bugs
 

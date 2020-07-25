@@ -15,13 +15,13 @@ class QuotasCard extends DashboardChartProtorype {
         }
         const style = getComputedStyle(document.documentElement);
         this.chart = new Chart(canvasChart.getContext('2d'), {
-            type: 'line',
+            type: 'bar',
             data: {
                 labels: labels,
                 datasets: [{
                     data: [],
-                    borderColor: style.getPropertyValue('--mdc-theme-primary'),
-                    pointHoverBorderColor: style.getPropertyValue('--mdc-theme-primary'),
+                    backgroundColor: style.getPropertyValue('--mdc-theme-primary'),
+                    hoverBackgroundColor: style.getPropertyValue('--mdc-theme-primary'),
                 }],
             },
             options: {
@@ -55,8 +55,8 @@ class QuotasCard extends DashboardChartProtorype {
     updateStyle() {
         if (!this.chart) return;
         const style = getComputedStyle(document.documentElement);
-        this.chart.data.datasets[0].borderColor = style.getPropertyValue('--mdc-theme-primary');
-        this.chart.data.datasets[0].hoverBorderColor = style.getPropertyValue('--mdc-theme-primary');
+        this.chart.data.datasets[0].backgroundColor = style.getPropertyValue('--mdc-theme-primary');
+        this.chart.data.datasets[0].hoverBackgroundColor = style.getPropertyValue('--mdc-theme-primary');
         this.chart.update();
     }
 }
