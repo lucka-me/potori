@@ -1,7 +1,7 @@
 # Changelog
 
 ```markdown
-## [0.7.3] - 2020-TBA
+## [0.7.3] - 2020-08-02
 - Improve UI
 
 ### Changed
