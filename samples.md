@@ -223,6 +223,26 @@ Subject: [能量塔審查完畢：<PORTAL-TITLE>]
 </details>
 
 ### Too Close
+<details><summary>en</summary>
+<p>
+
+```
+Subject: [Portal review complete:<PORTAL-TITLE>]
+----------
+
+Your Portal submission has been reviewed and the community agrees that it meets the Candidate Portal criteria. However, we are unable to bring it online at this time since this candidate is too close to an existing Portal.
+
+-NianticOps
+
+<PORTAL-TITLE>
+<PORTAL-DESCRIPTION>
+
+<PHOTO-URL>
+```
+
+</p>
+</details>
+
 <details><summary>zh</summary>
 <p>
 

@@ -1,5 +1,5 @@
 {
-    "version": "2",
+    "version": "3",
     "types": [
         {
             "key": "pending",
@@ -89,7 +89,7 @@
                 ],
                 [
                     "prime",
-                    ["能量塔過近"]
+                    [ "能量塔過近", "too close to" ]
                 ]
             ]
         }
