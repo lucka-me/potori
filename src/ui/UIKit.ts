@@ -105,7 +105,7 @@ class UIKit {
             },
             clear: () => {
                 Service.clearBsData();
-                this.dashboard.bs.basic.update([]);
+                this.dashboard.bs.update([]);
             }
         }
         this.dashboard.init(mainBox);

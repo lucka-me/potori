@@ -1,6 +1,14 @@
 # Changelog
 
 ```markdown
+## [0.7.4] - 2020-TBA
+- TBA
+
+### Fixed
+- Cards not updated when clear the bs data
+```
+
+```markdown
 ## [0.7.3] - 2020-08-02
 - Improve UI
 
