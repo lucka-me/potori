@@ -7,6 +7,9 @@
 ### Added
 - Support for new rejection mails with reason(s)
 
+### Changed
+- Update dependencies
+
 ### Fixed
 - Cards not updated when clear the bs data
 - When calculate Synch Rate, 3.0 is not regarded as accepted
