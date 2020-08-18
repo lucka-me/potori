@@ -1,7 +1,7 @@
 # Changelog
 
 ```markdown
-## [0.7.4] - 2020-08-TBA
+## [0.7.4] - 2020-08-18
 - Support new rejection mails with reason(s)
 
 ### Added
