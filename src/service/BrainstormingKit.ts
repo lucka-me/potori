@@ -151,15 +151,14 @@ class BrainstormingKit {
         const general = parseFloat(stars);
         if (isNaN(general)) return false;
         const types = StatusKit.types;
-        if (general < 3 && status === reasons.get('undeclared').code) {
-            return true;
+        if (status === types.get('accepted').code || status === reasons.get('tooClose').code) {
+            // Accepted
+            if (general >= 3) return true;
+        } else {
+            // Rejected
+            if (general < 3) return true;
         }
-        if (general > 3 && status === types.get('accepted').code) {
-            return true;
-        }
-        if (general > 3 && status === reasons.get('tooClose').code) {
-            return true;
-        }
+        
         return false;
     }
 }
