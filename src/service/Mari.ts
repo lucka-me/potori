@@ -58,15 +58,18 @@ class Parser {
     static reason(mailBody: string, scanner: string) {
         const mainBody = mailBody.slice(0, mailBody.search('-NianticOps'));
         const undeclared = StatusKit.reasons.get('undeclared');
+        // Get first result
         let result = undeclared;
+        let firstPos = mailBody.length;
         for (const reason of StatusKit.reasons.values()) {
             for (const keyword of reason.keywords.get(scanner)) {
-                if (mainBody.search(keyword) > -1) {
+                const pos = mainBody.search(keyword);
+                if (pos > -1 && pos < firstPos) {
                     result = reason;
+                    firstPos = pos;
                     break;
                 }
             }
-            if (result !== undeclared) break;
         }
         return result;
     }
