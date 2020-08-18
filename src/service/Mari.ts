@@ -37,7 +37,7 @@ class Parser {
             if (part.partId === '1') {
                 const mailBody = this.base64(part.body.data);
                 let imageTmp = mailBody.slice(mailBody.search(/googleusercontent\.com/));
-                for (const keyword of ['"', '\n']) {
+                for (const keyword of ['"', '\n', '</p>']) {
                     const slicePos = imageTmp.search(keyword);
                     if (slicePos > 0) imageTmp = imageTmp.slice(0, slicePos);
                 }
