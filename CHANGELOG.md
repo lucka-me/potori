@@ -1,11 +1,15 @@
 # Changelog
 
 ```markdown
-## [0.7.4] - 2020-TBA
-- TBA
+## [0.7.4] - 2020-08-TBA
+- Support new rejection mails with reason(s)
+
+### Added
+- Support for new rejection mails with reason(s)
 
 ### Fixed
 - Cards not updated when clear the bs data
+- When calculate Synch Rate, 3.0 is not regarded as accepted
 ```
 
 ```markdown

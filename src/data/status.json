@@ -1,5 +1,5 @@
 {
-    "version": "3",
+    "version": "4",
     "types": [
         {
             "key": "pending",
@@ -90,6 +90,20 @@
                 [
                     "prime",
                     [ "能量塔過近", "too close to" ]
+                ]
+            ]
+        },
+        {
+            "key": "temporary",
+            "code": 104,
+            "title": "Temporary",
+            "icon":  "\uf1da",
+            "color": "#647372",
+            "keywords": [
+                [ "redacted", [] ],
+                [
+                    "prime",
+                    [ "seasonal display " ]
                 ]
             ]
         }
