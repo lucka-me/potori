@@ -15,7 +15,7 @@ module.exports = {
   output: {
     filename: 'lib/[name].[chunkhash].js',
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/potori/',
+    publicPath: '/',
   },
   module: {
     rules: [
