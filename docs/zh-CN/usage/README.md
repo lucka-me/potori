@@ -42,6 +42,7 @@ Ingress Prime使用了本地化的模版，这给确定筛选器带来了挑战�
 | :--- | :---
 | 重复 | `duplicate of either an existing Portal`
 | 过近 | `too close to an existing Portal` `能量塔過近`
+| 临时 | `seasonal display`
 | 未指明 | （不匹配以上任何关键词）
 
 ::: warning

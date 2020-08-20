@@ -42,6 +42,7 @@ As for the rejection mails, there are several templates for each rejection reaso
 | :--- | :---
 | Duplicated | `duplicate of either an existing Portal`
 | Too Close | `too close to an existing Portal` `能量塔過近`
+| Temporary | `seasonal display`
 | Undeclared | (Match neither of the keywords above)
 
 ::: warning
