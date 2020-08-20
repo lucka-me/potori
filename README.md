@@ -1,6 +1,6 @@
 # ![](./assets/title.png)
 
-[![Release](https://img.shields.io/github/v/release/lucka-me/potori)](https://github.com/lucka-me/potori/releases/latest "Last release") ![CI Status](https://img.shields.io/github/workflow/status/lucka-me/potori/Node.js%20CI) [![Demo](https://img.shields.io/website?url=https%3A%2F%2Flucka.moe%2Fpotori)](https://lucka.moe/potori "Website") [![License](https://img.shields.io/github/license/lucka-me/potori)](./LICENSE "License")  
+[![CI Status](https://img.shields.io/github/workflow/status/lucka-me/potori/CI)](https://github.com/lucka-me/potori/actions?query=workflow%3ACI "CI Workflow") [![Release](https://img.shields.io/github/v/release/lucka-me/potori)](https://github.com/lucka-me/potori/releases/latest "Last release") [![Demo](https://img.shields.io/website?url=https%3A%2F%2Flucka.moe%2Fpotori)](https://lucka.moe/potori "Website") [![License](https://img.shields.io/github/license/lucka-me/potori)](./LICENSE "License")  
 [![Telegram Channel](https://img.shields.io/badge/telegram-channel-37aee2)](https://t.me/potori "Telegram Channel")
 
 ## Description
@@ -8,13 +8,13 @@ Gather and visualize your Portal nominations from your Gmail inbox.
 
 ## Build & Run
 ```sh
-$ git clone git@github.com:lucka-me/potori.git
+$ git clone git@github.com:lucka-me/potori.git # Use SSH
 $ cd potori
 $ npm install
 $ npm start
 ```
 
-Open `http://localhost:8000/potori` in browser.
+Open `http://localhost:8000/` in browser.
 
 ## Notice
 Due to Google's policy (which aims to protect user's data), some features related to 3rd-party are suspended in the demo page (as a lite version).
