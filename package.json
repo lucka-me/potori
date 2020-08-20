@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.14.0",
-    "@types/chart.js": "^2.9.23",
+    "@types/chart.js": "^2.9.24",
     "@types/copy-webpack-plugin": "^6.0.0",
     "@types/gapi": "0.0.39",
     "@types/gapi.auth2": "0.0.52",
