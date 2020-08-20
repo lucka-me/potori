@@ -199,7 +199,7 @@ class DetailsDialog extends DialogPrototype {
             inputRadio.addEventListener('change', (event: Event) => {
                 const target = event.target as HTMLInputElement;
                 this.selectedStatus = target.value;
-                this.fieldResultTime.root_.hidden = (target.value === 'pending');
+                this.fieldResultTime.root.hidden = (target.value === 'pending');
                 this.fieldResultTime.layout();
                 this.elementReason.hidden = !(target.value === 'rejected');
                 this.selectReason.layout();
@@ -404,7 +404,7 @@ class DetailsDialog extends DialogPrototype {
         this.image.src = nomination.imageUrl;
         this.textConfirmedTime.innerHTML = new Date(nomination.confirmedTime).toLocaleString();
 
-        this.fieldResultTime.root_.hidden = (type === 'pending');
+        this.fieldResultTime.root.hidden = (type === 'pending');
         const getLocalDateTimeISOString = (time: number) => {
             const date = new Date();
             date.setTime(time - date.getTimezoneOffset() * 60000);
