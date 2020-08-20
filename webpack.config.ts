@@ -160,18 +160,6 @@ module.exports = {
         'apple-mobile-web-app-status-bar-style' : 'dark',
       },
     }),
-    new HtmlWebpackPlugin({
-      title: 'Redirecting',
-      filename: 'intro/index.html',
-      meta: {
-        redirect: {
-          'http-equiv': 'refresh',
-          content: '0; url=/potori/docs',
-        },
-      },
-      cdnModule: false,
-      chunks: [],
-    }),
     new CopyPlugin({
       patterns: [
         { from: 'assets', to: 'assets' },
