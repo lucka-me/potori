@@ -28,7 +28,7 @@
   },
   "devDependencies": {
     "@fortawesome/fontawesome-free": "^5.14.0",
-    "@types/chart.js": "^2.9.23",
+    "@types/chart.js": "^2.9.24",
     "@types/copy-webpack-plugin": "^6.0.0",
     "@types/gapi": "0.0.39",
     "@types/gapi.auth2": "0.0.52",
@@ -41,7 +41,7 @@
     "css-loader": "^4.2.1",
     "gh-pages": "^3.1.0",
     "html-webpack-plugin": "^4.3.0",
-    "i18next-browser-languagedetector": "^4.3.1",
+    "i18next-browser-languagedetector": "^6.0.1",
     "mini-css-extract-plugin": "^0.10.0",
     "style-loader": "^1.2.1",
     "terser-webpack-plugin": "^4.1.0",
