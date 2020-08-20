@@ -264,6 +264,32 @@ Subject: [能量塔審查完畢：<PORTAL-TITLE>]
 </p>
 </details>
 
+### Temporary
+<details><summary>en</summary>
+<p>
+
+```
+Subject: [Portal review complete:<PORTAL-TITLE>]
+----------
+
+Your Portal nomination has been reviewed, and we have decided not to accept this candidate.
+
+Your nomination is rejected due to the following reason(s):
+Nomination does not appear to be permanent or appears to be a seasonal display that is only put up during certain times of the year.
+
+Note that we will not be overturning this decision. If you believe your New Portal nomination should have been accepted, we suggest re-submitting the Portal candidate after improving the photo.
+
+-NianticOps
+
+<PORTAL-TITLE>
+<PORTAL-DESCRIPTION>
+
+<PHOTO-URL>
+```
+
+</p>
+</details>
+
 ## Other
 Not nominations-related but may bring conflict to Potori.
 
