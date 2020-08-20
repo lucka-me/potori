@@ -1,6 +1,6 @@
 # ![](./assets/title.png)
 
-[![Release](https://img.shields.io/github/v/release/lucka-me/potori)](https://github.com/lucka-me/potori/releases/latest "Last release") [![Demo](https://img.shields.io/website?url=https%3A%2F%2Flucka.moe%2Fpotori)](https://lucka.moe/potori "Website") [![License](https://img.shields.io/github/license/lucka-me/potori)](./LICENSE "License")  
+[![Release](https://img.shields.io/github/v/release/lucka-me/potori)](https://github.com/lucka-me/potori/releases/latest "Last release") ![CI Status](https://img.shields.io/github/workflow/status/lucka-me/potori/Node.js%20CI) [![Demo](https://img.shields.io/website?url=https%3A%2F%2Flucka.moe%2Fpotori)](https://lucka.moe/potori "Website") [![License](https://img.shields.io/github/license/lucka-me/potori)](./LICENSE "License")  
 [![Telegram Channel](https://img.shields.io/badge/telegram-channel-37aee2)](https://t.me/potori "Telegram Channel")
 
 ## Description
