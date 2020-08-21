@@ -15,13 +15,13 @@ jobs:
       with:
         node-version: 12.x
     - name: Initiate
-      run: |
-        npm ci
-        git config --global user.name "Lucka"
-        git config --global user.email "samzhao0727@gmail.com"
+      run: npm ci
     - name: Build Potori
       run: npm run build
     - name: Build Documents
       run: npm run build:docs
     - name: Deploy
-      run: npm run deploy
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./dist
