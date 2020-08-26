@@ -32,7 +32,7 @@
     "@types/copy-webpack-plugin": "^6.0.0",
     "@types/gapi": "0.0.39",
     "@types/gapi.auth2": "0.0.52",
-    "@types/gapi.client.drive": "^3.0.8",
+    "@types/gapi.client.drive": "^3.0.9",
     "@types/gapi.client.gmail": "^1.0.2",
     "@types/lodash": "^4.14.160",
     "@types/mapbox-gl": "^1.11.2",
