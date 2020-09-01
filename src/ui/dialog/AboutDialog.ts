@@ -1,4 +1,4 @@
-import DialogPrototype, { Eli, MDCDialog, i18next } from './DialogPrototype';
+import DialogPrototype, { EliDialog as Eli, MDCDialog, i18next } from './DialogPrototype';
 import Version from '../../service/Version';
 
 class AboutDialog extends DialogPrototype {
