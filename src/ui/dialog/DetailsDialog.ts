@@ -257,7 +257,7 @@ class DetailsDialog extends DialogPrototype {
                 className: 'mdc-text-field__input',
                 id: 'input-dialog-details-result-time',
             }),
-            Eli.notchedOutline({
+            DetailsDialog.buildNotchedOutline({
                 for: 'input-dialog-details-result-time',
                 innerHTML: i18next.t('Result Time'),
             }),
@@ -285,7 +285,7 @@ class DetailsDialog extends DialogPrototype {
             }, [
                 Eli.build('i', { className: 'mdc-select__dropdown-icon' }),
                 Eli.build('div', { className: 'mdc-select__selected-text' }),
-                Eli.notchedOutline({ innerHTML: i18next.t('Reason') }),
+                DetailsDialog.buildNotchedOutline({ innerHTML: i18next.t('Reason') }),
             ]),
             Eli.build('div', {
                 className: 'mdc-select__menu mdc-menu mdc-menu-surface',
@@ -436,6 +436,22 @@ class DetailsDialog extends DialogPrototype {
     updateStyle() {
         if (!this.map.ctrl) return;
         this.map.ctrl.setStyle(`mapbox:${getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim()}?optimize=true`);
+    }
+
+    /**
+     * Build a MDC notched outline
+     * @param labelOptions Options for the label element
+     * @returns The outline element
+     */
+    static buildNotchedOutline(labelOptions: any): HTMLDivElement {
+        labelOptions.className = 'mdc-floating-label';
+        return Eli.build('div', { className: 'mdc-notched-outline' }, [
+            Eli.build('div', { className: 'mdc-notched-outline__leading' }),
+            Eli.build('div', {
+                className: 'mdc-notched-outline__notch',
+            }, [ Eli.build('label', labelOptions), ]),
+            Eli.build('div', { className: 'mdc-notched-outline__trailing' }),
+        ]);
     }
 }
 

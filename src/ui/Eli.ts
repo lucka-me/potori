@@ -38,17 +38,6 @@ class Eli {
             innerHTML: icon,
         });
     }
-
-    static notchedOutline(labelOptions: any): HTMLDivElement {
-        labelOptions.className = 'mdc-floating-label';
-        return Eli.build('div', { className: 'mdc-notched-outline' }, [
-            Eli.build('div', { className: 'mdc-notched-outline__leading' }),
-            Eli.build('div', {
-                className: 'mdc-notched-outline__notch',
-            }, [ Eli.build('label', labelOptions), ]),
-            Eli.build('div', { className: 'mdc-notched-outline__trailing' }),
-        ]);
-    }
 };
 
 export default Eli;
