@@ -9,6 +9,7 @@ import Eli          from "./Eli";
 import ListView     from './ListView';
 import Progress     from './Progress';
 import Service      from "../service/Service";
+import Snackbar     from './Snackbar';
 import StatusKit    from "../service/StatusKit";
 import Nomination   from '../service/Nomination';
 
@@ -19,6 +20,7 @@ class UIKit {
     dashboard   = new Dashboard();
     list        = new ListView();
     dialog      = new Dialog();
+    snackbar    = Snackbar;
 
     dark        = new Dark();
 
@@ -67,6 +69,9 @@ class UIKit {
             ].join(';'),
         });
         body.append(mainBox);
+
+        // Snackbar
+        this.snackbar.init(body);
 
         // Dashboard
         this.dashboard.map.events.focus = (id) => {
@@ -181,7 +186,7 @@ class UIKit {
             this.dialog.alert.open(message);
         }
         Service.events.info = (message) => {
-            this.dialog.shackbar.open(message);
+            this.snackbar.show(message);
         }
         // FileKit
         Service.file.local.events.openUI = (opened) => {

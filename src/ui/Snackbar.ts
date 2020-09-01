@@ -1,6 +1,6 @@
 import { MDCSnackbar } from "@material/snackbar";
 
-import UIKitPrototype , { Eli, i18next } from '../UIKitPrototype';
+import UIKitPrototype , { Eli, i18next } from './UIKitPrototype';
 
 class Snackbar extends UIKitPrototype {
 
@@ -31,7 +31,7 @@ class Snackbar extends UIKitPrototype {
         this.ctrl = new MDCSnackbar(element);
     }
 
-    open(message: string) {
+    show(message: string) {
         if (!this.ctrl) this.render();
         this.textMessage.innerHTML = message;
         this.ctrl.open();
