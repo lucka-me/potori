@@ -1,10 +1,10 @@
-import DialogPrototype, { EliDialog as Eli, MDCDialog, i18next } from './prototype';
+import DialogPrototype, { Eli, MDCDialog, i18next } from './prototype';
 import Version from '../../service/Version';
 
 class AboutDialog extends DialogPrototype {
 
     render() {
-        const element = Eli.dialog([
+        const element = DialogPrototype.buildDialog([
             Eli.build('h2', {
                 className: 'mdc-dialog__title',
                 innerHTML: i18next.t('About')
@@ -38,7 +38,7 @@ class AboutDialog extends DialogPrototype {
             ]),
             Eli.build('footer', {
                 className: 'mdc-dialog__actions',
-            }, [ Eli.dialogAction('close', i18next.t('Close')) ]),
+            }, [ DialogPrototype.buildDialogAction('close', i18next.t('Close')) ]),
         ]);
         this.parent.append(element);
         this.ctrl = new MDCDialog(element);

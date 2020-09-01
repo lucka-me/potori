@@ -1,4 +1,4 @@
-import DialogPrototype, { EliDialog as Eli, MDCDialog, i18next } from './prototype';
+import DialogPrototype, { Eli, MDCDialog, i18next } from './prototype';
 
 class AlertDialog extends DialogPrototype {
 
@@ -8,10 +8,10 @@ class AlertDialog extends DialogPrototype {
         this.textMessage = Eli.build('div', {
             className: 'mdc-dialog__content',
         });
-        const element = Eli.dialog([
+        const element = DialogPrototype.buildDialog([
             this.textMessage,
             Eli.build('footer', { className: 'mdc-dialog__actions' }, [
-                Eli.dialogAction('close', i18next.t('Close'))
+                DialogPrototype.buildDialogAction('close', i18next.t('Close'))
             ]),
         ]);
         this.parent.append(element);

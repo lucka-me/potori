@@ -1,6 +1,6 @@
 import { MDCTextField } from "@material/textfield";
 
-import DialogPrototype, { EliDialog as Eli, MDCDialog, i18next } from './prototype';
+import DialogPrototype, { Eli, MDCDialog, i18next } from './prototype';
 
 interface ImportDialogEvents {
     import: (raw: string) => void;
@@ -44,7 +44,7 @@ class ImportDialog extends DialogPrototype {
                 Eli.build('div', { className: 'mdc-notched-outline__trailing' }),
             ]),
         ]);
-        const elementDialog = Eli.dialog([
+        const elementDialog = DialogPrototype.buildDialog([
             Eli.build('h2', {
                 className: 'mdc-dialog__title',
                 innerHTML: i18next.t('Import')
@@ -70,8 +70,8 @@ class ImportDialog extends DialogPrototype {
             Eli.build('footer', {
                 className: 'mdc-dialog__actions',
             }, [
-                Eli.dialogAction('close' , i18next.t('Close' )),
-                Eli.dialogAction('import', i18next.t('Import')),
+                DialogPrototype.buildDialogAction('close' , i18next.t('Close' )),
+                DialogPrototype.buildDialogAction('import', i18next.t('Import')),
             ]),
         ]);
         this.parent.append(elementDialog);

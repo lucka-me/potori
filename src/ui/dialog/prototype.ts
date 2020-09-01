@@ -6,19 +6,13 @@ import UIKitPrototype, { Eli, i18next } from "../UIKitPrototype";
  */
 export default class DialogPrototype extends UIKitPrototype {
     ctrl: MDCDialog = null;
-}
-
-/**
- * Extended Eli with dialog-related functions
- */
-export class EliDialog extends Eli {
 
     /**
      * Build a MDC dialog element
      * @param contents Elements inside dialog
      * @returns The dialog element
      */
-    static dialog(contents: Array<HTMLElement>): HTMLDivElement {
+    static buildDialog(contents: Array<HTMLElement>): HTMLDivElement {
         return Eli.build('div', {
             className: 'mdc-dialog mdc-dialog--scrollable',
             role: 'dialog',
@@ -36,7 +30,7 @@ export class EliDialog extends Eli {
      * @param action Identifier of the action
      * @param text Text on the action
      */
-    static dialogAction(action: string, text: string): HTMLButtonElement {
+    static buildDialogAction(action: string, text: string): HTMLButtonElement {
         return Eli.build('button', {
             className: 'mdc-button mdc-dialog__button',
             dataset: { mdcDialogAction: action, },
@@ -48,4 +42,4 @@ export class EliDialog extends Eli {
     }
 }
 
-export { MDCDialog, i18next };
+export { Eli, MDCDialog, i18next };

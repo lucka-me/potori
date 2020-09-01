@@ -6,10 +6,10 @@ import { MDCSelect } from "@material/select";
 import { MDCTextField } from "@material/textfield";
 
 import AlertDialog from './AlertDialog';
-import DialogPrototype, { EliDialog as Eli, MDCDialog } from './prototype';
+import DialogPrototype, { MDCDialog } from './prototype';
 import Nomination, { LngLat } from '../../service/Nomination';
 import StatusKit from '../../service/StatusKit';
-import UIKitPrototype, { i18next } from '../UIKitPrototype';
+import UIKitPrototype, { Eli, i18next } from '../UIKitPrototype';
 
 interface DetailsDialogMapEvents {
     queryLngLat: (bsId: string, succeed: (lngLat: LngLat) => void, failed: () => void) => void;
@@ -322,15 +322,15 @@ class DetailsDialog extends DialogPrototype {
             }, [ elementResultTime, this.elementReason ]),
         ]);
         this.map.init(elementContents);
-        const elementDialog = Eli.dialog([
+        const elementDialog = DialogPrototype.buildDialog([
             this.headingTitle,
             this.image,
             elementContents,
             Eli.build('footer', {
                 className: 'mdc-dialog__actions',
             }, [
-                Eli.dialogAction('close', 'Close'),
-                Eli.dialogAction('save' , 'Save' ),
+                DialogPrototype.buildDialogAction('close', 'Close'),
+                DialogPrototype.buildDialogAction('save' , 'Save' ),
             ]),
         ]);
         this.parent.append(elementDialog);
