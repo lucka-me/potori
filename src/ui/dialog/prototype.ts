@@ -11,7 +11,7 @@ export default class DialogPrototype extends UIKitPrototype {
 /**
  * Extended Eli with dialog-related functions
  */
-class EliDialog extends Eli {
+export class EliDialog extends Eli {
 
     /**
      * Build a MDC dialog element
@@ -48,4 +48,4 @@ class EliDialog extends Eli {
     }
 }
 
-export { EliDialog, MDCDialog, i18next };
+export { MDCDialog, i18next };
