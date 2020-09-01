@@ -1,13 +1,13 @@
 import Chart from 'chart.js';
 import moment from 'moment';
 
-import { DashboardBsChartPrototype, BrainstormingStats, EliChartCard as Eli, i18next } from './prototypes';
+import { DashboardBsChartPrototype, BrainstormingStats, Eli, i18next } from './prototypes';
 import TimeKit from "../../TimeKit";
 
 class BSReviewsCard extends DashboardBsChartPrototype {
     render() {
         const canvasChart = Eli.build('canvas', { className: 'canvas-chart--h' });
-        this.root = Eli.chartCard(i18next.t('Brainstorming Reviews'), canvasChart, 3, 300);
+        this.root = DashboardBsChartPrototype.buildChartCard(i18next.t('Brainstorming Reviews'), canvasChart, 3, 300);
         this.setVisible(false);
         this.parent.append(this.root);
 

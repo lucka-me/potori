@@ -1,12 +1,12 @@
 import Chart from 'chart.js';
 
-import { DashboardBsChartPrototype, EliChartCard as Eli, BrainstormingStats, i18next } from './prototypes';
+import { DashboardBsChartPrototype, Eli, BrainstormingStats, i18next } from './prototypes';
 import { RateItems } from '../../../service/BrainstormingKit';
 
 class BSRatesCard extends DashboardBsChartPrototype {
     render() {
         const canvasChart = Eli.build('canvas', { className: 'canvas-chart--h' });
-        this.root = Eli.chartCard(i18next.t('Brainstorming Rates'), canvasChart, 1, 240);
+        this.root = DashboardBsChartPrototype.buildChartCard(i18next.t('Brainstorming Rates'), canvasChart, 1, 240);
         this.setVisible(false);
         this.parent.append(this.root);
 

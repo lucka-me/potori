@@ -32,12 +32,6 @@ export class DashboardChartProtorype extends DashboardPrototype {
             borderHover: 'rgba(0, 0, 0, 0.4)',
         };
     }
-}
-
-/**
- * Extended Eli with chart-card-related functions
- */
-export class EliChartCard extends Eli {
 
     /**
      * Build a MDC card with chart inside
@@ -47,7 +41,7 @@ export class EliChartCard extends Eli {
      * @param minWidth  Mininum width fo the card
      * @returns The card element
      */
-    static chartCard(
+    static buildChartCard(
         title: string, canvas: HTMLCanvasElement, flex: number, minWidth: number
     ): HTMLDivElement {
         return Eli.build('div', {
