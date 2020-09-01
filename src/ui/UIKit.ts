@@ -168,7 +168,7 @@ class UIKit {
             this.dashboard.bs.update(Service.nominations);
         }
         Service.events.showProgress = () => {
-            this.progress.root.hidden = false;
+            this.progress.ctrl.open();
         };
         Service.events.show = () => {
             this.show();
@@ -212,7 +212,7 @@ class UIKit {
         this.dashboard.setVisible(false);
         this.list.clear();
         this.dashboard.map.update(Service.nominations);
-        this.progress.root.hidden = true;
+        this.progress.ctrl.close();
         this.progress.ctrl.buffer = 0;
         this.progress.ctrl.progress = 0;
     }
@@ -226,7 +226,7 @@ class UIKit {
         this.appBar.menu.items.get(AppBarMenuItems.save.key).hidden = false;
         this.appBar.menu.items.get(AppBarMenuItems.upload.key).hidden = !Service.auth.signedIn;
         this.appBar.menu.items.get(AppBarMenuItems.import.key).hidden = false;
-        this.progress.root.hidden = true;
+        this.progress.ctrl.close();
     }
 
     update(nomination: Nomination) {

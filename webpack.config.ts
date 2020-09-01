@@ -9,9 +9,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const WebpackCdnPlugin = require('webpack-cdn-plugin');
 
 module.exports = {
-  entry: {
-    potori: './src/potori.ts',
-  },
+  entry: { potori: './src/potori.ts', },
   output: {
     filename: 'lib/[name].[chunkhash].js',
     path: path.resolve(__dirname, 'dist'),
@@ -32,9 +30,7 @@ module.exports = {
       },
     ],
   },
-  resolve: {
-    extensions: [ '.ts', '.js' ],
-  },
+  resolve: { extensions: [ '.ts', '.js' ], },
   optimization: {
     minimize: true,
     minimizer: [
@@ -141,7 +137,12 @@ module.exports = {
             'css/fontawesome.min.css',
             'css/solid.min.css'
           ],
-        }
+        },
+        {
+          name:   'material-components-web',
+          cssOnly:  true,
+          style:  'material-components-web.min.css',
+        },
       ],
       prodUrl: 'https://cdnjs.cloudflare.com/ajax/libs/:name/:version/:path'
     }),
