@@ -77,6 +77,7 @@ class NominationCard {
                 Eli.build('img', {
                     cssText: cssTextImg,
                     src: nomination.imageUrl,
+                    loading: 'lazy',
                 }),
                 Eli.build('div', {
                     className: [

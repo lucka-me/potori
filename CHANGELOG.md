@@ -1,6 +1,14 @@
 # Changelog
 
 ```markdown
+## [0.7.5] - 2020-TBA
+- TBA
+
+### Added
+- Support lazyload for images
+```
+
+```markdown
 ## [0.7.4] - 2020-08-18
 - Support new rejection mails with reason(s)
 
