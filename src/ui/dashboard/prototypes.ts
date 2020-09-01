@@ -34,4 +34,41 @@ export class DashboardChartProtorype extends DashboardPrototype {
     }
 }
 
+/**
+ * Extended Eli with chart-card-related functions
+ */
+export class EliChartCard extends Eli {
+
+    /**
+     * Build a MDC card with chart inside
+     * @param title     Title of the card
+     * @param canvas    Canvas element for the chart
+     * @param flex      Flex size of the card
+     * @param minWidth  Mininum width fo the card
+     * @returns The card element
+     */
+    static chartCard(
+        title: string, canvas: HTMLCanvasElement, flex: number, minWidth: number
+    ): HTMLDivElement {
+        return Eli.build('div', {
+            className: [
+                'mdc-card',
+                'mdc-card--outlined',
+                'padding--8',
+                `flex--${flex}`,
+                'flex-shrink--1'
+            ].join(' '),
+            cssText: `min-width:${minWidth}px`,
+        }, [
+            Eli.build('span', {
+                className: 'mdc-typography--headline6',
+                innerHTML: title,
+            }),
+            Eli.build('div', {
+                className: 'container-chart',
+            }, [ canvas ]),
+        ]);
+    }
+}
+
 export { Eli, Nomination, i18next };

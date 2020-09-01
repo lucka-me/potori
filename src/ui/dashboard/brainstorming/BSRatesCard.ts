@@ -1,6 +1,6 @@
 import Chart from 'chart.js';
 
-import { DashboardBsChartPrototype, Eli, BrainstormingStats, i18next } from './prototypes';
+import { DashboardBsChartPrototype, EliChartCard as Eli, BrainstormingStats, i18next } from './prototypes';
 import { RateItems } from '../../../service/BrainstormingKit';
 
 class BSRatesCard extends DashboardBsChartPrototype {

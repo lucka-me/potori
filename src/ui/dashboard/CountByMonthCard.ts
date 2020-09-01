@@ -1,7 +1,7 @@
 import Chart from 'chart.js';
 import moment from 'moment';
 
-import { DashboardChartProtorype, Eli, Nomination, i18next } from './prototypes';
+import { DashboardChartProtorype, EliChartCard as Eli, Nomination, i18next } from './prototypes';
 import TimeKit from "../TimeKit";
 
 class CountByMonthCard extends DashboardChartProtorype {

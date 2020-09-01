@@ -22,29 +22,6 @@ class Eli {
         return element;
     }
 
-    static chartCard(
-        title: string, canvas: HTMLCanvasElement, flex: number, minWidth: number
-    ): HTMLDivElement {
-        return Eli.build('div', {
-            className: [
-                'mdc-card',
-                'mdc-card--outlined',
-                'padding--8',
-                `flex--${flex}`,
-                'flex-shrink--1'
-            ].join(' '),
-            cssText: `min-width:${minWidth}px`,
-        }, [
-            Eli.build('span', {
-                className: 'mdc-typography--headline6',
-                innerHTML: title,
-            }),
-            Eli.build('div', {
-                className: 'container-chart',
-            }, [ canvas ]),
-        ]);
-    }
-
     static link(href: string, title: string, text: string): HTMLAnchorElement {
         return Eli.build('a', {
             href: href,
