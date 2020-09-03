@@ -19,7 +19,7 @@ jobs:
         node-version: 12.x
     - name: Initiate
       run: npm ci
-    - ame: Build Potori
+    - name: Build Potori
       run: npm run build
     - name: Build Documents
       run: npm run build:docs
