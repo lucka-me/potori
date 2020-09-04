@@ -1,11 +1,14 @@
 # Changelog
 
 ```markdown
-## [0.7.5] - 2020-TBA
-- TBA
+## [0.7.5] - 2020-09-04
+- Lazyload images
 
 ### Added
 - Support lazyload for images
+
+### Changed
+- Minor optimized
 ```
 
 ```markdown
