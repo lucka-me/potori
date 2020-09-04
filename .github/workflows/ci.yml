@@ -11,18 +11,15 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [ 12.x ]
-
     steps:
     - uses: actions/checkout@v2
     - uses: actions/setup-node@v1
       with:
         node-version: 12.x
-    - run: npm ci
-    - run: npm run build
-    - run: npm run build:docs
+    - name: Initiate
+      run: npm ci
+    - name: Build Potori
+      run: npm run build
+    - name: Build Documents
+      run: npm run build:docs
