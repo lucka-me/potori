@@ -1,5 +1,4 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap);
-@import url(https://cdnjs.cloudflare.com/ajax/libs/material-components-web/5.1.0/material-components-web.min.css);
 :root {
     --mdc-theme-primary: #3b1e5f !important;
     --mdc-theme-secondary: #2578B5 !important;
