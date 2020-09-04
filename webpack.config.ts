@@ -12,6 +12,7 @@ module.exports = {
   entry: { potori: './src/potori.ts', },
   output: {
     filename: 'lib/[name].[chunkhash].js',
+    chunkFilename: 'lib/[name].[chunkhash].bundle.js',
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/',
   },
@@ -44,9 +45,9 @@ module.exports = {
       }),
     ],
     splitChunks: {
-      chunks: 'all',
+      chunks: 'initial',
       minSize: 1,
-      maxInitialRequests: 7,
+      maxInitialRequests: 12,
       cacheGroups: {
         service: {
           test: /[\\/]src[\\/]service[\\/]/,
@@ -59,13 +60,8 @@ module.exports = {
           priority: 40,
         },
         data: {
-          test: /[\\/]src[\\/]data[\\/]/,
+          test: /[\\/]src[\\/](data|locales)[\\/]/,
           name: 'data',
-          priority: 30,
-        },
-        locales: {
-          test: /[\\/]src[\\/]locales[\\/]/,
-          name: 'locales',
           priority: 30,
         },
         mdc: {
@@ -74,10 +70,24 @@ module.exports = {
           priority: 20,
           reuseExistingChunk: true,
         },
+        chartjs: {
+          test: /[\\/]node_modules[\\/]chart\.js/,
+          name: 'chartjs',
+          priority: 20,
+          chunks: 'async',
+          reuseExistingChunk: true,
+        },
+        mapboxgl: {
+          test: /[\\/]node_modules[\\/]mapbox\-gl/,
+          name: 'mapboxgl',
+          priority: 20,
+          chunks: 'async',
+          reuseExistingChunk: true,
+        },
         modules: {
           test: /[\\/]node_modules[\\/]/,
           name: 'modules',
-          priority: 15,
+          priority: 10,
           reuseExistingChunk: true,
         },
       },
@@ -112,22 +122,10 @@ module.exports = {
           path: 'moment.min.js',
         },
         {
-          name:   'chart.js',
-          var:    'Chart',
-          cdn:    'Chart.js',
-          path:   'Chart.min.js',
-        },
-        {
           name: 'firebase',
           paths: [
             'firebase-app.min.js', 'firebase-database.min.js'
           ]
-        },
-        {
-          name:   'mapbox-gl',
-          var:    'mapboxgl',
-          path:   'mapbox-gl.min.js',
-          style:  'mapbox-gl.min.css',
         },
         {
           name:     '@fortawesome/fontawesome-free',

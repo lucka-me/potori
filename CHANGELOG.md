@@ -1,13 +1,14 @@
 # Changelog
 
 ```markdown
-## [0.7.5] - 2020-09-04
+## [0.7.5] - 2020-09-TBA
 - Lazyload images
 
 ### Added
 - Support lazyload for images
 
 ### Changed
+- Lazyload Dashboard, ListView, Chart.js and Mapbox GL JS
 - Minor optimized
 ```
 

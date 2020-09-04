@@ -1,4 +1,5 @@
 import mapboxgl from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 import { DashboardPrototype, Eli } from './prototypes';
 import FilterCard from './FilterCard';
@@ -33,6 +34,8 @@ class MapCard extends DashboardPrototype {
             cssText: 'min-width: 300px;',
         }, [ elementMap ]);
         this.parent.append(this.root);
+
+        mapboxgl.accessToken = 'pk.eyJ1IjoibHVja2EtbWUiLCJhIjoiY2p2NDk5NmRvMHFreTQzbzduemM1MHV4cCJ9.7XGmxnEJRoCDr-i5BBmBfw';
         this.ctrl = new mapboxgl.Map({
             container: elementMap,
             style: `mapbox:${getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim()}?optimize=true`

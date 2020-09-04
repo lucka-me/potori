@@ -1,4 +1,3 @@
-import mapboxgl from 'mapbox-gl';
 import { MDCFormField } from "@material/form-field";
 import { MDCRadio } from "@material/radio";
 import { MDCRipple } from "@material/ripple";
@@ -48,7 +47,7 @@ class DetailsDialogMap extends UIKitPrototype {
         this.render();
     }
 
-    render() {
+    async render() {
         const mapButtons = [];
         for (const value of Object.values(this.buttons)) {
             value.root = Eli.build('button', {
@@ -76,18 +75,22 @@ class DetailsDialogMap extends UIKitPrototype {
 
         this.parent.append(elementContent);
 
+        const mapboxgl = await import(
+            /* webpackChunkName: 'mapboxgl' */
+            'mapbox-gl'
+        );
         this.ctrl = new mapboxgl.Map({
             container: elementMap,
             style: `mapbox:${getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim()}?optimize=true`,
         });
         this.ctrl.addControl(new mapboxgl.NavigationControl());
+        this.marker = new mapboxgl.Marker();
     }
 
     set(nomination: Nomination) {
         this.nomination = nomination;
         this.delete();
         if (this.nomination.lngLat) {
-            this.marker = new mapboxgl.Marker();
             this.marker.setLngLat(this.nomination.lngLat).addTo(this.ctrl);
             this.ctrl.jumpTo({ center: this.nomination.lngLat, zoom: 16 });
             this.buttons.delete.root.disabled = false;
@@ -97,28 +100,25 @@ class DetailsDialogMap extends UIKitPrototype {
     }
 
     edit() {
-        if (!this.marker) {
-            this.marker = new mapboxgl.Marker()
+        if (this.buttons.delete.root.disabled) {
+            this.marker
                 .setLngLat(this.ctrl.getCenter())
-                .setDraggable(true)
                 .addTo(this.ctrl);
             this.buttons.delete.root.disabled = false;
             this.buttons.edit.root.innerHTML = '\uf044';
-        } else {
-            this.marker.setDraggable(true);
         }
+        this.marker.setDraggable(true);
     }
 
     search() {
         const succeed = (lngLat: LngLat) => {
             if (!this.dialog.isOpen) return;
-            if (!this.marker) {
-                this.marker = new mapboxgl.Marker()
+            if (this.buttons.delete.root.disabled) {
+                this.marker
                     .setLngLat(lngLat)
                     .addTo(this.ctrl);
-            } else {
-                this.marker.setLngLat(lngLat);
             }
+            this.marker.setLngLat(lngLat);
             this.marker.setDraggable(false);
             this.ctrl.easeTo({ center: lngLat, zoom: 16 });
             this.buttons.edit.root.innerHTML = '\uf044';
