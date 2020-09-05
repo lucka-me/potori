@@ -6,6 +6,7 @@ const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const webpack = require('webpack');
 const WebpackCdnPlugin = require('webpack-cdn-plugin');
 
 module.exports = {
@@ -47,7 +48,7 @@ module.exports = {
     splitChunks: {
       chunks: 'initial',
       minSize: 1,
-      maxInitialRequests: 12,
+      maxInitialRequests: 15,
       cacheGroups: {
         service: {
           test: /[\\/]src[\\/]service[\\/]/,
@@ -93,6 +94,13 @@ module.exports = {
           chunks: 'async',
           reuseExistingChunk: true,
         },
+        moment: {
+          test: /[\\/]node_modules[\\/]moment/,
+          name: 'moment',
+          priority: 20,
+          chunks: 'async',
+          reuseExistingChunk: true,
+        },
 
         modules: {
           test: /[\\/]node_modules[\\/]/,
@@ -127,11 +135,6 @@ module.exports = {
           path: 'i18nextBrowserLanguageDetector.min.js'
         },
         {
-          name: 'moment',
-          cdn:  'moment.js',
-          path: 'moment.min.js',
-        },
-        {
           name:     '@fortawesome/fontawesome-free',
           cdn:      'font-awesome',
           cssOnly:  true,
@@ -163,6 +166,7 @@ module.exports = {
         'apple-mobile-web-app-status-bar-style' : 'dark',
       },
     }),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
     new CopyPlugin({
       patterns: [
         { from: 'assets', to: 'assets' },
