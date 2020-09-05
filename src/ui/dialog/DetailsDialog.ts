@@ -42,9 +42,9 @@ class DetailsDialogMap extends UIKitPrototype {
         queryLngLat : () => { },
     };
 
-    init(parent: HTMLElement) {
+    async init(parent: HTMLElement) {
         super.init(parent);
-        this.render();
+        await this.render();
     }
 
     async render() {
@@ -84,42 +84,61 @@ class DetailsDialogMap extends UIKitPrototype {
             style: `mapbox:${getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim()}?optimize=true`,
         });
         this.ctrl.addControl(new mapboxgl.NavigationControl());
-        this.marker = new mapboxgl.Marker();
     }
 
     set(nomination: Nomination) {
         this.nomination = nomination;
         this.delete();
         if (this.nomination.lngLat) {
-            this.marker.setLngLat(this.nomination.lngLat).addTo(this.ctrl);
-            this.ctrl.jumpTo({ center: this.nomination.lngLat, zoom: 16 });
-            this.buttons.delete.root.disabled = false;
-            this.buttons.edit.root.innerHTML = '\uf044';
+            import(
+                /* webpackChunkName: 'mapboxgl' */
+                'mapbox-gl'
+            ).then((mapboxgl) => {
+                this.marker = new mapboxgl.Marker()
+                    .setLngLat(this.nomination.lngLat).addTo(this.ctrl);
+                this.ctrl.jumpTo({ center: this.nomination.lngLat, zoom: 16 });
+                this.buttons.delete.root.disabled = false;
+                this.buttons.edit.root.innerHTML = '\uf044';
+            });
         }
         this.buttons.search.root.disabled = false;
     }
 
     edit() {
-        if (this.buttons.delete.root.disabled) {
-            this.marker
-                .setLngLat(this.ctrl.getCenter())
-                .addTo(this.ctrl);
-            this.buttons.delete.root.disabled = false;
-            this.buttons.edit.root.innerHTML = '\uf044';
+        if (!this.marker) {
+            import(
+                /* webpackChunkName: 'mapboxgl' */
+                'mapbox-gl'
+            ).then((mapboxgl) => {
+                this.marker = new mapboxgl.Marker()
+                    .setLngLat(this.ctrl.getCenter())
+                    .setDraggable(true)
+                    .addTo(this.ctrl);
+                this.buttons.delete.root.disabled = false;
+                this.buttons.edit.root.innerHTML = '\uf044';
+            });
+        } else {
+            this.marker.setDraggable(true);
         }
-        this.marker.setDraggable(true);
     }
 
     search() {
         const succeed = (lngLat: LngLat) => {
             if (!this.dialog.isOpen) return;
-            if (this.buttons.delete.root.disabled) {
-                this.marker
-                    .setLngLat(lngLat)
-                    .addTo(this.ctrl);
+            if (!this.marker) {
+                import(
+                    /* webpackChunkName: 'mapboxgl' */
+                    'mapbox-gl'
+                ).then((mapboxgl) => {
+                    this.marker = new mapboxgl.Marker()
+                        .setLngLat(lngLat)
+                        .setDraggable(false)
+                        .addTo(this.ctrl);
+                });
+            } else {
+                this.marker.setLngLat(lngLat);
+                this.marker.setDraggable(false);
             }
-            this.marker.setLngLat(lngLat);
-            this.marker.setDraggable(false);
             this.ctrl.easeTo({ center: lngLat, zoom: 16 });
             this.buttons.edit.root.innerHTML = '\uf044';
             this.buttons.search.root.disabled = false;
@@ -168,7 +187,7 @@ class DetailsDialog extends DialogPrototype {
         query       : () => { },
     };
 
-    render() {
+    async render() {
         this.headingTitle = Eli.build('h2', {
             className: 'mdc-dialog__title',
             dataset: { mdcDialogInitialFocus: '' },
@@ -321,7 +340,7 @@ class DetailsDialog extends DialogPrototype {
                 className: 'flex-box-row--wrap',
             }, [ elementResultTime, this.elementReason ]),
         ]);
-        this.map.init(elementContents);
+        await this.map.init(elementContents);
         const elementDialog = DialogPrototype.buildDialog([
             this.headingTitle,
             this.image,
@@ -338,6 +357,16 @@ class DetailsDialog extends DialogPrototype {
         this.ctrl.listen('MDCDialog:opened', () => this.opened());
         this.ctrl.listen('MDCDialog:closed', (event: CustomEvent) => this.closed(event));
         this.map.dialog = this.ctrl;
+    }
+
+    /**
+     * Prepare the component
+     * - First time: Build components
+     * - After: Return directly
+     */
+    private async prepare() {
+        if (this.ctrl) return;
+        await this.render();
     }
 
     opened() {
@@ -395,42 +424,44 @@ class DetailsDialog extends DialogPrototype {
     }
 
     open(nomination: Nomination) {
-        if (!this.ctrl) this.render();
-        this.nomination = nomination;
-        this.map.set(nomination);
-        const type = StatusKit.getTypeByCode(nomination.status.code);
+        this.prepare().then(() => {
+            this.nomination = nomination;
+            this.map.set(nomination);
+            const type = StatusKit.getTypeByCode(nomination.status.code);
 
-        this.headingTitle.innerHTML = nomination.title;
-        this.image.src = nomination.imageUrl;
-        this.textConfirmedTime.innerHTML = new Date(nomination.confirmedTime).toLocaleString();
+            this.headingTitle.innerHTML = nomination.title;
+            this.image.src = nomination.imageUrl;
+            this.textConfirmedTime.innerHTML = new Date(nomination.confirmedTime).toLocaleString();
 
-        (this.fieldResultTime.root as HTMLElement).hidden = (type === 'pending');
-        const getLocalDateTimeISOString = (time: number) => {
-            const date = new Date();
-            date.setTime(time - date.getTimezoneOffset() * 60000);
-            return date.toISOString();
-        }
-        const resultTimeString = getLocalDateTimeISOString(
-            nomination.resultTime ? nomination.resultTime : Date.now()
-        );
-        this.fieldResultTime.value = resultTimeString.slice(0, resultTimeString.lastIndexOf(':'));
+            (this.fieldResultTime.root as HTMLElement).hidden = (type === 'pending');
+            const getLocalDateTimeISOString = (time: number) => {
+                const date = new Date();
+                date.setTime(time - date.getTimezoneOffset() * 60000);
+                return date.toISOString();
+            }
+            const resultTimeString = getLocalDateTimeISOString(
+                nomination.resultTime ? nomination.resultTime : Date.now()
+            );
+            this.fieldResultTime.value = resultTimeString.slice(0, resultTimeString.lastIndexOf(':'));
 
-        this.elementReason.hidden = !(type === 'rejected');
-        if (type === 'rejected') {
-            this.selectReason.selectedIndex = nomination.status.code - StatusKit.types.get(type).code;
-        }
-        if (type === 'pending') {
-            this.events.query(nomination.id, (data) => {
-                const timeString = getLocalDateTimeISOString(data.lastTime);
-                this.fieldResultTime.value = timeString.slice(0, timeString.lastIndexOf(':'));
-                this.fieldResultTime.layout();
-            }, () => {});
-        }
+            this.elementReason.hidden = !(type === 'rejected');
+            if (type === 'rejected') {
+                this.selectReason.selectedIndex = nomination.status.code - StatusKit.types.get(type).code;
+                console.log(`Reason index: ${this.selectReason.selectedIndex}`);
+            }
+            if (type === 'pending') {
+                this.events.query(nomination.id, (data) => {
+                    const timeString = getLocalDateTimeISOString(data.lastTime);
+                    this.fieldResultTime.value = timeString.slice(0, timeString.lastIndexOf(':'));
+                    this.fieldResultTime.layout();
+                }, () => {});
+            }
 
-        this.status.get(type).checked = true;
-        this.selectedStatus = type;
+            this.status.get(type).checked = true;
+            this.selectedStatus = type;
 
-        this.ctrl.open();
+            this.ctrl.open();
+        });
     }
 
     updateStyle() {
