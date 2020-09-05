@@ -309,7 +309,26 @@ class DetailsDialog extends DialogPrototype {
             }, [
                 DetailsDialog.buildNotchedOutline({ innerHTML: i18next.t('Reason') }),
                 Eli.build('span', { className: 'mdc-select__selected-text' }),
-                Eli.build('span', { className: 'mdc-select__dropdown-icon' }),
+                Eli.build('span', { className: 'mdc-select__dropdown-icon' }, [
+                    DetailsDialog.buildSVG('svg', {
+                        'class': 'mdc-select__dropdown-icon-graphic',
+                        'viewBox': '7 10 10 5',
+                        'focusable': false
+                    }, [
+                        DetailsDialog.buildSVG('polygon' , {
+                            'class': 'mdc-select__dropdown-icon-inactive',
+                            'stroke': 'none',
+                            'fill-rule': 'evenodd',
+                            'points': '7 10 12 15 17 10'
+                        }),
+                        DetailsDialog.buildSVG('polygon' , {
+                            'class': 'mdc-select__dropdown-icon-active',
+                            'stroke': 'none',
+                            'fill-rule': 'evenodd',
+                            'points': '7 15 12 10 17 15'
+                        })
+                    ])
+                ]),
             ]),
             Eli.build('div', {
                 className: 'mdc-select__menu mdc-menu mdc-menu-surface',
@@ -487,6 +506,23 @@ class DetailsDialog extends DialogPrototype {
             }, [ Eli.build('label', labelOptions), ]),
             Eli.build('div', { className: 'mdc-notched-outline__trailing' }),
         ]);
+    }
+
+    /**
+     * Build a svg element
+     * @param tag SVG tag
+     * @param options Options for the svg element
+     * @param children Chrldren svg elements
+     */
+    private static buildSVG(
+        tag: string, options: any, children?: Array<SVGElement>
+    ): SVGElement {
+        const svg = document.createElementNS('http://www.w3.org/2000/svg', tag);
+        for (const [key, value] of Object.entries(options)) {
+            svg.setAttributeNS(null, key, `${value}`);
+        }
+        if (children) svg.append(...children);
+        return svg;
     }
 }
 

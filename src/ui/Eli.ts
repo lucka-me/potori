@@ -1,6 +1,6 @@
 class Eli {
     static build<K extends keyof HTMLElementTagNameMap>(
-        tag: K, options: any, children?: Array<HTMLElement | string>
+        tag: K, options: any, children?: Array<HTMLElement | SVGElement | string>
     ): HTMLElementTagNameMap[K] {
         const element = document.createElement(tag);
         for (const [key, value] of Object.entries(options)) {
