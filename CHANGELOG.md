@@ -2,13 +2,13 @@
 
 ```markdown
 ## [0.7.5] - 2020-09-TBA
-- Lazyload images
+- Dynamically load some modules and lazyload images
 
 ### Added
 - Support lazyload for images
 
 ### Changed
-- Lazyload Dashboard, ListView, Chart.js and Mapbox GL JS
+- Lazyload Dashboard, ListView, Chart.js, Firebase and Mapbox GL JS
 - Minor optimized
 ```
 

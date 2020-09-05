@@ -1,5 +1,3 @@
-// import firebase from "firebase/app";
-// import "firebase/database";
 import type firebase from "firebase";
 
 import Nomination, { LngLat } from "./Nomination";

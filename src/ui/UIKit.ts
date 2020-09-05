@@ -182,8 +182,8 @@ class UIKit {
      * Start to preload modules
      */
     private preloadModules() {
-        import('./Dashboard');
-        import('./ListView');
+        import(/* webpackChunkName: 'dashboard' */ './Dashboard');
+        import(/* webpackChunkName: 'listview' */  './ListView');
     }
 
     /**
