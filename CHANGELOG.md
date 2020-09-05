@@ -1,7 +1,7 @@
 # Changelog
 
 ```markdown
-## [0.7.5] - 2020-09-TBA
+## [0.7.5] - 2020-09-06
 - Dynamically load most modules and lazyload images
 
 ### Added
@@ -10,6 +10,9 @@
 ### Changed
 - Lazyload Dashboard, ListView, Chart.js, Firebase, Moment.js and Mapbox GL JS
 - Minor optimized
+
+### Fixed
+- Broken reason selector in Details dialog
 ```
 
 ```markdown
