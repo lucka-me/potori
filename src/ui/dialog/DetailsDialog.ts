@@ -288,8 +288,13 @@ class DetailsDialog extends DialogPrototype {
             itemsSelectReason.push(Eli.build('li', {
                 className: 'mdc-list-item',
                 dataset: { value: key },
-                innerHTML: i18next.t(value.title),
-            }));
+            }, [
+                Eli.build('span', { className: 'mdc-list-item__ripple' }),
+                Eli.build('span', {
+                    className: 'mdc-list-item__text',
+                    innerHTML: i18next.t(value.title),
+                }),
+            ]));
         }
         this.elementReason = Eli.build('div', {
             className: [
@@ -302,9 +307,9 @@ class DetailsDialog extends DialogPrototype {
             Eli.build('div', {
                 className: 'mdc-select__anchor',
             }, [
-                Eli.build('i', { className: 'mdc-select__dropdown-icon' }),
-                Eli.build('div', { className: 'mdc-select__selected-text' }),
                 DetailsDialog.buildNotchedOutline({ innerHTML: i18next.t('Reason') }),
+                Eli.build('span', { className: 'mdc-select__selected-text' }),
+                Eli.build('span', { className: 'mdc-select__dropdown-icon' }),
             ]),
             Eli.build('div', {
                 className: 'mdc-select__menu mdc-menu mdc-menu-surface',
@@ -447,7 +452,6 @@ class DetailsDialog extends DialogPrototype {
             this.elementReason.hidden = !(type === 'rejected');
             if (type === 'rejected') {
                 this.selectReason.selectedIndex = nomination.status.code - StatusKit.types.get(type).code;
-                console.log(`Reason index: ${this.selectReason.selectedIndex}`);
             }
             if (type === 'pending') {
                 this.events.query(nomination.id, (data) => {
