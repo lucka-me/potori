@@ -1,6 +1,6 @@
 // import firebase from "firebase/app";
 // import "firebase/database";
-import firebase from "firebase";
+import type firebase from "firebase";
 
 import Nomination, { LngLat } from "./Nomination";
 import StatusKit from "./StatusKit";
@@ -27,13 +27,9 @@ interface BrainstormingStats {
 
 class BrainstormingKit {
 
-    reference: firebase.database.Reference = null;
     data: Map<string, any> = new Map();
-
-    init() {
-        const app = firebase.initializeApp({ databaseURL: 'https://oprbrainstorming.firebaseio.com' });
-        this.reference = app.database().ref('c/reviews/');
-    }
+    private firebaseInitialized = false;
+    private reference: firebase.database.Reference = null;
 
     query(bsId: string, succeed: (data: any) => void, failed: () => void) {
         if (this.data.has(bsId)) {
@@ -44,19 +40,7 @@ class BrainstormingKit {
             failed();
             return;
         }
-        this.reference.child(bsId).once(
-            'value',
-            (data) => {
-                const val = data.val();
-                if (!val) {
-                    failed();
-                    return;
-                }
-                this.data.set(bsId, val);
-                succeed(val);
-            },
-            (_) => failed(),
-        );
+        this.queryFirebase(bsId, succeed, failed);
     }
 
     queryLngLat(bsId: string, succeed: (lngLat: LngLat) => void, failed: () => void) {
@@ -73,25 +57,42 @@ class BrainstormingKit {
             }
         }
         let left = queryList.length;
-        const onQueried = () => {
+        const queried = () => {
             left--;
             if (left < 1) finished();
         }
         for (const id of queryList) {
-            this.reference.child(id).once(
-                'value',
-                (data) => {
-                    const val = data.val();
-                    if (!val) {
-                        onQueried();
-                        return;
-                    }
-                    this.data.set(id, val);
-                    onQueried();
-                },
-                (_) => onQueried(),
-            );
+            this.queryFirebase(id, (value) => {
+                this.data.set(id, value);
+                queried();
+            }, queried);
         }
+    }
+
+    /**
+     * Query the firebase
+     * @param bsId Brainstorming ID
+     * @param succeed Triggered when succeed
+     * @param failed Triggered when failed
+     */
+    private queryFirebase(bsId: string, succeed: (data: any) => void, failed: () => void) {
+        Promise.all([
+            import(/* webpackChunkName: 'firebase' */ 'firebase/app'),
+            import(/* webpackChunkName: 'firebase' */ 'firebase/database'),
+        ]).then(([ firebase, _ ]) => {
+            if (!this.reference) {
+                const app = firebase.initializeApp({ databaseURL: 'https://oprbrainstorming.firebaseio.com' });
+                if (!this.reference) this.reference = app.database().ref('c/reviews/');
+            }
+            this.reference.child(bsId).once('value', (data) => {
+                const value = data.val();
+                if (!value) {
+                    failed();
+                    return;
+                }
+                succeed(value);
+            }, failed);
+        });
     }
 
     clear() {

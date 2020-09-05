@@ -136,7 +136,6 @@ class Service {
         }
 
         this.auth.init();
-        this.bs.init();
 
         this.mari.events.finished = () => this.finish();
     }

@@ -59,11 +59,13 @@ module.exports = {
           name: 'ui',
           priority: 40,
         },
+
         data: {
           test: /[\\/]src[\\/](data|locales)[\\/]/,
           name: 'data',
           priority: 30,
         },
+
         mdc: {
           test: /[\\/]node_modules[\\/]@material/,
           name: 'mdc',
@@ -77,6 +79,13 @@ module.exports = {
           chunks: 'async',
           reuseExistingChunk: true,
         },
+        firebase: {
+          test: /[\\/]node_modules[\\/]firebase/,
+          name: 'firebase',
+          priority: 20,
+          chunks: 'async',
+          reuseExistingChunk: true,
+        },
         mapboxgl: {
           test: /[\\/]node_modules[\\/]mapbox\-gl/,
           name: 'mapboxgl',
@@ -84,6 +93,7 @@ module.exports = {
           chunks: 'async',
           reuseExistingChunk: true,
         },
+
         modules: {
           test: /[\\/]node_modules[\\/]/,
           name: 'modules',
@@ -120,12 +130,6 @@ module.exports = {
           name: 'moment',
           cdn:  'moment.js',
           path: 'moment.min.js',
-        },
-        {
-          name: 'firebase',
-          paths: [
-            'firebase-app.min.js', 'firebase-database.min.js'
-          ]
         },
         {
           name:     '@fortawesome/fontawesome-free',
