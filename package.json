@@ -1,6 +1,6 @@
 {
   "name": "potori",
-  "version": "0.7.5",
+  "version": "0.7.6",
   "description": "Web App to Visualize Ingress Nominations",
   "main": "src/potori.ts",
   "scripts": {
