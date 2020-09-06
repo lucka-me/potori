@@ -1,6 +1,4 @@
 // Inspired by https://github.com/elxris/Turnip-Calculator/blob/master/scripts/i18n.js
-const fs = require('fs');
-
 class LanguageData {
     code: string;
     files: Array<string>;
@@ -32,20 +30,25 @@ class LanguageData {
     }
 }
 
-const root = './src/locales'
-const ignore = ['index.ts', '.DS_Store'];
-const filter = (filename: string) => !ignore.includes(filename);
-const languages: Array<LanguageData> =
-    fs.readdirSync(root).filter(filter).reduce((list: Array<LanguageData>, folder: string) => {
-        list.push(new LanguageData(folder, fs.readdirSync(`${root}/${folder}`).filter(filter)));
-        return list;
-    }, []);
+function buildLocals() {
+    const fs = require('fs');
+    const root = './src/locales'
+    const ignore = ['index.ts', '.DS_Store'];
+    const filter = (filename: string) => !ignore.includes(filename);
+    const languages: Array<LanguageData> =
+        fs.readdirSync(root).filter(filter).reduce((list: Array<LanguageData>, folder: string) => {
+            list.push(new LanguageData(folder, fs.readdirSync(`${root}/${folder}`).filter(filter)));
+            return list;
+        }, []);
 
-const jsFile = `// This file is generated with scripts/build-locals.js
-${languages.map((language) => language.toImport()).join('\n')}
+    const jsFile = `// This file is generated with scripts/build-locals.js
+    ${languages.map((language) => language.toImport()).join('\n')}
 
-export default {
-${languages.map((language) => language.toExport()).join('')}
-};`;
+    export default {
+    ${languages.map((language) => language.toExport()).join('')}
+    };`;
 
-fs.writeFileSync(require('path').join(process.cwd(), `${root}/index.ts`), jsFile);
+    fs.writeFileSync(require('path').join(process.cwd(), `${root}/index.ts`), jsFile);
+}
+
+buildLocals();
