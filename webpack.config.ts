@@ -173,6 +173,7 @@ module.exports = {
         'description' : 'Web App to Visualize Ingress Nominations',
         'viewport'    : 'width=device-width, height=device-height, initial-scale=1',
       },
+      templateContent: '<html><head></head><body><noscript>Potori requires JavaScript.</noscript></body></html>',
     }),
     new WebpackPwaManifest({
       name: "Potori",
