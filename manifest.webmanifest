@@ -1,0 +1,25 @@
+{
+  "icons": [
+    {
+      "src": "/assets/icon_512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/assets/icon_180x180.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "maskable any"
+    }
+  ],
+  "name": "Potori",
+  "short_name": "Potori",
+  "orientation": "any",
+  "display": "standalone",
+  "start_url": "/",
+  "description": "Web App to Visualize Ingress Nominations",
+  "scope": "/",
+  "background_color": "#2578B5",
+  "theme_color": "#3B1E5F"
+}
