@@ -144,6 +144,10 @@ module.exports = {
           ],
         },
         {
+          name:    'googleapis',
+          prodUrl: 'https://apis.google.com/js/api.js',
+        },
+        {
           name:   'material-components-web',
           cssOnly:  true,
           style:  'material-components-web.min.css',
