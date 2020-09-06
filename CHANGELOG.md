@@ -1,6 +1,14 @@
 # Changelog
 
 ```markdown
+## [0.7.6] - 2020-09-TBA
+- Support offline
+
+### Added
+- Support open local files when offline
+```
+
+```markdown
 ## [0.7.5] - 2020-09-06
 - Dynamically load most modules and lazyload images
 

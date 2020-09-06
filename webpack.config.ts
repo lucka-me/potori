@@ -212,6 +212,7 @@ module.exports = {
         { url: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap', revision: null },
         { url: 'https://apis.google.com/js/api.js', revision: null },
         ...cdnConfig.modules.reduce((list, cdn) => {
+          // Cache sources from CDN
           if (cdn.prodUrl) return list;
           const version = WebpackCdnPlugin.getVersionInNodeModules(cdn.name);
           const base = cdnConfig.prodUrl
