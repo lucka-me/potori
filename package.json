@@ -37,7 +37,6 @@
     "@types/lodash": "^4.14.161",
     "@types/mapbox-gl": "^1.11.2",
     "clean-webpack-plugin": "^3.0.0",
-    "copy-webpack-plugin": "^6.1.0",
     "css-loader": "^4.2.2",
     "gh-pages": "^3.1.0",
     "googleapis": "^59.0.0",
@@ -54,6 +53,7 @@
     "webpack-bundle-analyzer": "^3.8.0",
     "webpack-cdn-plugin": "^3.3.1",
     "webpack-cli": "^3.3.12",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "webpack-pwa-manifest": "^4.2.0"
   }
 }

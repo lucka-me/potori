@@ -2,7 +2,7 @@ const path = require('path');
 
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
@@ -156,26 +156,46 @@ module.exports = {
       prodUrl: 'https://cdnjs.cloudflare.com/ajax/libs/:name/:version/:path'
     }),
     new HtmlWebpackPlugin({
-      template: 'index.html',
-      inject: false,
+      title: 'Potori',
+      inject: true,
+      favicon: 'assets/icon.png',
       scriptLoading: 'defer',
       chunks: [ 'potori' ],
       filename: 'index.html',
       meta: {
         'description' : 'Web App to Visualize Ingress Nominations',
         'viewport'    : 'width=device-width, height=device-height, initial-scale=1',
-        'theme-color' : '#3b1e5f',
-
-        'apple-mobile-web-app-capable'          : 'yes',
-        'apple-mobile-web-app-status-bar-style' : 'dark',
       },
     }),
-    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
-    new CopyPlugin({
-      patterns: [
-        { from: 'assets', to: 'assets' },
-        { from: 'manifest.json' },
+    new WebpackPwaManifest({
+      name: "Potori",
+      description: 'Web App to Visualize Ingress Nominations',
+      filename: 'manifest.webmanifest',
+      fingerprints: false,
+      orientation: "any",
+      start_url: '/',
+      scope: '/',
+      background_color: '#2578B5',
+      theme_color: '#3B1E5F',
+      ios: {
+        'apple-mobile-web-app-status-bar-style': 'black'
+      },
+      icons: [
+        {
+          src: path.resolve('assets/icon.png'),
+          size: 180,
+          destination: path.join('assets'),
+          purpose: 'maskable any',
+          ios: true,
+        },
+        {
+          src: path.resolve('assets/icon.png'),
+          size: 512,
+          destination: path.join('assets'),
+          purpose: 'maskable any',
+        }
       ],
     }),
+    new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   ],
 };

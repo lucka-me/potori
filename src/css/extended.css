@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap');
 
 :root {
-    --mdc-theme-primary: #3b1e5f !important;
+    --mdc-theme-primary: #3B1E5F !important;
     --mdc-theme-secondary: #2578B5 !important;
 
     --color-pending: #CAAF85;
