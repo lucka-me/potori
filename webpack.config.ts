@@ -2,12 +2,50 @@ const path = require('path');
 
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const WebpackPwaManifest = require('webpack-pwa-manifest');
+const { GenerateSW } = require('workbox-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const webpack = require('webpack');
 const WebpackCdnPlugin = require('webpack-cdn-plugin');
+const WebpackPwaManifest = require('webpack-pwa-manifest');
+
+const cdnConfig = {
+  modules: [
+    {
+      name: 'i18next',
+      path: 'i18next.min.js'
+    },
+    {
+      name: 'i18next-browser-languagedetector',
+      var:  'i18nextBrowserLanguageDetector',
+      path: 'i18nextBrowserLanguageDetector.min.js'
+    },
+    {
+      name:     '@fortawesome/fontawesome-free',
+      cdn:      'font-awesome',
+      cssOnly:  true,
+      styles: [
+        'css/fontawesome.min.css',
+        'css/solid.min.css'
+      ],
+      webfonts: [
+        'webfonts/fa-solid-900.ttf',
+        'webfonts/fa-solid-900.woff2'
+      ]
+    },
+    {
+      name:    'googleapis',
+      prodUrl: 'https://apis.google.com/js/api.js',
+    },
+    {
+      name:   'material-components-web',
+      cssOnly:  true,
+      style:  'material-components-web.min.css',
+    },
+  ],
+  prodUrl: 'https://cdnjs.cloudflare.com/ajax/libs/:name/:version/:path'
+};
 
 module.exports = {
   entry: { potori: './src/potori.ts', },
@@ -123,38 +161,7 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash].css',
     }),
-    new WebpackCdnPlugin({
-      modules: [
-        {
-          name: 'i18next',
-          path: 'i18next.min.js'
-        },
-        {
-          name: 'i18next-browser-languagedetector',
-          var:  'i18nextBrowserLanguageDetector',
-          path: 'i18nextBrowserLanguageDetector.min.js'
-        },
-        {
-          name:     '@fortawesome/fontawesome-free',
-          cdn:      'font-awesome',
-          cssOnly:  true,
-          styles: [
-            'css/fontawesome.min.css',
-            'css/solid.min.css'
-          ],
-        },
-        {
-          name:    'googleapis',
-          prodUrl: 'https://apis.google.com/js/api.js',
-        },
-        {
-          name:   'material-components-web',
-          cssOnly:  true,
-          style:  'material-components-web.min.css',
-        },
-      ],
-      prodUrl: 'https://cdnjs.cloudflare.com/ajax/libs/:name/:version/:path'
-    }),
+    new WebpackCdnPlugin(cdnConfig),
     new HtmlWebpackPlugin({
       title: 'Potori',
       inject: true,
@@ -195,6 +202,32 @@ module.exports = {
           purpose: 'maskable any',
         }
       ],
+    }),
+    new GenerateSW({
+      swDest: 'sw.js',
+      clientsClaim: true,
+      skipWaiting: true,
+      cleanupOutdatedCaches: true,
+      additionalManifestEntries: [
+        { url: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap', revision: null },
+        { url: 'https://apis.google.com/js/api.js', revision: null },
+        ...cdnConfig.modules.reduce((list, cdn) => {
+          if (cdn.prodUrl) return list;
+          const version = WebpackCdnPlugin.getVersionInNodeModules(cdn.name);
+          const base = cdnConfig.prodUrl
+            .replace(':name', cdn.cdn || cdn.name)
+            .replace(':version', version);
+          if (cdn.path) list.push({ url: base.replace(':path', cdn.path), revision: version });
+          if (cdn.style) list.push({ url: base.replace(':path', cdn.style), revision: version });
+          if (cdn.styles) list.push(...cdn.styles.map((style) => {
+            return { url: base.replace(':path', style), revision: version }
+          }));
+          if (cdn.webfonts) list.push(...cdn.webfonts.map((font) => {
+            return { url: base.replace(':path', font), revision: version }
+          }));
+          return list;
+        }, new Array<{ url: string, revision: string }>())
+      ]
     }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   ],

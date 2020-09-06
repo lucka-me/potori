@@ -11,7 +11,9 @@ class AuthKit {
     };
 
     init() {
-        gapi.load('client:auth2', () => this.initClient());
+        if (navigator.onLine) {
+            gapi.load('client:auth2', () => this.initClient());
+        }
     }
 
     private initClient() {

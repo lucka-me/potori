@@ -95,18 +95,8 @@ class UIKit {
 
     linkService() {
         // Service
-        Service.events.authStatusChanged = (signedIn) => {
-            if (signedIn) {
-                this.appBar.actions.get(AppBarActions.signin.key).hidden = true;
-                this.appBar.menu.items.get(AppBarMenuItems.signout.key).hidden = false;
-            } else {
-                this.clear();
-                this.appBar.actions.get(AppBarActions.signin.key).hidden = false;
-                this.appBar.menu.items.get(AppBarMenuItems.signout.key).hidden = true;
-                this.appBar.menu.items.get(AppBarMenuItems.upload.key).hidden = true;
-                this.appBar.menu.items.get(AppBarMenuItems.import.key).hidden = true;
-            }
-        }
+        Service.events.authStatusChanged = (signedIn) => this.authStatChanged(signedIn);
+        if (!navigator.onLine) this.authStatChanged(false);
         Service.events.progressUpdate = (percent) => {
             this.progress.ctrl.progress = percent;
         }
@@ -140,6 +130,24 @@ class UIKit {
         };
         Service.mari.events.progressUpdate = (percent) => {
             this.progress.ctrl.progress = percent * 0.9;
+        }
+    }
+
+    /**
+     * Handle the Google Auth stat change event
+     * Will hide sign in action if offline
+     * @param signedIn Is signed in or not
+     */
+    private authStatChanged(signedIn: boolean) {
+        if (signedIn) {
+            this.appBar.actions.get(AppBarActions.signin.key).hidden = true;
+            this.appBar.menu.items.get(AppBarMenuItems.signout.key).hidden = false;
+        } else {
+            this.clear();
+            this.appBar.actions.get(AppBarActions.signin.key).hidden = !navigator.onLine;
+            this.appBar.menu.items.get(AppBarMenuItems.signout.key).hidden = true;
+            this.appBar.menu.items.get(AppBarMenuItems.upload.key).hidden = true;
+            this.appBar.menu.items.get(AppBarMenuItems.import.key).hidden = true;
         }
     }
 
