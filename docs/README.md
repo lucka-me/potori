@@ -4,7 +4,7 @@ heroText: Potori
 heroImage: /assets/hero.png
 tagline: Web App to Visualize Ingress Nominations
 actionText: TRY
-actionLink: https://lucka.moe/potori
+actionLink: https://potori.lucka.moe/
 features:
 - title: From Gmail
   details: Parse your nominations from Gmail inbox, support both Scanner [REDACTED] and Prime.

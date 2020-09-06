@@ -4,7 +4,7 @@ heroText: Potori
 heroImage: /assets/hero.png
 tagline: 可视化您的Ingress提名
 actionText: 使用
-actionLink: https://lucka.moe/potori
+actionLink: https://potori.lucka.moe/
 features:
 - title: 基于Gmail
   details: 从Gmail中解析提名，支持Scanner [REDACTED]和Prime。
