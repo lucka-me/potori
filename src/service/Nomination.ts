@@ -30,7 +30,7 @@ class Nomination {
     }
 
     get bsUrl(): string {
-        return `http://brainstorming.azurewebsites.net/watermeter.html#${this.id}`;
+        return `https://brainstorming.azurewebsites.net/watermeter.html#${this.id}`;
     }
 
     get restoreTime(): number {
