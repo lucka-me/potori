@@ -29,7 +29,7 @@ class FilterCard extends DashboardPrototype {
 
     render() {
         this.block.type.root = Eli.build('div', { className: 'flex-box-row--nowrap' });
-        this.block.reason.root = Eli.build('div', { className: 'flex-box-row--nowrap' });
+        this.block.reason.root = Eli.build('div', { className: 'flex-box-row--wrap' });
         this.root = Eli.build('div', {
             className: [
                 'mdc-card',
