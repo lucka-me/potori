@@ -106,6 +106,34 @@
                     [ "seasonal display" ]
                 ]
             ]
+        },
+        {
+            "key": "generic",
+            "code": 105,
+            "title": "Generic Store",
+            "icon":  "\uf54e",
+            "color": "#F0C649",
+            "keywords": [
+                [ "redacted", [] ],
+                [
+                    "prime",
+                    [ "generic store" ]
+                ]
+            ]
+        },
+        {
+            "key": "plate",
+            "code": 105,
+            "title": "License Plate",
+            "icon":  "\uf1b9",
+            "color": "#004DB5",
+            "keywords": [
+                [ "redacted", [] ],
+                [
+                    "prime",
+                    [ "license plate" ]
+                ]
+            ]
         }
     ]
 }
