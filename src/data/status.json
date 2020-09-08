@@ -123,7 +123,7 @@
         },
         {
             "key": "plate",
-            "code": 105,
+            "code": 106,
             "title": "License Plate",
             "icon":  "\uf1b9",
             "color": "#004DB5",
