@@ -98,6 +98,7 @@ class Dashboard extends UIKitPrototype {
         this.statsType.update(nominations);
         this.statsRejected.update(nominations);
         this.countByMonth.update(nominations);
+        this.bs.update(nominations);
     }
 
     updateStyle() {
