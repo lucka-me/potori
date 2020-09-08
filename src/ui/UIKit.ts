@@ -98,11 +98,11 @@ class UIKit {
         Service.events.authStatusChanged = (signedIn) => this.authStatChanged(signedIn);
         if (!navigator.onLine) this.authStatChanged(false);
         Service.events.progressUpdate = (percent) => {
-            this.progress.ctrl.progress = percent;
+            this.progress.progress = percent;
         }
         Service.events.showProgress = () => {
             this.preloadModules();
-            this.progress.ctrl.open();
+            this.progress.open();
         };
         Service.events.show = () => {
             this.show();
@@ -126,10 +126,10 @@ class UIKit {
 
         // Mari
         Service.mari.events.bufferUpdate = (percent) => {
-            this.progress.ctrl.buffer = percent;
+            this.progress.buffer = percent;
         };
         Service.mari.events.progressUpdate = (percent) => {
-            this.progress.ctrl.progress = percent * 0.9;
+            this.progress.progress = percent * 0.9;
         }
     }
 
@@ -161,9 +161,9 @@ class UIKit {
     clear() {
         this.appBar.menu.items.get(AppBarMenuItems.open.key).hidden = false;
         this.appBar.menu.items.get(AppBarMenuItems.save.key).hidden = true;
-        this.progress.ctrl.close();
-        this.progress.ctrl.buffer = 0;
-        this.progress.ctrl.progress = 0;
+        this.progress.close();
+        this.progress.buffer = 0;
+        this.progress.progress = 0;
         
         if(!this.dashboard) return;
         this.dashboard.setVisible(false);
@@ -182,7 +182,7 @@ class UIKit {
             this.appBar.menu.items.get(AppBarMenuItems.save.key).hidden = false;
             this.appBar.menu.items.get(AppBarMenuItems.upload.key).hidden = !Service.auth.signedIn;
             this.appBar.menu.items.get(AppBarMenuItems.import.key).hidden = false;
-            this.progress.ctrl.close();
+            this.progress.close();
         });
     }
 
