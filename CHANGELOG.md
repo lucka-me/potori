@@ -1,11 +1,16 @@
 # Changelog
 
 ```markdown
-## [0.7.6] - 2020-09-TBA
+## [0.7.6] - 2020-09-08
 - Support offline
 
 ### Added
-- Support open local files when offline
+- Support for opening local files when offline
+
+### Fixed
+- Brainstorming URL leads to 404
+- Progress bar not totally hide
+- Brainstorming cards not updated when save nomination data
 ```
 
 ```markdown
