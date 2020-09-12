@@ -13,6 +13,8 @@ import Nomination   from '../service/Nomination';
 import type Dashboard   from './Dashboard';
 import type ListView    from './ListView';
 
+import '../css/extended.css'
+
 class UIKit {
 
     appBar      = new AppBar();
