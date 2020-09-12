@@ -117,7 +117,7 @@ class AppBar extends UIKitPrototype {
         this.actions.get(AppBarActions.menu.key).hidden = false;
 
         const elementAppBar = Eli.build('header', {
-            className: 'mdc-top-app-bar',
+            className: 'mdc-top-app-bar mdc-top-app-bar--fixed',
         }, [
             Eli.build('div', {
                 className: 'mdc-top-app-bar__row',
