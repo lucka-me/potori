@@ -1,5 +1,5 @@
 {
-    "version": "5",
+    "version": "6",
     "types": [
         {
             "key": "pending",
@@ -73,7 +73,10 @@
                     "redacted",
                     [ "duplicate of either an existing Portal" ]
                 ],
-                [ "prime", [] ]
+                [
+                    "prime",
+                    [ "duplicate of an existing Portal" ]
+                ]
             ]
         },
         {

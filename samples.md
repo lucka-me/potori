@@ -222,6 +222,27 @@ Subject: [能量塔審查完畢：<PORTAL-TITLE>]
 </p>
 </details>
 
+### Duplicated
+<details><summary>en</summary>
+<p>
+
+```
+Subject: [Portal review complete:<PORTAL-TITLE>]
+----------
+
+Your Portal submission has been reviewed and we’re not able to bring this candidate online at this time as your candidate is a duplicate of an existing Portal. The photo from your submission has been merged into the existing Portal.
+
+-NianticOps
+
+<PORTAL-TITLE>
+<PORTAL-DESCRIPTION>
+
+<PHOTO-URL>
+```
+
+</p>
+</details>
+
 ### Too Close
 <details><summary>en</summary>
 <p>
