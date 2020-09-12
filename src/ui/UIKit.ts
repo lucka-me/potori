@@ -217,9 +217,11 @@ class UIKit {
             return Service.nominations;
         }
         this.dashboard.filter.events.switchType = (type, visible) => {
-            for (const nomination of Service.nominations) {
-                if (StatusKit.typeMatched(nomination.status.code, type.code)) {
-                    document.getElementById(`card-${nomination.id}`).hidden = !visible;
+            if (type.key !== 'rejected' || !visible) {
+                for (const nomination of Service.nominations) {
+                    if (StatusKit.typeMatched(nomination.status.code, type.code)) {
+                        document.getElementById(`card-${nomination.id}`).hidden = !visible;
+                    }
                 }
             }
             if (type.key === 'rejected') {

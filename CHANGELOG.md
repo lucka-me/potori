@@ -1,6 +1,14 @@
 # Changelog
 
 ```markdown
+## [0.7.7] - 2020-09-TBA
+- TBA
+
+### Fixed
+- Turn one reason switch on will show all rejected cards when the reject switch is off
+```
+
+```markdown
 ## [0.7.6] - 2020-09-08
 - Support offline
 
