@@ -26,7 +26,6 @@ interface BrainstormingStats {
 class BrainstormingKit {
 
     data: Map<string, any> = new Map();
-    private firebaseInitialized = false;
     private reference: firebase.database.Reference = null;
 
     query(bsId: string, succeed: (data: any) => void, failed: () => void) {
