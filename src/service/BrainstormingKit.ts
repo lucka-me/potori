@@ -1,4 +1,4 @@
-import type firebase from "firebase";
+import type { Reference } from "@firebase/database-types";
 
 import Nomination, { LngLat } from "./Nomination";
 import StatusKit from "./StatusKit";
@@ -26,7 +26,7 @@ interface BrainstormingStats {
 class BrainstormingKit {
 
     data: Map<string, any> = new Map();
-    private reference: firebase.database.Reference = null;
+    private reference: Reference = null;
 
     query(bsId: string, succeed: (data: any) => void, failed: () => void) {
         if (this.data.has(bsId)) {
@@ -74,11 +74,11 @@ class BrainstormingKit {
      */
     private queryFirebase(bsId: string, succeed: (data: any) => void, failed: () => void) {
         Promise.all([
-            import(/* webpackChunkName: 'firebase' */ 'firebase/app'),
-            import(/* webpackChunkName: 'firebase' */ 'firebase/database'),
+            import(/* webpackChunkName: 'firebase' */ '@firebase/app'),
+            import(/* webpackChunkName: 'firebase' */ '@firebase/database'),
         ]).then(([ firebase, _ ]) => {
             if (!this.reference) {
-                const app = firebase.initializeApp({ databaseURL: 'https://oprbrainstorming.firebaseio.com' });
+                const app = firebase.default.initializeApp({ databaseURL: 'https://oprbrainstorming.firebaseio.com' });
                 if (!this.reference) this.reference = app.database().ref('c/reviews/');
             }
             this.reference.child(bsId).once('value', (data) => {
