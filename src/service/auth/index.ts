@@ -1,8 +1,22 @@
+/**
+ * Events for {@link AuthKit}
+ */
 interface AuthKitEvents {
+    /**
+     * Triggered when sign-in or sign-out
+     * @param signedIn Signed in or not
+     */
     authStatusChanged: (signedIn: boolean) => void;
+    /**
+     * Triggered when gapi.auth error occures
+     * @param message The error message
+     */
     onerror: (message: string) => void;
 }
 
+/**
+ * Handle GAPI authentication
+ */
 class AuthKit {
 
     events: AuthKitEvents = {
@@ -16,6 +30,9 @@ class AuthKit {
         }
     }
 
+    /**
+     * Initialize the GAPI and load client libraries
+     */
     private initClient() {
         gapi.client.init({
             apiKey: 'AIzaSyCqIaS8UizqjWrIKm5zV3_S8EffCWjKR-A',
@@ -40,17 +57,33 @@ class AuthKit {
         );
     }
 
+    /**
+     * Get authentication status, signed in or not
+     */
     get signedIn() {
         return gapi.auth2.getAuthInstance().isSignedIn.get();
     }
 
+    /**
+     * Get the token for accessing the account
+     */
     get accessToken() {
         return gapi.auth2.getAuthInstance().currentUser.get().getAuthResponse().access_token;
     }
 
-    signIn() { gapi.auth2.getAuthInstance().signIn(); }
+    /**
+     * Sign in
+     */
+    signIn() {
+        gapi.auth2.getAuthInstance().signIn();
+    }
 
-    signOut() { gapi.auth2.getAuthInstance().signOut(); }
+    /**
+     * Sign out
+     */
+    signOut() {
+        gapi.auth2.getAuthInstance().signOut();
+    }
 }
 
 export default new AuthKit();
