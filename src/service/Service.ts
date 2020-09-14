@@ -5,7 +5,7 @@ import AuthKit from './auth';
 import Mari from './Mari';
 import BrainstormingKit from './BrainstormingKit';
 import FileKit, { Constants as FileConst } from './file';
-import Nomination from './Nomination';
+import Nomination from './nomination';
 import translations from '../locales';
 
 class Parser {

@@ -1,6 +1,6 @@
 import type { Reference } from "@firebase/database-types";
 
-import Nomination, { LngLat } from "./Nomination";
+import Nomination, { LngLat } from "./nomination";
 import statusKit from "./status";
 import version from "./version";
 

@@ -6,7 +6,7 @@ import { MDCTextField } from "@material/textfield";
 
 import AlertDialog from './AlertDialog';
 import DialogPrototype, { MDCDialog } from './prototype';
-import Nomination, { LngLat } from '../../service/Nomination';
+import Nomination, { LngLat } from '../../service/nomination';
 import statusKit from '../../service/status';
 import UIKitPrototype, { Eli, i18next } from '../UIKitPrototype';
 

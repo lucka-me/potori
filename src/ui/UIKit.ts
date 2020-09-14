@@ -8,7 +8,7 @@ import Progress     from './Progress';
 import Service      from "../service/Service";
 import Snackbar     from './Snackbar';
 import statusKit    from "../service/status";
-import Nomination   from '../service/Nomination';
+import Nomination   from '../service/nomination';
 
 import type Dashboard   from './Dashboard';
 import type ListView    from './ListView';

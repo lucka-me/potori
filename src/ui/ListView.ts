@@ -1,5 +1,5 @@
 import FilterCard from './dashboard/FilterCard';
-import Nomination from '../service/Nomination';
+import Nomination from '../service/nomination';
 import NominationCard from "./list-view/NominationCard";
 import { StatusReason, StatusType } from '../service/status';
 import UIKitPrototype, { Eli } from './UIKitPrototype';

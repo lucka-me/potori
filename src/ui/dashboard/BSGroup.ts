@@ -5,7 +5,7 @@ import BSRatesCard      from './brainstorming/BSRatesCard';
 import BSSynchCard      from './brainstorming/BSSynchCard';
 import BSReviewsCard    from './brainstorming/BSReviewsCard';
 import { DashboardBsPrototype, BrainstormingStats } from './brainstorming/prototypes';
-import Nomination from '../../service/Nomination';
+import Nomination from '../../service/nomination';
 
 interface BSGroupEvents {
     analyse: (nominations: Array<Nomination>) => BrainstormingStats;

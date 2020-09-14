@@ -3,7 +3,7 @@ import { MDCRipple } from "@material/ripple";
 
 import AlertDialog from "../dialog/AlertDialog";
 import Eli from "../Eli";
-import Nomination from '../../service/Nomination';
+import Nomination from '../../service/nomination';
 import version from "../../service/version";
 import statusKit from "../../service/status";
 
