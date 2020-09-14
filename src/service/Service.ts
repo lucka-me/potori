@@ -1,12 +1,12 @@
-import i18next from "i18next";
-import LanguageDetector from "i18next-browser-languagedetector";
+import i18next from 'i18next';
+import LanguageDetector from 'i18next-browser-languagedetector';
 
-import AuthKit from "./auth";
-import Mari from "./Mari";
-import BrainstormingKit from "./BrainstormingKit";
-import FileKit, { FileConst } from "./file";
-import Nomination from "./Nomination";
-import translations from "../locales";
+import AuthKit from './auth';
+import Mari from './Mari';
+import BrainstormingKit from './BrainstormingKit';
+import FileKit, { Constants as FileConst } from './file';
+import Nomination from './Nomination';
+import translations from '../locales';
 
 class Parser {
     static nominations(content: string) {
@@ -301,8 +301,8 @@ class Service {
             checkFinish();
             return true;
         };
-        this.file.googleDrive.get(FileConst.bsData, gotBsData);
-        this.file.googleDrive.get(FileConst.nominations, gotNominations);
+        this.file.googleDrive.download(FileConst.bsData, gotBsData);
+        this.file.googleDrive.download(FileConst.nominations, gotNominations);
     }
 
     upload() {
@@ -320,13 +320,10 @@ class Service {
             FileConst.nominations,
             BlobGenerator.nominations(this.nominations),
             this.auth.accessToken,
-            (response) => {
+            (succeed, message?) => {
                 uploadedNominations = true;
-                if (!response) {
-                    this.events.alert(i18next.t('message:Unable to upload Nomination List'));
-                } else if (!response.id) {
-                    this.events.alert(`${i18next.t('message:Unable to upload Nomination List')}\n${response.message}`);
-                    return;
+                if (!succeed) {
+                    this.events.alert(`${i18next.t('message:Unable to upload Nomination List')}${message ? `\n${message}` : ''}`);
                 }
                 checkFinish();
             }
@@ -336,13 +333,10 @@ class Service {
             FileConst.bsData,
             BlobGenerator.bsData(this.bs.data),
             this.auth.accessToken,
-            (response) => {
+            (succeed, message?) => {
                 uploadedBsData = true;
-                if (!response) {
-                    this.events.alert(i18next.t('message:Unable to upload Brainstorming Data'));
-                } else if (!response.id) {
-                    this.events.alert(`${i18next.t('message:Unable to upload Brainstorming Data')}\n${response.message}`);
-                    return;
+                if (!succeed) {
+                    this.events.alert(`${i18next.t('message:Unable to upload Brainstorming Data')}${message ? `\n${message}` : ''}`);
                 }
                 checkFinish();
             }

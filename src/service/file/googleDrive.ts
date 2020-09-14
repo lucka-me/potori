@@ -1,4 +1,7 @@
-import Constants from "./constants";
+import Constants from './constants';
+
+type DownloadCallback = (file: gapi.client.drive.File, more: boolean) => boolean;
+type UploadCallback = (succeed: boolean, message?: string) => void;
 
 /**
  * Download and upload from / to Google Drive
@@ -16,20 +19,20 @@ export default class GoogleDriveFileKit {
      * whether to delete the current one & download next one or not by return a boolean
      * 
      * @param filename Name of the file to download
-     * @param got Triggered when a file is downloaded
+     * @param callback Triggered when a file is downloaded
      */
-    get(filename: string, got: (file: gapi.client.drive.File, more: boolean) => boolean) {
+    download(filename: string, callback: DownloadCallback) {
         const gotList = (fileList: Array<gapi.client.drive.File>) => {
             if (fileList.length < 1) {
-                got(null, false);
+                callback(null, false);
                 return;
             }
             const fileId = fileList[0].id;
             gapi.client.drive.files.get({
                 fileId: fileId,
-                alt: "media"
+                alt: 'media'
             }).then((response: gapi.client.Response<gapi.client.drive.File>) => {
-                if (!got(response.result, true)) {
+                if (!callback(response.result, true)) {
                     gapi.client.drive.files.delete({ fileId: fileId });
                     fileList.splice(0, 1);
                     gotList(fileList);
@@ -48,7 +51,7 @@ export default class GoogleDriveFileKit {
         }).then((response: gapi.client.Response<gapi.client.drive.FileList>) => {
             const files = response.result.files;
             if (!files) {
-                got(null, false);
+                callback(null, false);
                 return;
             }
             gotList(files);
@@ -60,9 +63,9 @@ export default class GoogleDriveFileKit {
      * @param filename Filename to upload
      * @param blob Content to upload
      * @param token The Google account access token
-     * @param finished Triggered when process finished
+     * @param callback Triggered when process finished
      */
-    upload(filename: string, blob: Blob, token: string, finished: (response: any) => void) {
+    upload(filename: string, blob: Blob, token: string, callback: UploadCallback) {
         // Ref: https://gist.github.com/tanaikech/bd53b366aedef70e35a35f449c51eced
         let url = '';
         let method = '';
@@ -92,9 +95,11 @@ export default class GoogleDriveFileKit {
             .then(response => {
                 if (response && response.id) {
                     this.ids.set(filename, response.id);
+                    callback(true);
+                } else {
+                    callback(false, response.message);
                 }
-                finished(response);
             })
-            .catch(() => finished(null));
+            .catch(() => callback(false));
     }
 }
