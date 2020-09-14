@@ -1,6 +1,9 @@
 import data from "../../data/status.json";
 
-class Status {
+/**
+ * Basic information of all status
+ */
+export class Status {
 
     readonly key: string;
     readonly code: number;
@@ -15,7 +18,7 @@ class Status {
     }
 }
 
-class StatusType extends Status {
+export class StatusType extends Status {
 
     readonly queries: Map<string, string>;
 
@@ -28,7 +31,7 @@ class StatusType extends Status {
     }
 }
 
-class StatusReason extends Status {
+export class StatusReason extends Status {
 
     readonly color: string;
     readonly keywords: Map<string, Array<string>>;
@@ -95,4 +98,3 @@ class StatusKit {
 }
 
 export default new StatusKit();
-export { Status, StatusType, StatusReason };
