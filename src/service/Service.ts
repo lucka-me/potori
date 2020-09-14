@@ -4,7 +4,7 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import AuthKit from "./auth";
 import Mari from "./Mari";
 import BrainstormingKit from "./BrainstormingKit";
-import FileKit, { FileConst } from "./FileKit";
+import FileKit, { FileConst } from "./file";
 import Nomination from "./Nomination";
 import translations from "../locales";
 
