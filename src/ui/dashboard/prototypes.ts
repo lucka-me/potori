@@ -1,3 +1,5 @@
+import moment from 'moment';
+
 import UIKitPrototype, { Eli, i18next } from "../UIKitPrototype";
 import Nomination from "../../service/Nomination";
 
@@ -62,6 +64,22 @@ export class DashboardChartProtorype extends DashboardPrototype {
                 className: 'container-chart',
             }, [ canvas ]),
         ]);
+    }
+
+    /**
+     * Fill the <time, data> map with empty months
+     * @param dataMap The map to be filled
+     * @param start Start time
+     * @param end End time
+     */
+    static fillTimeDataMap(dataMap: Map<number, number>, start: number, end: number) {
+        let scan = start;
+        while (scan <= end) {
+            const month = moment(scan + 1000).startOf('month');
+            const key = month.valueOf();
+            if (!dataMap.has(key)) dataMap.set(key, 0);
+            scan = month.endOf('month').valueOf();
+        }
     }
 }
 

@@ -2,7 +2,6 @@ import Chart from 'chart.js';
 import moment from 'moment';
 
 import { DashboardChartProtorype, Eli, Nomination, i18next } from './prototypes';
-import TimeKit from "../TimeKit";
 
 class CountByMonthCard extends DashboardChartProtorype {
     render() {
@@ -83,8 +82,8 @@ class CountByMonthCard extends DashboardChartProtorype {
             }
         }
         // Fill the empty months
-        TimeKit.fillTimeDataMap(mapSub, min, max);
-        TimeKit.fillTimeDataMap(mapRet, min, max);
+        DashboardChartProtorype.fillTimeDataMap(mapSub, min, max);
+        DashboardChartProtorype.fillTimeDataMap(mapRet, min, max);
         const dataSub: Array<{ t: number, y: number }> = [];
         const dataRet: Array<{ t: number, y: number }> = [];
         mapSub.forEach((value, key) => {

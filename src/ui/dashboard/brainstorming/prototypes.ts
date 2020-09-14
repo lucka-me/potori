@@ -24,6 +24,16 @@ export class DashboardBsChartPrototype extends DashboardBsPrototype {
     ): HTMLDivElement {
         return DashboardChartProtorype.buildChartCard(title, canvas, flex, minWidth);
     }
+
+    /**
+     * Fill the <time, data> map with empty months
+     * @param dataMap The map to be filled
+     * @param start Start time
+     * @param end End time
+     */
+    static fillTimeDataMap(dataMap: Map<number, number>, start: number, end: number) {
+        DashboardChartProtorype.fillTimeDataMap(dataMap, start, end);
+    }
 }
 
 export { BrainstormingStats, Eli, i18next };
