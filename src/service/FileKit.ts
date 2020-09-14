@@ -1,6 +1,6 @@
 import i18next from "i18next";
 
-import AuthKit from "./AuthKit";
+import AuthKit from "./auth";
 
 class FileConst {
     static type = 'application/json';

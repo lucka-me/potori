@@ -1,7 +1,7 @@
 import i18next from "i18next";
 import LanguageDetector from "i18next-browser-languagedetector";
 
-import AuthKit from "./AuthKit";
+import AuthKit from "./auth";
 import Mari from "./Mari";
 import BrainstormingKit from "./BrainstormingKit";
 import FileKit, { FileConst } from "./FileKit";
