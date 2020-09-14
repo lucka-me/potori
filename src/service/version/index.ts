@@ -1,5 +1,5 @@
-import { version as potoriVersion } from "../../package.json";
-import { version as dataVersion } from "../data/status.json";
+import { version as potoriVersion } from "../../../package.json";
+import { version as dataVersion } from "../../data/status.json";
 
 /**
  * Version information
@@ -25,6 +25,7 @@ class Version {
     get full() {
         return !this.published;
     }
+
 }
 
 export default new Version();
