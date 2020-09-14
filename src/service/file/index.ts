@@ -4,9 +4,9 @@ import i18next from "i18next";
  * Constants for {@link FileKit}
  */
 export class FileConst {
-    static type = 'application/json';
-    static nominations = 'potori.json';
-    static bsData = 'bsdata.json';
+    static type = 'application/json';   // MIME type of json file
+    static nominations = 'potori.json'; // Filename of nomination data
+    static bsData = 'bsdata.json';      // Filename of Brainstorming data
 }
 
 /**
@@ -34,7 +34,7 @@ class LocalFileKit {
     events: LocalFileKitEvents = {
         openUI: () => {},
         saveUI: () => {},
-    }
+    };
 
     /**
      * Open a local file
@@ -70,9 +70,9 @@ class LocalFileKit {
  */
 class GoogleDriveFileKit {
 
-    private ids: Map<string, string> = new Map();
+    private static readonly folder = 'appDataFolder';   // The private folder in Google Drive
 
-    private static get folder() { return 'appDataFolder' }
+    private ids: Map<string, string> = new Map();   // ID of files, <filename, id>
 
     /**
      * Download file from Google Drive.
