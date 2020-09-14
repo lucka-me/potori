@@ -1,5 +1,5 @@
 import DialogPrototype, { Eli, MDCDialog, i18next } from './prototype';
-import Version from '../../service/version';
+import version from '../../service/version';
 
 class AboutDialog extends DialogPrototype {
 
@@ -30,7 +30,7 @@ class AboutDialog extends DialogPrototype {
                 }, [
                     Eli.link(
                         'https://github.com/lucka-me/potori/blob/master/CHANGELOG.md',
-                        i18next.t('Changelog'), Version.string
+                        i18next.t('Changelog'), version.string
                     ),
                     ' by ',
                     Eli.link('https://lucka.moe', i18next.t('Blog'), 'Lucka'),

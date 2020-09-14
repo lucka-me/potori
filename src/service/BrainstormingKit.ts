@@ -2,7 +2,7 @@ import type { Reference } from "@firebase/database-types";
 
 import Nomination, { LngLat } from "./Nomination";
 import StatusKit from "./status";
-import Version from "./version";
+import version from "./version";
 
 const RateItems = {
     quality: 'Quality',
@@ -33,7 +33,7 @@ class BrainstormingKit {
             succeed(this.data.get(bsId));
             return;
         }
-        if (!Version.full) {
+        if (!version.full) {
             failed();
             return;
         }

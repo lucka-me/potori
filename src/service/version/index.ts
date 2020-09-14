@@ -6,9 +6,8 @@ import { version as dataVersion } from "../../data/status.json";
  */
 class Version {
 
-    readonly string: string;
-    // Is the current instance a full (private) version
-    readonly full: boolean;
+    readonly string: string;    // The version string, <app version>d<data version>-(lite|full)
+    readonly full: boolean;     // Is the current instance a full (private) version
 
     constructor() {
         const published = document.URL.includes('lucka.moe');

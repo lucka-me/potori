@@ -4,7 +4,7 @@ import { MDCRipple } from "@material/ripple";
 import AlertDialog from "../dialog/AlertDialog";
 import Eli from "../Eli";
 import Nomination from '../../service/Nomination';
-import Version from "../../service/version";
+import version from "../../service/version";
 import StatusKit from "../../service/status";
 
 interface NominationCardEvents {
@@ -111,7 +111,7 @@ class NominationCard {
         ]);
         const actionStatus = new MDCRipple(elementActionStatus);
         actionStatus.unbounded = true;
-        if (Version.full) {
+        if (version.full) {
             actionStatus.listen('click', () => {
                 window.open(nomination.bsUrl, '_blank', 'noopener');
             });
@@ -147,7 +147,7 @@ class NominationCard {
         actionLocation.listen('click', events.focus);
         actionIcons.push(elementActionLocation);
 
-        if (Version.full) {
+        if (version.full) {
             const elementActionIntel = Eli.build('button', {
                 className: classNameAction,
                 title: i18next.t('Intel Map'),
@@ -204,7 +204,7 @@ class NominationCard {
         const elementLocation = card.querySelector('#button-card-nomination-location') as HTMLButtonElement;
         elementLocation.hidden = hidden;
 
-        if (!Version.full) return;
+        if (!version.full) return;
         const elementIntel = card.querySelector('#button-card-nomination-intel') as HTMLButtonElement;
         elementIntel.hidden = hidden;
     }
