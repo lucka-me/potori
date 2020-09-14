@@ -1,7 +1,7 @@
 import type { Reference } from "@firebase/database-types";
 
 import Nomination, { LngLat } from "./Nomination";
-import StatusKit from "./status";
+import statusKit from "./status";
 import version from "./version";
 
 const RateItems = {
@@ -142,13 +142,13 @@ class BrainstormingKit {
     }
 
     static isSynched(stars: string, status: number) {
-        const reasons = StatusKit.reasons;
+        const reasons = statusKit.reasons;
         if (stars === 'D' && status === reasons.get('duplicated').code) {
             return true;
         }
         const general = parseFloat(stars);
         if (isNaN(general)) return false;
-        const types = StatusKit.types;
+        const types = statusKit.types;
         if (status === types.get('accepted').code || status === reasons.get('tooClose').code) {
             // Accepted
             if (general >= 3) return true;

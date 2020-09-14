@@ -1,4 +1,4 @@
-import StatusKit, { Status } from "./status";
+import statusKit, { Status } from "./status";
 
 const now = Date.now();
 
@@ -12,7 +12,7 @@ class Nomination {
     title = '';
     image = '';
 
-    status: Status = StatusKit.codes.get(0);
+    status: Status = statusKit.codes.get(0);
 
     confirmedTime = 0;
     confirmationMailId = '';
@@ -82,7 +82,7 @@ class Nomination {
         nomination.title = json.title;
         nomination.image = json.image;
 
-        nomination.status = StatusKit.codes.get(json.status);
+        nomination.status = statusKit.codes.get(json.status);
 
         nomination.confirmedTime = json.confirmedTime;
         nomination.confirmationMailId = json.confirmationMailId;

@@ -5,10 +5,10 @@ import data from "../../data/status.json";
  */
 export class Status {
 
-    readonly key: string;
-    readonly code: number;
-    readonly title: string;
-    readonly icon: string;
+    readonly key: string;   // Key of the status
+    readonly code: number;  // Code to identify the status and saved in file
+    readonly title: string; // Title to display
+    readonly icon: string;  // Icon to represent the status
 
     constructor(key: string, code: number, title: string, icon: string) {
         this.key = key;
@@ -18,9 +18,12 @@ export class Status {
     }
 }
 
+/**
+ * Information of types
+ */
 export class StatusType extends Status {
 
-    readonly queries: Map<string, string>;
+    readonly queries: Map<string, string>;  // Queries to search mails, <scanner, query>
 
     constructor(
         key: string, code: number, title: string, icon: string,
@@ -31,10 +34,13 @@ export class StatusType extends Status {
     }
 }
 
+/**
+ * Information of reject reasons
+ */
 export class StatusReason extends Status {
 
-    readonly color: string;
-    readonly keywords: Map<string, Array<string>>;
+    readonly color: string; // Color to represent the reason in charts
+    readonly keywords: Map<string, Array<string>>;  // Keywords to identify the reason, <scanner, keywords>
 
     constructor(
         key: string, code: number, title: string, icon: string,
@@ -46,13 +52,16 @@ export class StatusReason extends Status {
     }
 }
 
+/**
+ * Keep all status data
+ */
 class StatusKit {
 
-    readonly version: string = data.version;
+    readonly version: string = data.version;    // Data version
     
-    readonly types  : Map<string, StatusType>   = new Map();
-    readonly reasons: Map<string, StatusReason> = new Map();
-    readonly codes  : Map<number, Status>       = new Map();
+    readonly types  : Map<string, StatusType>   = new Map();    // <key, type>
+    readonly reasons: Map<string, StatusReason> = new Map();    // <key, reason>
+    readonly codes  : Map<number, Status>       = new Map();    // <code, status>
 
     constructor() {
         for (const type of data.types) {
@@ -74,6 +83,12 @@ class StatusKit {
         }
     }
 
+    /**
+     * Get if the status matches the type
+     * @param status Status code
+     * @param type Type code
+     * @returns Result
+     */
     typeMatched(status: number, type: number): boolean {
         if (type < 101) {
             return status === type;
@@ -82,12 +97,22 @@ class StatusKit {
         }
     }
     
+    /**
+     * Get the type key
+     * @param code Status code
+     * @returns Type key of the status code
+     */
     getTypeByCode(code: number): string {
         if (code === 0) return 'pending';
         if (code === 1) return 'accepted';
         return 'rejected';
     }
 
+    /**
+     * Get the reject reason
+     * @param code Reason code
+     * @returns Reject reason
+     */
     getReasonByCode(code: number): StatusReason {
         if (code < 100) return null;
         for (const value of this.reasons.values()) {

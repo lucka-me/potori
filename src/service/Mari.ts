@@ -1,5 +1,5 @@
-import StatusKit from "./status";
-import Nomination, { LngLat } from "./Nomination";
+import statusKit from './status';
+import Nomination, { LngLat } from './Nomination';
 
 interface QueryKeys {
     scanner: string;
@@ -9,7 +9,7 @@ interface QueryKeys {
 class Parser {
     static mail(mail: gapi.client.gmail.Message, keys: QueryKeys) {
         const nomination = new Nomination();
-        nomination.status = StatusKit.types.get(keys.type);
+        nomination.status = statusKit.types.get(keys.type);
         if (keys.type === 'pending') {
             nomination.confirmedTime = parseInt(mail.internalDate);
             nomination.confirmationMailId = mail.id;
@@ -57,11 +57,11 @@ class Parser {
 
     static reason(mailBody: string, scanner: string) {
         const mainBody = mailBody.slice(0, mailBody.search('-NianticOps'));
-        const undeclared = StatusKit.reasons.get('undeclared');
+        const undeclared = statusKit.reasons.get('undeclared');
         // Get first result
         let result = undeclared;
         let firstPos = mailBody.length;
-        for (const reason of StatusKit.reasons.values()) {
+        for (const reason of statusKit.reasons.values()) {
             for (const keyword of reason.keywords.get(scanner)) {
                 const pos = mainBody.search(keyword);
                 if (pos > -1 && pos < firstPos) {
@@ -90,7 +90,7 @@ class Parser {
     static base64(text: string) {
         return unescape(
             decodeURIComponent(
-                escape(window.atob(text.replace(/\-/g, "+").replace(/\_/g, "/")))
+                escape(window.atob(text.replace(/\-/g, '+').replace(/\_/g, '/')))
             )
         );
     }
@@ -123,10 +123,10 @@ class Mari {
     };
 
     constructor() {
-        for (const type of StatusKit.types.keys()) {
+        for (const type of statusKit.types.keys()) {
             this.types.push(type);
         }
-        for (const scanner of StatusKit.types.get(this.types[0]).queries.keys()) {
+        for (const scanner of statusKit.types.get(this.types[0]).queries.keys()) {
             this.scanners.push(scanner);
         }
     }
@@ -163,7 +163,7 @@ class Mari {
     getListRequest(pageToken: string, keys: QueryKeys) {
         return gapi.client.gmail.users.messages.list({
             'userId': 'me',
-            'q': StatusKit.types.get(keys.type).queries.get(keys.scanner),
+            'q': statusKit.types.get(keys.type).queries.get(keys.scanner),
             'pageToken': pageToken
         });
     }

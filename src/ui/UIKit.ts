@@ -7,7 +7,7 @@ import Eli          from "./Eli";
 import Progress     from './Progress';
 import Service      from "../service/Service";
 import Snackbar     from './Snackbar';
-import StatusKit    from "../service/status";
+import statusKit    from "../service/status";
 import Nomination   from '../service/Nomination';
 
 import type Dashboard   from './Dashboard';
@@ -221,7 +221,7 @@ class UIKit {
         this.dashboard.filter.events.switchType = (type, visible) => {
             if (type.key !== 'rejected' || !visible) {
                 for (const nomination of Service.nominations) {
-                    if (StatusKit.typeMatched(nomination.status.code, type.code)) {
+                    if (statusKit.typeMatched(nomination.status.code, type.code)) {
                         document.getElementById(`card-${nomination.id}`).hidden = !visible;
                     }
                 }

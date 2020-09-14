@@ -5,7 +5,7 @@ import AlertDialog from "../dialog/AlertDialog";
 import Eli from "../Eli";
 import Nomination from '../../service/Nomination';
 import version from "../../service/version";
-import StatusKit from "../../service/status";
+import statusKit from "../../service/status";
 
 interface NominationCardEvents {
     focus: () => void;
@@ -184,11 +184,11 @@ class NominationCard {
 
     static update(nomination: Nomination, card: HTMLDivElement) {
         const boxResult = card.querySelector('#box-card-nomination-result') as HTMLSpanElement;
-        const type = StatusKit.getTypeByCode(nomination.status.code);
+        const type = statusKit.getTypeByCode(nomination.status.code);
         card.querySelector('#text-card-nomination-interval').innerHTML = nomination.intervalString;
         if (nomination.status.code > 0) {
             boxResult.hidden = false;
-            boxResult.querySelector('i').innerHTML = StatusKit.types.get(type).icon;
+            boxResult.querySelector('i').innerHTML = statusKit.types.get(type).icon;
             boxResult.querySelector('span').innerHTML = nomination.resultDateString;
         } else {
             boxResult.hidden = true;
