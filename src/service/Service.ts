@@ -138,7 +138,7 @@ class Service {
                 this.startMail();
             }
         };
-        this.auth.events.onerror = (error) => {
+        this.auth.events.error = (error) => {
             this.events.alert(JSON.stringify(error, null, 2));
         }
 

@@ -1,17 +1,12 @@
+type AuthStatusChangedCallback = (signedIn: boolean) => void;
+type ErrorCallback = (message: string) => void;
+
 /**
  * Events for {@link AuthKit}
  */
 interface AuthKitEvents {
-    /**
-     * Triggered when sign-in or sign-out
-     * @param signedIn Signed in or not
-     */
-    authStatusChanged: (signedIn: boolean) => void;
-    /**
-     * Triggered when gapi.auth error occures
-     * @param message The error message
-     */
-    onerror: (message: string) => void;
+    authStatusChanged: AuthStatusChangedCallback;   // Triggered when sign-in or sign-out
+    error: ErrorCallback;   // Triggered when gapi.auth error occures
 }
 
 /**
@@ -20,8 +15,8 @@ interface AuthKitEvents {
 class AuthKit {
 
     events: AuthKitEvents = {
-        authStatusChanged: (signedIn: boolean) => { signedIn },
-        onerror: (message: string) => { message },
+        authStatusChanged: () => { },
+        error: () => { },
     };
 
     init() {
@@ -53,7 +48,7 @@ class AuthKit {
                 // Handle the initial sign-in state.
                 this.events.authStatusChanged(this.signedIn);
             },
-            this.events.onerror
+            this.events.error
         );
     }
 
