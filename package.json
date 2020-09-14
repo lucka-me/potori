@@ -36,7 +36,7 @@
     "@types/gapi.client.drive": "^3.0.10",
     "@types/gapi.client.gmail": "^1.0.2",
     "@types/lodash": "^4.14.161",
-    "@types/mapbox-gl": "^1.11.2",
+    "@types/mapbox-gl": "^1.12.0",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^4.3.0",
     "gh-pages": "^3.1.0",
