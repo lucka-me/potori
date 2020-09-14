@@ -1,7 +1,5 @@
 import i18next from "i18next";
 
-import AuthKit from "./auth";
-
 class FileConst {
     static type = 'application/json';
     static nominations = 'potori.json';
@@ -83,7 +81,7 @@ class GoogleDriveFileKit {
         });
     }
 
-    upload(filename: string, blob: Blob, finished: (response: any) => void) {
+    upload(filename: string, blob: Blob, token: string, finished: (response: any) => void) {
         // Ref: https://gist.github.com/tanaikech/bd53b366aedef70e35a35f449c51eced
         let url = '';
         let method = '';
@@ -103,7 +101,7 @@ class GoogleDriveFileKit {
         const form = new FormData();
         form.append('metadata', new Blob([JSON.stringify(metadata)], { type: FileConst.type }));
         form.append('file', blob);
-        const authHeader = `Bearer ${AuthKit.accessToken}`;
+        const authHeader = `Bearer ${token}`;
         fetch(url, {
             method: method,
             headers: new Headers({ Authorization: authHeader }),

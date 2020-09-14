@@ -319,6 +319,7 @@ class Service {
         this.file.googleDrive.upload(
             FileConst.nominations,
             BlobGenerator.nominations(this.nominations),
+            this.auth.accessToken,
             (response) => {
                 uploadedNominations = true;
                 if (!response) {
@@ -334,6 +335,7 @@ class Service {
         this.file.googleDrive.upload(
             FileConst.bsData,
             BlobGenerator.bsData(this.bs.data),
+            this.auth.accessToken,
             (response) => {
                 uploadedBsData = true;
                 if (!response) {
