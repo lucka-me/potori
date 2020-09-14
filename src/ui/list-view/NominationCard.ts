@@ -111,7 +111,7 @@ class NominationCard {
         ]);
         const actionStatus = new MDCRipple(elementActionStatus);
         actionStatus.unbounded = true;
-        if (Version.fullFeature) {
+        if (Version.full) {
             actionStatus.listen('click', () => {
                 window.open(nomination.bsUrl, '_blank', 'noopener');
             });
@@ -147,7 +147,7 @@ class NominationCard {
         actionLocation.listen('click', events.focus);
         actionIcons.push(elementActionLocation);
 
-        if (Version.fullFeature) {
+        if (Version.full) {
             const elementActionIntel = Eli.build('button', {
                 className: classNameAction,
                 title: i18next.t('Intel Map'),
@@ -204,7 +204,7 @@ class NominationCard {
         const elementLocation = card.querySelector('#button-card-nomination-location') as HTMLButtonElement;
         elementLocation.hidden = hidden;
 
-        if (!Version.fullFeature) return;
+        if (!Version.full) return;
         const elementIntel = card.querySelector('#button-card-nomination-intel') as HTMLButtonElement;
         elementIntel.hidden = hidden;
     }

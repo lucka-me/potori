@@ -30,7 +30,7 @@ class AboutDialog extends DialogPrototype {
                 }, [
                     Eli.link(
                         'https://github.com/lucka-me/potori/blob/master/CHANGELOG.md',
-                        i18next.t('Changelog'), Version.text
+                        i18next.t('Changelog'), Version.string
                     ),
                     ' by ',
                     Eli.link('https://lucka.moe', i18next.t('Blog'), 'Lucka'),

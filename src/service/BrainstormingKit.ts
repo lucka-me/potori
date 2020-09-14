@@ -33,7 +33,7 @@ class BrainstormingKit {
             succeed(this.data.get(bsId));
             return;
         }
-        if (!Version.fullFeature) {
+        if (!Version.full) {
             failed();
             return;
         }
