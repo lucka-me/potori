@@ -6,24 +6,14 @@ import { version as dataVersion } from "../../data/status.json";
  */
 class Version {
 
-    private published: boolean;
+    readonly string: string;
+    // Is the current instance a full (private) version
+    readonly full: boolean;
 
     constructor() {
-        this.published = document.URL.includes('lucka.moe');
-    }
-
-    /**
-     * Get the version string
-     */
-    get string() {
-        return `${potoriVersion}d${dataVersion}-${this.published ? 'lite' : 'full'}`;
-    }
-
-    /**
-     * Get if the current instance should be a full (private) version
-     */
-    get full() {
-        return !this.published;
+        const published = document.URL.includes('lucka.moe');
+        this.string = `${potoriVersion}d${dataVersion}-${published ? 'lite' : 'full'}`;
+        this.full = !published;
     }
 
 }
