@@ -4,7 +4,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { DashboardPrototype, Eli } from './prototypes';
 import FilterCard from './FilterCard';
 import Nomination, { LngLat } from '../../service/Nomination';
-import StatusKit from '../../service/StatusKit';
+import StatusKit from '../../service/status';
 
 interface MapCardEvents {
     focus: (id: string) => void,

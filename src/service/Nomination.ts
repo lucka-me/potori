@@ -1,4 +1,4 @@
-import StatusKit, { Status } from "./StatusKit";
+import StatusKit, { Status } from "./status";
 
 const now = Date.now();
 

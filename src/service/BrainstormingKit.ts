@@ -1,7 +1,7 @@
 import type { Reference } from "@firebase/database-types";
 
 import Nomination, { LngLat } from "./Nomination";
-import StatusKit from "./StatusKit";
+import StatusKit from "./status";
 import Version from "./version";
 
 const RateItems = {

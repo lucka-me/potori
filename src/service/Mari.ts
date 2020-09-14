@@ -1,4 +1,4 @@
-import StatusKit from "./StatusKit";
+import StatusKit from "./status";
 import Nomination, { LngLat } from "./Nomination";
 
 interface QueryKeys {

@@ -14,7 +14,7 @@ export default class DialogPrototype extends UIKitPrototype {
      */
     static buildDialog(contents: Array<HTMLElement>): HTMLDivElement {
         return Eli.build('div', {
-            className: 'mdc-dialog mdc-dialog--scrollable',
+            className: 'mdc-dialog',
             role: 'dialog',
             ariaModal: true,
         }, [

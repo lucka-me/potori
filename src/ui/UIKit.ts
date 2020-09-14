@@ -7,7 +7,7 @@ import Eli          from "./Eli";
 import Progress     from './Progress';
 import Service      from "../service/Service";
 import Snackbar     from './Snackbar';
-import StatusKit    from "../service/StatusKit";
+import StatusKit    from "../service/status";
 import Nomination   from '../service/Nomination';
 
 import type Dashboard   from './Dashboard';

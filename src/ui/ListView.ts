@@ -1,7 +1,7 @@
 import FilterCard from './dashboard/FilterCard';
 import Nomination from '../service/Nomination';
 import NominationCard from "./list-view/NominationCard";
-import { StatusReason, StatusType } from '../service/StatusKit';
+import { StatusReason, StatusType } from '../service/status';
 import UIKitPrototype, { Eli } from './UIKitPrototype';
 
 interface ListViewEvents {

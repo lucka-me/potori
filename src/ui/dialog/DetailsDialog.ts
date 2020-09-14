@@ -7,7 +7,7 @@ import { MDCTextField } from "@material/textfield";
 import AlertDialog from './AlertDialog';
 import DialogPrototype, { MDCDialog } from './prototype';
 import Nomination, { LngLat } from '../../service/Nomination';
-import StatusKit from '../../service/StatusKit';
+import StatusKit from '../../service/status';
 import UIKitPrototype, { Eli, i18next } from '../UIKitPrototype';
 
 interface DetailsDialogMapEvents {
@@ -331,10 +331,11 @@ class DetailsDialog extends DialogPrototype {
                 ]),
             ]),
             Eli.build('div', {
-                className: 'mdc-select__menu mdc-menu mdc-menu-surface',
+                className: 'mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth',
             }, [
                 Eli.build('ul', {
-                    className: 'mdc-list'
+                    className: 'mdc-list',
+                    role: 'listbox'
                 }, itemsSelectReason),
             ]),
         ]);
