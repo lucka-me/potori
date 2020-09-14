@@ -283,12 +283,14 @@ class UIKit {
         this.list.update(nomination);
     }
 
-    openFileUI(opened: (event: Event) => void) {
+    openFileUI(opened: (file: File) => void) {
         const element = Eli.build('input', {
             cssText: 'display:none;',
             type: 'file', accept: 'json'
         });
-        element.addEventListener('change', opened, false);
+        element.addEventListener('change', (event) => {
+            opened((event.target as HTMLInputElement).files[0]);
+        }, false);
         document.body.append(element);
         element.click();
         setTimeout(() => {

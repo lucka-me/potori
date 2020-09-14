@@ -1,16 +1,34 @@
 import i18next from "i18next";
 
-class FileConst {
+/**
+ * Constants for {@link FileKit}
+ */
+export class FileConst {
     static type = 'application/json';
     static nominations = 'potori.json';
     static bsData = 'bsdata.json';
 }
 
+/**
+ * Events for {@link @LocalFileKit}
+ */
 interface LocalFileKitEvents {
-    openUI: (opened: (event: Event) => void) => void;
+    /**
+     * Triggered when require the UI to open a file
+     * @param opened Callback that should be triggered when file is opened
+     */
+    openUI: (opened: (file: File) => void) => void;
+    /**
+     * Triggered when require the UI to save a file
+     * @param filename The default filename to save
+     * @param href URL of the content
+     */
     saveUI: (filename: string, href: string) => void;
 }
 
+/**
+ * Open and save local files
+ */
 class LocalFileKit {
 
     events: LocalFileKitEvents = {
@@ -18,9 +36,13 @@ class LocalFileKit {
         saveUI: () => {},
     }
 
+    /**
+     * Open a local file
+     * @param onload Triggered when content is loaded
+     * @param onerror Triggered when error occurs
+     */
     open(onload: (result: string) => void, onerror: (message: string) => void) {
-        this.events.openUI((event: Event) => {
-            const file = (event.target as HTMLInputElement).files[0];
+        this.events.openUI((file: File) => {
             if (!file) {
                 onerror(i18next.t('message:Failed to open file'));
                 return;
@@ -33,17 +55,34 @@ class LocalFileKit {
         });
     }
 
+    /**
+     * Save a local file
+     * @param filename Default filename
+     * @param blob Content to save
+     */
     save(filename: string, blob: Blob) {
         this.events.saveUI(filename, URL.createObjectURL(blob));
     }
 }
 
+/**
+ * Download and upload from / to Google Drive
+ */
 class GoogleDriveFileKit {
 
-    ids: Map<string, string> = new Map();
+    private ids: Map<string, string> = new Map();
 
-    static get folder() { return 'appDataFolder' }
+    private static get folder() { return 'appDataFolder' }
 
+    /**
+     * Download file from Google Drive.
+     * 
+     * If there are multiple files (more === true), the caller should decide
+     * whether to delete the current one & download next one or not by return a boolean
+     * 
+     * @param filename Name of the file to download
+     * @param got Triggered when a file is downloaded
+     */
     get(filename: string, got: (file: gapi.client.drive.File, more: boolean) => boolean) {
         const gotList = (fileList: Array<gapi.client.drive.File>) => {
             if (fileList.length < 1) {
@@ -81,6 +120,13 @@ class GoogleDriveFileKit {
         });
     }
 
+    /**
+     * Upload file to Google Drive
+     * @param filename Filename to upload
+     * @param blob Content to upload
+     * @param token The Google account access token
+     * @param finished Triggered when process finished
+     */
     upload(filename: string, blob: Blob, token: string, finished: (response: any) => void) {
         // Ref: https://gist.github.com/tanaikech/bd53b366aedef70e35a35f449c51eced
         let url = '';
@@ -118,10 +164,7 @@ class GoogleDriveFileKit {
     }
 }
 
-class FileKit {
+export default class FileKit {
     local       = new LocalFileKit();
     googleDrive = new GoogleDriveFileKit();
 }
-
-export default FileKit;
-export { FileConst };
