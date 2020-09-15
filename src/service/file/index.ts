@@ -1,5 +1,5 @@
 import Constants from './constants';
-import GoogleDriveFileKit from './googleDrive';
+import GoogleDriveFileKit from './google-drive';
 import LocalFileKit from './local';
 
 export default class FileKit {

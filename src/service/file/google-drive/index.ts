@@ -1,4 +1,4 @@
-import Constants from './constants';
+import Constants from '../constants';
 
 type DownloadCallback = (file: gapi.client.drive.File, more: boolean) => boolean;
 type UploadCallback = (succeed: boolean, message?: string) => void;
