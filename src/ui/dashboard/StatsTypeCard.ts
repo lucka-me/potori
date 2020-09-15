@@ -1,7 +1,7 @@
 import Chart from 'chart.js';
 
 import { DashboardChartProtorype, Eli, Nomination, i18next } from './prototypes';
-import statusKit from '../../service/status';
+import { statusKit } from '../../service';
 
 class StatsTypeCard extends DashboardChartProtorype {
 

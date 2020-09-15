@@ -5,9 +5,8 @@ import Dark         from "./Dark";
 import Dialog       from './Dialog';
 import Eli          from "./Eli";
 import Progress     from './Progress';
-import Service, { Nomination } from "../service";
+import Service, { Nomination, statusKit } from "../service";
 import Snackbar     from './Snackbar';
-import statusKit    from "../service/status";
 
 import type Dashboard   from './Dashboard';
 import type ListView    from './ListView';

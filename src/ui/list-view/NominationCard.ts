@@ -5,7 +5,7 @@ import AlertDialog from "../dialog/AlertDialog";
 import Eli from "../Eli";
 import { Nomination } from '../../service';
 import version from "../../service/version";
-import statusKit from "../../service/status";
+import { statusKit } from "../../service";
 
 interface NominationCardEvents {
     focus: () => void;

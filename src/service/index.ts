@@ -2,10 +2,11 @@ import i18next from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 import authKit from './auth';
-import Mari from './mari';
 import BrainstormingKit from './brainstorming';
 import FileKit, { Constants as FileConst } from './file';
+import Mari from './mari';
 import Nomination, { LngLat } from './nomination';
+import statusKit, { Status, StatusType, StatusReason } from "./status";
 import translations from '../locales';
 
 class Parser {
@@ -388,3 +389,4 @@ class Service {
 
 export default new Service();
 export { Nomination, LngLat };
+export { statusKit, Status, StatusType, StatusReason };
