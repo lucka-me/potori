@@ -2,7 +2,7 @@ import i18next from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 import AuthKit from './auth';
-import Mari from './Mari';
+import Mari from './mari/Mari';
 import BrainstormingKit from './BrainstormingKit';
 import FileKit, { Constants as FileConst } from './file';
 import Nomination from './nomination';

@@ -1,5 +1,5 @@
-import statusKit from './status';
-import Nomination, { LngLat } from './nomination';
+import statusKit from '../status';
+import Nomination, { LngLat } from '../nomination';
 
 interface QueryKeys {
     scanner: string;
