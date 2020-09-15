@@ -5,7 +5,7 @@ import authKit from './auth';
 import Mari from './mari';
 import BrainstormingKit from './brainstorming';
 import FileKit, { Constants as FileConst } from './file';
-import Nomination from './nomination';
+import Nomination, { LngLat } from './nomination';
 import translations from '../locales';
 
 class Parser {
@@ -320,7 +320,7 @@ class Service {
             FileConst.nominations,
             BlobGenerator.nominations(this.nominations),
             this.auth.accessToken,
-            (succeed, message?) => {
+            (succeed: boolean, message?: string) => {
                 uploadedNominations = true;
                 if (!succeed) {
                     this.events.alert(`${i18next.t('message:Unable to upload Nomination List')}${message ? `\n${message}` : ''}`);
@@ -333,7 +333,7 @@ class Service {
             FileConst.bsData,
             BlobGenerator.bsData(this.bs.data),
             this.auth.accessToken,
-            (succeed, message?) => {
+            (succeed: boolean, message?: string) => {
                 uploadedBsData = true;
                 if (!succeed) {
                     this.events.alert(`${i18next.t('message:Unable to upload Brainstorming Data')}${message ? `\n${message}` : ''}`);
@@ -387,3 +387,4 @@ class Service {
 }
 
 export default new Service();
+export { Nomination, LngLat };

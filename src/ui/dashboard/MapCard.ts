@@ -3,7 +3,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 import { DashboardPrototype, Eli } from './prototypes';
 import FilterCard from './FilterCard';
-import Nomination, { LngLat } from '../../service/nomination';
+import { LngLat, Nomination } from '../../service';
 import statusKit from '../../service/status';
 
 interface MapCardEvents {
