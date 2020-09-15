@@ -144,7 +144,7 @@ class Service {
 
         this.auth.init();
 
-        this.mari.events.finished = () => this.finish();
+        this.mari.events.finish = () => this.finish();
     }
 
     startMail() {
