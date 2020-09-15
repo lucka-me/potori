@@ -1,4 +1,4 @@
-import statusKit, { Status } from "../status";
+import statusKit, { Status } from '../status';
 
 const now = Date.now();
 
@@ -75,7 +75,7 @@ export default class Nomination {
     get intervalString(): string {
         const end = this.resultTime ? this.resultTime : now;
         const day = Math.floor((end - this.confirmedTime) / (24 * 3600 * 1000));
-        return `${day} day${(day > 1 ? "s" : "")}`;
+        return `${day} day${(day > 1 ? 's' : '')}`;
     }
 
     /**
@@ -83,7 +83,7 @@ export default class Nomination {
      */
     get restoreIntervalString(): string {
         const day = Math.floor((this.restoreTime - now) / (24 * 3600 * 1000));
-        return `${day} day${(day > 1 ? "s" : "")}`;
+        return `${day} day${(day > 1 ? 's' : '')}`;
     }
 
     /**

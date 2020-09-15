@@ -1,7 +1,7 @@
 import i18next from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-import AuthKit from './auth';
+import authKit from './auth';
 import Mari from './mari';
 import BrainstormingKit from './brainstorming';
 import FileKit, { Constants as FileConst } from './file';
@@ -91,7 +91,7 @@ interface ServiceEvents {
 
 class Service {
 
-    auth    = AuthKit;
+    auth    = authKit;
     bs      = new BrainstormingKit();
     file    = new FileKit();
     mari    = new Mari();
