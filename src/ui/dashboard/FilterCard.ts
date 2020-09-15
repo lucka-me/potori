@@ -1,7 +1,7 @@
 import { MDCSwitch } from "@material/switch";
 
 import { DashboardPrototype, Eli, i18next } from './prototypes';
-import statusKit, { Status, StatusType, StatusReason } from '../../service';
+import { statusKit, Status, StatusType, StatusReason } from '../../service';
 
 interface FilterCardBlock {
     root: HTMLDivElement;
