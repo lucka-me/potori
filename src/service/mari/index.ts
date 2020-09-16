@@ -1,5 +1,5 @@
 import Nomination from '../nomination';
-import Parser from './parser';
+import Parser from './tools';
 import statusKit from '../status';
 
 type FinishCallback = () => void;
