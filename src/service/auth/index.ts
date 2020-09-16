@@ -1,4 +1,4 @@
-type AuthStatusChangedCallback = (signedIn: boolean) => void;
+export type AuthStatusChangedCallback = (signedIn: boolean) => void;
 type ErrorCallback = (message: string) => void;
 
 /**

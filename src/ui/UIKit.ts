@@ -100,11 +100,11 @@ class UIKit {
         Service.events.progressUpdate = (percent) => {
             this.progress.progress = percent;
         }
-        Service.events.showProgress = () => {
+        Service.events.start = () => {
             this.preloadModules();
             this.progress.open();
         };
-        Service.events.show = () => {
+        Service.events.idle = () => {
             this.show();
         };
         Service.events.clear = () => {

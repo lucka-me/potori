@@ -3,7 +3,7 @@ import Parser from './tools';
 import statusKit from '../status';
 
 type FinishCallback = () => void;
-type ProgressCallback = (percent: number) => void;
+export type ProgressCallback = (percent: number) => void;
 
 /**
  * Events for {@link Mari}

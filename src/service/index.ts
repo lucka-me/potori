@@ -1,27 +1,33 @@
 import i18next from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-import authKit from './auth';
+import authKit, { AuthStatusChangedCallback } from './auth';
 import BrainstormingKit from './brainstorming';
 import FileKit, { Constants as FileConst } from './file';
-import Mari from './mari';
+import Mari, { ProgressCallback } from './mari';
 import Nomination, { LngLat } from './nomination';
 import { Parser, BlobGenerator } from "./tools";
 import translations from '../locales';
 
 import statusKit, { Status, StatusType, StatusReason } from "./status";
 
+type BasicCallback = () => void;
+type MessageCallback = (message: string) => void;
+
+/**
+ * Events for {@link Service}
+ */
 interface ServiceEvents {
-    authStatusChanged   : (signedIn: boolean) => void,
-    progressUpdate      : (percent: number) => void,
-    updateBs            : () => void,
-    showProgress        : () => void,
-    
-    show    : () => void,
-    clear   : () => void,
-    
-    alert   : (message: string) => void,
-    info    : (message: string) => void,
+    authStatusChanged   : AuthStatusChangedCallback,    // Triggered when authentication status changed
+    progressUpdate      : ProgressCallback, // Triggered when progress updated
+    updateBs            : BasicCallback,    // Triggered when brainstorming data updated
+
+    start   : BasicCallback,    // Triggered when progress bar should show up
+    idle    : BasicCallback,    // Triggered when process is finished
+    clear   : BasicCallback,    // Triggered when UI should be cleared
+
+    alert   : MessageCallback,  // Triggered when alert raised
+    info    : MessageCallback,  // Triggered when some information should be passed to user
 }
 
 class Service {
@@ -37,9 +43,9 @@ class Service {
         authStatusChanged:  (signedIn) => signedIn,
         progressUpdate:     (percent) => percent,
         updateBs:           () => {},
-        showProgress:       () => {},
+        start:       () => {},
         
-        show:   () => {},
+        idle:   () => {},
         clear:  () => {},
         
         alert:  (message) => message,
@@ -84,14 +90,14 @@ class Service {
 
     startMail() {
         this.events.clear();
-        this.events.showProgress();
+        this.events.start();
         this.download(() => {
             this.mari.start(this.nominations);
         });
     }
 
     finish() {
-        this.events.showProgress();
+        this.events.start();
         // Merge duplicated nominations -> targets
         for (let i = this.nominations.length - 1; i >= 0; i--) {
             const current = this.nominations[i];
@@ -122,7 +128,7 @@ class Service {
         });
 
         const finished = () => {
-            this.events.show();
+            this.events.idle();
         };
 
         // Query locations
@@ -306,7 +312,7 @@ class Service {
                 lat: parseFloat(nomination.lat)
             };
         }
-        this.events.show();
+        this.events.idle();
     }
 
     updateBsData() {
