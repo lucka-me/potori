@@ -19,14 +19,12 @@ class LanguageData {
     }
 
     toExport() {
-        return `
-    '${this.code}': {
-        ${
-            this.files.map((file) => {
-                return `${file.replace('.json', '')}: ${this.moduleName(file)},`
-            }).join('\n        ')
-        }
-    },`
+        return '\n\n'
+        + `    '${this.code}': {\n`
+        + '        '
+        + this.files.map((file) => `${file.replace('.json', '')}: ${this.moduleName(file)},`).join('\n        ')
+        + '\n'
+        + '    },'
     }
 }
 
@@ -46,7 +44,7 @@ function buildLocals() {
         + '\n\n'
         + 'export default {'
         + languages.map((language) => language.toExport()).join('')
-        + '\n'
+        + '\n\n'
         + '};';
 
     fs.writeFileSync(require('path').join(process.cwd(), `${root}/index.ts`), content);
