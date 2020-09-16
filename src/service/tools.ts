@@ -3,15 +3,44 @@ import i18next from 'i18next';
 import { Constants as FileConst } from './file';
 import Nomination from './nomination';
 
+/**
+ * Result of {@link Parser} methods
+ */
+interface ParseResult {
+    matched: boolean,   // Whether the json matches the data structure or not
+    message: string,    // Error message
+}
+
+/**
+ * Result of {@link Parser.nominations}
+ */
+interface ParseNominationsResult extends ParseResult {
+    nominations: Array<Nomination>  // Nomination list
+}
+
+/**
+ * Result of {@link Parser.bsData}
+ */
+interface ParseBsDataResult extends ParseResult {
+    data: Map<string, any>  // Brainstorming data map
+}
+
+/**
+ * Parsers for files
+ */
 export class Parser {
-    static nominations(content: string) {
-        const result = {
+    /**
+     * Parse nomination list from JSON
+     * @param json JSON string
+     */
+    static nominations(json: string): ParseNominationsResult {
+        const result: ParseNominationsResult = {
             matched: false,
             message: '',
-            nominations: [] as Array<Nomination>,
+            nominations: []
         };
         try {
-            const jsonList = JSON.parse(content);
+            const jsonList = JSON.parse(json);
             if (jsonList.length === 0) {
                 result.message = i18next.t('message:List is empty');
                 return result;
@@ -23,26 +52,27 @@ export class Parser {
                     result.message = i18next.t('message:Failed to parse as Nomination List');
                     return result;
                 }
-                result.nominations.push(Nomination.from(json));
+                result.nominations.push(nomination);
             }
+            result.matched = true;
         } catch(error) {
+            result.matched = false;
             result.message = i18next.t('message:Failed to parse as Nomination List');
-            return result;
         }
-        result.matched = true;
         return result;
     }
 
-    static bsData(content: string) {
-        const result = {
+    static bsData(content: string): ParseBsDataResult {
+        const result: ParseBsDataResult = {
             matched: false,
             message: '',
-            data: null as Map<string, any>,
+            data: null,
         };
         try {
             result.data = new Map(JSON.parse(content));
             result.matched = true;
         } catch (error) {
+            result.matched = false;
             result.message = i18next.t('message:Failed to parse as Brainstorming Data');
         }
 
@@ -50,8 +80,15 @@ export class Parser {
     }
 }
 
+/**
+ * Generate blob from data
+ */
 export class BlobGenerator {
-    static nominations(nominations: Array<Nomination>) {
+    /**
+     * Generate blob from nomination list
+     * @param nominations Nomination list
+     */
+    static nominations(nominations: Array<Nomination>): Blob {
         const list = [];
         for (const nomination of nominations) {
             list.push(nomination.json);
@@ -63,6 +100,10 @@ export class BlobGenerator {
         );
     }
 
+    /**
+     * Generate blob from Brainstorming data map
+     * @param data Brainstorming data map
+     */
     static bsData(data: Map<string, any>) {
         return new Blob(
             [ JSON.stringify([...data], null, 4) ],
