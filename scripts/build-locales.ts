@@ -41,14 +41,15 @@ function buildLocals() {
             return list;
         }, []);
 
-    const jsFile = `// This file is generated with scripts/build-locals.js
-    ${languages.map((language) => language.toImport()).join('\n')}
+    const content = '// This file is generated with scripts/build-locals.js\n'
+        + languages.map((language) => language.toImport()).join('\n')
+        + '\n\n'
+        + 'export default {'
+        + languages.map((language) => language.toExport()).join('')
+        + '\n'
+        + '};';
 
-    export default {
-    ${languages.map((language) => language.toExport()).join('')}
-    };`;
-
-    fs.writeFileSync(require('path').join(process.cwd(), `${root}/index.ts`), jsFile);
+    fs.writeFileSync(require('path').join(process.cwd(), `${root}/index.ts`), content);
 }
 
 buildLocals();
