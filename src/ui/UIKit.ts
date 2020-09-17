@@ -2,7 +2,7 @@ import i18next from 'i18next';
 
 import AppBar, { AppBarMenuItems, AppBarActions } from './app-bar';
 import Dark         from "./dark";
-import Dialog       from './Dialog';
+import Dialog       from './dialog';
 import Progress     from './progress';
 import service, { Nomination, statusKit } from "../service";
 import Snackbar     from './snackbar';

@@ -1,10 +1,13 @@
-import UIPrototype from './base';
+import UIPrototype from '../base';
 
-import AboutDialog      from './dialog/AboutDialog';
-import AlertDialog      from './dialog/AlertDialog';
-import DetailsDialog    from './dialog/DetailsDialog';
-import ImportDialog     from './dialog/ImportDialog';
+import AboutDialog      from './AboutDialog';
+import AlertDialog      from './AlertDialog';
+import DetailsDialog    from './DetailsDialog';
+import ImportDialog     from './ImportDialog';
 
+/**
+ * Virtual component to host all dialogs
+ */
 class Dialog extends UIPrototype {
 
     about       = new AboutDialog;
