@@ -7,10 +7,10 @@ import MapCard              from './dashboard/MapCard';
 import QuotasCard           from './dashboard/QuotasCard';
 import StatsRejectedCard    from './dashboard/StatsRejectedCard';
 import StatsTypeCard        from './dashboard/StatsTypeCard';
-import UIKitPrototype       from './base';
+import UIPrototype       from './base';
 import { DashboardPrototype, Nomination } from './dashboard/prototypes';
 
-class Dashboard extends UIKitPrototype {
+class Dashboard extends UIPrototype {
 
     root: HTMLDivElement = null;
 

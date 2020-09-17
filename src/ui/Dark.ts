@@ -1,6 +1,6 @@
-import UIKitPrototype from './base';
+import UIPrototype from './base';
 
-class Dark extends UIKitPrototype {
+class Dark extends UIPrototype {
 
     enabled = false;
     changed: (enabled: boolean) => void = () => {};

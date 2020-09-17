@@ -2,14 +2,14 @@ import FilterCard from './dashboard/FilterCard';
 import { Nomination } from '../service';
 import NominationCard from "./list-view/NominationCard";
 import { StatusReason, StatusType } from '../service';
-import UIKitPrototype from './base';
+import UIPrototype from './base';
 
 interface ListViewEvents {
     focus: (nomination: Nomination) => void;
     openDetails: (nomination: Nomination) => void;
 }
 
-class ListView extends UIKitPrototype {
+class ListView extends UIPrototype {
 
     root: HTMLDivElement = null;
     now = Date.now();

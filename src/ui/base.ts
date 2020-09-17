@@ -1,8 +1,11 @@
 import i18next from 'i18next';
 
-export default class UIKitPrototype {
+/**
+ * Prototype of UI components
+ */
+export default class UIPrototype {
     
-    parent: HTMLElement = null;
+    parent: HTMLElement = null; // Parent element, not enumerable
 
     constructor() {
         Object.defineProperty(this, 'parent', {
@@ -10,10 +13,17 @@ export default class UIKitPrototype {
         });
     }
     
+    /**
+     * Initialize and setup component
+     * @param parent Parent element
+     */
     init(parent: HTMLElement) {
         this.parent = parent;
     }
 
+    /**
+     * Build element and render
+     */
     render() { }
 }
 

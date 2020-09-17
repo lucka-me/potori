@@ -1,8 +1,8 @@
 import { MDCSnackbar } from "@material/snackbar";
 
-import UIKitPrototype , { i18next } from './base';
+import UIPrototype , { i18next } from './base';
 
-class Snackbar extends UIKitPrototype {
+class Snackbar extends UIPrototype {
 
     ctrl: MDCSnackbar = null;
     textMessage: HTMLDivElement = null;

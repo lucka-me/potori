@@ -1,11 +1,11 @@
-import UIKitPrototype from './base';
+import UIPrototype from './base';
 
 import AboutDialog      from './dialog/AboutDialog';
 import AlertDialog      from './dialog/AlertDialog';
 import DetailsDialog    from './dialog/DetailsDialog';
 import ImportDialog     from './dialog/ImportDialog';
 
-class Dialog extends UIKitPrototype {
+class Dialog extends UIPrototype {
 
     about       = new AboutDialog;
     alert       = AlertDialog;

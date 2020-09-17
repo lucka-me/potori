@@ -1,10 +1,10 @@
 import { MDCDialog } from "@material/dialog";
-import UIKitPrototype, { i18next } from "../base";
+import UIPrototype, { i18next } from "../base";
 
 /**
  * Ptototype of MDC dialog components
  */
-export default class DialogPrototype extends UIKitPrototype {
+export default class DialogPrototype extends UIPrototype {
     ctrl: MDCDialog = null;
 
     /**

@@ -2,7 +2,7 @@ import { MDCMenu } from "@material/menu";
 import { MDCRipple } from "@material/ripple";
 import { MDCTopAppBar } from "@material/top-app-bar";
 
-import UIKitPrototype, { i18next } from './base';
+import UIPrototype, { i18next } from './base';
 
 const AppBarMenuItems = {
     open     : { key: 'open'    , title: 'Open'       },
@@ -13,7 +13,7 @@ const AppBarMenuItems = {
     signout  : { key: 'signout' , title: 'Sign Out'   },
 };
 
-class AppBarMenu extends UIKitPrototype {
+class AppBarMenu extends UIPrototype {
 
     ctrl: MDCMenu = null;
     items: Map<string, HTMLLIElement> = new Map();
@@ -75,7 +75,7 @@ const AppBarActions = {
     menu:   { key: 'menu'   , title: 'Menu'     , icon: '\uf142' },
 };
 
-class AppBar extends UIKitPrototype {
+class AppBar extends UIPrototype {
 
     menu = new AppBarMenu();
     actions: Map<string, HTMLButtonElement> = new Map();

@@ -1,8 +1,8 @@
 import { MDCLinearProgress } from "@material/linear-progress";
 
-import UIKitPrototype from './base';
+import UIPrototype from './base';
 
-class Progress extends UIKitPrototype {
+class Progress extends UIPrototype {
 
     private ctrl: MDCLinearProgress = null;
     private root: HTMLDivElement = null;

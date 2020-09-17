@@ -8,13 +8,13 @@ import AlertDialog from './AlertDialog';
 import DialogPrototype, { MDCDialog } from './prototype';
 import { Nomination, LngLat } from '../../service';
 import { statusKit } from '../../service';
-import UIKitPrototype, { i18next } from '../base';
+import UIPrototype, { i18next } from '../base';
 
 interface DetailsDialogMapEvents {
     queryLngLat: (bsId: string, succeed: (lngLat: LngLat) => void, failed: () => void) => void;
 }
 
-class DetailsDialogMap extends UIKitPrototype {
+class DetailsDialogMap extends UIPrototype {
 
     ctrl: mapboxgl.Map = null;
     marker: mapboxgl.Marker = null;

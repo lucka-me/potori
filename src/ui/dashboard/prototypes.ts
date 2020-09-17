@@ -1,9 +1,9 @@
 import moment from 'moment';
 
-import UIKitPrototype, { i18next } from "../base";
+import UIPrototype, { i18next } from "../base";
 import { Nomination } from "../../service";
 
-export class DashboardPrototype extends UIKitPrototype {
+export class DashboardPrototype extends UIPrototype {
 
     root: HTMLElement = null;
 
