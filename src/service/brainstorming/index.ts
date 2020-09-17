@@ -1,34 +1,44 @@
 import type { Reference } from '@firebase/database-types';
 
 import Nomination, { LngLat } from '../nomination';
+import { RateItems } from "./constants";
 import statusKit from '../status';
 import version from '../version';
 
-const RateItems = {
-    quality: 'Quality',
-    description: 'Description',
-    cultural: 'Cultural',
-    uniqueness: 'Uniqueness',
-    safety: 'Safety',
-    location: 'Location',
-};
-
+/**
+ * Result for {@link BrainstormingKit.analyse}
+ */
 interface BrainstormingStats {
-    review: number,
-    nomination: number,
-    rate: Map<string, Array<number>>,
-    reviewTimes: Array<number>,
+    review: number,                     // Review count
+    nomination: number,                 // Count of nominations containing reviews
+    rate: Map<string, Array<number>>,   // Map of rate lists
+    reviewTimes: Array<number>,         // List of review timestamps
     synch: {
-        total: number, synched: number
+        total: number,  // Count of reviews of resulted nominations
+        synched: number // Count of reviews matches the result
     },
 }
 
+type FailCallback = () => void;
+type QueryCallback = (data: any) => void;
+type QueryLocationCallback = (lngLat: LngLat) => void;
+type UpdateCallback = () => void;
+
+/**
+ * Host Brainstorming data and handle tasks related to Brainstorming
+ */
 class BrainstormingKit {
 
-    data: Map<string, any> = new Map();
-    private reference: Reference = null;
+    data: Map<string, any> = new Map();     // Local database
+    private reference: Reference = null;    // Firebase reference
 
-    query(bsId: string, succeed: (data: any) => void, failed: () => void) {
+    /**
+     * Query data from local databse and firebase (full version only)
+     * @param bsId Brainstorming ID
+     * @param succeed Triggered when succeed to query data
+     * @param failed Triggered when Failed to query data
+     */
+    query(bsId: string, succeed: QueryCallback, failed: FailCallback) {
         if (this.data.has(bsId)) {
             succeed(this.data.get(bsId));
             return;
@@ -40,13 +50,24 @@ class BrainstormingKit {
         this.queryFirebase(bsId, succeed, failed);
     }
 
-    queryLngLat(bsId: string, succeed: (lngLat: LngLat) => void, failed: () => void) {
+    /**
+     * Query location data from local databse and firebase (full version only)
+     * @param bsId Brainstorming ID
+     * @param succeed Triggered when succeed to query location
+     * @param failed Triggered when Failed to query location
+     */
+    queryLocation(bsId: string, succeed: QueryLocationCallback, failed: FailCallback) {
         this.query(bsId, (data) => {
             succeed({ lng: parseFloat(data.lng), lat: parseFloat(data.lat) });
         }, failed);
     }
 
-    update(nominations: Array<Nomination>, finished: () => void) {
+    /**
+     * Query firebase to update local database
+     * @param nominations Nomination list
+     * @param finish Triggered when all query finishes
+     */
+    update(nominations: Array<Nomination>, finish: UpdateCallback) {
         const queryList = [];
         for (const nomination of nominations) {
             if ((nomination.status.code < 1) || !this.data.has(nomination.id)) {
@@ -56,7 +77,7 @@ class BrainstormingKit {
         let left = queryList.length;
         const queried = () => {
             left--;
-            if (left < 1) finished();
+            if (left < 1) finish();
         }
         for (const id of queryList) {
             this.queryFirebase(id, (value) => {
@@ -92,10 +113,17 @@ class BrainstormingKit {
         });
     }
 
+    /**
+     * Clear local database
+     */
     clear() {
         this.data.clear();
     }
 
+    /**
+     * Analyse reviews of given nominations
+     * @param nominations Nomination list
+     */
     analyse(nominations: Array<Nomination>): BrainstormingStats {
         const stats: BrainstormingStats = {
             review: 0,
@@ -141,7 +169,17 @@ class BrainstormingKit {
         return stats;
     }
 
-    static isSynched(stars: string, status: number) {
+    /**
+     * Detect if a review matches the result
+     * 
+     * - D matches duplicated
+     * - 3 or 3+ stars matches accepted and tooClose
+     * - 3- stars matches rejected
+     * 
+     * @param stars Stars of the review
+     * @param status Status code of the resulted nomination
+     */
+    private static isSynched(stars: string, status: number) {
         const reasons = statusKit.reasons;
         if (stars === 'D' && status === reasons.get('duplicated').code) {
             return true;

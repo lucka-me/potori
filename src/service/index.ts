@@ -2,7 +2,7 @@ import i18next from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 import authKit, { AuthStatusChangedCallback } from './auth';
-import BrainstormingKit from './brainstorming';
+import BrainstormingKit, { RateItems, BrainstormingStats } from './brainstorming';
 import FileKit, { Constants as FileConst } from './file';
 import Mari, { ProgressCallback } from './mari';
 import Nomination, { LngLat } from './nomination';
@@ -157,7 +157,7 @@ class Service {
             if (count === listNoLocation.length) finished();
         };
         for (const nomination of listNoLocation) {
-            this.bs.queryLngLat(
+            this.bs.queryLocation(
                 nomination.id,
                 (lngLat) => {
                     nomination.lngLat = lngLat;
@@ -361,4 +361,5 @@ class Service {
 
 export default new Service();
 export { Nomination, LngLat };
+export { RateItems, BrainstormingStats };
 export { statusKit, Status, StatusType, StatusReason };
