@@ -5,11 +5,17 @@ import { AppBarActions } from "./constants";
 import AppBarMenu, { AppBarMenuItems } from "./menu";
 import UIPrototype, { i18next } from '../base';
 
+type AppBarActionClickCallback = () => void;
+
+/**
+ * App bar component
+ */
 class AppBar extends UIPrototype {
 
-    menu = new AppBarMenu();
-    actions: Map<string, HTMLButtonElement> = new Map();
-    events: Map<string, () => void> = new Map();
+    menu = new AppBarMenu();    // Menu component
+
+    actions: Map<string, HTMLButtonElement> = new Map();        // Actions
+    events: Map<string, AppBarActionClickCallback> = new Map(); // Click events for actions
 
     constructor() {
         super();
@@ -74,6 +80,9 @@ class AppBar extends UIPrototype {
         new MDCTopAppBar(elementAppBar);
     }
 
+    /**
+     * Switch the view action between Dashboard and List
+     */
     switchView() {
         const actionView = this.actions.get(AppBarActions.view.key);
         const switchToList = actionView.innerHTML === '\uf00b';

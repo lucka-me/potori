@@ -1,3 +1,6 @@
+/**
+ * Actions in app bar
+ */
 export const AppBarActions = {
     view:   { key: 'view'   , title: 'List'     , icon: '\uf00b' },
     signin: { key: 'signin' , title: 'Sign In'  , icon: '\uf2bd' },
