@@ -1,4 +1,5 @@
 import { MDCDialog } from "@material/dialog";
+
 import UIPrototype, { i18next } from "../base";
 
 /**

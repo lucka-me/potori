@@ -1,4 +1,4 @@
-import DialogPrototype, { MDCDialog, i18next } from './prototype';
+import DialogPrototype, { MDCDialog, i18next } from './base';
 
 class AlertDialog extends DialogPrototype {
 

@@ -1,6 +1,6 @@
 import { MDCTextField } from "@material/textfield";
 
-import DialogPrototype, { MDCDialog, i18next } from './prototype';
+import DialogPrototype, { MDCDialog, i18next } from './base';
 
 interface ImportDialogEvents {
     import: (raw: string) => void;
