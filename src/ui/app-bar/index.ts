@@ -1,79 +1,9 @@
-import { MDCMenu } from "@material/menu";
 import { MDCRipple } from "@material/ripple";
 import { MDCTopAppBar } from "@material/top-app-bar";
 
+import { AppBarActions } from "./constants";
+import AppBarMenu, { AppBarMenuItems } from "./menu";
 import UIPrototype, { i18next } from '../base';
-
-const AppBarMenuItems = {
-    open     : { key: 'open'    , title: 'Open'       },
-    save     : { key: 'save'    , title: 'Save'       },
-    upload   : { key: 'upload'  , title: 'Upload'     },
-    import   : { key: 'import'  , title: 'Import'     },
-    about    : { key: 'about'   , title: 'About'      },
-    signout  : { key: 'signout' , title: 'Sign Out'   },
-};
-
-class AppBarMenu extends UIPrototype {
-
-    ctrl: MDCMenu = null;
-    items: Map<string, HTMLLIElement> = new Map();
-    events: Map<string, () => void> = new Map();
-
-    init(parent: HTMLElement) {
-        super.init(parent);
-        this.render();
-    }
-
-    render() {
-        const menuList = eli.build('ul', {
-            className: 'mdc-list',
-            role: 'menu',
-            ariaOrientation: 'vertical',
-        });
-        for (const value of Object.values(AppBarMenuItems)) {
-            const element = eli.build('li', {
-                className: 'mdc-list-item',
-                role: 'menuitem',
-                dataset: { code : value.key },
-                hidden: true,
-            }, [
-                eli.build('span', {
-                    className: 'mdc-list-item__text',
-                    innerHTML: i18next.t(value.title),
-                }),
-            ]);
-            this.items.set(value.key, element);
-            menuList.append(element);
-        }
-        this.items.get(AppBarMenuItems.about.key).hidden = false;
-
-        const menuSurface = eli.build('div', {
-            className: 'mdc-menu mdc-menu-surface',
-        }, [ menuList ]);
-        const menuAnchor = eli.build('div', {
-            className: 'mdc-menu-surface--anchor',
-        }, [ menuSurface ]);
-        this.parent.append(menuAnchor);
-
-        this.ctrl = new MDCMenu(menuSurface);
-        this.ctrl.listen(
-            'MDCMenu:selected',
-            (event: CustomEvent) => {
-                this.events.get(event.detail.item.dataset.code as string)();
-            }
-        );
-    }
-
-    open() {
-        if (!this.ctrl.open) { this.ctrl.open = true; }
-    }
-}
-
-const AppBarActions = {
-    view:   { key: 'view'   , title: 'List'     , icon: '\uf00b' },
-    signin: { key: 'signin' , title: 'Sign In'  , icon: '\uf2bd' },
-    menu:   { key: 'menu'   , title: 'Menu'     , icon: '\uf142' },
-};
 
 class AppBar extends UIPrototype {
 

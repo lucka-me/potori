@@ -1,6 +1,6 @@
 import i18next from 'i18next';
 
-import AppBar, { AppBarMenuItems, AppBarActions } from './app-bar/AppBar';
+import AppBar, { AppBarMenuItems, AppBarActions } from './app-bar';
 import Dark         from "./dark";
 import Dialog       from './Dialog';
 import Progress     from './Progress';
