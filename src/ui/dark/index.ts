@@ -7,17 +7,13 @@ type DarkModeChangeCallback = (enabled: boolean) => void;
  */
 export default class Dark extends UIPrototype {
 
-    private enabled = false;
-    changed: DarkModeChangeCallback = () => {};
+    change: DarkModeChangeCallback = () => {};
 
     init(parent: HTMLElement) {
         super.init(parent);
         const darkMediaQueryList = window.matchMedia('(prefers-color-scheme: dark)');
-        const changed = (event: MediaQueryListEvent) => {
-            this.enabled = event.matches;
-            this.changed(this.enabled);
-        };
-        darkMediaQueryList.addListener(changed);
-        this.enabled = darkMediaQueryList.matches;
+        darkMediaQueryList.addListener((event: MediaQueryListEvent) => {
+            this.change(event.matches);
+        });
     }
 }

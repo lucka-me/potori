@@ -247,7 +247,7 @@ class UIKit {
                 this.dashboard.bs.update([]);
             }
         }
-        this.dark.changed = () => {
+        this.dark.change = () => {
             if (this.dashboard) this.dashboard.updateStyle();
             this.dialog.details.updateStyle();
         };
