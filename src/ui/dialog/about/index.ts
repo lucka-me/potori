@@ -1,6 +1,9 @@
 import DialogPrototype, { MDCDialog, i18next } from '../base';
 import { version } from '../../../service';
 
+/**
+ * Dialog to show Potori information
+ */
 class AboutDialog extends DialogPrototype {
 
     render() {
@@ -44,6 +47,9 @@ class AboutDialog extends DialogPrototype {
         this.ctrl = new MDCDialog(element);
     }
 
+    /**
+     * Open the dialog
+     */
     open() {
         if (!this.ctrl) this.render();
         this.ctrl.open();

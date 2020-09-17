@@ -4,9 +4,12 @@ import UIPrototype, { i18next } from "../base";
 
 /**
  * Ptototype of MDC dialog components
+ * 
+ * Should check if the ctrl is null and call render() if it is in open()
  */
 export default class DialogPrototype extends UIPrototype {
-    ctrl: MDCDialog = null;
+
+    ctrl: MDCDialog = null; // MDC dialog controller
 
     /**
      * Build a MDC dialog element
