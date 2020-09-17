@@ -2,7 +2,6 @@ import i18next from "i18next";
 import { MDCRipple } from "@material/ripple";
 
 import AlertDialog from "../dialog/AlertDialog";
-import Eli from "../Eli";
 import { Nomination } from '../../service';
 import version from "../../service/version";
 import { statusKit } from "../../service";
@@ -20,42 +19,42 @@ class NominationCard {
             'flex-align-items--center',
         ].join(' ');
         const contentsInfo = [];
-        contentsInfo.push(Eli.build('span', {
+        contentsInfo.push(eli.build('span', {
             className: classNameInfoContent,
         }, [
-            Eli.icon('&#xf062'),
-            Eli.build('span', {
+            eli.icon('&#xf062'),
+            eli.build('span', {
                 className: 'margin-l--4',
                 innerHTML: nomination.confirmedDateString,
             }),
         ]));
         const restoreTime = nomination.restoreTime;
         if (restoreTime > now) {
-            contentsInfo.push(Eli.build('span', {
+            contentsInfo.push(eli.build('span', {
                 className: classNameInfoContent,
             }, [
-                Eli.icon('&#xf2f9'),
-                Eli.build('span', {
+                eli.icon('&#xf2f9'),
+                eli.build('span', {
                     className: 'margin-l--4',
                     innerHTML: nomination.restoreIntervalString,
                 }),
             ]));
         }
-        contentsInfo.push(Eli.build('span', {
+        contentsInfo.push(eli.build('span', {
             className: classNameInfoContent,
         }, [
-            Eli.icon('&#xf017'),
-            Eli.build('span', {
+            eli.icon('&#xf017'),
+            eli.build('span', {
                 className: 'margin-l--4',
                 id: 'text-card-nomination-interval',
             }),
         ]));
-        contentsInfo.push(Eli.build('span', {
+        contentsInfo.push(eli.build('span', {
             className: classNameInfoContent,
             id: 'box-card-nomination-result',
         }, [
-            Eli.icon('&#xf00c'),
-            Eli.build('span', {
+            eli.icon('&#xf00c'),
+            eli.build('span', {
                 className: 'margin-l--4',
             }),
         ]));
@@ -68,18 +67,18 @@ class NominationCard {
             'height: 120px',
             'min-height: 120px',
         ].join(';');
-        const elementPrimaryAction = Eli.build('div', {
+        const elementPrimaryAction = eli.build('div', {
             className: 'mdc-card__primary-action',
         }, [
-            Eli.build('div', {
+            eli.build('div', {
                 className: 'flex-box-row--nowrap',
             }, [
-                Eli.build('img', {
+                eli.build('img', {
                     cssText: cssTextImg,
                     src: nomination.imageUrl,
                     loading: 'lazy',
                 }),
-                Eli.build('div', {
+                eli.build('div', {
                     className: [
                         'padding--8',
                         'flex-box--col',
@@ -87,11 +86,11 @@ class NominationCard {
                         'flex-justify-content--start'
                     ].join(' '),
                 }, [
-                    Eli.build('span', {
+                    eli.build('span', {
                         className: 'mdc-typography--headline6',
                         innerHTML: nomination.title,
                     }),
-                    Eli.build('div', {
+                    eli.build('div', {
                         className: 'mdc-typography--body2 flex-box-row--wrap',
                     }, contentsInfo),
                 ]),
@@ -100,14 +99,14 @@ class NominationCard {
         const primaryAction = new MDCRipple(elementPrimaryAction);
         primaryAction.listen('click', events.openDetails);
 
-        const elementActionStatus = Eli.build('button', {
+        const elementActionStatus = eli.build('button', {
             className: 'mdc-button mdc-card__action mdc-card__action--button',
         }, [
-            Eli.build('div', { className: 'mdc-button__ripple' }),
-            Eli.build('i', {
+            eli.build('div', { className: 'mdc-button__ripple' }),
+            eli.build('i', {
                 className: 'fa fa-fw mdc-button__icon',
             }),
-            Eli.build('span', { className: 'mdc-button__label' }),
+            eli.build('span', { className: 'mdc-button__label' }),
         ]);
         const actionStatus = new MDCRipple(elementActionStatus);
         actionStatus.unbounded = true;
@@ -117,7 +116,7 @@ class NominationCard {
             });
         } else {
             actionStatus.listen('click', () => {
-                const textarea = Eli.build('textarea', {
+                const textarea = eli.build('textarea', {
                     value: nomination.id, readOnly: true
                 });
                 document.body.append(textarea);
@@ -135,7 +134,7 @@ class NominationCard {
             'mdc-card__action',
             'mdc-card__action--icon'
         ].join(' ');
-        const elementActionLocation = Eli.build('button', {
+        const elementActionLocation = eli.build('button', {
             className: classNameAction,
             title: i18next.t('Location'),
             id: 'button-card-nomination-location',
@@ -148,7 +147,7 @@ class NominationCard {
         actionIcons.push(elementActionLocation);
 
         if (version.full) {
-            const elementActionIntel = Eli.build('button', {
+            const elementActionIntel = eli.build('button', {
                 className: classNameAction,
                 title: i18next.t('Intel Map'),
                 id: 'button-card-nomination-intel',
@@ -163,18 +162,18 @@ class NominationCard {
             actionIcons.push(elementActionIntel);
         }
 
-        const elementCard = Eli.build('div', {
+        const elementCard = eli.build('div', {
             className: 'mdc-card mdc-card--outlined flex-shrink--0',
             id: `card-${nomination.id}`,
         }, [
             elementPrimaryAction,
-            Eli.build('div', {
+            eli.build('div', {
                 className: 'mdc-card__actions',
             }, [
-                Eli.build('div', {
+                eli.build('div', {
                     className: 'mdc-card__action-buttons',
                 }, [ elementActionStatus ]),
-                Eli.build('div', {
+                eli.build('div', {
                     className: 'mdc-card__action-icons',
                 }, actionIcons),
             ]),

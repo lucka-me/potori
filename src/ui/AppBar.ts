@@ -2,7 +2,7 @@ import { MDCMenu } from "@material/menu";
 import { MDCRipple } from "@material/ripple";
 import { MDCTopAppBar } from "@material/top-app-bar";
 
-import UIKitPrototype, { Eli, i18next } from './base';
+import UIKitPrototype, { i18next } from './base';
 
 const AppBarMenuItems = {
     open     : { key: 'open'    , title: 'Open'       },
@@ -25,19 +25,19 @@ class AppBarMenu extends UIKitPrototype {
     }
 
     render() {
-        const menuList = Eli.build('ul', {
+        const menuList = eli.build('ul', {
             className: 'mdc-list',
             role: 'menu',
             ariaOrientation: 'vertical',
         });
         for (const value of Object.values(AppBarMenuItems)) {
-            const element = Eli.build('li', {
+            const element = eli.build('li', {
                 className: 'mdc-list-item',
                 role: 'menuitem',
                 dataset: { code : value.key },
                 hidden: true,
             }, [
-                Eli.build('span', {
+                eli.build('span', {
                     className: 'mdc-list-item__text',
                     innerHTML: i18next.t(value.title),
                 }),
@@ -47,10 +47,10 @@ class AppBarMenu extends UIKitPrototype {
         }
         this.items.get(AppBarMenuItems.about.key).hidden = false;
 
-        const menuSurface = Eli.build('div', {
+        const menuSurface = eli.build('div', {
             className: 'mdc-menu mdc-menu-surface',
         }, [ menuList ]);
-        const menuAnchor = Eli.build('div', {
+        const menuAnchor = eli.build('div', {
             className: 'mdc-menu-surface--anchor',
         }, [ menuSurface ]);
         this.parent.append(menuAnchor);
@@ -92,14 +92,14 @@ class AppBar extends UIKitPrototype {
     }
 
     render() {
-        const sectionActions = Eli.build('section', {
+        const sectionActions = eli.build('section', {
             className: [
                 'mdc-top-app-bar__section',
                 'mdc-top-app-bar__section--align-end'
             ].join(' '),
         });
         for (const value of Object.values(AppBarActions)) {
-            const elementAction = Eli.build('button', {
+            const elementAction = eli.build('button', {
                 className: 'fa mdc-icon-button',
                 title: i18next.t(value.title),
                 innerHTML: value.icon,
@@ -116,19 +116,19 @@ class AppBar extends UIKitPrototype {
         this.actions.get(AppBarActions.view.key).id = 'button-appBar-view';
         this.actions.get(AppBarActions.menu.key).hidden = false;
 
-        const elementAppBar = Eli.build('header', {
+        const elementAppBar = eli.build('header', {
             className: 'mdc-top-app-bar mdc-top-app-bar--fixed',
         }, [
-            Eli.build('div', {
+            eli.build('div', {
                 className: 'mdc-top-app-bar__row',
             }, [
-                Eli.build('section', {
+                eli.build('section', {
                     className: [
                         'mdc-top-app-bar__section',
                         'mdc-top-app-bar__section--align-start'
                     ].join(' '),
                 }, [
-                    Eli.build('span', {
+                    eli.build('span', {
                         className: 'mdc-top-app-bar__title',
                         innerHTML: 'Potori',
                     }),
@@ -138,7 +138,7 @@ class AppBar extends UIKitPrototype {
         ]);
 
         this.parent.append(elementAppBar);
-        this.parent.append(Eli.build('div', {
+        this.parent.append(eli.build('div', {
             className: 'mdc-top-app-bar--fixed-adjust'
         }));
         new MDCTopAppBar(elementAppBar);

@@ -1,7 +1,6 @@
 import { MDCLinearProgress } from "@material/linear-progress";
 
 import UIKitPrototype from './base';
-import Eli from "./Eli";
 
 class Progress extends UIKitPrototype {
 
@@ -14,23 +13,23 @@ class Progress extends UIKitPrototype {
     }
 
     render() {
-        this.root = Eli.build('div', {
+        this.root = eli.build('div', {
             className: 'mdc-linear-progress mdc-linear-progress--closed',
             hidden: true
         }, [
-            Eli.build('div', { className: 'mdc-linear-progress__buffer' }, [
-                Eli.build('div', { className: 'mdc-linear-progress__buffer-bar' }),
-                Eli.build('div', { className: 'mdc-linear-progress__buffer-dots' }),
+            eli.build('div', { className: 'mdc-linear-progress__buffer' }, [
+                eli.build('div', { className: 'mdc-linear-progress__buffer-bar' }),
+                eli.build('div', { className: 'mdc-linear-progress__buffer-dots' }),
             ]),
-            Eli.build('div', {
+            eli.build('div', {
                 className: 'mdc-linear-progress__bar mdc-linear-progress__primary-bar',
             }, [
-                Eli.build('span', { className: 'mdc-linear-progress__bar-inner' }),
+                eli.build('span', { className: 'mdc-linear-progress__bar-inner' }),
             ]),
-            Eli.build('div', {
+            eli.build('div', {
                 className: 'mdc-linear-progress__bar mdc-linear-progress__secondary-bar',
             }, [
-                Eli.build('span', { className: 'mdc-linear-progress__bar-inner' }),
+                eli.build('span', { className: 'mdc-linear-progress__bar-inner' }),
             ]),
         ]);
         this.parent.append(this.root);

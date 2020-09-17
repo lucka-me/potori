@@ -3,7 +3,6 @@ import i18next from 'i18next';
 import AppBar, { AppBarMenuItems, AppBarActions } from './AppBar';
 import Dark         from "./Dark";
 import Dialog       from './Dialog';
-import Eli          from "./Eli";
 import Progress     from './Progress';
 import service, { Nomination, statusKit } from "../service";
 import Snackbar     from './Snackbar';
@@ -59,7 +58,7 @@ class UIKit {
         this.progress.init(body);
 
         // MainBox
-        this.mainBox = Eli.build('div', {
+        this.mainBox = eli.build('div', {
             className: [
                 'flex--1',
                 'flex-box-row--wrap',
@@ -282,7 +281,7 @@ class UIKit {
     }
 
     openFileUI(opened: (file: File) => void) {
-        const element = Eli.build('input', {
+        const element = eli.build('input', {
             cssText: 'display:none;',
             type: 'file', accept: 'json'
         });
@@ -297,7 +296,7 @@ class UIKit {
     }
 
     saveFileUI(filename: string, href: string) {
-        const element = Eli.build('a', {
+        const element = eli.build('a', {
             cssText: 'display:none',
             href: href,
             download: filename,

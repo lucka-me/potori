@@ -1,5 +1,5 @@
-class Eli {
-    static build<K extends keyof HTMLElementTagNameMap>(
+namespace eli {
+    export function build<K extends keyof HTMLElementTagNameMap>(
         tag: K, options: any, children?: Array<HTMLElement | SVGElement | string>
     ): HTMLElementTagNameMap[K] {
         const element = document.createElement(tag);
@@ -22,8 +22,8 @@ class Eli {
         return element;
     }
 
-    static link(href: string, title: string, text: string): HTMLAnchorElement {
-        return Eli.build('a', {
+    export function link(href: string, title: string, text: string): HTMLAnchorElement {
+        return build('a', {
             href: href,
             title: title,
             target: '_blank',
@@ -32,12 +32,10 @@ class Eli {
         });
     }
 
-    static icon(icon: string): HTMLElement {
-        return Eli.build('i', {
+    export function icon(icon: string): HTMLElement {
+        return build('i', {
             className: 'fa fa-fw',
             innerHTML: icon,
         });
     }
 };
-
-export default Eli;
