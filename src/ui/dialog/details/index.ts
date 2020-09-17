@@ -4,11 +4,10 @@ import { MDCRipple } from "@material/ripple";
 import { MDCSelect } from "@material/select";
 import { MDCTextField } from "@material/textfield";
 
-import AlertDialog from './alert';
-import DialogPrototype, { MDCDialog } from './base';
-import { Nomination, LngLat } from '../../service';
-import { statusKit } from '../../service';
-import UIPrototype, { i18next } from '../base';
+import AlertDialog from '../alert';
+import DialogPrototype, { MDCDialog } from '../base';
+import { LngLat, Nomination, statusKit } from '../../../service';
+import UIPrototype, { i18next } from '../../base';
 
 interface DetailsDialogMapEvents {
     queryLngLat: (bsId: string, succeed: (lngLat: LngLat) => void, failed: () => void) => void;
