@@ -1,8 +1,11 @@
-import DialogPrototype, { MDCDialog, i18next } from './base';
+import DialogPrototype, { MDCDialog, i18next } from '../base';
 
+/**
+ * Dialog to show alert message
+ */
 class AlertDialog extends DialogPrototype {
 
-    textMessage: HTMLDivElement = null;
+    textMessage: HTMLDivElement = null; // Dialog element
 
     render() {
         this.textMessage = eli.build('div', {
@@ -18,6 +21,10 @@ class AlertDialog extends DialogPrototype {
         this.ctrl = new MDCDialog(element);
     }
 
+    /**
+     * Open dialog and show alert message
+     * @param message Alert message to display
+     */
     open(message: string) {
         if (!this.ctrl) this.render();
         this.ctrl.open();

@@ -1,7 +1,7 @@
 import i18next from "i18next";
 import { MDCRipple } from "@material/ripple";
 
-import AlertDialog from "../dialog/AlertDialog";
+import AlertDialog from "../dialog/alert";
 import { Nomination } from '../../service';
 import version from "../../service/version";
 import { statusKit } from "../../service";

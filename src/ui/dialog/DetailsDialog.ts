@@ -4,7 +4,7 @@ import { MDCRipple } from "@material/ripple";
 import { MDCSelect } from "@material/select";
 import { MDCTextField } from "@material/textfield";
 
-import AlertDialog from './AlertDialog';
+import AlertDialog from './alert';
 import DialogPrototype, { MDCDialog } from './base';
 import { Nomination, LngLat } from '../../service';
 import { statusKit } from '../../service';
