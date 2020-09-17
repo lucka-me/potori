@@ -2,7 +2,7 @@ import { MDCMenu } from "@material/menu";
 import { MDCRipple } from "@material/ripple";
 import { MDCTopAppBar } from "@material/top-app-bar";
 
-import UIPrototype, { i18next } from './base';
+import UIPrototype, { i18next } from '../base';
 
 const AppBarMenuItems = {
     open     : { key: 'open'    , title: 'Open'       },
