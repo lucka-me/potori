@@ -1,16 +1,15 @@
 import i18next from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
-import authKit, { AuthStatusChangedCallback } from './auth';
-import BrainstormingKit, { RateItems, BrainstormingStats } from './brainstorming';
+import AuthKit, { AuthStatusChangedCallback } from './auth';
+import { BlobGenerator, Parser } from "./tools";
+import BrainstormingKit, { BrainstormingStats, RateItems } from './brainstorming';
 import FileKit, { Constants as FileConst } from './file';
 import Mari, { ProgressCallback } from './mari';
 import Nomination, { LngLat } from './nomination';
-import { Parser, BlobGenerator } from "./tools";
+import statusKit, { Status, StatusReason, StatusType } from "./status";
 import translations from '../locales';
-import version from "./version";
-
-import statusKit, { Status, StatusType, StatusReason } from "./status";
+import Version from "./version";
 
 type BasicCallback = () => void;
 type MessageCallback = (message: string) => void;
@@ -36,10 +35,12 @@ interface ServiceEvents {
  */
 class Service {
 
-    readonly auth   = authKit;
-    readonly bs     = new BrainstormingKit();
-    readonly file   = new FileKit();
-    readonly mari   = new Mari();
+    readonly auth       = new AuthKit();
+    readonly bs         = new BrainstormingKit();
+    readonly file       = new FileKit();
+    readonly mari       = new Mari();
+    readonly status     = statusKit;
+    readonly version    = new Version();
 
     nominations: Array<Nomination> = [];    // Nomination list
 
@@ -90,6 +91,8 @@ class Service {
         this.auth.init();
 
         this.mari.events.finish = () => this.final();
+
+        this.bs.init(this.version);
     }
 
     /**
@@ -363,5 +366,4 @@ class Service {
 export default new Service();
 export { Nomination, LngLat };
 export { RateItems, BrainstormingStats };
-export { statusKit, Status, StatusType, StatusReason };
-export { version };
+export { Status, StatusType, StatusReason };

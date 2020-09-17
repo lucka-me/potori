@@ -4,7 +4,7 @@ import { version as dataVersion } from '../../data/status.json';
 /**
  * Version information
  */
-class Version {
+export default class Version {
 
     readonly string: string;    // The version string, <app version>d<data version>-(lite|full)
     readonly full: boolean;     // Is the current instance a full (private) version
@@ -16,5 +16,3 @@ class Version {
     }
 
 }
-
-export default new Version();

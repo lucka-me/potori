@@ -1,5 +1,5 @@
 import DialogPrototype, { MDCDialog, i18next } from '../base';
-import { version } from '../../../service';
+import service from '../../../service';
 
 /**
  * Dialog to show Potori information
@@ -33,7 +33,7 @@ class AboutDialog extends DialogPrototype {
                 }, [
                     DialogPrototype.buildLink(
                         'https://github.com/lucka-me/potori/blob/master/CHANGELOG.md',
-                        i18next.t('Changelog'), version.string
+                        i18next.t('Changelog'), service.version.string
                     ),
                     ' by ',
                     DialogPrototype.buildLink('https://lucka.moe', i18next.t('Blog'), 'Lucka'),

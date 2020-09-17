@@ -1,7 +1,7 @@
 import Chart from 'chart.js';
 
 import { DashboardChartProtorype, Nomination, i18next } from './prototypes';
-import { statusKit } from '../../service';
+import service from '../../service';
 
 class StatsTypeCard extends DashboardChartProtorype {
 
@@ -17,7 +17,7 @@ class StatsTypeCard extends DashboardChartProtorype {
         const colorsDark = [];
         const style = getComputedStyle(document.documentElement);
         
-        for (const [key, value] of statusKit.types.entries()) {
+        for (const [key, value] of service.status.types.entries()) {
             labels.push(i18next.t(value.title));
             colors.push(style.getPropertyValue(`--color-${key}`));
             colorsLight.push(style.getPropertyValue(`--color-${key}--light`));

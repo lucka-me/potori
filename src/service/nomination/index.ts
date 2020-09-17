@@ -18,7 +18,7 @@ export default class Nomination {
     title = ''; // Title
     image = ''; // Hash part of the image URL
 
-    status: Status = statusKit.codes.get(0);    // Status of nomination
+    status: Status = null;  // Status of nomination
 
     confirmedTime = 0;              // Confirmed time, the timestamp of confirmation mail
     confirmationMailId = '';        // ID of confirmation mail

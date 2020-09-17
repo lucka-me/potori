@@ -2,9 +2,7 @@ import i18next from "i18next";
 import { MDCRipple } from "@material/ripple";
 
 import AlertDialog from "../dialog/alert";
-import { Nomination } from '../../service';
-import version from "../../service/version";
-import { statusKit } from "../../service";
+import service, { Nomination } from '../../service';
 
 interface NominationCardEvents {
     focus: () => void;
@@ -110,7 +108,7 @@ class NominationCard {
         ]);
         const actionStatus = new MDCRipple(elementActionStatus);
         actionStatus.unbounded = true;
-        if (version.full) {
+        if (service.version.full) {
             actionStatus.listen('click', () => {
                 window.open(nomination.bsUrl, '_blank', 'noopener');
             });
@@ -146,7 +144,7 @@ class NominationCard {
         actionLocation.listen('click', events.focus);
         actionIcons.push(elementActionLocation);
 
-        if (version.full) {
+        if (service.version.full) {
             const elementActionIntel = eli.build('button', {
                 className: classNameAction,
                 title: i18next.t('Intel Map'),
@@ -183,11 +181,11 @@ class NominationCard {
 
     static update(nomination: Nomination, card: HTMLDivElement) {
         const boxResult = card.querySelector('#box-card-nomination-result') as HTMLSpanElement;
-        const type = statusKit.getTypeByCode(nomination.status.code);
+        const type = service.status.getTypeByCode(nomination.status.code);
         card.querySelector('#text-card-nomination-interval').innerHTML = nomination.intervalString;
         if (nomination.status.code > 0) {
             boxResult.hidden = false;
-            boxResult.querySelector('i').innerHTML = statusKit.types.get(type).icon;
+            boxResult.querySelector('i').innerHTML = service.status.types.get(type).icon;
             boxResult.querySelector('span').innerHTML = nomination.resultDateString;
         } else {
             boxResult.hidden = true;
@@ -203,7 +201,7 @@ class NominationCard {
         const elementLocation = card.querySelector('#button-card-nomination-location') as HTMLButtonElement;
         elementLocation.hidden = hidden;
 
-        if (!version.full) return;
+        if (!service.version.full) return;
         const elementIntel = card.querySelector('#button-card-nomination-intel') as HTMLButtonElement;
         elementIntel.hidden = hidden;
     }

@@ -6,7 +6,7 @@ import { MDCTextField } from "@material/textfield";
 import AlertDialog from '../alert';
 import DetailsDialogMap from "./map";
 import DialogPrototype, { i18next, MDCDialog } from '../base';
-import { Nomination, statusKit } from '../../../service';
+import service, { Nomination } from '../../../service';
 
 interface DetailsDialogEvents {
     update: (nomination: Nomination) => void;
@@ -53,7 +53,7 @@ class DetailsDialog extends DialogPrototype {
         });
 
         const statusRadios: Array<HTMLDivElement> = [];
-        for (const key of statusKit.types.keys()) {
+        for (const key of service.status.types.keys()) {
             const radioId = `radio-dialog-details-status-${key}`;
 
             const inputRadio = eli.build('input', {
@@ -89,7 +89,7 @@ class DetailsDialog extends DialogPrototype {
                 eli.build('label', {
                     for: radioId,
                     className: `fa status-${key}`,
-                    innerHTML: statusKit.types.get(key).icon,
+                    innerHTML: service.status.types.get(key).icon,
                 }),
             ]);
 
@@ -131,7 +131,7 @@ class DetailsDialog extends DialogPrototype {
         this.fieldResultTime = new MDCTextField(elementResultTime);
 
         const itemsSelectReason = [];
-        for (const [key, value] of statusKit.reasons.entries()) {
+        for (const [key, value] of service.status.reasons.entries()) {
             itemsSelectReason.push(eli.build('li', {
                 className: 'mdc-list-item',
                 dataset: { value: key },
@@ -250,8 +250,8 @@ class DetailsDialog extends DialogPrototype {
     closed(event: CustomEvent) {
         if (event.detail.action !== 'save') return;
         const keys = {
-            type: statusKit.getTypeByCode(this.nomination.status.code),
-            reason: statusKit.getReasonByCode(this.nomination.status.code),
+            type: service.status.getTypeByCode(this.nomination.status.code),
+            reason: service.status.getReasonByCode(this.nomination.status.code),
         }
         const selectedStatus = this.selectedStatus;
         let shouldUpdate = false;
@@ -287,9 +287,9 @@ class DetailsDialog extends DialogPrototype {
         }
         if (shouldUpdate) {
             if (this.selectedStatus !== 'rejected') {
-                this.nomination.status = statusKit.types.get(this.selectedStatus);
+                this.nomination.status = service.status.types.get(this.selectedStatus);
             } else {
-                this.nomination.status = statusKit.reasons.get(this.selectReason.value);
+                this.nomination.status = service.status.reasons.get(this.selectReason.value);
             }
             this.events.update(this.nomination);
         }
@@ -299,7 +299,7 @@ class DetailsDialog extends DialogPrototype {
         this.prepare().then(() => {
             this.nomination = nomination;
             this.map.set(nomination);
-            const type = statusKit.getTypeByCode(nomination.status.code);
+            const type = service.status.getTypeByCode(nomination.status.code);
 
             this.headingTitle.innerHTML = nomination.title;
             this.image.src = nomination.imageUrl;
@@ -318,7 +318,7 @@ class DetailsDialog extends DialogPrototype {
 
             this.elementReason.hidden = !(type === 'rejected');
             if (type === 'rejected') {
-                this.selectReason.selectedIndex = nomination.status.code - statusKit.types.get(type).code;
+                this.selectReason.selectedIndex = nomination.status.code - service.status.types.get(type).code;
             }
             if (type === 'pending') {
                 this.events.query(nomination.id, (data) => {

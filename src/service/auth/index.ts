@@ -12,7 +12,7 @@ interface AuthKitEvents {
 /**
  * Handle GAPI authentication
  */
-class AuthKit {
+export default class AuthKit {
 
     events: AuthKitEvents = {
         authStatusChanged: () => { },
@@ -80,5 +80,3 @@ class AuthKit {
         gapi.auth2.getAuthInstance().signOut();
     }
 }
-
-export default new AuthKit();

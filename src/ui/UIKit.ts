@@ -4,7 +4,7 @@ import AppBar, { AppBarMenuItems, AppBarActions } from './app-bar';
 import Dark         from "./dark";
 import Dialog       from './dialog';
 import Progress     from './progress';
-import service, { Nomination, statusKit } from "../service";
+import service, { Nomination } from "../service";
 import Snackbar     from './snackbar';
 
 import type Dashboard   from './Dashboard';
@@ -218,7 +218,7 @@ class UIKit {
         this.dashboard.filter.events.switchType = (type, visible) => {
             if (type.key !== 'rejected' || !visible) {
                 for (const nomination of service.nominations) {
-                    if (statusKit.typeMatched(nomination.status.code, type.code)) {
+                    if (service.status.typeMatched(nomination.status.code, type.code)) {
                         document.getElementById(`card-${nomination.id}`).hidden = !visible;
                     }
                 }

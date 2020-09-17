@@ -3,7 +3,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 import { DashboardPrototype } from './prototypes';
 import FilterCard from './FilterCard';
-import { LngLat, Nomination, statusKit } from '../../service';
+import service, { LngLat, Nomination } from '../../service';
 
 interface MapCardEvents {
     focus: (id: string) => void,
@@ -57,11 +57,11 @@ class MapCard extends DashboardPrototype {
         this.updateRejected(nominations);
         this.updateSource(
             'accepted',
-            MapCard.generateGeoJSON(nominations, [ statusKit.types.get('accepted').code ])
+            MapCard.generateGeoJSON(nominations, [ service.status.types.get('accepted').code ])
         );
         this.updateSource(
             'pending',
-            MapCard.generateGeoJSON(nominations, [ statusKit.types.get('pending').code ])
+            MapCard.generateGeoJSON(nominations, [ service.status.types.get('pending').code ])
         );
     }
 

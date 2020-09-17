@@ -1,7 +1,7 @@
 import { MDCSwitch } from "@material/switch";
 
 import { DashboardPrototype, i18next } from './prototypes';
-import { statusKit, Status, StatusType, StatusReason } from '../../service';
+import service, { Status, StatusType, StatusReason } from '../../service';
 
 interface FilterCardBlock {
     root: HTMLDivElement;
@@ -57,14 +57,14 @@ class FilterCard extends DashboardPrototype {
         this.setVisible(false);
         this.parent.append(this.root);
         
-        for (const reason of statusKit.reasons.values()) {
+        for (const reason of service.status.reasons.values()) {
             const switchCtrl = FilterCard.buildSwitch(this.block.reason, reason, 'rejected');
             switchCtrl.listen('change', () => {
                 this.switchReason(reason, switchCtrl.checked);
             });
             this.reasons.set(reason, switchCtrl);
         }
-        for (const type of statusKit.types.values()) {
+        for (const type of service.status.types.values()) {
             const switchCtrl = FilterCard.buildSwitch(this.block.type, type, type.key);
             switchCtrl.listen('change', () => this.switchType(type, switchCtrl.checked));
             this.types.set(type, switchCtrl);
@@ -82,7 +82,7 @@ class FilterCard extends DashboardPrototype {
 
     switchReason(reason: Status, checked: boolean) {
         this.events.switchReason(reason, checked);
-        const statusRejected = statusKit.types.get('rejected');
+        const statusRejected = service.status.types.get('rejected');
         if (checked && !this.types.get(statusRejected).checked) {
             this.types.get(statusRejected).checked = true;
             this.events.switchType(statusRejected, true);

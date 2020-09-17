@@ -1,9 +1,10 @@
 import type { Reference } from '@firebase/database-types';
 
+import type Version from "../version";
+
 import Nomination, { LngLat } from '../nomination';
 import { RateItems } from "./constants";
 import statusKit from '../status';
-import version from '../version';
 
 /**
  * Result for {@link BrainstormingKit.analyse}
@@ -30,7 +31,17 @@ type UpdateCallback = () => void;
 class BrainstormingKit {
 
     data: Map<string, any> = new Map();     // Local database
+    private full: boolean = false;          // If current instance is a full version
     private reference: Reference = null;    // Firebase reference
+
+    /**
+     * Initiate Brainstorming Kit
+     * @param version Instance of {@link Version}
+     * @param status Instance of {@link StatusKit}
+     */
+    init(version: Version) {
+        this.full = version.full;
+    }
 
     /**
      * Query data from local databse and firebase (full version only)
@@ -43,7 +54,7 @@ class BrainstormingKit {
             succeed(this.data.get(bsId));
             return;
         }
-        if (!version.full) {
+        if (!this.full) {
             failed();
             return;
         }

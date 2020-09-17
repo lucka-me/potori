@@ -1,7 +1,7 @@
 import Chart from 'chart.js';
 
 import { DashboardChartProtorype, Nomination, i18next } from './prototypes';
-import { statusKit } from '../../service';
+import service from '../../service';
 
 class StatsRejectedCard extends DashboardChartProtorype {
 
@@ -14,7 +14,7 @@ class StatsRejectedCard extends DashboardChartProtorype {
         const labels = [];
         const colors = [];
 
-        for (const reason of statusKit.reasons.values()) {
+        for (const reason of service.status.reasons.values()) {
             labels.push(i18next.t(reason.title));
             colors.push(reason.color)
         }
@@ -38,7 +38,7 @@ class StatsRejectedCard extends DashboardChartProtorype {
     }
 
     update(nominations: Array<Nomination>) {
-        const data = new Array(statusKit.reasons.size).fill(0);
+        const data = new Array(service.status.reasons.size).fill(0);
         for (const nomination of nominations) {
             if (nomination.status.code > 100) {
                 data[nomination.status.code - 101] += 1;
