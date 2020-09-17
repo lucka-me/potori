@@ -1,6 +1,6 @@
 import UIPrototype from '../base';
 
-import AboutDialog      from './AboutDialog';
+import AboutDialog      from './about';
 import AlertDialog      from './AlertDialog';
 import DetailsDialog    from './DetailsDialog';
 import ImportDialog     from './ImportDialog';

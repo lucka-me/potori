@@ -8,6 +8,7 @@ import Mari, { ProgressCallback } from './mari';
 import Nomination, { LngLat } from './nomination';
 import { Parser, BlobGenerator } from "./tools";
 import translations from '../locales';
+import version from "./version";
 
 import statusKit, { Status, StatusType, StatusReason } from "./status";
 
@@ -363,3 +364,4 @@ export default new Service();
 export { Nomination, LngLat };
 export { RateItems, BrainstormingStats };
 export { statusKit, Status, StatusType, StatusReason };
+export { version };
