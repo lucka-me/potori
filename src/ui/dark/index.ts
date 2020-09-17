@@ -1,9 +1,14 @@
-import UIPrototype from './base';
+import UIPrototype from '../base';
 
-class Dark extends UIPrototype {
+type DarkModeChangeCallback = (enabled: boolean) => void;
 
-    enabled = false;
-    changed: (enabled: boolean) => void = () => {};
+/**
+ * Handle the dark mode
+ */
+export default class Dark extends UIPrototype {
+
+    private enabled = false;
+    changed: DarkModeChangeCallback = () => {};
 
     init(parent: HTMLElement) {
         super.init(parent);
@@ -16,5 +21,3 @@ class Dark extends UIPrototype {
         this.enabled = darkMediaQueryList.matches;
     }
 }
-
-export default Dark;
