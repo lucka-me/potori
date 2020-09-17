@@ -1,11 +1,14 @@
 import { MDCLinearProgress } from "@material/linear-progress";
 
-import UIPrototype from './base';
+import UIPrototype from '../base';
 
+/**
+ * Progress bar component
+ */
 class Progress extends UIPrototype {
 
-    private ctrl: MDCLinearProgress = null;
-    private root: HTMLDivElement = null;
+    private ctrl: MDCLinearProgress = null; // MDC linear progress controller
+    private root: HTMLDivElement = null;    // The progress bar element
 
     init(parent: HTMLElement) {
         super.init(parent);
@@ -53,7 +56,7 @@ class Progress extends UIPrototype {
     }
 
     /**
-     * Set buffer progress
+     * Set buffer (secondary) progress
      */
     set buffer(buffer: number) { this.ctrl.buffer = buffer; }
 
