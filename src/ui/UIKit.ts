@@ -83,7 +83,7 @@ class UIKit {
         this.dialog.details.map.events.queryLngLat = (bsId, succeed, failed) => {
             service.bs.queryLocation(bsId, succeed, failed);
         };
-        this.dialog.import.events.import = (raw) => {
+        this.dialog.import.import = (raw) => {
             service.import(raw);
         };
         this.dialog.init(body);

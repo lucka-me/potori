@@ -2,17 +2,13 @@ import { MDCTextField } from "@material/textfield";
 
 import DialogPrototype, { MDCDialog, i18next } from '../base';
 
-interface ImportDialogEvents {
-    import: (raw: string) => void;
-}
+type ImportCallback = (raw: string) => void;
 
 class ImportDialog extends DialogPrototype {
 
-    textField: MDCTextField = null;
+    private textField: MDCTextField = null; // MDC text field controller
 
-    events: ImportDialogEvents = {
-        import: () => { },
-    };
+    import: ImportCallback = () => { }; // Triggered when click Import button
 
     render() {
         const elementTextField = eli.build('div', {
@@ -78,19 +74,19 @@ class ImportDialog extends DialogPrototype {
         this.ctrl = new MDCDialog(elementDialog);
         this.textField = new MDCTextField(elementTextField);
         this.ctrl.listen('MDCDialog:closed', (event: CustomEvent) => {
-            this.closed(event);
+            if (event.detail.action === 'import') {
+                this.import(this.textField.value);
+            }
         });
     }
 
+    /**
+     * Open dialog
+     */
     open() {
         if (!this.ctrl) this.render();
+        this.textField.value = '';
         this.ctrl.open();
-    }
-
-    closed(event: CustomEvent) {
-        if (event.detail.action === 'import') {
-            this.events.import(this.textField.value);
-        }
     }
 }
 
