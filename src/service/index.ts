@@ -30,26 +30,29 @@ interface ServiceEvents {
     info    : MessageCallback,  // Triggered when some information should be passed to user
 }
 
+/**
+ * Handle all non-UI tasks and host data
+ */
 class Service {
 
-    auth    = authKit;
-    bs      = new BrainstormingKit();
-    file    = new FileKit();
-    mari    = new Mari();
+    readonly auth   = authKit;
+    readonly bs     = new BrainstormingKit();
+    readonly file   = new FileKit();
+    readonly mari   = new Mari();
 
-    nominations: Array<Nomination> = [];
+    nominations: Array<Nomination> = [];    // Nomination list
 
     events: ServiceEvents = {
-        authStatusChanged:  (signedIn) => signedIn,
-        progressUpdate:     (percent) => percent,
-        updateBs:           () => {},
-        start:       () => {},
+        authStatusChanged:  () => { },
+        progressUpdate:     () => { },
+        updateBs:           () => { },
         
-        idle:   () => {},
-        clear:  () => {},
+        start:  () => { },
+        idle:   () => { },
+        clear:  () => { },
         
-        alert:  (message) => message,
-        info:   (message) => message,
+        alert:  () => { },
+        info:   () => { },
     };
 
     init() {
@@ -85,10 +88,13 @@ class Service {
 
         this.auth.init();
 
-        this.mari.events.finish = () => this.finish();
+        this.mari.events.finish = () => this.final();
     }
 
-    startMail() {
+    /**
+     * Start to download data and process mail
+     */
+    private startMail() {
         this.events.clear();
         this.events.start();
         this.download(() => {
@@ -96,7 +102,10 @@ class Service {
         });
     }
 
-    finish() {
+    /**
+     * Final process, merge duplicated nominations, sort and query locations
+     */
+    private final() {
         this.events.start();
         // Merge duplicated nominations -> targets
         for (let i = this.nominations.length - 1; i >= 0; i--) {
@@ -159,6 +168,9 @@ class Service {
         }
     }
 
+    /**
+     * Open local file
+     */
     open() {
         this.events.clear();
         const onload = (content: string) => {
@@ -166,7 +178,7 @@ class Service {
             if (resultNominations.matched) {
                 this.nominations = [];
                 this.nominations.push(...resultNominations.nominations);
-                this.finish();
+                this.final();
                 return;
             }
             const resultBsData = Parser.bsData(content);
@@ -183,6 +195,9 @@ class Service {
         this.file.local.open(onload, this.events.alert);
     }
 
+    /**
+     * Save local file
+     */
     save() {
         if (this.nominations.length < 1) {
             this.events.alert(i18next.t('message:No Nomination to save'));
@@ -194,12 +209,16 @@ class Service {
         }, 2000);
     }
 
-    download(finished: () => void) {
+    /**
+     * Download data files from Google Drive
+     * @param finish Triggered when download finishes
+     */
+    private download(finish: BasicCallback) {
         let finishedNominations = false;
         let finishedBsData = false;
 
         const checkFinish = () => {
-            if (finishedNominations && finishedBsData) finished();
+            if (finishedNominations && finishedBsData) finish();
         };
 
         const gotNominations = (file: gapi.client.drive.File, more: boolean) => {
@@ -246,6 +265,9 @@ class Service {
         this.file.googleDrive.download(FileConst.nominations, gotNominations);
     }
 
+    /**
+     * Upload data to Google Drive
+     */
     upload() {
 
         let uploadedNominations = false;
@@ -285,6 +307,10 @@ class Service {
 
     }
 
+    /**
+     * Import JSON from Wayfarer API response
+     * @param raw Raw JSON
+     */
     import(raw: string) {
         let parsed;
         try {
@@ -315,6 +341,9 @@ class Service {
         this.events.idle();
     }
 
+    /**
+     * Query Brainstorming firebase and update local bs data
+     */
     updateBsData() {
         this.bs.update(this.nominations, () => {
             this.events.updateBs();
@@ -322,6 +351,9 @@ class Service {
         });
     }
 
+    /**
+     * Clear Brainstorming database
+     */
     clearBsData() {
         this.bs.clear();
     }
