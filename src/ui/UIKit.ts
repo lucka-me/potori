@@ -5,7 +5,7 @@ import Dark         from "./Dark";
 import Dialog       from './Dialog';
 import Eli          from "./Eli";
 import Progress     from './Progress';
-import Service, { Nomination, statusKit } from "../service";
+import service, { Nomination, statusKit } from "../service";
 import Snackbar     from './Snackbar';
 
 import type Dashboard   from './Dashboard';
@@ -34,15 +34,15 @@ class UIKit {
 
         // AppBar
         this.appBar.events.set(AppBarActions.view.key   , () => this.switchView());
-        this.appBar.events.set(AppBarActions.signin.key , () => Service.auth.signIn());
+        this.appBar.events.set(AppBarActions.signin.key , () => service.auth.signIn());
         this.appBar.menu.events.set(
-            AppBarMenuItems.open.key, () => Service.open()
+            AppBarMenuItems.open.key, () => service.open()
         );
         this.appBar.menu.events.set(
-            AppBarMenuItems.save.key, () => Service.save()
+            AppBarMenuItems.save.key, () => service.save()
         );
         this.appBar.menu.events.set(
-            AppBarMenuItems.upload.key, () => Service.upload()
+            AppBarMenuItems.upload.key, () => service.upload()
         );
         this.appBar.menu.events.set(
             AppBarMenuItems.import.key, () => this.dialog.import.open()
@@ -51,7 +51,7 @@ class UIKit {
             AppBarMenuItems.about.key, () => this.dialog.about.open()
         );
         this.appBar.menu.events.set(
-            AppBarMenuItems.signout.key, () => Service.auth.signOut()
+            AppBarMenuItems.signout.key, () => service.auth.signOut()
         );
         this.appBar.init(body);
 
@@ -79,13 +79,13 @@ class UIKit {
             this.update(nomination);
         };
         this.dialog.details.events.query = (bsId, succeed, failed) => {
-            Service.bs.query(bsId, succeed, failed);
+            service.bs.query(bsId, succeed, failed);
         };
         this.dialog.details.map.events.queryLngLat = (bsId, succeed, failed) => {
-            Service.bs.queryLocation(bsId, succeed, failed);
+            service.bs.queryLocation(bsId, succeed, failed);
         };
         this.dialog.import.events.import = (raw) => {
-            Service.import(raw);
+            service.import(raw);
         };
         this.dialog.init(body);
 
@@ -95,40 +95,40 @@ class UIKit {
 
     linkService() {
         // Service
-        Service.events.authStatusChanged = (signedIn) => this.authStatChanged(signedIn);
+        service.events.authStatusChanged = (signedIn) => this.authStatChanged(signedIn);
         if (!navigator.onLine) this.authStatChanged(false);
-        Service.events.progressUpdate = (percent) => {
+        service.events.progressUpdate = (percent) => {
             this.progress.progress = percent;
         }
-        Service.events.start = () => {
+        service.events.start = () => {
             this.preloadModules();
             this.progress.open();
         };
-        Service.events.idle = () => {
+        service.events.idle = () => {
             this.show();
         };
-        Service.events.clear = () => {
+        service.events.clear = () => {
             this.clear();
         };
-        Service.events.alert = (message) => {
+        service.events.alert = (message) => {
             this.dialog.alert.open(message);
         }
-        Service.events.info = (message) => {
+        service.events.info = (message) => {
             this.snackbar.show(message);
         }
         // FileKit
-        Service.file.local.events.openUI = (opened) => {
+        service.file.local.events.openUI = (opened) => {
             this.openFileUI(opened);
         }
-        Service.file.local.events.saveUI = (filename, href) => {
+        service.file.local.events.saveUI = (filename, href) => {
             this.saveFileUI(filename, href);
         }
 
         // Mari
-        Service.mari.events.buffer = (percent) => {
+        service.mari.events.buffer = (percent) => {
             this.progress.buffer = percent;
         };
-        Service.mari.events.progress = (percent) => {
+        service.mari.events.progress = (percent) => {
             this.progress.progress = percent * 0.9;
         }
     }
@@ -168,19 +168,19 @@ class UIKit {
         if(!this.dashboard) return;
         this.dashboard.setVisible(false);
         this.list.clear();
-        this.dashboard.map.update(Service.nominations);
+        this.dashboard.map.update(service.nominations);
     }
 
     show() {
         this.prepareViews().then(() => {
             this.dashboard.setVisible(true);
-            this.dashboard.map.fit(Service.nominations);
-            this.dashboard.refresh(Service.nominations);
-            this.list.show(Service.nominations);
+            this.dashboard.map.fit(service.nominations);
+            this.dashboard.refresh(service.nominations);
+            this.list.show(service.nominations);
 
             this.appBar.menu.items.get(AppBarMenuItems.open.key).hidden = true;
             this.appBar.menu.items.get(AppBarMenuItems.save.key).hidden = false;
-            this.appBar.menu.items.get(AppBarMenuItems.upload.key).hidden = !Service.auth.signedIn;
+            this.appBar.menu.items.get(AppBarMenuItems.upload.key).hidden = !service.auth.signedIn;
             this.appBar.menu.items.get(AppBarMenuItems.import.key).hidden = false;
             this.progress.close();
         });
@@ -210,41 +210,41 @@ class UIKit {
         );
         this.dashboard = new Dashboard.default();
         this.dashboard.init(this.mainBox);
-        Service.events.updateBs = () => {
-            this.dashboard.bs.update(Service.nominations);
+        service.events.updateBs = () => {
+            this.dashboard.bs.update(service.nominations);
         }
         this.dashboard.map.events.styleLoaded = () => {
-            return Service.nominations;
+            return service.nominations;
         }
         this.dashboard.filter.events.switchType = (type, visible) => {
             if (type.key !== 'rejected' || !visible) {
-                for (const nomination of Service.nominations) {
+                for (const nomination of service.nominations) {
                     if (statusKit.typeMatched(nomination.status.code, type.code)) {
                         document.getElementById(`card-${nomination.id}`).hidden = !visible;
                     }
                 }
             }
             if (type.key === 'rejected') {
-                this.dashboard.map.updateRejected(Service.nominations);
+                this.dashboard.map.updateRejected(service.nominations);
             }
             this.dashboard.map.setTypeVisible(type.key, visible);
         };
         this.dashboard.filter.events.switchReason = (reason, visible) => {
-            for (const nomination of Service.nominations) {
+            for (const nomination of service.nominations) {
                 if (nomination.status.code !== reason.code) continue;
                 document.getElementById(`card-${nomination.id}`).hidden = !visible;
             }
-            this.dashboard.map.updateRejected(Service.nominations);
+            this.dashboard.map.updateRejected(service.nominations);
         };
         this.dashboard.bs.events.analyse = (nominations) => {
-            return Service.bs.analyse(nominations);
+            return service.bs.analyse(nominations);
         }
         this.dashboard.bs.basic.events = {
             refresh: () => {
-                Service.updateBsData();
+                service.updateBsData();
             },
             clear: () => {
-                Service.clearBsData();
+                service.clearBsData();
                 this.dashboard.bs.update([]);
             }
         }
@@ -277,7 +277,7 @@ class UIKit {
 
     update(nomination: Nomination) {
         if (!this.dashboard) return;
-        this.dashboard.update(Service.nominations);
+        this.dashboard.update(service.nominations);
         this.list.update(nomination);
     }
 

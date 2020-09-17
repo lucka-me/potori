@@ -1,7 +1,7 @@
-import Service from "./service";
+import service from "./service";
 import UIKit from "./ui/UIKit";
 
-Service.init();
+service.init();
 const ui = new UIKit();
 ui.init();
 ui.linkService();
