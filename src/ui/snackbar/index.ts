@@ -1,14 +1,16 @@
 import { MDCSnackbar } from "@material/snackbar";
 
-import UIPrototype , { i18next } from './base';
+import UIPrototype, { i18next } from '../base';
 
+/**
+ * Snackbar component for showing information message
+ */
 class Snackbar extends UIPrototype {
 
-    ctrl: MDCSnackbar = null;
-    textMessage: HTMLDivElement = null;
+    ctrl: MDCSnackbar = null;   // MDC snackbar controller
 
     render() {
-        this.textMessage = eli.build('div', {
+        const textMessage = eli.build('div', {
             className: 'mdc-snackbar__label',
             role: 'status', ariaLive: 'polite',
         });
@@ -23,7 +25,7 @@ class Snackbar extends UIPrototype {
         ]);
         const element = eli.build('div', { className: 'mdc-snackbar' }, [
             eli.build('div', { className: 'mdc-snackbar__surface' }, [
-                this.textMessage,
+                textMessage,
                 elementActions,
             ]),
         ]);
@@ -31,9 +33,13 @@ class Snackbar extends UIPrototype {
         this.ctrl = new MDCSnackbar(element);
     }
 
+    /**
+     * Show snackbar with a message
+     * @param message Message to display
+     */
     show(message: string) {
         if (!this.ctrl) this.render();
-        this.textMessage.innerHTML = message;
+        this.ctrl.labelText = message;
         this.ctrl.open();
     }
 }

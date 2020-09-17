@@ -5,7 +5,7 @@ import Dark         from "./dark";
 import Dialog       from './Dialog';
 import Progress     from './progress';
 import service, { Nomination, statusKit } from "../service";
-import Snackbar     from './Snackbar';
+import Snackbar     from './snackbar';
 
 import type Dashboard   from './Dashboard';
 import type ListView    from './ListView';
