@@ -1,10 +1,7 @@
 import type { Reference } from '@firebase/database-types';
 
-import type Version from "../version";
-
-import Nomination, { LngLat } from '../nomination';
 import { RateItems } from "./constants";
-import statusKit from '../status';
+import { service, LngLat, Nomination } from '..';
 
 /**
  * Result for {@link BrainstormingKit.analyse}
@@ -31,17 +28,7 @@ type UpdateCallback = () => void;
 class BrainstormingKit {
 
     data: Map<string, any> = new Map();     // Local database
-    private full: boolean = false;          // If current instance is a full version
     private reference: Reference = null;    // Firebase reference
-
-    /**
-     * Initiate Brainstorming Kit
-     * @param version Instance of {@link Version}
-     * @param status Instance of {@link StatusKit}
-     */
-    init(version: Version) {
-        this.full = version.full;
-    }
 
     /**
      * Query data from local databse and firebase (full version only)
@@ -54,7 +41,7 @@ class BrainstormingKit {
             succeed(this.data.get(bsId));
             return;
         }
-        if (!this.full) {
+        if (!service.version.full) {
             failed();
             return;
         }
@@ -191,13 +178,13 @@ class BrainstormingKit {
      * @param status Status code of the resulted nomination
      */
     private static isSynched(stars: string, status: number) {
-        const reasons = statusKit.reasons;
+        const reasons = service.status.reasons;
         if (stars === 'D' && status === reasons.get('duplicated').code) {
             return true;
         }
         const general = parseFloat(stars);
         if (isNaN(general)) return false;
-        const types = statusKit.types;
+        const types = service.status.types;
         if (status === types.get('accepted').code || status === reasons.get('tooClose').code) {
             // Accepted
             if (general >= 3) return true;

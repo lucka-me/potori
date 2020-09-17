@@ -1,4 +1,4 @@
-import statusKit, { Status } from '../status';
+import { service, Status } from '..';
 
 const now = Date.now();
 
@@ -119,7 +119,7 @@ export default class Nomination {
         nomination.title = json.title;
         nomination.image = json.image;
 
-        nomination.status = statusKit.codes.get(json.status);
+        nomination.status = service.status.codes.get(json.status);
 
         nomination.confirmedTime = json.confirmedTime;
         nomination.confirmationMailId = json.confirmationMailId;

@@ -1,6 +1,5 @@
-import Nomination from '../nomination';
 import Parser from './tools';
-import statusKit from '../status';
+import { service, Nomination } from '..';
 
 type FinishCallback = () => void;
 export type ProgressCallback = (percent: number) => void;
@@ -42,10 +41,10 @@ export default class Mari {
     };
 
     constructor() {
-        for (const type of statusKit.types.keys()) {
+        for (const type of service.status.types.keys()) {
             this.types.push(type);
         }
-        for (const scanner of statusKit.types.get(this.types[0]).queries.keys()) {
+        for (const scanner of service.status.types.get(this.types[0]).queries.keys()) {
             this.scanners.push(scanner);
         }
     }
@@ -82,7 +81,7 @@ export default class Mari {
     private static getListRequest(pageToken: string, keys: QueryKeys) {
         return gapi.client.gmail.users.messages.list({
             'userId': 'me',
-            'q': statusKit.types.get(keys.type).queries.get(keys.scanner),
+            'q': service.status.types.get(keys.type).queries.get(keys.scanner),
             'pageToken': pageToken
         });
     }

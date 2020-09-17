@@ -1,5 +1,4 @@
-import Nomination, { LngLat } from '../nomination';
-import statusKit from '../status';
+import { service, LngLat, Nomination } from '..';
 
 /**
  * Parsers for mail content
@@ -13,7 +12,7 @@ export default class Parser {
      */
     static mail(mail: gapi.client.gmail.Message, keys: QueryKeys): Nomination {
         const nomination = new Nomination();
-        nomination.status = statusKit.types.get(keys.type);
+        nomination.status = service.status.types.get(keys.type);
         if (keys.type === 'pending') {
             nomination.confirmedTime = parseInt(mail.internalDate);
             nomination.confirmationMailId = mail.id;
@@ -66,11 +65,11 @@ export default class Parser {
      */
     static reason(mail: string, scanner: string) {
         const mainBody = mail.slice(0, mail.search('-NianticOps'));
-        const undeclared = statusKit.reasons.get('undeclared');
+        const undeclared = service.status.reasons.get('undeclared');
         // Get first result
         let result = undeclared;
         let firstPos = mail.length;
-        for (const reason of statusKit.reasons.values()) {
+        for (const reason of service.status.reasons.values()) {
             for (const keyword of reason.keywords.get(scanner)) {
                 const pos = mainBody.search(keyword);
                 if (pos > -1 && pos < firstPos) {

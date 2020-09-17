@@ -1,5 +1,5 @@
 import DialogPrototype, { MDCDialog, i18next } from '../base';
-import service from '../../../service';
+import { service } from '../../../service';
 
 /**
  * Dialog to show Potori information

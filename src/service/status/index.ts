@@ -55,7 +55,7 @@ export class StatusReason extends Status {
 /**
  * Keep all status data
  */
-class StatusKit {
+export default class StatusKit {
 
     readonly version: string = data.version;    // Data version
     
@@ -121,5 +121,3 @@ class StatusKit {
         return null;
     }
 }
-
-export default new StatusKit();

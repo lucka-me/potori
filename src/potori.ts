@@ -1,5 +1,5 @@
-import service from "./service";
 import UIKit from "./ui/UIKit";
+import { service } from "./service";
 
 service.init();
 const ui = new UIKit();

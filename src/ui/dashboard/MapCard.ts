@@ -3,7 +3,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 
 import { DashboardPrototype } from './prototypes';
 import FilterCard from './FilterCard';
-import service, { LngLat, Nomination } from '../../service';
+import { service, LngLat, Nomination } from '../../service';
 
 interface MapCardEvents {
     focus: (id: string) => void,

@@ -7,7 +7,7 @@ import BrainstormingKit, { BrainstormingStats, RateItems } from './brainstorming
 import FileKit, { Constants as FileConst } from './file';
 import Mari, { ProgressCallback } from './mari';
 import Nomination, { LngLat } from './nomination';
-import statusKit, { Status, StatusReason, StatusType } from "./status";
+import StatusKit, { Status, StatusReason, StatusType } from "./status";
 import translations from '../locales';
 import Version from "./version";
 
@@ -33,18 +33,18 @@ interface ServiceEvents {
 /**
  * Handle all non-UI tasks and host data
  */
-class Service {
+export namespace service {
 
-    readonly auth       = new AuthKit();
-    readonly bs         = new BrainstormingKit();
-    readonly file       = new FileKit();
-    readonly mari       = new Mari();
-    readonly status     = statusKit;
-    readonly version    = new Version();
+    export const auth       = new AuthKit();
+    export const bs         = new BrainstormingKit();
+    export const file       = new FileKit();
+    export const mari       = new Mari();
+    export const status     = new StatusKit();
+    export const version    = new Version();
 
-    nominations: Array<Nomination> = [];    // Nomination list
+    export const nominations: Array<Nomination> = [];    // Nomination list
 
-    events: ServiceEvents = {
+    export const events: ServiceEvents = {
         authStatusChanged:  () => { },
         progressUpdate:     () => { },
         updateBs:           () => { },
@@ -57,7 +57,7 @@ class Service {
         info:   () => { },
     };
 
-    init() {
+    export function init() {
         // Register service worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
@@ -75,49 +75,47 @@ class Service {
                 defaultNS: 'general',
             });
 
-        this.auth.events.authStatusChanged = (signedIn) => {
+        auth.events.authStatusChanged = (signedIn) => {
             if (!signedIn) {
-                this.nominations = [];
+                nominations.length = 0;
             }
-            this.events.authStatusChanged(signedIn);
+            events.authStatusChanged(signedIn);
             if (signedIn) {
-                this.startMail();
+                startMail();
             }
         };
-        this.auth.events.error = (error) => {
-            this.events.alert(JSON.stringify(error, null, 2));
+        auth.events.error = (error) => {
+            events.alert(JSON.stringify(error, null, 2));
         }
 
-        this.auth.init();
+        auth.init();
 
-        this.mari.events.finish = () => this.final();
-
-        this.bs.init(this.version);
+        mari.events.finish = () => final();
     }
 
     /**
      * Start to download data and process mail
      */
-    private startMail() {
-        this.events.clear();
-        this.events.start();
-        this.download(() => {
-            this.mari.start(this.nominations);
+    function startMail() {
+        events.clear();
+        events.start();
+        download(() => {
+            mari.start(nominations);
         });
     }
 
     /**
      * Final process, merge duplicated nominations, sort and query locations
      */
-    private final() {
-        this.events.start();
+    function final() {
+        events.start();
         // Merge duplicated nominations -> targets
-        for (let i = this.nominations.length - 1; i >= 0; i--) {
-            const current = this.nominations[i];
+        for (let i = nominations.length - 1; i >= 0; i--) {
+            const current = nominations[i];
 
             for (let j = 0; j < i; j++) {
-                if (current.id !== this.nominations[j].id) continue;
-                const target = this.nominations[j];
+                if (current.id !== nominations[j].id) continue;
+                const target = nominations[j];
                 if (target.resultMailId) {
                     target.confirmedTime = current.confirmedTime;
                     target.confirmationMailId = current.confirmationMailId;
@@ -128,24 +126,24 @@ class Service {
                     target.resultTime = current.resultTime;
                     target.resultMailId = current.resultMailId;
                 }
-                this.nominations.splice(i, 1);
+                nominations.splice(i, 1);
                 break;
             }
         }
 
         // Sort by time
-        this.nominations.sort((a, b) => {
+        nominations.sort((a, b) => {
             const timeA = a.resultTime ? a.resultTime : a.confirmedTime;
             const timeB = b.resultTime ? b.resultTime : b.confirmedTime;
             return timeA < timeB ? 1 : -1;
         });
 
         const finished = () => {
-            this.events.idle();
+            events.idle();
         };
 
         // Query locations
-        const listNoLocation: Array<Nomination> = this.nominations.reduce((list, nomination) => {
+        const listNoLocation: Array<Nomination> = nominations.reduce((list, nomination) => {
             if (!nomination.lngLat) list.push(nomination);
             return list;
         }, []);
@@ -154,14 +152,14 @@ class Service {
             return;
         }
         let count = 0;
-        this.events.progressUpdate(0.9);
+        events.progressUpdate(0.9);
         const countUp = () => {
             count += 1;
-            this.events.progressUpdate(0.9 + (count / listNoLocation.length * 0.1));
+            events.progressUpdate(0.9 + (count / listNoLocation.length * 0.1));
             if (count === listNoLocation.length) finished();
         };
         for (const nomination of listNoLocation) {
-            this.bs.queryLocation(
+            bs.queryLocation(
                 nomination.id,
                 (lngLat) => {
                     nomination.lngLat = lngLat;
@@ -175,41 +173,41 @@ class Service {
     /**
      * Open local file
      */
-    open() {
-        this.events.clear();
+    export function open() {
+        events.clear();
         const onload = (content: string) => {
             const resultNominations = Parser.nominations(content);
             if (resultNominations.matched) {
-                this.nominations = [];
-                this.nominations.push(...resultNominations.nominations);
-                this.final();
+                nominations.length = 0;
+                nominations.push(...resultNominations.nominations);
+                final();
                 return;
             }
             const resultBsData = Parser.bsData(content);
             if (resultBsData.matched) {
-                this.bs.data = resultBsData.data;
-                if (this.nominations.length > 0) {
-                    this.events.updateBs();
+                bs.data = resultBsData.data;
+                if (nominations.length > 0) {
+                    events.updateBs();
                 }
-                this.events.info(i18next.t('message:Load as Brainstorming Data'));
+                events.info(i18next.t('message:Load as Brainstorming Data'));
                 return;
             }
             // Parse as other contents
         };
-        this.file.local.open(onload, this.events.alert);
+        file.local.open(onload, events.alert);
     }
 
     /**
      * Save local file
      */
-    save() {
-        if (this.nominations.length < 1) {
-            this.events.alert(i18next.t('message:No Nomination to save'));
+    export function save() {
+        if (nominations.length < 1) {
+            events.alert(i18next.t('message:No Nomination to save'));
             return;
         }
-        this.file.local.save(FileConst.nominations, BlobGenerator.nominations(this.nominations));
+        file.local.save(FileConst.nominations, BlobGenerator.nominations(nominations));
         window.setTimeout(() => {
-            this.file.local.save(FileConst.bsData, BlobGenerator.bsData(this.bs.data));
+            file.local.save(FileConst.bsData, BlobGenerator.bsData(bs.data));
         }, 2000);
     }
 
@@ -217,7 +215,7 @@ class Service {
      * Download data files from Google Drive
      * @param finish Triggered when download finishes
      */
-    private download(finish: BasicCallback) {
+    function download(finish: BasicCallback) {
         let finishedNominations = false;
         let finishedBsData = false;
 
@@ -233,7 +231,8 @@ class Service {
             }
             try {
                 const jsonList = file as Array<any>;
-                this.nominations = jsonList.map(json => Nomination.from(json));
+                nominations.length = 0;
+                nominations.push(...jsonList.map(json => Nomination.from(json)));
             } catch (error) {
                 if (more) return false;
                 finishedNominations = true;
@@ -253,7 +252,7 @@ class Service {
             }
 
             try {
-                this.bs.data = new Map(result as Array<[string, any]>);
+                bs.data = new Map(result as Array<[string, any]>);
             } catch (error) {
                 if (more) return false;
                 finishedBsData = true;
@@ -265,45 +264,45 @@ class Service {
             checkFinish();
             return true;
         };
-        this.file.googleDrive.download(FileConst.bsData, gotBsData);
-        this.file.googleDrive.download(FileConst.nominations, gotNominations);
+        file.googleDrive.download(FileConst.bsData, gotBsData);
+        file.googleDrive.download(FileConst.nominations, gotNominations);
     }
 
     /**
      * Upload data to Google Drive
      */
-    upload() {
+    export function upload() {
 
         let uploadedNominations = false;
         let uploadedBsData = false;
 
         const checkFinish = () => {
             if (uploadedNominations && uploadedBsData) {
-                this.events.info(i18next.t('message:Uploaded'));
+                events.info(i18next.t('message:Uploaded'));
             };
         };
 
-        this.file.googleDrive.upload(
+        file.googleDrive.upload(
             FileConst.nominations,
-            BlobGenerator.nominations(this.nominations),
-            this.auth.accessToken,
+            BlobGenerator.nominations(nominations),
+            auth.accessToken,
             (succeed: boolean, message?: string) => {
                 uploadedNominations = true;
                 if (!succeed) {
-                    this.events.alert(`${i18next.t('message:Unable to upload Nomination List')}${message ? `\n${message}` : ''}`);
+                    events.alert(`${i18next.t('message:Unable to upload Nomination List')}${message ? `\n${message}` : ''}`);
                 }
                 checkFinish();
             }
         );
 
-        this.file.googleDrive.upload(
+        file.googleDrive.upload(
             FileConst.bsData,
-            BlobGenerator.bsData(this.bs.data),
-            this.auth.accessToken,
+            BlobGenerator.bsData(bs.data),
+            auth.accessToken,
             (succeed: boolean, message?: string) => {
                 uploadedBsData = true;
                 if (!succeed) {
-                    this.events.alert(`${i18next.t('message:Unable to upload Brainstorming Data')}${message ? `\n${message}` : ''}`);
+                    events.alert(`${i18next.t('message:Unable to upload Brainstorming Data')}${message ? `\n${message}` : ''}`);
                 }
                 checkFinish();
             }
@@ -315,19 +314,19 @@ class Service {
      * Import JSON from Wayfarer API response
      * @param raw Raw JSON
      */
-    import(raw: string) {
+    export function importJSON(raw: string) {
         let parsed;
         try {
             parsed = JSON.parse(raw);
         } catch (error) {
-            this.events.alert(i18next.t('message:Unable to parse the code'));
+            events.alert(i18next.t('message:Unable to parse the code'));
             return;
         }
         if (!parsed.result || parsed.result.length < 1) {
-            this.events.alert(i18next.t('message:Invalid data'));
+            events.alert(i18next.t('message:Invalid data'));
         }
         const mapNomination = new Map();
-        for (const monination of this.nominations) {
+        for (const monination of nominations) {
             mapNomination.set(monination.id, monination);
         }
         for (const nomination of parsed.result) {
@@ -342,28 +341,27 @@ class Service {
                 lat: parseFloat(nomination.lat)
             };
         }
-        this.events.idle();
+        events.idle();
     }
 
     /**
      * Query Brainstorming firebase and update local bs data
      */
-    updateBsData() {
-        this.bs.update(this.nominations, () => {
-            this.events.updateBs();
-            this.events.info(i18next.t('message:Brainstorming Data updated'));
+    export function updateBsData() {
+        bs.update(nominations, () => {
+            events.updateBs();
+            events.info(i18next.t('message:Brainstorming Data updated'));
         });
     }
 
     /**
      * Clear Brainstorming database
      */
-    clearBsData() {
-        this.bs.clear();
+    export function clearBsData() {
+        bs.clear();
     }
 }
 
-export default new Service();
 export { Nomination, LngLat };
 export { RateItems, BrainstormingStats };
 export { Status, StatusType, StatusReason };

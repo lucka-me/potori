@@ -4,7 +4,7 @@ import AppBar, { AppBarMenuItems, AppBarActions } from './app-bar';
 import Dark         from "./dark";
 import Dialog       from './dialog';
 import Progress     from './progress';
-import service, { Nomination } from "../service";
+import { service, Nomination } from "../service";
 import Snackbar     from './snackbar';
 
 import type Dashboard   from './Dashboard';
@@ -84,7 +84,7 @@ class UIKit {
             service.bs.queryLocation(bsId, succeed, failed);
         };
         this.dialog.import.import = (raw) => {
-            service.import(raw);
+            service.importJSON(raw);
         };
         this.dialog.init(body);
 
