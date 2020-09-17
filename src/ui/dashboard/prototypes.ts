@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-import UIKitPrototype, { Eli, i18next } from "../UIKitPrototype";
+import UIKitPrototype, { Eli, i18next } from "../base";
 import { Nomination } from "../../service";
 
 export class DashboardPrototype extends UIKitPrototype {

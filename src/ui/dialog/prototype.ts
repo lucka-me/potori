@@ -1,5 +1,5 @@
 import { MDCDialog } from "@material/dialog";
-import UIKitPrototype, { Eli, i18next } from "../UIKitPrototype";
+import UIKitPrototype, { Eli, i18next } from "../base";
 
 /**
  * Ptototype of MDC dialog components

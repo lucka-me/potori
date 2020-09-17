@@ -1,6 +1,6 @@
 import { MDCLinearProgress } from "@material/linear-progress";
 
-import UIKitPrototype from './UIKitPrototype';
+import UIKitPrototype from './base';
 import Eli from "./Eli";
 
 class Progress extends UIKitPrototype {

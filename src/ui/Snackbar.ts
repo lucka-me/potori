@@ -1,6 +1,6 @@
 import { MDCSnackbar } from "@material/snackbar";
 
-import UIKitPrototype , { Eli, i18next } from './UIKitPrototype';
+import UIKitPrototype , { Eli, i18next } from './base';
 
 class Snackbar extends UIKitPrototype {
 

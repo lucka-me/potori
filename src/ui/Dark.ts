@@ -1,4 +1,4 @@
-import UIKitPrototype from './UIKitPrototype';
+import UIKitPrototype from './base';
 
 class Dark extends UIKitPrototype {
 

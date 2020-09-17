@@ -7,7 +7,7 @@ import MapCard              from './dashboard/MapCard';
 import QuotasCard           from './dashboard/QuotasCard';
 import StatsRejectedCard    from './dashboard/StatsRejectedCard';
 import StatsTypeCard        from './dashboard/StatsTypeCard';
-import UIKitPrototype, { Eli } from './UIKitPrototype';
+import UIKitPrototype, { Eli } from './base';
 import { DashboardPrototype, Nomination } from './dashboard/prototypes';
 
 class Dashboard extends UIKitPrototype {

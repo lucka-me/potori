@@ -8,7 +8,7 @@ import AlertDialog from './AlertDialog';
 import DialogPrototype, { MDCDialog } from './prototype';
 import { Nomination, LngLat } from '../../service';
 import { statusKit } from '../../service';
-import UIKitPrototype, { Eli, i18next } from '../UIKitPrototype';
+import UIKitPrototype, { Eli, i18next } from '../base';
 
 interface DetailsDialogMapEvents {
     queryLngLat: (bsId: string, succeed: (lngLat: LngLat) => void, failed: () => void) => void;

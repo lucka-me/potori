@@ -1,4 +1,4 @@
-import UIKitPrototype from './UIKitPrototype';
+import UIKitPrototype from './base';
 
 import AboutDialog      from './dialog/AboutDialog';
 import AlertDialog      from './dialog/AlertDialog';
