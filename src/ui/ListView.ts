@@ -2,7 +2,7 @@ import FilterCard from './dashboard/FilterCard';
 import { Nomination } from '../service';
 import NominationCard from "./list-view/NominationCard";
 import { StatusReason, StatusType } from '../service';
-import UIKitPrototype, { Eli } from './base';
+import UIKitPrototype from './base';
 
 interface ListViewEvents {
     focus: (nomination: Nomination) => void;
@@ -25,7 +25,7 @@ class ListView extends UIKitPrototype {
     }
 
     render() {
-        this.root = Eli.build('div', {
+        this.root = eli.build('div', {
             className: [
                 'flex--1',
                 'flex-box-col',

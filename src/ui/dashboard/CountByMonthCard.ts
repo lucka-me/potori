@@ -1,11 +1,11 @@
 import Chart from 'chart.js';
 import moment from 'moment';
 
-import { DashboardChartProtorype, Eli, Nomination, i18next } from './prototypes';
+import { DashboardChartProtorype, Nomination, i18next } from './prototypes';
 
 class CountByMonthCard extends DashboardChartProtorype {
     render() {
-        const canvasChart = Eli.build('canvas', { className: 'canvas-chart--h' });
+        const canvasChart = eli.build('canvas', { className: 'canvas-chart--h' });
         this.root = DashboardChartProtorype.buildChartCard(i18next.t('Count by Month'), canvasChart, 3, 300);
         this.setVisible(false);
         this.parent.append(this.root);

@@ -1,42 +1,42 @@
-import DialogPrototype, { Eli, MDCDialog, i18next } from './prototype';
+import DialogPrototype, { MDCDialog, i18next } from './prototype';
 import version from '../../service/version';
 
 class AboutDialog extends DialogPrototype {
 
     render() {
         const element = DialogPrototype.buildDialog([
-            Eli.build('h2', {
+            eli.build('h2', {
                 className: 'mdc-dialog__title',
                 innerHTML: i18next.t('About')
             }),
-            Eli.build('div', {
+            eli.build('div', {
                 className: 'mdc-dialog__content flex-box-col',
             }, [
-                Eli.build('span', {
+                eli.build('span', {
                     className: 'mdc-typography--body2',
                 }, [
-                    Eli.link('./docs', i18next.t('Documents'), i18next.t('Documents'))
+                    eli.link('./docs', i18next.t('Documents'), i18next.t('Documents'))
                 ]),
-                Eli.build('span', {
+                eli.build('span', {
                     className: 'mdc-typography--body2',
                 }, [
-                    Eli.link(
+                    eli.link(
                         'https://github.com/lucka-me/potori',
                         i18next.t('GitHub Repo'), i18next.t('GitHub Repo')
                     ),
                 ]),
-                Eli.build('span', {
+                eli.build('span', {
                     className: 'mdc-typography--body2',
                 }, [
-                    Eli.link(
+                    eli.link(
                         'https://github.com/lucka-me/potori/blob/master/CHANGELOG.md',
                         i18next.t('Changelog'), version.string
                     ),
                     ' by ',
-                    Eli.link('https://lucka.moe', i18next.t('Blog'), 'Lucka'),
+                    eli.link('https://lucka.moe', i18next.t('Blog'), 'Lucka'),
                 ]),
             ]),
-            Eli.build('footer', {
+            eli.build('footer', {
                 className: 'mdc-dialog__actions',
             }, [ DialogPrototype.buildDialogAction('close', i18next.t('Close')) ]),
         ]);

@@ -1,5 +1,5 @@
 import { MDCDialog } from "@material/dialog";
-import UIKitPrototype, { Eli, i18next } from "../base";
+import UIKitPrototype, { i18next } from "../base";
 
 /**
  * Ptototype of MDC dialog components
@@ -13,15 +13,15 @@ export default class DialogPrototype extends UIKitPrototype {
      * @returns The dialog element
      */
     static buildDialog(contents: Array<HTMLElement>): HTMLDivElement {
-        return Eli.build('div', {
+        return eli.build('div', {
             className: 'mdc-dialog',
             role: 'dialog',
             ariaModal: true,
         }, [
-            Eli.build('div', { className: 'mdc-dialog__container' }, [
-                Eli.build('div', { className: 'mdc-dialog__surface' }, contents),
+            eli.build('div', { className: 'mdc-dialog__container' }, [
+                eli.build('div', { className: 'mdc-dialog__surface' }, contents),
             ]),
-            Eli.build('div', { className: 'mdc-dialog__scrim' }),
+            eli.build('div', { className: 'mdc-dialog__scrim' }),
         ]);
     }
 
@@ -31,15 +31,15 @@ export default class DialogPrototype extends UIKitPrototype {
      * @param text Text on the action
      */
     static buildDialogAction(action: string, text: string): HTMLButtonElement {
-        return Eli.build('button', {
+        return eli.build('button', {
             className: 'mdc-button mdc-dialog__button',
             dataset: { mdcDialogAction: action, },
         }, [
-            Eli.build('span', {
+            eli.build('span', {
                 className: 'mdc-button__label', innerHTML: text
             }),
         ]);
     }
 }
 
-export { Eli, MDCDialog, i18next };
+export { MDCDialog, i18next };

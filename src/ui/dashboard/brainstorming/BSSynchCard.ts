@@ -1,15 +1,15 @@
-import { DashboardBsPrototype, BrainstormingStats, Eli, i18next } from './prototypes';
+import { DashboardBsPrototype, BrainstormingStats, i18next } from './prototypes';
 
 class BSSynchCard extends DashboardBsPrototype {
 
     textSynch: HTMLSpanElement = null;
 
     render() {
-        this.textSynch = Eli.build('span', {
+        this.textSynch = eli.build('span', {
             cssText: 'font-weight:300;font-size:6rem;line-height:6rem;',
             innerHTML: '0.0',
         })
-        this.root = Eli.build('div', {
+        this.root = eli.build('div', {
             className: [
                 'mdc-card',
                 'mdc-card--outlined',
@@ -19,18 +19,18 @@ class BSSynchCard extends DashboardBsPrototype {
                 'flex-justify-content--between'
             ].join(' '),
         }, [
-            Eli.build('span', {
+            eli.build('span', {
                 className: 'mdc-typography--headline6',
                 innerHTML: i18next.t('Brainstorming Synch'),
             }),
-            Eli.build('span', { className: 'text-nowarp' }, [
+            eli.build('span', { className: 'text-nowarp' }, [
                 this.textSynch,
-                Eli.build('span', {
+                eli.build('span', {
                     cssText: 'font-size:2rem;line-height:2rem;',
                     innerHTML: '%'
                 }),
             ]),
-            Eli.build('span', {
+            eli.build('span', {
                 className: 'mdc-typography--body1 text-nowarp',
                 innerHTML: i18next.t('Reviews match the result'),
             }),

@@ -1,12 +1,12 @@
 import Chart from 'chart.js';
 
-import { DashboardChartProtorype, Eli, Nomination, i18next } from './prototypes';
+import { DashboardChartProtorype, Nomination, i18next } from './prototypes';
 import { statusKit } from '../../service';
 
 class StatsRejectedCard extends DashboardChartProtorype {
 
     render() {
-        const canvasChart = Eli.build('canvas', { className: 'canvas-chart--v' });
+        const canvasChart = eli.build('canvas', { className: 'canvas-chart--v' });
         this.root = DashboardChartProtorype.buildChartCard(i18next.t('Stats Rejected'), canvasChart, 2, 250);
         this.setVisible(false);
         this.parent.append(this.root);

@@ -1,9 +1,9 @@
-import { DashboardChartProtorype, Eli, Nomination, i18next } from './prototypes';
+import { DashboardChartProtorype, Nomination, i18next } from './prototypes';
 import Chart from 'chart.js';
 
 class QuotasCard extends DashboardChartProtorype {
     render() {
-        const canvasChart = Eli.build('canvas', { className: 'canvas-chart--h' });
+        const canvasChart = eli.build('canvas', { className: 'canvas-chart--h' });
         this.root = DashboardChartProtorype.buildChartCard(i18next.t('Quotas'), canvasChart, 2, 200);
 
         this.setVisible(false);

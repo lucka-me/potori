@@ -1,16 +1,16 @@
-import DialogPrototype, { Eli, MDCDialog, i18next } from './prototype';
+import DialogPrototype, { MDCDialog, i18next } from './prototype';
 
 class AlertDialog extends DialogPrototype {
 
     textMessage: HTMLDivElement = null;
 
     render() {
-        this.textMessage = Eli.build('div', {
+        this.textMessage = eli.build('div', {
             className: 'mdc-dialog__content',
         });
         const element = DialogPrototype.buildDialog([
             this.textMessage,
-            Eli.build('footer', { className: 'mdc-dialog__actions' }, [
+            eli.build('footer', { className: 'mdc-dialog__actions' }, [
                 DialogPrototype.buildDialogAction('close', i18next.t('Close'))
             ]),
         ]);

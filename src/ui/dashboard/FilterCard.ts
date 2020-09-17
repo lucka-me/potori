@@ -1,6 +1,6 @@
 import { MDCSwitch } from "@material/switch";
 
-import { DashboardPrototype, Eli, i18next } from './prototypes';
+import { DashboardPrototype, i18next } from './prototypes';
 import { statusKit, Status, StatusType, StatusReason } from '../../service';
 
 interface FilterCardBlock {
@@ -28,9 +28,9 @@ class FilterCard extends DashboardPrototype {
     }
 
     render() {
-        this.block.type.root = Eli.build('div', { className: 'flex-box-row--nowrap' });
-        this.block.reason.root = Eli.build('div', { className: 'flex-box-row--wrap' });
-        this.root = Eli.build('div', {
+        this.block.type.root = eli.build('div', { className: 'flex-box-row--nowrap' });
+        this.block.reason.root = eli.build('div', { className: 'flex-box-row--wrap' });
+        this.root = eli.build('div', {
             className: [
                 'mdc-card',
                 'mdc-card--outlined',
@@ -39,16 +39,16 @@ class FilterCard extends DashboardPrototype {
                 'flex-shrink--0'
             ].join(' '),
         }, [
-            Eli.build('span', {
+            eli.build('span', {
                 className: 'mdc-typography--headline6',
                 innerHTML: i18next.t('Filter')
             }),
-            Eli.build('span', {
+            eli.build('span', {
                 className: 'mdc-typography--subtitle1',
                 innerHTML: i18next.t('Type')
             }),
             this.block.type.root,
-            Eli.build('span', {
+            eli.build('span', {
                 className: 'mdc-typography--subtitle1',
                 innerHTML: i18next.t('Rejected')
             }),
@@ -91,14 +91,14 @@ class FilterCard extends DashboardPrototype {
 
     static buildSwitch(block: FilterCardBlock, status: Status, type: string) {
         const id = `switch-filter-${status.key}`;
-        const element = Eli.build('div', { className: 'mdc-switch' }, [
-            Eli.build('div', { className: 'mdc-switch__track' }),
-            Eli.build('div', {
+        const element = eli.build('div', { className: 'mdc-switch' }, [
+            eli.build('div', { className: 'mdc-switch__track' }),
+            eli.build('div', {
                 className: 'mdc-switch__thumb-underlay',
                 id: id,
             }, [
-                Eli.build('div', { className: 'mdc-switch__thumb' }, [
-                    Eli.build('input', {
+                eli.build('div', { className: 'mdc-switch__thumb' }, [
+                    eli.build('input', {
                         type: 'checkbox',
                         className: 'mdc-switch__native-control',
                         role: 'switch',
@@ -106,11 +106,11 @@ class FilterCard extends DashboardPrototype {
                 ]),
             ]),
         ]);
-        const container = Eli.build('div', {
+        const container = eli.build('div', {
             className: 'mdc-switch-box margin-h--4',
         }, [
             element,
-            Eli.build('label', {
+            eli.build('label', {
                 className: `fa fa-fw status-${type}`,
                 for: id,
                 title: i18next.t(status.title),

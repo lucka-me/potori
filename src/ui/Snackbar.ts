@@ -1,6 +1,6 @@
 import { MDCSnackbar } from "@material/snackbar";
 
-import UIKitPrototype , { Eli, i18next } from './base';
+import UIKitPrototype , { i18next } from './base';
 
 class Snackbar extends UIKitPrototype {
 
@@ -8,21 +8,21 @@ class Snackbar extends UIKitPrototype {
     textMessage: HTMLDivElement = null;
 
     render() {
-        this.textMessage = Eli.build('div', {
+        this.textMessage = eli.build('div', {
             className: 'mdc-snackbar__label',
             role: 'status', ariaLive: 'polite',
         });
-        const elementActions = Eli.build('div', {
+        const elementActions = eli.build('div', {
             className: 'mdc-snackbar__actions'
         }, [
-            Eli.build('button', {
+            eli.build('button', {
                 className: 'fa mdc-icon-button mdc-snackbar__dismiss',
                 title: i18next.t('Dismiss'),
                 innerHTML: '&#xf00d',
             }),
         ]);
-        const element = Eli.build('div', { className: 'mdc-snackbar' }, [
-            Eli.build('div', { className: 'mdc-snackbar__surface' }, [
+        const element = eli.build('div', { className: 'mdc-snackbar' }, [
+            eli.build('div', { className: 'mdc-snackbar__surface' }, [
                 this.textMessage,
                 elementActions,
             ]),

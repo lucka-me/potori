@@ -1,6 +1,6 @@
 import { MDCTextField } from "@material/textfield";
 
-import DialogPrototype, { Eli, MDCDialog, i18next } from './prototype';
+import DialogPrototype, { MDCDialog, i18next } from './prototype';
 
 interface ImportDialogEvents {
     import: (raw: string) => void;
@@ -15,7 +15,7 @@ class ImportDialog extends DialogPrototype {
     };
 
     render() {
-        const elementTextField = Eli.build('div', {
+        const elementTextField = eli.build('div', {
             className: [
                 'mdc-text-field',
                 'mdc-text-field--outlined',
@@ -23,51 +23,51 @@ class ImportDialog extends DialogPrototype {
                 'mdc-text-field--fullwidth'
             ].join(' '),
         }, [
-            Eli.build('textarea', {
+            eli.build('textarea', {
                 className: 'mdc-text-field__input code',
                 id: 'input-dialog-import-wayfarer',
                 rows: 8, cols: 80
             }),
-            Eli.build('div', {
+            eli.build('div', {
                 className: 'mdc-notched-outline',
             }, [
-                Eli.build('div', { className: 'mdc-notched-outline__leading' }),
-                Eli.build('div', {
+                eli.build('div', { className: 'mdc-notched-outline__leading' }),
+                eli.build('div', {
                     className: 'mdc-notched-outline__notch',
                 }, [
-                    Eli.build('label', {
+                    eli.build('label', {
                         className: 'mdc-floating-label',
                         for: 'input-dialog-import-wayfarer',
                         innerHTML: 'JSON',
                     }),
                 ]),
-                Eli.build('div', { className: 'mdc-notched-outline__trailing' }),
+                eli.build('div', { className: 'mdc-notched-outline__trailing' }),
             ]),
         ]);
         const elementDialog = DialogPrototype.buildDialog([
-            Eli.build('h2', {
+            eli.build('h2', {
                 className: 'mdc-dialog__title',
                 innerHTML: i18next.t('Import')
             }),
-            Eli.build('div', {
+            eli.build('div', {
                 className: 'mdc-dialog__content',
             }, [
                 elementTextField,
-                Eli.build('div', {
+                eli.build('div', {
                     className: 'mdc-text-field-helper-line',
                 }, [
-                    Eli.build('div', {
+                    eli.build('div', {
                         className: 'mdc-text-field-helper-text mdc-text-field-helper-text--persistent',
                     }, [
                         i18next.t('From '),
-                        Eli.link(
+                        eli.link(
                             'https://wayfarer.nianticlabs.com/api/v1/vault/manage',
                             i18next.t('Wayfarer API'), i18next.t('Wayfarer API')
                         ),
                     ]),
                 ]),
             ]),
-            Eli.build('footer', {
+            eli.build('footer', {
                 className: 'mdc-dialog__actions',
             }, [
                 DialogPrototype.buildDialogAction('close' , i18next.t('Close' )),

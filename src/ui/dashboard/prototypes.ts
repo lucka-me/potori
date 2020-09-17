@@ -1,6 +1,6 @@
 import moment from 'moment';
 
-import UIKitPrototype, { Eli, i18next } from "../base";
+import UIKitPrototype, { i18next } from "../base";
 import { Nomination } from "../../service";
 
 export class DashboardPrototype extends UIKitPrototype {
@@ -46,7 +46,7 @@ export class DashboardChartProtorype extends DashboardPrototype {
     static buildChartCard(
         title: string, canvas: HTMLCanvasElement, flex: number, minWidth: number
     ): HTMLDivElement {
-        return Eli.build('div', {
+        return eli.build('div', {
             className: [
                 'mdc-card',
                 'mdc-card--outlined',
@@ -56,11 +56,11 @@ export class DashboardChartProtorype extends DashboardPrototype {
             ].join(' '),
             cssText: `min-width:${minWidth}px`,
         }, [
-            Eli.build('span', {
+            eli.build('span', {
                 className: 'mdc-typography--headline6',
                 innerHTML: title,
             }),
-            Eli.build('div', {
+            eli.build('div', {
                 className: 'container-chart',
             }, [ canvas ]),
         ]);
@@ -83,4 +83,4 @@ export class DashboardChartProtorype extends DashboardPrototype {
     }
 }
 
-export { Eli, Nomination, i18next };
+export { Nomination, i18next };

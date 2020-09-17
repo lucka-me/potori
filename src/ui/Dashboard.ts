@@ -7,7 +7,7 @@ import MapCard              from './dashboard/MapCard';
 import QuotasCard           from './dashboard/QuotasCard';
 import StatsRejectedCard    from './dashboard/StatsRejectedCard';
 import StatsTypeCard        from './dashboard/StatsTypeCard';
-import UIKitPrototype, { Eli } from './base';
+import UIKitPrototype       from './base';
 import { DashboardPrototype, Nomination } from './dashboard/prototypes';
 
 class Dashboard extends UIKitPrototype {
@@ -67,7 +67,7 @@ class Dashboard extends UIKitPrototype {
     }
 
     render() {
-        this.root = Eli.build('div', {
+        this.root = eli.build('div', {
             className: [
                 'flex--2',
                 'flex-box-row--wrap',

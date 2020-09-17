@@ -8,7 +8,7 @@ import AlertDialog from './AlertDialog';
 import DialogPrototype, { MDCDialog } from './prototype';
 import { Nomination, LngLat } from '../../service';
 import { statusKit } from '../../service';
-import UIKitPrototype, { Eli, i18next } from '../base';
+import UIKitPrototype, { i18next } from '../base';
 
 interface DetailsDialogMapEvents {
     queryLngLat: (bsId: string, succeed: (lngLat: LngLat) => void, failed: () => void) => void;
@@ -50,7 +50,7 @@ class DetailsDialogMap extends UIKitPrototype {
     async render() {
         const mapButtons = [];
         for (const value of Object.values(this.buttons)) {
-            value.root = Eli.build('button', {
+            value.root = eli.build('button', {
                 className: 'fa mdc-icon-button',
                 innerHTML: value.icon,
             });
@@ -59,15 +59,15 @@ class DetailsDialogMap extends UIKitPrototype {
             ctrl.listen('click', value.clicked);
             mapButtons.push(value.root);
         }
-        const elementMap = Eli.build('div', {
+        const elementMap = eli.build('div', {
             className: 'flex-grow--1',
             cssText: 'min-height: 180px',
         });
 
-        const elementContent = Eli.build('div', {
+        const elementContent = eli.build('div', {
             className: 'flex-box-row--nowrap margin-v--8',
         }, [
-            Eli.build('div', {
+            eli.build('div', {
                 className: 'flex-box-col flex-justify-content--around',
             }, mapButtons),
             elementMap,
@@ -188,20 +188,20 @@ class DetailsDialog extends DialogPrototype {
     };
 
     async render() {
-        this.headingTitle = Eli.build('h2', {
+        this.headingTitle = eli.build('h2', {
             className: 'mdc-dialog__title',
             dataset: { mdcDialogInitialFocus: '' },
             innerHTML: '',
         });
 
-        this.image = Eli.build('img', {
+        this.image = eli.build('img', {
             cssText: [
                 'object-fit:cover', 'object-position:center',
                 'width:100%', 'height:150px;'
             ].join(';')
         });
 
-        this.textConfirmedTime = Eli.build('span', {
+        this.textConfirmedTime = eli.build('span', {
             className: 'margin-l--4'
         });
 
@@ -209,7 +209,7 @@ class DetailsDialog extends DialogPrototype {
         for (const key of statusKit.types.keys()) {
             const radioId = `radio-dialog-details-status-${key}`;
 
-            const inputRadio = Eli.build('input', {
+            const inputRadio = eli.build('input', {
                 type: 'radio',
                 className: 'mdc-radio__native-control',
                 name: 'radio-dialog-details-status',
@@ -224,22 +224,22 @@ class DetailsDialog extends DialogPrototype {
                 this.selectReason.layout();
                 this.map.ctrl.resize();
             });
-            const elementRadio = Eli.build('div', {
+            const elementRadio = eli.build('div', {
                 className: 'mdc-radio',
             }, [
                 inputRadio,
-                Eli.build('div', {
+                eli.build('div', {
                     className: 'mdc-radio__background',
                 }, [
-                    Eli.build('div', { className: 'mdc-radio__outer-circle' }),
-                    Eli.build('div', { className: 'mdc-radio__inner-circle' }),
+                    eli.build('div', { className: 'mdc-radio__outer-circle' }),
+                    eli.build('div', { className: 'mdc-radio__inner-circle' }),
                 ]),
             ]);
-            const elementField = Eli.build('div', {
+            const elementField = eli.build('div', {
                 className: 'mdc-form-field',
             }, [
                 elementRadio,
-                Eli.build('label', {
+                eli.build('label', {
                     for: radioId,
                     className: `fa status-${key}`,
                     innerHTML: statusKit.types.get(key).icon,
@@ -253,7 +253,7 @@ class DetailsDialog extends DialogPrototype {
             statusRadios.push(elementField);
         }
 
-        const elementResultTime = Eli.build('div', {
+        const elementResultTime = eli.build('div', {
             className: [
                 'mdc-text-field',
                 'mdc-text-field--outlined',
@@ -263,7 +263,7 @@ class DetailsDialog extends DialogPrototype {
                 'flex-grow--1'
             ].join(' '),
         }, [
-            Eli.build('i', {
+            eli.build('i', {
                 className: [
                     'fa',
                     'mdc-text-field__icon',
@@ -271,7 +271,7 @@ class DetailsDialog extends DialogPrototype {
                 ].join(' '),
                 innerHTML: '\uf073',
             }),
-            Eli.build('input', {
+            eli.build('input', {
                 type: 'datetime-local',
                 className: 'mdc-text-field__input',
                 id: 'input-dialog-details-result-time',
@@ -285,18 +285,18 @@ class DetailsDialog extends DialogPrototype {
 
         const itemsSelectReason = [];
         for (const [key, value] of statusKit.reasons.entries()) {
-            itemsSelectReason.push(Eli.build('li', {
+            itemsSelectReason.push(eli.build('li', {
                 className: 'mdc-list-item',
                 dataset: { value: key },
             }, [
-                Eli.build('span', { className: 'mdc-list-item__ripple' }),
-                Eli.build('span', {
+                eli.build('span', { className: 'mdc-list-item__ripple' }),
+                eli.build('span', {
                     className: 'mdc-list-item__text',
                     innerHTML: i18next.t(value.title),
                 }),
             ]));
         }
-        this.elementReason = Eli.build('div', {
+        this.elementReason = eli.build('div', {
             className: [
                 'mdc-select',
                 'mdc-select--outlined',
@@ -304,12 +304,12 @@ class DetailsDialog extends DialogPrototype {
                 'margin-h--4'
             ].join(' '),
         }, [
-            Eli.build('div', {
+            eli.build('div', {
                 className: 'mdc-select__anchor',
             }, [
                 DetailsDialog.buildNotchedOutline({ innerHTML: i18next.t('Reason') }),
-                Eli.build('span', { className: 'mdc-select__selected-text' }),
-                Eli.build('span', { className: 'mdc-select__dropdown-icon' }, [
+                eli.build('span', { className: 'mdc-select__selected-text' }),
+                eli.build('span', { className: 'mdc-select__dropdown-icon' }, [
                     DetailsDialog.buildSVG('svg', {
                         'class': 'mdc-select__dropdown-icon-graphic',
                         'viewBox': '7 10 10 5',
@@ -330,10 +330,10 @@ class DetailsDialog extends DialogPrototype {
                     ])
                 ]),
             ]),
-            Eli.build('div', {
+            eli.build('div', {
                 className: 'mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth',
             }, [
-                Eli.build('ul', {
+                eli.build('ul', {
                     className: 'mdc-list',
                     role: 'listbox'
                 }, itemsSelectReason),
@@ -342,26 +342,26 @@ class DetailsDialog extends DialogPrototype {
         this.selectReason = new MDCSelect(this.elementReason);
         this.selectReason.selectedIndex = 0;
 
-        const elementContents = Eli.build('div', {
+        const elementContents = eli.build('div', {
             className: 'mdc-dialog__content',
         }, [
-            Eli.build('div', {
+            eli.build('div', {
                 className: [
                     'mdc-typography--body1',
                     'flex-box-row--nowrap',
                     'flex-align-items--center'
                 ].join(' '),
             }, [
-                Eli.icon('&#xf062'), this.textConfirmedTime,
+                eli.icon('&#xf062'), this.textConfirmedTime,
             ]),
-            Eli.build('div', {
+            eli.build('div', {
                 className: [
                     'fullwidth',
                     'flex-box-row--nowrap',
                     'flex-justify-content--around'
                 ].join(' '),
             }, statusRadios),
-            Eli.build('div', {
+            eli.build('div', {
                 className: 'flex-box-row--wrap',
             }, [ elementResultTime, this.elementReason ]),
         ]);
@@ -370,7 +370,7 @@ class DetailsDialog extends DialogPrototype {
             this.headingTitle,
             this.image,
             elementContents,
-            Eli.build('footer', {
+            eli.build('footer', {
                 className: 'mdc-dialog__actions',
             }, [
                 DialogPrototype.buildDialogAction('close', 'Close'),
@@ -500,12 +500,12 @@ class DetailsDialog extends DialogPrototype {
      */
     static buildNotchedOutline(labelOptions: any): HTMLDivElement {
         labelOptions.className = 'mdc-floating-label';
-        return Eli.build('div', { className: 'mdc-notched-outline' }, [
-            Eli.build('div', { className: 'mdc-notched-outline__leading' }),
-            Eli.build('div', {
+        return eli.build('div', { className: 'mdc-notched-outline' }, [
+            eli.build('div', { className: 'mdc-notched-outline__leading' }),
+            eli.build('div', {
                 className: 'mdc-notched-outline__notch',
-            }, [ Eli.build('label', labelOptions), ]),
-            Eli.build('div', { className: 'mdc-notched-outline__trailing' }),
+            }, [ eli.build('label', labelOptions), ]),
+            eli.build('div', { className: 'mdc-notched-outline__trailing' }),
         ]);
     }
 
