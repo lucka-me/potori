@@ -40,6 +40,22 @@ export default class DialogPrototype extends UIKitPrototype {
             }),
         ]);
     }
+
+    /**
+     * Build a hyperlink element
+     * @param href URL
+     * @param title Text to show when mouse hover
+     * @param text Text to display in the link
+     */
+    static buildLink(href: string, title: string, text: string): HTMLAnchorElement {
+        return eli.build('a', {
+            href: href,
+            title: title,
+            target: '_blank',
+            rel: 'noopener',
+            innerHTML: text,
+        });
+    }
 }
 
 export { MDCDialog, i18next };

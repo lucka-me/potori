@@ -1,4 +1,10 @@
 namespace eli {
+    /**
+     * Build a HTML element
+     * @param tag Element tag
+     * @param options Element attributes
+     * @param children Children of element
+     */
     export function build<K extends keyof HTMLElementTagNameMap>(
         tag: K, options: any, children?: Array<HTMLElement | SVGElement | string>
     ): HTMLElementTagNameMap[K] {
@@ -20,22 +26,5 @@ namespace eli {
         }
         if (children) element.append(...children);
         return element;
-    }
-
-    export function link(href: string, title: string, text: string): HTMLAnchorElement {
-        return build('a', {
-            href: href,
-            title: title,
-            target: '_blank',
-            rel: 'noopener',
-            innerHTML: text,
-        });
-    }
-
-    export function icon(icon: string): HTMLElement {
-        return build('i', {
-            className: 'fa fa-fw',
-            innerHTML: icon,
-        });
     }
 };

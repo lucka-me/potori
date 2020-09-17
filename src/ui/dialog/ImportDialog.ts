@@ -60,7 +60,7 @@ class ImportDialog extends DialogPrototype {
                         className: 'mdc-text-field-helper-text mdc-text-field-helper-text--persistent',
                     }, [
                         i18next.t('From '),
-                        eli.link(
+                        DialogPrototype.buildLink(
                             'https://wayfarer.nianticlabs.com/api/v1/vault/manage',
                             i18next.t('Wayfarer API'), i18next.t('Wayfarer API')
                         ),

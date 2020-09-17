@@ -15,12 +15,12 @@ class AboutDialog extends DialogPrototype {
                 eli.build('span', {
                     className: 'mdc-typography--body2',
                 }, [
-                    eli.link('./docs', i18next.t('Documents'), i18next.t('Documents'))
+                    DialogPrototype.buildLink('./docs', i18next.t('Documents'), i18next.t('Documents'))
                 ]),
                 eli.build('span', {
                     className: 'mdc-typography--body2',
                 }, [
-                    eli.link(
+                    DialogPrototype.buildLink(
                         'https://github.com/lucka-me/potori',
                         i18next.t('GitHub Repo'), i18next.t('GitHub Repo')
                     ),
@@ -28,12 +28,12 @@ class AboutDialog extends DialogPrototype {
                 eli.build('span', {
                     className: 'mdc-typography--body2',
                 }, [
-                    eli.link(
+                    DialogPrototype.buildLink(
                         'https://github.com/lucka-me/potori/blob/master/CHANGELOG.md',
                         i18next.t('Changelog'), version.string
                     ),
                     ' by ',
-                    eli.link('https://lucka.moe', i18next.t('Blog'), 'Lucka'),
+                    DialogPrototype.buildLink('https://lucka.moe', i18next.t('Blog'), 'Lucka'),
                 ]),
             ]),
             eli.build('footer', {
