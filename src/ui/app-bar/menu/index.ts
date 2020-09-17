@@ -3,11 +3,16 @@ import { MDCMenu } from "@material/menu";
 import { AppBarMenuItems } from "./constants";
 import UIPrototype, { i18next } from '../../base';
 
+type MenuItemClickCallback = () => void;
+
+/**
+ * Menu component in app bar
+ */
 export default class AppBarMenu extends UIPrototype {
 
-    ctrl: MDCMenu = null;
-    items: Map<string, HTMLLIElement> = new Map();
-    events: Map<string, () => void> = new Map();
+    ctrl: MDCMenu = null;                                   // MDC controller
+    items: Map<string, HTMLLIElement> = new Map();          // Menu items
+    events: Map<string, MenuItemClickCallback> = new Map(); // Click events for menu items
 
     init(parent: HTMLElement) {
         super.init(parent);
@@ -54,6 +59,9 @@ export default class AppBarMenu extends UIPrototype {
         );
     }
 
+    /**
+     * Open the menu
+     */
     open() {
         if (!this.ctrl.open) { this.ctrl.open = true; }
     }

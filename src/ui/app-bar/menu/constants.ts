@@ -1,3 +1,6 @@
+/**
+ * Items in app bar menu
+ */
 export const AppBarMenuItems = {
     open     : { key: 'open'    , title: 'Open'       },
     save     : { key: 'save'    , title: 'Save'       },
