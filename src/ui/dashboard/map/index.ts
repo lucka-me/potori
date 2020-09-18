@@ -2,7 +2,6 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 import { DashboardPrototype } from '../base';
-import FilterCard from '../FilterCard';
 import { service, LngLat, Nomination } from '../../../service';
 
 interface MapCardEvents {
@@ -17,6 +16,7 @@ class MapCard extends DashboardPrototype {
         focus: () => { },
         styleLoaded: () => [],
     }
+    private enabledReasons: Array<number> = [];
     private tasks: Array<() => void> = [];
 
     render() {
@@ -74,6 +74,17 @@ class MapCard extends DashboardPrototype {
         this.update(this.events.styleLoaded());
     }
 
+    /**
+     * Set reason filter map, call before {@link update} and {@link updateRejected}
+     */
+    set reasonFilter(map: Map<number, boolean>) {
+        this.enabledReasons = [];
+        for (const [key, value] of map.entries()) {
+            if (!value) continue;
+            this.enabledReasons.push(key);
+        }
+    }
+
     setTypeVisible(type: string, visible: boolean) {
         if (!this.loaded) {
             this.tasks.push(() => this.setTypeVisible(type, visible));
@@ -129,12 +140,7 @@ class MapCard extends DashboardPrototype {
             this.tasks.push(() => this.updateRejected(nominations));
             return;
         }
-        const codes: Array<number> = [];
-        for (const [key, value] of FilterCard.reasons.entries()) {
-            if (!value.checked) continue;
-            codes.push(key.code);
-        }
-        this.updateSource('rejected', MapCard.generateGeoJSON(nominations, codes));
+        this.updateSource('rejected', MapCard.generateGeoJSON(nominations, this.enabledReasons));
     }
 
     private executeTasks() {

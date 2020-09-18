@@ -224,6 +224,7 @@ class UIKit {
                 }
             }
             if (type.key === 'rejected') {
+                this.dashboard.map.reasonFilter = this.dashboard.filter.reasonFilter;
                 this.dashboard.map.updateRejected(service.nominations);
             }
             this.dashboard.map.setTypeVisible(type.key, visible);
@@ -233,6 +234,7 @@ class UIKit {
                 if (nomination.status.code !== reason.code) continue;
                 document.getElementById(`card-${nomination.id}`).hidden = !visible;
             }
+            this.dashboard.map.reasonFilter = this.dashboard.filter.reasonFilter;
             this.dashboard.map.updateRejected(service.nominations);
         };
         this.dashboard.bs.events.analyse = (nominations) => {

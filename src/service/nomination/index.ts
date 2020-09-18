@@ -14,6 +14,7 @@ export interface LngLat {
  * Nomination data
  */
 export default class Nomination {
+
     id = '';    // Short ID, also brainstorming ID
     title = ''; // Title
     image = ''; // Hash part of the image URL

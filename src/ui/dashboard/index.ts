@@ -88,12 +88,15 @@ class Dashboard extends UIPrototype {
     }
 
     refresh(nominations: Array<Nomination>) {
+        this.map.reasonFilter = this.filter.reasonFilter;
         this.forEach((card) => {
             card.update(nominations);
         });
     }
 
     update(nominations: Array<Nomination>) {
+        this.map.reasonFilter = this.filter.reasonFilter;
+
         this.map.update(nominations);
         this.statsType.update(nominations);
         this.statsRejected.update(nominations);

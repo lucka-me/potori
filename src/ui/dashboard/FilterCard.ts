@@ -89,6 +89,23 @@ class FilterCard extends DashboardPrototype {
         }
     }
 
+    private getFilter(map: Map<Status, MDCSwitch>): Map<number, boolean> {
+        const filter = new Map<number, boolean>();
+        for (const [key, value] of map.entries()) {
+            if (!value.checked) continue;
+            filter.set(key.code, value.checked);
+        }
+        return filter;
+    }
+
+    get typeFilter(): Map<number, boolean> {
+        return this.getFilter(this.types);
+    }
+
+    get reasonFilter(): Map<number, boolean> {
+        return this.getFilter(this.reasons);
+    }
+
     static buildSwitch(block: FilterCardBlock, status: Status, type: string) {
         const id = `switch-filter-${status.key}`;
         const element = eli.build('div', { className: 'mdc-switch' }, [
