@@ -1,9 +1,9 @@
 import { DashboardPrototype } from '../base';
 
-import BSBasicCard      from './BSBasicCard';
-import BSRatesCard      from './BSRatesCard';
-import BSSynchCard      from './BSSynchCard';
-import BSReviewsCard    from './BSReviewsCard';
+import BSBasicCard      from './basic';
+import BSRatesCard      from './rates';
+import BSReviewsCard    from './reviews';
+import BSSynchCard      from './synch';
 import { DashboardBsPrototype, BrainstormingStats } from './base';
 import { Nomination } from '../../../service';
 

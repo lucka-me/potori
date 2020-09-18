@@ -1,4 +1,4 @@
-import { DashboardBsPrototype, BrainstormingStats, i18next } from './base';
+import { DashboardBsPrototype, BrainstormingStats, i18next } from '../base';
 
 class BSSynchCard extends DashboardBsPrototype {
 
