@@ -2,8 +2,7 @@ import { MDCRipple } from "@material/ripple";
 import { MDCDialog } from "@material/dialog";
 
 import AlertDialog from '../../alert';
-import { LngLat, Nomination } from '../../../../service';
-import UIPrototype, { i18next } from '../../../base';
+import UIPrototype, { i18next, Nomination, LngLat } from '../../../base';
 
 interface DetailsDialogMapEvents {
     queryLngLat: (bsId: string, succeed: (lngLat: LngLat) => void, failed: () => void) => void;

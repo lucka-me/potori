@@ -1,8 +1,7 @@
-import { DashboardPrototype, DashboardChartProtorype, i18next } from "../base";
-import { BrainstormingStats } from "../../../service";
+import { DashboardPrototype, DashboardChartProtorype, i18next, Nomination, BrainstormingStats, RateItems } from "../base";
 
 export class DashboardBsPrototype extends DashboardPrototype {
-    updateStats(stats: BrainstormingStats ) { stats }
+    updateStats(stats: BrainstormingStats) { stats }
 }
 
 export class DashboardBsChartPrototype extends DashboardBsPrototype {
@@ -36,4 +35,4 @@ export class DashboardBsChartPrototype extends DashboardBsPrototype {
     }
 }
 
-export { BrainstormingStats, i18next };
+export { BrainstormingStats, i18next, Nomination, RateItems };

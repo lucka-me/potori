@@ -5,8 +5,7 @@ import { MDCTextField } from "@material/textfield";
 
 import AlertDialog from '../alert';
 import DetailsDialogMap from "./map";
-import DialogPrototype, { i18next, MDCDialog } from '../base';
-import { service, Nomination } from '../../../service';
+import DialogPrototype, { i18next, MDCDialog, service, Nomination } from '../base';
 
 interface DetailsDialogEvents {
     update: (nomination: Nomination) => void;
