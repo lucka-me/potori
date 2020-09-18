@@ -1,7 +1,5 @@
-import UIKit from "./ui";
-import { service } from "./service";
+import { service } from "service";
+import { ui } from "ui";
 
 service.init();
-const ui = new UIKit();
 ui.init();
-ui.linkService();
