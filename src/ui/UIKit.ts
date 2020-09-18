@@ -7,7 +7,7 @@ import Progress     from './progress';
 import { service, Nomination } from "../service";
 import Snackbar     from './snackbar';
 
-import type Dashboard   from './Dashboard';
+import type Dashboard   from './dashboard';
 import type ListView    from './list-view';
 
 import '../css/extended.css';
@@ -189,7 +189,7 @@ class UIKit {
      * Start to preload modules
      */
     private preloadModules() {
-        import(/* webpackChunkName: 'dashboard' */ './Dashboard');
+        import(/* webpackChunkName: 'dashboard' */ './dashboard');
         import(/* webpackChunkName: 'listview' */  './list-view');
     }
 
@@ -205,7 +205,7 @@ class UIKit {
         // Lazyload Dashboard
         const Dashboard = await import(
             /* webpackChunkName: 'dashboard' */
-            './Dashboard'
+            './dashboard'
         );
         this.dashboard = new Dashboard.default();
         this.dashboard.init(this.mainBox);
