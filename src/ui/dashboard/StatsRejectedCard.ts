@@ -1,6 +1,6 @@
 import Chart from 'chart.js';
 
-import { DashboardChartProtorype, Nomination, i18next } from './prototypes';
+import { DashboardChartProtorype, Nomination, i18next } from './base';
 import { service } from '../../service';
 
 class StatsRejectedCard extends DashboardChartProtorype {

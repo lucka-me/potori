@@ -1,4 +1,4 @@
-import { DashboardPrototype, DashboardChartProtorype, i18next } from "../prototypes";
+import { DashboardPrototype, DashboardChartProtorype, i18next } from "../base";
 import { BrainstormingStats } from "../../../service";
 
 export class DashboardBsPrototype extends DashboardPrototype {

@@ -1,7 +1,7 @@
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-import { DashboardPrototype } from '../prototypes';
+import { DashboardPrototype } from '../base';
 import FilterCard from '../FilterCard';
 import { service, LngLat, Nomination } from '../../../service';
 

@@ -1,4 +1,4 @@
-import { DashboardChartProtorype, Nomination, i18next } from './prototypes';
+import { DashboardChartProtorype, Nomination, i18next } from './base';
 import Chart from 'chart.js';
 
 class QuotasCard extends DashboardChartProtorype {

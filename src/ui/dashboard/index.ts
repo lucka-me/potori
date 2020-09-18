@@ -8,7 +8,7 @@ import QuotasCard           from './QuotasCard';
 import StatsRejectedCard    from './StatsRejectedCard';
 import StatsTypeCard        from './StatsTypeCard';
 import UIPrototype       from '../base';
-import { DashboardPrototype, Nomination } from './prototypes';
+import { DashboardPrototype, Nomination } from './base';
 
 class Dashboard extends UIPrototype {
 

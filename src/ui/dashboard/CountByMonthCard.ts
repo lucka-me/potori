@@ -1,7 +1,7 @@
 import Chart from 'chart.js';
 import moment from 'moment';
 
-import { DashboardChartProtorype, Nomination, i18next } from './prototypes';
+import { DashboardChartProtorype, Nomination, i18next } from './base';
 
 class CountByMonthCard extends DashboardChartProtorype {
     render() {

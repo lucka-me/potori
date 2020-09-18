@@ -1,4 +1,4 @@
-import { DashboardPrototype } from './prototypes';
+import { DashboardPrototype } from './base';
 
 import BSBasicCard      from './brainstorming/BSBasicCard';
 import BSRatesCard      from './brainstorming/BSRatesCard';
