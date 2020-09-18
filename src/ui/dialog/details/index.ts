@@ -1,15 +1,17 @@
+import i18next from "i18next";
+import { MDCDialog } from "@material/dialog";
 import { MDCFormField } from "@material/form-field";
 import { MDCRadio } from "@material/radio";
 import { MDCSelect } from "@material/select";
 import { MDCTextField } from "@material/textfield";
 
-import AlertDialog from '../alert';
+import { eli } from "ui/eli";
+import { service } from "service";
+import AlertDialog from 'ui/dialog/alert';
+import DialogPrototype from 'ui/dialog/base';
+import Nomination from "service/nomination";
+
 import DetailsDialogMap from "./map";
-import DialogPrototype, {
-    i18next, MDCDialog,
-    eli,
-    service, Nomination
-} from '../base';
 
 interface DetailsDialogEvents {
     update: (nomination: Nomination) => void;

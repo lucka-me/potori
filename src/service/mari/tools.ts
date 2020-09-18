@@ -1,4 +1,5 @@
-import { service, LngLat, Nomination } from '..';
+import { service } from 'service';
+import Nomination, { LngLat } from 'service/nomination';
 
 /**
  * Parsers for mail content

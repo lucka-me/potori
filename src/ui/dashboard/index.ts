@@ -1,5 +1,10 @@
 import Chart from 'chart.js';
 
+import { eli } from 'ui/eli';
+import { DashboardPrototype } from './base';
+import Nomination from "service/nomination";
+import UIPrototype from 'ui/base';
+
 import BSGroup              from './brainstorming';
 import CountByMonthCard     from './count-by-month';
 import FilterCard           from './filter';
@@ -7,8 +12,6 @@ import MapCard              from './map';
 import QuotasCard           from './quotas';
 import StatsRejectedCard    from './stats-rejected';
 import StatsTypeCard        from './stats-type';
-import UIPrototype          from '../base';
-import { DashboardPrototype, eli, Nomination } from './base';
 
 class Dashboard extends UIPrototype {
 

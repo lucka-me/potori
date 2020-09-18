@@ -1,4 +1,4 @@
-import data from '../../data/status.json';
+import data from 'data/status.json';
 
 /**
  * Basic information of all status

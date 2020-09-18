@@ -3,12 +3,12 @@ import LanguageDetector from 'i18next-browser-languagedetector';
 
 import AuthKit, { AuthStatusChangedCallback } from './auth';
 import { BlobGenerator, Parser } from "./tools";
-import BrainstormingKit, { BrainstormingStats, RateItems } from './brainstorming';
+import BrainstormingKit from './brainstorming';
 import FileKit, { Constants as FileConst } from './file';
 import Mari, { ProgressCallback } from './mari';
-import Nomination, { LngLat } from './nomination';
-import StatusKit, { Status, StatusReason, StatusType } from "./status";
-import translations from '../locales';
+import Nomination from './nomination';
+import StatusKit from "./status";
+import translations from 'locales';
 import Version from "./version";
 
 type BasicCallback = () => void;
@@ -362,7 +362,3 @@ export namespace service {
         bs.clear();
     }
 }
-
-export { Nomination, LngLat };
-export { RateItems, BrainstormingStats };
-export { Status, StatusType, StatusReason };

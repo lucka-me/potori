@@ -1,9 +1,12 @@
+import i18next from "i18next";
 import { MDCRipple } from "@material/ripple";
 import { MDCTopAppBar } from "@material/top-app-bar";
 
+import { eli } from "ui/eli";
+import UIPrototype from 'ui/base';
+
 import { AppBarActions } from "./constants";
 import AppBarMenu, { AppBarMenuItems } from "./menu";
-import UIPrototype, { eli, i18next } from '../base';
 
 type AppBarActionClickCallback = () => void;
 

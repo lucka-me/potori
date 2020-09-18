@@ -1,10 +1,12 @@
-import { DashboardPrototype } from '../base';
+import { BrainstormingStats } from 'service/brainstorming';
+import { DashboardBsPrototype } from './base';
+import { DashboardPrototype } from 'ui/dashboard/base';
+import Nomination from 'service/nomination';
 
 import BSBasicCard      from './basic';
 import BSRatesCard      from './rates';
 import BSReviewsCard    from './reviews';
 import BSSynchCard      from './synch';
-import { DashboardBsPrototype, BrainstormingStats, Nomination } from './base';
 
 interface BSGroupEvents {
     analyse: (nominations: Array<Nomination>) => BrainstormingStats;

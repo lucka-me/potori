@@ -1,12 +1,8 @@
 import moment from 'moment';
 
-import UIPrototype, {
-    i18next,
-    eli,
-    BrainstormingStats, RateItems,
-    service, Nomination, LngLat,
-    Status, StatusType, StatusReason
-} from "../base";
+import { eli } from "ui/eli";
+import Nomination from "service/nomination";
+import UIPrototype from "ui/base";
 
 export class DashboardPrototype extends UIPrototype {
 
@@ -87,9 +83,3 @@ export class DashboardChartProtorype extends DashboardPrototype {
         }
     }
 }
-
-export { i18next };
-export { eli };
-export { BrainstormingStats, RateItems };
-export { service, Nomination, LngLat };
-export { Status, StatusType, StatusReason };

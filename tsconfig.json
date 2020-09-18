@@ -7,6 +7,10 @@
     "allowJs": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "baseUrl": "src",
+    "paths": {
+      "root/*": [ "../*" ],
+    }
   }
 }

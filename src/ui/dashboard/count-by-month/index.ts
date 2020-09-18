@@ -1,12 +1,10 @@
 import Chart from 'chart.js';
+import i18next from 'i18next';
 import moment from 'moment';
 
-import {
-    DashboardChartProtorype,
-    i18next,
-    eli,
-    Nomination
-} from '../base';
+import { eli } from 'ui/eli';
+import { DashboardChartProtorype } from 'ui/dashboard/base';
+import Nomination from 'service/nomination';
 
 class CountByMonthCard extends DashboardChartProtorype {
     render() {

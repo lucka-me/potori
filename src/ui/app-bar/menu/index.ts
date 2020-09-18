@@ -1,7 +1,10 @@
+import i18next from "i18next";
 import { MDCMenu } from "@material/menu";
 
+import { eli } from "ui/eli";
+import UIPrototype from 'ui/base';
+
 import { AppBarMenuItems } from "./constants";
-import UIPrototype, { eli, i18next } from '../../base';
 
 type MenuItemClickCallback = () => void;
 

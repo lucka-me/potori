@@ -1,6 +1,8 @@
+import i18next from "i18next";
 import { MDCSnackbar } from "@material/snackbar";
 
-import UIPrototype, { i18next, eli } from '../base';
+import { eli } from "ui/eli";
+import UIPrototype from 'ui/base';
 
 /**
  * Snackbar component for showing information message

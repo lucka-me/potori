@@ -1,9 +1,8 @@
-import {
-    DashboardBsPrototype,
-    i18next,
-    eli,
-    BrainstormingStats
-} from '../base';
+import i18next from 'i18next';
+
+import { eli } from 'ui/eli';
+import { BrainstormingStats } from 'service/brainstorming';
+import { DashboardBsPrototype } from 'ui/dashboard/brainstorming/base';
 
 class BSSynchCard extends DashboardBsPrototype {
 

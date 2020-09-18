@@ -1,7 +1,9 @@
 import type { Reference } from '@firebase/database-types';
 
+import { service } from 'service';
+import Nomination, { LngLat } from 'service/nomination'
+
 import { RateItems } from "./constants";
-import { service, LngLat, Nomination } from '..';
 
 /**
  * Result for {@link BrainstormingKit.analyse}

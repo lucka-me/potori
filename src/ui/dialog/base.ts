@@ -1,10 +1,7 @@
 import { MDCDialog } from "@material/dialog";
 
-import UIPrototype, {
-    i18next, 
-    eli,
-    service, Nomination
-} from "../base";
+import { eli } from "ui/eli";
+import UIPrototype from "ui/base";
 
 /**
  * Ptototype of MDC dialog components
@@ -65,7 +62,3 @@ export default class DialogPrototype extends UIPrototype {
         });
     }
 }
-
-export { i18next, MDCDialog };
-export { eli };
-export { service, Nomination };

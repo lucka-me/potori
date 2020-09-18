@@ -1,4 +1,4 @@
-import UIPrototype from '../base';
+import UIPrototype from 'ui/base';
 
 import AboutDialog      from './about';
 import AlertDialog      from './alert';

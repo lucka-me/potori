@@ -1,10 +1,5 @@
-import {
-    DashboardPrototype, DashboardChartProtorype,
-    i18next,
-    eli,
-    Nomination,
-    BrainstormingStats, RateItems
-} from "../base";
+import { BrainstormingStats } from 'service/brainstorming';
+import { DashboardPrototype, DashboardChartProtorype } from "ui/dashboard/base";
 
 export class DashboardBsPrototype extends DashboardPrototype {
     updateStats(stats: BrainstormingStats) { stats }
@@ -40,7 +35,3 @@ export class DashboardBsChartPrototype extends DashboardBsPrototype {
         DashboardChartProtorype.fillTimeDataMap(dataMap, start, end);
     }
 }
-
-export { i18next };
-export { eli };
-export { Nomination, BrainstormingStats, RateItems };

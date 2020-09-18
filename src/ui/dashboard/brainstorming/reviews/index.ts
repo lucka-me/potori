@@ -1,12 +1,10 @@
 import Chart from 'chart.js';
+import i18next from 'i18next';
 import moment from 'moment';
 
-import {
-    DashboardBsChartPrototype,
-    i18next,
-    eli,
-    BrainstormingStats
-} from '../base';
+import { eli } from 'ui/eli';
+import { BrainstormingStats } from 'service/brainstorming';
+import { DashboardBsChartPrototype } from 'ui/dashboard/brainstorming/base';
 
 class BSReviewsCard extends DashboardBsChartPrototype {
     render() {

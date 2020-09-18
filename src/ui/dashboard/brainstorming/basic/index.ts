@@ -1,11 +1,9 @@
+import i18next from 'i18next';
 import { MDCRipple } from "@material/ripple";
 
-import {
-    DashboardBsPrototype,
-    i18next,
-    eli,
-    BrainstormingStats
-} from '../base';
+import { eli } from 'ui/eli';
+import { BrainstormingStats } from 'service/brainstorming';
+import { DashboardBsPrototype } from 'ui/dashboard/brainstorming/base';
 
 interface BSBasicCardEvents {
     refresh:    () => void,

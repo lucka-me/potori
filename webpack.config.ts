@@ -70,7 +70,17 @@ module.exports = {
       },
     ],
   },
-  resolve: { extensions: [ '.ts', '.js' ], },
+  resolve: {
+    alias: {
+      root: path.join(__dirname, 'src', '../'),
+
+      data:     path.join(__dirname, 'src', 'data'),
+      locales:  path.join(__dirname, 'src', 'locales'),
+      service:  path.join(__dirname, 'src', 'service'),
+      ui:       path.join(__dirname, 'src', 'ui'),
+    },
+    extensions: [ '.ts', '.js' ],
+  },
   optimization: {
     minimize: true,
     minimizer: [

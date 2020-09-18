@@ -1,8 +1,9 @@
-import DialogPrototype, {
-    i18next, MDCDialog,
-    eli,
-    service
-} from '../base';
+import i18next from "i18next";
+import { MDCDialog } from "@material/dialog";
+
+import { eli } from "ui/eli";
+import { service } from "service";
+import DialogPrototype from 'ui/dialog/base';
 
 /**
  * Dialog to show Potori information

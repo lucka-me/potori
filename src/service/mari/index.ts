@@ -1,5 +1,7 @@
+import { service } from 'service';
+import Nomination from 'service/nomination';
+
 import Parser from './tools';
-import { service, Nomination } from '..';
 
 type FinishCallback = () => void;
 export type ProgressCallback = (percent: number) => void;

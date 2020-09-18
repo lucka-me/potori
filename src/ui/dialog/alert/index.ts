@@ -1,4 +1,8 @@
-import DialogPrototype, { i18next, MDCDialog, eli } from '../base';
+import i18next from "i18next";
+import { MDCDialog } from "@material/dialog";
+
+import { eli } from "ui/eli";
+import DialogPrototype from 'ui/dialog/base';
 
 /**
  * Dialog to show alert message

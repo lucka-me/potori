@@ -1,5 +1,8 @@
+import { eli } from 'ui/eli';
+import Nomination from 'service/nomination';
+import UIPrototype from 'ui/base';
+
 import NominationCard from "./card";
-import UIPrototype, { eli, Nomination }  from '../base';
 
 interface ListViewEvents {
     focus: (nomination: Nomination) => void;

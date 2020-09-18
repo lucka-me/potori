@@ -1,4 +1,5 @@
-import { service, Status } from '..';
+import { service } from 'service';
+import { Status } from "service/status";
 
 const now = Date.now();
 

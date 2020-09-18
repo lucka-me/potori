@@ -1,4 +1,4 @@
-import UIPrototype from '../base';
+import UIPrototype from 'ui/base';
 
 type DarkModeChangeCallback = (enabled: boolean) => void;
 

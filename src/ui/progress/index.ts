@@ -1,6 +1,7 @@
 import { MDCLinearProgress } from "@material/linear-progress";
 
-import UIPrototype, { eli } from '../base';
+import { eli } from "ui/eli";
+import UIPrototype from 'ui/base';
 
 /**
  * Progress bar component
