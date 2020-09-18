@@ -1,4 +1,4 @@
-import UIKit from "./ui/UIKit";
+import UIKit from "./ui";
 import { service } from "./service";
 
 service.init();

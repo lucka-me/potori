@@ -1,14 +1,14 @@
 import Chart from 'chart.js';
 
-import BSGroup              from './dashboard/BSGroup';
-import CountByMonthCard     from './dashboard/CountByMonthCard';
-import FilterCard           from './dashboard/FilterCard';
-import MapCard              from './dashboard/MapCard';
-import QuotasCard           from './dashboard/QuotasCard';
-import StatsRejectedCard    from './dashboard/StatsRejectedCard';
-import StatsTypeCard        from './dashboard/StatsTypeCard';
-import UIPrototype       from './base';
-import { DashboardPrototype, Nomination } from './dashboard/prototypes';
+import BSGroup              from './BSGroup';
+import CountByMonthCard     from './CountByMonthCard';
+import FilterCard           from './FilterCard';
+import MapCard              from './MapCard';
+import QuotasCard           from './QuotasCard';
+import StatsRejectedCard    from './StatsRejectedCard';
+import StatsTypeCard        from './StatsTypeCard';
+import UIPrototype       from '../base';
+import { DashboardPrototype, Nomination } from './prototypes';
 
 class Dashboard extends UIPrototype {
 
