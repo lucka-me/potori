@@ -8,7 +8,7 @@ import { service, Nomination } from "../service";
 import Snackbar     from './snackbar';
 
 import type Dashboard   from './Dashboard';
-import type ListView    from './ListView';
+import type ListView    from './list-view';
 
 import '../css/extended.css';
 
@@ -190,7 +190,7 @@ class UIKit {
      */
     private preloadModules() {
         import(/* webpackChunkName: 'dashboard' */ './Dashboard');
-        import(/* webpackChunkName: 'listview' */  './ListView');
+        import(/* webpackChunkName: 'listview' */  './list-view');
     }
 
     /**
@@ -255,7 +255,7 @@ class UIKit {
         // Lazyload ListView
         const ListView = await import(
             /* webpackChunkName: 'listview' */
-            './ListView'
+            './list-view'
         );
         this.list = new ListView.default();
         this.list.init(this.mainBox);

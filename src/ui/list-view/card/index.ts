@@ -1,8 +1,8 @@
 import i18next from "i18next";
 import { MDCRipple } from "@material/ripple";
 
-import AlertDialog from "../dialog/alert";
-import { service, Nomination } from '../../service';
+import AlertDialog from "../../dialog/alert";
+import { service, Nomination } from '../../../service';
 
 interface NominationCardEvents {
     focus: () => void;
