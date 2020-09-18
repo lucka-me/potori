@@ -4,7 +4,7 @@ import BSBasicCard      from './BSBasicCard';
 import BSRatesCard      from './BSRatesCard';
 import BSSynchCard      from './BSSynchCard';
 import BSReviewsCard    from './BSReviewsCard';
-import { DashboardBsPrototype, BrainstormingStats } from './prototypes';
+import { DashboardBsPrototype, BrainstormingStats } from './base';
 import { Nomination } from '../../../service';
 
 interface BSGroupEvents {

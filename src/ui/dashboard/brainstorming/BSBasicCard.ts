@@ -1,6 +1,6 @@
 import { MDCRipple } from "@material/ripple";
 
-import { DashboardBsPrototype, BrainstormingStats, i18next } from './prototypes';
+import { DashboardBsPrototype, BrainstormingStats, i18next } from './base';
 
 interface BSBasicCardEvents {
     refresh:    () => void,
