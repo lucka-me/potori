@@ -5,25 +5,26 @@
 [![Telegram Channel](https://img.shields.io/badge/telegram-channel-37aee2)](https://t.me/potori "Telegram Channel")
 
 ## Description
-Gather and visualize your Portal nominations from your Gmail inbox.
+
+A web app to visualize Ingress nominations from Gmail inbox.
 
 ## Build & Run
 ```sh
-$ git clone git@github.com:lucka-me/potori.git # Use SSH
-$ cd potori
-$ npm install
+$ npm i
 $ npm start
 ```
 
 Open `http://localhost:8000/` in browser.
 
 ## Notice
-Due to Google's policy (which aims to protect user's data), some features related to 3rd-party are suspended in the demo page (as a lite version).
+Due to Google's policy (which aims to protect user's data), some features related to 3rd-party are suspended in the public web app (as a lite version).
 
-Potori is NOT fully compatible with Prime yet, we still need more [mail samples](./samples.md) to figure out how to query all related and localized mails exactly, and how to identify each reason for rejection. If you have any trouble or want to help me, please open an issue or contact me via Telegram@SeeleUN.
+Potori is NOT fully compatible with Prime yet, we still need more [mail samples](./samples.md) to figure out how to query all related and localized mails exactly and identify each reason for rejection. If you have any trouble or want to help, please open an issue or contact us via Telegram@SeeleUN.
 
 ## Future Style
-Since Niantic launched the Niantic Wayfarer which contains a nomination manager, I've thought a lot about the future of Potori. I've learned a lot from developing it and I do not want to stop. There are still many posibilities: re-writing the entire Potori with ~~Angular~~ Vue, extending it to a data visualization tool, import from [Wayfarer Nomination Manage API response data](https://wayfarer.nianticlabs.com/api/v1/vault/manage)... I'm actually working on them, which is little bit tough for me, though.
+> Since Niantic launched the Niantic Wayfarer which contains a nomination manager, I've thought a lot about the future of Potori. I've learned a lot during the development and I do not want to abandon. There are still many posibilities: re-writing the entire Potori with ~~Angular~~ ~~Vue~~ TypeScript and Webpack, extending it to a data visualization tool, import from [Wayfarer Nomination Manage API response data](https://wayfarer.nianticlabs.com/api/v1/vault/manage)... ~~I'm actually working on them, which is little bit tough for me, though.~~ I've done most part of them.
+> 
+> Lucka.
 
 - [x] Import from Wayfarer Nomination Manage API response data  
   Done in `0.4.19`
@@ -44,4 +45,6 @@ See [CHANGELOG.md](./CHANGELOG.md).
 ## License
 The source code are [licensed under MIT](./LICENSE).
 
-Please notice that the API Keys and Client ID included in the source code is owned by [Lucka](https://github.com/lucka-me) and **ONLY** for public useage in [the demo pages](https://potori.lucka.moe).
+Please notice that the API Keys and Client ID included in the source code is owned by [Lucka](https://github.com/lucka-me) and **ONLY** for public useage in [the public web app](https://potori.lucka.moe).
+
+This project is NOT affiliated to Ingress or Niantic.
