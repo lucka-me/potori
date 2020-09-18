@@ -91,6 +91,7 @@ export namespace service {
         auth.init();
 
         mari.events.finish = () => final();
+        mari.init();
     }
 
     /**

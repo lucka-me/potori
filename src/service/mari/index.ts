@@ -40,7 +40,10 @@ export default class Mari {
         progress: () => {},
     };
 
-    constructor() {
+    /**
+     * Initiate Mari
+     */
+    init() {
         for (const type of service.status.types.keys()) {
             this.types.push(type);
         }
