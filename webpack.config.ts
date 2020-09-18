@@ -48,7 +48,7 @@ const cdnConfig = {
 };
 
 module.exports = {
-  entry: { potori: './src/potori.ts', },
+  entry: { potori: './src/index.ts', },
   output: {
     filename: 'lib/[name].[chunkhash].js',
     chunkFilename: 'lib/[name].[chunkhash].bundle.js',
