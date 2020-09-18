@@ -3,7 +3,7 @@ import { MDCTopAppBar } from "@material/top-app-bar";
 
 import { AppBarActions } from "./constants";
 import AppBarMenu, { AppBarMenuItems } from "./menu";
-import UIPrototype, { i18next } from '../base';
+import UIPrototype, { eli, i18next } from '../base';
 
 type AppBarActionClickCallback = () => void;
 

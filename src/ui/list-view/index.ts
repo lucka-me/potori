@@ -1,5 +1,5 @@
 import NominationCard from "./card";
-import UIPrototype, { Nomination }  from '../base';
+import UIPrototype, { eli, Nomination }  from '../base';
 
 interface ListViewEvents {
     focus: (nomination: Nomination) => void;

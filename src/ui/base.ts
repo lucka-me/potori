@@ -1,5 +1,6 @@
 import i18next from 'i18next';
 import { service, Nomination, LngLat, BrainstormingStats, RateItems, Status, StatusType, StatusReason } from "../service";
+import { eli } from "./eli";
 
 /**
  * Prototype of UI components
@@ -29,6 +30,7 @@ export default class UIPrototype {
 }
 
 export { i18next };
-export { service, Nomination, LngLat };
+export { eli };
 export { BrainstormingStats, RateItems };
+export { service, Nomination, LngLat };
 export { Status, StatusType, StatusReason };

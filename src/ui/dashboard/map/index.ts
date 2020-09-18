@@ -1,7 +1,11 @@
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-import { DashboardPrototype, service, Nomination, LngLat } from '../base';
+import {
+    DashboardPrototype,
+    eli,
+    service, Nomination, LngLat
+} from '../base';
 
 interface MapCardEvents {
     focus: (id: string) => void,

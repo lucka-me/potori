@@ -1,4 +1,4 @@
-import DialogPrototype, { MDCDialog, i18next } from '../base';
+import DialogPrototype, { i18next, MDCDialog, eli } from '../base';
 
 /**
  * Dialog to show alert message

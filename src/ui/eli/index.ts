@@ -1,4 +1,4 @@
-namespace eli {
+export namespace eli {
     /**
      * Build a HTML element
      * @param tag Element tag
@@ -26,5 +26,16 @@ namespace eli {
         }
         if (children) element.append(...children);
         return element;
+    }
+
+    /**
+     * Build a fontawesome icon element
+     * @param icon Start with &#x
+     */
+    export function icon(icon: string): HTMLElement {
+        return build('i', {
+            className: 'fa fa-fw',
+            innerHTML: icon,
+        });
     }
 };

@@ -1,6 +1,11 @@
 import Chart from 'chart.js';
 
-import { DashboardBsChartPrototype, BrainstormingStats, i18next, RateItems } from '../base';
+import {
+    DashboardBsChartPrototype,
+    i18next,
+    eli,
+    BrainstormingStats, RateItems
+} from '../base';
 
 class BSRatesCard extends DashboardBsChartPrototype {
     render() {
