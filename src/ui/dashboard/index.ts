@@ -5,8 +5,8 @@ import CountByMonthCard     from './CountByMonthCard';
 import FilterCard           from './filter';
 import MapCard              from './map';
 import QuotasCard           from './QuotasCard';
-import StatsRejectedCard    from './StatsRejectedCard';
-import StatsTypeCard        from './StatsTypeCard';
+import StatsRejectedCard    from './stats-rejected';
+import StatsTypeCard        from './stats-type';
 import UIPrototype       from '../base';
 import { DashboardPrototype, Nomination } from './base';
 
