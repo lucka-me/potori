@@ -22,7 +22,7 @@ export namespace ui {
     const dark       = new Dark();
     const dialog     = new Dialog();
     const progress   = new Progress();
-    const snackbar   = Snackbar;
+    const snackbar   = new Snackbar();
 
     let mainBox  : HTMLDivElement    = null;
     let dashboard: Dashboard         = null;

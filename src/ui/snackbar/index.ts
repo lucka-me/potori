@@ -7,7 +7,7 @@ import UIPrototype from 'ui/base';
 /**
  * Snackbar component for showing information message
  */
-class Snackbar extends UIPrototype {
+export default class Snackbar extends UIPrototype {
 
     ctrl: MDCSnackbar = null;   // MDC snackbar controller
 
@@ -45,5 +45,3 @@ class Snackbar extends UIPrototype {
         this.ctrl.open();
     }
 }
-
-export default new Snackbar();
