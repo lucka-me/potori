@@ -12,7 +12,7 @@ interface FilterCardEvents {
     switchReason:   (reason : Status, visible: boolean) => void,
 }
 
-class FilterCard extends DashboardPrototype {
+export default class FilterCard extends DashboardPrototype {
 
     block = {
         type    : { root: null } as FilterCardBlock,
@@ -140,5 +140,3 @@ class FilterCard extends DashboardPrototype {
         return ctrl;
     }
 }
-
-export default new FilterCard();

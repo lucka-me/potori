@@ -14,8 +14,8 @@ class Dashboard extends UIPrototype {
 
     root: HTMLDivElement = null;
 
-    map             = new MapCard;
-    filter          = FilterCard;
+    map             = new MapCard();
+    filter          = new FilterCard();
     statsType       = new StatsTypeCard();
     statsRejected   = new StatsRejectedCard();
     countByMonth    = new CountByMonthCard();
