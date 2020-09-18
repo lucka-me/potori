@@ -4,7 +4,7 @@ import AppBar, { AppBarMenuItems, AppBarActions } from './app-bar';
 import Dark         from "./dark";
 import Dialog       from './dialog';
 import Progress     from './progress';
-import { service, Nomination } from "../service";
+import { service, Nomination, StatusReason, StatusType } from "../service";
 import Snackbar     from './snackbar';
 
 import type Dashboard   from './dashboard';
@@ -279,7 +279,13 @@ class UIKit {
     update(nomination: Nomination) {
         if (!this.dashboard) return;
         this.dashboard.update(service.nominations);
-        this.list.update(nomination);
+        let visibility = false;
+        if (nomination.status instanceof StatusReason) {
+            visibility = this.dashboard.filter.reasons.get(nomination.status).checked;
+        } else if (nomination.status instanceof StatusType) {
+            visibility = this.dashboard.filter.types.get(nomination.status).checked;
+        }
+        this.list.update(nomination, visibility);
     }
 
     openFileUI(opened: (file: File) => void) {

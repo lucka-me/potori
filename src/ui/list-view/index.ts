@@ -1,5 +1,4 @@
-import FilterCard from '../dashboard/FilterCard';
-import { Nomination, StatusReason, StatusType } from '../../service';
+import { Nomination } from '../../service';
 import NominationCard from "./card";
 import UIPrototype from '../base';
 
@@ -61,19 +60,11 @@ class ListView extends UIPrototype {
         this.root.append(...cards);
     }
 
-    updateVisibility(nomination: Nomination, card: HTMLDivElement) {
-        if (nomination.status instanceof StatusReason) {
-            card.hidden = !FilterCard.reasons.get(nomination.status).checked;
-        } else if (nomination.status instanceof StatusType) {
-            card.hidden = !FilterCard.types.get(nomination.status).checked;
-        }
-    }
-
-    update(nomination: Nomination) {
+    update(nomination: Nomination, visibility: boolean) {
         const card = this.root.querySelector(`#card-${nomination.id}`) as HTMLDivElement;
         NominationCard.update(nomination, card);
         NominationCard.updateLocation(nomination, card);
-        this.updateVisibility(nomination, card);
+        card.hidden = !visibility;
     }
 };
 
