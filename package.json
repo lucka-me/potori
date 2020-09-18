@@ -20,7 +20,7 @@
   "license": "MIT",
   "dependencies": {
     "@firebase/app": "^0.6.11",
-    "@firebase/database": "^0.6.12",
+    "@firebase/database": "^0.6.13",
     "chart.js": "^2.9.3",
     "i18next": "^19.7.0",
     "mapbox-gl": "^1.12.0",
