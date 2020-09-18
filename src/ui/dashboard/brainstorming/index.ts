@@ -1,11 +1,11 @@
-import { DashboardPrototype } from './base';
+import { DashboardPrototype } from '../base';
 
-import BSBasicCard      from './brainstorming/BSBasicCard';
-import BSRatesCard      from './brainstorming/BSRatesCard';
-import BSSynchCard      from './brainstorming/BSSynchCard';
-import BSReviewsCard    from './brainstorming/BSReviewsCard';
-import { DashboardBsPrototype, BrainstormingStats } from './brainstorming/prototypes';
-import { Nomination } from '../../service';
+import BSBasicCard      from './BSBasicCard';
+import BSRatesCard      from './BSRatesCard';
+import BSSynchCard      from './BSSynchCard';
+import BSReviewsCard    from './BSReviewsCard';
+import { DashboardBsPrototype, BrainstormingStats } from './prototypes';
+import { Nomination } from '../../../service';
 
 interface BSGroupEvents {
     analyse: (nominations: Array<Nomination>) => BrainstormingStats;
