@@ -1,10 +1,10 @@
 import Chart from 'chart.js';
 
 import BSGroup              from './BSGroup';
-import CountByMonthCard     from './CountByMonthCard';
+import CountByMonthCard     from './count-by-month';
 import FilterCard           from './filter';
 import MapCard              from './map';
-import QuotasCard           from './QuotasCard';
+import QuotasCard           from './quotas';
 import StatsRejectedCard    from './stats-rejected';
 import StatsTypeCard        from './stats-type';
 import UIPrototype       from '../base';

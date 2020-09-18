@@ -1,5 +1,6 @@
-import { DashboardChartProtorype, Nomination, i18next } from './base';
 import Chart from 'chart.js';
+
+import { DashboardChartProtorype, Nomination, i18next } from '../base';
 
 class QuotasCard extends DashboardChartProtorype {
     render() {
