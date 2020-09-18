@@ -2,7 +2,7 @@ import Chart from 'chart.js';
 
 import BSGroup              from './BSGroup';
 import CountByMonthCard     from './CountByMonthCard';
-import FilterCard           from './FilterCard';
+import FilterCard           from './filter';
 import MapCard              from './map';
 import QuotasCard           from './QuotasCard';
 import StatsRejectedCard    from './StatsRejectedCard';

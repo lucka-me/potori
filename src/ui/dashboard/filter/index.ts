@@ -1,7 +1,7 @@
 import { MDCSwitch } from "@material/switch";
 
-import { DashboardPrototype, i18next } from './base';
-import { service, Status, StatusType, StatusReason } from '../../service';
+import { DashboardPrototype, i18next } from '../base';
+import { service, Status, StatusType, StatusReason } from '../../../service';
 
 interface FilterCardBlock {
     root: HTMLDivElement;
@@ -106,7 +106,7 @@ export default class FilterCard extends DashboardPrototype {
         return this.getFilter(this.reasons);
     }
 
-    static buildSwitch(block: FilterCardBlock, status: Status, type: string) {
+    private static buildSwitch(block: FilterCardBlock, status: Status, type: string) {
         const id = `switch-filter-${status.key}`;
         const element = eli.build('div', { className: 'mdc-switch' }, [
             eli.build('div', { className: 'mdc-switch__track' }),
