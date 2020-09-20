@@ -3,6 +3,8 @@
 
 @include icon-button.core-styles;
 
+#button-appBar-view { display: none; }
+
 @media screen and (max-width: 620px) {
     #button-appBar-view { display: block; }
 }
