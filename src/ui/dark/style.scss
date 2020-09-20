@@ -8,6 +8,26 @@
         --mdc-theme-text-disabled-on-light: rgba(255, 255, 255, 0.5) !important;
     }
 
+    body {
+        color: #FFF !important;
+    }
+
+    .mdc-icon-button::before, .mdc-icon-button::after {
+        background: #FFF !important;
+    }
+
+    .mdc-card--outlined {
+        border-style: none !important;
+    }
+
+    .mdc-card__action--icon:not(:disabled) {
+        color: var(--mdc-theme-primary) !important;
+    }
+    
+    .mdc-card__primary-action::before, .mdc-card__primary-action::after {
+        background: #FFF !important;
+    }
+
     .mdc-menu .mdc-list {
         color: #FFF !important;
     }

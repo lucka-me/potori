@@ -14,7 +14,7 @@ import Snackbar     from './snackbar';
 import type Dashboard   from './dashboard';
 import type ListView    from './list-view';
 
-import '../css/extended.css';
+import './style.scss'
 
 export namespace ui {
 
@@ -32,7 +32,7 @@ export namespace ui {
         document.documentElement.lang = i18next.language;
 
         const body = document.body;
-        body.className = 'mdc-typography fullheight flex-box-col';
+        body.className = 'mdc-typography flex-box-col';
 
         // AppBar
         appBar.events.set(AppBarActions.view.key   , () => switchView());

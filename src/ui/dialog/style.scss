@@ -1,0 +1,12 @@
+/* Dialog */
+.mdc-dialog-content-block {
+    padding: 0px 8px;
+    display: flex;
+    flex-flow: column nowrap;
+    flex-grow: 1;
+}
+
+textarea.code {
+    font-family: monospace;
+    line-height: 1rem !important;
+}
