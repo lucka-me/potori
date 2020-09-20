@@ -3,11 +3,6 @@
         --map-style: //styles/mapbox/dark-v10 !important;
     }
 
-    .mdc-dialog .mdc-dialog__content,
-    .mdc-dialog .mdc-dialog__title {
-        color: #FFF !important;
-    }
-
     .mdc-radio__native-control:enabled:not(:checked)+.mdc-radio__background .mdc-radio__outer-circle {
         border-color: #FFF !important;
     }

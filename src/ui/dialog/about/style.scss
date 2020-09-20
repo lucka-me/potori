@@ -1,0 +1,4 @@
+@use "@material/dialog";
+@use "@material/typography/mdc-typography";
+
+@include dialog.core-styles;
