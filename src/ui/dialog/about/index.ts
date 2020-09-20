@@ -5,7 +5,7 @@ import { eli } from "ui/eli";
 import { service } from "service";
 import DialogPrototype from 'ui/dialog/base';
 
-import './style.scss'
+import './style.scss';
 
 /**
  * Dialog to show Potori information

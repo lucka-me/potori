@@ -4,6 +4,8 @@ import { MDCDialog } from "@material/dialog";
 import { eli } from "ui/eli";
 import DialogPrototype from 'ui/dialog/base';
 
+import './style.scss';
+
 /**
  * Dialog to show alert message
  */
