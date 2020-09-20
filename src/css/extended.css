@@ -75,20 +75,11 @@ body {
 
 h1, h2, h3, h4 { margin-block-end: 0; }
 a { color: var(--mdc-theme-text-primary-on-light); }
-.mdc-data-table { margin-block-start: 0.5rem; margin-block-end: 0.5rem; }
 
 body.fullheight {
     height: 100%;
     min-height: 100%;
     max-height: 100%;
-}
-
-.logo { height: 32px; }
-
-#button-appBar-view { display: none; }
-
-.mdc-linear-progress__bar-inner {
-    background-color: var(--mdc-theme-secondary) !important;
 }
 
 .fa.mdc-icon-button,
@@ -141,11 +132,7 @@ textarea.code {
     margin-left: 0.6rem;
 }
 
-/* Data Table */
-.mdc-data-table__cell--wrap { white-space: normal !important; }
-
 /* Mobile View */
 @media screen and (max-width: 620px) {
     .view-hide { display: none !important; }
-    #button-appBar-view { display: block; }
 }

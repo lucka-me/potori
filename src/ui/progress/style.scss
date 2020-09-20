@@ -1,0 +1,7 @@
+@use "@material/linear-progress";
+
+@include linear-progress.core-styles;
+
+.mdc-linear-progress__bar-inner {
+    background-color: var(--mdc-theme-secondary) !important;
+}
