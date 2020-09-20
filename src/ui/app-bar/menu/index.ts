@@ -6,6 +6,8 @@ import UIPrototype from 'ui/base';
 
 import { AppBarMenuItems } from "./constants";
 
+import "./style.scss";
+
 type MenuItemClickCallback = () => void;
 
 /**

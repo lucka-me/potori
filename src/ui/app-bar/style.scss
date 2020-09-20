@@ -1,0 +1,14 @@
+@use "@material/icon-button";
+@use "@material/top-app-bar/mdc-top-app-bar";
+
+@include icon-button.core-styles;
+
+@media screen and (max-width: 620px) {
+    #button-appBar-view { display: block; }
+}
+
+@media (prefers-color-scheme: dark) {
+    .mdc-top-app-bar {
+        background-color: #272727 !important;   // Elevation: 4dp
+    }
+}

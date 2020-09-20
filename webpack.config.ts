@@ -62,6 +62,14 @@ module.exports = {
         use: 'ts-loader',
       },
       {
+        test: /\.s[ac]ss$/i,
+        use: [
+          MiniCssExtractPlugin.loader,
+          'css-loader',
+          'sass-loader',
+        ],
+      },
+      {
         test: /\.css$/,
         use: [
           { loader: MiniCssExtractPlugin.loader },
@@ -237,7 +245,7 @@ module.exports = {
             .replace(':name', cdn.cdn || cdn.name)
             .replace(':version', version);
           if (cdn.path) list.push({ url: base.replace(':path', cdn.path), revision: version });
-          if (cdn.style) list.push({ url: base.replace(':path', cdn.style), revision: version });
+          //if (cdn.style) list.push({ url: base.replace(':path', cdn.style), revision: version });
           if (cdn.styles) list.push(...cdn.styles.map((style) => {
             return { url: base.replace(':path', style), revision: version }
           }));

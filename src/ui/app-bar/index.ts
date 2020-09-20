@@ -8,6 +8,8 @@ import UIPrototype from 'ui/base';
 import { AppBarActions } from "./constants";
 import AppBarMenu, { AppBarMenuItems } from "./menu";
 
+import './style.scss';
+
 type AppBarActionClickCallback = () => void;
 
 /**
