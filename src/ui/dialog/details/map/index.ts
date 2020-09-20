@@ -75,7 +75,7 @@ export default class DetailsDialogMap extends UIPrototype {
         this.parent.append(elementContent);
 
         const mapboxgl = await import(
-            /* webpackChunkName: 'mapboxgl' */
+            /* webpackChunkName: 'modules-async' */
             'mapbox-gl'
         );
         this.ctrl = new mapboxgl.Map({
@@ -90,7 +90,7 @@ export default class DetailsDialogMap extends UIPrototype {
         this.delete();
         if (this.nomination.lngLat) {
             import(
-                /* webpackChunkName: 'mapboxgl' */
+                /* webpackChunkName: 'modules-async' */
                 'mapbox-gl'
             ).then((mapboxgl) => {
                 this.marker = new mapboxgl.Marker()
@@ -106,7 +106,7 @@ export default class DetailsDialogMap extends UIPrototype {
     edit() {
         if (!this.marker) {
             import(
-                /* webpackChunkName: 'mapboxgl' */
+                /* webpackChunkName: 'modules-async' */
                 'mapbox-gl'
             ).then((mapboxgl) => {
                 this.marker = new mapboxgl.Marker()
@@ -126,7 +126,7 @@ export default class DetailsDialogMap extends UIPrototype {
             if (!this.dialog.isOpen) return;
             if (!this.marker) {
                 import(
-                    /* webpackChunkName: 'mapboxgl' */
+                    /* webpackChunkName: 'modules-async' */
                     'mapbox-gl'
                 ).then((mapboxgl) => {
                     this.marker = new mapboxgl.Marker()

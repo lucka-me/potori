@@ -111,6 +111,12 @@ module.exports = {
           name: 'ui',
           priority: 40,
         },
+        uiAsync: {
+          test: /[\\/]src[\\/]ui[\\/]/,
+          name: 'ui-async',
+          chunks: 'async',
+          priority: 40,
+        },
 
         data: {
           test: /[\\/]src[\\/](data|locales)[\\/]/,
@@ -124,30 +130,9 @@ module.exports = {
           priority: 20,
           reuseExistingChunk: true,
         },
-        chartjs: {
-          test: /[\\/]node_modules[\\/]chart\.js/,
-          name: 'chartjs',
-          priority: 20,
-          chunks: 'async',
-          reuseExistingChunk: true,
-        },
-        firebase: {
-          test: /[\\/]node_modules[\\/]firebase/,
-          name: 'firebase',
-          priority: 20,
-          chunks: 'async',
-          reuseExistingChunk: true,
-        },
-        mapboxgl: {
-          test: /[\\/]node_modules[\\/]mapbox\-gl/,
-          name: 'mapboxgl',
-          priority: 20,
-          chunks: 'async',
-          reuseExistingChunk: true,
-        },
-        moment: {
-          test: /[\\/]node_modules[\\/]moment/,
-          name: 'moment',
+        mdcAsync: {
+          test: /[\\/]node_modules[\\/]@material/,
+          name: 'mdc-async',
           priority: 20,
           chunks: 'async',
           reuseExistingChunk: true,
@@ -157,6 +142,13 @@ module.exports = {
           test: /[\\/]node_modules[\\/]/,
           name: 'modules',
           priority: 10,
+          reuseExistingChunk: true,
+        },
+        modulesAsync: {
+          test: /[\\/]node_modules[\\/]/,
+          name: 'modules-async',
+          priority: 10,
+          chunks: 'async',
           reuseExistingChunk: true,
         },
       },

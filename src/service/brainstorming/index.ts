@@ -95,8 +95,8 @@ class BrainstormingKit {
      */
     private queryFirebase(bsId: string, succeed: (data: any) => void, failed: () => void) {
         Promise.all([
-            import(/* webpackChunkName: 'firebase' */ '@firebase/app'),
-            import(/* webpackChunkName: 'firebase' */ '@firebase/database'),
+            import(/* webpackChunkName: 'modules-async' */ '@firebase/app'),
+            import(/* webpackChunkName: 'modules-async' */ '@firebase/database'),
         ]).then(([ firebase, _ ]) => {
             if (!this.reference) {
                 const app = firebase.default.initializeApp({ databaseURL: 'https://oprbrainstorming.firebaseio.com' });

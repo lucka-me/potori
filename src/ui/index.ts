@@ -194,8 +194,8 @@ export namespace ui {
      * Start to preload modules
      */
     function preloadModules() {
-        import(/* webpackChunkName: 'dashboard' */ './dashboard');
-        import(/* webpackChunkName: 'listview' */  './list-view');
+        import(/* webpackChunkName: 'ui-async' */ './dashboard');
+        import(/* webpackChunkName: 'ui-async' */  './list-view');
     }
 
     /**
@@ -209,7 +209,7 @@ export namespace ui {
 
         // Lazyload Dashboard
         const Dashboard = await import(
-            /* webpackChunkName: 'dashboard' */
+            /* webpackChunkName: 'ui-async' */
             './dashboard'
         );
         dashboard = new Dashboard.default();
@@ -261,7 +261,7 @@ export namespace ui {
 
         // Lazyload ListView
         const ListView = await import(
-            /* webpackChunkName: 'listview' */
+            /* webpackChunkName: 'ui-async' */
             './list-view'
         );
         list = new ListView.default();
