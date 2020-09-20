@@ -12,10 +12,10 @@ import './style.scss';
  */
 class Dialog extends UIPrototype {
 
-    about       = new AboutDialog;
-    alert       = AlertDialog;
-    details     = new DetailsDialog;
-    import      = new ImportDialog;
+    about       = new AboutDialog();
+    alert       = new AlertDialog();
+    details     = new DetailsDialog();
+    import      = new ImportDialog();
 
     init(parent: HTMLElement) {
         super.init(parent);

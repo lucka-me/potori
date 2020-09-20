@@ -77,12 +77,18 @@ export namespace ui {
         snackbar.init(body);
 
         // Dialog
-        dialog.details.events.update = (nomination) => {
-            update(nomination);
-        };
+        dialog.details.events.alert = (message) => {
+            dialog.alert.open(message);
+        }
         dialog.details.events.query = (bsId, succeed, failed) => {
             service.bs.query(bsId, succeed, failed);
         };
+        dialog.details.events.update = (nomination) => {
+            update(nomination);
+        };
+        dialog.details.map.events.alert = (message) => {
+            dialog.alert.open(message);
+        }
         dialog.details.map.events.queryLngLat = (bsId, succeed, failed) => {
             service.bs.queryLocation(bsId, succeed, failed);
         };

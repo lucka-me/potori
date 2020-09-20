@@ -7,7 +7,6 @@ import { MDCTextField } from "@material/textfield";
 
 import { eli } from "ui/eli";
 import { service } from "service";
-import AlertDialog from 'ui/dialog/alert';
 import DialogPrototype from 'ui/dialog/base';
 import Nomination from "service/nomination";
 
@@ -16,8 +15,9 @@ import DetailsDialogMap from "./map";
 import './style.scss';
 
 interface DetailsDialogEvents {
-    update: (nomination: Nomination) => void;
+    alert: (message: string) => void;
     query: (bsId: string, succeed: (data: any) => void, failed: () => void) => void;
+    update: (nomination: Nomination) => void;
 }
 
 class DetailsDialog extends DialogPrototype {
@@ -37,8 +37,9 @@ class DetailsDialog extends DialogPrototype {
     map = new DetailsDialogMap();
 
     events: DetailsDialogEvents = {
-        update      : () => { },
+        alert       : () => { },
         query       : () => { },
+        update      : () => { },
     };
 
     async render() {
@@ -265,7 +266,7 @@ class DetailsDialog extends DialogPrototype {
         if (selectedStatus !== 'pending') {
             const time = Date.parse(this.fieldResultTime.value);
             if (!time) {
-                AlertDialog.open(i18next.t('message:Invalid DateTime'));
+                this.events.alert(i18next.t('message:Invalid DateTime'));
                 return;
             }
             const newTime = time + (new Date().getTimezoneOffset() * 60000);

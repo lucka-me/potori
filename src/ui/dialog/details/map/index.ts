@@ -3,13 +3,13 @@ import { MDCRipple } from "@material/ripple";
 import { MDCDialog } from "@material/dialog";
 
 import { eli } from "ui/eli";
-import AlertDialog from 'ui/dialog/alert';
 import Nomination, { LngLat } from 'service/nomination'
 import UIPrototype from 'ui/base';
 
 import './style.scss';
 
 interface DetailsDialogMapEvents {
+    alert: (message: string) => void;
     queryLngLat: (bsId: string, succeed: (lngLat: LngLat) => void, failed: () => void) => void;
 }
 
@@ -38,7 +38,8 @@ export default class DetailsDialogMap extends UIPrototype {
     };
 
     events: DetailsDialogMapEvents = {
-        queryLngLat : () => { },
+        alert: () => { },
+        queryLngLat: () => { },
     };
 
     async init(parent: HTMLElement) {
@@ -145,7 +146,7 @@ export default class DetailsDialogMap extends UIPrototype {
         };
         const failed = () => {
             if (!this.dialog.isOpen) return;
-            AlertDialog.open(i18next.t('message:Unable to query the location'));
+            this.events.alert(i18next.t('message:Unable to query the location'));
             this.buttons.search.root.disabled = false;
         }
         this.buttons.search.root.disabled = true;

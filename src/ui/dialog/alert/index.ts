@@ -9,7 +9,7 @@ import './style.scss';
 /**
  * Dialog to show alert message
  */
-class AlertDialog extends DialogPrototype {
+export default class AlertDialog extends DialogPrototype {
 
     textMessage: HTMLDivElement = null; // Dialog element
 
@@ -37,5 +37,3 @@ class AlertDialog extends DialogPrototype {
         this.textMessage.innerHTML = message;
     }
 }
-
-export default new AlertDialog();
