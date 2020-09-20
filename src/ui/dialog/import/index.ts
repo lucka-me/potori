@@ -5,6 +5,8 @@ import { MDCTextField } from "@material/textfield";
 import { eli } from "ui/eli";
 import DialogPrototype from 'ui/dialog/base';
 
+import './style.scss'
+
 type ImportCallback = (raw: string) => void;
 
 class ImportDialog extends DialogPrototype {

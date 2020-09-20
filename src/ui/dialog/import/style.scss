@@ -1,0 +1,8 @@
+@use "@material/dialog";
+@use "@material/floating-label/mdc-floating-label";
+@use "@material/notched-outline/mdc-notched-outline";
+@use "@material/textfield";
+@use "@material/typography/mdc-typography";
+
+@include dialog.core-styles;
+@include textfield.core-styles;

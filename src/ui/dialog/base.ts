@@ -3,8 +3,6 @@ import { MDCDialog } from "@material/dialog";
 import { eli } from "ui/eli";
 import UIPrototype from "ui/base";
 
-import './style.scss';
-
 /**
  * Ptototype of MDC dialog components
  * 

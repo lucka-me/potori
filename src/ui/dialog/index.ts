@@ -5,6 +5,8 @@ import AlertDialog      from './alert';
 import DetailsDialog    from './details';
 import ImportDialog     from './import';
 
+import './style.scss';
+
 /**
  * Virtual component to host all dialogs
  */
