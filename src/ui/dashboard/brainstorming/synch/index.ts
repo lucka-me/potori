@@ -4,6 +4,8 @@ import { eli } from 'ui/eli';
 import { BrainstormingStats } from 'service/brainstorming';
 import { DashboardBsPrototype } from 'ui/dashboard/brainstorming/base';
 
+import './style.scss';
+
 class BSSynchCard extends DashboardBsPrototype {
 
     textSynch: HTMLSpanElement = null;

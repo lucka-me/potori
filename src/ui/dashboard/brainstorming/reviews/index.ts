@@ -6,6 +6,8 @@ import { eli } from 'ui/eli';
 import { BrainstormingStats } from 'service/brainstorming';
 import { DashboardBsChartPrototype } from 'ui/dashboard/brainstorming/base';
 
+import './style.scss';
+
 class BSReviewsCard extends DashboardBsChartPrototype {
     render() {
         const canvasChart = eli.build('canvas', { className: 'canvas-chart--h' });

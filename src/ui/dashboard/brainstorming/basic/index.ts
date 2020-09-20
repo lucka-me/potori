@@ -5,6 +5,8 @@ import { eli } from 'ui/eli';
 import { BrainstormingStats } from 'service/brainstorming';
 import { DashboardBsPrototype } from 'ui/dashboard/brainstorming/base';
 
+import './style.scss';
+
 interface BSBasicCardEvents {
     refresh:    () => void,
     clear:      () => void;
