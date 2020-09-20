@@ -1,10 +1,14 @@
+import i18next from 'i18next';
+
 import { eli } from 'ui/eli';
+import { service } from 'service';
 import Nomination from 'service/nomination';
 import UIPrototype from 'ui/base';
 
 import NominationCard from "./card";
 
 interface ListViewEvents {
+    alert: (message: string) => void;
     focus: (nomination: Nomination) => void;
     openDetails: (nomination: Nomination) => void;
 }
@@ -15,6 +19,7 @@ class ListView extends UIPrototype {
     now = Date.now();
 
     events: ListViewEvents = {
+        alert:          () => { },
         focus:          () => { },
         openDetails:    () => { },
     };
@@ -50,8 +55,22 @@ class ListView extends UIPrototype {
         this.clear();
         const cards = nominations.map((nomination) => {
             const card = NominationCard.build(nomination, this.now, {
-                openDetails: () => this.events.openDetails(nomination),
                 focus: () => { this.events.focus(nomination) },
+                openBs: () => {
+                    if (service.version.full) {
+                        window.open(nomination.bsUrl, '_blank', 'noopener');
+                    } else {
+                        const textarea = eli.build('textarea', {
+                            value: nomination.id, readOnly: true
+                        });
+                        document.body.append(textarea);
+                        textarea.select();
+                        document.execCommand('copy');
+                        textarea.remove();
+                        this.events.alert(i18next.t('message:Brainstorming ID copied', { id: nomination.id }));
+                    }
+                },
+                openDetails: () => this.events.openDetails(nomination),
             });
             NominationCard.update(nomination, card);
             if (nomination.lngLat) {

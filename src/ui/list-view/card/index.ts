@@ -3,14 +3,19 @@ import { MDCRipple } from "@material/ripple";
 
 import { eli } from "ui/eli";
 import { service } from "service";
-import AlertDialog from "ui/dialog/alert";
 import Nomination from 'service/nomination';
 
 import './style.scss';
 
+type BasicCallback = () => void;
+
+/**
+ * Events for {@link NominationCard}
+ */
 interface NominationCardEvents {
-    focus: () => void;
-    openDetails: () => void;
+    focus:          BasicCallback;  // Triggered when click the location button to focus in map
+    openBs:         BasicCallback;  // Triggered when click the status button to open bs page
+    openDetails:    BasicCallback;  // Triggered when click the main action to open details dialog
 }
 
 class NominationCard {
@@ -112,22 +117,7 @@ class NominationCard {
         ]);
         const actionStatus = new MDCRipple(elementActionStatus);
         actionStatus.unbounded = true;
-        if (service.version.full) {
-            actionStatus.listen('click', () => {
-                window.open(nomination.bsUrl, '_blank', 'noopener');
-            });
-        } else {
-            actionStatus.listen('click', () => {
-                const textarea = eli.build('textarea', {
-                    value: nomination.id, readOnly: true
-                });
-                document.body.append(textarea);
-                textarea.select();
-                document.execCommand('copy');
-                textarea.remove();
-                AlertDialog.open(i18next.t('message:Brainstorming ID copied', { id: nomination.id }));
-            });
-        }
+        actionStatus.listen('click', events.openBs);
 
         const actionIcons = [];
         const classNameAction = [

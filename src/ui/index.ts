@@ -267,6 +267,9 @@ export namespace ui {
         list = new ListView.default();
         list.init(mainBox);
 
+        list.events.alert = (message) => {
+            dialog.alert.open(message);
+        }
         list.events.focus = (nomination) => {
             dashboard.map.easeTo(nomination.lngLat);
         }
