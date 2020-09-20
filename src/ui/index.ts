@@ -5,6 +5,8 @@ import { service } from 'service';
 import Nomination from 'service/nomination';
 import { StatusReason, StatusType } from 'service/status';
 
+import './style.scss';
+
 import AppBar, { AppBarMenuItems, AppBarActions } from './app-bar';
 import Dark         from "./dark";
 import Dialog       from './dialog';
@@ -13,8 +15,6 @@ import Snackbar     from './snackbar';
 
 import type Dashboard   from './dashboard';
 import type ListView    from './list-view';
-
-import './style.scss'
 
 export namespace ui {
 

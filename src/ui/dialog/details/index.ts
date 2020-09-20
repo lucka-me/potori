@@ -343,8 +343,7 @@ class DetailsDialog extends DialogPrototype {
     }
 
     updateStyle() {
-        if (!this.map.ctrl) return;
-        this.map.ctrl.setStyle(getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim());
+        this.map.updateStyle();
     }
 
     /**

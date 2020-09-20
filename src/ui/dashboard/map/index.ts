@@ -41,7 +41,7 @@ class MapCard extends DashboardPrototype {
         mapboxgl.accessToken = 'pk.eyJ1IjoibHVja2EtbWUiLCJhIjoiY2p2NDk5NmRvMHFreTQzbzduemM1MHV4cCJ9.7XGmxnEJRoCDr-i5BBmBfw';
         this.ctrl = new mapboxgl.Map({
             container: elementMap,
-            style: getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim()
+            style: MapCard.getStyle(),
         });
         this.ctrl.on('idle', () => this.executeTasks());
         this.ctrl.addControl(new mapboxgl.NavigationControl());
@@ -74,7 +74,7 @@ class MapCard extends DashboardPrototype {
             this.tasks.push(() => this.updateStyle());
             return;
         }
-        this.ctrl.setStyle(getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim());
+        this.ctrl.setStyle(MapCard.getStyle());
         this.update(this.events.styleLoaded());
     }
 
@@ -268,6 +268,10 @@ class MapCard extends DashboardPrototype {
             });
         }
         return geoJson;
+    }
+
+    private static getStyle() {
+        return `mapbox://styles/mapbox/${getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim()}?optimize=true`;
     }
 }
 

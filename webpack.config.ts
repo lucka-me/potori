@@ -38,11 +38,6 @@ const cdnConfig = {
       name:    'googleapis',
       prodUrl: 'https://apis.google.com/js/api.js',
     },
-    {
-      name:   'material-components-web',
-      cssOnly:  true,
-      style:  'material-components-web.min.css',
-    },
   ],
   prodUrl: 'https://cdnjs.cloudflare.com/ajax/libs/:name/:version/:path'
 };

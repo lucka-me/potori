@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap');
-@use "@material/theme" with (
-  $primary: #3B1E5F,
-  $secondary: #2578B5,
-);
+@use "@material/theme";
 @use "@material/typography/mdc-typography";
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap');
 
 :root {
+    --mdc-theme-primary: #3B1E5F;
+    --mdc-theme-secondary: #2578B5;
+
     --color-pending: #CAAF85;
     --color-pending--dark: #988058;
     --color-pending--light: #fEE1B5;

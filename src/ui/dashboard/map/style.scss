@@ -4,7 +4,7 @@
 
 @media (prefers-color-scheme: dark) {
     :root {
-        --map-style: 'mapbox://styles/mapbox/dark-v10?optimize=true';
+        --map-style: dark-v10;
     }
 
     .mapboxgl-popup-content {
@@ -28,5 +28,5 @@
     }
 }
 :root {
-    --map-style: 'mapbox://styles/mapbox/streets-v11?optimize=true'
+    --map-style: streets-v11;
 }

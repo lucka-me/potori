@@ -80,7 +80,7 @@ export default class DetailsDialogMap extends UIPrototype {
         );
         this.ctrl = new mapboxgl.Map({
             container: elementMap,
-            style: getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim(),
+            style: DetailsDialogMap.getStyle(),
         });
         this.ctrl.addControl(new mapboxgl.NavigationControl());
     }
@@ -157,5 +157,14 @@ export default class DetailsDialogMap extends UIPrototype {
         this.marker = null;
         this.buttons.edit.root.innerHTML = '\uf067';
         this.buttons.delete.root.disabled = true;
+    }
+
+    updateStyle() {
+        if (!this.ctrl) return;
+        this.ctrl.setStyle(DetailsDialogMap.getStyle());
+    }
+
+    private static getStyle() {
+        return `mapbox://styles/mapbox/${getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim()}?optimize=true`;
     }
 }
