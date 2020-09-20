@@ -13,6 +13,8 @@ import Nomination from "service/nomination";
 
 import DetailsDialogMap from "./map";
 
+import './style.scss';
+
 interface DetailsDialogEvents {
     update: (nomination: Nomination) => void;
     query: (bsId: string, succeed: (data: any) => void, failed: () => void) => void;

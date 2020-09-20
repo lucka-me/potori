@@ -32,10 +32,6 @@
         color: #FFF !important;
     }
 
-    .mdc-radio__native-control:enabled:not(:checked)+.mdc-radio__background .mdc-radio__outer-circle {
-        border-color: #FFF !important;
-    }
-
     .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__icon,
     .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input {
         color: #FFF !important;

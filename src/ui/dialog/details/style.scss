@@ -1,0 +1,14 @@
+@use "@material/dialog";
+@use "@material/form-field";
+@use "@material/radio";
+@use "@material/typography/mdc-typography";
+
+@include dialog.core-styles;
+@include form-field.core-styles;
+@include radio.core-styles;
+
+@media (prefers-color-scheme: dark) {
+    .mdc-radio__native-control:enabled:not(:checked)+.mdc-radio__background .mdc-radio__outer-circle {
+        border-color: #FFF !important;
+    }
+}
