@@ -47,9 +47,6 @@ export namespace ui {
             AppBarMenuItems.upload.key, () => service.upload()
         );
         appBar.menu.events.set(
-            AppBarMenuItems.import.key, () => dialog.import.open()
-        );
-        appBar.menu.events.set(
             AppBarMenuItems.about.key, () => dialog.about.open()
         );
         appBar.menu.events.set(
@@ -77,24 +74,6 @@ export namespace ui {
         snackbar.init(body);
 
         // Dialog
-        dialog.details.events.alert = (message) => {
-            dialog.alert.open(message);
-        }
-        dialog.details.events.query = (bsId, succeed, failed) => {
-            service.bs.query(bsId, succeed, failed);
-        };
-        dialog.details.events.update = (nomination) => {
-            update(nomination);
-        };
-        dialog.details.map.events.alert = (message) => {
-            dialog.alert.open(message);
-        }
-        dialog.details.map.events.queryLngLat = (bsId, succeed, failed) => {
-            service.bs.queryLocation(bsId, succeed, failed);
-        };
-        dialog.import.import = (raw) => {
-            service.importJSON(raw);
-        };
         dialog.init(body);
 
         // Dark
@@ -182,7 +161,7 @@ export namespace ui {
     }
 
     function show() {
-        prepareViews().then(() => {
+        prepare().then(() => {
             dashboard.setVisible(true);
             dashboard.map.fit(service.nominations);
             dashboard.refresh(service.nominations);
@@ -209,7 +188,7 @@ export namespace ui {
      * - First time: Load modules, build views and register events
      * - After: Return directly
      */
-    async function prepareViews() {
+    async function prepare() {
 
         if (dashboard) return;
 
@@ -279,15 +258,44 @@ export namespace ui {
         list.events.focus = (nomination) => {
             dashboard.map.easeTo(nomination.lngLat);
         }
-        list.events.openDetails = (nomination) => {
-            dialog.details.open(nomination);
-        }
         dashboard.map.events.focus = (id) => {
             const top = list.root.offsetTop + 8;
             list.root.scrollTo(
                 0, document.getElementById(`card-${id}`).offsetTop - top
             );
         }
+
+        // Prepare async dialogs
+        await dialog.prepare();
+        // Details dialog
+        dialog.details.events.alert = (message) => {
+            dialog.alert.open(message);
+        }
+        dialog.details.events.query = (bsId, succeed, failed) => {
+            service.bs.query(bsId, succeed, failed);
+        };
+        dialog.details.events.update = (nomination) => {
+            update(nomination);
+        };
+        dialog.details.map.events.alert = (message) => {
+            dialog.alert.open(message);
+        }
+        dialog.details.map.events.queryLngLat = (bsId, succeed, failed) => {
+            service.bs.queryLocation(bsId, succeed, failed);
+        };
+
+        list.events.openDetails = (nomination) => {
+            dialog.details.open(nomination);
+        };
+
+        // Import dialog
+        dialog.import.import = (raw) => {
+            service.importJSON(raw);
+        };
+
+        appBar.menu.events.set(
+            AppBarMenuItems.import.key, () => dialog.import.open()
+        );
     }
 
     function update(nomination: Nomination) {

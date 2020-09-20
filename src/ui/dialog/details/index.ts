@@ -42,7 +42,7 @@ class DetailsDialog extends DialogPrototype {
         update      : () => { },
     };
 
-    async render() {
+    render() {
         this.headingTitle = eli.build('h2', {
             className: 'mdc-dialog__title',
             dataset: { mdcDialogInitialFocus: '' },
@@ -220,7 +220,7 @@ class DetailsDialog extends DialogPrototype {
                 className: 'flex-box-row--wrap',
             }, [ elementResultTime, this.elementReason ]),
         ]);
-        await this.map.init(elementContents);
+        this.map.init(elementContents);
         const elementDialog = DialogPrototype.buildDialog([
             this.headingTitle,
             this.image,
@@ -237,16 +237,6 @@ class DetailsDialog extends DialogPrototype {
         this.ctrl.listen('MDCDialog:opened', () => this.opened());
         this.ctrl.listen('MDCDialog:closed', (event: CustomEvent) => this.closed(event));
         this.map.dialog = this.ctrl;
-    }
-
-    /**
-     * Prepare the component
-     * - First time: Build components
-     * - After: Return directly
-     */
-    private async prepare() {
-        if (this.ctrl) return;
-        await this.render();
     }
 
     opened() {
@@ -304,43 +294,42 @@ class DetailsDialog extends DialogPrototype {
     }
 
     open(nomination: Nomination) {
-        this.prepare().then(() => {
-            this.nomination = nomination;
-            this.map.set(nomination);
-            const type = service.status.getTypeByCode(nomination.status.code);
+        if (!this.ctrl) this.render();
+        this.nomination = nomination;
+        this.map.set(nomination);
+        const type = service.status.getTypeByCode(nomination.status.code);
 
-            this.headingTitle.innerHTML = nomination.title;
-            this.image.src = nomination.imageUrl;
-            this.textConfirmedTime.innerHTML = new Date(nomination.confirmedTime).toLocaleString();
+        this.headingTitle.innerHTML = nomination.title;
+        this.image.src = nomination.imageUrl;
+        this.textConfirmedTime.innerHTML = new Date(nomination.confirmedTime).toLocaleString();
 
-            (this.fieldResultTime.root as HTMLElement).hidden = (type === 'pending');
-            const getLocalDateTimeISOString = (time: number) => {
-                const date = new Date();
-                date.setTime(time - date.getTimezoneOffset() * 60000);
-                return date.toISOString();
-            }
-            const resultTimeString = getLocalDateTimeISOString(
-                nomination.resultTime ? nomination.resultTime : Date.now()
-            );
-            this.fieldResultTime.value = resultTimeString.slice(0, resultTimeString.lastIndexOf(':'));
+        (this.fieldResultTime.root as HTMLElement).hidden = (type === 'pending');
+        const getLocalDateTimeISOString = (time: number) => {
+            const date = new Date();
+            date.setTime(time - date.getTimezoneOffset() * 60000);
+            return date.toISOString();
+        }
+        const resultTimeString = getLocalDateTimeISOString(
+            nomination.resultTime ? nomination.resultTime : Date.now()
+        );
+        this.fieldResultTime.value = resultTimeString.slice(0, resultTimeString.lastIndexOf(':'));
 
-            this.elementReason.hidden = !(type === 'rejected');
-            if (type === 'rejected') {
-                this.selectReason.selectedIndex = nomination.status.code - service.status.types.get(type).code;
-            }
-            if (type === 'pending') {
-                this.events.query(nomination.id, (data) => {
-                    const timeString = getLocalDateTimeISOString(data.lastTime);
-                    this.fieldResultTime.value = timeString.slice(0, timeString.lastIndexOf(':'));
-                    this.fieldResultTime.layout();
-                }, () => {});
-            }
+        this.elementReason.hidden = !(type === 'rejected');
+        if (type === 'rejected') {
+            this.selectReason.selectedIndex = nomination.status.code - service.status.types.get(type).code;
+        }
+        if (type === 'pending') {
+            this.events.query(nomination.id, (data) => {
+                const timeString = getLocalDateTimeISOString(data.lastTime);
+                this.fieldResultTime.value = timeString.slice(0, timeString.lastIndexOf(':'));
+                this.fieldResultTime.layout();
+            }, () => {});
+        }
 
-            this.status.get(type).checked = true;
-            this.selectedStatus = type;
+        this.status.get(type).checked = true;
+        this.selectedStatus = type;
 
-            this.ctrl.open();
-        });
+        this.ctrl.open();
     }
 
     updateStyle() {

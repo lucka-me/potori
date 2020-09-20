@@ -1,4 +1,5 @@
 import i18next from "i18next";
+import mapboxgl from "mapbox-gl";
 import { MDCRipple } from "@material/ripple";
 import { MDCDialog } from "@material/dialog";
 
@@ -42,12 +43,12 @@ export default class DetailsDialogMap extends UIPrototype {
         queryLngLat: () => { },
     };
 
-    async init(parent: HTMLElement) {
+    init(parent: HTMLElement) {
         super.init(parent);
-        await this.render();
+        this.render();
     }
 
-    async render() {
+    render() {
         const mapButtons = [];
         for (const value of Object.values(this.buttons)) {
             value.root = eli.build('button', {
@@ -75,10 +76,6 @@ export default class DetailsDialogMap extends UIPrototype {
 
         this.parent.append(elementContent);
 
-        const mapboxgl = await import(
-            /* webpackChunkName: 'modules-async' */
-            'mapbox-gl'
-        );
         this.ctrl = new mapboxgl.Map({
             container: elementMap,
             style: DetailsDialogMap.getStyle(),
