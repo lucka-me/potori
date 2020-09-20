@@ -6,6 +6,8 @@ import { service } from "service";
 import AlertDialog from "ui/dialog/alert";
 import Nomination from 'service/nomination';
 
+import './style.scss';
+
 interface NominationCardEvents {
     focus: () => void;
     openDetails: () => void;
