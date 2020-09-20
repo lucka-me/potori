@@ -2,6 +2,10 @@
 
 @include card.core-styles;
 
+:root {
+    --map-style: streets-v11;
+}
+
 @media (prefers-color-scheme: dark) {
     :root {
         --map-style: dark-v10;
@@ -26,7 +30,4 @@
     .mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
         border-right-color: var(--mdc-theme-surface) !important;
     }
-}
-:root {
-    --map-style: streets-v11;
 }
