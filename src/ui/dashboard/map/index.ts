@@ -6,6 +6,8 @@ import { service } from 'service';
 import { DashboardPrototype } from 'ui/dashboard/base';
 import Nomination, { LngLat } from 'service/nomination';
 
+import './style.scss';
+
 interface MapCardEvents {
     focus: (id: string) => void,
     styleLoaded: () => Array<Nomination>,
@@ -39,7 +41,7 @@ class MapCard extends DashboardPrototype {
         mapboxgl.accessToken = 'pk.eyJ1IjoibHVja2EtbWUiLCJhIjoiY2p2NDk5NmRvMHFreTQzbzduemM1MHV4cCJ9.7XGmxnEJRoCDr-i5BBmBfw';
         this.ctrl = new mapboxgl.Map({
             container: elementMap,
-            style: `mapbox:${getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim()}?optimize=true`
+            style: getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim()
         });
         this.ctrl.on('idle', () => this.executeTasks());
         this.ctrl.addControl(new mapboxgl.NavigationControl());
@@ -72,7 +74,7 @@ class MapCard extends DashboardPrototype {
             this.tasks.push(() => this.updateStyle());
             return;
         }
-        this.ctrl.setStyle(`mapbox:${getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim()}?optimize=true`);
+        this.ctrl.setStyle(getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim());
         this.update(this.events.styleLoaded());
     }
 

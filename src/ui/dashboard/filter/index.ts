@@ -6,6 +6,8 @@ import { service } from 'service';
 import { DashboardPrototype } from 'ui/dashboard/base';
 import { Status, StatusType, StatusReason } from 'service/status';
 
+import './style.scss';
+
 interface FilterCardBlock {
     root: HTMLDivElement;
 }

@@ -344,7 +344,7 @@ class DetailsDialog extends DialogPrototype {
 
     updateStyle() {
         if (!this.map.ctrl) return;
-        this.map.ctrl.setStyle(`mapbox:${getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim()}?optimize=true`);
+        this.map.ctrl.setStyle(getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim());
     }
 
     /**

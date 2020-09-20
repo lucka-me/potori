@@ -13,7 +13,7 @@ import QuotasCard           from './quotas';
 import StatsRejectedCard    from './stats-rejected';
 import StatsTypeCard        from './stats-type';
 
-import './style.scss'
+import './style.scss';
 
 class Dashboard extends UIPrototype {
 

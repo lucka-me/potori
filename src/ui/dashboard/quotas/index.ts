@@ -5,6 +5,8 @@ import { eli } from 'ui/eli';
 import { DashboardChartProtorype } from 'ui/dashboard/base';
 import Nomination from 'service/nomination';
 
+import './style.scss';
+
 class QuotasCard extends DashboardChartProtorype {
     render() {
         const canvasChart = eli.build('canvas', { className: 'canvas-chart--h' });

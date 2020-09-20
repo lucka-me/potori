@@ -80,7 +80,7 @@ export default class DetailsDialogMap extends UIPrototype {
         );
         this.ctrl = new mapboxgl.Map({
             container: elementMap,
-            style: `mapbox:${getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim()}?optimize=true`,
+            style: getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim(),
         });
         this.ctrl.addControl(new mapboxgl.NavigationControl());
     }

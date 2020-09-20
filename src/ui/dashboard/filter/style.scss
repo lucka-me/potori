@@ -1,0 +1,17 @@
+@use "@material/card";
+@use "@material/switch";
+@use "@material/typography/mdc-typography";
+
+@include switch.core-styles;
+@include card.core-styles;
+
+.mdc-switch-box {
+    padding: 4px 0px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+}
+
+.mdc-switch-box > label {
+    margin-left: 0.6rem;
+}

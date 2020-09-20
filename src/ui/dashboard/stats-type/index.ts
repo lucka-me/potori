@@ -6,6 +6,8 @@ import { service } from 'service';
 import { DashboardChartProtorype } from 'ui/dashboard/base';
 import Nomination from 'service/nomination';
 
+import './style.scss';
+
 class StatsTypeCard extends DashboardChartProtorype {
 
     render() {

@@ -1,6 +1,10 @@
+@use "@material/card";
+
+@include card.core-styles;
+
 @media (prefers-color-scheme: dark) {
     :root {
-        --map-style: //styles/mapbox/dark-v10 !important;
+        --map-style: 'mapbox://styles/mapbox/dark-v10?optimize=true';
     }
 
     .mapboxgl-popup-content {
@@ -22,4 +26,7 @@
     .mapboxgl-popup-anchor-left .mapboxgl-popup-tip {
         border-right-color: var(--mdc-theme-surface) !important;
     }
+}
+:root {
+    --map-style: 'mapbox://styles/mapbox/streets-v11?optimize=true'
 }
