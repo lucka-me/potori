@@ -7,6 +7,8 @@ import AlertDialog from 'ui/dialog/alert';
 import Nomination, { LngLat } from 'service/nomination'
 import UIPrototype from 'ui/base';
 
+import './style.scss';
+
 interface DetailsDialogMapEvents {
     queryLngLat: (bsId: string, succeed: (lngLat: LngLat) => void, failed: () => void) => void;
 }
