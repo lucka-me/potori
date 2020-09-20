@@ -1,0 +1,13 @@
+.dashboard > .mdc-card {
+    height: 200px;
+    margin: 4px !important;
+    flex-basis: 0%;
+}
+
+.container-chart {
+    flex-grow: 1;
+    position: relative;
+}
+
+canvas.canvas-chart--h { width:  100% !important; }
+canvas.canvas-chart--v { height: 100% !important; }
