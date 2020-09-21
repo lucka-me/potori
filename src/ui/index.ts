@@ -35,23 +35,11 @@ export namespace ui {
         body.className = 'mdc-typography flex-box-col';
 
         // AppBar
-        appBar.events.set(AppBarActions.view.key   , () => switchView());
-        appBar.events.set(AppBarActions.signin.key , () => service.auth.signIn());
-        appBar.menu.events.set(
-            AppBarMenuItems.open.key, () => service.open()
-        );
-        appBar.menu.events.set(
-            AppBarMenuItems.save.key, () => service.save()
-        );
-        appBar.menu.events.set(
-            AppBarMenuItems.upload.key, () => service.upload()
-        );
-        appBar.menu.events.set(
-            AppBarMenuItems.about.key, () => dialog.about.open()
-        );
-        appBar.menu.events.set(
-            AppBarMenuItems.signout.key, () => service.auth.signOut()
-        );
+        appBar.events.set(AppBarActions.view.key    , () => switchView());
+        appBar.events.set(AppBarActions.signin.key  , () => service.auth.signIn());
+        appBar.events.set(AppBarActions.open.key    , () => service.open());
+        appBar.events.set(AppBarActions.about.key   , () => dialog.about.open());
+        
         appBar.init(body);
 
         // Progress
@@ -134,9 +122,11 @@ export namespace ui {
         } else {
             clear();
             appBar.actions.get(AppBarActions.signin.key).hidden = !navigator.onLine;
-            appBar.menu.items.get(AppBarMenuItems.signout.key).hidden = true;
-            appBar.menu.items.get(AppBarMenuItems.upload.key).hidden = true;
-            appBar.menu.items.get(AppBarMenuItems.import.key).hidden = true;
+            if (appBar.menu) {
+                appBar.menu.items.get(AppBarMenuItems.signout.key).hidden = true;
+                appBar.menu.items.get(AppBarMenuItems.upload.key).hidden = true;
+                appBar.menu.items.get(AppBarMenuItems.import.key).hidden = true;
+            }
         }
     }
 
@@ -148,8 +138,13 @@ export namespace ui {
     }
 
     function clear() {
-        appBar.menu.items.get(AppBarMenuItems.open.key).hidden = false;
-        appBar.menu.items.get(AppBarMenuItems.save.key).hidden = true;
+        if (appBar.menu) {
+            appBar.menu.items.get(AppBarMenuItems.open.key).hidden = false;
+            appBar.menu.items.get(AppBarMenuItems.save.key).hidden = true;
+            appBar.actions.get(AppBarActions.menu.key).hidden = true;
+        }
+        appBar.actions.get(AppBarActions.open.key).hidden = false;
+        appBar.actions.get(AppBarActions.about.key).hidden = false;
         progress.close();
         progress.buffer = 0;
         progress.progress = 0;
@@ -191,6 +186,24 @@ export namespace ui {
     async function prepare() {
 
         if (dashboard) return;
+
+        // Prepare app bar menu
+        await appBar.prepare();
+        appBar.menu.events.set(
+            AppBarMenuItems.open.key, () => service.open()
+        );
+        appBar.menu.events.set(
+            AppBarMenuItems.save.key, () => service.save()
+        );
+        appBar.menu.events.set(
+            AppBarMenuItems.upload.key, () => service.upload()
+        );
+        appBar.menu.events.set(
+            AppBarMenuItems.about.key, () => dialog.about.open()
+        );
+        appBar.menu.events.set(
+            AppBarMenuItems.signout.key, () => service.auth.signOut()
+        );
 
         // Lazyload Dashboard
         const Dashboard = await import(

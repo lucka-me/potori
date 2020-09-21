@@ -6,7 +6,9 @@ import { eli } from "ui/eli";
 import UIPrototype from 'ui/base';
 
 import { AppBarActions } from "./constants";
-import AppBarMenu, { AppBarMenuItems } from "./menu";
+import { AppBarMenuItems } from "./menu/constants";
+
+import type AppBarMenu from "./menu";
 
 import './style.scss';
 
@@ -17,10 +19,12 @@ type AppBarActionClickCallback = () => void;
  */
 class AppBar extends UIPrototype {
 
-    menu = new AppBarMenu();    // Menu component
+    menu: AppBarMenu = null;    // Menu component
 
     actions: Map<string, HTMLButtonElement> = new Map();        // Actions
     events: Map<string, AppBarActionClickCallback> = new Map(); // Click events for actions
+
+    private sectionActions: HTMLElement = null;
 
     constructor() {
         super();
@@ -33,7 +37,7 @@ class AppBar extends UIPrototype {
     }
 
     render() {
-        const sectionActions = eli.build('section', {
+        this.sectionActions = eli.build('section', {
             className: [
                 'mdc-top-app-bar__section',
                 'mdc-top-app-bar__section--align-end'
@@ -45,17 +49,17 @@ class AppBar extends UIPrototype {
                 title: i18next.t(value.title),
                 innerHTML: value.icon,
             });
-            sectionActions.append(elementAction);
+            this.sectionActions.append(elementAction);
             const rippleAction = new MDCRipple(elementAction);
             rippleAction.unbounded = true;
             rippleAction.listen('click', this.events.get(value.key));
             elementAction.hidden = true;
             this.actions.set(value.key, elementAction);
         }
-        this.menu.init(sectionActions);
         this.actions.get(AppBarActions.view.key).hidden = false;
         this.actions.get(AppBarActions.view.key).id = 'button-appBar-view';
-        this.actions.get(AppBarActions.menu.key).hidden = false;
+        this.actions.get(AppBarActions.open.key).hidden = false;
+        this.actions.get(AppBarActions.about.key).hidden = false;
 
         const elementAppBar = eli.build('header', {
             className: 'mdc-top-app-bar mdc-top-app-bar--fixed',
@@ -74,7 +78,7 @@ class AppBar extends UIPrototype {
                         innerHTML: 'Potori',
                     }),
                 ]),
-                sectionActions,
+                this.sectionActions,
             ]),
         ]);
 
@@ -83,6 +87,22 @@ class AppBar extends UIPrototype {
             className: 'mdc-top-app-bar--fixed-adjust'
         }));
         new MDCTopAppBar(elementAppBar);
+    }
+
+    async prepare() {
+        if (this.menu) return;
+
+        // Lazyload Menu
+        const AppBarMenu = await import(
+            /* webpackChunkName: 'ui-async' */
+            './menu'
+        );
+        this.menu = new AppBarMenu.default();
+        this.menu.init(this.sectionActions);
+
+        this.actions.get(AppBarActions.menu.key).hidden = false;
+        this.actions.get(AppBarActions.open.key).hidden = true;
+        this.actions.get(AppBarActions.about.key).hidden = true;
     }
 
     /**
