@@ -56,7 +56,7 @@ export default class AuthKit {
      * Get authentication status, signed in or not
      */
     get signedIn() {
-        return gapi.auth2.getAuthInstance().isSignedIn.get();
+        return navigator.onLine && gapi.auth2.getAuthInstance().isSignedIn.get();
     }
 
     /**
