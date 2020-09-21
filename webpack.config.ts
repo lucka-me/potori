@@ -13,15 +13,6 @@ const WebpackPwaManifest = require('webpack-pwa-manifest');
 const cdnConfig = {
   modules: [
     {
-      name: 'i18next',
-      path: 'i18next.min.js'
-    },
-    {
-      name: 'i18next-browser-languagedetector',
-      var:  'i18nextBrowserLanguageDetector',
-      path: 'i18nextBrowserLanguageDetector.min.js'
-    },
-    {
       name:     '@fortawesome/fontawesome-free',
       cdn:      'font-awesome',
       cssOnly:  true,
@@ -231,7 +222,7 @@ module.exports = {
           const base = cdnConfig.prodUrl
             .replace(':name', cdn.cdn || cdn.name)
             .replace(':version', version);
-          if (cdn.path) list.push({ url: base.replace(':path', cdn.path), revision: version });
+          //if (cdn.path) list.push({ url: base.replace(':path', cdn.path), revision: version });
           //if (cdn.style) list.push({ url: base.replace(':path', cdn.style), revision: version });
           if (cdn.styles) list.push(...cdn.styles.map((style) => {
             return { url: base.replace(':path', style), revision: version }
