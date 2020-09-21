@@ -78,6 +78,7 @@ export namespace ui {
             progress.progress = percent;
         }
         service.events.start = () => {
+            appBar.actions.get(AppBarActions.open.key).hidden = true;
             preloadModules();
             progress.open();
         };
@@ -118,7 +119,9 @@ export namespace ui {
     function authStatChanged(signedIn: boolean) {
         if (signedIn) {
             appBar.actions.get(AppBarActions.signin.key).hidden = true;
-            appBar.menu.items.get(AppBarMenuItems.signout.key).hidden = false;
+            if (appBar.menu) {
+                appBar.menu.items.get(AppBarMenuItems.signout.key).hidden = false;
+            }
         } else {
             clear();
             appBar.actions.get(AppBarActions.signin.key).hidden = !navigator.onLine;
@@ -189,6 +192,7 @@ export namespace ui {
 
         // Prepare app bar menu
         await appBar.prepare();
+        appBar.menu.items.get(AppBarMenuItems.signout.key).hidden = !service.auth.signedIn;
         appBar.menu.events.set(
             AppBarMenuItems.open.key, () => service.open()
         );
