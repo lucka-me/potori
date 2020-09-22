@@ -19,6 +19,7 @@
     "Brainstorming ID copied": "已复制Brainstorming ID：{{id}}",
 
     "DetailsDialog": "",
-    "Unable to query the location": "无法查询位置。",
+    "Failed to query Firebase": "无法查询线上数据库。",
+    "Nomination not exists in database": "数据库中未找到提名。",
     "Invalid DateTime": "时间无效。"
 }

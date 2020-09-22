@@ -19,6 +19,7 @@
     "Brainstorming ID copied": "已拷貝Brainstorming ID：{{id}}",
 
     "DetailsDialog": "",
-    "Unable to query the location": "無法查詢位置。",
+    "Failed to query Firebase": "无法擷取線上資料庫。",
+    "Nomination not exists in database": "資料庫中未找到提名。",
     "Invalid DateTime": "時間無效。"
 }

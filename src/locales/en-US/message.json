@@ -19,6 +19,7 @@
     "Brainstorming ID copied": "Brainstorming ID copied: {{id}}",
 
     "DetailsDialog": "",
-    "Unable to query the location": "Unable to query the location.",
+    "Failed to query Firebase": "Failed to query Firebase.",
+    "Nomination not exists in database": "Nomination not exists in database",
     "Invalid DateTime": "Invalid DateTime."
 }

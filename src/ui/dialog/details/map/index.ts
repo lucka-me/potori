@@ -4,14 +4,15 @@ import { MDCRipple } from "@material/ripple";
 import { MDCDialog } from "@material/dialog";
 
 import { eli } from "ui/eli";
-import Nomination, { LngLat } from 'service/nomination'
+import Nomination, { LngLat } from 'service/nomination';
+import { QueryFailReason } from 'service/brainstorming';
 import UIPrototype from 'ui/base';
 
 import './style.scss';
 
 interface DetailsDialogMapEvents {
     alert: (message: string) => void;
-    queryLngLat: (bsId: string, succeed: (lngLat: LngLat) => void, failed: () => void) => void;
+    queryLngLat: (bsId: string, succeed: (lngLat: LngLat) => void, failed: (reason: QueryFailReason) => void) => void;
 }
 
 export default class DetailsDialogMap extends UIPrototype {
@@ -141,9 +142,20 @@ export default class DetailsDialogMap extends UIPrototype {
             this.buttons.search.root.disabled = false;
             this.buttons.delete.root.disabled = false;
         };
-        const failed = () => {
+        const failed = (reason: QueryFailReason) => {
             if (!this.dialog.isOpen) return;
-            this.events.alert(i18next.t('message:Unable to query the location'));
+            const message = '';
+            switch(reason) {
+                case QueryFailReason.FIREBASE_ERROR: {
+                    this.events.alert(i18next.t('message:Failed to query Firebase'));
+                    break;
+                }
+                case QueryFailReason.NOT_EXIST: {
+                    this.events.alert(i18next.t('message:Nomination not exists in database'));
+                    break;
+                }
+                default:
+            }
             this.buttons.search.root.disabled = false;
         }
         this.buttons.search.root.disabled = true;

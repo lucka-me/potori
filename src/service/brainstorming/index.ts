@@ -3,7 +3,7 @@ import type { Reference } from '@firebase/database-types';
 import { service } from 'service';
 import Nomination, { LngLat } from 'service/nomination'
 
-import { RateItems } from "./constants";
+import { QueryFailReason, RateItems } from "./constants";
 
 /**
  * Result for {@link BrainstormingKit.analyse}
@@ -19,7 +19,7 @@ interface BrainstormingStats {
     },
 }
 
-type FailCallback = () => void;
+type FailCallback = (reason: QueryFailReason) => void;
 type QueryCallback = (data: any) => void;
 type QueryLocationCallback = (lngLat: LngLat) => void;
 type UpdateCallback = () => void;
@@ -44,7 +44,7 @@ class BrainstormingKit {
             return;
         }
         if (!service.version.full) {
-            failed();
+            failed(QueryFailReason.NOT_EXIST);
             return;
         }
         this.queryFirebase(bsId, succeed, failed);
@@ -93,7 +93,7 @@ class BrainstormingKit {
      * @param succeed Triggered when succeed
      * @param failed Triggered when failed
      */
-    private queryFirebase(bsId: string, succeed: (data: any) => void, failed: () => void) {
+    private queryFirebase(bsId: string, succeed: QueryCallback, failed: FailCallback) {
         Promise.all([
             import(/* webpackChunkName: 'modules-async' */ '@firebase/app'),
             import(/* webpackChunkName: 'modules-async' */ '@firebase/database'),
@@ -105,11 +105,11 @@ class BrainstormingKit {
             this.reference.child(bsId).once('value', (data) => {
                 const value = data.val();
                 if (!value) {
-                    failed();
+                    failed(QueryFailReason.NOT_EXIST);
                     return;
                 }
                 succeed(value);
-            }, failed);
+            }, () => failed(QueryFailReason.FIREBASE_ERROR));
         });
     }
 
@@ -200,4 +200,4 @@ class BrainstormingKit {
 }
 
 export default BrainstormingKit;
-export { RateItems, BrainstormingStats };
+export { BrainstormingStats, QueryFailReason, RateItems };
