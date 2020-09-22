@@ -4,6 +4,9 @@
 ## [0.7.7] - 2020-09-TBA
 - TBA
 
+### Changed
+- Replace drop down selector with chips in Details dialog to aviod menu being covered
+
 ### Fixed
 - Turn one reason switch on will show all rejected cards when the reject switch is off
 ```

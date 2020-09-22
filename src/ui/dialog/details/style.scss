@@ -1,10 +1,7 @@
+@use "@material/chips/mdc-chips";
 @use "@material/dialog";
 @use "@material/form-field";
-@use "@material/list/mdc-list";
-@use "@material/menu-surface/mdc-menu-surface";
-@use "@material/menu/mdc-menu";
 @use "@material/radio";
-@use "@material/select/mdc-select";
 @use "@material/typography/mdc-typography";
 
 @include dialog.core-styles;

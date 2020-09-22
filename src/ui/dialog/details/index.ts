@@ -1,8 +1,8 @@
 import i18next from "i18next";
+import { MDCChipSet } from "@material/chips";
 import { MDCDialog } from "@material/dialog";
 import { MDCFormField } from "@material/form-field";
 import { MDCRadio } from "@material/radio";
-import { MDCSelect } from "@material/select";
 import { MDCTextField } from "@material/textfield";
 
 import { eli } from "ui/eli";
@@ -31,8 +31,8 @@ class DetailsDialog extends DialogPrototype {
     status = new Map<string, MDCRadio>();
     selectedStatus: string = null;
     fieldResultTime: MDCTextField = null;
-    selectReason: MDCSelect = null;
-    elementReason: HTMLDivElement = null;
+    elementChipSetReason: HTMLDivElement = null;
+    chipSetReason: MDCChipSet = null;
 
     map = new DetailsDialogMap();
 
@@ -75,8 +75,7 @@ class DetailsDialog extends DialogPrototype {
                 this.selectedStatus = target.value;
                 (this.fieldResultTime.root as HTMLElement).hidden = (target.value === 'pending');
                 this.fieldResultTime.layout();
-                this.elementReason.hidden = !(target.value === 'rejected');
-                this.selectReason.layout();
+                this.elementChipSetReason.hidden = !(target.value === 'rejected');
                 this.map.ctrl.resize();
             });
             const elementRadio = eli.build('div', {
@@ -115,7 +114,7 @@ class DetailsDialog extends DialogPrototype {
                 'mdc-text-field--with-leading-icon',
                 'margin-v--8',
                 'margin-h--4',
-                'flex-grow--1'
+                'fullwidth'
             ].join(' '),
         }, [
             eli.build('i', {
@@ -138,64 +137,33 @@ class DetailsDialog extends DialogPrototype {
         ]);
         this.fieldResultTime = new MDCTextField(elementResultTime);
 
-        const itemsSelectReason = [];
+        // Chip set for reasons
+        const elementChipsReason: Array<HTMLDivElement> = [];
         for (const [key, value] of service.status.reasons.entries()) {
-            itemsSelectReason.push(eli.build('li', {
-                className: 'mdc-list-item',
-                dataset: { value: key },
+            elementChipsReason.push(eli.build('div', {
+                className: 'mdc-chip',
+                id: `details-reason-${key}`,
+                role: 'row'
             }, [
-                eli.build('span', { className: 'mdc-list-item__ripple' }),
-                eli.build('span', {
-                    className: 'mdc-list-item__text',
-                    innerHTML: i18next.t(value.title),
-                }),
-            ]));
-        }
-        this.elementReason = eli.build('div', {
-            className: [
-                'mdc-select',
-                'mdc-select--outlined',
-                'margin-v--8',
-                'margin-h--4'
-            ].join(' '),
-        }, [
-            eli.build('div', {
-                className: 'mdc-select__anchor',
-            }, [
-                DetailsDialog.buildNotchedOutline({ innerHTML: i18next.t('Reason') }),
-                eli.build('span', { className: 'mdc-select__selected-text' }),
-                eli.build('span', { className: 'mdc-select__dropdown-icon' }, [
-                    DetailsDialog.buildSVG('svg', {
-                        'class': 'mdc-select__dropdown-icon-graphic',
-                        'viewBox': '7 10 10 5',
-                        'focusable': false
+                eli.build('div', { className: 'mdc-chip__ripple' }),
+                eli.build('span', { role: 'gridcell' }, [
+                    eli.build('span', {
+                        className: 'mdc-chip__primary-action',
+                        role: 'button'
                     }, [
-                        DetailsDialog.buildSVG('polygon' , {
-                            'class': 'mdc-select__dropdown-icon-inactive',
-                            'stroke': 'none',
-                            'fill-rule': 'evenodd',
-                            'points': '7 10 12 15 17 10'
-                        }),
-                        DetailsDialog.buildSVG('polygon' , {
-                            'class': 'mdc-select__dropdown-icon-active',
-                            'stroke': 'none',
-                            'fill-rule': 'evenodd',
-                            'points': '7 15 12 10 17 15'
+                        eli.build('span', {
+                            className: 'mdc-chip__text',
+                            innerHTML: i18next.t(value.title),
                         })
                     ])
-                ]),
-            ]),
-            eli.build('div', {
-                className: 'mdc-select__menu mdc-menu mdc-menu-surface mdc-menu-surface--fullwidth',
-            }, [
-                eli.build('ul', {
-                    className: 'mdc-list',
-                    role: 'listbox'
-                }, itemsSelectReason),
-            ]),
-        ]);
-        this.selectReason = new MDCSelect(this.elementReason);
-        this.selectReason.selectedIndex = 0;
+                ])
+            ]));
+        }
+        this.elementChipSetReason = eli.build('div', {
+            className: 'mdc-chip-set mdc-chip-set--choice',
+            role: 'grid'
+        }, elementChipsReason);
+        this.chipSetReason = new MDCChipSet(this.elementChipSetReason);
 
         const elementContents = eli.build('div', {
             className: 'mdc-dialog__content',
@@ -216,9 +184,8 @@ class DetailsDialog extends DialogPrototype {
                     'flex-justify-content--around'
                 ].join(' '),
             }, statusRadios),
-            eli.build('div', {
-                className: 'flex-box-row--wrap',
-            }, [ elementResultTime, this.elementReason ]),
+            elementResultTime,
+            this.elementChipSetReason
         ]);
         this.map.init(elementContents);
         const elementDialog = DialogPrototype.buildDialog([
@@ -241,7 +208,6 @@ class DetailsDialog extends DialogPrototype {
 
     opened() {
         this.fieldResultTime.layout();
-        this.selectReason.layout();
         this.map.ctrl.resize();
     }
 
@@ -265,7 +231,7 @@ class DetailsDialog extends DialogPrototype {
                 shouldUpdate = true;
             }
         }
-        const reason = this.selectReason.value;
+        const reason = this.chipSetReason.selectedChipIds.length > 0 ? this.chipSetReason.selectedChipIds[0].replace('details-reason-', '') : 'undeclared';
         if (selectedStatus !== keys.type) {
             shouldUpdate = true;
         } else if ((keys.type === 'rejected') && (keys.reason.key !== reason)) {
@@ -287,7 +253,7 @@ class DetailsDialog extends DialogPrototype {
             if (this.selectedStatus !== 'rejected') {
                 this.nomination.status = service.status.types.get(this.selectedStatus);
             } else {
-                this.nomination.status = service.status.reasons.get(this.selectReason.value);
+                this.nomination.status = service.status.reasons.get(reason);
             }
             this.events.update(this.nomination);
         }
@@ -314,9 +280,12 @@ class DetailsDialog extends DialogPrototype {
         );
         this.fieldResultTime.value = resultTimeString.slice(0, resultTimeString.lastIndexOf(':'));
 
-        this.elementReason.hidden = !(type === 'rejected');
+        this.elementChipSetReason.hidden = !(type === 'rejected');
         if (type === 'rejected') {
-            this.selectReason.selectedIndex = nomination.status.code - service.status.types.get(type).code;
+            const targetId = `details-reason-${nomination.status.key}`;
+            this.chipSetReason.chips.forEach((chip) => {
+                chip.selected = chip.id === targetId;
+            })
         }
         if (type === 'pending') {
             this.events.query(nomination.id, (data) => {
@@ -350,23 +319,6 @@ class DetailsDialog extends DialogPrototype {
             }, [ eli.build('label', labelOptions), ]),
             eli.build('div', { className: 'mdc-notched-outline__trailing' }),
         ]);
-    }
-
-    /**
-     * Build a svg element
-     * @param tag SVG tag
-     * @param options Options for the svg element
-     * @param children Chrldren svg elements
-     */
-    private static buildSVG(
-        tag: string, options: any, children?: Array<SVGElement>
-    ): SVGElement {
-        const svg = document.createElementNS('http://www.w3.org/2000/svg', tag);
-        for (const [key, value] of Object.entries(options)) {
-            svg.setAttributeNS(null, key, `${value}`);
-        }
-        if (children) svg.append(...children);
-        return svg;
     }
 }
 
