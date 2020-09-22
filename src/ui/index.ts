@@ -223,15 +223,18 @@ export namespace ui {
             return service.nominations;
         }
         dashboard.filter.events.switchType = (type, visible) => {
-            if (type.key !== 'rejected' || !visible) {
+            if (type.key !== 'rejected') {
                 for (const nomination of service.nominations) {
-                    if (service.status.typeMatched(nomination.status.code, type.code)) {
-                        document.getElementById(`card-${nomination.id}`).hidden = !visible;
-                    }
+                    if (!service.status.typeMatched(nomination.status.code, type.code)) continue;
+                    document.getElementById(`card-${nomination.id}`).hidden = !visible;
                 }
-            }
-            if (type.key === 'rejected') {
-                dashboard.map.reasonFilter = dashboard.filter.reasonFilter;
+            } else {
+                const reasonFilter = dashboard.filter.reasonFilter;
+                for (const nomination of service.nominations) {
+                    if (nomination.status.code < 100) continue;
+                    document.getElementById(`card-${nomination.id}`).hidden = !reasonFilter.get(nomination.status.code);
+                }
+                dashboard.map.reasonFilter = reasonFilter;
                 dashboard.map.updateRejected(service.nominations);
             }
             dashboard.map.setTypeVisible(type.key, visible);
