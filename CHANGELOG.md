@@ -4,8 +4,13 @@
 ## [0.7.7] - 2020-09-TBA
 - TBA
 
+### Added
+- Detailed reasons when fail to query database
+
 ### Changed
 - Replace drop down selector with chips in Details dialog to aviod menu being covered
+- Pack 3rd-party modules and reduce app size
+- Logo
 
 ### Fixed
 - Turn one reason switch on will show all rejected cards when the reject switch is off
