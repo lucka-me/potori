@@ -12,4 +12,10 @@
     .mdc-radio__native-control:enabled:not(:checked)+.mdc-radio__background .mdc-radio__outer-circle {
         border-color: #FFF !important;
     }
+
+    .mdc-chip {
+        // 24dp
+        background-color: #282828;
+        color: rgba(255, 255, 255, 0.87);
+    }
 }
