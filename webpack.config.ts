@@ -25,10 +25,6 @@ const cdnConfig = {
         'webfonts/fa-solid-900.woff2'
       ]
     },
-    {
-      name:    'googleapis',
-      prodUrl: 'https://apis.google.com/js/api.js',
-    },
   ],
   prodUrl: 'https://cdnjs.cloudflare.com/ajax/libs/:name/:version/:path'
 };
@@ -172,11 +168,7 @@ module.exports = {
         'description' : 'Web App to Visualize Ingress Nominations',
         'viewport'    : 'width=device-width, height=device-height, initial-scale=1',
       },
-      templateContent: '<!DOCTYPE html>'
-        + '<html>'
-        + '<head><meta charset="UTF-8"><title>Potori</title></head>'
-        + '<body><noscript>Potori requires JavaScript.</noscript></body>'
-        + '</html>',
+      template: './src/templates/potori.tpl',
     }),
     new WebpackPwaManifest({
       name: "Potori",
@@ -217,7 +209,7 @@ module.exports = {
         { url: 'https://apis.google.com/js/api.js', revision: null },
         ...cdnConfig.modules.reduce((list, cdn) => {
           // Cache sources from CDN
-          if (cdn.prodUrl) return list;
+          //if (cdn.prodUrl) return list;
           const version = WebpackCdnPlugin.getVersionInNodeModules(cdn.name);
           const base = cdnConfig.prodUrl
             .replace(':name', cdn.cdn || cdn.name)
