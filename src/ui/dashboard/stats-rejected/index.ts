@@ -7,6 +7,7 @@ import { DashboardChartProtorype } from 'ui/dashboard/base';
 import Nomination from 'service/nomination';
 
 import './style.scss';
+import { StatusReason } from 'service/status';
 
 class StatsRejectedCard extends DashboardChartProtorype {
 
@@ -16,23 +17,16 @@ class StatsRejectedCard extends DashboardChartProtorype {
         this.setVisible(false);
         this.parent.append(this.root);
 
-        const labels = [];
-        const colors = [];
-
-        for (const reason of service.status.reasons.values()) {
-            labels.push(i18next.t(reason.title));
-            colors.push(reason.color)
-        }
         this.chart = new Chart(canvasChart.getContext('2d'), {
             type: 'doughnut',
             data: {
-                labels: labels,
+                labels: [],
                 datasets: [{
                     data: [],
-                    backgroundColor: colors,
+                    backgroundColor: [],
                     borderAlign: 'inner',
                     borderColor: StatsRejectedCard.color.border,
-                    hoverBackgroundColor: colors,
+                    hoverBackgroundColor: [],
                     hoverBorderColor: StatsRejectedCard.color.borderHover,
                 }],
             },
@@ -43,13 +37,32 @@ class StatsRejectedCard extends DashboardChartProtorype {
     }
 
     update(nominations: Array<Nomination>) {
-        const data = new Array(service.status.reasons.size).fill(0);
-        for (const nomination of nominations) {
-            if (nomination.status.code > 100) {
-                data[nomination.status.code - 101] += 1;
-            }
+
+        const stats = new Map<StatusReason, number>();
+        for (const reason of service.status.reasons.values()) {
+            stats.set(reason, 0);
         }
+        nominations.reduce((map, nomination) => {
+            if (nomination.status.code < 100) return map;
+            const reason = nomination.status as StatusReason;
+            map.set(reason, map.get(reason) + 1);
+            return map;
+        }, stats);
+
+        const labels = [];
+        const colors = [];
+        const data = [];
+        for (const [reason, count] of stats.entries()) {
+            if (count < 1) continue;
+            labels.push(i18next.t(reason.title));
+            colors.push(reason.color);
+            data.push(count);
+        }
+
+        this.chart.data.labels = labels;
         this.chart.data.datasets[0].data = data;
+        this.chart.data.datasets[0].backgroundColor = colors;
+        this.chart.data.datasets[0].hoverBackgroundColor = colors;
         this.chart.update();
     }
 }
