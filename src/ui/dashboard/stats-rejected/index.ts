@@ -5,9 +5,9 @@ import { eli } from 'ui/eli';
 import { service } from 'service';
 import { DashboardChartProtorype } from 'ui/dashboard/base';
 import Nomination from 'service/nomination';
+import { StatusReason } from 'service/status';
 
 import './style.scss';
-import { StatusReason } from 'service/status';
 
 class StatsRejectedCard extends DashboardChartProtorype {
 
