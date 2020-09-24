@@ -3,6 +3,7 @@ import { MDCChipSet } from '@material/chips';
 import { MDCDialog } from '@material/dialog';
 import { MDCFormField } from '@material/form-field';
 import { MDCRadio } from '@material/radio';
+import { MDCRipple } from '@material/ripple';
 import { MDCTextField } from '@material/textfield';
 
 import { eli } from 'ui/eli';
@@ -31,8 +32,11 @@ class DetailsDialog extends DialogPrototype {
     status = new Map<string, MDCRadio>();
     selectedStatus: string = null;
     fieldResultTime: MDCTextField = null;
-    elementChipSetReason: HTMLDivElement = null;
-    chipSetReason: MDCChipSet = null;
+
+    private blockReason: HTMLDivElement = null;
+    private iconReason: HTMLElement = null;
+    private textReason: HTMLSpanElement = null;
+    private chipSetReason: MDCChipSet = null;
 
     map = new DetailsDialogMap();
 
@@ -75,7 +79,7 @@ class DetailsDialog extends DialogPrototype {
                 this.selectedStatus = target.value;
                 (this.fieldResultTime.root as HTMLElement).hidden = (target.value === 'pending');
                 this.fieldResultTime.layout();
-                this.elementChipSetReason.hidden = !(target.value === 'rejected');
+                this.blockReason.hidden = !(target.value === 'rejected');
                 this.map.ctrl.resize();
             });
             const elementRadio = eli.build('div', {
@@ -113,8 +117,7 @@ class DetailsDialog extends DialogPrototype {
                 'mdc-text-field--outlined',
                 'mdc-text-field--with-leading-icon',
                 'margin-v--8',
-                'margin-h--4',
-                'fullwidth'
+                'fullwidth',
             ].join(' '),
         }, [
             eli.build('i', {
@@ -143,7 +146,7 @@ class DetailsDialog extends DialogPrototype {
             elementChipsReason.push(eli.build('div', {
                 className: 'mdc-chip',
                 id: `details-reason-${key}`,
-                role: 'row'
+                role: 'row',
             }, [
                 eli.build('div', { className: 'mdc-chip__ripple' }),
                 eli.build('span', { role: 'gridcell' }, [
@@ -159,11 +162,51 @@ class DetailsDialog extends DialogPrototype {
                 ])
             ]));
         }
-        this.elementChipSetReason = eli.build('div', {
+        const elementChipSetReason = eli.build('div', {
             className: 'mdc-chip-set mdc-chip-set--choice',
-            role: 'grid'
+            role: 'grid',
+            hidden: true
         }, elementChipsReason);
-        this.chipSetReason = new MDCChipSet(this.elementChipSetReason);
+        this.chipSetReason = new MDCChipSet(elementChipSetReason);
+
+        this.iconReason = eli.build('i', {
+            className: 'fa fa-fw margin-l--8'
+        });
+        this.textReason = eli.build('span', {
+            className: 'margin-l--4 flex--1'
+        });
+        const elementReasonExpand = eli.build('button', {
+            className: 'fa mdc-icon-button',
+            innerHTML: '&#xf107',
+        });
+        const rippleReasonExpand = new MDCRipple(elementReasonExpand);
+        rippleReasonExpand.unbounded = true;
+        rippleReasonExpand.listen('click', () => {
+            elementChipSetReason.hidden = !elementChipSetReason.hidden;
+            elementReasonExpand.innerHTML = elementChipSetReason.hidden ? '&#xf107' : '&#xf106';
+            this.map.ctrl.resize();
+        });
+        this.blockReason = eli.build('div', {
+            className: 'fullwidth'
+        }, [
+            eli.build('div', {
+                className: 'fullwidth flex-box-row--nowrap flex-align-items--baseline'
+            }, [
+                eli.build('span', { innerHTML: i18next.t('Reason') }),
+                this.iconReason,
+                this.textReason,
+                elementReasonExpand,
+            ]),
+            elementChipSetReason
+        ]);
+        this.chipSetReason.chips.forEach((chip) => {
+            chip.listen('MDCChip:selection', () => {
+                const key = this.chipSetReason.selectedChipIds.length > 0 ? this.chipSetReason.selectedChipIds[0].replace('details-reason-', '') : 'undeclared';
+                const reason = service.status.reasons.get(key);
+                this.iconReason.innerHTML = reason.icon;
+                this.textReason.innerHTML = i18next.t(reason.title);
+            });
+        });
 
         const elementContents = eli.build('div', {
             className: 'mdc-dialog__content',
@@ -185,7 +228,7 @@ class DetailsDialog extends DialogPrototype {
                 ].join(' '),
             }, statusRadios),
             elementResultTime,
-            this.elementChipSetReason
+            this.blockReason
         ]);
         this.map.init(elementContents);
         const elementDialog = DialogPrototype.buildDialog([
@@ -204,6 +247,7 @@ class DetailsDialog extends DialogPrototype {
         this.ctrl.listen('MDCDialog:opened', () => this.opened());
         this.ctrl.listen('MDCDialog:closed', (event: CustomEvent) => this.closed(event));
         this.map.dialog = this.ctrl;
+        rippleReasonExpand.layout();
     }
 
     opened() {
@@ -280,12 +324,14 @@ class DetailsDialog extends DialogPrototype {
         );
         this.fieldResultTime.value = resultTimeString.slice(0, resultTimeString.lastIndexOf(':'));
 
-        this.elementChipSetReason.hidden = !(type === 'rejected');
+        this.blockReason.hidden = !(type === 'rejected');
         if (type === 'rejected') {
             const targetId = `details-reason-${nomination.status.key}`;
             this.chipSetReason.chips.forEach((chip) => {
                 chip.selected = chip.id === targetId;
             })
+            this.iconReason.innerHTML = nomination.status.icon;
+            this.textReason.innerHTML = i18next.t(nomination.status.title);
         }
         if (type === 'pending') {
             this.events.query(nomination.id, (data) => {

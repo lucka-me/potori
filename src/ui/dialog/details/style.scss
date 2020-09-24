@@ -1,11 +1,13 @@
 @use '@material/chips/mdc-chips';
 @use '@material/dialog';
 @use '@material/form-field';
+@use '@material/icon-button';
 @use '@material/radio';
 @use '@material/typography/mdc-typography';
 
 @include dialog.core-styles;
 @include form-field.core-styles;
+@include icon-button.core-styles;
 @include radio.core-styles;
 
 @media (prefers-color-scheme: dark) {
