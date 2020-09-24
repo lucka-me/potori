@@ -20,38 +20,22 @@
         color: #FFF !important;
     }
 
-    .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__icon,
-    .mdc-text-field:not(.mdc-text-field--disabled) .mdc-text-field__input {
+    .mdc-text-field .mdc-text-field__icon,
+    .mdc-text-field .mdc-text-field__input {
         color: #FFF !important;
     }
 
-    .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused) .mdc-notched-outline__leading,
-    .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused) .mdc-notched-outline__notch,
-    .mdc-text-field--outlined:not(.mdc-text-field--disabled):not(.mdc-text-field--focused) .mdc-notched-outline__trailing {
+    .mdc-text-field--outlined:not(.mdc-text-field--focused) .mdc-notched-outline__leading,
+    .mdc-text-field--outlined:not(.mdc-text-field--focused) .mdc-notched-outline__notch,
+    .mdc-text-field--outlined:not(.mdc-text-field--focused) .mdc-notched-outline__trailing {
         border-color: #FFF !important;
     }
 
-    .mdc-text-field:not(.mdc-text-field--disabled):not(.mdc-text-field--focused) .mdc-floating-label {
+    .mdc-text-field:not(.mdc-text-field--focused) .mdc-floating-label {
         color: #FFF !important;
     }
 
     .mdc-text-field-helper-text {
         color: var(--mdc-theme-text-primary-on-light) !important;
-    }
-
-    .mdc-select--outlined:not(.mdc-select--disabled):not(.mdc-select--focused) .mdc-notched-outline__leading,
-    .mdc-select--outlined:not(.mdc-select--disabled):not(.mdc-select--focused) .mdc-notched-outline__notch,
-    .mdc-select--outlined:not(.mdc-select--disabled):not(.mdc-select--focused) .mdc-notched-outline__trailing {
-        border-color: #FFF !important;
-    }
-
-    .mdc-select:not(.mdc-select--disabled) .mdc-select__native-control,
-    .mdc-select:not(.mdc-select--disabled) .mdc-select__selected-text,
-    .mdc-select:not(.mdc-select--disabled):not(.mdc-select--focused) .mdc-floating-label {
-        color: #FFF !important;
-    }
-
-    .mdc-select:not(.mdc-select--disabled) .mdc-select__dropdown-icon {
-        fill: rgba(255, 255, 255, 0.54) !important;
     }
 }

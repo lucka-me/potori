@@ -34,8 +34,7 @@ class DetailsDialog extends DialogPrototype {
     fieldResultTime: MDCTextField = null;
 
     private blockReason: HTMLDivElement = null;
-    private iconReason: HTMLElement = null;
-    private textReason: HTMLSpanElement = null;
+    private fieldReason: MDCTextField = null;
     private chipSetReason: MDCChipSet = null;
 
     map = new DetailsDialogMap();
@@ -111,36 +110,28 @@ class DetailsDialog extends DialogPrototype {
             statusRadios.push(elementField);
         }
 
-        const elementResultTime = eli.build('div', {
-            className: [
-                'mdc-text-field',
-                'mdc-text-field--outlined',
-                'mdc-text-field--with-leading-icon',
-                'margin-v--8',
-                'fullwidth',
-            ].join(' '),
-        }, [
-            eli.build('i', {
-                className: [
-                    'fa',
-                    'mdc-text-field__icon',
-                    'mdc-text-field__icon--leading'
-                ].join(' '),
-                innerHTML: '\uf073',
-            }),
-            eli.build('input', {
-                type: 'datetime-local',
-                className: 'mdc-text-field__input',
-                id: 'input-dialog-details-result-time',
-            }),
-            DetailsDialog.buildNotchedOutline({
-                for: 'input-dialog-details-result-time',
-                innerHTML: i18next.t('Result Time'),
-            }),
-        ]);
+        const elementResultTime = DetailsDialog.buildTextField(
+            'input-dialog-details-result-time',
+            'fullwidth',
+            '\uf073',
+            i18next.t('Result Time'),
+            'datetime-local'
+        );
+        
         this.fieldResultTime = new MDCTextField(elementResultTime);
 
-        // Chip set for reasons
+        // Reason block
+        // Text field
+        const elementReason = DetailsDialog.buildTextField(
+            'input-dialog-details-reason',
+            'flex--1',
+            '',
+            i18next.t('Reason'),
+            'text'
+        );
+        this.fieldReason = new MDCTextField(elementReason);
+        this.fieldReason.disabled = true
+        // Chip set
         const elementChipsReason: Array<HTMLDivElement> = [];
         for (const [key, value] of service.status.reasons.entries()) {
             elementChipsReason.push(eli.build('div', {
@@ -168,15 +159,9 @@ class DetailsDialog extends DialogPrototype {
             hidden: true
         }, elementChipsReason);
         this.chipSetReason = new MDCChipSet(elementChipSetReason);
-
-        this.iconReason = eli.build('i', {
-            className: 'fa fa-fw margin-l--8'
-        });
-        this.textReason = eli.build('span', {
-            className: 'margin-l--4 flex--1'
-        });
+        // Button
         const elementReasonExpand = eli.build('button', {
-            className: 'fa mdc-icon-button',
+            className: 'fa mdc-icon-button margin-l--8',
             innerHTML: '&#xf107',
         });
         const rippleReasonExpand = new MDCRipple(elementReasonExpand);
@@ -190,11 +175,9 @@ class DetailsDialog extends DialogPrototype {
             className: 'fullwidth'
         }, [
             eli.build('div', {
-                className: 'fullwidth flex-box-row--nowrap flex-align-items--baseline'
+                className: 'fullwidth flex-box-row--nowrap flex-align-items--center'
             }, [
-                eli.build('span', { innerHTML: i18next.t('Reason') }),
-                this.iconReason,
-                this.textReason,
+                elementReason,
                 elementReasonExpand,
             ]),
             elementChipSetReason
@@ -203,11 +186,12 @@ class DetailsDialog extends DialogPrototype {
             chip.listen('MDCChip:selection', () => {
                 const key = this.chipSetReason.selectedChipIds.length > 0 ? this.chipSetReason.selectedChipIds[0].replace('details-reason-', '') : 'undeclared';
                 const reason = service.status.reasons.get(key);
-                this.iconReason.innerHTML = reason.icon;
-                this.textReason.innerHTML = i18next.t(reason.title);
+                this.fieldReason.leadingIconContent = reason.icon;
+                this.fieldReason.value = i18next.t(reason.title);
             });
         });
 
+        // Dialog content
         const elementContents = eli.build('div', {
             className: 'mdc-dialog__content',
         }, [
@@ -238,8 +222,8 @@ class DetailsDialog extends DialogPrototype {
             eli.build('footer', {
                 className: 'mdc-dialog__actions',
             }, [
-                DialogPrototype.buildDialogAction('close', 'Close'),
-                DialogPrototype.buildDialogAction('save' , 'Save' ),
+                DialogPrototype.buildDialogAction('close', i18next.t('Close')),
+                DialogPrototype.buildDialogAction('save' , i18next.t('Save') ),
             ]),
         ]);
         this.parent.append(elementDialog);
@@ -252,6 +236,7 @@ class DetailsDialog extends DialogPrototype {
 
     opened() {
         this.fieldResultTime.layout();
+        this.fieldReason.layout();
         this.map.ctrl.resize();
     }
 
@@ -330,8 +315,8 @@ class DetailsDialog extends DialogPrototype {
             this.chipSetReason.chips.forEach((chip) => {
                 chip.selected = chip.id === targetId;
             })
-            this.iconReason.innerHTML = nomination.status.icon;
-            this.textReason.innerHTML = i18next.t(nomination.status.title);
+            this.fieldReason.leadingIconContent = nomination.status.icon;
+            this.fieldReason.value = i18next.t(nomination.status.title);
         }
         if (type === 'pending') {
             this.events.query(nomination.id, (data) => {
@@ -364,6 +349,38 @@ class DetailsDialog extends DialogPrototype {
                 className: 'mdc-notched-outline__notch',
             }, [ eli.build('label', labelOptions), ]),
             eli.build('div', { className: 'mdc-notched-outline__trailing' }),
+        ]);
+    }
+
+    static buildTextField(
+        id: string, extraClassName: string, icon: string, label: string, type: string
+    ): HTMLDivElement {
+        return eli.build('div', {
+            className: [
+                'mdc-text-field',
+                'mdc-text-field--outlined',
+                'mdc-text-field--with-leading-icon',
+                'margin-v--8',
+                extraClassName,
+            ].join(' '),
+        }, [
+            eli.build('i', {
+                className: [
+                    'fa',
+                    'mdc-text-field__icon',
+                    'mdc-text-field__icon--leading'
+                ].join(' '),
+                innerHTML: icon,
+            }),
+            eli.build('input', {
+                type: type,
+                className: 'mdc-text-field__input',
+                id: id,
+            }),
+            DetailsDialog.buildNotchedOutline({
+                for: id,
+                innerHTML: label,
+            }),
         ]);
     }
 }
