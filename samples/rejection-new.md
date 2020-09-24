@@ -27,6 +27,27 @@ Note that we will not be overturning this decision. If you believe your New Port
 </p>
 </details>
 
+## Criteria
+<details><summary>en</summary>
+<p>
+
+```
+Nomination does not meet acceptance criteria
+```
+
+</p>
+</details>
+
+## Generic Store
+<details><summary>en</summary>
+<p>
+
+```
+The real-world location of the nomination appears to represent a generic store or restaurant
+```
+
+</p>
+</details>
 
 ## Temporary
 <details><summary>en</summary>
@@ -39,12 +60,12 @@ Nomination does not appear to be permanent or appears to be a seasonal display t
 </p>
 </details>
 
-## Generic Store
+## Private
 <details><summary>en</summary>
 <p>
 
 ```
-The real-world location of the nomination appears to represent a generic store or restaurant
+The real-word location of the nomination appears to be on private residential property or farm
 ```
 
 </p>
@@ -67,28 +88,6 @@ Photo appears to include a recognizable license plate
 
 ```
 Photo is low quality (e.g., pitch black/blurry photos or photos taken from a car)
-```
-
-</p>
-</details>
-
-## Criteria
-<details><summary>en</summary>
-<p>
-
-```
-Nomination does not meet acceptance criteria
-```
-
-</p>
-</details>
-
-## Private
-<details><summary>en</summary>
-<p>
-
-```
-The real-word location of the nomination appears to be on private residential property or farm
 ```
 
 </p>
