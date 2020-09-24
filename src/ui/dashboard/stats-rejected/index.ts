@@ -13,7 +13,7 @@ class StatsRejectedCard extends DashboardChartProtorype {
 
     render() {
         const canvasChart = eli.build('canvas', { className: 'canvas-chart--v' });
-        this.root = DashboardChartProtorype.buildChartCard(i18next.t('Stats Rejected'), canvasChart, 2, 250);
+        this.root = DashboardChartProtorype.buildChartCard(i18next.t('Stats Rejected'), canvasChart, 3, 300);
         this.setVisible(false);
         this.parent.append(this.root);
 
