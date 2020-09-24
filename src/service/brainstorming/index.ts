@@ -3,7 +3,7 @@ import type { Reference } from '@firebase/database-types';
 import { service } from 'service';
 import Nomination, { LngLat } from 'service/nomination'
 
-import { QueryFailReason, RateItems } from "./constants";
+import { QueryFailReason, RateItems } from './constants';
 
 /**
  * Result for {@link BrainstormingKit.analyse}

@@ -1,9 +1,9 @@
-import i18next from "i18next";
-import mapboxgl from "mapbox-gl";
-import { MDCRipple } from "@material/ripple";
-import { MDCDialog } from "@material/dialog";
+import i18next from 'i18next';
+import mapboxgl from 'mapbox-gl';
+import { MDCRipple } from '@material/ripple';
+import { MDCDialog } from '@material/dialog';
 
-import { eli } from "ui/eli";
+import { eli } from 'ui/eli';
 import Nomination, { LngLat } from 'service/nomination';
 import { QueryFailReason } from 'service/brainstorming';
 import UIPrototype from 'ui/base';

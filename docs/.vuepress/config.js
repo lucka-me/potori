@@ -24,8 +24,8 @@ module.exports = {
         ariaLabel: 'Languages',
         serviceWorker: {
           updatePopup: {
-            message: "New content is available.",
-            buttonText: "Refresh"
+            message: 'New content is available.',
+            buttonText: 'Refresh'
           }
         },
         nav: [
@@ -52,8 +52,8 @@ module.exports = {
         label: '简体中文',
         serviceWorker: {
           updatePopup: {
-            message: "新内容可用",
-            buttonText: "刷新"
+            message: '新内容可用',
+            buttonText: '刷新'
           }
         },
         nav: [

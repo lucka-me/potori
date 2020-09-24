@@ -1,6 +1,6 @@
-@use "@material/button";
-@use "@material/dialog";
-@use "@material/typography/mdc-typography";
+@use '@material/button';
+@use '@material/dialog';
+@use '@material/typography/mdc-typography';
 
 @include button.core-styles;
 @include dialog.core-styles;

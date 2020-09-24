@@ -5,7 +5,7 @@ import { service } from 'service';
 import Nomination from 'service/nomination';
 import UIPrototype from 'ui/base';
 
-import NominationCard from "./card";
+import NominationCard from './card';
 
 interface ListViewEvents {
     alert: (message: string) => void;

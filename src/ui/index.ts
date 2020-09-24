@@ -1,6 +1,6 @@
 import i18next from 'i18next';
 
-import { eli } from "./eli";
+import { eli } from './eli';
 import { service } from 'service';
 import Nomination from 'service/nomination';
 import { StatusReason, StatusType } from 'service/status';
@@ -8,7 +8,7 @@ import { StatusReason, StatusType } from 'service/status';
 import './style.scss';
 
 import AppBar, { AppBarMenuItems, AppBarActions } from './app-bar';
-import Dark         from "./dark";
+import Dark         from './dark';
 import Dialog       from './dialog';
 import Progress     from './progress';
 import Snackbar     from './snackbar';

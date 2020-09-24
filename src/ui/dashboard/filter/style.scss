@@ -1,6 +1,6 @@
-@use "@material/card";
-@use "@material/switch";
-@use "@material/typography/mdc-typography";
+@use '@material/card';
+@use '@material/switch';
+@use '@material/typography/mdc-typography';
 
 @include switch.core-styles;
 @include card.core-styles;

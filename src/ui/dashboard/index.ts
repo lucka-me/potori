@@ -2,7 +2,7 @@ import Chart from 'chart.js';
 
 import { eli } from 'ui/eli';
 import { DashboardPrototype } from './base';
-import Nomination from "service/nomination";
+import Nomination from 'service/nomination';
 import UIPrototype from 'ui/base';
 
 import BSGroup              from './brainstorming';

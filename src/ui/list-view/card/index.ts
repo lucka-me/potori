@@ -1,8 +1,8 @@
-import i18next from "i18next";
-import { MDCRipple } from "@material/ripple";
+import i18next from 'i18next';
+import { MDCRipple } from '@material/ripple';
 
-import { eli } from "ui/eli";
-import { service } from "service";
+import { eli } from 'ui/eli';
+import { service } from 'service';
 import Nomination from 'service/nomination';
 
 import './style.scss';

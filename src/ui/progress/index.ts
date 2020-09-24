@@ -1,6 +1,6 @@
-import { MDCLinearProgress } from "@material/linear-progress";
+import { MDCLinearProgress } from '@material/linear-progress';
 
-import { eli } from "ui/eli";
+import { eli } from 'ui/eli';
 import UIPrototype from 'ui/base';
 
 import './style.scss';

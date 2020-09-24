@@ -172,11 +172,11 @@ module.exports = {
       template: './src/templates/potori.tpl',
     }),
     new WebpackPwaManifest({
-      name: "Potori",
+      name: 'Potori',
       description: 'Web App to Visualize Ingress Nominations',
       filename: 'manifest.webmanifest',
       fingerprints: false,
-      orientation: "any",
+      orientation: 'any',
       start_url: '/',
       scope: '/',
       background_color: '#2578B5',

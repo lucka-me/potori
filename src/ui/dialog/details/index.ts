@@ -1,16 +1,16 @@
-import i18next from "i18next";
-import { MDCChipSet } from "@material/chips";
-import { MDCDialog } from "@material/dialog";
-import { MDCFormField } from "@material/form-field";
-import { MDCRadio } from "@material/radio";
-import { MDCTextField } from "@material/textfield";
+import i18next from 'i18next';
+import { MDCChipSet } from '@material/chips';
+import { MDCDialog } from '@material/dialog';
+import { MDCFormField } from '@material/form-field';
+import { MDCRadio } from '@material/radio';
+import { MDCTextField } from '@material/textfield';
 
-import { eli } from "ui/eli";
-import { service } from "service";
+import { eli } from 'ui/eli';
+import { service } from 'service';
 import DialogPrototype from 'ui/dialog/base';
-import Nomination from "service/nomination";
+import Nomination from 'service/nomination';
 
-import DetailsDialogMap from "./map";
+import DetailsDialogMap from './map';
 
 import './style.scss';
 

@@ -1,7 +1,7 @@
-import i18next from "i18next";
-import { MDCSnackbar } from "@material/snackbar";
+import i18next from 'i18next';
+import { MDCSnackbar } from '@material/snackbar';
 
-import { eli } from "ui/eli";
+import { eli } from 'ui/eli';
 import UIPrototype from 'ui/base';
 
 import './style.scss';

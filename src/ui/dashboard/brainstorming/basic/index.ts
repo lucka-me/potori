@@ -1,5 +1,5 @@
 import i18next from 'i18next';
-import { MDCRipple } from "@material/ripple";
+import { MDCRipple } from '@material/ripple';
 
 import { eli } from 'ui/eli';
 import { BrainstormingStats } from 'service/brainstorming';

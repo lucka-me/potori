@@ -1,7 +1,7 @@
-import i18next from "i18next";
-import { MDCDialog } from "@material/dialog";
+import i18next from 'i18next';
+import { MDCDialog } from '@material/dialog';
 
-import { eli } from "ui/eli";
+import { eli } from 'ui/eli';
 import DialogPrototype from 'ui/dialog/base';
 
 import './style.scss';

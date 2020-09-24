@@ -1,8 +1,8 @@
 import moment from 'moment';
 
-import { eli } from "ui/eli";
-import Nomination from "service/nomination";
-import UIPrototype from "ui/base";
+import { eli } from 'ui/eli';
+import Nomination from 'service/nomination';
+import UIPrototype from 'ui/base';
 
 export class DashboardPrototype extends UIPrototype {
 

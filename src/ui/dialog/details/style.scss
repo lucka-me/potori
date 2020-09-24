@@ -1,8 +1,8 @@
-@use "@material/chips/mdc-chips";
-@use "@material/dialog";
-@use "@material/form-field";
-@use "@material/radio";
-@use "@material/typography/mdc-typography";
+@use '@material/chips/mdc-chips';
+@use '@material/dialog';
+@use '@material/form-field';
+@use '@material/radio';
+@use '@material/typography/mdc-typography';
 
 @include dialog.core-styles;
 @include form-field.core-styles;

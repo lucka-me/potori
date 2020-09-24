@@ -1,5 +1,5 @@
 import { BrainstormingStats } from 'service/brainstorming';
-import { DashboardPrototype, DashboardChartProtorype } from "ui/dashboard/base";
+import { DashboardPrototype, DashboardChartProtorype } from 'ui/dashboard/base';
 
 export class DashboardBsPrototype extends DashboardPrototype {
     updateStats(stats: BrainstormingStats) { stats }

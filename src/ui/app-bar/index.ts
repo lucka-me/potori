@@ -1,14 +1,14 @@
-import i18next from "i18next";
-import { MDCRipple } from "@material/ripple";
-import { MDCTopAppBar } from "@material/top-app-bar";
+import i18next from 'i18next';
+import { MDCRipple } from '@material/ripple';
+import { MDCTopAppBar } from '@material/top-app-bar';
 
-import { eli } from "ui/eli";
+import { eli } from 'ui/eli';
 import UIPrototype from 'ui/base';
 
-import { AppBarActions } from "./constants";
-import { AppBarMenuItems } from "./menu/constants";
+import { AppBarActions } from './constants';
+import { AppBarMenuItems } from './menu/constants';
 
-import type AppBarMenu from "./menu";
+import type AppBarMenu from './menu';
 
 import './style.scss';
 

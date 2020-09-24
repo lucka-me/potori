@@ -1,5 +1,5 @@
-import { service } from "service";
-import { ui } from "ui";
+import { service } from 'service';
+import { ui } from 'ui';
 
 service.init();
 ui.init();

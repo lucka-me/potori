@@ -2,14 +2,14 @@ import i18next from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 import AuthKit, { AuthStatusChangedCallback } from './auth';
-import { BlobGenerator, Parser } from "./tools";
+import { BlobGenerator, Parser } from './tools';
 import BrainstormingKit from './brainstorming';
 import FileKit, { Constants as FileConst } from './file';
 import Mari, { ProgressCallback } from './mari';
 import Nomination from './nomination';
-import StatusKit from "./status";
+import StatusKit from './status';
 import translations from 'locales';
-import Version from "./version";
+import Version from './version';
 
 type BasicCallback = () => void;
 type MessageCallback = (message: string) => void;

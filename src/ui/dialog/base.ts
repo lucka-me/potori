@@ -1,7 +1,7 @@
-import { MDCDialog } from "@material/dialog";
+import { MDCDialog } from '@material/dialog';
 
-import { eli } from "ui/eli";
-import UIPrototype from "ui/base";
+import { eli } from 'ui/eli';
+import UIPrototype from 'ui/base';
 
 /**
  * Ptototype of MDC dialog components
