@@ -103,6 +103,7 @@ module.exports = {
           name: 'ui-async',
           chunks: 'async',
           priority: 40,
+          reuseExistingChunk: true,
         },
 
         data: {
