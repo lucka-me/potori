@@ -3,12 +3,19 @@
     "Pending": "Pending",
     "Accepted": "Accepted",
     "Rejected": "Rejected",
+
     "Undeclared": "Undeclared",
     "Duplicated": "Duplicated",
     "Too Close": "Too Close",
-    "Temporary": "Temporary",
+
+    "Criteria": "Criteria",
     "Generic Store": "Generic Store",
+    "Temporary": "Temporary",
+
+    "Private": "Private",
+    
     "License Plate": "License Plate",
+    "Photo Quality": "Photo Quality",
 
     "BrainstormingKit": "",
     "Quality": "Quality",

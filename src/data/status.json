@@ -1,5 +1,5 @@
 {
-    "version": "6",
+    "version": "7",
     "types": [
         {
             "key": "pending",
@@ -80,7 +80,7 @@
             ]
         },
         {
-            "key": "tooClose",
+            "key": "close",
             "code": 103,
             "title": "Too Close",
             "icon":  "\uf547",
@@ -96,22 +96,23 @@
                 ]
             ]
         },
+
         {
-            "key": "temporary",
-            "code": 104,
-            "title": "Temporary",
-            "icon":  "\uf1da",
-            "color": "#647372",
+            "key": "criteria:criteria",
+            "code": 112,
+            "title": "Criteria",
+            "icon":  "\uf05e",
+            "color": "#004DB5",
             "keywords": [
                 [ "redacted", [] ],
                 [
                     "prime",
-                    [ "seasonal display" ]
+                    [ "meet acceptance criteria" ]
                 ]
             ]
         },
         {
-            "key": "generic",
+            "key": "criteria:generic",
             "code": 105,
             "title": "Generic Store",
             "icon":  "\uf54e",
@@ -125,7 +126,37 @@
             ]
         },
         {
-            "key": "plate",
+            "key": "criteria:temporary",
+            "code": 104,
+            "title": "Temporary",
+            "icon":  "\uf1da",
+            "color": "#647372",
+            "keywords": [
+                [ "redacted", [] ],
+                [
+                    "prime",
+                    [ "seasonal display" ]
+                ]
+            ]
+        },
+
+        {
+            "key": "location:private",
+            "code": 124,
+            "title": "Private",
+            "icon":  "\uf023",
+            "color": "#004DB5",
+            "keywords": [
+                [ "redacted", [] ],
+                [
+                    "prime",
+                    [ "private residential" ]
+                ]
+            ]
+        },
+        
+        {
+            "key": "photo:plate",
             "code": 106,
             "title": "License Plate",
             "icon":  "\uf1b9",
@@ -135,6 +166,20 @@
                 [
                     "prime",
                     [ "license plate" ]
+                ]
+            ]
+        },
+        {
+            "key": "photo:quality",
+            "code": 133,
+            "title": "Photo Quality",
+            "icon":  "\uf03e",
+            "color": "#004DB5",
+            "keywords": [
+                [ "redacted", [] ],
+                [
+                    "prime",
+                    [ "Photo is low quality" ]
                 ]
             ]
         }

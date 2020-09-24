@@ -3,12 +3,19 @@
     "Pending": "审核中",
     "Accepted": "批准",
     "Rejected": "拒绝",
+
     "Undeclared": "未指明",
     "Duplicated": "重复",
     "Too Close": "过近",
-    "Temporary": "临时",
+
+    "Criteria": "不合标准",
     "Generic Store": "一般商家",
+    "Temporary": "临时",
+
+    "Private": "私人",
+    
     "License Plate": "车牌",
+    "Photo Quality": "照片质量",
 
     "BrainstormingKit": "",
     "Quality": "质量",

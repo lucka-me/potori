@@ -187,7 +187,7 @@ class BrainstormingKit {
         const general = parseFloat(stars);
         if (isNaN(general)) return false;
         const types = service.status.types;
-        if (status === types.get('accepted').code || status === reasons.get('tooClose').code) {
+        if (status === types.get('accepted').code || status === reasons.get('close').code) {
             // Accepted
             if (general >= 3) return true;
         } else {
