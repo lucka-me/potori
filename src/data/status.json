@@ -102,7 +102,7 @@
             "code": 112,
             "title": "Criteria",
             "icon":  "\uf05e",
-            "color": "#004DB5",
+            "color": "#B80233",
             "keywords": [
                 [ "redacted", [] ],
                 [
@@ -145,7 +145,7 @@
             "code": 124,
             "title": "Private",
             "icon":  "\uf023",
-            "color": "#004DB5",
+            "color": "#5A4C4C",
             "keywords": [
                 [ "redacted", [] ],
                 [
@@ -174,7 +174,7 @@
             "code": 133,
             "title": "Photo Quality",
             "icon":  "\uf03e",
-            "color": "#004DB5",
+            "color": "#5A715F",
             "keywords": [
                 [ "redacted", [] ],
                 [
