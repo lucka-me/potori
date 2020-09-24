@@ -38,23 +38,17 @@ export default class Parser {
 
         // Body -> image, id lngLat and rejectReason
         for (const part of mail.payload.parts) {
-            if (part.partId === '1') {
-                const mailBody = this.base64(part.body.data);
-                let imageTmp = mailBody.slice(mailBody.search(/googleusercontent\.com/));
-                for (const keyword of ['"', '\n', '</p>']) {
-                    const slicePos = imageTmp.search(keyword);
-                    if (slicePos > 0) imageTmp = imageTmp.slice(0, slicePos);
-                }
-                nomination.image = imageTmp.replace('googleusercontent.com/', '');
-                nomination.id = Nomination.parseId(nomination.image);
-                if (keys.scanner === 'redacted' && keys.type !== 'pending') {
-                    nomination.lngLat = this.lngLat(mailBody);
-                }
-                if (keys.type === 'rejected') {
-                    nomination.status = this.reason(mailBody, keys.scanner);
-                }
-                break;
+            if (part.partId !== '1') continue;
+            const mailBody = this.base64(part.body.data);
+            nomination.image = mailBody.match(/googleusercontent\.com\/[0-9a-zA-Z\-\_]+/)[0].replace('googleusercontent.com/', '');
+            nomination.id = Nomination.parseId(nomination.image);
+            if (keys.scanner === 'redacted' && keys.type !== 'pending') {
+                nomination.lngLat = this.lngLat(mailBody);
             }
+            if (keys.type === 'rejected') {
+                nomination.status = this.reason(mailBody, keys.scanner);
+            }
+            break;
         }
         return nomination;
     }
