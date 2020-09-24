@@ -60,3 +60,36 @@ Photo appears to include a recognizable license plate
 
 </p>
 </details>
+
+## Photo Quality
+<details><summary>en</summary>
+<p>
+
+```
+Photo is low quality (e.g., pitch black/blurry photos or photos taken from a car)
+```
+
+</p>
+</details>
+
+## Criteria
+<details><summary>en</summary>
+<p>
+
+```
+Nomination does not meet acceptance criteria
+```
+
+</p>
+</details>
+
+## Private
+<details><summary>en</summary>
+<p>
+
+```
+The real-word location of the nomination appears to be on private residential property or farm
+```
+
+</p>
+</details>
