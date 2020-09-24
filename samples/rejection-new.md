@@ -35,7 +35,7 @@ Nomination does not appear to be permanent or appears to be a seasonal display t
 </p>
 </details>
 
-### Generic Store
+## Generic Store
 <details><summary>en</summary>
 <p>
 The real-world location of the nomination appears to represent a generic store or restaurant
