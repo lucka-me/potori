@@ -1,5 +1,5 @@
 # Changelog
-Noteable changes of Potori will be documented here. For [Status Data](./src/data/status.json), please refer to [Data Changelog](#Data_Changelog).
+Noteable changes of Potori will be documented here. For [Status Data](./src/data/status.json), please refer to [Data Changelog](#data-changelog).
 
 ## [0.7.7](https://github.com/lucka-me/potori/releases/tag/0.7.7) - 2020-09-TBA
 - TBA
@@ -18,6 +18,7 @@ Noteable changes of Potori will be documented here. For [Status Data](./src/data
 - Unable to parse image from some mail
 
 
+
 ## [0.7.6](https://github.com/lucka-me/potori/releases/tag/0.7.6) - 2020-09-08
 - Support offline
 
@@ -29,7 +30,8 @@ Noteable changes of Potori will be documented here. For [Status Data](./src/data
 - Progress bar not totally hide
 - Brainstorming cards not updated when save nomination data
 
-
+<details><summary>Earlier</summary>
+<p>
 
 ## [0.7.5](https://github.com/lucka-me/potori/releases/tag/0.7.5) - 2020-09-06
 - Dynamically load most modules and lazyload images
@@ -113,8 +115,7 @@ Migrate to Webpack and TypeScript
 ### Fixed
 - Various bugs related to Map Card
 
-<details><summary>Earlier</summary>
-<p>
+
 
 ## [0.6.2](https://github.com/lucka-me/potori/releases/tag/0.6.2) - 2020-06-08
 Bugs fixed
@@ -789,6 +790,7 @@ Bug fixed
 </p>
 </details>
 
+
 # Data Changelog
 
 ## d7 - 2020-09-24
@@ -800,6 +802,9 @@ Bug fixed
 ### Changed
 - Add prefix for new reasons
 - Not use `code` as index any more
+
+<details><summary>Earlier</summary>
+<p>
 
 ## d6 - 2020-09-12
 ### Added
@@ -824,3 +829,6 @@ Bug fixed
 
 ## d1 - 2019-01-12
 - Initial version
+
+</p>
+</details>
