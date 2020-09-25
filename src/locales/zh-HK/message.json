@@ -1,0 +1,25 @@
+{
+    "Service": "",
+    "List is empty": "列表為空。",
+    "Failed to parse as Nomination List": "无法解析为提名列表。",
+    "Failed to parse as Brainstorming Data": "无法解析为Brainstorming数据。",
+    "Load as Brainstorming Data": "加載為Brainstorming數據",
+    "No Nomination to save": "没有提名。",
+    "Uploaded": "已上載。",
+    "Unable to upload Nomination List": "無法上載提名列表。",
+    "Unable to upload Brainstorming Data": "無法上載Brainstorming數據。",
+    "Unable to parse the code": "无法解析代码。",
+    "Invalid data": "數據無效。",
+    "Brainstorming Data updated": "Brainstorming數據已更新。",
+
+    "FileKit": "FileKit",
+    "Failed to open file": "無法打開檔案。",
+
+    "NominationCard": "",
+    "Brainstorming ID copied": "已拷貝Brainstorming ID：{{id}}",
+
+    "DetailsDialog": "",
+    "Failed to query Firebase": "无法擷取線上資料庫。",
+    "Nomination not exists in database": "資料庫中未找到提名。",
+    "Invalid DateTime": "時間無效。"
+}

@@ -41,8 +41,6 @@ class AboutDialog extends DialogPrototype {
                         'https://github.com/lucka-me/potori/blob/master/CHANGELOG.md',
                         i18next.t('Changelog'), service.version.string
                     ),
-                    ' by ',
-                    DialogPrototype.buildLink('https://lucka.moe', i18next.t('Blog'), 'Lucka'),
                 ]),
             ]),
             eli.build('footer', {
