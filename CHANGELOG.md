@@ -30,7 +30,7 @@ Noteable changes of Potori will be documented here. For [Status Data](./src/data
 - Progress bar not totally hide
 - Brainstorming cards not updated when save nomination data
 
-<details><summary>Earlier</summary>
+<details><summary>0.7.x</summary>
 <p>
 
 ## [0.7.5](https://github.com/lucka-me/potori/releases/tag/0.7.5) - 2020-09-06
@@ -115,7 +115,10 @@ Migrate to Webpack and TypeScript
 ### Fixed
 - Various bugs related to Map Card
 
-
+</p>
+</details>
+<details><summary>0.6.x</summary>
+<p>
 
 ## [0.6.2](https://github.com/lucka-me/potori/releases/tag/0.6.2) - 2020-06-08
 Bugs fixed
@@ -150,7 +153,10 @@ Modularize Potori
 ### Fixed
 - Synch includes reviews for pending portals
 
-
+</p>
+</details>
+<details><summary>0.5.x</summary>
+<p>
 
 ## [0.5.6](https://github.com/lucka-me/potori/releases/tag/0.5.6) - 2020-05-29
 UI improvement and bug fix
@@ -245,7 +251,10 @@ Introduce Dashboard, a view to show map and statistics
 - A dashboard with map, filter and more cards
 - Status & About dialog -> About dialog
 
-
+</p>
+</details>
+<details><summary>0.4.x</summary>
+<p>
 
 ## [0.4.22](https://github.com/lucka-me/potori/releases/tag/0.4.22) - 2020-05-21
 Minor improvement and bugs fixed
@@ -496,7 +505,10 @@ Brand new Material Design UI
 ### Fixed
 - Lite: Keyboard will show up when click the status button to copy bs ID
 
-
+</p>
+</details>
+<details><summary>0.3.x</summary>
+<p>
 
 ## 0.3.10 - 2019-07-27
 Fixed: Deleting empty file in Google Drive will cause crash
@@ -613,7 +625,10 @@ Support Prime
 - Re-constructed code
 - A lite version in /docs to meet the criteria of Google Trust & Safety Team
 
-
+</p>
+</details>
+<details><summary>0.2.x</summary>
+<p>
 
 ## 0.2.9 - 2019-06-25
 Removed all features related to 3rd-party
@@ -713,7 +728,10 @@ UI updated with some new features
 ### Changed
 - The main UI
 
-
+</p>
+</details>
+<details><summary>0.1.x</summary>
+<p>
 
 ## 0.1.7 - 2019-01-18
 Intel link added
