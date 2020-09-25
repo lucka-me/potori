@@ -5,15 +5,17 @@
 - TBA
 
 ### Added
+- zh-HK locale based on zh-TW
 - Detailed reasons when fail to query database
 
 ### Changed
-- Replace drop down selector with chips in Details dialog to aviod menu being covered
+- Replace drop down selector with text field and chips in Details dialog to aviod menu being covered
 - Pack 3rd-party modules and reduce app size
 - Logo
 
 ### Fixed
 - Turn one reason switch on will show all rejected cards when the reject switch is off
+- Unable to parse image from some mail
 ```
 
 ```markdown
