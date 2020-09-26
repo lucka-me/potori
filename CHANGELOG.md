@@ -1,8 +1,8 @@
 # Changelog
 Noteable changes of Potori will be documented here. For [Status Data](./src/data/status.json), please refer to [Data Changelog](#data-changelog).
 
-## [0.7.7](https://github.com/lucka-me/potori/releases/tag/0.7.7) - 2020-09-TBA
-- TBA
+## [0.7.7](https://github.com/lucka-me/potori/releases/tag/0.7.7) - 2020-09-26
+- Improved UI and reduce app size
 
 ### Added
 - zh-HK locale based on zh-TW
