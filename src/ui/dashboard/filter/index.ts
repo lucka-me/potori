@@ -34,7 +34,10 @@ export default class FilterCard extends DashboardPrototype {
 
     render() {
         this.block.type.root = eli.build('div', { className: 'flex-box-row--nowrap' });
-        this.block.reason.root = eli.build('div', { className: 'flex-box-row--wrap' });
+        this.block.reason.root = eli.build('div', {
+            cssText: 'overflow-y: auto;',
+            className: 'flex-box-row--wrap'
+        });
         this.root = eli.build('div', {
             className: [
                 'mdc-card',

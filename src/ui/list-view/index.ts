@@ -41,7 +41,7 @@ class ListView extends UIPrototype {
                 'min-width: 300px',
                 'padding: 4px',
                 'box-sizing: border-box',
-                'overflow-y: scroll',
+                'overflow-y: auto',
                 'scroll-behavior: smooth',
                 '-webkit-overflow-scrolling: touch',
             ].join(';'),

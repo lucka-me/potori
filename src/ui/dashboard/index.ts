@@ -84,7 +84,7 @@ class Dashboard extends UIPrototype {
             cssText: [
                 'height: 100%',
                 'box-sizing: border-box',
-                'overflow-y: scroll',
+                'overflow-y: auto',
                 'scroll-behavior: smooth',
                 '-webkit-overflow-scrolling: touch',
             ].join(';'),
