@@ -29,7 +29,7 @@
     "@types/gapi.client.drive": "^3.0.10",
     "@types/gapi.client.gmail": "^1.0.2",
     "@types/lodash": "^4.14.161",
-    "@types/mapbox-gl": "^1.12.1",
+    "@types/mapbox-gl": "^1.12.2",
     "chart.js": "^2.9.3",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^4.3.0",
