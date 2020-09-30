@@ -75,7 +75,7 @@ class NominationCard {
             'min-height: 120px',
         ].join(';');
         const elementPrimaryAction = eli.build('div', {
-            className: 'mdc-card__primary-action',
+            //className: 'mdc-card__primary-action',
         }, [
             eli.build('div', {
                 className: 'flex-box-row--nowrap',
@@ -103,8 +103,8 @@ class NominationCard {
                 ]),
             ]),
         ]);
-        const primaryAction = new MDCRipple(elementPrimaryAction);
-        primaryAction.listen('click', events.openDetails);
+        //const primaryAction = new MDCRipple(elementPrimaryAction);
+        //primaryAction.listen('click', events.openDetails);
 
         const elementActionStatus = eli.build('button', {
             className: 'mdc-button mdc-card__action mdc-card__action--button',
@@ -117,7 +117,7 @@ class NominationCard {
         ]);
         const actionStatus = new MDCRipple(elementActionStatus);
         actionStatus.unbounded = true;
-        actionStatus.listen('click', events.openBs);
+        actionStatus.listen('click', events.openDetails);
 
         const actionIcons = [];
         const classNameAction = [
@@ -139,6 +139,7 @@ class NominationCard {
         actionIcons.push(elementActionLocation);
 
         if (service.version.full) {
+            // Intel Maps
             const elementActionIntel = eli.build('button', {
                 className: classNameAction,
                 title: i18next.t('Intel Map'),
@@ -153,6 +154,16 @@ class NominationCard {
             });
             actionIcons.push(elementActionIntel);
         }
+        // Brainstorming watermeter
+        const elementBs = eli.build('button', {
+            className: classNameAction,
+            title: i18next.t('Brainstorming Watermeter'),
+            innerHTML: '&#xf5dc',
+        });
+        const actionBs = new MDCRipple(elementBs);
+        actionBs.unbounded = true;
+        actionBs.listen('click', events.openBs);
+        actionIcons.push(elementBs);
 
         const elementCard = eli.build('div', {
             className: 'mdc-card mdc-card--outlined flex-shrink--0',
