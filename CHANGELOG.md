@@ -1,6 +1,15 @@
 # Changelog
 Noteable changes of Potori will be documented here. For [Status Data](./src/data/status.json), please refer to [Data Changelog](#data-changelog).
 
+## [0.7.8](https://github.com/lucka-me/potori/releases/tag/0.7.8) - 2020-TBA
+- TBA
+
+### Changed
+- Skip queries for nominations which got result before database exists (17/2/2018)
+- Minor UI improvement
+
+
+
 ## [0.7.7](https://github.com/lucka-me/potori/releases/tag/0.7.7) - 2020-09-26
 - Improved UI and reduce app size
 
@@ -17,7 +26,8 @@ Noteable changes of Potori will be documented here. For [Status Data](./src/data
 - Turn one reason switch on will show all rejected cards when the reject switch is off
 - Unable to parse image from some mail
 
-
+<details><summary>0.7.x</summary>
+<p>
 
 ## [0.7.6](https://github.com/lucka-me/potori/releases/tag/0.7.6) - 2020-09-08
 - Support offline
@@ -30,8 +40,7 @@ Noteable changes of Potori will be documented here. For [Status Data](./src/data
 - Progress bar not totally hide
 - Brainstorming cards not updated when save nomination data
 
-<details><summary>0.7.x</summary>
-<p>
+
 
 ## [0.7.5](https://github.com/lucka-me/potori/releases/tag/0.7.5) - 2020-09-06
 - Dynamically load most modules and lazyload images
