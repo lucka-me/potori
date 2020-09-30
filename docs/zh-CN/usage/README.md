@@ -52,7 +52,7 @@ Ingress Prime使用了本地化的模版，这给确定关键词带来了挑战�
 ## 可视化
 Potori会将提名信息展现在卡片中，并在仪表盘视图中展示数据和统计信息。
 
-提名的状态、结果时间和拒绝理由可以在点击卡片打开的*详情对话框*中编辑。
+提名的状态、结果时间和拒绝理由可以在点击状态按钮打开的*详情对话框*中编辑。
 
 ## 导入
 Potori可以导入[Wayfarer API](https://wayfarer.nianticlabs.com/api/v1/vault/manage "Wayfarer API")中的数据以更新提名的名称和坐标。在菜单中点击*Import*打开*导入对话框*，将Wayfarer API的JSON代码粘贴并点击*Import*即可。

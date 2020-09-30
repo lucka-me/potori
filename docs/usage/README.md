@@ -52,7 +52,7 @@ Ingress Prime uses localized templates, which makes it difficult to find the cor
 ## Visualize
 Potori will display the information of nominations in cards, and display data and stastistics in the Dashboard view.
 
-The status, result time and rejection reason are editable, click the cards to open the *Details Dialog* and edit.
+The status, result time and rejection reason are editable, click the status button to open the *Details Dialog* and edit.
 
 ## Import
 Potori can parse data from [Wayfarer API](https://wayfarer.nianticlabs.com/api/v1/vault/manage "Wayfarer API") and update the title and location of nominations. Click *Import* from menu to open the *Import Dialog*, paste the JSON code from Wayfarer API and click Import.
