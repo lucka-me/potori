@@ -43,9 +43,10 @@ export default class FilterCard extends DashboardPrototype {
                 'mdc-card',
                 'mdc-card--outlined',
                 'padding--8',
-                'flex--1',
+                'flex--2',
                 'flex-shrink--0'
             ].join(' '),
+            cssText: 'min-width: 250px',
         }, [
             eli.build('span', {
                 className: 'mdc-typography--headline6',
