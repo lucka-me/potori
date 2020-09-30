@@ -17,7 +17,7 @@ import './style.scss';
 
 interface DetailsDialogEvents {
     alert: (message: string) => void;
-    query: (bsId: string, succeed: (data: any) => void, failed: () => void) => void;
+    query: (nomination: Nomination, succeed: (data: any) => void, failed: () => void) => void;
     update: (nomination: Nomination) => void;
 }
 
@@ -319,7 +319,7 @@ class DetailsDialog extends DialogPrototype {
             this.fieldReason.value = i18next.t(nomination.status.title);
         }
         if (type === 'pending') {
-            this.events.query(nomination.id, (data) => {
+            this.events.query(nomination, (data) => {
                 const timeString = getLocalDateTimeISOString(data.lastTime);
                 this.fieldResultTime.value = timeString.slice(0, timeString.lastIndexOf(':'));
                 this.fieldResultTime.layout();

@@ -12,7 +12,7 @@ import './style.scss';
 
 interface DetailsDialogMapEvents {
     alert: (message: string) => void;
-    queryLngLat: (bsId: string, succeed: (lngLat: LngLat) => void, failed: (reason: QueryFailReason) => void) => void;
+    queryLngLat: (nomination: Nomination, succeed: (lngLat: LngLat) => void, failed: (reason: QueryFailReason) => void) => void;
 }
 
 export default class DetailsDialogMap extends UIPrototype {
@@ -144,7 +144,6 @@ export default class DetailsDialogMap extends UIPrototype {
         };
         const failed = (reason: QueryFailReason) => {
             if (!this.dialog.isOpen) return;
-            const message = '';
             switch(reason) {
                 case QueryFailReason.FIREBASE_ERROR: {
                     this.events.alert(i18next.t('message:Failed to query Firebase'));
@@ -154,12 +153,16 @@ export default class DetailsDialogMap extends UIPrototype {
                     this.events.alert(i18next.t('message:Nomination not exists in database'));
                     break;
                 }
+                case QueryFailReason.EARLY: {
+                    this.events.alert(i18next.t('message:Early nominaion not exists in database'));
+                    break;
+                }
                 default:
             }
             this.buttons.search.root.disabled = false;
         }
         this.buttons.search.root.disabled = true;
-        this.events.queryLngLat(this.nomination.id, succeed, failed);
+        this.events.queryLngLat(this.nomination, succeed, failed);
     }
 
     delete() {

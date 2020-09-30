@@ -161,7 +161,7 @@ export namespace service {
         };
         for (const nomination of listNoLocation) {
             bs.queryLocation(
-                nomination.id,
+                nomination,
                 (lngLat) => {
                     nomination.lngLat = lngLat;
                     countUp();

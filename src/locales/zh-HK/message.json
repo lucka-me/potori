@@ -21,5 +21,6 @@
     "DetailsDialog": "",
     "Failed to query Firebase": "无法擷取線上資料庫。",
     "Nomination not exists in database": "資料庫中未找到提名。",
+    "Early nominaion not exists in database": "早期提名資料未录入資料庫中。",
     "Invalid DateTime": "時間無效。"
 }

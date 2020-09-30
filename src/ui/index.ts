@@ -291,8 +291,8 @@ export namespace ui {
         dialog.details.events.alert = (message) => {
             dialog.alert.open(message);
         }
-        dialog.details.events.query = (bsId, succeed, failed) => {
-            service.bs.query(bsId, succeed, failed);
+        dialog.details.events.query = (nomination, succeed, failed) => {
+            service.bs.query(nomination, succeed, failed);
         };
         dialog.details.events.update = (nomination) => {
             update(nomination);
@@ -300,8 +300,8 @@ export namespace ui {
         dialog.details.map.events.alert = (message) => {
             dialog.alert.open(message);
         }
-        dialog.details.map.events.queryLngLat = (bsId, succeed, failed) => {
-            service.bs.queryLocation(bsId, succeed, failed);
+        dialog.details.map.events.queryLngLat = (nomination, succeed, failed) => {
+            service.bs.queryLocation(nomination, succeed, failed);
         };
 
         list.events.openDetails = (nomination) => {

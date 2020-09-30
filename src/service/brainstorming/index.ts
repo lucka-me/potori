@@ -34,30 +34,34 @@ class BrainstormingKit {
 
     /**
      * Query data from local databse and firebase (full version only)
-     * @param bsId Brainstorming ID
+     * @param nomination Nomination to query
      * @param succeed Triggered when succeed to query data
      * @param failed Triggered when Failed to query data
      */
-    query(bsId: string, succeed: QueryCallback, failed: FailCallback) {
-        if (this.data.has(bsId)) {
-            succeed(this.data.get(bsId));
+    query(nomination: Nomination, succeed: QueryCallback, failed: FailCallback) {
+        if (nomination.status.code > 0 && nomination.resultTime < 1518796800) {
+            failed(QueryFailReason.EARLY);
+            return;
+        }
+        if (this.data.has(nomination.id)) {
+            succeed(this.data.get(nomination.id));
             return;
         }
         if (!service.version.full) {
             failed(QueryFailReason.NOT_EXIST);
             return;
         }
-        this.queryFirebase(bsId, succeed, failed);
+        this.queryFirebase(nomination, succeed, failed);
     }
 
     /**
      * Query location data from local databse and firebase (full version only)
-     * @param bsId Brainstorming ID
+     * @param nomination Nomination to query
      * @param succeed Triggered when succeed to query location
      * @param failed Triggered when Failed to query location
      */
-    queryLocation(bsId: string, succeed: QueryLocationCallback, failed: FailCallback) {
-        this.query(bsId, (data) => {
+    queryLocation(nomination: Nomination, succeed: QueryLocationCallback, failed: FailCallback) {
+        this.query(nomination, (data) => {
             succeed({ lng: parseFloat(data.lng), lat: parseFloat(data.lat) });
         }, failed);
     }
@@ -71,7 +75,7 @@ class BrainstormingKit {
         const queryList = [];
         for (const nomination of nominations) {
             if ((nomination.status.code < 1) || !this.data.has(nomination.id)) {
-                queryList.push(nomination.id);
+                queryList.push(nomination);
             }
         }
         let left = queryList.length;
@@ -79,9 +83,9 @@ class BrainstormingKit {
             left--;
             if (left < 1) finish();
         }
-        for (const id of queryList) {
-            this.queryFirebase(id, (value) => {
-                this.data.set(id, value);
+        for (const nomination of queryList) {
+            this.queryFirebase(nomination, (value) => {
+                this.data.set(nomination.id, value);
                 queried();
             }, queried);
         }
@@ -93,7 +97,11 @@ class BrainstormingKit {
      * @param succeed Triggered when succeed
      * @param failed Triggered when failed
      */
-    private queryFirebase(bsId: string, succeed: QueryCallback, failed: FailCallback) {
+    private queryFirebase(nomination: Nomination, succeed: QueryCallback, failed: FailCallback) {
+        if (nomination.status.code > 0 && nomination.resultTime < 1518796800) {
+            failed(QueryFailReason.EARLY);
+            return;
+        }
         Promise.all([
             import(/* webpackChunkName: 'modules-async' */ '@firebase/app'),
             import(/* webpackChunkName: 'modules-async' */ '@firebase/database'),
@@ -102,7 +110,7 @@ class BrainstormingKit {
                 const app = firebase.default.initializeApp({ databaseURL: 'https://oprbrainstorming.firebaseio.com' });
                 if (!this.reference) this.reference = app.database().ref('c/reviews/');
             }
-            this.reference.child(bsId).once('value', (data) => {
+            this.reference.child(nomination.id).once('value', (data) => {
                 const value = data.val();
                 if (!value) {
                     failed(QueryFailReason.NOT_EXIST);

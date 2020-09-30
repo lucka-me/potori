@@ -21,5 +21,6 @@
     "DetailsDialog": "",
     "Failed to query Firebase": "Failed to query Firebase.",
     "Nomination not exists in database": "Nomination not exists in database",
+    "Early nominaion not exists in database": "Early nominaion not exists in database",
     "Invalid DateTime": "Invalid DateTime."
 }
