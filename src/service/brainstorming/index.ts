@@ -39,7 +39,7 @@ class BrainstormingKit {
      * @param failed Triggered when Failed to query data
      */
     query(nomination: Nomination, succeed: QueryCallback, failed: FailCallback) {
-        if (nomination.status.code > 0 && nomination.resultTime < 1518796800) {
+        if (this.beforeCreate(nomination)) {
             failed(QueryFailReason.EARLY);
             return;
         }
@@ -74,9 +74,8 @@ class BrainstormingKit {
     update(nominations: Array<Nomination>, finish: UpdateCallback) {
         const queryList = [];
         for (const nomination of nominations) {
-            if ((nomination.status.code < 1) || !this.data.has(nomination.id)) {
-                queryList.push(nomination);
-            }
+            if (this.beforeCreate(nomination)) continue;
+            queryList.push(nomination);
         }
         let left = queryList.length;
         const queried = () => {
@@ -98,7 +97,7 @@ class BrainstormingKit {
      * @param failed Triggered when failed
      */
     private queryFirebase(nomination: Nomination, succeed: QueryCallback, failed: FailCallback) {
-        if (nomination.status.code > 0 && nomination.resultTime < 1518796800) {
+        if (this.beforeCreate(nomination)) {
             failed(QueryFailReason.EARLY);
             return;
         }
@@ -126,6 +125,14 @@ class BrainstormingKit {
      */
     clear() {
         this.data.clear();
+    }
+
+    /**
+     * Check if the nomination got result before creation of firebase, should skip query if true
+     * @param nomination The nomination
+     */
+    beforeCreate(nomination: Nomination): boolean {
+        return nomination.status.code > 0 && nomination.resultTime < 1518796800;
     }
 
     /**

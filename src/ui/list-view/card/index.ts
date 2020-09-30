@@ -74,9 +74,7 @@ class NominationCard {
             'height: 120px',
             'min-height: 120px',
         ].join(';');
-        const elementPrimaryAction = eli.build('div', {
-            //className: 'mdc-card__primary-action',
-        }, [
+        const elementPrimaryAction = eli.build('div', { }, [
             eli.build('div', {
                 className: 'flex-box-row--nowrap',
             }, [
@@ -103,10 +101,8 @@ class NominationCard {
                 ]),
             ]),
         ]);
-        //const primaryAction = new MDCRipple(elementPrimaryAction);
-        //primaryAction.listen('click', events.openDetails);
 
-        const elementActionStatus = eli.build('button', {
+        const elementStatus = eli.build('button', {
             className: 'mdc-button mdc-card__action mdc-card__action--button',
         }, [
             eli.build('div', { className: 'mdc-button__ripple' }),
@@ -115,55 +111,28 @@ class NominationCard {
             }),
             eli.build('span', { className: 'mdc-button__label' }),
         ]);
-        const actionStatus = new MDCRipple(elementActionStatus);
-        actionStatus.unbounded = true;
-        actionStatus.listen('click', events.openDetails);
+        const rippleStatus = new MDCRipple(elementStatus);
+        rippleStatus.unbounded = true;
+        rippleStatus.listen('click', events.openDetails);
 
-        const actionIcons = [];
-        const classNameAction = [
-            'fa',
-            'mdc-icon-button',
-            'mdc-card__action',
-            'mdc-card__action--icon'
-        ].join(' ');
-        const elementActionLocation = eli.build('button', {
-            className: classNameAction,
-            title: i18next.t('Location'),
-            id: 'button-card-nomination-location',
-            hidden: true,
-            innerHTML: '&#xf3c5',
-        });
-        const actionLocation = new MDCRipple(elementActionLocation);
-        actionLocation.unbounded = true;
-        actionLocation.listen('click', events.focus);
-        actionIcons.push(elementActionLocation);
+        const actions: Array<HTMLButtonElement> = [];
+        actions.push(NominationCard.buildAction(
+            'Location', 'button-card-nomination-location', '&#xf3c5', true, events.focus
+        ));
 
         if (service.version.full) {
             // Intel Maps
-            const elementActionIntel = eli.build('button', {
-                className: classNameAction,
-                title: i18next.t('Intel Map'),
-                id: 'button-card-nomination-intel',
-                hidden: true,
-                innerHTML: '&#xf279',
-            });
-            const actionIntel = new MDCRipple(elementActionIntel);
-            actionIntel.unbounded = true;
-            actionIntel.listen('click', () => {
-                window.open(nomination.intelUrl, '_blank', 'noopener');
-            });
-            actionIcons.push(elementActionIntel);
+            actions.push(NominationCard.buildAction(
+                'Intel Map', 'button-card-nomination-intel', '&#xf0ac', true,
+                () => window.open(nomination.intelUrl, '_blank', 'noopener')
+            ));
         }
         // Brainstorming watermeter
-        const elementBs = eli.build('button', {
-            className: classNameAction,
-            title: i18next.t('Brainstorming Watermeter'),
-            innerHTML: '&#xf5dc',
-        });
-        const actionBs = new MDCRipple(elementBs);
-        actionBs.unbounded = true;
-        actionBs.listen('click', events.openBs);
-        actionIcons.push(elementBs);
+        actions.push(NominationCard.buildAction(
+            'Brainstorming Watermeter', 'button-card-nomination-bs', '&#xf5dc',
+            service.bs.beforeCreate(nomination),
+            events.openBs
+        ));
 
         const elementCard = eli.build('div', {
             className: 'mdc-card mdc-card--outlined flex-shrink--0',
@@ -175,13 +144,40 @@ class NominationCard {
             }, [
                 eli.build('div', {
                     className: 'mdc-card__action-buttons',
-                }, [ elementActionStatus ]),
+                }, [ elementStatus ]),
                 eli.build('div', {
                     className: 'mdc-card__action-icons',
-                }, actionIcons),
+                }, actions),
             ]),
         ]);
         return elementCard;
+    }
+
+    /**
+     * Build an icon action
+     * @param title Title of the element
+     * @param id ID of the element
+     * @param icon Icon of the button
+     * @param hidden Hidden or not
+     * @param click Callback for click event
+     */
+    private static buildAction(title: string, id: string, icon: string, hidden: boolean, click: BasicCallback): HTMLButtonElement {
+        const element = eli.build('button', {
+            className: [
+                'fa',
+                'mdc-icon-button',
+                'mdc-card__action',
+                'mdc-card__action--icon'
+            ].join(' '),
+            title: i18next.t(title),
+            id: id,
+            hidden: hidden,
+            innerHTML: icon,
+        });
+        const rippleLocation = new MDCRipple(element);
+        rippleLocation.unbounded = true;
+        rippleLocation.listen('click', click);
+        return element;
     }
 
     static update(nomination: Nomination, card: HTMLDivElement) {
@@ -199,6 +195,9 @@ class NominationCard {
         buttonStatus.className = `mdc-button mdc-card__action mdc-card__action--button status-${type}`;
         buttonStatus.querySelector('i').innerHTML = nomination.status.icon;
         buttonStatus.querySelector('span').innerHTML = i18next.t(nomination.status.title);
+
+        const elementBs = card.querySelector('#button-card-nomination-bs') as HTMLDivElement;
+        elementBs.hidden = service.bs.beforeCreate(nomination);
     }
 
     static updateLocation(nomination: Nomination, card: HTMLDivElement) {
