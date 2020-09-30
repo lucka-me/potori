@@ -1,3 +1,5 @@
+import i18next from 'i18next';
+
 import { service } from 'service';
 import { Status } from 'service/status';
 
@@ -76,16 +78,18 @@ export default class Nomination {
      */
     get intervalString(): string {
         const end = this.resultTime ? this.resultTime : now;
-        const day = Math.floor((end - this.confirmedTime) / (24 * 3600 * 1000));
-        return `${day} day${(day > 1 ? 's' : '')}`;
+        return i18next.t('dayCount', {
+            count: Math.floor((end - this.confirmedTime) / (24 * 3600 * 1000))
+        });
     }
 
     /**
      * Get string of interval between now and restore time
      */
     get restoreIntervalString(): string {
-        const day = Math.floor((this.restoreTime - now) / (24 * 3600 * 1000));
-        return `${day} day${(day > 1 ? 's' : '')}`;
+        return i18next.t('dayCount', {
+            count: Math.floor((this.restoreTime - now) / (24 * 3600 * 1000))
+        });
     }
 
     /**

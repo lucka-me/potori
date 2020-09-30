@@ -39,6 +39,8 @@
 
     "NominationCard": "",
     "Intel Map": "Intel Map",
+    "dayCount": "{{count}} day",
+    "dayCount_plural": "{{count}} days",
 
     "Dialogs": "",
     "Close": "Close",

@@ -39,6 +39,8 @@
 
     "NominationCard": "",
     "Intel Map": "情报地图",
+    "dayCount": "{{count}}天",
+    "dayCount_plural": "{{count}}天",
 
     "Dialogs": "",
     "Close": "关闭",
