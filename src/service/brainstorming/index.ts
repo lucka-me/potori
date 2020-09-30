@@ -132,7 +132,7 @@ class BrainstormingKit {
      * @param nomination The nomination
      */
     beforeCreate(nomination: Nomination): boolean {
-        return nomination.status.code > 0 && nomination.resultTime < 1518796800;
+        return nomination.status.code > 0 && nomination.resultTime < 1518796800000;
     }
 
     /**
