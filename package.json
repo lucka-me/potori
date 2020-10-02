@@ -39,7 +39,7 @@
     "i18next-browser-languagedetector": "^6.0.1",
     "mapbox-gl": "^1.12.0",
     "material-components-web": "^7.0.0",
-    "mini-css-extract-plugin": "^0.11.2",
+    "mini-css-extract-plugin": "^0.11.3",
     "moment": "^2.29.0",
     "sass": "^1.26.11",
     "sass-loader": "^10.0.2",
