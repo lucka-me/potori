@@ -21,7 +21,7 @@
   "devDependencies": {
     "@firebase/app": "^0.6.11",
     "@firebase/database": "^0.6.13",
-    "@fortawesome/fontawesome-free": "^5.15.0",
+    "@fortawesome/fontawesome-free": "^5.15.1",
     "@types/chart.js": "^2.9.24",
     "@types/copy-webpack-plugin": "^6.0.0",
     "@types/gapi": "0.0.39",
