@@ -100,7 +100,7 @@
         {
             "key": "criteria:criteria",
             "code": 112,
-            "title": "data.criteria",
+            "title": "data.criteriaCriteria",
             "icon":  "\uf05e",
             "color": "#B80233",
             "keywords": [
@@ -114,7 +114,7 @@
         {
             "key": "criteria:generic",
             "code": 105,
-            "title": "data.generic",
+            "title": "data.criteriaGeneric",
             "icon":  "\uf54e",
             "color": "#F0C649",
             "keywords": [
@@ -128,7 +128,7 @@
         {
             "key": "criteria:temporary",
             "code": 104,
-            "title": "data.temporary",
+            "title": "data.criteriaTemporary",
             "icon":  "\uf1da",
             "color": "#647372",
             "keywords": [
@@ -143,7 +143,7 @@
         {
             "key": "location:private",
             "code": 124,
-            "title": "data.private",
+            "title": "data.locationPrivate",
             "icon":  "\uf023",
             "color": "#5A4C4C",
             "keywords": [
@@ -158,7 +158,7 @@
         {
             "key": "photo:plate",
             "code": 106,
-            "title": "data.plate",
+            "title": "data.photoPlate",
             "icon":  "\uf1b9",
             "color": "#004DB5",
             "keywords": [
@@ -172,7 +172,7 @@
         {
             "key": "photo:quality",
             "code": 133,
-            "title": "data.Quality",
+            "title": "data.photoQuality",
             "icon":  "\uf03e",
             "color": "#5A715F",
             "keywords": [
