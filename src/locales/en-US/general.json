@@ -1,7 +1,3 @@
 {
-    "ui.list-view.card.location": "Location",
-    "ui.list-view.card.intelMap": "Intel Map",
-    "ui.list-view.card.bsWatermeter": "Brainstorming Watermeter",
-
     "ui.snackbar.dismiss": "Dismiss"
 }
