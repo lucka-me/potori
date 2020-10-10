@@ -1,11 +1,4 @@
 {
-    "ui.app-bar.menu.upload": "上載",
-    "ui.app-bar.menu.import": "匯入",
-    "ui.app-bar.menu.about": "關於",
-    "ui.app-bar.menu.signOut": "登出",
-    "ui.app-bar.menu.open": "開啟",
-    "ui.app-bar.menu.save"  : "儲存",
-
     "ui.list-view.card.location": "位置",
     "ui.list-view.card.intelMap": "情報地圖",
     "ui.list-view.card.bsWatermeter": "Brainstorming水錶",

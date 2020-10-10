@@ -1,0 +1,40 @@
+{
+    "general": {
+        "open": {
+            "en-US": "Open",
+            "zh-CN": "打开",
+            "zh-HK": "開啟",
+            "zh-TW": "開啟"
+        },
+        "save": {
+            "en-US": "Save",
+            "zh-CN": "保存",
+            "zh-HK": "儲存",
+            "zh-TW": "儲存"
+        },
+        "upload": {
+            "en-US": "Upload",
+            "zh-CN": "上传",
+            "zh-HK": "上載",
+            "zh-TW": "上載"
+        },
+        "import": {
+            "en-US": "Import",
+            "zh-CN": "导入",
+            "zh-HK": "匯入",
+            "zh-TW": "匯入"
+        },
+        "about": {
+            "en-US": "About",
+            "zh-CN": "关于",
+            "zh-HK": "關於",
+            "zh-TW": "關於"
+        },
+        "signOut": {
+            "en-US": "Sign Out",
+            "zh-CN": "登出",
+            "zh-HK": "登出",
+            "zh-TW": "登出"
+        }
+    }
+}

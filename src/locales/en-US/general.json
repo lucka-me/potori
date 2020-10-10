@@ -1,11 +1,4 @@
 {
-    "ui.app-bar.menu.open": "Open",
-    "ui.app-bar.menu.save": "Save",
-    "ui.app-bar.menu.upload": "Upload",
-    "ui.app-bar.menu.import": "Import",
-    "ui.app-bar.menu.about": "About",
-    "ui.app-bar.menu.signOut": "Sign Out",
-
     "ui.dashboard.count-by-month.title": "Count by Month",
     "ui.dashboard.count-by-month.submissions": "Submissions",
     "ui.dashboard.count-by-month.results": "Results",
