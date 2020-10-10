@@ -1,0 +1,40 @@
+{
+    "general": {
+        "quality": {
+            "en-US": "Quality",
+            "zh-CN": "质量",
+            "zh-HK": "質量",
+            "zh-TW": "質量"
+        },
+        "description": {
+            "en-US": "Description",
+            "zh-CN": "描述",
+            "zh-HK": "描述",
+            "zh-TW": "描述"
+        },
+        "cultural": {
+            "en-US": "Cultural",
+            "zh-CN": "文化",
+            "zh-HK": "文化",
+            "zh-TW": "文化"
+        },
+        "uniqueness": {
+            "en-US": "Uniqueness",
+            "zh-CN": "独特",
+            "zh-HK": "獨特",
+            "zh-TW": "獨特"
+        },
+        "safety": {
+            "en-US": "Safety",
+            "zh-CN": "安全",
+            "zh-HK": "安全",
+            "zh-TW": "安全"
+        },
+        "location": {
+            "en-US": "Location",
+            "zh-CN": "位置",
+            "zh-HK": "位置",
+            "zh-TW": "位置"
+        }
+    }
+}

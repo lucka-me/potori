@@ -11,8 +11,6 @@
     "service.invalidData": "数据无效。",
     "service.bsDataUpdated": "Brainstorming数据已更新。",
 
-    "service.file.local.openFailed": "无法打开文件。",
-
     "ui.list-view.bsIdCopied": "已复制Brainstorming ID：{{id}}",
 
     "ui.dialog.details.map.queryFailed": "无法查询线上数据库。",

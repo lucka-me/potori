@@ -1,0 +1,10 @@
+{
+    "message": {
+        "openFailed": {
+            "en-US": "Failed to open file.",
+            "zh-CN": "无法打开文件。",
+            "zh-HK": "無法打開檔案。",
+            "zh-TW": "無法打開檔案。"
+        }
+    }
+}

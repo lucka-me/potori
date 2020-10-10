@@ -1,28 +1,4 @@
 {
-    "data.pending": "审核中",
-    "data.accepted": "批准",
-    "data.rejected": "拒绝",
-
-    "data.undeclared": "未指明",
-    "data.duplicated": "重复",
-    "data.close": "过近",
-
-    "data.criteria": "不合标准",
-    "data.generic": "一般商家",
-    "data.temporary": "临时",
-
-    "data.private": "私人",
-    
-    "data.plate": "车牌",
-    "data.Quality": "照片质量",
-
-    "service.brainstorming.quality": "质量",
-    "service.brainstorming.description": "描述",
-    "service.brainstorming.cultural": "文化",
-    "service.brainstorming.uniqueness": "独特",
-    "service.brainstorming.safety": "安全",
-    "service.brainstorming.location": "位置",
-
     "ui.app-bar.open"  : "打开",
     "ui.app-bar.menu.save"  : "保存",
     "ui.app-bar.menu.upload": "上传",

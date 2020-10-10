@@ -1,21 +1,4 @@
 {
-    "data.pending": "審核中",
-    "data.accepted": "批准",
-    "data.rejected": "拒絕",
-
-    "data.undeclared": "未指明",
-    "data.duplicated": "重複",
-    "data.close": "過近",
-
-    "data.criteria": "不合標準",
-    "data.generic": "一般商家",
-    "data.temporary": "臨時",
-
-    "data.private": "私人",
-    
-    "data.plate": "車牌",
-    "data.Quality": "照片品質",
-
     "service.brainstorming.quality": "質量",
     "service.brainstorming.description": "描述",
     "service.brainstorming.cultural": "文化",
