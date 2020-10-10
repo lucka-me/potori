@@ -24,14 +24,14 @@ class AboutDialog extends DialogPrototype {
                 eli.build('span', {
                     className: 'mdc-typography--body2',
                 }, [
-                    DialogPrototype.buildLink('./docs', i18next.t('Documents'), i18next.t('Documents'))
+                    DialogPrototype.buildLink('./docs', i18next.t('ui.dialog.about.documents'), i18next.t('ui.dialog.about.documents'))
                 ]),
                 eli.build('span', {
                     className: 'mdc-typography--body2',
                 }, [
                     DialogPrototype.buildLink(
                         'https://github.com/lucka-me/potori',
-                        i18next.t('GitHub Repo'), i18next.t('GitHub Repo')
+                        i18next.t('ui.dialog.about.repo'), i18next.t('ui.dialog.about.repo')
                     ),
                 ]),
                 eli.build('span', {
@@ -39,13 +39,13 @@ class AboutDialog extends DialogPrototype {
                 }, [
                     DialogPrototype.buildLink(
                         'https://github.com/lucka-me/potori/blob/master/CHANGELOG.md',
-                        i18next.t('Changelog'), service.version.string
+                        i18next.t('ui.dialog.about.changelog'), service.version.string
                     ),
                 ]),
             ]),
             eli.build('footer', {
                 className: 'mdc-dialog__actions',
-            }, [ DialogPrototype.buildDialogAction('close', i18next.t('Close')) ]),
+            }, [ DialogPrototype.buildDialogAction('close', i18next.t('ui.dialog.close')) ]),
         ]);
         this.parent.append(element);
         this.ctrl = new MDCDialog(element);

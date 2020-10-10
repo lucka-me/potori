@@ -42,24 +42,19 @@
     "dayCount": "{{count}}天",
     "dayCount_plural": "{{count}}天",
 
-    "Dialogs": "",
-    "Close": "关闭",
+    "ui.dialog.close": "关闭",
 
-    "AboutDialog": "",
-    "Changelog": "更新日志",
-    "Documents": "文档",
-    "GitHub Repo": "GitHub仓库",
+    "ui.dialog.about.changelog": "更新日志",
+    "ui.dialog.about.documents": "文档",
+    "ui.dialog.about.repo": "GitHub仓库",
 
-    "DetailsDialog": "",
-    "Result Time": "结果时间",
-    "Reason": "原因",
+    "ui.dialog.details.resultTime": "结果时间",
+    "ui.dialog.details.reason": "原因",
 
-    "ImportDialog": "",
-    "JSON": "JSON",
-    "From ": "来自",
-    "Wayfarer API": "Wayfarer API",
+    "ui.dialog.import.json": "JSON",
+    "ui.dialog.import.from": "来自",
+    "ui.dialog.import.wayfarer": "Wayfarer API",
 
-    "Snackbar": "",
     "ui.snackbar.dismiss": "关闭",
 
     "ui.dashboard.brainstorming.count-by-month.title": "每月统计",

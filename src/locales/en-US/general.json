@@ -42,22 +42,18 @@
     "dayCount": "{{count}} day",
     "dayCount_plural": "{{count}} days",
 
-    "Dialogs": "",
-    "Close": "Close",
+    "ui.dialog.close": "Close",
 
-    "AboutDialog": "",
-    "Changelog": "Changelog",
-    "Documents": "Documents",
-    "GitHub Repo": "GitHub Repo",
+    "ui.dialog.about.changelog": "Changelog",
+    "ui.dialog.about.documents": "Documents",
+    "ui.dialog.about.repo": "GitHub Repository",
 
-    "DetailsDialog": "",
-    "Result Time": "Result Time",
-    "Reason": "Reason",
+    "ui.dialog.details.resultTime": "Result Time",
+    "ui.dialog.details.reason": "Reason",
 
-    "ImportDialog": "",
-    "JSON": "JSON",
-    "From ": "From ",
-    "Wayfarer API": "Wayfarer API",
+    "ui.dialog.import.json": "JSON",
+    "ui.dialog.import.from": "From ",
+    "ui.dialog.import.wayfarer": "Wayfarer API",
 
     "ui.snackbar.dismiss": "Dismiss",
 

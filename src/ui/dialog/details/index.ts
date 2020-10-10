@@ -114,7 +114,7 @@ class DetailsDialog extends DialogPrototype {
             'input-dialog-details-result-time',
             'fullwidth',
             '\uf073',
-            i18next.t('Result Time'),
+            i18next.t('ui.dialog.details.resultTime'),
             'datetime-local'
         );
         
@@ -126,7 +126,7 @@ class DetailsDialog extends DialogPrototype {
             'input-dialog-details-reason',
             'flex--1',
             '',
-            i18next.t('Reason'),
+            i18next.t('ui.dialog.details.reason'),
             'text'
         );
         this.fieldReason = new MDCTextField(elementReason);
@@ -222,7 +222,7 @@ class DetailsDialog extends DialogPrototype {
             eli.build('footer', {
                 className: 'mdc-dialog__actions',
             }, [
-                DialogPrototype.buildDialogAction('close', i18next.t('Close')),
+                DialogPrototype.buildDialogAction('close', i18next.t('ui.dialog.close')),
                 DialogPrototype.buildDialogAction('save' , i18next.t('Save') ),
             ]),
         ]);

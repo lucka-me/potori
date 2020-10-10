@@ -39,7 +39,7 @@ class ImportDialog extends DialogPrototype {
                     eli.build('label', {
                         className: 'mdc-floating-label',
                         for: 'input-dialog-import-wayfarer',
-                        innerHTML: 'JSON',
+                        innerHTML: i18next.t('ui.dialog.import.json'),
                     }),
                 ]),
                 eli.build('div', { className: 'mdc-notched-outline__trailing' }),
@@ -60,10 +60,10 @@ class ImportDialog extends DialogPrototype {
                     eli.build('div', {
                         className: 'mdc-text-field-helper-text mdc-text-field-helper-text--persistent',
                     }, [
-                        i18next.t('From '),
+                        i18next.t('ui.dialog.import.from'),
                         DialogPrototype.buildLink(
                             'https://wayfarer.nianticlabs.com/api/v1/vault/manage',
-                            i18next.t('Wayfarer API'), i18next.t('Wayfarer API')
+                            i18next.t('ui.dialog.import.wayfarer'), i18next.t('ui.dialog.import.wayfarer')
                         ),
                     ]),
                 ]),
@@ -71,7 +71,7 @@ class ImportDialog extends DialogPrototype {
             eli.build('footer', {
                 className: 'mdc-dialog__actions',
             }, [
-                DialogPrototype.buildDialogAction('close' , i18next.t('Close' )),
+                DialogPrototype.buildDialogAction('close' , i18next.t('ui.dialog.close' )),
                 DialogPrototype.buildDialogAction('import', i18next.t('Import')),
             ]),
         ]);
