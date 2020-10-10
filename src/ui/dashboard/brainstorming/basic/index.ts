@@ -30,7 +30,7 @@ class BSBasicCard extends DashboardBsPrototype {
         });
         this.textSubtitle = eli.build('span', {
             className: 'mdc-typography--body1 text-nowrap',
-            innerHTML: i18next.t('Reviews for Portals', { count: 0 }),
+            innerHTML: i18next.t('ui.dashboard.brainstorming.basic.desc', { count: 0 }),
         });
 
         this.actionRefresh = eli.build('button', {
@@ -39,7 +39,7 @@ class BSBasicCard extends DashboardBsPrototype {
         }, [
             eli.build('div', { className: 'mdc-button__ripple' }),
             eli.build('i', { className: 'fa fa-fw mdc-button__icon', innerHTML: '\uf2f1' }),
-            eli.build('span', { className: 'mdc-button__label', innerHTML: i18next.t('Refresh') }),
+            eli.build('span', { className: 'mdc-button__label', innerHTML: i18next.t('ui.dashboard.brainstorming.basic.refresh') }),
         ]);
         const rippleRefresh = new MDCRipple(this.actionRefresh);
         rippleRefresh.unbounded = true;
@@ -55,7 +55,7 @@ class BSBasicCard extends DashboardBsPrototype {
                 'mdc-card__action',
                 'mdc-card__action--icon'
             ].join(' '),
-            title: i18next.t('Clear'),
+            title: i18next.t('ui.dashboard.brainstorming.basic.clear'),
             id: 'button-card-nomination-location',
             innerHTML: '\uf1f8',
         });
@@ -83,7 +83,7 @@ class BSBasicCard extends DashboardBsPrototype {
             }, [
                 eli.build('span', {
                     className: 'mdc-typography--headline6',
-                    innerHTML: i18next.t('Brainstorming'),
+                    innerHTML: i18next.t('ui.dashboard.brainstorming.basic.title'),
                 }),
                 this.textReviews,
                 this.textSubtitle,
@@ -106,7 +106,7 @@ class BSBasicCard extends DashboardBsPrototype {
 
     updateStats(stats: BrainstormingStats) {
         this.textReviews.innerHTML = `${stats.review}`;
-        this.textSubtitle.innerHTML = i18next.t('Reviews for Portals', { count: stats.nomination });
+        this.textSubtitle.innerHTML = i18next.t('ui.dashboard.brainstorming.basic.desc', { count: stats.nomination });
         this.actionRefresh.disabled = false;
     }
 }

@@ -27,7 +27,7 @@ class BSSynchCard extends DashboardBsPrototype {
         }, [
             eli.build('span', {
                 className: 'mdc-typography--headline6',
-                innerHTML: i18next.t('Brainstorming Synch'),
+                innerHTML: i18next.t('ui.dashboard.brainstorming.synch.title'),
             }),
             eli.build('span', { className: 'text-nowarp' }, [
                 this.textSynch,
@@ -38,7 +38,7 @@ class BSSynchCard extends DashboardBsPrototype {
             ]),
             eli.build('span', {
                 className: 'mdc-typography--body1 text-nowarp',
-                innerHTML: i18next.t('Reviews match the result'),
+                innerHTML: i18next.t('ui.dashboard.brainstorming.synch.desc'),
             }),
         ]);
         this.setVisible(false);

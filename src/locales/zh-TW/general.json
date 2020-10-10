@@ -79,16 +79,16 @@
 
     "BSGroup": "",
     "BSBasicCard": "",
-    "Brainstorming": "Brainstorming",
-    "Refresh": "重載",
-    "Clear": "清除",
-    "Reviews for Portals": "覆蓋{{count}}個提名的評估",
+    "ui.dashboard.brainstorming.basic.title": "Brainstorming",
+    "ui.dashboard.brainstorming.basic.refresh": "重載",
+    "ui.dashboard.brainstorming.basic.clear": "清除",
+    "ui.dashboard.brainstorming.basic.desc": "覆蓋{{count}}個提名的評估",
 
-    "Brainstorming Rates": "Brainstorming評分",
+    "ui.dashboard.brainstorming.rates.title": "Brainstorming評分",
 
-    "Brainstorming Reviews": "Brainstorming評估",
-    "Reviews": "評估",
+    "ui.dashboard.brainstorming.reviews.title": "Brainstorming評估",
+    "ui.dashboard.brainstorming.reviews.desc": "個評估",
 
-    "Brainstorming Synch": "Brainstorming同步率",
-    "Reviews match the result": "評估與結果相符"
+    "ui.dashboard.brainstorming.synch.title": "Brainstorming同步率",
+    "ui.dashboard.brainstorming.synch.desc": "評估與結果相符"
 }

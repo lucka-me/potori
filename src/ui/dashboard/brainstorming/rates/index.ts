@@ -10,7 +10,7 @@ import './style.scss';
 class BSRatesCard extends DashboardBsChartPrototype {
     render() {
         const canvasChart = eli.build('canvas', { className: 'canvas-chart--h' });
-        this.root = DashboardBsChartPrototype.buildChartCard(i18next.t('Brainstorming Rates'), canvasChart, 1, 240);
+        this.root = DashboardBsChartPrototype.buildChartCard(i18next.t('ui.dashboard.brainstorming.rates.title'), canvasChart, 1, 240);
         this.setVisible(false);
         this.parent.append(this.root);
 

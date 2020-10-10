@@ -11,7 +11,7 @@ import './style.scss';
 class BSReviewsCard extends DashboardBsChartPrototype {
     render() {
         const canvasChart = eli.build('canvas', { className: 'canvas-chart--h' });
-        this.root = DashboardBsChartPrototype.buildChartCard(i18next.t('Brainstorming Reviews'), canvasChart, 3, 300);
+        this.root = DashboardBsChartPrototype.buildChartCard(i18next.t('ui.dashboard.brainstorming.reviews.title'), canvasChart, 3, 300);
         this.setVisible(false);
         this.parent.append(this.root);
 
@@ -21,7 +21,7 @@ class BSReviewsCard extends DashboardBsChartPrototype {
             data: {
                 labels: [],
                 datasets: [{
-                    label: i18next.t('Reviews'),
+                    label: i18next.t('ui.dashboard.brainstorming.reviews.desc'),
                     data: [],
                     borderColor: style.getPropertyValue('--mdc-theme-primary'),
                     pointRadius: 0,

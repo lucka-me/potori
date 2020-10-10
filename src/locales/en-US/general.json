@@ -77,18 +77,16 @@
 
     "Stats Type": "Stats: Type",
 
-    "BSGroup": "",
-    "BSBasicCard": "",
-    "Brainstorming": "Brainstorming",
-    "Refresh": "Refresh",
-    "Clear": "Clear",
-    "Reviews for Portals": "Reviews for {{count}} Nominations",
+    "ui.dashboard.brainstorming.basic.title": "Brainstorming",
+    "ui.dashboard.brainstorming.basic.refresh": "Refresh",
+    "ui.dashboard.brainstorming.basic.clear": "Clear",
+    "ui.dashboard.brainstorming.basic.desc": "Reviews for {{count}} Nominations",
 
-    "Brainstorming Rates": "Brainstorming Rates",
+    "ui.dashboard.brainstorming.rates.title": "Brainstorming Rates",
 
-    "Brainstorming Reviews": "Brainstorming Reviews",
-    "Reviews": "Reviews",
+    "ui.dashboard.brainstorming.reviews.title": "Brainstorming Reviews",
+    "ui.dashboard.brainstorming.reviews.desc": "Reviews",
 
-    "Brainstorming Synch": "Brainstorming Synch",
-    "Reviews match the result": "Reviews match the result"
+    "ui.dashboard.brainstorming.synch.title": "Brainstorming Synch",
+    "ui.dashboard.brainstorming.synch.desc": "Reviews match the result"
 }
