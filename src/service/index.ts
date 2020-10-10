@@ -20,7 +20,8 @@ type MessageCallback = (message: string) => void;
 interface ServiceEvents {
     authStatusChanged   : AuthStatusChangedCallback,    // Triggered when authentication status changed
     progressUpdate      : ProgressCallback, // Triggered when progress updated
-    updateBs            : BasicCallback,    // Triggered when brainstorming data updated
+    bufferUpdate        : ProgressCallback, // Triggered when buffer (secondary progress) updated
+    bsUpdate            : BasicCallback,    // Triggered when brainstorming data updated
 
     start   : BasicCallback,    // Triggered when progress bar should show up
     idle    : BasicCallback,    // Triggered when process is finished
@@ -47,7 +48,8 @@ export namespace service {
     export const events: ServiceEvents = {
         authStatusChanged:  () => { },
         progressUpdate:     () => { },
-        updateBs:           () => { },
+        bufferUpdate:       () => { },
+        bsUpdate:           () => { },
         
         start:  () => { },
         idle:   () => { },
@@ -90,6 +92,8 @@ export namespace service {
 
         auth.init();
 
+        mari.events.progress = (percent) => events.progressUpdate(percent * 0.9);
+        mari.events.buffer = (percent) => events.bufferUpdate(percent);
         mari.events.finish = () => final();
         mari.init();
     }
@@ -188,7 +192,7 @@ export namespace service {
             if (resultBsData.matched) {
                 bs.data = resultBsData.data;
                 if (nominations.length > 0) {
-                    events.updateBs();
+                    events.bsUpdate();
                 }
                 events.info(i18next.t('message:Load as Brainstorming Data'));
                 return;
@@ -350,7 +354,7 @@ export namespace service {
      */
     export function updateBsData() {
         bs.update(nominations, () => {
-            events.updateBs();
+            events.bsUpdate();
             events.info(i18next.t('message:Brainstorming Data updated'));
         });
     }

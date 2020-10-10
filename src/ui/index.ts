@@ -74,9 +74,8 @@ export namespace ui {
         // Service
         service.events.authStatusChanged = (signedIn) => authStatChanged(signedIn);
         if (!navigator.onLine) authStatChanged(false);
-        service.events.progressUpdate = (percent) => {
-            progress.progress = percent;
-        }
+        service.events.progressUpdate = (percent) => progress.progress = percent;
+        service.events.bufferUpdate = (percent) => progress.buffer = percent;
         service.events.start = () => {
             appBar.actions.get(AppBarActions.open.key).hidden = true;
             preloadModules();
@@ -100,14 +99,6 @@ export namespace ui {
         }
         service.file.local.events.saveUI = (filename, href) => {
             saveFileUI(filename, href);
-        }
-
-        // Mari
-        service.mari.events.buffer = (percent) => {
-            progress.buffer = percent;
-        };
-        service.mari.events.progress = (percent) => {
-            progress.progress = percent * 0.9;
         }
     }
 
@@ -216,7 +207,7 @@ export namespace ui {
         );
         dashboard = new Dashboard.default();
         dashboard.init(mainBox);
-        service.events.updateBs = () => {
+        service.events.bsUpdate = () => {
             dashboard.bs.update(service.nominations);
         }
         dashboard.map.events.styleLoaded = () => {
