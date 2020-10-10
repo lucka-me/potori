@@ -4,8 +4,7 @@
   "description": "Web App to Visualize Ingress Nominations",
   "main": "src/potori.ts",
   "scripts": {
-    "postinstall": "TS_NODE_PROJECT=\"tsconfig-scripts.json\" ts-node ./scripts/build-locales-legacy.ts",
-    "newpostinstall": "TS_NODE_PROJECT=\"tsconfig-scripts.json\" ts-node ./scripts/build-locales.ts",
+    "postinstall": "TS_NODE_PROJECT=\"tsconfig-scripts.json\" ts-node ./scripts/build-locales.ts",
     "start": "webpack-dev-server",
     "dev": "webpack --mode development",
     "build": "TS_NODE_PROJECT=\"tsconfig-scripts.json\" webpack --mode production",
