@@ -1,0 +1,22 @@
+{
+    "general": {
+        "title": {
+            "en-US": "Count by Month",
+            "zh-CN": "每月统计",
+            "zh-HK": "每月統計",
+            "zh-TW": "每月統計"
+        },
+        "submissions": {
+            "en-US": "Submissions",
+            "zh-CN": "提交",
+            "zh-HK": "提交",
+            "zh-TW": "提交"
+        },
+        "results": {
+            "en-US": "Results",
+            "zh-CN": "结果",
+            "zh-HK": "結果",
+            "zh-TW": "結果"
+        }
+    }
+}

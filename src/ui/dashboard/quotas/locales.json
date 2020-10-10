@@ -1,0 +1,16 @@
+{
+    "general": {
+        "title": {
+            "en-US": "Quotas",
+            "zh-CN": "名额",
+            "zh-HK": "名額",
+            "zh-TW": "名額"
+        },
+        "xAxis": {
+            "en-US": "Day",
+            "zh-CN": "天",
+            "zh-HK": "天",
+            "zh-TW": "天"
+        }
+    }
+}

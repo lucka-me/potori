@@ -1,19 +1,4 @@
 {
-    "ui.dashboard.count-by-month.title": "Count by Month",
-    "ui.dashboard.count-by-month.submissions": "Submissions",
-    "ui.dashboard.count-by-month.results": "Results",
-
-    "ui.dashboard.filter.title": "Filter",
-    "ui.dashboard.filter.type": "Type",
-    "ui.dashboard.filter.rejected": "Rejected",
-
-    "ui.dashboard.quotas.title": "Quotas",
-    "ui.dashboard.quotas.xAxis": "Day",
-
-    "ui.dashboard.stats-rejected.title": "Stats: Rejected",
-
-    "ui.dashboard.stats-type.title": "Stats: Type",
-
     "ui.dashboard.brainstorming.basic.title": "Brainstorming",
     "ui.dashboard.brainstorming.basic.refresh": "Refresh",
     "ui.dashboard.brainstorming.basic.clear": "Clear",

@@ -22,21 +22,6 @@
 
     "ui.snackbar.dismiss": "关闭",
 
-    "ui.dashboard.count-by-month.title": "每月统计",
-    "ui.dashboard.count-by-month.submissions": "提交",
-    "ui.dashboard.count-by-month.results": "结果",
-
-    "ui.dashboard.filter.title": "筛选",
-    "ui.dashboard.filter.type": "类型",
-    "ui.dashboard.filter.rejected": "拒绝",
-
-    "ui.dashboard.quotas.title": "名额",
-    "ui.dashboard.quotas.xAxis": "天",
-
-    "ui.dashboard.stats-rejected.title": "统计：拒绝",
-
-    "ui.dashboard.stats-type.title": "统计：类型",
-
     "BSGroup": "",
     "BSBasicCard": "",
     "ui.dashboard.brainstorming.basic.title": "Brainstorming",

@@ -1,0 +1,22 @@
+{
+    "general": {
+        "title": {
+            "en-US": "Filter",
+            "zh-CN": "筛选",
+            "zh-HK": "篩選",
+            "zh-TW": "篩選"
+        },
+        "type": {
+            "en-US": "Type",
+            "zh-CN": "类型",
+            "zh-HK": "類型",
+            "zh-TW": "類型"
+        },
+        "rejected": {
+            "en-US": "Rejected",
+            "zh-CN": "拒绝",
+            "zh-HK": "拒絕",
+            "zh-TW": "拒絕"
+        }
+    }
+}
