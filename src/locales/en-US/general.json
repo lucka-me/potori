@@ -58,7 +58,8 @@
     "ui.dashboard.brainstorming.basic.title": "Brainstorming",
     "ui.dashboard.brainstorming.basic.refresh": "Refresh",
     "ui.dashboard.brainstorming.basic.clear": "Clear",
-    "ui.dashboard.brainstorming.basic.desc": "Reviews for {{count}} Nominations",
+    "ui.dashboard.brainstorming.basic.desc": "Reviews for {{count}} Nomination",
+    "ui.dashboard.brainstorming.basic.desc_plural": "Reviews for {{count}} Nominations",
 
     "ui.dashboard.brainstorming.rates.title": "Brainstorming Rates",
 
