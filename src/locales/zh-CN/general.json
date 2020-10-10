@@ -1,15 +1,9 @@
 {
-    "ui.app-bar.open"  : "打开",
     "ui.app-bar.menu.save"  : "保存",
     "ui.app-bar.menu.upload": "上传",
     "ui.app-bar.menu.import": "导入",
     "ui.app-bar.menu.about": "关于",
-    "ui.app-bar.about" : "关于",
     "ui.app-bar.menu.signOut": "登出",
-    "ui.app-bar.list": "列表",
-    "ui.app-bar.dashboard": "仪表盘",
-    "ui.app-bar.signIn": "登入",
-    "ui.app-bar.menu": "菜单",
     "ui.app-bar.menu.open": "打开",
 
     "ui.list-view.card.location": "位置",

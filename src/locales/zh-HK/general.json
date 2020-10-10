@@ -1,14 +1,8 @@
 {
-    "ui.app-bar.open"  : "開啟",
     "ui.app-bar.menu.upload": "上載",
     "ui.app-bar.menu.import": "匯入",
     "ui.app-bar.menu.about": "關於",
-    "ui.app-bar.about" : "關於",
     "ui.app-bar.menu.signOut": "登出",
-    "ui.app-bar.list": "列表",
-    "ui.app-bar.dashboard": "儀表板",
-    "ui.app-bar.signIn": "登入",
-    "ui.app-bar.menu": "選單",
     "ui.app-bar.menu.open": "開啟",
     "ui.app-bar.menu.save"  : "儲存",
 

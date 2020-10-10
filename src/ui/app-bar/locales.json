@@ -1,0 +1,40 @@
+{
+    "general": {
+        "open": {
+            "en-US": "Open",
+            "zh-CN": "打开",
+            "zh-HK": "開啟",
+            "zh-TW": "開啟"
+        },
+        "about": {
+            "en-US": "About",
+            "zh-CN": "关于",
+            "zh-HK": "關於",
+            "zh-TW": "關於"
+        },
+        "list": {
+            "en-US": "List",
+            "zh-CN": "列表",
+            "zh-HK": "列表",
+            "zh-TW": "列表"
+        },
+        "dashboard": {
+            "en-US": "Dashboard",
+            "zh-CN": "仪表盘",
+            "zh-HK": "儀表板",
+            "zh-TW": "儀表板"
+        },
+        "signIn": {
+            "en-US": "Sign In",
+            "zh-CN": "登入",
+            "zh-HK": "登入",
+            "zh-TW": "登入"
+        },
+        "menu": {
+            "en-US": "Menu",
+            "zh-CN": "菜单",
+            "zh-HK": "選單",
+            "zh-TW": "選單"
+        }
+    }
+}
