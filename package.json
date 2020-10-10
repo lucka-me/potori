@@ -5,8 +5,8 @@
   "main": "src/potori.ts",
   "scripts": {
     "postinstall": "TS_NODE_PROJECT=\"tsconfig-scripts.json\" ts-node ./scripts/build-locales.ts",
-    "start": "webpack-dev-server",
-    "dev": "webpack --mode development",
+    "start": "TS_NODE_PROJECT=\"tsconfig-scripts.json\" webpack-dev-server",
+    "dev": "TS_NODE_PROJECT=\"tsconfig-scripts.json\" webpack --mode development",
     "build": "TS_NODE_PROJECT=\"tsconfig-scripts.json\" webpack --mode production",
     "dev:docs": "vuepress dev docs",
     "build:docs": "vuepress build docs",
