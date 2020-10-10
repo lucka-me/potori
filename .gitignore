@@ -2,4 +2,5 @@
 /dist
 /src/locales/index.ts
 /src/locales-new
+locales.json
 .DS_Store
