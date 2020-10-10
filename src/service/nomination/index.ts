@@ -78,7 +78,7 @@ export default class Nomination {
      */
     get intervalString(): string {
         const end = this.resultTime ? this.resultTime : now;
-        return i18next.t('dayCount', {
+        return i18next.t('service.nomination.day', {
             count: Math.floor((end - this.confirmedTime) / (24 * 3600 * 1000))
         });
     }
@@ -87,7 +87,7 @@ export default class Nomination {
      * Get string of interval between now and restore time
      */
     get restoreIntervalString(): string {
-        return i18next.t('dayCount', {
+        return i18next.t('service.nomination.day', {
             count: Math.floor((this.restoreTime - now) / (24 * 3600 * 1000))
         });
     }

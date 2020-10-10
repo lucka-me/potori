@@ -5,10 +5,10 @@ export enum QueryFailReason {
 };
 
 export const RateItems = {
-    quality:        'Quality',
-    description:    'Description',
-    cultural:       'Cultural',
-    uniqueness:     'Uniqueness',
-    safety:         'Safety',
-    location:       'Location',
+    quality:        'service.brainstorming.quality',
+    description:    'service.brainstorming.description',
+    cultural:       'service.brainstorming.cultural',
+    uniqueness:     'service.brainstorming.uniqueness',
+    safety:         'service.brainstorming.safety',
+    location:       'service.brainstorming.location',
 };

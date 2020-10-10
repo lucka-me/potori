@@ -117,19 +117,19 @@ class NominationCard {
 
         const actions: Array<HTMLButtonElement> = [];
         actions.push(NominationCard.buildAction(
-            'Location', 'button-card-nomination-location', '&#xf3c5', true, events.focus
+            'ui.list-view.card.location', 'button-card-nomination-location', '&#xf3c5', true, events.focus
         ));
 
         if (service.version.full) {
             // Intel Maps
             actions.push(NominationCard.buildAction(
-                'Intel Map', 'button-card-nomination-intel', '&#xf0ac', true,
+                'ui.list-view.card.intelMap', 'button-card-nomination-intel', '&#xf0ac', true,
                 () => window.open(nomination.intelUrl, '_blank', 'noopener')
             ));
         }
         // Brainstorming watermeter
         actions.push(NominationCard.buildAction(
-            'Brainstorming Watermeter', 'button-card-nomination-bs', '&#xf5dc',
+            'ui.list-view.card.bsWatermeter', 'button-card-nomination-bs', '&#xf5dc',
             service.bs.beforeCreate(nomination),
             events.openBs
         ));

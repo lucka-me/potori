@@ -16,13 +16,12 @@
     "License Plate": "車牌",
     "Photo Quality": "照片品質",
 
-    "BrainstormingKit": "",
-    "Quality": "質量",
-    "Description": "描述",
-    "Cultural": "文化",
-    "Uniqueness": "獨特",
-    "Safety": "安全",
-    "Location": "位置",
+    "service.brainstorming.quality": "質量",
+    "service.brainstorming.description": "描述",
+    "service.brainstorming.cultural": "文化",
+    "service.brainstorming.uniqueness": "獨特",
+    "service.brainstorming.safety": "安全",
+    "service.brainstorming.location": "位置",
 
     "AppBar": "",
     "Open"  : "開啟",
@@ -36,11 +35,11 @@
     "Sign In": "登入",
     "Menu": "選單",
 
-    "NominationCard": "",
-    "Intel Map": "情報地圖",
-    "Brainstorming Watermeter": "Brainstorming水錶",
-    "dayCount": "{{count}}天",
-    "dayCount_plural": "{{count}}天",
+    "ui.list-view.card.location": "位置",
+    "ui.list-view.card.intelMap": "情報地圖",
+    "ui.list-view.card.bsWatermeter": "Brainstorming水錶",
+    "service.nomination.day": "{{count}}天",
+    "service.nomination.day_plural": "{{count}}天",
 
     "ui.dialog.close": "關閉",
 

@@ -16,13 +16,12 @@
     "License Plate": "License Plate",
     "Photo Quality": "Photo Quality",
 
-    "BrainstormingKit": "",
-    "Quality": "Quality",
-    "Description": "Description",
-    "Cultural": "Cultural",
-    "Uniqueness": "Uniqueness",
-    "Safety": "Safety",
-    "Location": "Location",
+    "service.brainstorming.quality": "Quality",
+    "service.brainstorming.description": "Description",
+    "service.brainstorming.cultural": "Cultural",
+    "service.brainstorming.uniqueness": "Uniqueness",
+    "service.brainstorming.safety": "Safety",
+    "service.brainstorming.location": "Location",
 
     "AppBar": "",
     "Open": "Open",
@@ -36,11 +35,11 @@
     "Sign In": "Sign In",
     "Menu": "Menu",
 
-    "NominationCard": "",
-    "Intel Map": "Intel Map",
-    "Brainstorming Watermeter": "Brainstorming Watermeter",
-    "dayCount": "{{count}} day",
-    "dayCount_plural": "{{count}} days",
+    "ui.list-view.card.location": "Location",
+    "ui.list-view.card.intelMap": "Intel Map",
+    "ui.list-view.card.bsWatermeter": "Brainstorming Watermeter",
+    "service.nomination.day": "{{count}} day",
+    "service.nomination.day_plural": "{{count}} days",
 
     "ui.dialog.close": "Close",
 
