@@ -1,14 +1,14 @@
-const path = require('path');
-
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const { GenerateSW } = require('workbox-webpack-plugin');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
-const TerserPlugin = require('terser-webpack-plugin');
-const webpack = require('webpack');
+import * as webpack from 'webpack';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
+import { CleanWebpackPlugin } from 'clean-webpack-plugin';
+import { GenerateSW } from 'workbox-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import path from 'path';
+import TerserPlugin from 'terser-webpack-plugin';
+import WebpackPwaManifest from 'webpack-pwa-manifest';
+// @types/webpack-cdn-plugin not exists yet
 const WebpackCdnPlugin = require('webpack-cdn-plugin');
-const WebpackPwaManifest = require('webpack-pwa-manifest');
 
 const cdnConfig = {
   modules: [
@@ -29,7 +29,7 @@ const cdnConfig = {
   prodUrl: 'https://cdnjs.cloudflare.com/ajax/libs/:name/:version/:path'
 };
 
-module.exports = {
+const config: webpack.Configuration = {
   entry: { potori: './src/index.ts', },
   output: {
     filename: 'lib/[name].[chunkhash].js',
@@ -230,3 +230,5 @@ module.exports = {
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
   ],
 };
+
+export default config;
