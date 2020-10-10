@@ -1,7 +1,4 @@
 {
-    "service.tools.parseEmpty": "List is empty.",
-    "service.tools.parseNominationsFailed": "Failed to parse as Nomination List.",
-    "service.tools.parseBsDataFailed": "Failed to parse as Brainstorming Data.",
     "service.loadBsData": "Load as Brainstorming Data.",
     "service.nominationsEmpty": "No Nomination to save",
     "service.uploaded": "Uploaded.",
@@ -10,6 +7,9 @@
     "service.parseError": "Unable to parse the code.",
     "service.invalidData": "Invalid data",
     "service.bsDataUpdated": "Brainstorming Data updated.",
+    "service.parseEmpty": "List is empty.",
+    "service.parseNominationsFailed": "Failed to parse as Nomination List.",
+    "service.parseBsDataFailed": "Failed to parse as Brainstorming Data.",
 
     "service.file.local.openFailed": "Failed to open file.",
 

@@ -1,7 +1,7 @@
 {
-    "service.tools.parseEmpty": "列表为空。",
-    "service.tools.parseNominationsFailed": "无法解析为提名列表。",
-    "service.tools.parseBsDataFailed": "无法解析为Brainstorming数据。",
+    "service.parseEmpty": "列表为空。",
+    "service.parseNominationsFailed": "无法解析为提名列表。",
+    "service.parseBsDataFailed": "无法解析为Brainstorming数据。",
     "service.loadBsData": "加载为Brainstorming数据。",
     "service.nominationsEmpty": "没有提名。",
     "service.uploaded": "已上传。",
