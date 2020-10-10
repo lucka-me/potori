@@ -1,7 +1,4 @@
 {
-    "service.nomination.day": "{{count}} day",
-    "service.nomination.day_plural": "{{count}} days",
-
     "ui.app-bar.open": "Open",
     "ui.app-bar.about": "About",
     "ui.app-bar.list": "List",

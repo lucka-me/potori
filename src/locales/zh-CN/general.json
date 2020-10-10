@@ -15,8 +15,6 @@
     "ui.list-view.card.location": "位置",
     "ui.list-view.card.intelMap": "情报地图",
     "ui.list-view.card.bsWatermeter": "Brainstorming水表",
-    "service.nomination.day": "{{count}}天",
-    "service.nomination.day_plural": "{{count}}天",
 
     "ui.dialog.close": "关闭",
 

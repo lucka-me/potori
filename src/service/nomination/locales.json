@@ -1,0 +1,13 @@
+{
+    "general": {
+        "day": {
+            "en-US": "{{count}} day",
+            "zh-CN": "{{count}}天",
+            "zh-HK": "{{count}}天",
+            "zh-TW": "{{count}}天"
+        },
+        "day_plural": {
+            "en-US": "{{count}} days"
+        }
+    }
+}
