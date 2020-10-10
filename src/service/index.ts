@@ -194,7 +194,7 @@ export namespace service {
                 if (nominations.length > 0) {
                     events.bsUpdate();
                 }
-                events.info(i18next.t('message:Load as Brainstorming Data'));
+                events.info(i18next.t('message:service.loadBsData'));
                 return;
             }
             // Parse as other contents
@@ -207,7 +207,7 @@ export namespace service {
      */
     export function save() {
         if (nominations.length < 1) {
-            events.alert(i18next.t('message:No Nomination to save'));
+            events.alert(i18next.t('message:service.nominationsEmpty'));
             return;
         }
         file.local.save(FileConst.nominations, BlobGenerator.nominations(nominations));
@@ -283,7 +283,7 @@ export namespace service {
 
         const checkFinish = () => {
             if (uploadedNominations && uploadedBsData) {
-                events.info(i18next.t('message:Uploaded'));
+                events.info(i18next.t('message:service.uploaded'));
             };
         };
 
@@ -294,7 +294,7 @@ export namespace service {
             (succeed: boolean, message?: string) => {
                 uploadedNominations = true;
                 if (!succeed) {
-                    events.alert(`${i18next.t('message:Unable to upload Nomination List')}${message ? `\n${message}` : ''}`);
+                    events.alert(`${i18next.t('message:service.uploadNominationsError')}${message ? `\n${message}` : ''}`);
                 }
                 checkFinish();
             }
@@ -307,7 +307,7 @@ export namespace service {
             (succeed: boolean, message?: string) => {
                 uploadedBsData = true;
                 if (!succeed) {
-                    events.alert(`${i18next.t('message:Unable to upload Brainstorming Data')}${message ? `\n${message}` : ''}`);
+                    events.alert(`${i18next.t('message:service.uploadBsDataError')}${message ? `\n${message}` : ''}`);
                 }
                 checkFinish();
             }
@@ -324,11 +324,11 @@ export namespace service {
         try {
             parsed = JSON.parse(raw);
         } catch (error) {
-            events.alert(i18next.t('message:Unable to parse the code'));
+            events.alert(i18next.t('message:service.parseError'));
             return;
         }
         if (!parsed.result || parsed.result.length < 1) {
-            events.alert(i18next.t('message:Invalid data'));
+            events.alert(i18next.t('message:service.invalidData'));
         }
         const mapNomination = new Map();
         for (const monination of nominations) {
@@ -355,7 +355,7 @@ export namespace service {
     export function updateBsData() {
         bs.update(nominations, () => {
             events.bsUpdate();
-            events.info(i18next.t('message:Brainstorming Data updated'));
+            events.info(i18next.t('message:service.bsDataUpdated'));
         });
     }
 

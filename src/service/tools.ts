@@ -42,14 +42,14 @@ export class Parser {
         try {
             const jsonList = JSON.parse(json);
             if (jsonList.length === 0) {
-                result.message = i18next.t('message:List is empty');
+                result.message = i18next.t('message:service.tools.parseEmpty');
                 return result;
             }
             for (const json of jsonList) {
                 const nomination = Nomination.from(json);
                 if (!nomination.id) {
                     result.nominations = [];
-                    result.message = i18next.t('message:Failed to parse as Nomination List');
+                    result.message = i18next.t('message:service.tools.parseNominationsFailed');
                     return result;
                 }
                 result.nominations.push(nomination);
@@ -57,7 +57,7 @@ export class Parser {
             result.matched = true;
         } catch(error) {
             result.matched = false;
-            result.message = i18next.t('message:Failed to parse as Nomination List');
+            result.message = i18next.t('message:service.tools.parseNominationsFailed');
         }
         return result;
     }
@@ -73,7 +73,7 @@ export class Parser {
             result.matched = true;
         } catch (error) {
             result.matched = false;
-            result.message = i18next.t('message:Failed to parse as Brainstorming Data');
+            result.message = i18next.t('message:service.tools.parseBsDataFailed');
         }
 
         return result;

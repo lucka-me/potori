@@ -35,7 +35,7 @@ export default class LocalFileKit {
     open(onload: (result: string) => void, onerror: (message: string) => void) {
         this.events.openUI((file: File) => {
             if (!file) {
-                onerror(i18next.t('message:Failed to open file'));
+                onerror(i18next.t('message:service.file.local.openFailed'));
                 return;
             }
             const fileReader = new FileReader();
