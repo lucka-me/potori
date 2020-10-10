@@ -67,7 +67,7 @@ class ListView extends UIPrototype {
                         textarea.select();
                         document.execCommand('copy');
                         textarea.remove();
-                        this.events.alert(i18next.t('message:Brainstorming ID copied', { id: nomination.id }));
+                        this.events.alert(i18next.t('message:ui.list-view.bsIdCopied', { id: nomination.id }));
                     }
                 },
                 openDetails: () => this.events.openDetails(nomination),

@@ -15,12 +15,10 @@
     "FileKit": "",
     "Failed to open file": "Failed to open file.",
 
-    "NominationCard": "",
-    "Brainstorming ID copied": "Brainstorming ID copied: {{id}}",
+    "ui.list-view.bsIdCopied": "Brainstorming ID copied: {{id}}",
 
-    "DetailsDialog": "",
-    "Failed to query Firebase": "Failed to query Firebase.",
-    "Nomination not exists in database": "Nomination not exists in database",
-    "Early nominaion not exists in database": "Early nominaion not exists in database",
-    "Invalid DateTime": "Invalid DateTime."
+    "ui.dialog.details.map.queryFailed": "Failed to query Firebase.",
+    "ui.dialog.details.map.queryNotExists": "Nomination not exists in database.",
+    "ui.dialog.details.map.queryEarly": "Early nominaion not exists in database.",
+    "ui.dialog.details.invalidTime": "Invalid DateTime."
 }

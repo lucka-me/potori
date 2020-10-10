@@ -15,12 +15,10 @@
     "FileKit": "FileKit",
     "Failed to open file": "无法打开文件。",
 
-    "NominationCard": "",
-    "Brainstorming ID copied": "已复制Brainstorming ID：{{id}}",
+    "ui.list-view.bsIdCopied": "已复制Brainstorming ID：{{id}}",
 
-    "DetailsDialog": "",
-    "Failed to query Firebase": "无法查询线上数据库。",
-    "Nomination not exists in database": "数据库中未找到提名。",
-    "Early nominaion not exists in database": "早期提名数据未收录于数据库中。",
-    "Invalid DateTime": "时间无效。"
+    "ui.dialog.details.map.queryFailed": "无法查询线上数据库。",
+    "ui.dialog.details.map.queryNotExists": "数据库中未找到提名。",
+    "ui.dialog.details.map.queryEarly": "早期提名数据未收录于数据库中。",
+    "ui.dialog.details.invalidTime": "时间无效。"
 }

@@ -251,7 +251,7 @@ class DetailsDialog extends DialogPrototype {
         if (selectedStatus !== 'pending') {
             const time = Date.parse(this.fieldResultTime.value);
             if (!time) {
-                this.events.alert(i18next.t('message:Invalid DateTime'));
+                this.events.alert(i18next.t('message:ui.dialog.details.invalidTime'));
                 return;
             }
             const newTime = time + (new Date().getTimezoneOffset() * 60000);
