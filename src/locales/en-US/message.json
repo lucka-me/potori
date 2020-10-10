@@ -1,16 +1,4 @@
 {
-    "service.loadBsData": "Load as Brainstorming Data.",
-    "service.nominationsEmpty": "No Nomination to save",
-    "service.uploaded": "Uploaded.",
-    "service.uploadNominationsError": "Unable to upload Nomination List.",
-    "service.uploadBsDataError": "Unable to upload Brainstorming Data.",
-    "service.parseError": "Unable to parse the code.",
-    "service.invalidData": "Invalid data",
-    "service.bsDataUpdated": "Brainstorming Data updated.",
-    "service.parseEmpty": "List is empty.",
-    "service.parseNominationsFailed": "Failed to parse as Nomination List.",
-    "service.parseBsDataFailed": "Failed to parse as Brainstorming Data.",
-
     "ui.list-view.bsIdCopied": "Brainstorming ID copied: {{id}}",
 
     "ui.dialog.details.map.queryFailed": "Failed to query Firebase.",

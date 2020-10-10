@@ -1,16 +1,4 @@
 {
-    "service.parseEmpty": "列表为空。",
-    "service.parseNominationsFailed": "无法解析为提名列表。",
-    "service.parseBsDataFailed": "无法解析为Brainstorming数据。",
-    "service.loadBsData": "加载为Brainstorming数据。",
-    "service.nominationsEmpty": "没有提名。",
-    "service.uploaded": "已上传。",
-    "service.uploadNominationsError": "无法上传提名列表。",
-    "service.uploadBsDataError": "无法上传Brainstorming数据。",
-    "service.parseError": "无法解析代码。",
-    "service.invalidData": "数据无效。",
-    "service.bsDataUpdated": "Brainstorming数据已更新。",
-
     "ui.list-view.bsIdCopied": "已复制Brainstorming ID：{{id}}",
 
     "ui.dialog.details.map.queryFailed": "无法查询线上数据库。",
