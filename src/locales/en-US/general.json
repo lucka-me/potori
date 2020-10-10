@@ -1,28 +1,4 @@
 {
-    "data.pending": "Pending",
-    "data.accepted": "Accepted",
-    "data.rejected": "Rejected",
-
-    "data.undeclared": "Undeclared",
-    "data.duplicated": "Duplicated",
-    "data.close": "Too Close",
-
-    "data.criteria": "Criteria",
-    "data.generic": "Generic Store",
-    "data.temporary": "Temporary",
-
-    "data.private": "Private",
-    
-    "data.plate": "License Plate",
-    "data.Quality": "Photo Quality",
-
-    "service.brainstorming.quality": "Quality",
-    "service.brainstorming.description": "Description",
-    "service.brainstorming.cultural": "Cultural",
-    "service.brainstorming.uniqueness": "Uniqueness",
-    "service.brainstorming.safety": "Safety",
-    "service.brainstorming.location": "Location",
-
     "service.nomination.day": "{{count}} day",
     "service.nomination.day_plural": "{{count}} days",
 

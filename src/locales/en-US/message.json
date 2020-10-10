@@ -11,8 +11,6 @@
     "service.parseNominationsFailed": "Failed to parse as Nomination List.",
     "service.parseBsDataFailed": "Failed to parse as Brainstorming Data.",
 
-    "service.file.local.openFailed": "Failed to open file.",
-
     "ui.list-view.bsIdCopied": "Brainstorming ID copied: {{id}}",
 
     "ui.dialog.details.map.queryFailed": "Failed to query Firebase.",
