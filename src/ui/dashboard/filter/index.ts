@@ -50,16 +50,16 @@ export default class FilterCard extends DashboardPrototype {
         }, [
             eli.build('span', {
                 className: 'mdc-typography--headline6',
-                innerHTML: i18next.t('Filter')
+                innerHTML: i18next.t('ui.dashboard.brainstorming.filter.title')
             }),
             eli.build('span', {
                 className: 'mdc-typography--subtitle1',
-                innerHTML: i18next.t('Type')
+                innerHTML: i18next.t('ui.dashboard.brainstorming.filter.type')
             }),
             this.block.type.root,
             eli.build('span', {
                 className: 'mdc-typography--subtitle1',
-                innerHTML: i18next.t('Rejected')
+                innerHTML: i18next.t('ui.dashboard.brainstorming.filter.rejected')
             }),
             this.block.reason.root,
         ]);

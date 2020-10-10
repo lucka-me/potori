@@ -11,7 +11,7 @@ import './style.scss';
 class CountByMonthCard extends DashboardChartProtorype {
     render() {
         const canvasChart = eli.build('canvas', { className: 'canvas-chart--h' });
-        this.root = DashboardChartProtorype.buildChartCard(i18next.t('Count by Month'), canvasChart, 3, 300);
+        this.root = DashboardChartProtorype.buildChartCard(i18next.t('ui.dashboard.brainstorming.count-by-month.title'), canvasChart, 3, 300);
         this.setVisible(false);
         this.parent.append(this.root);
 
@@ -23,14 +23,14 @@ class CountByMonthCard extends DashboardChartProtorype {
             data: {
                 labels: [],
                 datasets: [{
-                    label: i18next.t('Submissions'),
+                    label: i18next.t('ui.dashboard.brainstorming.count-by-month.submissions'),
                     data: [],
                     borderColor: colorPrimary,
                     pointBackgroundColor: colorPrimary,
                     pointRadius: 0,
                     fill: false,
                 }, {
-                    label: i18next.t('Results'),
+                    label: i18next.t('ui.dashboard.brainstorming.count-by-month.results'),
                     data: [],
                     borderColor: colorSecondary,
                     pointBackgroundColor: colorSecondary,

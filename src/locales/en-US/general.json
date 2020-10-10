@@ -59,23 +59,22 @@
     "From ": "From ",
     "Wayfarer API": "Wayfarer API",
 
-    "Snackbar": "",
-    "Dismiss": "Dismiss",
+    "ui.snackbar.dismiss": "Dismiss",
 
-    "Dashboard Cards": "",
-    "Count by Month": "Count by Month",
-    "Submissions": "Submissions",
-    "Results": "Results",
+    "ui.dashboard.brainstorming.count-by-month.title": "Count by Month",
+    "ui.dashboard.brainstorming.count-by-month.submissions": "Submissions",
+    "ui.dashboard.brainstorming.count-by-month.results": "Results",
 
-    "Filter": "Filter",
-    "Type": "Type",
+    "ui.dashboard.brainstorming.filter.title": "Filter",
+    "ui.dashboard.brainstorming.filter.type": "Type",
+    "ui.dashboard.brainstorming.filter.rejected": "Rejected",
 
-    "Quotas": "Quotas",
-    "Day": "Day",
+    "ui.dashboard.brainstorming.quotas.title": "Quotas",
+    "ui.dashboard.brainstorming.quotas.xAxis": "Day",
 
-    "Stats Rejected": "Stats: Rejected",
+    "ui.dashboard.brainstorming.stats-rejected.title": "Stats: Rejected",
 
-    "Stats Type": "Stats: Type",
+    "ui.dashboard.brainstorming.stats-type.title": "Stats: Type",
 
     "ui.dashboard.brainstorming.basic.title": "Brainstorming",
     "ui.dashboard.brainstorming.basic.refresh": "Refresh",

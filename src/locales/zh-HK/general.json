@@ -60,22 +60,22 @@
     "Wayfarer API": "Wayfarer API",
 
     "Snackbar": "",
-    "Dismiss": "關閉",
+    "ui.snackbar.dismiss": "關閉",
 
-    "Dashboard Cards": "",
-    "Count by Month": "每月統計",
-    "Submissions": "提交",
-    "Results": "結果",
+    "ui.dashboard.brainstorming.count-by-month.title": "每月統計",
+    "ui.dashboard.brainstorming.count-by-month.submissions": "提交",
+    "ui.dashboard.brainstorming.count-by-month.results": "結果",
 
-    "Filter": "篩選",
-    "Type": "類型",
+    "ui.dashboard.brainstorming.filter.title": "篩選",
+    "ui.dashboard.brainstorming.filter.type": "類型",
+    "ui.dashboard.brainstorming.filter.rejected": "拒絕",
 
-    "Quotas": "名額",
-    "Day": "天",
+    "ui.dashboard.brainstorming.quotas.title": "名額",
+    "ui.dashboard.brainstorming.quotas.xAxis": "天",
 
-    "Stats Rejected": "統計：拒絕",
+    "ui.dashboard.brainstorming.stats-rejected.title": "統計：拒絕",
 
-    "Stats Type": "統計：類型",
+    "ui.dashboard.brainstorming.stats-type.title": "統計：類型",
 
     "BSGroup": "",
     "BSBasicCard": "",

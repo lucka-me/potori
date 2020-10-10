@@ -23,7 +23,7 @@ export default class Snackbar extends UIPrototype {
         }, [
             eli.build('button', {
                 className: 'fa mdc-icon-button mdc-snackbar__dismiss',
-                title: i18next.t('Dismiss'),
+                title: i18next.t('ui.snackbar.dismiss'),
                 innerHTML: '&#xf00d',
             }),
         ]);

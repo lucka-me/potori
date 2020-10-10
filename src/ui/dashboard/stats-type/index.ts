@@ -12,7 +12,7 @@ class StatsTypeCard extends DashboardChartProtorype {
 
     render() {
         const canvasChart = eli.build('canvas', { className: 'canvas-chart--v' });
-        this.root = DashboardChartProtorype.buildChartCard(i18next.t('Stats Type'), canvasChart, 2, 250);
+        this.root = DashboardChartProtorype.buildChartCard(i18next.t('ui.dashboard.brainstorming.stats-type.title'), canvasChart, 2, 250);
         this.setVisible(false);
         this.parent.append(this.root);
 

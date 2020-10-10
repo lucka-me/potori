@@ -10,7 +10,7 @@ import './style.scss';
 class QuotasCard extends DashboardChartProtorype {
     render() {
         const canvasChart = eli.build('canvas', { className: 'canvas-chart--h' });
-        this.root = DashboardChartProtorype.buildChartCard(i18next.t('Quotas'), canvasChart, 2, 200);
+        this.root = DashboardChartProtorype.buildChartCard(i18next.t('ui.dashboard.brainstorming.quotas.title'), canvasChart, 2, 200);
 
         this.setVisible(false);
         this.parent.append(this.root);
@@ -37,7 +37,7 @@ class QuotasCard extends DashboardChartProtorype {
                     xAxes: [{
                         scaleLabel: {
                             display: true,
-                            labelString: i18next.t('Day')
+                            labelString: i18next.t('ui.dashboard.brainstorming.quotas.xAxis')
                         },
                     }],
                 },
