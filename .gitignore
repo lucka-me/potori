@@ -1,5 +1,4 @@
 /node_modules
 /dist
-/src/locales/index.ts
-/src/locales-new
+/src/locales
 .DS_Store

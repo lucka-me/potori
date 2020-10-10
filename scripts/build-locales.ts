@@ -18,14 +18,16 @@ namespace locale {
         build(root: string) {
             const dir = `${root}/${this.code}`;
             if (!fs.existsSync(dir)) {
-                fs.mkdirSync(`dir`);
+                fs.mkdirSync(dir);
             }
             for (const [ns, items] of this.data) {
                 const value: any = {};
                 for (const [key, translation] of items) {
                     value[key] = translation;
                 }
-                fs.writeFileSync(`${dir}/${ns}.json`, JSON.stringify(value, null, 4));
+                const file = `${dir}/${ns}.json`;
+                fs.writeFileSync(file, JSON.stringify(value, null, 4));
+                console.info(`Generated ${file}`);
             }
         }
 
@@ -81,7 +83,7 @@ namespace locale {
      * @param path Path of the `locales.json`
      */
     function parse(path: string) {
-        console.log(`Load locales from ${path}`);
+        console.info(`Load locales from ${path}`);
             const json = JSON.parse(fs.readFileSync(path, 'utf-8'));
             const perfix = path
                 .replace('./src/', '')
@@ -126,8 +128,9 @@ namespace locale {
             + codesExport.join('')
             + '\n\n'
             + '};';
-        
-        fs.writeFileSync(`${root}/index.ts`, code);
+        const file = `${root}/index.ts`;
+        fs.writeFileSync(file, code);
+        console.info(`Generated ${file}`);
     }
 
     /**
@@ -136,14 +139,15 @@ namespace locale {
      */
     export function build() {
         search('./src', 'locales.json', (path) => parse(path));
-        // Build to temp folder temporarily
-        const targetRoot = './src/locales-new';
+
+        const targetRoot = './src/locales';
         if (!fs.existsSync(targetRoot)) {
             fs.mkdirSync(targetRoot);
         }
         for (const localeData of data.values()) {
             localeData.build(targetRoot);
         }
+
         buildIndex(targetRoot);
     }
 }
