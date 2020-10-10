@@ -112,7 +112,7 @@ class AppBar extends UIPrototype {
         const actionView = this.actions.get(AppBarActions.view.key);
         const switchToList = actionView.innerHTML === '\uf00b';
         actionView.innerHTML = switchToList ? '\uf3fd' : '\uf00b';
-        actionView.title = i18next.t(switchToList ? 'Dashboard' : 'List');
+        actionView.title = i18next.t(switchToList ? 'ui.app-bar.dashboard' : 'ui.app-bar.list');
     }
 }
 

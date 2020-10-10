@@ -23,17 +23,18 @@
     "service.brainstorming.safety": "安全",
     "service.brainstorming.location": "位置",
 
-    "AppBar": "",
-    "Open"  : "打开",
-    "Save"  : "保存",
-    "Upload": "上传",
-    "Import": "导入",
-    "About" : "关于",
-    "Sign Out": "登出",
-    "List": "列表",
-    "Dashboard": "仪表盘",
-    "Sign In": "登入",
-    "Menu": "菜单",
+    "ui.app-bar.open"  : "打开",
+    "ui.app-bar.menu.save"  : "保存",
+    "ui.app-bar.menu.upload": "上传",
+    "ui.app-bar.menu.import": "导入",
+    "ui.app-bar.menu.about": "关于",
+    "ui.app-bar.about" : "关于",
+    "ui.app-bar.menu.signOut": "登出",
+    "ui.app-bar.list": "列表",
+    "ui.app-bar.dashboard": "仪表盘",
+    "ui.app-bar.signIn": "登入",
+    "ui.app-bar.menu": "菜单",
+    "ui.app-bar.menu.open": "打开",
 
     "ui.list-view.card.location": "位置",
     "ui.list-view.card.intelMap": "情报地图",
@@ -43,16 +44,20 @@
 
     "ui.dialog.close": "关闭",
 
+    "ui.dialog.about.title": "关于",
     "ui.dialog.about.changelog": "更新日志",
     "ui.dialog.about.documents": "文档",
     "ui.dialog.about.repo": "GitHub仓库",
 
     "ui.dialog.details.resultTime": "结果时间",
     "ui.dialog.details.reason": "原因",
+    "ui.dialog.details.save": "保存",
 
+    "ui.dialog.import.title": "导入",
     "ui.dialog.import.json": "JSON",
     "ui.dialog.import.from": "来自",
     "ui.dialog.import.wayfarer": "Wayfarer API",
+    "ui.dialog.import.import": "导入",
 
     "ui.snackbar.dismiss": "关闭",
 

@@ -23,17 +23,18 @@
     "service.brainstorming.safety": "Safety",
     "service.brainstorming.location": "Location",
 
-    "AppBar": "",
-    "Open": "Open",
-    "Save": "Save",
-    "Upload": "Upload",
-    "Import": "Import",
-    "About": "About",
-    "Sign Out": "Sign Out",
-    "List": "List",
-    "Dashboard": "Dashboard",
-    "Sign In": "Sign In",
-    "Menu": "Menu",
+    "ui.app-bar.open": "Open",
+    "ui.app-bar.menu.save": "Save",
+    "ui.app-bar.menu.upload": "Upload",
+    "ui.app-bar.menu.import": "Import",
+    "ui.app-bar.menu.about": "About",
+    "ui.app-bar.about": "About",
+    "ui.app-bar.menu.signOut": "Sign Out",
+    "ui.app-bar.list": "List",
+    "ui.app-bar.dashboard": "Dashboard",
+    "ui.app-bar.signIn": "Sign In",
+    "ui.app-bar.menu": "Menu",
+    "ui.app-bar.menu.open": "Open",
 
     "ui.list-view.card.location": "Location",
     "ui.list-view.card.intelMap": "Intel Map",
@@ -43,16 +44,20 @@
 
     "ui.dialog.close": "Close",
 
+    "ui.dialog.about.title": "About",
     "ui.dialog.about.changelog": "Changelog",
     "ui.dialog.about.documents": "Documents",
     "ui.dialog.about.repo": "GitHub Repository",
 
     "ui.dialog.details.resultTime": "Result Time",
     "ui.dialog.details.reason": "Reason",
+    "ui.dialog.details.save": "Save",
 
+    "ui.dialog.import.title": "Import",
     "ui.dialog.import.json": "JSON",
     "ui.dialog.import.from": "From ",
     "ui.dialog.import.wayfarer": "Wayfarer API",
+    "ui.dialog.import.import": "Import",
 
     "ui.snackbar.dismiss": "Dismiss",
 

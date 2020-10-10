@@ -48,7 +48,7 @@ class ImportDialog extends DialogPrototype {
         const elementDialog = DialogPrototype.buildDialog([
             eli.build('h2', {
                 className: 'mdc-dialog__title',
-                innerHTML: i18next.t('Import')
+                innerHTML: i18next.t('ui.dialog.import.title')
             }),
             eli.build('div', {
                 className: 'mdc-dialog__content',
@@ -72,7 +72,7 @@ class ImportDialog extends DialogPrototype {
                 className: 'mdc-dialog__actions',
             }, [
                 DialogPrototype.buildDialogAction('close' , i18next.t('ui.dialog.close' )),
-                DialogPrototype.buildDialogAction('import', i18next.t('Import')),
+                DialogPrototype.buildDialogAction('import', i18next.t('ui.dialog.import.import')),
             ]),
         ]);
         this.parent.append(elementDialog);

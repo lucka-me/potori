@@ -223,7 +223,7 @@ class DetailsDialog extends DialogPrototype {
                 className: 'mdc-dialog__actions',
             }, [
                 DialogPrototype.buildDialogAction('close', i18next.t('ui.dialog.close')),
-                DialogPrototype.buildDialogAction('save' , i18next.t('Save') ),
+                DialogPrototype.buildDialogAction('save' , i18next.t('ui.dialog.details.save') ),
             ]),
         ]);
         this.parent.append(elementDialog);

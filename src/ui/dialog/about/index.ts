@@ -16,7 +16,7 @@ class AboutDialog extends DialogPrototype {
         const element = DialogPrototype.buildDialog([
             eli.build('h2', {
                 className: 'mdc-dialog__title',
-                innerHTML: i18next.t('About')
+                innerHTML: i18next.t('ui.dialog.about.title')
             }),
             eli.build('div', {
                 className: 'mdc-dialog__content flex-box-col',
