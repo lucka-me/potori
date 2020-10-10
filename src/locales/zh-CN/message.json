@@ -1,8 +1,3 @@
 {
-    "ui.list-view.bsIdCopied": "已复制Brainstorming ID：{{id}}",
-
-    "ui.dialog.details.map.queryFailed": "无法查询线上数据库。",
-    "ui.dialog.details.map.queryNotExists": "数据库中未找到提名。",
-    "ui.dialog.details.map.queryEarly": "早期提名数据未收录于数据库中。",
-    "ui.dialog.details.invalidTime": "时间无效。"
+    
 }

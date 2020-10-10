@@ -1,8 +1,3 @@
 {
-    "ui.list-view.bsIdCopied": "已拷貝Brainstorming ID：{{id}}",
-
-    "ui.dialog.details.map.queryFailed": "无法擷取線上資料庫。",
-    "ui.dialog.details.map.queryNotExists": "資料庫中未找到提名。",
-    "ui.dialog.details.map.queryEarly": "早期提名資料未录入資料庫中。",
-    "ui.dialog.details.invalidTime": "時間無效。"
+    
 }

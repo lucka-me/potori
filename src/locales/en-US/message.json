@@ -1,8 +1,3 @@
 {
-    "ui.list-view.bsIdCopied": "Brainstorming ID copied: {{id}}",
-
-    "ui.dialog.details.map.queryFailed": "Failed to query Firebase.",
-    "ui.dialog.details.map.queryNotExists": "Nomination not exists in database.",
-    "ui.dialog.details.map.queryEarly": "Early nominaion not exists in database.",
-    "ui.dialog.details.invalidTime": "Invalid DateTime."
+    
 }

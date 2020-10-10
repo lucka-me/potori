@@ -18,5 +18,13 @@
             "zh-HK": "儲存",
             "zh-TW": "儲存"
         }
+    },
+    "message": {
+        "invalidTime": {
+            "en-US": "Invalid Time.",
+            "zh-CN": "时间无效。",
+            "zh-HK": "時間無效。",
+            "zh-TW": "時間無效。"
+        }
     }
 }
