@@ -3,22 +3,5 @@
     "ui.list-view.card.intelMap": "情報地圖",
     "ui.list-view.card.bsWatermeter": "Brainstorming水錶",
 
-    "ui.dialog.close": "關閉",
-
-    "ui.dialog.about.title": "關於",
-    "ui.dialog.about.changelog": "更新日誌",
-    "ui.dialog.about.documents": "文檔",
-    "ui.dialog.about.repo": "GitHub倉庫",
-
-    "ui.dialog.details.resultTime": "結果時間",
-    "ui.dialog.details.reason": "原因",
-    "ui.dialog.details.save": "儲存",
-
-    "ui.dialog.import.title": "匯入",
-    "ui.dialog.import.json": "JSON",
-    "ui.dialog.import.from": "來自",
-    "ui.dialog.import.wayfarer": "Wayfarer API",
-    "ui.dialog.import.import": "匯入",
-
     "ui.snackbar.dismiss": "關閉"
 }

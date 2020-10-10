@@ -1,21 +1,4 @@
 {
-    "ui.dialog.close": "Close",
-
-    "ui.dialog.about.title": "About",
-    "ui.dialog.about.changelog": "Changelog",
-    "ui.dialog.about.documents": "Documents",
-    "ui.dialog.about.repo": "GitHub Repository",
-
-    "ui.dialog.details.resultTime": "Result Time",
-    "ui.dialog.details.reason": "Reason",
-    "ui.dialog.details.save": "Save",
-
-    "ui.dialog.import.title": "Import",
-    "ui.dialog.import.json": "JSON",
-    "ui.dialog.import.from": "From ",
-    "ui.dialog.import.wayfarer": "Wayfarer API",
-    "ui.dialog.import.import": "Import",
-
     "ui.list-view.card.location": "Location",
     "ui.list-view.card.intelMap": "Intel Map",
     "ui.list-view.card.bsWatermeter": "Brainstorming Watermeter",

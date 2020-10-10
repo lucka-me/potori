@@ -3,22 +3,5 @@
     "ui.list-view.card.intelMap": "情报地图",
     "ui.list-view.card.bsWatermeter": "Brainstorming水表",
 
-    "ui.dialog.close": "关闭",
-
-    "ui.dialog.about.title": "关于",
-    "ui.dialog.about.changelog": "更新日志",
-    "ui.dialog.about.documents": "文档",
-    "ui.dialog.about.repo": "GitHub仓库",
-
-    "ui.dialog.details.resultTime": "结果时间",
-    "ui.dialog.details.reason": "原因",
-    "ui.dialog.details.save": "保存",
-
-    "ui.dialog.import.title": "导入",
-    "ui.dialog.import.json": "JSON",
-    "ui.dialog.import.from": "来自",
-    "ui.dialog.import.wayfarer": "Wayfarer API",
-    "ui.dialog.import.import": "导入",
-
     "ui.snackbar.dismiss": "关闭"
 }

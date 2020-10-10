@@ -1,0 +1,28 @@
+{
+    "general": {
+        "title": {
+            "en-US": "About",
+            "zh-CN": "关于",
+            "zh-HK": "關於",
+            "zh-TW": "關於"
+        },
+        "changelog": {
+            "en-US": "Changelog",
+            "zh-CN": "更新日志",
+            "zh-HK": "更新日誌",
+            "zh-TW": "更新日誌"
+        },
+        "documents": {
+            "en-US": "Documents",
+            "zh-CN": "文档",
+            "zh-HK": "文檔",
+            "zh-TW": "文檔"
+        },
+        "repo": {
+            "en-US": "GitHub Repository",
+            "zh-CN": "GitHub仓库",
+            "zh-HK": "GitHub倉庫",
+            "zh-TW": "GitHub倉庫"
+        }
+    }
+}

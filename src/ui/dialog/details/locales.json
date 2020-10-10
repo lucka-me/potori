@@ -1,0 +1,22 @@
+{
+    "general": {
+        "resultTime": {
+            "en-US": "Result Time",
+            "zh-CN": "结果时间",
+            "zh-HK": "結果時間",
+            "zh-TW": "結果時間"
+        },
+        "reason": {
+            "en-US": "Reason",
+            "zh-CN": "原因",
+            "zh-HK": "原因",
+            "zh-TW": "原因"
+        },
+        "save": {
+            "en-US": "Save",
+            "zh-CN": "保存",
+            "zh-HK": "儲存",
+            "zh-TW": "儲存"
+        }
+    }
+}
