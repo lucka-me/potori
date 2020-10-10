@@ -36,5 +36,25 @@
             "zh-HK": "位置",
             "zh-TW": "位置"
         }
+    },
+    "message": {
+        "firebaseError": {
+            "en-US": "Failed to query Firebase.",
+            "zh-CN": "无法查询线上数据库。",
+            "zh-HK": "无法擷取線上資料庫。",
+            "zh-TW": "无法擷取線上資料庫。"
+        },
+        "notExists": {
+            "en-US": "Nomination not exists in database.",
+            "zh-CN": "数据库中未找到提名。",
+            "zh-HK": "資料庫中未找到提名。",
+            "zh-TW": "資料庫中未找到提名。"
+        },
+        "early": {
+            "en-US": "Early nominaion not exists in database.",
+            "zh-CN": "早期提名資料未录入資料庫中。",
+            "zh-HK": "早期提名資料未录入資料庫中。",
+            "zh-TW": "早期提名資料未录入資料庫中。"
+        }
     }
 }

@@ -144,21 +144,7 @@ export default class DetailsDialogMap extends UIPrototype {
         };
         const failed = (reason: QueryFailReason) => {
             if (!this.dialog.isOpen) return;
-            switch(reason) {
-                case QueryFailReason.FIREBASE_ERROR: {
-                    this.events.alert(i18next.t('message:ui.dialog.details.map.queryFailed'));
-                    break;
-                }
-                case QueryFailReason.NOT_EXIST: {
-                    this.events.alert(i18next.t('message:ui.dialog.details.map.queryNotExists'));
-                    break;
-                }
-                case QueryFailReason.EARLY: {
-                    this.events.alert(i18next.t('message:ui.dialog.details.map.queryEarly'));
-                    break;
-                }
-                default:
-            }
+            this.events.alert(i18next.t(reason))
             this.buttons.search.root.disabled = false;
         }
         this.buttons.search.root.disabled = true;

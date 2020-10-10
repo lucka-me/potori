@@ -48,7 +48,7 @@ class BrainstormingKit {
             return;
         }
         if (!service.version.full) {
-            failed(QueryFailReason.NOT_EXIST);
+            failed(QueryFailReason.NOT_EXISTS);
             return;
         }
         this.queryFirebase(nomination, succeed, failed);
@@ -112,7 +112,7 @@ class BrainstormingKit {
             this.reference.child(nomination.id).once('value', (data) => {
                 const value = data.val();
                 if (!value) {
-                    failed(QueryFailReason.NOT_EXIST);
+                    failed(QueryFailReason.NOT_EXISTS);
                     return;
                 }
                 succeed(value);

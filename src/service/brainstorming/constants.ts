@@ -1,7 +1,7 @@
 export enum QueryFailReason {
-    FIREBASE_ERROR, // Unable to query firebase
-    NOT_EXIST,      // Nomination not exists in local database or firebase
-    EARLY,          // Nomination got result before firebase exists
+    FIREBASE_ERROR  = 'message:service.brainstorming.firebaseError',    // Unable to query firebase
+    NOT_EXISTS      = 'message:service.brainstorming.notExists',        // Nomination not exists in local database or firebase
+    EARLY           = 'message:service.brainstorming.early',            // Nomination got result before firebase exists
 };
 
 export const RateItems = {
