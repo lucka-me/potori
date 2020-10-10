@@ -1,3 +1,5 @@
+import * as fs from 'fs';
+
 // Inspired by https://github.com/elxris/Turnip-Calculator/blob/master/scripts/i18n.js
 class LanguageData {
     code: string;
@@ -29,8 +31,7 @@ class LanguageData {
 }
 
 function buildLocals() {
-    const fs = require('fs');
-    const root = './src/locales'
+    const root = './src/locales';
     const ignore = ['index.ts', '.DS_Store'];
     const filter = (filename: string) => !ignore.includes(filename);
     const languages: Array<LanguageData> =
