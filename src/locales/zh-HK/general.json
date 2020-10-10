@@ -1,20 +1,20 @@
 {
-    "Pending": "審核中",
-    "Accepted": "批准",
-    "Rejected": "拒絕",
+    "data.pending": "審核中",
+    "data.accepted": "批准",
+    "data.rejected": "拒絕",
 
-    "Undeclared": "未指明",
-    "Duplicated": "重複",
-    "Too Close": "過近",
+    "data.undeclared": "未指明",
+    "data.duplicated": "重複",
+    "data.close": "過近",
 
-    "Criteria": "不合標準",
-    "Generic Store": "一般商家",
-    "Temporary": "臨時",
+    "data.criteria": "不合標準",
+    "data.generic": "一般商家",
+    "data.temporary": "臨時",
 
-    "Private": "私人",
+    "data.private": "私人",
     
-    "License Plate": "車牌",
-    "Photo Quality": "照片品質",
+    "data.plate": "車牌",
+    "data.Quality": "照片品質",
 
     "service.brainstorming.quality": "質量",
     "service.brainstorming.description": "描述",
@@ -61,20 +61,20 @@
 
     "ui.snackbar.dismiss": "關閉",
 
-    "ui.dashboard.brainstorming.count-by-month.title": "每月統計",
-    "ui.dashboard.brainstorming.count-by-month.submissions": "提交",
-    "ui.dashboard.brainstorming.count-by-month.results": "結果",
+    "ui.dashboard.count-by-month.title": "每月統計",
+    "ui.dashboard.count-by-month.submissions": "提交",
+    "ui.dashboard.count-by-month.results": "結果",
 
-    "ui.dashboard.brainstorming.filter.title": "篩選",
-    "ui.dashboard.brainstorming.filter.type": "類型",
-    "ui.dashboard.brainstorming.filter.rejected": "拒絕",
+    "ui.dashboard.filter.title": "篩選",
+    "ui.dashboard.filter.type": "類型",
+    "ui.dashboard.filter.rejected": "拒絕",
 
-    "ui.dashboard.brainstorming.quotas.title": "名額",
-    "ui.dashboard.brainstorming.quotas.xAxis": "天",
+    "ui.dashboard.quotas.title": "名額",
+    "ui.dashboard.quotas.xAxis": "天",
 
-    "ui.dashboard.brainstorming.stats-rejected.title": "統計：拒絕",
+    "ui.dashboard.stats-rejected.title": "統計：拒絕",
 
-    "ui.dashboard.brainstorming.stats-type.title": "統計：類型",
+    "ui.dashboard.stats-type.title": "統計：類型",
 
     "BSGroup": "",
     "BSBasicCard": "",

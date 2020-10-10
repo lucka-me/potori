@@ -1,10 +1,10 @@
 {
-    "version": "7",
+    "version": "8",
     "types": [
         {
             "key": "pending",
             "code": 0,
-            "title": "Pending",
+            "title": "data.pending",
             "icon":  "\uf017",
             "queries": [
                 [
@@ -20,7 +20,7 @@
         {
             "key": "accepted",
             "code": 1,
-            "title": "Accepted",
+            "title": "data.accepted",
             "icon":  "\uf00c",
             "queries": [
                 [
@@ -36,7 +36,7 @@
         {
             "key": "rejected",
             "code": 101,
-            "title": "Rejected",
+            "title": "data.rejected",
             "icon":  "\uf00d",
             "queries": [
                 [
@@ -54,7 +54,7 @@
         {
             "key": "undeclared",
             "code": 101,
-            "title": "Undeclared",
+            "title": "data.undeclared",
             "icon":  "\uf00d",
             "color": "#B0373C",
             "keywords": [
@@ -65,7 +65,7 @@
         {
             "key": "duplicated",
             "code": 102,
-            "title": "Duplicated",
+            "title": "data.duplicated",
             "icon":  "\uf24d",
             "color": "#5E90B8",
             "keywords": [
@@ -82,7 +82,7 @@
         {
             "key": "close",
             "code": 103,
-            "title": "Too Close",
+            "title": "data.close",
             "icon":  "\uf547",
             "color": "#009345",
             "keywords": [
@@ -100,7 +100,7 @@
         {
             "key": "criteria:criteria",
             "code": 112,
-            "title": "Criteria",
+            "title": "data.criteria",
             "icon":  "\uf05e",
             "color": "#B80233",
             "keywords": [
@@ -114,7 +114,7 @@
         {
             "key": "criteria:generic",
             "code": 105,
-            "title": "Generic Store",
+            "title": "data.generic",
             "icon":  "\uf54e",
             "color": "#F0C649",
             "keywords": [
@@ -128,7 +128,7 @@
         {
             "key": "criteria:temporary",
             "code": 104,
-            "title": "Temporary",
+            "title": "data.temporary",
             "icon":  "\uf1da",
             "color": "#647372",
             "keywords": [
@@ -143,7 +143,7 @@
         {
             "key": "location:private",
             "code": 124,
-            "title": "Private",
+            "title": "data.private",
             "icon":  "\uf023",
             "color": "#5A4C4C",
             "keywords": [
@@ -158,7 +158,7 @@
         {
             "key": "photo:plate",
             "code": 106,
-            "title": "License Plate",
+            "title": "data.plate",
             "icon":  "\uf1b9",
             "color": "#004DB5",
             "keywords": [
@@ -172,7 +172,7 @@
         {
             "key": "photo:quality",
             "code": 133,
-            "title": "Photo Quality",
+            "title": "data.Quality",
             "icon":  "\uf03e",
             "color": "#5A715F",
             "keywords": [

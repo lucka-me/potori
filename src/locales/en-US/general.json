@@ -1,20 +1,20 @@
 {
-    "Pending": "Pending",
-    "Accepted": "Accepted",
-    "Rejected": "Rejected",
+    "data.pending": "Pending",
+    "data.accepted": "Accepted",
+    "data.rejected": "Rejected",
 
-    "Undeclared": "Undeclared",
-    "Duplicated": "Duplicated",
-    "Too Close": "Too Close",
+    "data.undeclared": "Undeclared",
+    "data.duplicated": "Duplicated",
+    "data.close": "Too Close",
 
-    "Criteria": "Criteria",
-    "Generic Store": "Generic Store",
-    "Temporary": "Temporary",
+    "data.criteria": "Criteria",
+    "data.generic": "Generic Store",
+    "data.temporary": "Temporary",
 
-    "Private": "Private",
+    "data.private": "Private",
     
-    "License Plate": "License Plate",
-    "Photo Quality": "Photo Quality",
+    "data.plate": "License Plate",
+    "data.Quality": "Photo Quality",
 
     "service.brainstorming.quality": "Quality",
     "service.brainstorming.description": "Description",
@@ -23,24 +23,50 @@
     "service.brainstorming.safety": "Safety",
     "service.brainstorming.location": "Location",
 
+    "service.nomination.day": "{{count}} day",
+    "service.nomination.day_plural": "{{count}} days",
+
     "ui.app-bar.open": "Open",
-    "ui.app-bar.menu.save": "Save",
-    "ui.app-bar.menu.upload": "Upload",
-    "ui.app-bar.menu.import": "Import",
-    "ui.app-bar.menu.about": "About",
     "ui.app-bar.about": "About",
-    "ui.app-bar.menu.signOut": "Sign Out",
     "ui.app-bar.list": "List",
     "ui.app-bar.dashboard": "Dashboard",
     "ui.app-bar.signIn": "Sign In",
     "ui.app-bar.menu": "Menu",
-    "ui.app-bar.menu.open": "Open",
 
-    "ui.list-view.card.location": "Location",
-    "ui.list-view.card.intelMap": "Intel Map",
-    "ui.list-view.card.bsWatermeter": "Brainstorming Watermeter",
-    "service.nomination.day": "{{count}} day",
-    "service.nomination.day_plural": "{{count}} days",
+    "ui.app-bar.menu.open": "Open",
+    "ui.app-bar.menu.save": "Save",
+    "ui.app-bar.menu.upload": "Upload",
+    "ui.app-bar.menu.import": "Import",
+    "ui.app-bar.menu.about": "About",
+    "ui.app-bar.menu.signOut": "Sign Out",
+
+    "ui.dashboard.count-by-month.title": "Count by Month",
+    "ui.dashboard.count-by-month.submissions": "Submissions",
+    "ui.dashboard.count-by-month.results": "Results",
+
+    "ui.dashboard.filter.title": "Filter",
+    "ui.dashboard.filter.type": "Type",
+    "ui.dashboard.filter.rejected": "Rejected",
+
+    "ui.dashboard.quotas.title": "Quotas",
+    "ui.dashboard.quotas.xAxis": "Day",
+
+    "ui.dashboard.stats-rejected.title": "Stats: Rejected",
+
+    "ui.dashboard.stats-type.title": "Stats: Type",
+
+    "ui.dashboard.brainstorming.basic.title": "Brainstorming",
+    "ui.dashboard.brainstorming.basic.refresh": "Refresh",
+    "ui.dashboard.brainstorming.basic.clear": "Clear",
+    "ui.dashboard.brainstorming.basic.desc": "Reviews for {{count}} Nominations",
+
+    "ui.dashboard.brainstorming.rates.title": "Brainstorming Rates",
+
+    "ui.dashboard.brainstorming.reviews.title": "Brainstorming Reviews",
+    "ui.dashboard.brainstorming.reviews.desc": "Reviews",
+
+    "ui.dashboard.brainstorming.synch.title": "Brainstorming Synch",
+    "ui.dashboard.brainstorming.synch.desc": "Reviews match the result",
 
     "ui.dialog.close": "Close",
 
@@ -59,33 +85,9 @@
     "ui.dialog.import.wayfarer": "Wayfarer API",
     "ui.dialog.import.import": "Import",
 
-    "ui.snackbar.dismiss": "Dismiss",
+    "ui.list-view.card.location": "Location",
+    "ui.list-view.card.intelMap": "Intel Map",
+    "ui.list-view.card.bsWatermeter": "Brainstorming Watermeter",
 
-    "ui.dashboard.brainstorming.count-by-month.title": "Count by Month",
-    "ui.dashboard.brainstorming.count-by-month.submissions": "Submissions",
-    "ui.dashboard.brainstorming.count-by-month.results": "Results",
-
-    "ui.dashboard.brainstorming.filter.title": "Filter",
-    "ui.dashboard.brainstorming.filter.type": "Type",
-    "ui.dashboard.brainstorming.filter.rejected": "Rejected",
-
-    "ui.dashboard.brainstorming.quotas.title": "Quotas",
-    "ui.dashboard.brainstorming.quotas.xAxis": "Day",
-
-    "ui.dashboard.brainstorming.stats-rejected.title": "Stats: Rejected",
-
-    "ui.dashboard.brainstorming.stats-type.title": "Stats: Type",
-
-    "ui.dashboard.brainstorming.basic.title": "Brainstorming",
-    "ui.dashboard.brainstorming.basic.refresh": "Refresh",
-    "ui.dashboard.brainstorming.basic.clear": "Clear",
-    "ui.dashboard.brainstorming.basic.desc": "Reviews for {{count}} Nominations",
-
-    "ui.dashboard.brainstorming.rates.title": "Brainstorming Rates",
-
-    "ui.dashboard.brainstorming.reviews.title": "Brainstorming Reviews",
-    "ui.dashboard.brainstorming.reviews.desc": "Reviews",
-
-    "ui.dashboard.brainstorming.synch.title": "Brainstorming Synch",
-    "ui.dashboard.brainstorming.synch.desc": "Reviews match the result"
+    "ui.snackbar.dismiss": "Dismiss"
 }
