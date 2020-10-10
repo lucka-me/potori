@@ -1,18 +1,4 @@
 {
-    "ui.dashboard.brainstorming.basic.title": "Brainstorming",
-    "ui.dashboard.brainstorming.basic.refresh": "Refresh",
-    "ui.dashboard.brainstorming.basic.clear": "Clear",
-    "ui.dashboard.brainstorming.basic.desc": "Reviews for {{count}} Nomination",
-    "ui.dashboard.brainstorming.basic.desc_plural": "Reviews for {{count}} Nominations",
-
-    "ui.dashboard.brainstorming.rates.title": "Brainstorming Rates",
-
-    "ui.dashboard.brainstorming.reviews.title": "Brainstorming Reviews",
-    "ui.dashboard.brainstorming.reviews.desc": "Reviews",
-
-    "ui.dashboard.brainstorming.synch.title": "Brainstorming Synch",
-    "ui.dashboard.brainstorming.synch.desc": "Reviews match the result",
-
     "ui.dialog.close": "Close",
 
     "ui.dialog.about.title": "About",

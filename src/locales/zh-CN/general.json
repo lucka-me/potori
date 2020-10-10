@@ -20,20 +20,5 @@
     "ui.dialog.import.wayfarer": "Wayfarer API",
     "ui.dialog.import.import": "导入",
 
-    "ui.snackbar.dismiss": "关闭",
-
-    "BSGroup": "",
-    "BSBasicCard": "",
-    "ui.dashboard.brainstorming.basic.title": "Brainstorming",
-    "ui.dashboard.brainstorming.basic.refresh": "刷新",
-    "ui.dashboard.brainstorming.basic.clear": "清除",
-    "ui.dashboard.brainstorming.basic.desc": "涵盖{{count}}个提名的评估",
-
-    "ui.dashboard.brainstorming.rates.title": "Brainstorming评分",
-
-    "ui.dashboard.brainstorming.reviews.title": "Brainstorming评估",
-    "ui.dashboard.brainstorming.reviews.desc": "个评估",
-
-    "ui.dashboard.brainstorming.synch.title": "Brainstorming同步率",
-    "ui.dashboard.brainstorming.synch.desc": "评估与结果相符"
+    "ui.snackbar.dismiss": "关闭"
 }

@@ -1,0 +1,16 @@
+{
+    "general": {
+        "title": {
+            "en-US": "Brainstorming Synch",
+            "zh-CN": "Brainstorming同步率",
+            "zh-HK": "Brainstorming同步率",
+            "zh-TW": "Brainstorming同步率"
+        },
+        "desc": {
+            "en-US": "Reviews match the result",
+            "zh-CN": "评估与结果相符",
+            "zh-HK": "評估與結果相符",
+            "zh-TW": "評估與結果相符"
+        }
+    }
+}
