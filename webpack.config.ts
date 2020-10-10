@@ -6,7 +6,8 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import path from 'path';
 import TerserPlugin from 'terser-webpack-plugin';
-import WebpackPwaManifest from 'webpack-pwa-manifest';
+// Attribute purpose is not added to Icon in index.d.ts
+const WebpackPwaManifest = require('webpack-pwa-manifest');
 // @types/webpack-cdn-plugin not exists yet
 const WebpackCdnPlugin = require('webpack-cdn-plugin');
 
