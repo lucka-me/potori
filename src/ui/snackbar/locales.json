@@ -1,0 +1,10 @@
+{
+    "general": {
+        "dismiss": {
+            "en-US": "Dismiss",
+            "zh-CN": "关闭",
+            "zh-HK": "關閉",
+            "zh-TW": "關閉"
+        }
+    }
+}
