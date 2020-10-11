@@ -8,27 +8,6 @@ import path from 'path';
 import TerserPlugin from 'terser-webpack-plugin';
 // Attribute purpose is not added to Icon in index.d.ts
 const WebpackPwaManifest = require('webpack-pwa-manifest');
-// @types/webpack-cdn-plugin not exists yet
-const WebpackCdnPlugin = require('webpack-cdn-plugin');
-
-const cdnConfig = {
-  modules: [
-    {
-      name:     '@fortawesome/fontawesome-free',
-      cdn:      'font-awesome',
-      cssOnly:  true,
-      styles: [
-        'css/fontawesome.min.css',
-        'css/solid.min.css'
-      ],
-      webfonts: [
-        'webfonts/fa-solid-900.ttf',
-        'webfonts/fa-solid-900.woff2'
-      ]
-    },
-  ],
-  prodUrl: 'https://cdnjs.cloudflare.com/ajax/libs/:name/:version/:path'
-};
 
 const config: webpack.Configuration = {
   entry: { potori: './src/index.ts', },
@@ -58,6 +37,18 @@ const config: webpack.Configuration = {
           { loader: MiniCssExtractPlugin.loader },
           'css-loader',
         ],
+      },
+      {
+        test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+        use: [
+          {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'assets/'
+            }
+          }
+        ]
       },
     ],
   },
@@ -158,7 +149,6 @@ const config: webpack.Configuration = {
     new MiniCssExtractPlugin({
       filename: 'css/[name].[contenthash].css',
     }),
-    new WebpackCdnPlugin(cdnConfig),
     new HtmlWebpackPlugin({
       title: 'Potori',
       inject: true,
@@ -209,23 +199,6 @@ const config: webpack.Configuration = {
       additionalManifestEntries: [
         { url: 'https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap', revision: null },
         { url: 'https://apis.google.com/js/api.js', revision: null },
-        ...cdnConfig.modules.reduce((list, cdn) => {
-          // Cache sources from CDN
-          //if (cdn.prodUrl) return list;
-          const version = WebpackCdnPlugin.getVersionInNodeModules(cdn.name);
-          const base = cdnConfig.prodUrl
-            .replace(':name', cdn.cdn || cdn.name)
-            .replace(':version', version);
-          //if (cdn.path) list.push({ url: base.replace(':path', cdn.path), revision: version });
-          //if (cdn.style) list.push({ url: base.replace(':path', cdn.style), revision: version });
-          if (cdn.styles) list.push(...cdn.styles.map((style) => {
-            return { url: base.replace(':path', style), revision: version }
-          }));
-          if (cdn.webfonts) list.push(...cdn.webfonts.map((font) => {
-            return { url: base.replace(':path', font), revision: version }
-          }));
-          return list;
-        }, new Array<{ url: string, revision: string }>())
       ]
     }),
     new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/),
