@@ -9,7 +9,6 @@ Noteable changes of Potori will be documented here. For [Status Data](./src/data
 - Minor UI improvement
 
 
-
 ## [0.7.7](https://github.com/lucka-me/potori/releases/tag/0.7.7) - 2020-09-26
 - Improved UI and reduce app size
 
@@ -41,7 +40,6 @@ Noteable changes of Potori will be documented here. For [Status Data](./src/data
 - Brainstorming cards not updated when save nomination data
 
 
-
 ## [0.7.5](https://github.com/lucka-me/potori/releases/tag/0.7.5) - 2020-09-06
 - Dynamically load most modules and lazyload images
 
@@ -54,7 +52,6 @@ Noteable changes of Potori will be documented here. For [Status Data](./src/data
 
 ### Fixed
 - Broken reason selector in Details dialog
-
 
 
 ## [0.7.4](https://github.com/lucka-me/potori/releases/tag/0.7.4) - 2020-08-18
@@ -79,7 +76,6 @@ Noteable changes of Potori will be documented here. For [Status Data](./src/data
 - Remove points in line and radar charts
 
 
-
 ## [0.7.2](https://github.com/lucka-me/potori/releases/tag/0.7.2) - 2020-07-13
 - Fixed bugs
 
@@ -87,7 +83,6 @@ Noteable changes of Potori will be documented here. For [Status Data](./src/data
 - Mail processing may be blocked when there are new mails
 - Unable to open alert dialog
 - Content of copy brainstorming id alert
-
 
 
 ## [0.7.1](https://github.com/lucka-me/potori/releases/tag/0.7.1) - 2020-06-24
@@ -103,7 +98,6 @@ Noteable changes of Potori will be documented here. For [Status Data](./src/data
 ### Fixed
 - Wrong start_url and scope in manifest.json
 - Some icons are missing in Chrome and Firefox
-
 
 
 ## [0.7.0](https://github.com/lucka-me/potori/releases/tag/0.7.0) - 2020-06-21
@@ -138,13 +132,11 @@ Bugs fixed
 - No response when open file in Safari
 
 
-
 ## [0.6.1](https://github.com/lucka-me/potori/releases/tag/0.6.1) - 2020-06-07
 Fixed view switching not work
 
 ### Fixed
 - Can not switch view
-
 
 
 ## [0.6.0](https://github.com/lucka-me/potori/releases/tag/0.6.0) - 2020-06-07
@@ -178,7 +170,6 @@ UI improvement and bug fix
 - Map bound incorrect in desktop devices
 
 
-
 ## [0.5.5](https://github.com/lucka-me/potori/releases/tag/0.5.5) - 2020-05-28
 Add new cards
 
@@ -191,7 +182,6 @@ Add new cards
 ### Changed
 - Minor adjustment for cards
 - Code enhancement
-
 
 
 ## [0.5.4](https://github.com/lucka-me/potori/releases/tag/0.5.4) - 2020-05-26
@@ -210,13 +200,11 @@ Bug fixed and minor enhancement
 - Tooltips of radar chart display value as title
 
 
-
 ## [0.5.3](https://github.com/lucka-me/potori/releases/tag/0.5.3) - 2020-05-25
 Fixed lite version can not finish process
 
 ### Fixed
 - Query lntLat can't finish in lite version
-
 
 
 ## [0.5.2](https://github.com/lucka-me/potori/releases/tag/0.5.2) - 2020-05-25
@@ -236,7 +224,6 @@ Statistic for Brainstorming data
 - Parsing portals file always fail
 
 
-
 ## [0.5.1](https://github.com/lucka-me/potori/releases/tag/0.5.1) - 2020-05-25
 Submissions card -> Count by Month card
 
@@ -244,7 +231,6 @@ Submissions card -> Count by Month card
 - Submissions card -> Count by Month card including results
 - Card style: outlined
 - Minor code optimized
-
 
 
 ## [0.5.0](https://github.com/lucka-me/potori/releases/tag/0.5.0) - 2020-05-22
@@ -275,7 +261,6 @@ Minor improvement and bugs fixed
 - Clusters disappear after switching dark/light mode
 
 
-
 ## [0.4.21](https://github.com/lucka-me/potori/releases/tag/0.4.21) - 2020-05-20
 Add menu and Restore time of quota
 
@@ -284,13 +269,11 @@ Add menu and Restore time of quota
 - Time left for the quota to be restored
 
 
-
 ## [0.4.20](https://github.com/lucka-me/potori/releases/tag/0.4.20) - 2020-05-20
 Minor improvement
 
 ### Changed
 - Remove classified portals data in status dialog
-
 
 
 ## [0.4.19](https://github.com/lucka-me/potori/releases/tag/0.4.19) - 2020-05-19
@@ -306,7 +289,6 @@ Cluster all rejected nominations
 - Error: Style is not done loading
 
 
-
 ## [0.4.18](https://github.com/lucka-me/potori/releases/tag/0.4.18) - 2020-05-18
 Cluster nominations on map
 
@@ -315,7 +297,6 @@ Cluster nominations on map
 
 ### Fixed
 - Page height on mobile devices
-
 
 
 ## [0.4.17](https://github.com/lucka-me/potori/releases/tag/0.4.17) - 2020-04-29
@@ -329,7 +310,6 @@ Minor update
 - Dark mode for Mapbox
 
 
-
 ## [0.4.16](https://github.com/lucka-me/potori/releases/tag/0.4.16) - 2020-03-30
 SDK upgraded
 
@@ -341,13 +321,11 @@ SDK upgraded
 - Position of icon in Detail dialog
 
 
-
 ## 0.4.15 - 2020-01-01
 Bug fixed
 
 ### Fixed
 - Reject reason select menu broken
-
 
 
 ## 0.4.14 - 2019-10-26
@@ -361,14 +339,12 @@ Bug fixed
 - Accepted file type when open file
 
 
-
 ## 0.4.13 - 2019-09-28
 UI optimized
 
 ### Changed
 - UI optimized
 - Merged Intro and Privacy Policy
-
 
 
 ## 0.4.12 - 2019-09-16
@@ -378,13 +354,11 @@ Updated version format
 - Includes a data version, changing of data won't change the code version
 
 
-
 ## 0.4.11 - 2019-09-13
 Updated code structure
 
 ### Changed
 - Update code structure, make it easier to update for new rejected reason
-
 
 
 ## 0.4.10 - 2019-09-12
@@ -397,13 +371,11 @@ Changed query for confirmation mails of Prime
 - Indicator in progress bar doesn't show up
 
 
-
 ## 0.4.9 - 2019-09-11
 Fixed Details dialog not working properly in lite version
 
 ### Fixed
 - Details dialog: Search button is not initiated in lite version, which leads to crashing during interacting with dialog
-
 
 
 ## 0.4.8 - 2019-09-10
@@ -416,7 +388,6 @@ Fixed several bugs related to Details dialog
 - Some filters are not updated after saving with changing the status and rejected reason
 
 
-
 ## 0.4.7 - 2019-09-10
 Support editing location in Details dialog
 
@@ -427,13 +398,11 @@ Support editing location in Details dialog
 - Click events of Location button and Intel button will be triggered multiple times when clicked once after saving in Details dialog
 
 
-
 ## 0.4.6 - 2019-09-08
 Support dark mode
 
 ### Added
 - BETA: Support for dark mode, including css and map style
-
 
 
 ## 0.4.5 - 2019-09-07
@@ -447,14 +416,12 @@ Support editing in Details dialog
 - Code optimized
 
 
-
 ## 0.4.4 - 2019-09-03
 Fixed dialog issues
 
 ### Fixed
 - Alert dialog can't show up
 - Details Dialog can't show up
-
 
 
 ## 0.4.3 - 2019-09-01
@@ -472,7 +439,6 @@ I18n framework for Intro and Privacy
 - Progress Bar is not accurate when some mails are processed before other lists been fetched
 
 
-
 ## 0.4.2 - 2019-08-25
 Add dialog: Portal Details
 
@@ -488,7 +454,6 @@ Add dialog: Portal Details
 - Progress Bar is not accurate when some mails are processed before other lists been fetched
 
 
-
 ## 0.4.1 - 2019-08-17
 Support PWA
 
@@ -497,7 +462,6 @@ Support PWA
 
 ### Changed
 - Icon color
-
 
 
 ## 0.4.0 - 2019-08-17
@@ -531,13 +495,11 @@ Fixed: Deleting empty file in Google Drive will cause crash
 - Two string values are missing
 
 
-
 ## 0.3.9 - 2019-07-24
 Fixed: CSS overflow-y: scroll doesn't work in Firefox
 
 ### Fixed
 - CSS overflow-y issue in Firefox: add min-height: 0% in parent element
-
 
 
 ## 0.3.8 - 2019-07-20
@@ -548,7 +510,6 @@ Fixed: Fail to upload file
 
 ### Fixed
 - Fail to upload file caused by wrong parameter in Update method
-
 
 
 ## 0.3.7 - 2019-07-12
@@ -562,7 +523,6 @@ Lite: Migrate to Potori
 - Lite: Migrate to Potori GCP project
 
 
-
 ## 0.3.6 - 2019-07-05
 Lite: Added an extended page for features related to 3rd-party
 
@@ -574,7 +534,6 @@ Lite: Added an extended page for features related to 3rd-party
 - Lite: JavaScript structure optimized
 
 
-
 ## 0.3.5 - 2019-07-03
 Support rejection-undeclared ja and en
 
@@ -583,7 +542,6 @@ Support rejection-undeclared ja and en
 
 ### Changed
 - Remove all contents following "-NianticOps" before parse rejected reason
-
 
 
 ## 0.3.4 - 2019-06-29
@@ -599,13 +557,11 @@ Added Navi Control and fixed title issue
 - CSS overflow-y: scroll doesn't work in Firefox, which make the page as long as the list
 
 
-
 ## 0.3.3 - 2019-06-29
 Check structure when get file from Google Drive
 
 ### Added
 - When get file from Google Drive, check the structure, which may be wrong in some situations
-
 
 
 ## 0.3.2 - 2019-06-28
@@ -615,13 +571,11 @@ Support confirmation in en and ja
 - Support for confirmation mails in en an ja
 
 
-
 ## 0.3.1 - 2019-06-28
 Fixed Open File
 
 ### Fixed
 - Open File doesn't work, caused by calling a function that has been moved
-
 
 
 ## 0.3.0 - 2019-06-27
@@ -646,7 +600,6 @@ Removed all features related to 3rd-party
 - Bs Watermeter link and Intel Map link
 
 
-
 ## 0.2.8 - 2019-05-19
 Hide rejection reason filters by default
 
@@ -655,7 +608,6 @@ Hide rejection reason filters by default
 
 ### Changed
 - Hide rejection reason filters when process finishes
-
 
 
 ## 0.2.7 - 2019-05-13
@@ -667,7 +619,6 @@ New feature: Filter & statics for rejected portals classified by the reason
 ### Changed
 - Id of elements: "console" -> "control"
 - Pack dozens of objects into three main objects
-
 
 
 ## 0.2.6 - 2019-05-13
@@ -683,13 +634,11 @@ Collapsible in console
 - Issues when there is no acceptance or rejection mail - not tested yet
 
 
-
 ## 0.2.5 - 2019-05-11
 Fixed: scroll to card
 
 ### Fixed
 - Won't scroll to the card when click marker
-
 
 
 ## 0.2.4 - 2019-05-11
@@ -699,7 +648,6 @@ Fixed confirmation time of pending portals
 - Confirmation time of pending portals are displayed as Invalid Date
 
 
-
 ## 0.2.3 - 2019-05-06
 Fixed min-width
 
@@ -707,13 +655,11 @@ Fixed min-width
 - Changed min-width from 400px to 300px to avoid overflow on mobile
 
 
-
 ## 0.2.2 - 2019-05-06
 Optimized for portrait orientation like mobile phone
 
 ### Changed
 - UI optimized for portrait orientation
-
 
 
 ## 0.2.1 - 2019-05-03
@@ -725,7 +671,6 @@ New feature: Filter
 ### Changed
 - UI improved
 - Data structure optimized
-
 
 
 ## 0.2.0 - 2019-05-01
@@ -752,7 +697,6 @@ Intel link added
 - Click status icon to open BS watermeter in new tab
 
 
-
 ## 0.1.6 - 2019-01-18
 Reason of rejection
 
@@ -764,13 +708,11 @@ Reason of rejection
 - Minor UI improved
 
 
-
 ## 0.1.5 - 2019-01-17
 Link to BS watermeter
 
 ### Added
 - Click title to query the portal in Brainstorming watermeter
-
 
 
 ## 0.1.4 - 2019-01-17
@@ -786,13 +728,11 @@ UI fixed and policy updated
 - Minor mistakes in UI
 
 
-
 ## 0.1.3 - 2019-01-14
 UI improved
 
 ### Changed
 - Style of cards to MD-like style
-
 
 
 ## 0.1.2 - 2019-01-12
@@ -802,13 +742,11 @@ Bug fixed
 - ipsc -> psci
 
 
-
 ## 0.1.1 - 2019-01-12
 Bug fixed
 
 ### Fixed
 - Status text
-
 
 
 ## 0.1 - 2019-01-12
@@ -819,6 +757,10 @@ Bug fixed
 
 
 # Data Changelog
+
+## d8 - 2020-10-TBA
+### Changed
+- Use new i18n keys for title
 
 ## d7 - 2020-09-24
 ### Added
