@@ -1,6 +1,10 @@
-@use '@material/theme';
-@use '@material/typography/mdc-typography';
+@use '~@material/theme/mdc-theme';
+@use '~@material/typography/mdc-typography';
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap');
+$fa-font-path: "~@fortawesome/fontawesome-free/webfonts";
+//@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import '~@fortawesome/fontawesome-free/scss/solid';
+@import '~@fortawesome/fontawesome-free/scss/fixed-width';
 
 :root {
     --mdc-theme-primary: #3B1E5F;
