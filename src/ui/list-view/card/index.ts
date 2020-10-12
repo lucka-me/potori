@@ -73,6 +73,7 @@ class NominationCard {
             'min-width: 120px',
             'height: 120px',
             'min-height: 120px',
+            'border-top-left-radius: 4px',
         ].join(';');
         const elementPrimaryAction = eli.build('div', { }, [
             eli.build('div', {
