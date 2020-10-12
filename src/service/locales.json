@@ -65,6 +65,15 @@
             "zh-CN": "无法解析为Brainstorming数据。",
             "zh-HK": "無法解析為Brainstorming數據。",
             "zh-TW": "無法解析為Brainstorming數據。"
+        },
+        "imported": {
+            "en-US": "Imported and updated {{count}} nomination.",
+            "zh-CN": "已导入并更新{{count}}个提名。",
+            "zh-HK": "已匯入並更新{{count}}个提名。",
+            "zh-TW": "已匯入並更新{{count}}个提名。"
+        },
+        "imported_plural": {
+            "en-US": "Imported and updated {{count}} nominations."
         }
     }
 }

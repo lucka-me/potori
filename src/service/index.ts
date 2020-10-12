@@ -329,11 +329,14 @@ export namespace service {
         }
         if (!parsed.result || parsed.result.length < 1) {
             events.alert(i18next.t('message:service.invalidData'));
+            return;
         }
-        const mapNomination = new Map();
+        const mapNomination = new Map<string, Nomination>();
+        
         for (const monination of nominations) {
             mapNomination.set(monination.id, monination);
         }
+        let count = 0;
         for (const nomination of parsed.result) {
             const imageUrl = nomination.imageUrl.replace('https://lh3.googleusercontent.com/', '');
             const id = Nomination.parseId(imageUrl);
@@ -345,7 +348,9 @@ export namespace service {
                 lng: parseFloat(nomination.lng),
                 lat: parseFloat(nomination.lat)
             };
+            count += 1;
         }
+        events.info(i18next.t('message:service.imported', { count: count }));
         events.idle();
     }
 
