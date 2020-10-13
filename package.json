@@ -26,7 +26,7 @@
     "@types/copy-webpack-plugin": "^6.0.0",
     "@types/gapi": "0.0.39",
     "@types/gapi.auth2": "0.0.52",
-    "@types/gapi.client.drive": "^3.0.10",
+    "@types/gapi.client.drive": "^3.0.11",
     "@types/gapi.client.gmail": "^1.0.2",
     "@types/lodash": "^4.14.162",
     "@types/mapbox-gl": "^1.12.3",
