@@ -1,13 +1,15 @@
 # Changelog
 Noteable changes of Potori will be documented here. For [Status Data](./src/data/status.json), please refer to [Data Changelog](#data-changelog).
 
-## [0.7.8](https://github.com/lucka-me/potori/releases/tag/0.7.8) - 2020-TBA
-- TBA
+## [0.7.8](https://github.com/lucka-me/potori/releases/tag/0.7.8) - 2020-10-15
+- Skip some queries and improve UI
 
 ### Changed
 - Skip queries for nominations which got result before database exists (17/2/2018)
 - Minor UI improvement
 
+### Fixed
+- Some translations
 
 ## [0.7.7](https://github.com/lucka-me/potori/releases/tag/0.7.7) - 2020-09-26
 - Improved UI and reduce app size
@@ -758,7 +760,7 @@ Bug fixed
 
 # Data Changelog
 
-## d8 - 2020-10-TBA
+## d8 - 2020-10-15
 ### Changed
 - Use new i18n keys for title
 
