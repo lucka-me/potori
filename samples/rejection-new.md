@@ -27,7 +27,8 @@ Note that we will not be overturning this decision. If you believe your New Port
 </p>
 </details>
 
-## Criteria
+## Criteria 
+### Criteria
 <details><summary>en</summary>
 <p>
 
@@ -38,7 +39,7 @@ Nomination does not meet acceptance criteria
 </p>
 </details>
 
-## Generic Store
+### Generic Store
 <details><summary>en</summary>
 <p>
 
@@ -49,7 +50,7 @@ The real-world location of the nomination appears to represent a generic store o
 </p>
 </details>
 
-## Temporary
+### Temporary
 <details><summary>en</summary>
 <p>
 
@@ -60,7 +61,8 @@ Nomination does not appear to be permanent or appears to be a seasonal display t
 </p>
 </details>
 
-## Private
+## Location
+### Private
 <details><summary>en</summary>
 <p>
 
@@ -71,7 +73,8 @@ The real-word location of the nomination appears to be on private residential pr
 </p>
 </details>
 
-## License Plate
+## Photo
+### License Plate
 <details><summary>en</summary>
 <p>
 
@@ -82,7 +85,7 @@ Photo appears to include a recognizable license plate
 </p>
 </details>
 
-## Photo Quality
+### Quality
 <details><summary>en</summary>
 <p>
 
