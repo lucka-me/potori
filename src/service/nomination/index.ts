@@ -116,10 +116,16 @@ export default class Nomination {
     }
 
     /**
-     * Deserialize from JSON
-     * @param json JSON to deserialize
+     * Parse nomination from JSON
+     * @param json JSON to be parsed
+     * @throws An `Error` when JSON missing `id`, `title`, `image` or `confirmedTime`
      */
     static from(json: any): Nomination {
+        if (!json.id) throw new Error('message:service.nomination.parseNoId');
+        if (!json.title) throw new Error('message:service.nomination.parseNoTitle');
+        if (!json.image) throw new Error('message:service.nomination.parseNoImage');
+        if (!json.confirmedTime) throw new Error('message:service.nomination.parseNoConfirmedTime');
+
         const nomination = new Nomination();
         nomination.id = json.id;
         nomination.title = json.title;

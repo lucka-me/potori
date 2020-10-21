@@ -9,5 +9,31 @@
         "day_plural": {
             "en-US": "{{count}} days"
         }
+    },
+    "message": {
+        "parseNoId": {
+            "en-US": "ID missing in JSON",
+            "zh-CN": "JSON中缺少ID信息",
+            "zh-HK": "JSON內缺少ID信息",
+            "zh-TW": "JSON內缺少ID信息"
+        },
+        "parseNoTitle": {
+            "en-US": "Title missing in JSON",
+            "zh-CN": "JSON中缺少标题信息",
+            "zh-HK": "JSON內缺少標題信息",
+            "zh-TW": "JSON內缺少標題信息"
+        },
+        "parseNoImage": {
+            "en-US": "Image missing in JSON",
+            "zh-CN": "JSON中缺少图片信息",
+            "zh-HK": "JSON內缺少圖像信息",
+            "zh-TW": "JSON內缺少圖像信息"
+        },
+        "parseNoConfirmedTime": {
+            "en-US": "Confirmed time missing in JSON",
+            "zh-CN": "JSON中缺少提交时间信息",
+            "zh-HK": "JSON內缺少提交時間信息",
+            "zh-TW": "JSON內缺少提交時間信息"
+        }
     }
 }
