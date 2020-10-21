@@ -146,6 +146,8 @@ export namespace service {
         const finished = () => {
             events.idle();
         };
+        finished();
+        return;
 
         // Query locations
         const listNoLocation: Array<Nomination> = nominations.reduce((list, nomination) => {
@@ -239,7 +241,7 @@ export namespace service {
                 nominations.length = 0;
                 nominations.push(...jsonList.reduce((list: Array<Nomination>, json) => {
                     try {
-                        list.push(Nomination.from(json));
+                        list.push(Nomination.parse(json));
                     } catch (error) {
                         // Log or alert
                     }

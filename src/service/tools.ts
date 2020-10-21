@@ -46,7 +46,7 @@ export class Parser {
                 return result;
             }
             for (const json of jsonList) {
-                const nomination = Nomination.from(json);
+                const nomination = Nomination.parse(json);
                 result.nominations.push(nomination);
             }
             result.matched = true;

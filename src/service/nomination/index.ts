@@ -120,16 +120,27 @@ export default class Nomination {
      * @param json JSON to be parsed
      * @throws An `Error` when JSON missing `id`, `title`, `image` or `confirmedTime`
      */
-    static from(json: any): Nomination {
+    static parse(json: any): Nomination {
         if (!json.id) throw new Error('message:service.nomination.parseNoId');
         if (!json.title) throw new Error('message:service.nomination.parseNoTitle');
         if (!json.image) throw new Error('message:service.nomination.parseNoImage');
         if (!json.confirmedTime) throw new Error('message:service.nomination.parseNoConfirmedTime');
 
+        // Fix old issues
+        const image = (json.image as string).replace('\r', '');
+
+        // Test format
+        if (!/^[a-zA-Z0-9]+$/.test(json.id)) {
+            throw new Error('message:service.nomination.parseFormatId');
+        }
+        if (!/^[0-9a-zA-Z\-\_]+$/.test(image)) {
+            throw new Error('message:service.nomination.parseFormatImage');
+        }
+
         const nomination = new Nomination();
         nomination.id = json.id;
         nomination.title = json.title;
-        nomination.image = json.image;
+        nomination.image = image;
 
         nomination.status = service.status.codes.get(json.status);
 
