@@ -237,7 +237,14 @@ export namespace service {
             try {
                 const jsonList = file as Array<any>;
                 nominations.length = 0;
-                nominations.push(...jsonList.map(json => Nomination.from(json)));
+                nominations.push(...jsonList.reduce((list: Array<Nomination>, json) => {
+                    try {
+                        list.push(Nomination.from(json));
+                    } catch (error) {
+                        // Log or alert
+                    }
+                    return list;
+                }, []));
             } catch (error) {
                 if (more) return false;
                 finishedNominations = true;

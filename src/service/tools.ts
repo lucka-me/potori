@@ -47,15 +47,11 @@ export class Parser {
             }
             for (const json of jsonList) {
                 const nomination = Nomination.from(json);
-                if (!nomination.id) {
-                    result.nominations = [];
-                    result.message = i18next.t('message:service.parseNominationsFailed');
-                    return result;
-                }
                 result.nominations.push(nomination);
             }
             result.matched = true;
         } catch(error) {
+            result.nominations = [];
             result.matched = false;
             result.message = i18next.t('message:service.parseNominationsFailed');
         }
