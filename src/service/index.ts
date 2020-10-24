@@ -230,35 +230,7 @@ export namespace service {
             if (finishedNominations && finishedBsData) finish();
         };
 
-        const gotNominations = (file: gapi.client.drive.File, more: boolean) => {
-            if (!file) {
-                finishedNominations = true;
-                checkFinish();
-                return true;
-            }
-            try {
-                const jsonList = file as Array<any>;
-                nominations.length = 0;
-                nominations.push(...jsonList.reduce((list: Array<Nomination>, json) => {
-                    try {
-                        list.push(Nomination.parse(json));
-                    } catch (error) {
-                        // Log or alert
-                    }
-                    return list;
-                }, []));
-            } catch (error) {
-                if (more) return false;
-                finishedNominations = true;
-                checkFinish();
-                return true;
-            }
-
-            finishedNominations = true;
-            checkFinish();
-            return true;
-        };
-        const gotBsData = (result: gapi.client.drive.File, more: boolean) => {
+        file.googleDrive.download(FileConst.bsData, (result, more) => {
             if (!result) {
                 finishedBsData = true;
                 checkFinish();
@@ -277,9 +249,34 @@ export namespace service {
             finishedBsData = true;
             checkFinish();
             return true;
-        };
-        file.googleDrive.download(FileConst.bsData, gotBsData);
-        file.googleDrive.download(FileConst.nominations, gotNominations);
+        });
+        file.googleDrive.download(FileConst.nominations, (file, more) => {
+            if (!file) {
+                finishedNominations = true;
+                checkFinish();
+                return true;
+            }
+            try {
+                const jsonList = file as Array<any>;
+                nominations.length = 0;
+                for (const json of jsonList) {
+                    try {
+                        nominations.push(Nomination.parse(json));
+                    } catch (error) {
+                        // Log or alert
+                    }
+                }
+            } catch (error) {
+                if (more) return false;
+                finishedNominations = true;
+                checkFinish();
+                return true;
+            }
+
+            finishedNominations = true;
+            checkFinish();
+            return true;
+        });
     }
 
     /**
