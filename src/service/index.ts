@@ -146,8 +146,6 @@ export namespace service {
         const finished = () => {
             events.idle();
         };
-        finished();
-        return;
 
         // Query locations
         const listNoLocation: Array<Nomination> = nominations.reduce((list, nomination) => {
