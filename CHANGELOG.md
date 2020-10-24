@@ -1,6 +1,16 @@
 # Changelog
 Noteable changes of Potori will be documented here. For [Status Data](./src/data/status.json), please refer to [Data Changelog](#data-changelog).
 
+## [0.7.9](https://github.com/lucka-me/potori/releases/tag/0.7.9) - 2020-10-24
+- Fixed various issues caused by incorrect data
+
+### Added
+- Check existence of `id`, `title`, `image` and `confirmedTime` and format of `id` and `image` when parse nomination from JSON
+
+### Fixed
+- Various issues caused by incorrect nomination data, will check and skip them when download data
+
+
 ## [0.7.8](https://github.com/lucka-me/potori/releases/tag/0.7.8) - 2020-10-15
 - Skip some queries and improve UI
 
@@ -10,6 +20,9 @@ Noteable changes of Potori will be documented here. For [Status Data](./src/data
 
 ### Fixed
 - Some translations
+
+<details><summary>0.7.x</summary>
+<p>
 
 ## [0.7.7](https://github.com/lucka-me/potori/releases/tag/0.7.7) - 2020-09-26
 - Improved UI and reduce app size
@@ -27,8 +40,6 @@ Noteable changes of Potori will be documented here. For [Status Data](./src/data
 - Turn one reason switch on will show all rejected cards when the reject switch is off
 - Unable to parse image from some mail
 
-<details><summary>0.7.x</summary>
-<p>
 
 ## [0.7.6](https://github.com/lucka-me/potori/releases/tag/0.7.6) - 2020-09-08
 - Support offline
