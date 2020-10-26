@@ -68,8 +68,8 @@ export default class Mari {
         // Ignore the mails already in the list
         this.ignoreMailIds  = [];
         for (const nomination of this.nominations) {
-            this.ignoreMailIds.push(nomination.confirmationMailId);
-            if (nomination.resultMailId) this.ignoreMailIds.push(nomination.resultMailId);
+            //this.ignoreMailIds.push(nomination.confirmationMailId);
+            //if (nomination.resultMailId) this.ignoreMailIds.push(nomination.resultMailId);
         }
         for (const scanner of this.scanners) {
             for (const type of this.types) {
@@ -161,7 +161,15 @@ export default class Mari {
                 format: 'full',
                 metadataHeaders: 'Subject'
             }).execute((response: gapi.client.Response<gapi.client.gmail.Message>) => {
-                this.nominations.push(Parser.mail(response.result, keys));
+                try {
+                    const nomination = Parser.mail(response.result, keys);
+                    this.nominations.push(nomination);
+                } catch (error) {
+                    // Should report the mail
+                    console.log(`${keys.scanner}:${keys.type}`);
+                    console.log(response.result);
+                }
+
                 this.progress.finished += 1;
                 this.events.progress(
                     this.progress.finished / this.progress.total * (this.progress.list / this.scanners.length)
