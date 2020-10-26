@@ -92,6 +92,7 @@ export namespace service {
 
         auth.init();
 
+        mari.events.alert = (message) => events.alert(message);
         mari.events.progress = (percent) => events.progressUpdate(percent * 0.9);
         mari.events.buffer = (percent) => events.bufferUpdate(percent);
         mari.events.finish = () => final();

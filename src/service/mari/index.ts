@@ -1,8 +1,11 @@
+import i18next from 'i18next';
+
 import { service } from 'service';
 import Nomination from 'service/nomination';
 
 import Parser from './tools';
 
+type MessageCallback = (message: string) => void;
 type FinishCallback = () => void;
 export type ProgressCallback = (percent: number) => void;
 
@@ -10,6 +13,7 @@ export type ProgressCallback = (percent: number) => void;
  * Events for {@link Mari}
  */
 interface MariEvents {
+    alert:      MessageCallback;    // Triggered when alert should be displayed
     finish:     FinishCallback;     // Triggered when processes all finish
     buffer:     ProgressCallback;   // Triggered when buffer (secondary progress) updates
     progress:   ProgressCallback,   // Triggered when main progress update
@@ -37,6 +41,7 @@ export default class Mari {
         list: 0, total: 0, finished: 0,
     };
     events: MariEvents = {
+        alert:  () => {},
         finish: () => {},
         buffer: () => {},
         progress: () => {},
@@ -164,10 +169,23 @@ export default class Mari {
                 try {
                     const nomination = Parser.mail(response.result, keys);
                     this.nominations.push(nomination);
-                } catch (error) {
-                    // Should report the mail
-                    console.log(`${keys.scanner}:${keys.type}`);
-                    console.log(response.result);
+                } catch (error: Error | any) {
+                    let subject = '';
+                    for (let i = 0; i < mail.payload.headers.length; i++) {
+                        const header = mail.payload.headers[i];
+                        if (header.name === 'Subject') {
+                            subject = header.value;
+                            break;
+                        }
+                    }
+                    let details: string = error;
+                    if ('message' in error) {
+                        details = (error as Error).stack || (error as Error).message;
+                    }
+                    this.events.alert(i18next.t('message:service.mari.reportParserError', {
+                        subject: subject,
+                        message: `[${keys.scanner}:${keys.type}]${details}`
+                    }));
                 }
 
                 this.progress.finished += 1;
