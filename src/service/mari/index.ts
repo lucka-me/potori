@@ -73,8 +73,8 @@ export default class Mari {
         // Ignore the mails already in the list
         this.ignoreMailIds  = [];
         for (const nomination of this.nominations) {
-            //this.ignoreMailIds.push(nomination.confirmationMailId);
-            //if (nomination.resultMailId) this.ignoreMailIds.push(nomination.resultMailId);
+            this.ignoreMailIds.push(nomination.confirmationMailId);
+            if (nomination.resultMailId) this.ignoreMailIds.push(nomination.resultMailId);
         }
         for (const scanner of this.scanners) {
             for (const type of this.types) {
