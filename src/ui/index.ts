@@ -130,8 +130,8 @@ export namespace ui {
     function switchView() {
         if (!dashboard) return;
         appBar.switchView();
-        dashboard.root.classList.toggle('view-hide');
-        list.root.classList.toggle('view-hide');
+        dashboard.switchView();
+        list.switchView();
     }
 
     function clear() {
@@ -268,23 +268,20 @@ export namespace ui {
 
         list.events.alert = (message) => {
             dialog.alert.open(message);
-        }
+        };
         list.events.focus = (nomination) => {
             dashboard.map.easeTo(nomination.lngLat);
-        }
+        };
         dashboard.map.events.focus = (id) => {
-            const top = list.root.offsetTop + 8;
-            list.root.scrollTo(
-                0, document.getElementById(`card-${id}`).offsetTop - top
-            );
-        }
+            list.focus(id);
+        };
 
         // Prepare async dialogs
         await dialog.prepare();
         // Details dialog
         dialog.details.events.alert = (message) => {
             dialog.alert.open(message);
-        }
+        };
         dialog.details.events.query = (nomination, succeed, failed) => {
             service.bs.query(nomination, succeed, failed);
         };
@@ -293,7 +290,7 @@ export namespace ui {
         };
         dialog.details.map.events.alert = (message) => {
             dialog.alert.open(message);
-        }
+        };
         dialog.details.map.events.queryLngLat = (nomination, succeed, failed) => {
             service.bs.queryLocation(nomination, succeed, failed);
         };
