@@ -23,6 +23,26 @@
             "zh-CN": "GitHub仓库",
             "zh-HK": "GitHub倉庫",
             "zh-TW": "GitHub倉庫"
+        },
+        "exportError": {
+            "en-US": "Export Error",
+            "zh-CN": "导出错误",
+            "zh-HK": "导出错误",
+            "zh-TW": "导出错误"
+        }
+    },
+    "message": {
+        "exportErrorEmpty": {
+            "en-US": "There is no error to export.",
+            "zh-CN": "未导出任何错误。",
+            "zh-HK": "未导出任何错误。",
+            "zh-TW": "未导出任何错误。"
+        },
+        "exportErrorCopied": {
+            "en-US": "Exported {{ count }} error to clipboard.",
+            "zh-CN": "向剪贴板导出了{{ count }}个错误。",
+            "zh-HK": "向剪贴板导出了{{ count }}个错误。",
+            "zh-TW": "向剪贴板导出了{{ count }}个错误。"
         }
     }
 }

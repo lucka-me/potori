@@ -63,6 +63,9 @@ export namespace ui {
 
         // Dialog
         dialog.init(body);
+        dialog.about.events.info = (message) => {
+            snackbar.show(message);
+        };
 
         // Dark
         dark.init(body);
