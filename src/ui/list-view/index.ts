@@ -15,8 +15,8 @@ interface ListViewEvents {
 
 class ListView extends UIPrototype {
 
-    root: HTMLDivElement = null;
-    now = Date.now();
+    private root: HTMLDivElement = null;
+    private now = Date.now();
 
     events: ListViewEvents = {
         alert:          () => { },
@@ -86,6 +86,17 @@ class ListView extends UIPrototype {
         NominationCard.update(nomination, card);
         NominationCard.updateLocation(nomination, card);
         card.hidden = !visibility;
+    }
+
+    focus(id: string) {
+        const top = this.root.offsetTop + 8;
+        this.root.scrollTo(
+            0, document.getElementById(`card-${id}`).offsetTop - top
+        );
+    }
+
+    switchView() {
+        this.root.classList.toggle('view-hide');
     }
 };
 
