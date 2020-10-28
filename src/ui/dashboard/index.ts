@@ -122,6 +122,10 @@ class Dashboard extends UIPrototype {
         this.map.resize();
     }
 
+    switchView() {
+        this.root.classList.toggle('view-hide');
+    }
+
     forEach(callback: (card: DashboardPrototype) => void) {
         Object.values(this).forEach(callback);
     }
