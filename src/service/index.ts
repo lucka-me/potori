@@ -45,6 +45,8 @@ export namespace service {
 
     export const nominations: Array<Nomination> = [];    // Nomination list
 
+    export const errors: Array<ErrorEvent> = [];
+
     export const events: ServiceEvents = {
         authStatusChanged:  () => { },
         progressUpdate:     () => { },
@@ -97,6 +99,10 @@ export namespace service {
         mari.events.buffer = (percent) => events.bufferUpdate(percent);
         mari.events.finish = () => final();
         mari.init();
+
+        window.addEventListener('error', (errorEvent) => {
+            errors.push(errorEvent);
+        })
     }
 
     /**
@@ -149,10 +155,10 @@ export namespace service {
         };
 
         // Query locations
-        const listNoLocation: Array<Nomination> = nominations.reduce((list, nomination) => {
+        const listNoLocation = nominations.reduce((list, nomination) => {
             if (!nomination.lngLat) list.push(nomination);
             return list;
-        }, []);
+        }, new Array<Nomination>());
         if (listNoLocation.length < 1) {
             finished();
             return;

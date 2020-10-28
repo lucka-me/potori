@@ -47,18 +47,18 @@ export default class DialogPrototype extends UIPrototype {
     }
 
     /**
-     * Build a hyperlink element
+     * Build a hyperlink elementpm
      * @param href URL
-     * @param title Text to show when mouse hover
-     * @param text Text to display in the link
+     * @param title Text to show when mouse hovers
+     * @param text Text to display in the link, will use `title` if not provided
      */
-    static buildLink(href: string, title: string, text: string): HTMLAnchorElement {
+    static buildLink(href: string, title: string, text?: string): HTMLAnchorElement {
         return eli.build('a', {
             href: href,
             title: title,
             target: '_blank',
             rel: 'noopener',
-            innerHTML: text,
+            innerHTML: text || title,
         });
     }
 }
