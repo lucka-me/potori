@@ -20,7 +20,7 @@
   "license": "MIT",
   "devDependencies": {
     "@firebase/app": "^0.6.12",
-    "@firebase/database": "^0.6.13",
+    "@firebase/database": "^0.7.0",
     "@fortawesome/fontawesome-free": "^5.15.1",
     "@types/chart.js": "^2.9.27",
     "@types/copy-webpack-plugin": "^6.0.0",
