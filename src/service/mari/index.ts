@@ -175,7 +175,7 @@ export default class Mari {
                     }
                     let details: string = error;
                     if ('message' in error) {
-                        const typedError = error.error as Error;
+                        const typedError = error as Error;
                         details = typedError.stack || typedError.message;
                     }
                     this.events.alert(i18next.t('message:service.mari.reportParserError', {
