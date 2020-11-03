@@ -4,6 +4,7 @@ import AboutDialog      from './about';
 import AlertDialog      from './alert';
 import type DetailsDialog   from './details';
 import type ImportDialog    from './import';
+import type MatchDialog     from './match';
 
 import './style.scss';
 
@@ -17,6 +18,7 @@ class Dialog extends UIPrototype {
 
     details:    DetailsDialog   = null;
     import:     ImportDialog    = null;
+    match:      MatchDialog     = null;
 
     init(parent: HTMLElement) {
         super.init(parent);
@@ -45,6 +47,13 @@ class Dialog extends UIPrototype {
         this.import = new ImportDialog.default();
         this.import.init(this.parent);
 
+        // Lazyload MatchDialog
+        const MatchDialog = await import(
+            /* webpackChunkName: 'ui-async' */
+            './match'
+        );
+        this.match = new MatchDialog.default();
+        this.match.init(this.parent);
     }
 }
 

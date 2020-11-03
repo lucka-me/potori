@@ -1,0 +1,16 @@
+{
+    "general": {
+        "title": {
+            "en-US": "Match",
+            "zh-CN": "匹配",
+            "zh-HK": "匹配",
+            "zh-TW": "匹配"
+        },
+        "desc": {
+            "en-US": "Are the nominations below of the same?",
+            "zh-CN": "以下两者是否为同一个提名？",
+            "zh-HK": "以下二者是否為同一個提名？",
+            "zh-TW": "以下二者是否為同一個提名？"
+        }
+    }
+}

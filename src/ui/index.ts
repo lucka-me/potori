@@ -90,6 +90,12 @@ export namespace ui {
         service.events.clear = () => {
             clear();
         };
+        service.events.match = (target, candidate, callback) => {
+            prepare().then(() => {
+                dialog.match.events.close = callback;
+                dialog.match.open(target, candidate);
+            })
+        }
         service.events.alert = (message) => {
             dialog.alert.open(message);
         }

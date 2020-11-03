@@ -13,7 +13,7 @@ import Version from './version';
 
 type BasicCallback = () => void;
 type MessageCallback = (message: string) => void;
-type MatchCallback = (a: Nomination, b: Nomination, callback: (matched: boolean) => void) => void;
+type MatchCallback = (target: Nomination, candidate: Nomination, callback: (matched: boolean) => void) => void;
 
 /**
  * Events for {@link Service}
