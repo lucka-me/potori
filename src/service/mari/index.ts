@@ -160,13 +160,14 @@ export default class Mari {
                 format: 'full',
                 metadataHeaders: 'Subject'
             }).execute((response: gapi.client.Response<gapi.client.gmail.Message>) => {
+                const fullMail = response.result;
                 try {
-                    const nomination = Parser.mail(response.result, keys);
+                    const nomination = Parser.mail(fullMail, keys);
                     this.nominations.push(nomination);
                 } catch (error: Error | any) {
                     let subject = '';
-                    for (let i = 0; i < mail.payload.headers.length; i++) {
-                        const header = mail.payload.headers[i];
+                    for (let i = 0; i < fullMail.payload.headers.length; i++) {
+                        const header = fullMail.payload.headers[i];
                         if (header.name === 'Subject') {
                             subject = header.value;
                             break;
