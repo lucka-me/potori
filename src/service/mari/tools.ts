@@ -40,8 +40,11 @@ export default class Parser {
         for (const part of mail.payload.parts) {
             if (part.partId !== '1') continue;
             const mailBody = this.base64(part.body.data);
-            nomination.image = mailBody.match(/googleusercontent\.com\/[0-9a-zA-Z\-\_]+/)[0].replace('googleusercontent.com/', '');
-            nomination.id = Nomination.parseId(nomination.image);
+            const matchedImages = mailBody.match(/googleusercontent\.com\/[0-9a-zA-Z\-\_]+/);
+            if (matchedImages) {
+                nomination.image = matchedImages[0].replace('googleusercontent.com/', '');
+                nomination.id = Nomination.parseId(nomination.image);
+            }
             if (keys.scanner === 'redacted' && keys.type !== 'pending') {
                 nomination.lngLat = this.lngLat(mailBody);
             }

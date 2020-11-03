@@ -13,6 +13,7 @@ import Version from './version';
 
 type BasicCallback = () => void;
 type MessageCallback = (message: string) => void;
+type MatchCallback = (a: Nomination, b: Nomination) => boolean;
 
 /**
  * Events for {@link Service}
@@ -26,6 +27,8 @@ interface ServiceEvents {
     start   : BasicCallback,    // Triggered when progress bar should show up
     idle    : BasicCallback,    // Triggered when process is finished
     clear   : BasicCallback,    // Triggered when UI should be cleared
+
+    match   : MatchCallback,    // Triggered when a manually matching required
 
     alert   : MessageCallback,  // Triggered when alert raised
     info    : MessageCallback,  // Triggered when some information should be passed to user
@@ -56,6 +59,8 @@ export namespace service {
         start:  () => { },
         idle:   () => { },
         clear:  () => { },
+
+        match:  () => false,
         
         alert:  () => { },
         info:   () => { },
@@ -121,9 +126,21 @@ export namespace service {
      */
     function final() {
         events.start();
+        // Collect broken and pending nominations
+        // Broken nominations are rejected ones without image
+        const brokenNominations: Array<Nomination> = [];
+        const pendingNominations: Array<Nomination> = [];
         // Merge duplicated nominations -> targets
         for (let i = nominations.length - 1; i >= 0; i--) {
             const current = nominations[i];
+            if (current.id.length < 1) {
+                brokenNominations.push(current);
+                nominations.splice(i, 1);
+                continue;
+            }
+            if (current.status.code === 0) {
+                pendingNominations.push(current);
+            }
 
             for (let j = 0; j < i; j++) {
                 if (current.id !== nominations[j].id) continue;
@@ -139,6 +156,18 @@ export namespace service {
                     target.resultMailId = current.resultMailId;
                 }
                 nominations.splice(i, 1);
+                break;
+            }
+        }
+
+        // Manually match the broken nominations
+        for (const broken of brokenNominations) {
+            for (const pending of pendingNominations) {
+                if (broken.title !== pending.title) continue;
+                if (!events.match(pending, broken)) continue;
+                pending.status = broken.status;
+                pending.resultTime = broken.resultTime;
+                pending.resultMailId = broken.resultMailId;
                 break;
             }
         }
