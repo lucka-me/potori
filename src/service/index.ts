@@ -13,7 +13,7 @@ import Version from './version';
 
 type BasicCallback = () => void;
 type MessageCallback = (message: string) => void;
-type MatchCallback = (a: Nomination, b: Nomination) => boolean;
+type MatchCallback = (a: Nomination, b: Nomination, callback: (matched: boolean) => void) => void;
 
 /**
  * Events for {@link Service}
@@ -32,6 +32,14 @@ interface ServiceEvents {
 
     alert   : MessageCallback,  // Triggered when alert raised
     info    : MessageCallback,  // Triggered when some information should be passed to user
+}
+
+/**
+ * Item for manually matching
+ */
+interface MatchItem {
+    target: Nomination,             // The broken nomination, should be rejected and missing image
+    candidates: Array<Nomination>,  // Candidates, pending, early than target and with same title
 }
 
 /**
@@ -60,7 +68,7 @@ export namespace service {
         idle:   () => { },
         clear:  () => { },
 
-        match:  () => false,
+        match:  () => { },
         
         alert:  () => { },
         info:   () => { },
@@ -102,7 +110,7 @@ export namespace service {
         mari.events.alert = (message) => events.alert(message);
         mari.events.progress = (percent) => events.progressUpdate(percent * 0.9);
         mari.events.buffer = (percent) => events.bufferUpdate(percent);
-        mari.events.finish = () => final();
+        mari.events.finish = () => arrange();
         mari.init();
 
         window.addEventListener('error', (errorEvent) => {
@@ -122,29 +130,30 @@ export namespace service {
     }
 
     /**
-     * Final process, merge duplicated nominations, sort and query locations
+     * Arrange nominations, merge duplicated nominations
+     * Next step is {@link sort}
      */
-    function final() {
+    function arrange() {
         events.start();
         // Collect broken and pending nominations
-        // Broken nominations are rejected ones without image
-        const brokenNominations: Array<Nomination> = [];
+        const matchQueue: Array<MatchItem> = [];
         const pendingNominations: Array<Nomination> = [];
         // Merge duplicated nominations -> targets
         for (let i = nominations.length - 1; i >= 0; i--) {
             const current = nominations[i];
             if (current.id.length < 1) {
-                brokenNominations.push(current);
+                matchQueue.push({
+                    target: current,
+                    candidates: []
+                });
                 nominations.splice(i, 1);
                 continue;
             }
-            if (current.status.code === 0) {
-                pendingNominations.push(current);
-            }
 
+            let pending = current.status.code === 0;
             for (let j = 0; j < i; j++) {
-                if (current.id !== nominations[j].id) continue;
                 const target = nominations[j];
+                if (current.id !== target.id) continue;
                 if (target.resultMailId) {
                     target.confirmedTime = current.confirmedTime;
                     target.confirmationMailId = current.confirmationMailId;
@@ -156,29 +165,77 @@ export namespace service {
                     target.resultMailId = current.resultMailId;
                 }
                 nominations.splice(i, 1);
+                pending = true;
                 break;
+            }
+
+            if (pending) {
+                pendingNominations.push(current);
             }
         }
 
-        // Manually match the broken nominations
-        for (const broken of brokenNominations) {
+        // Find out candidates
+        for (const item of matchQueue) {
             for (const pending of pendingNominations) {
-                if (broken.title !== pending.title) continue;
-                if (!events.match(pending, broken)) continue;
-                pending.status = broken.status;
-                pending.resultTime = broken.resultTime;
-                pending.resultMailId = broken.resultMailId;
-                break;
+                if (item.target.title !== pending.title) continue;
+                if (item.target.resultTime < pending.confirmedTime) continue;
+                item.candidates.push(pending);
             }
         }
 
-        // Sort by time
+        manuallyMatch(matchQueue);
+    }
+
+    /**
+     * Match the first target in queue and first candidate in its cadidates
+     * Next step is {@link sort}
+     * @param queue Queue to match
+     */
+    function manuallyMatch(queue: Array<MatchItem>) {
+        if (queue.length < 1) sort();
+        const item = queue[0];
+        if (item.candidates.length < 1) {
+            queue.shift();
+            manuallyMatch(queue);
+        }
+        const candidate = item.candidates[0];
+        events.match(item.target, candidate, (matched) => {
+            if (matched) {
+                candidate.status = item.target.status;
+                candidate.resultTime = item.target.resultTime;
+                candidate.resultMailId = item.target.resultMailId;
+                queue.shift();
+                for (const item of queue) {
+                    const index = item.candidates.indexOf(candidate);
+                    if (index < 0) continue;
+                    item.candidates.splice(index, 1);
+                }
+            } else {
+                item.candidates.shift();
+            }
+            manuallyMatch(queue);
+        });
+    }
+
+    /**
+     * Sort nominations by result time or confirmed time
+     * Next step is {@link queryLocation}
+     */
+    function sort() {
         nominations.sort((a, b) => {
             const timeA = a.resultTime ? a.resultTime : a.confirmedTime;
             const timeB = b.resultTime ? b.resultTime : b.confirmedTime;
             return timeA < timeB ? 1 : -1;
         });
 
+        queryLocation();
+    }
+
+    /**
+     * Query locations
+     * Next step is {@link event.idle}
+     */
+    function queryLocation() {
         const finished = () => {
             events.idle();
         };
@@ -221,7 +278,7 @@ export namespace service {
             if (resultNominations.matched) {
                 nominations.length = 0;
                 nominations.push(...resultNominations.nominations);
-                final();
+                arrange();
                 return;
             }
             const resultBsData = Parser.bsData(content);
