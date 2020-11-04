@@ -113,7 +113,7 @@ class MatchDialog extends DialogPrototype {
         }, [
             eli.build('img', {
                 cssText: cssTextImg,
-                src: nomination.imageUrl.length > 0 ? nomination.imageUrl : 'https://wayfarer.nianticlabs.com/img/missing_image.png'
+                src: nomination.image.length > 0 ? nomination.imageUrl : 'https://wayfarer.nianticlabs.com/img/missing_image.png'
             }),
             eli.build('div', {
                 className: [
