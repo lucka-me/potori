@@ -192,11 +192,15 @@ export namespace service {
      * @param queue Queue to match
      */
     function manuallyMatch(queue: Array<MatchItem>) {
-        if (queue.length < 1) sort();
+        if (queue.length < 1) {
+            sort();
+            return;
+        }
         const item = queue[0];
         if (item.candidates.length < 1) {
             queue.shift();
             manuallyMatch(queue);
+            return;
         }
         const candidate = item.candidates[0];
         events.match(item.target, candidate, (matched) => {
