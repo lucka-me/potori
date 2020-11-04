@@ -5,6 +5,10 @@
   "main": "src/potori.ts",
   "scripts": {
     "postinstall": "TS_NODE_PROJECT=\"tsconfig-scripts.json\" ts-node ./scripts/build-locales.ts",
+    "prestart": "TS_NODE_PROJECT=\"tsconfig-scripts.json\" ts-node ./scripts/build-locales.ts",
+    "predev": "TS_NODE_PROJECT=\"tsconfig-scripts.json\" ts-node ./scripts/build-locales.ts",
+    "prebuild": "TS_NODE_PROJECT=\"tsconfig-scripts.json\" ts-node ./scripts/build-locales.ts",
+
     "start": "TS_NODE_PROJECT=\"tsconfig-scripts.json\" webpack serve",
     "dev": "TS_NODE_PROJECT=\"tsconfig-scripts.json\" webpack --mode development",
     "build": "TS_NODE_PROJECT=\"tsconfig-scripts.json\" webpack --mode production",
