@@ -184,7 +184,9 @@ class NominationCard {
     static update(nomination: Nomination, card: HTMLDivElement) {
         const boxResult = card.querySelector('#box-card-nomination-result') as HTMLSpanElement;
         const type = service.status.getTypeByCode(nomination.status.code);
-        card.querySelector('#text-card-nomination-interval').innerHTML = nomination.intervalString;
+        if (nomination.confirmedTime > 0) {
+            card.querySelector('#text-card-nomination-interval').innerHTML = nomination.intervalString;
+        }
         if (nomination.status.code > 0) {
             boxResult.hidden = false;
             boxResult.querySelector('i').innerHTML = service.status.types.get(type).icon;
