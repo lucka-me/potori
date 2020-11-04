@@ -12,12 +12,6 @@
             "zh-HK": "以下二者是否為同一個提名？",
             "zh-TW": "以下二者是否為同一個提名？"
         },
-        "missing": {
-            "en-US": "Missing",
-            "zh-CN": "缺失",
-            "zh-HK": "缺失",
-            "zh-TW": "缺失"
-        },
         "yes": {
             "en-US": "Yes",
             "zh-CN": "是",

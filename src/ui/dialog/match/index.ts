@@ -76,7 +76,7 @@ class MatchDialog extends DialogPrototype {
             eli.icon('&#xf062'),
             eli.build('span', {
                 className: 'margin-l--4',
-                innerHTML: nomination.confirmedTime > 0 ? nomination.confirmedDateString : i18next.t('ui.dialog.match.missing'),
+                innerHTML: nomination.confirmedDateString,
             }),
         ]));
         if (nomination.status.code > 0) {

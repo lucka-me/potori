@@ -63,7 +63,10 @@ export default class Nomination {
      * Get the string of confirmedTime
      */
     get confirmedDateString(): string {
-        return new Date(this.confirmedTime).toLocaleDateString();
+        if (this.confirmedTime > 0) {
+            return new Date(this.confirmedTime).toLocaleDateString();
+        }
+        return i18next.t('service.nomination.missing');
     }
 
     /**

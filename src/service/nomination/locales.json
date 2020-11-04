@@ -8,6 +8,12 @@
         },
         "day_plural": {
             "en-US": "{{count}} days"
+        },
+        "missing": {
+            "en-US": "Missing",
+            "zh-CN": "缺失",
+            "zh-HK": "缺失",
+            "zh-TW": "缺失"
         }
     },
     "message": {
