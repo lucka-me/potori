@@ -49,11 +49,11 @@ class NominationCard {
         }
         contentsInfo.push(eli.build('span', {
             className: classNameInfoContent,
+            id: 'box-card-nomination-interval'
         }, [
             eli.icon('&#xf017'),
             eli.build('span', {
                 className: 'margin-l--4',
-                id: 'text-card-nomination-interval',
             }),
         ]));
         contentsInfo.push(eli.build('span', {
@@ -182,11 +182,15 @@ class NominationCard {
     }
 
     static update(nomination: Nomination, card: HTMLDivElement) {
+        const boxInterval = card.querySelector('#box-card-nomination-interval') as HTMLSpanElement;
+        if (nomination.confirmedTime > 0) {
+            boxInterval.hidden = false;
+            boxInterval.querySelector('span').innerHTML = nomination.intervalString;
+        } else {
+            boxInterval.hidden = true;
+        }
         const boxResult = card.querySelector('#box-card-nomination-result') as HTMLSpanElement;
         const type = service.status.getTypeByCode(nomination.status.code);
-        if (nomination.confirmedTime > 0) {
-            card.querySelector('#text-card-nomination-interval').innerHTML = nomination.intervalString;
-        }
         if (nomination.status.code > 0) {
             boxResult.hidden = false;
             boxResult.querySelector('i').innerHTML = service.status.types.get(type).icon;
