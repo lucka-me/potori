@@ -69,21 +69,24 @@ class CountByMonthCard extends DashboardChartProtorype {
         let min = moment(nominations[0].confirmedTime).startOf('month').valueOf();
         let max = min;
         for (const nomination of nominations) {
-            const sub = moment(nomination.confirmedTime).startOf('month').valueOf();
-            if (sub < min) min = sub;
-            else if (sub > max) max = sub;
-            if (mapSub.has(sub)) {
-                mapSub.set(sub, mapSub.get(sub) + 1);
-            } else {
-                mapSub.set(sub, 1);
+            if (nomination.confirmedTime > 0) {
+                const sub = moment(nomination.confirmedTime).startOf('month').valueOf();
+                if (sub < min) min = sub;
+                else if (sub > max) max = sub;
+                if (mapSub.has(sub)) {
+                    mapSub.set(sub, mapSub.get(sub) + 1);
+                } else {
+                    mapSub.set(sub, 1);
+                }
             }
-            if (!nomination.resultTime) continue;
-            const ret = moment(nomination.resultTime).startOf('month').valueOf();
-            if (ret > max) max = ret;
-            if (mapRet.has(ret)) {
-                mapRet.set(ret, mapRet.get(ret) + 1);
-            } else {
-                mapRet.set(ret, 1);
+            if (nomination.resultTime > 0) {
+                const ret = moment(nomination.resultTime).startOf('month').valueOf();
+                if (ret > max) max = ret;
+                if (mapRet.has(ret)) {
+                    mapRet.set(ret, mapRet.get(ret) + 1);
+                } else {
+                    mapRet.set(ret, 1);
+                }
             }
         }
         // Fill the empty months
