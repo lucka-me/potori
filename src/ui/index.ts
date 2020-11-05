@@ -298,10 +298,6 @@ export namespace ui {
         dialog.details.events.update = (nomination) => {
             update(nomination);
         };
-        dialog.details.map.events.alert = (message) => {
-            dialog.alert.message = message;
-            dialog.alert.open();
-        };
 
         list.events.openDetails = (nomination) => {
             dialog.details.open(nomination);

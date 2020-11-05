@@ -25,19 +25,19 @@ class DetailsDialog extends DialogPrototype {
 
     nomination: Nomination = null;
 
-    headingTitle: HTMLHeadingElement = null;
-    image: HTMLImageElement = null;
-    textConfirmedTime: HTMLSpanElement = null;
+    private headingTitle: HTMLHeadingElement = null;
+    private image: HTMLImageElement = null;
+    private textConfirmedTime: HTMLSpanElement = null;
 
-    status = new Map<string, MDCRadio>();
-    selectedStatus: string = null;
-    fieldResultTime: MDCTextField = null;
+    private status = new Map<string, MDCRadio>();
+    private selectedStatus: string = null;
+    private fieldResultTime: MDCTextField = null;
 
     private blockReason: HTMLDivElement = null;
     private fieldReason: MDCTextField = null;
     private chipSetReason: MDCChipSet = null;
 
-    map = new DetailsDialogMap();
+    private map = new DetailsDialogMap();
 
     events: DetailsDialogEvents = {
         alert       : () => { },
@@ -215,6 +215,7 @@ class DetailsDialog extends DialogPrototype {
             this.blockReason
         ]);
         this.map.init(elementContents);
+        this.map.events.alert = (message) => this.events.alert(message);
         this.map.events.queryLngLat = (succeed, failed) => {
             this.events.query(this.nomination, (data) => {
                 succeed({
