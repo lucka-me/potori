@@ -18,7 +18,7 @@ interface AboutDialogEvents {
 /**
  * Dialog to show Potori information
  */
-class AboutDialog extends DialogPrototype {
+export default class AboutDialog extends DialogPrototype {
 
     events: AboutDialogEvents = {
         info: () => { },
@@ -106,5 +106,3 @@ class AboutDialog extends DialogPrototype {
         }));
     }
 };
-
-export default AboutDialog;
