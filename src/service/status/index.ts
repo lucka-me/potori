@@ -24,11 +24,8 @@ export class Status {
     }
 
     isType(type: number): boolean {
-        if (type < 101) {
-            return this.code === type;
-        } else {
-            return this.code > 100;
-        }
+        if (type < 101) return this.code === type;
+        return this.code > 100;
     }
 }
 
