@@ -6,12 +6,7 @@ export const Action = {
 };
 
 export const Icon = {
-    arrowUp:        '\uf062',
-    brain:          '\uf5dc',
-    clock:          '\uf017',
-    globe:          '\uf0ac',
-    mapMarkerAlt:   '\uf3c5',
-    redoAlt:        '\uf2f9',
+    arrowUp: '\uf062',
 };
 
 export const Link = {
