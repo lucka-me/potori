@@ -11,12 +11,12 @@ export const ClassName = {
 };
 
 export const Icon = {
-    arrowUp:    '&#xf062',
-    brain:  '&#xf5dc',
-    clock:  '&#xf017',
-    globe:  '&#xf0ac',
-    mapMarkerAlt:   '&#xf3c5',
-    redoAlt:    '&#xf2f9',
+    arrowUp:        '\uf062',
+    brain:          '\uf5dc',
+    clock:          '\uf017',
+    globe:          '\uf0ac',
+    mapMarkerAlt:   '\uf3c5',
+    redoAlt:        '\uf2f9',
 };
 
 export const StringKey = {
