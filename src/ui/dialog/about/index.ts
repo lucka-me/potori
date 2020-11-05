@@ -7,6 +7,8 @@ import DialogPrototype from 'ui/dialog/base';
 
 import './style.scss';
 
+import { Link, StringKey } from './constants';
+
 type MessageCallback = (message: string) => void;
 
 interface AboutDialogEvents {
@@ -24,47 +26,38 @@ class AboutDialog extends DialogPrototype {
 
     render() {
         const elementExportError = DialogPrototype.buildLink(
-            '#', i18next.t('ui.dialog.about.exportError'),
+            '#', i18next.t(StringKey.exportError),
         );
         elementExportError.onclick = () => {
             this.exportError();
             return false;
         }
-        const element = DialogPrototype.buildDialog('', [
+        const element = DialogPrototype.buildDialog('about-dialog', [
             eli.build('h2', {
                 className: 'mdc-dialog__title',
-                innerHTML: i18next.t('ui.dialog.about.title')
+                innerHTML: i18next.t(StringKey.title)
             }),
             eli.build('div', {
-                className: 'mdc-dialog__content flex-box-col',
+                className: 'mdc-dialog__content',
             }, [
-                eli.build('span', {
-                    className: 'mdc-typography--body2',
-                }, [
+                eli.build('span', { }, [
                     DialogPrototype.buildLink(
-                        './docs', i18next.t('ui.dialog.about.documents'),
+                        Link.documents, i18next.t(StringKey.documents),
                     )
                 ]),
-                eli.build('span', {
-                    className: 'mdc-typography--body2',
-                }, [
+                eli.build('span', { }, [
                     DialogPrototype.buildLink(
-                        'https://github.com/lucka-me/potori',
-                        i18next.t('ui.dialog.about.repo')
+                        Link.repo, i18next.t(StringKey.repo)
                     ),
                 ]),
-                eli.build('span', {
-                    className: 'mdc-typography--body2',
-                }, [
+                eli.build('span', { }, [
                     DialogPrototype.buildLink(
-                        'https://github.com/lucka-me/potori/blob/master/CHANGELOG.md',
-                        i18next.t('ui.dialog.about.changelog'),
+                        Link.changelog,
+                        i18next.t(StringKey.changelog),
                         service.version.string
                     ),
                 ]),
-                eli.build('span', {
-                    className: 'mdc-typography--body2',
-                }, [ elementExportError ]),
+                eli.build('span', { }, [ elementExportError ]),
             ]),
             eli.build('footer', {
                 className: 'mdc-dialog__actions',
@@ -89,7 +82,7 @@ class AboutDialog extends DialogPrototype {
      */
     private exportError() {
         if (service.errors.length < 1) {
-            this.events.info(i18next.t('message:ui.dialog.about.exportErrorEmpty'));
+            this.events.info(i18next.t(StringKey.messageExportErrorEmpty));
             return;
         }
         let message = '';
@@ -108,7 +101,7 @@ class AboutDialog extends DialogPrototype {
         textarea.select();
         document.execCommand('copy');
         textarea.remove();
-        this.events.info(i18next.t('message:ui.dialog.about.exportErrorCopied', {
+        this.events.info(i18next.t(StringKey.messageExportErrorCopied, {
             count: service.errors.length
         }));
     }

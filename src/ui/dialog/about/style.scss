@@ -1,6 +1,9 @@
-@use '@material/button';
-@use '@material/dialog';
-@use '@material/typography/mdc-typography';
+@use '@material/typography';
 
-@include button.core-styles;
-@include dialog.core-styles;
+.about-dialog {
+    .mdc-dialog__content {
+        display: flex;
+        flex-flow: column nowrap;
+        @include typography.typography(body2);
+    }
+}
