@@ -5,6 +5,8 @@ import { service } from 'service';
 import Nomination from 'service/nomination';
 import UIPrototype from 'ui/base';
 
+import './style.scss';
+
 import NominationCard, { NominationCardEvents } from './card';
 
 interface ListViewEvents {
@@ -30,26 +32,13 @@ class ListView extends UIPrototype {
     }
 
     render() {
-        this.root = eli.build('div', {
-            className: [
-                'flex--1',
-                'flex-box-col',
-                'view-hide',
-            ].join(' '),
-            cssText: [
-                'height: 100%',
-                'min-width: 300px',
-                'padding: 4px',
-                'box-sizing: border-box',
-                'overflow-y: auto',
-                'scroll-behavior: smooth',
-                '-webkit-overflow-scrolling: touch',
-            ].join(';'),
-        });
+        this.root = eli.build('div', { className: 'list-view view-hide' });
         this.parent.append(this.root);
     }
 
-    clear() { this.root.innerHTML = ''; }
+    clear() {
+        this.root.innerHTML = '';
+    }
 
     show(nominations: Array<Nomination>) {
         this.clear();
@@ -69,9 +58,8 @@ class ListView extends UIPrototype {
 
     focus(id: string) {
         const top = this.root.offsetTop + 8;
-        this.root.scrollTo(
-            0, document.getElementById(`card-${id}`).offsetTop - top
-        );
+        const card = this.root.querySelector(`#card-${id}`) as HTMLDivElement;
+        this.root.scrollTo(0, card.offsetTop - top);
     }
 
     switchView() {
@@ -90,7 +78,8 @@ class ListView extends UIPrototype {
                     window.open(nomination.bsUrl, '_blank', 'noopener');
                 } else {
                     const textarea = eli.build('textarea', {
-                        value: nomination.id, readOnly: true
+                        value: nomination.id,
+                        readOnly: true
                     });
                     document.body.append(textarea);
                     textarea.select();
