@@ -3,10 +3,14 @@ import { MDCDialog } from '@material/dialog';
 
 import { eli } from 'ui/eli';
 import { service } from 'service';
+import Nomination from 'service/nomination';
+
 import DialogPrototype from 'ui/dialog/base';
 
 import './style.scss';
-import Nomination from 'service/nomination';
+
+import { Action, Icon, Link, StringKey } from './constants';
+
 
 type CloseCallback = (matched: boolean) => void;
 
@@ -27,25 +31,25 @@ class MatchDialog extends DialogPrototype {
 
     render() {
         this.content = eli.build('div', {
-            className: 'mdc-dialog__content flex-box-col',
+            className: 'mdc-dialog__content',
         });
-        const element = DialogPrototype.buildDialog('', [
+        const element = DialogPrototype.buildDialog('match-dialog', [
             eli.build('h2', {
                 className: 'mdc-dialog__title',
-                innerHTML: i18next.t('ui.dialog.match.title')
+                innerHTML: i18next.t(StringKey.title)
             }),
             this.content,
             eli.build('footer', {
                 className: 'mdc-dialog__actions',
             }, [
-                DialogPrototype.buildDialogAction('no', i18next.t('ui.dialog.match.no')),
-                DialogPrototype.buildDialogAction('yes', i18next.t('ui.dialog.match.yes'))
+                DialogPrototype.buildDialogAction(Action.no, i18next.t(StringKey.no)),
+                DialogPrototype.buildDialogAction(Action.yes, i18next.t(StringKey.yes))
             ]),
         ]);
         this.parent.append(element);
         this.ctrl = new MDCDialog(element);
         this.ctrl.listen('MDCDialog:closed', (event: CustomEvent) => {
-            this.events.close(event.detail.action === 'yes');
+            this.events.close(event.detail.action === Action.yes);
         });
     }
 
@@ -56,7 +60,7 @@ class MatchDialog extends DialogPrototype {
         if (!this.ctrl) this.render();
 
         this.content.innerHTML = '';
-        this.content.append(i18next.t('ui.dialog.match.desc'));
+        this.content.append(i18next.t(StringKey.desc));
         this.buildBlock(target);
         this.buildBlock(candidate);
 
@@ -64,75 +68,43 @@ class MatchDialog extends DialogPrototype {
     }
 
     private buildBlock(nomination: Nomination) {
-        const classNameInfo = [
-            'margin-r--8',
-            'flex-box-row--nowrap',
-            'flex-align-items--center',
-        ].join(' ');
-        const info = [];
-        info.push(eli.build('span', {
-            className: classNameInfo,
-        }, [
-            eli.icon('&#xf062'),
-            eli.build('span', {
-                className: 'margin-l--4',
-                innerHTML: nomination.confirmedDateString,
-            }),
-        ]));
+        const details = [];
+        this.buildDetail(Icon.arrowUp, nomination.confirmedDateString);
         if (nomination.status.code > 0) {
             const type = nomination.status.type;
-            info.push(eli.build('span', {
-                className: classNameInfo,
-            }, [
-                eli.icon(service.status.types.get(type).icon),
-                eli.build('span', {
-                    className: 'margin-l--4',
-                    innerHTML: nomination.resultDateString
-                }),
-            ]));
-            info.push(eli.build('span', {
-                className: `${classNameInfo} status-${type}`,
-            }, [
-                eli.icon(nomination.status.icon),
-                eli.build('span', {
-                    className: 'margin-l--4',
-                    innerHTML: i18next.t(nomination.status.title)
-                }),
-            ]));
+            details.push(this.buildDetail(
+                service.status.types.get(type).icon, nomination.resultDateString
+            ));
+            const elementResult = this.buildDetail(
+                nomination.status.icon, i18next.t(nomination.status.title)
+            );
+            elementResult.classList.add(`status-${type}`);
+            details.push(elementResult);
         }
-        const cssTextImg = [
-            'object-fit: cover',
-            'object-position: center',
-            'width: 120px',
-            'min-width: 120px',
-            'height: 120px',
-            'min-height: 120px',
-        ].join(';');
         const element = eli.build('div', {
-            className: 'margin-v--8 flex-box-row--nowrap'
+            className: 'nomination-block'
         }, [
             eli.build('img', {
-                cssText: cssTextImg,
-                src: nomination.image.length > 0 ? nomination.imageUrl : 'https://wayfarer.nianticlabs.com/img/missing_image.png'
+                src: nomination.image.length > 0 ? nomination.imageUrl : Link.missing
             }),
-            eli.build('div', {
-                className: [
-                    'padding--8',
-                    'flex-box--col',
-                    'flex-align-items--start',
-                    'flex-justify-content--start'
-                ].join(' '),
-            }, [
-                eli.build('span', {
-                    className: 'mdc-typography--headline6',
-                    innerHTML: nomination.title,
-                }),
-                eli.build('div', {
-                    className: 'mdc-typography--body2 flex-box-row--wrap',
-                }, info),
+            eli.build('div', {  }, [
+                eli.build('span', { innerHTML: nomination.title }),
+                eli.build('div', { }, details),
             ]),
         ]);
         this.content.append(element);
+    }
+
+    /**
+     * Build a detail block
+     * @param icon Icon of the detail
+     * @param text Text to display
+     */
+    private buildDetail(icon: string, text: string): HTMLSpanElement {
+        return eli.build('span', { }, [
+            eli.icon(icon),
+            eli.build('span', { innerHTML: text }),
+        ]);
     }
 };
 
