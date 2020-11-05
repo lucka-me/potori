@@ -10,23 +10,28 @@ import { eli } from 'ui/eli';
 import { service } from 'service';
 import DialogPrototype from 'ui/dialog/base';
 import Nomination from 'service/nomination';
+import { QueryFailReason } from 'service/brainstorming';
 
 import DetailsDialogMap from './map';
 
 import './style.scss';
 
+type MessageCallback = (message: string) => void;
+type QuerySucceedCallback = (data: any) => void;
+type QueryFailCallback = (reason: QueryFailReason) => void;
+type QueryCallback = (nomination: Nomination, succeed: QuerySucceedCallback, failed: QueryFailCallback) => void;
+type UpdateCallback = (nomination: Nomination) => void;
+
 interface DetailsDialogEvents {
-    alert: (message: string) => void;
-    query: (nomination: Nomination, succeed: (data: any) => void, failed: (message: string) => void) => void;
-    update: (nomination: Nomination) => void;
+    alert: MessageCallback;
+    query: QueryCallback;
+    update: UpdateCallback;
 }
 
 class DetailsDialog extends DialogPrototype {
 
     nomination: Nomination = null;
 
-    private headingTitle: HTMLHeadingElement = null;
-    private image: HTMLImageElement = null;
     private textConfirmedTime: HTMLSpanElement = null;
 
     private status = new Map<string, MDCRadio>();
@@ -46,23 +51,7 @@ class DetailsDialog extends DialogPrototype {
     };
 
     render() {
-        this.headingTitle = eli.build('h2', {
-            className: 'mdc-dialog__title',
-            dataset: { mdcDialogInitialFocus: '' },
-            innerHTML: '',
-        });
-
-        this.image = eli.build('img', {
-            cssText: [
-                'object-fit:cover', 'object-position:center',
-                'width:100%', 'height:150px;'
-            ].join(';')
-        });
-
-        this.textConfirmedTime = eli.build('span', {
-            className: 'margin-l--4'
-        });
-
+        // Status form
         const statusRadios: Array<HTMLDivElement> = [];
         for (const key of service.status.types.keys()) {
             const radioId = `radio-dialog-details-status-${key}`;
@@ -110,12 +99,9 @@ class DetailsDialog extends DialogPrototype {
             statusRadios.push(elementField);
         }
 
+        // Result time
         const elementResultTime = DetailsDialog.buildTextField(
-            'input-dialog-details-result-time',
-            'fullwidth',
-            '\uf073',
-            i18next.t('ui.dialog.details.resultTime'),
-            'datetime-local'
+            'result-time', '\uf073', i18next.t('ui.dialog.details.resultTime'), 'datetime-local'
         );
         
         this.fieldResultTime = new MDCTextField(elementResultTime);
@@ -123,11 +109,7 @@ class DetailsDialog extends DialogPrototype {
         // Reason block
         // Text field
         const elementReason = DetailsDialog.buildTextField(
-            'input-dialog-details-reason',
-            'flex--1',
-            '',
-            i18next.t('ui.dialog.details.reason'),
-            'text'
+            'reason', '', i18next.t('ui.dialog.details.reason'), 'text'
         );
         this.fieldReason = new MDCTextField(elementReason);
         this.fieldReason.disabled = true
@@ -191,26 +173,16 @@ class DetailsDialog extends DialogPrototype {
             });
         });
 
+        this.textConfirmedTime = eli.build('span', { });
+
         // Dialog content
         const elementContents = eli.build('div', {
             className: 'mdc-dialog__content',
         }, [
-            eli.build('div', {
-                className: [
-                    'mdc-typography--body1',
-                    'flex-box-row--nowrap',
-                    'flex-align-items--center'
-                ].join(' '),
-            }, [
-                eli.icon('&#xf062'), this.textConfirmedTime,
+            eli.build('div', { className: 'confirmed-time' }, [
+                eli.icon('&#xf062'), this.textConfirmedTime
             ]),
-            eli.build('div', {
-                className: [
-                    'fullwidth',
-                    'flex-box-row--nowrap',
-                    'flex-justify-content--around'
-                ].join(' '),
-            }, statusRadios),
+            eli.build('div', { className: 'status-form' }, statusRadios),
             elementResultTime,
             this.blockReason
         ]);
@@ -224,9 +196,13 @@ class DetailsDialog extends DialogPrototype {
                 });
             }, failed);
         };
-        const elementDialog = DialogPrototype.buildDialog('', [
-            this.headingTitle,
-            this.image,
+        const elementDialog = DialogPrototype.buildDialog('details-dialog', [
+            eli.build('h2', {
+                className: 'mdc-dialog__title',
+                dataset: { mdcDialogInitialFocus: '' },
+                innerHTML: '',
+            }),
+            eli.build('img', { }),
             elementContents,
             eli.build('footer', {
                 className: 'mdc-dialog__actions',
@@ -304,8 +280,8 @@ class DetailsDialog extends DialogPrototype {
         this.map.lngLat = nomination.lngLat;
         const type = nomination.status.type;
 
-        this.headingTitle.innerHTML = nomination.title;
-        this.image.src = nomination.imageUrl;
+        this.ctrl.root.querySelector('.mdc-dialog__title').innerHTML = nomination.title;
+        this.ctrl.root.querySelector('img').src = nomination.imageUrl;
         this.textConfirmedTime.innerHTML = new Date(nomination.confirmedTime).toLocaleString();
 
         (this.fieldResultTime.root as HTMLElement).hidden = (type === 'pending');
@@ -362,16 +338,16 @@ class DetailsDialog extends DialogPrototype {
         ]);
     }
 
-    static buildTextField(
-        id: string, extraClassName: string, icon: string, label: string, type: string
+    private static buildTextField(
+        name: string, icon: string, label: string, type: string
     ): HTMLDivElement {
+        const id = `input-dialog-details-result-time-${name}`;
         return eli.build('div', {
             className: [
                 'mdc-text-field',
                 'mdc-text-field--outlined',
                 'mdc-text-field--with-leading-icon',
-                'margin-v--8',
-                extraClassName,
+                name,
             ].join(' '),
         }, [
             eli.build('i', {

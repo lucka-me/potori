@@ -1,14 +1,52 @@
 @use '@material/chips/mdc-chips';
-@use '@material/dialog';
 @use '@material/form-field';
-@use '@material/icon-button';
 @use '@material/radio';
-@use '@material/typography/mdc-typography';
+@use '@material/typography';
 
-@include dialog.core-styles;
 @include form-field.core-styles;
-@include icon-button.core-styles;
 @include radio.core-styles;
+
+.details-dialog {
+    img {
+        object-fit: cover;
+        object-position: center;
+        width: 100%;
+        height:150px;
+    }
+
+    .mdc-dialog__content {
+        > .confirmed-time {
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+            @include typography.typography(body1);
+
+            > .span {
+                margin-left: 4px;
+            }
+        }
+
+        > .status-form {
+            width: 100%;
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: space-around;
+        }
+
+        > .mdc-text-field {
+            margin-top: 8px;
+            margin-bottom: 8px;
+        }
+
+        > .mdc-text-field.result-time {
+            width: 100%;
+        }
+
+        > .mdc-text-field.reason {
+            flex: 1;
+        }
+    }
+}
 
 @media (prefers-color-scheme: dark) {
     .mdc-radio__native-control:enabled:not(:checked)+.mdc-radio__background .mdc-radio__outer-circle {
