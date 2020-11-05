@@ -45,7 +45,7 @@ class ImportDialog extends DialogPrototype {
                 eli.build('div', { className: 'mdc-notched-outline__trailing' }),
             ]),
         ]);
-        const elementDialog = DialogPrototype.buildDialog([
+        const elementDialog = DialogPrototype.buildDialog('', [
             eli.build('h2', {
                 className: 'mdc-dialog__title',
                 innerHTML: i18next.t('ui.dialog.import.title')

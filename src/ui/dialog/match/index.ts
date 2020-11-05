@@ -29,7 +29,7 @@ class MatchDialog extends DialogPrototype {
         this.content = eli.build('div', {
             className: 'mdc-dialog__content flex-box-col',
         });
-        const element = DialogPrototype.buildDialog([
+        const element = DialogPrototype.buildDialog('', [
             eli.build('h2', {
                 className: 'mdc-dialog__title',
                 innerHTML: i18next.t('ui.dialog.match.title')

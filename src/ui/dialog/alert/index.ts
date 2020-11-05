@@ -17,7 +17,7 @@ export default class AlertDialog extends DialogPrototype {
         this.textMessage = eli.build('div', {
             className: 'mdc-dialog__content',
         });
-        const element = DialogPrototype.buildDialog([
+        const element = DialogPrototype.buildDialog('', [
             this.textMessage,
             eli.build('footer', { className: 'mdc-dialog__actions' }, [
                 DialogPrototype.buildDialogAction('close', i18next.t('ui.dialog.close'))

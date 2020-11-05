@@ -30,7 +30,7 @@ class AboutDialog extends DialogPrototype {
             this.exportError();
             return false;
         }
-        const element = DialogPrototype.buildDialog([
+        const element = DialogPrototype.buildDialog('', [
             eli.build('h2', {
                 className: 'mdc-dialog__title',
                 innerHTML: i18next.t('ui.dialog.about.title')

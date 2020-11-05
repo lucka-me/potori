@@ -215,7 +215,7 @@ class DetailsDialog extends DialogPrototype {
             this.blockReason
         ]);
         this.map.init(elementContents);
-        const elementDialog = DialogPrototype.buildDialog([
+        const elementDialog = DialogPrototype.buildDialog('', [
             this.headingTitle,
             this.image,
             elementContents,

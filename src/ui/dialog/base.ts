@@ -17,9 +17,9 @@ export default class DialogPrototype extends UIPrototype {
      * @param contents Elements inside dialog
      * @returns The dialog element
      */
-    static buildDialog(contents: Array<HTMLElement>): HTMLDivElement {
+    static buildDialog(className: string, contents: Array<HTMLElement>): HTMLDivElement {
         return eli.build('div', {
-            className: 'mdc-dialog',
+            className: `mdc-dialog ${className}`,
             role: 'dialog',
             ariaModal: true,
         }, [

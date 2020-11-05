@@ -22,10 +22,8 @@ class Dialog extends UIPrototype {
 
     init(parent: HTMLElement) {
         super.init(parent);
-        for (const value of Object.values(this)) {
-            if (!value) continue;
-            value.init(parent);
-        }
+        this.about.init(parent);
+        this.alert.init(parent);
     }
 
     async prepare() {
