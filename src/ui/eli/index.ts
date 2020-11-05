@@ -30,7 +30,7 @@ export namespace eli {
 
     /**
      * Build a fontawesome icon element
-     * @param icon Start with &#x
+     * @param icon Start with \u or &#x
      */
     export function icon(icon: string): HTMLElement {
         return build('i', {
