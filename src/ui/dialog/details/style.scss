@@ -42,8 +42,23 @@
             width: 100%;
         }
 
-        > .mdc-text-field.reason {
-            flex: 1;
+        > .reason-selector {
+            width: 100%;
+
+            > .controller {
+                width: 100%;
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: center;
+
+                > .mdc-text-field {
+                    flex: 1;
+                }
+    
+                > button {
+                    margin-left: 8px;
+                }
+            }
         }
     }
 }

@@ -12,9 +12,10 @@ import DialogPrototype from 'ui/dialog/base';
 import Nomination from 'service/nomination';
 import { QueryFailReason } from 'service/brainstorming';
 
-import DetailsDialogMap from './map';
-
 import './style.scss';
+
+import { Action, ClassName, Icon, StringKey } from './constants';
+import DetailsDialogMap from './map';
 
 type MessageCallback = (message: string) => void;
 type QuerySucceedCallback = (data: any) => void;
@@ -51,6 +52,17 @@ class DetailsDialog extends DialogPrototype {
     };
 
     render() {
+        // Dialog content
+        const elementContents = eli.build('div', {
+            className: 'mdc-dialog__content',
+        });
+
+        // Confirmed time
+        this.textConfirmedTime = eli.build('span', { });
+        elementContents.append(eli.build('div', { className: 'confirmed-time' }, [
+            eli.icon(Icon.arrowUp), this.textConfirmedTime
+        ]));
+
         // Status form
         const statusRadios: Array<HTMLDivElement> = [];
         for (const key of service.status.types.keys()) {
@@ -98,18 +110,19 @@ class DetailsDialog extends DialogPrototype {
             field.input = radioCtrl;
             statusRadios.push(elementField);
         }
+        elementContents.append(eli.build('div', { className: 'status-form' }, statusRadios));
 
         // Result time
         const elementResultTime = DetailsDialog.buildTextField(
-            'result-time', '\uf073', i18next.t('ui.dialog.details.resultTime'), 'datetime-local'
+            'result-time', Icon.calendarAlt, i18next.t(StringKey.resultTime), 'datetime-local'
         );
-        
+        elementContents.append(elementResultTime);
         this.fieldResultTime = new MDCTextField(elementResultTime);
 
         // Reason block
         // Text field
         const elementReason = DetailsDialog.buildTextField(
-            'reason', '', i18next.t('ui.dialog.details.reason'), 'text'
+            '', '', i18next.t(StringKey.reason), 'text'
         );
         this.fieldReason = new MDCTextField(elementReason);
         this.fieldReason.disabled = true
@@ -143,49 +156,38 @@ class DetailsDialog extends DialogPrototype {
         this.chipSetReason = new MDCChipSet(elementChipSetReason);
         // Button
         const elementReasonExpand = eli.build('button', {
-            className: 'fa mdc-icon-button margin-l--8',
-            innerHTML: '&#xf107',
+            className: 'fa mdc-icon-button',
+            innerHTML: Icon.angleDown,
         });
         const rippleReasonExpand = new MDCRipple(elementReasonExpand);
         rippleReasonExpand.unbounded = true;
         rippleReasonExpand.listen('click', () => {
             elementChipSetReason.hidden = !elementChipSetReason.hidden;
-            elementReasonExpand.innerHTML = elementChipSetReason.hidden ? '&#xf107' : '&#xf106';
+            elementReasonExpand.innerHTML = elementChipSetReason.hidden ? Icon.angleDown : Icon.angleUp;
             this.map.layout();
         });
         this.blockReason = eli.build('div', {
-            className: 'fullwidth'
+            className: 'reason-selector'
         }, [
             eli.build('div', {
-                className: 'fullwidth flex-box-row--nowrap flex-align-items--center'
+                className: 'controller'
             }, [
                 elementReason,
                 elementReasonExpand,
             ]),
             elementChipSetReason
         ]);
-        this.chipSetReason.chips.forEach((chip) => {
+        for (const chip of this.chipSetReason.chips) {
             chip.listen('MDCChip:selection', () => {
                 const key = this.chipSetReason.selectedChipIds.length > 0 ? this.chipSetReason.selectedChipIds[0].replace('details-reason-', '') : 'undeclared';
                 const reason = service.status.reasons.get(key);
                 this.fieldReason.leadingIconContent = reason.icon;
                 this.fieldReason.value = i18next.t(reason.title);
             });
-        });
+        }
+        elementContents.append(this.blockReason);
 
-        this.textConfirmedTime = eli.build('span', { });
-
-        // Dialog content
-        const elementContents = eli.build('div', {
-            className: 'mdc-dialog__content',
-        }, [
-            eli.build('div', { className: 'confirmed-time' }, [
-                eli.icon('&#xf062'), this.textConfirmedTime
-            ]),
-            eli.build('div', { className: 'status-form' }, statusRadios),
-            elementResultTime,
-            this.blockReason
-        ]);
+        // Map
         this.map.init(elementContents);
         this.map.events.alert = (message) => this.events.alert(message);
         this.map.events.queryLngLat = (succeed, failed) => {
@@ -207,8 +209,8 @@ class DetailsDialog extends DialogPrototype {
             eli.build('footer', {
                 className: 'mdc-dialog__actions',
             }, [
-                DialogPrototype.buildDialogAction('close', i18next.t('ui.dialog.close')),
-                DialogPrototype.buildDialogAction('save' , i18next.t('ui.dialog.details.save') ),
+                DialogPrototype.buildDialogAction(Action.close, i18next.t('ui.dialog.close')),
+                DialogPrototype.buildDialogAction(Action.save , i18next.t(StringKey.save) ),
             ]),
         ]);
         this.parent.append(elementDialog);
@@ -227,17 +229,16 @@ class DetailsDialog extends DialogPrototype {
 
     closed(event: CustomEvent) {
         this.map.opened = false;
-        if (event.detail.action !== 'save') return;
+        if (event.detail.action !== Action.save) return;
         const keys = {
             type: this.nomination.status.type,
             reason: this.nomination.status.code < 100 ? null : this.nomination.status,
         }
-        const selectedStatus = this.selectedStatus;
         let shouldUpdate = false;
-        if (selectedStatus !== 'pending') {
+        if (this.selectedStatus !== 'pending') {
             const time = Date.parse(this.fieldResultTime.value);
             if (!time) {
-                this.events.alert(i18next.t('message:ui.dialog.details.invalidTime'));
+                this.events.alert(i18next.t(StringKey.messageInvalidTime));
                 return;
             }
             const newTime = time + (new Date().getTimezoneOffset() * 60000);
@@ -247,7 +248,7 @@ class DetailsDialog extends DialogPrototype {
             }
         }
         const reason = this.chipSetReason.selectedChipIds.length > 0 ? this.chipSetReason.selectedChipIds[0].replace('details-reason-', '') : 'undeclared';
-        if (selectedStatus !== keys.type) {
+        if (this.selectedStatus !== keys.type) {
             shouldUpdate = true;
         } else if ((keys.type === 'rejected') && (keys.reason.key !== reason)) {
             shouldUpdate = true;
@@ -343,19 +344,10 @@ class DetailsDialog extends DialogPrototype {
     ): HTMLDivElement {
         const id = `input-dialog-details-result-time-${name}`;
         return eli.build('div', {
-            className: [
-                'mdc-text-field',
-                'mdc-text-field--outlined',
-                'mdc-text-field--with-leading-icon',
-                name,
-            ].join(' '),
+            className: ClassName.textField,
         }, [
             eli.build('i', {
-                className: [
-                    'fa',
-                    'mdc-text-field__icon',
-                    'mdc-text-field__icon--leading'
-                ].join(' '),
+                className: ClassName.textFieldIcon,
                 innerHTML: icon,
             }),
             eli.build('input', {
