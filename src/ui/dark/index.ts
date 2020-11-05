@@ -14,7 +14,7 @@ export default class Dark extends UIPrototype {
     init(parent: HTMLElement) {
         super.init(parent);
         const darkMediaQueryList = window.matchMedia('(prefers-color-scheme: dark)');
-        darkMediaQueryList.addListener((event: MediaQueryListEvent) => {
+        darkMediaQueryList.addEventListener('change', (event) => {
             this.change(event.matches);
         });
     }
