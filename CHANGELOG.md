@@ -5,6 +5,7 @@ Noteable changes of Potori will be documented here. For [Status Data](./src/data
 - TBA
 
 ### Added
+- Display an dialog to ask manually match if the nomination's image is missing
 - Display an alert to ask report when error occurs during parsing mail
 - Log error and export in About dialog
 
