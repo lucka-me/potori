@@ -59,6 +59,7 @@ const config: webpack.Configuration = {
             locales: path.join(__dirname, 'src', 'locales'),
             service: path.join(__dirname, 'src', 'service'),
             ui: path.join(__dirname, 'src', 'ui'),
+            eli: path.join(__dirname, 'src', 'ui', 'eli'),
         },
         extensions: ['.ts', '.js'],
     },
