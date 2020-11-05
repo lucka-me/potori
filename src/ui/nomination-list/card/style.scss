@@ -33,17 +33,26 @@
             justify-content: flex-start;
             align-items: flex-start;
     
+            // Title
             > span {
                 @include typography.typography(headline6);
             }
     
+            // Details
             > div {
                 display: flex;
                 flex-flow: row wrap;
                 @include typography.typography(body2);
 
                 > span {
-                    margin-left: 4px;
+                    margin-right: 8px;
+                    display: flex;
+                    flex-flow: row nowrap;
+                    align-items: center;
+
+                    > span {
+                        margin-left: 4px;
+                    }
                 }
             }
         }
