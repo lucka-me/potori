@@ -53,17 +53,20 @@ class MatchDialog extends DialogPrototype {
         });
     }
 
+    set nominations(list: Array<Nomination>) {
+        if (!this.ctrl) this.render();
+        this.content.innerHTML = '';
+        this.content.append(i18next.t(StringKey.desc));
+        for (const nomination of list) {
+            this.buildBlock(nomination);
+        }
+    }
+
     /**
      * Open the dialog
      */
-    open(target: Nomination, candidate: Nomination) {
+    open() {
         if (!this.ctrl) this.render();
-
-        this.content.innerHTML = '';
-        this.content.append(i18next.t(StringKey.desc));
-        this.buildBlock(target);
-        this.buildBlock(candidate);
-
         this.ctrl.open();
     }
 

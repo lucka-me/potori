@@ -93,8 +93,9 @@ export namespace ui {
         service.events.match = (target, candidate, callback) => {
             prepare().then(() => {
                 dialog.match.events.close = callback;
-                dialog.match.open(target, candidate);
-            })
+                dialog.match.nominations = [target, candidate];
+                dialog.match.open();
+            });
         }
         service.events.alert = (message) => {
             dialog.alert.message = message;
