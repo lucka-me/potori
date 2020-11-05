@@ -1,3 +1,17 @@
-@use '@material/icon-button';
+.details-map {
+    display: flex;
+    flex-flow: row nowrap;
+    margin-top: 8px;
+    margin-bottom: 8px;
 
-@include icon-button.core-styles;
+    > .buttons {
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-around;
+    }
+
+    > .map {
+        flex-grow: 1;
+        min-height: 180px;
+    }
+}

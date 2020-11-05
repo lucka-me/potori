@@ -300,7 +300,7 @@ class DetailsDialog extends DialogPrototype {
     open(nomination: Nomination) {
         if (!this.ctrl) this.render();
         this.nomination = nomination;
-        this.map.set(nomination);
+        this.map.lngLat = nomination.lngLat;
         const type = nomination.status.type;
 
         this.headingTitle.innerHTML = nomination.title;

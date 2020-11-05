@@ -1,14 +1,15 @@
 import i18next from 'i18next';
 import mapboxgl from 'mapbox-gl';
 import { MDCRipple } from '@material/ripple';
-import { MDCDialog } from '@material/dialog';
 
 import { eli } from 'ui/eli';
-import Nomination, { LngLat } from 'service/nomination';
+import { LngLat } from 'service/nomination';
 import { QueryFailReason } from 'service/brainstorming';
 import UIPrototype from 'ui/base';
 
 import './style.scss';
+
+import { Icon } from './constants';
 
 type MessageCallback = (message: string) => void;
 type QueryFailCallback = (reason: QueryFailReason) => void;
@@ -20,26 +21,32 @@ interface DetailsDialogMapEvents {
     queryLngLat: QueryLocationCallback;
 }
 
+interface MapButton {
+    ctrl: MDCRipple,
+    icon: string,
+    clicked: () => void,
+}
+
 export default class DetailsDialogMap extends UIPrototype {
 
     private ctrl: mapboxgl.Map = null;
     private marker: mapboxgl.Marker = null;
     private buttons = {
         edit: {
-            root: null as HTMLButtonElement,
-            icon: '\uf044',
+            ctrl: null,
+            icon: Icon.edit,
             clicked: () => this.edit(),
-        },
+        } as MapButton,
         search: {
-            root: null as HTMLButtonElement,
-            icon: '\uf002',
+            ctrl: null,
+            icon: Icon.search,
             clicked: () => this.search(),
-        },
+        } as MapButton,
         delete: {
-            root: null as HTMLButtonElement,
-            icon: '\uf1f8',
+            ctrl: null,
+            icon: Icon.trash,
             clicked: () => this.delete(),
-        },
+        } as MapButton,
     };
 
     opened = false;
@@ -55,58 +62,69 @@ export default class DetailsDialogMap extends UIPrototype {
     }
 
     render() {
-        const mapButtons = [];
-        for (const value of Object.values(this.buttons)) {
-            value.root = eli.build('button', {
-                className: 'fa mdc-icon-button',
-                innerHTML: value.icon,
-            });
-            const ctrl = new MDCRipple(value.root);
-            ctrl.unbounded = true;
-            ctrl.listen('click', value.clicked);
-            mapButtons.push(value.root);
-        }
-        const elementMap = eli.build('div', {
-            className: 'flex-grow--1',
-            cssText: 'min-height: 180px',
-        });
+        const elementMap = eli.build('div', { className: 'map' });
 
-        const elementContent = eli.build('div', {
-            className: 'flex-box-row--nowrap margin-v--8',
+        this.parent.append(eli.build('div', {
+            className: 'details-map',
         }, [
-            eli.build('div', {
-                className: 'flex-box-col flex-justify-content--around',
-            }, mapButtons),
+            eli.build(
+                'div', { className: 'buttons' },
+                Object.values(this.buttons).map((button) => {
+                    const element = eli.build('button', {
+                        className: 'fa mdc-icon-button',
+                        innerHTML: button.icon,
+                    });
+                    button.ctrl = new MDCRipple(element);
+                    button.ctrl.unbounded = true;
+                    button.ctrl.listen('click', button.clicked);
+                    return element;
+                })
+            ),
             elementMap,
-        ]);
-
-        this.parent.append(elementContent);
+        ]));
 
         this.ctrl = new mapboxgl.Map({
             container: elementMap,
-            style: DetailsDialogMap.getStyle(),
+            style: DetailsDialogMap.style,
         });
         this.ctrl.addControl(new mapboxgl.NavigationControl());
     }
 
-    set(nomination: Nomination) {
+    updateStyle() {
+        if (!this.ctrl) return;
+        this.ctrl.setStyle(DetailsDialogMap.style);
+    }
+
+    set lngLat(lngLat: LngLat | null) {
         this.delete();
-        if (nomination.lngLat) {
+        if (lngLat) {
             import(
                 /* webpackChunkName: 'modules-async' */
                 'mapbox-gl'
             ).then((mapboxgl) => {
                 this.marker = new mapboxgl.Marker()
-                    .setLngLat(nomination.lngLat).addTo(this.ctrl);
-                this.ctrl.jumpTo({ center: nomination.lngLat, zoom: 16 });
-                this.buttons.delete.root.disabled = false;
-                this.buttons.edit.root.innerHTML = '\uf044';
+                    .setLngLat(lngLat).addTo(this.ctrl);
+                this.ctrl.jumpTo({ center: lngLat, zoom: 16 });
+                this.buttons.delete.ctrl.disabled = false;
+                this.buttons.edit.ctrl.root.innerHTML = Icon.edit;
             });
         }
-        this.buttons.search.root.disabled = false;
+        this.buttons.search.ctrl.disabled = false;
     }
 
-    edit() {
+    get lngLat(): LngLat | null {
+        if (!this.marker) return null;
+        return this.marker.getLngLat();
+    }
+
+    layout() {
+        this.ctrl.resize();
+        for (const button of Object.values(this.buttons)) {
+            button.ctrl.layout();
+        }
+    }
+
+    private edit() {
         if (!this.marker) {
             import(
                 /* webpackChunkName: 'modules-async' */
@@ -116,15 +134,15 @@ export default class DetailsDialogMap extends UIPrototype {
                     .setLngLat(this.ctrl.getCenter())
                     .setDraggable(true)
                     .addTo(this.ctrl);
-                this.buttons.delete.root.disabled = false;
-                this.buttons.edit.root.innerHTML = '\uf044';
+                this.buttons.delete.ctrl.disabled = false;
+                this.buttons.edit.ctrl.root.innerHTML = Icon.edit;
             });
         } else {
             this.marker.setDraggable(true);
         }
     }
 
-    search() {
+    private search() {
         const succeed = (lngLat: LngLat) => {
             if (!this.opened) return;
             if (!this.marker) {
@@ -142,41 +160,27 @@ export default class DetailsDialogMap extends UIPrototype {
                 this.marker.setDraggable(false);
             }
             this.ctrl.easeTo({ center: lngLat, zoom: 16 });
-            this.buttons.edit.root.innerHTML = '\uf044';
-            this.buttons.search.root.disabled = false;
-            this.buttons.delete.root.disabled = false;
+            this.buttons.edit.ctrl.root.innerHTML = Icon.edit;
+            this.buttons.search.ctrl.disabled = false;
+            this.buttons.delete.ctrl.disabled = false;
         };
         const failed = (reason: QueryFailReason) => {
             if (!this.opened) return;
             this.events.alert(i18next.t(reason))
-            this.buttons.search.root.disabled = false;
+            this.buttons.search.ctrl.disabled = false;
         }
-        this.buttons.search.root.disabled = true;
+        this.buttons.search.ctrl.disabled = true;
         this.events.queryLngLat(succeed, failed);
     }
 
-    delete() {
+    private delete() {
         if (this.marker) this.marker.remove();
         this.marker = null;
-        this.buttons.edit.root.innerHTML = '\uf067';
-        this.buttons.delete.root.disabled = true;
+        this.buttons.edit.ctrl.root.innerHTML = Icon.plus;
+        this.buttons.delete.ctrl.disabled = true;
     }
 
-    updateStyle() {
-        if (!this.ctrl) return;
-        this.ctrl.setStyle(DetailsDialogMap.getStyle());
-    }
-
-    layout() {
-        this.ctrl.resize();
-    }
-
-    get lngLat(): LngLat | null {
-        if (!this.marker) return null;
-        return this.marker.getLngLat();
-    }
-
-    private static getStyle() {
+    private static get style() {
         return `mapbox://styles/mapbox/${getComputedStyle(document.documentElement).getPropertyValue('--map-style').trim()}?optimize=true`;
     }
 }
