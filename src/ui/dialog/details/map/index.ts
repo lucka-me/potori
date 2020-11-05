@@ -10,18 +10,21 @@ import UIPrototype from 'ui/base';
 
 import './style.scss';
 
+type MessageCallback = (message: string) => void;
+type QueryFailCallback = (reason: QueryFailReason) => void;
+type QuerySucceedCallback = (lngLat: LngLat) => void;
+type QueryLocationCallback = (succeed: QuerySucceedCallback, failed: QueryFailCallback) => void;
+
 interface DetailsDialogMapEvents {
-    alert: (message: string) => void;
-    queryLngLat: (nomination: Nomination, succeed: (lngLat: LngLat) => void, failed: (reason: QueryFailReason) => void) => void;
+    alert: MessageCallback;
+    queryLngLat: QueryLocationCallback;
 }
 
 export default class DetailsDialogMap extends UIPrototype {
 
-    ctrl: mapboxgl.Map = null;
-    marker: mapboxgl.Marker = null;
-    dialog: MDCDialog = null;
-    nomination: Nomination = null;
-    buttons = {
+    private ctrl: mapboxgl.Map = null;
+    private marker: mapboxgl.Marker = null;
+    private buttons = {
         edit: {
             root: null as HTMLButtonElement,
             icon: '\uf044',
@@ -38,6 +41,8 @@ export default class DetailsDialogMap extends UIPrototype {
             clicked: () => this.delete(),
         },
     };
+
+    opened = false;
 
     events: DetailsDialogMapEvents = {
         alert: () => { },
@@ -85,16 +90,15 @@ export default class DetailsDialogMap extends UIPrototype {
     }
 
     set(nomination: Nomination) {
-        this.nomination = nomination;
         this.delete();
-        if (this.nomination.lngLat) {
+        if (nomination.lngLat) {
             import(
                 /* webpackChunkName: 'modules-async' */
                 'mapbox-gl'
             ).then((mapboxgl) => {
                 this.marker = new mapboxgl.Marker()
-                    .setLngLat(this.nomination.lngLat).addTo(this.ctrl);
-                this.ctrl.jumpTo({ center: this.nomination.lngLat, zoom: 16 });
+                    .setLngLat(nomination.lngLat).addTo(this.ctrl);
+                this.ctrl.jumpTo({ center: nomination.lngLat, zoom: 16 });
                 this.buttons.delete.root.disabled = false;
                 this.buttons.edit.root.innerHTML = '\uf044';
             });
@@ -122,7 +126,7 @@ export default class DetailsDialogMap extends UIPrototype {
 
     search() {
         const succeed = (lngLat: LngLat) => {
-            if (!this.dialog.isOpen) return;
+            if (!this.opened) return;
             if (!this.marker) {
                 import(
                     /* webpackChunkName: 'modules-async' */
@@ -143,12 +147,12 @@ export default class DetailsDialogMap extends UIPrototype {
             this.buttons.delete.root.disabled = false;
         };
         const failed = (reason: QueryFailReason) => {
-            if (!this.dialog.isOpen) return;
+            if (!this.opened) return;
             this.events.alert(i18next.t(reason))
             this.buttons.search.root.disabled = false;
         }
         this.buttons.search.root.disabled = true;
-        this.events.queryLngLat(this.nomination, succeed, failed);
+        this.events.queryLngLat(succeed, failed);
     }
 
     delete() {
@@ -161,6 +165,15 @@ export default class DetailsDialogMap extends UIPrototype {
     updateStyle() {
         if (!this.ctrl) return;
         this.ctrl.setStyle(DetailsDialogMap.getStyle());
+    }
+
+    layout() {
+        this.ctrl.resize();
+    }
+
+    get lngLat(): LngLat | null {
+        if (!this.marker) return null;
+        return this.marker.getLngLat();
     }
 
     private static getStyle() {

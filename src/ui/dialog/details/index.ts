@@ -17,7 +17,7 @@ import './style.scss';
 
 interface DetailsDialogEvents {
     alert: (message: string) => void;
-    query: (nomination: Nomination, succeed: (data: any) => void, failed: () => void) => void;
+    query: (nomination: Nomination, succeed: (data: any) => void, failed: (message: string) => void) => void;
     update: (nomination: Nomination) => void;
 }
 
@@ -79,7 +79,7 @@ class DetailsDialog extends DialogPrototype {
                 (this.fieldResultTime.root as HTMLElement).hidden = (target.value === 'pending');
                 this.fieldResultTime.layout();
                 this.blockReason.hidden = !(target.value === 'rejected');
-                this.map.ctrl.resize();
+                this.map.layout();
             });
             const elementRadio = eli.build('div', {
                 className: 'mdc-radio',
@@ -169,7 +169,7 @@ class DetailsDialog extends DialogPrototype {
         rippleReasonExpand.listen('click', () => {
             elementChipSetReason.hidden = !elementChipSetReason.hidden;
             elementReasonExpand.innerHTML = elementChipSetReason.hidden ? '&#xf107' : '&#xf106';
-            this.map.ctrl.resize();
+            this.map.layout();
         });
         this.blockReason = eli.build('div', {
             className: 'fullwidth'
@@ -215,6 +215,14 @@ class DetailsDialog extends DialogPrototype {
             this.blockReason
         ]);
         this.map.init(elementContents);
+        this.map.events.queryLngLat = (succeed, failed) => {
+            this.events.query(this.nomination, (data) => {
+                succeed({
+                    lng: parseFloat(data.lng),
+                    lat: parseFloat(data.lat)
+                });
+            }, failed);
+        };
         const elementDialog = DialogPrototype.buildDialog('', [
             this.headingTitle,
             this.image,
@@ -230,17 +238,18 @@ class DetailsDialog extends DialogPrototype {
         this.ctrl = new MDCDialog(elementDialog);
         this.ctrl.listen('MDCDialog:opened', () => this.opened());
         this.ctrl.listen('MDCDialog:closed', (event: CustomEvent) => this.closed(event));
-        this.map.dialog = this.ctrl;
         rippleReasonExpand.layout();
     }
 
     opened() {
         this.fieldResultTime.layout();
         this.fieldReason.layout();
-        this.map.ctrl.resize();
+        this.map.layout();
+        this.map.opened = true;
     }
 
     closed(event: CustomEvent) {
+        this.map.opened = false;
         if (event.detail.action !== 'save') return;
         const keys = {
             type: this.nomination.status.type,
@@ -266,8 +275,8 @@ class DetailsDialog extends DialogPrototype {
         } else if ((keys.type === 'rejected') && (keys.reason.key !== reason)) {
             shouldUpdate = true;
         }
-        if (this.map.marker) {
-            const lngLat = this.map.marker.getLngLat();
+        const lngLat = this.map.lngLat;
+        if (lngLat) {
             if (!this.nomination.lngLat
                 || (this.nomination.lngLat.lng !== lngLat.lng || this.nomination.lngLat.lat !== lngLat.lat)
             ) {

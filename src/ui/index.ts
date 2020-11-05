@@ -302,9 +302,6 @@ export namespace ui {
             dialog.alert.message = message;
             dialog.alert.open();
         };
-        dialog.details.map.events.queryLngLat = (nomination, succeed, failed) => {
-            service.bs.queryLocation(nomination, succeed, failed);
-        };
 
         list.events.openDetails = (nomination) => {
             dialog.details.open(nomination);
