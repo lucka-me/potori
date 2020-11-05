@@ -15,7 +15,7 @@ type MenuItemClickCallback = () => void;
  */
 export default class AppBarMenu extends UIPrototype {
 
-    ctrl: MDCMenu = null;                                   // MDC controller
+    private ctrl: MDCMenu = null;                           // MDC controller
     items: Map<string, HTMLLIElement> = new Map();          // Menu items
     events: Map<string, MenuItemClickCallback> = new Map(); // Click events for menu items
 
@@ -25,7 +25,7 @@ export default class AppBarMenu extends UIPrototype {
     }
 
     render() {
-        const menuList = eli.build('ul', {
+        const elementList = eli.build('ul', {
             className: 'mdc-list',
             role: 'menu',
             ariaOrientation: 'vertical',
@@ -43,19 +43,21 @@ export default class AppBarMenu extends UIPrototype {
                 }),
             ]);
             this.items.set(value.key, element);
-            menuList.append(element);
+            elementList.append(element);
         }
         this.items.get(AppBarMenuItems.about.key).hidden = false;
 
-        const menuSurface = eli.build('div', {
+        const elementSurface = eli.build('div', {
             className: 'mdc-menu mdc-menu-surface',
-        }, [ menuList ]);
-        const menuAnchor = eli.build('div', {
+        }, [ elementList ]);
+        const elementAnchor = eli.build('div', {
             className: 'mdc-menu-surface--anchor',
-        }, [ menuSurface ]);
-        this.parent.append(menuAnchor);
+        }, [ elementSurface ]);
+        this.parent.append(eli.build('div', {
+            className: 'mdc-menu-surface--anchor'
+        }, [ elementSurface ]));
 
-        this.ctrl = new MDCMenu(menuSurface);
+        this.ctrl = new MDCMenu(elementSurface);
         this.ctrl.listen(
             'MDCMenu:selected',
             (event: CustomEvent) => {
