@@ -88,7 +88,7 @@ export default class NominationCard {
             ));
         }
         // Result
-        const type = service.status.getTypeByCode(nomination.status.code);
+        const type = nomination.status.type;
         if (nomination.status.code > 0) {
             elementDetails.append(NominationCard.buildDetail(
                 service.status.types.get(type).icon,

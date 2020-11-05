@@ -225,7 +225,7 @@ export namespace ui {
         dashboard.filter.events.switchType = (type, visible) => {
             if (type.key !== 'rejected') {
                 for (const nomination of service.nominations) {
-                    if (!service.status.typeMatched(nomination.status.code, type.code)) continue;
+                    if (!nomination.status.isType(type.code)) continue;
                     document.getElementById(`card-${nomination.id}`).hidden = !visible;
                 }
             } else {

@@ -243,8 +243,8 @@ class DetailsDialog extends DialogPrototype {
     closed(event: CustomEvent) {
         if (event.detail.action !== 'save') return;
         const keys = {
-            type: service.status.getTypeByCode(this.nomination.status.code),
-            reason: service.status.getReasonByCode(this.nomination.status.code),
+            type: this.nomination.status.type,
+            reason: this.nomination.status.code < 100 ? null : this.nomination.status,
         }
         const selectedStatus = this.selectedStatus;
         let shouldUpdate = false;
@@ -292,7 +292,7 @@ class DetailsDialog extends DialogPrototype {
         if (!this.ctrl) this.render();
         this.nomination = nomination;
         this.map.set(nomination);
-        const type = service.status.getTypeByCode(nomination.status.code);
+        const type = nomination.status.type;
 
         this.headingTitle.innerHTML = nomination.title;
         this.image.src = nomination.imageUrl;

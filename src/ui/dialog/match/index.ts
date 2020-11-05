@@ -80,7 +80,7 @@ class MatchDialog extends DialogPrototype {
             }),
         ]));
         if (nomination.status.code > 0) {
-            const type = service.status.getTypeByCode(nomination.status.code);
+            const type = nomination.status.type;
             info.push(eli.build('span', {
                 className: classNameInfo,
             }, [

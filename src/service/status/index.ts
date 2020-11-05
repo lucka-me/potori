@@ -16,6 +16,20 @@ export class Status {
         this.title = title;
         this.icon = icon;
     }
+
+    get type(): string {
+        if (this.code === 0) return 'pending';
+        if (this.code === 1) return 'accepted';
+        return 'rejected';
+    }
+
+    isType(type: number): boolean {
+        if (type < 101) {
+            return this.code === type;
+        } else {
+            return this.code > 100;
+        }
+    }
 }
 
 /**
@@ -81,43 +95,5 @@ export default class StatusKit {
             this.reasons.set(reason.key, status);
             this.codes.set(reason.code, status);
         }
-    }
-
-    /**
-     * Get if the status matches the type
-     * @param status Status code
-     * @param type Type code
-     * @returns Result
-     */
-    typeMatched(status: number, type: number): boolean {
-        if (type < 101) {
-            return status === type;
-        } else {
-            return status > 100;
-        }
-    }
-    
-    /**
-     * Get the type key
-     * @param code Status code
-     * @returns Type key of the status code
-     */
-    getTypeByCode(code: number): string {
-        if (code === 0) return 'pending';
-        if (code === 1) return 'accepted';
-        return 'rejected';
-    }
-
-    /**
-     * Get the reject reason
-     * @param code Reason code
-     * @returns Reject reason
-     */
-    getReasonByCode(code: number): StatusReason {
-        if (code < 100) return null;
-        for (const value of this.reasons.values()) {
-            if (value.code === code) return value;
-        }
-        return null;
     }
 }
