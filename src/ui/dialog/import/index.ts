@@ -7,9 +7,11 @@ import DialogPrototype from 'ui/dialog/base';
 
 import './style.scss'
 
+import { Action, ClassName, Link, StringKey } from './constants';
+
 type ImportCallback = (raw: string) => void;
 
-class ImportDialog extends DialogPrototype {
+export default class ImportDialog extends DialogPrototype {
 
     private textField: MDCTextField = null; // MDC text field controller
 
@@ -17,12 +19,7 @@ class ImportDialog extends DialogPrototype {
 
     render() {
         const elementTextField = eli.build('div', {
-            className: [
-                'mdc-text-field',
-                'mdc-text-field--outlined',
-                'mdc-text-field--textarea',
-                'mdc-text-field--fullwidth'
-            ].join(' '),
+            className: ClassName.textfield,
         }, [
             eli.build('textarea', {
                 className: 'mdc-text-field__input code',
@@ -39,7 +36,7 @@ class ImportDialog extends DialogPrototype {
                     eli.build('label', {
                         className: 'mdc-floating-label',
                         for: 'input-dialog-import-wayfarer',
-                        innerHTML: i18next.t('ui.dialog.import.json'),
+                        innerHTML: i18next.t(StringKey.json),
                     }),
                 ]),
                 eli.build('div', { className: 'mdc-notched-outline__trailing' }),
@@ -48,7 +45,7 @@ class ImportDialog extends DialogPrototype {
         const elementDialog = DialogPrototype.buildDialog('', [
             eli.build('h2', {
                 className: 'mdc-dialog__title',
-                innerHTML: i18next.t('ui.dialog.import.title')
+                innerHTML: i18next.t(StringKey.title)
             }),
             eli.build('div', {
                 className: 'mdc-dialog__content',
@@ -60,10 +57,9 @@ class ImportDialog extends DialogPrototype {
                     eli.build('div', {
                         className: 'mdc-text-field-helper-text mdc-text-field-helper-text--persistent',
                     }, [
-                        i18next.t('ui.dialog.import.from'),
+                        i18next.t(StringKey.from),
                         DialogPrototype.buildLink(
-                            'https://wayfarer.nianticlabs.com/api/v1/vault/manage',
-                            i18next.t('ui.dialog.import.wayfarer'), i18next.t('ui.dialog.import.wayfarer')
+                            Link.wayfarer, i18next.t(StringKey.wayfarer),
                         ),
                     ]),
                 ]),
@@ -72,14 +68,14 @@ class ImportDialog extends DialogPrototype {
                 className: 'mdc-dialog__actions',
             }, [
                 DialogPrototype.buildDialogAction('close' , i18next.t('ui.dialog.close' )),
-                DialogPrototype.buildDialogAction('import', i18next.t('ui.dialog.import.import')),
+                DialogPrototype.buildDialogAction(Action.import, i18next.t(StringKey.import)),
             ]),
         ]);
         this.parent.append(elementDialog);
         this.ctrl = new MDCDialog(elementDialog);
         this.textField = new MDCTextField(elementTextField);
         this.ctrl.listen('MDCDialog:closed', (event: CustomEvent) => {
-            if (event.detail.action === 'import') {
+            if (event.detail.action === Action.import) {
                 this.import(this.textField.value);
             }
         });
@@ -94,5 +90,3 @@ class ImportDialog extends DialogPrototype {
         this.ctrl.open();
     }
 }
-
-export default ImportDialog;
