@@ -2,25 +2,25 @@ import i18next from 'i18next';
 import { MDCDialog } from '@material/dialog';
 
 import { eli } from 'ui/eli';
-import DialogPrototype from 'ui/dialog/base';
+import { base } from 'ui/dialog/base';
 
 import './style.scss';
 
 /**
  * Dialog to show alert message
  */
-export default class AlertDialog extends DialogPrototype {
+export default class AlertDialog extends base.DialogPrototype {
 
     private textMessage: HTMLDivElement = null; // Dialog element
 
     render() {
         this.textMessage = eli.build('div', {
-            className: 'mdc-dialog__content',
+            className: base.ClassName.content,
         });
-        const element = DialogPrototype.buildDialog('alert-dialog', [
+        const element = base.buildDialog('alert-dialog', [
             this.textMessage,
-            eli.build('footer', { className: 'mdc-dialog__actions' }, [
-                DialogPrototype.buildDialogAction('close', i18next.t('ui.dialog.close'))
+            eli.build('footer', { className: base.ClassName.actions }, [
+                base.buildDialogAction(base.Action.close, i18next.t(base.StringKey.close))
             ]),
         ]);
         this.parent.append(element);

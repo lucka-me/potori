@@ -3,7 +3,7 @@ import { MDCDialog } from '@material/dialog';
 
 import { eli } from 'ui/eli';
 import { service } from 'service';
-import DialogPrototype from 'ui/dialog/base';
+import { base } from 'ui/dialog/base';
 
 import './style.scss';
 
@@ -18,40 +18,40 @@ interface AboutDialogEvents {
 /**
  * Dialog to show Potori information
  */
-export default class AboutDialog extends DialogPrototype {
+export default class AboutDialog extends base.DialogPrototype {
 
     events: AboutDialogEvents = {
         info: () => { },
     };
 
     render() {
-        const elementExportError = DialogPrototype.buildLink(
+        const elementExportError = base.buildLink(
             '#', i18next.t(StringKey.exportError),
         );
         elementExportError.onclick = () => {
             this.exportError();
             return false;
         }
-        const element = DialogPrototype.buildDialog('about-dialog', [
+        const element = base.buildDialog('about-dialog', [
             eli.build('h2', {
-                className: 'mdc-dialog__title',
+                className: base.ClassName.title,
                 innerHTML: i18next.t(StringKey.title)
             }),
             eli.build('div', {
-                className: 'mdc-dialog__content',
+                className: base.ClassName.content,
             }, [
                 eli.build('span', { }, [
-                    DialogPrototype.buildLink(
+                    base.buildLink(
                         Link.documents, i18next.t(StringKey.documents),
                     )
                 ]),
                 eli.build('span', { }, [
-                    DialogPrototype.buildLink(
+                    base.buildLink(
                         Link.repo, i18next.t(StringKey.repo)
                     ),
                 ]),
                 eli.build('span', { }, [
-                    DialogPrototype.buildLink(
+                    base.buildLink(
                         Link.changelog,
                         i18next.t(StringKey.changelog),
                         service.version.string
@@ -60,9 +60,11 @@ export default class AboutDialog extends DialogPrototype {
                 eli.build('span', { }, [ elementExportError ]),
             ]),
             eli.build('footer', {
-                className: 'mdc-dialog__actions',
+                className: base.ClassName.actions,
             }, [
-                DialogPrototype.buildDialogAction('close', i18next.t('ui.dialog.close'))
+                base.buildDialogAction(
+                    base.Action.close, i18next.t(base.StringKey.close)
+                )
             ]),
         ]);
         this.parent.append(element);

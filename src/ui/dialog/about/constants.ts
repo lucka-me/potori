@@ -1,3 +1,5 @@
+const StringKeyBase = 'ui.dialog.about';
+
 export const Link = {
     documents: './docs',
     repo: 'https://github.com/lucka-me/potori',
@@ -5,12 +7,12 @@ export const Link = {
 };
 
 export const StringKey = {
-    title: 'ui.dialog.about.title',
-    documents: 'ui.dialog.about.documents',
-    repo: 'ui.dialog.about.repo',
-    exportError: 'ui.dialog.about.exportError',
-    changelog: 'ui.dialog.about.changelog',
+    title: `${StringKeyBase}.title`,
+    documents: `${StringKeyBase}.documents`,
+    repo: `${StringKeyBase}.repo`,
+    exportError: `${StringKeyBase}.exportError`,
+    changelog: `${StringKeyBase}.changelog`,
 
-    messageExportErrorEmpty: 'message:ui.dialog.about.exportErrorEmpty',
-    messageExportErrorCopied: 'message:ui.dialog.about.exportErrorCopied',
+    messageExportErrorEmpty: `message:${StringKeyBase}.exportErrorEmpty`,
+    messageExportErrorCopied: `message:${StringKeyBase}.exportErrorCopied`,
 };

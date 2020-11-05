@@ -4,13 +4,11 @@ import { MDCDialog } from '@material/dialog';
 import { eli } from 'ui/eli';
 import { service } from 'service';
 import Nomination from 'service/nomination';
-
-import DialogPrototype from 'ui/dialog/base';
+import { base } from 'ui/dialog/base';
 
 import './style.scss';
 
 import { Action, Icon, Link, StringKey } from './constants';
-
 
 type CloseCallback = (matched: boolean) => void;
 
@@ -21,7 +19,7 @@ interface MatchDialogEvents {
 /**
  * Dialog to manually match nominations
  */
-class MatchDialog extends DialogPrototype {
+class MatchDialog extends base.DialogPrototype {
 
     private content: HTMLDivElement = null;
 
@@ -31,19 +29,19 @@ class MatchDialog extends DialogPrototype {
 
     render() {
         this.content = eli.build('div', {
-            className: 'mdc-dialog__content',
+            className: base.ClassName.content,
         });
-        const element = DialogPrototype.buildDialog('match-dialog', [
+        const element = base.buildDialog('match-dialog', [
             eli.build('h2', {
-                className: 'mdc-dialog__title',
+                className: base.ClassName.title,
                 innerHTML: i18next.t(StringKey.title)
             }),
             this.content,
             eli.build('footer', {
-                className: 'mdc-dialog__actions',
+                className: base.ClassName.actions,
             }, [
-                DialogPrototype.buildDialogAction(Action.no, i18next.t(StringKey.no)),
-                DialogPrototype.buildDialogAction(Action.yes, i18next.t(StringKey.yes))
+                base.buildDialogAction(Action.no, i18next.t(StringKey.no)),
+                base.buildDialogAction(Action.yes, i18next.t(StringKey.yes))
             ]),
         ]);
         this.parent.append(element);

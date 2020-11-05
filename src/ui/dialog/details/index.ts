@@ -8,7 +8,7 @@ import { MDCTextField } from '@material/textfield';
 
 import { eli } from 'ui/eli';
 import { service } from 'service';
-import DialogPrototype from 'ui/dialog/base';
+import { base } from 'ui/dialog/base';
 import Nomination from 'service/nomination';
 import { QueryFailReason } from 'service/brainstorming';
 
@@ -29,7 +29,7 @@ interface DetailsDialogEvents {
     update: UpdateCallback;
 }
 
-class DetailsDialog extends DialogPrototype {
+class DetailsDialog extends base.DialogPrototype {
 
     private _nomination: Nomination = null;
 
@@ -54,7 +54,7 @@ class DetailsDialog extends DialogPrototype {
     render() {
         // Dialog content
         const elementContents = eli.build('div', {
-            className: 'mdc-dialog__content',
+            className: base.ClassName.content,
         });
 
         // Confirmed time
@@ -198,19 +198,19 @@ class DetailsDialog extends DialogPrototype {
                 });
             }, failed);
         };
-        const elementDialog = DialogPrototype.buildDialog('details-dialog', [
+        const elementDialog = base.buildDialog('details-dialog', [
             eli.build('h2', {
-                className: 'mdc-dialog__title',
+                className: base.ClassName.title,
                 dataset: { mdcDialogInitialFocus: '' },
                 innerHTML: '',
             }),
             eli.build('img', { }),
             elementContents,
             eli.build('footer', {
-                className: 'mdc-dialog__actions',
+                className: base.ClassName.actions,
             }, [
-                DialogPrototype.buildDialogAction(Action.close, i18next.t('ui.dialog.close')),
-                DialogPrototype.buildDialogAction(Action.save , i18next.t(StringKey.save) ),
+                base.buildDialogAction(base.Action.close, i18next.t(base.StringKey.close)),
+                base.buildDialogAction(Action.save , i18next.t(StringKey.save) ),
             ]),
         ]);
         this.parent.append(elementDialog);
@@ -230,7 +230,7 @@ class DetailsDialog extends DialogPrototype {
         this.map.lngLat = nomination.lngLat;
         const type = nomination.status.type;
 
-        this.ctrl.root.querySelector('.mdc-dialog__title').innerHTML = nomination.title;
+        this.ctrl.root.querySelector(`.${base.ClassName.title}`).innerHTML = nomination.title;
         this.ctrl.root.querySelector('img').src = nomination.imageUrl;
         this.textConfirmedTime.innerHTML = new Date(nomination.confirmedTime).toLocaleString();
 

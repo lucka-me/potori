@@ -1,9 +1,8 @@
-const StringKeyBase = 'ui.dialog.match';
+const StringKeyBase = 'ui.dialog.details';
 
 export const Action = {
-    close: 'close',
     save: 'save',
-}
+};
 
 export const ClassName = {
     textField: [
@@ -17,7 +16,7 @@ export const ClassName = {
         'mdc-text-field__icon',
         'mdc-text-field__icon--leading'
     ].join(' '),
-}
+};
 
 export const Icon = {
     arrowUp: '\uf062',

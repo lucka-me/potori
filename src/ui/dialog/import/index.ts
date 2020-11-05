@@ -3,7 +3,7 @@ import { MDCDialog } from '@material/dialog';
 import { MDCTextField } from '@material/textfield';
 
 import { eli } from 'ui/eli';
-import DialogPrototype from 'ui/dialog/base';
+import { base } from 'ui/dialog/base';
 
 import './style.scss'
 
@@ -11,7 +11,7 @@ import { Action, ClassName, Link, StringKey } from './constants';
 
 type ImportCallback = (raw: string) => void;
 
-export default class ImportDialog extends DialogPrototype {
+export default class ImportDialog extends base.DialogPrototype {
 
     private textField: MDCTextField = null; // MDC text field controller
 
@@ -42,13 +42,13 @@ export default class ImportDialog extends DialogPrototype {
                 eli.build('div', { className: 'mdc-notched-outline__trailing' }),
             ]),
         ]);
-        const elementDialog = DialogPrototype.buildDialog('', [
+        const elementDialog = base.buildDialog('', [
             eli.build('h2', {
-                className: 'mdc-dialog__title',
+                className: base.ClassName.title,
                 innerHTML: i18next.t(StringKey.title)
             }),
             eli.build('div', {
-                className: 'mdc-dialog__content',
+                className: base.ClassName.content,
             }, [
                 elementTextField,
                 eli.build('div', {
@@ -58,17 +58,17 @@ export default class ImportDialog extends DialogPrototype {
                         className: 'mdc-text-field-helper-text mdc-text-field-helper-text--persistent',
                     }, [
                         i18next.t(StringKey.from),
-                        DialogPrototype.buildLink(
+                        base.buildLink(
                             Link.wayfarer, i18next.t(StringKey.wayfarer),
                         ),
                     ]),
                 ]),
             ]),
             eli.build('footer', {
-                className: 'mdc-dialog__actions',
+                className: base.ClassName.actions,
             }, [
-                DialogPrototype.buildDialogAction('close' , i18next.t('ui.dialog.close' )),
-                DialogPrototype.buildDialogAction(Action.import, i18next.t(StringKey.import)),
+                base.buildDialogAction(base.Action.close , i18next.t(base.StringKey.close)),
+                base.buildDialogAction(Action.import, i18next.t(StringKey.import)),
             ]),
         ]);
         this.parent.append(elementDialog);

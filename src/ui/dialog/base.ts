@@ -3,21 +3,44 @@ import { MDCDialog } from '@material/dialog';
 import { eli } from 'ui/eli';
 import UIPrototype from 'ui/base';
 
-/**
- * Ptototype of MDC dialog components
- * 
- * Should check if the ctrl is null and call render() if it is in open()
- */
-export default class DialogPrototype extends UIPrototype {
+export namespace base {
+    export const Action = {
+        close: 'close'
+    };
 
-    ctrl: MDCDialog = null; // MDC dialog controller
+    export const ClassName = {
+        dialog: 'mdc-dialog',
+        container: 'mdc-dialog__container',
+        surface: 'mdc-dialog__surface',
+        content: 'mdc-dialog__content',
+        title: 'mdc-dialog__title',
+        actions: 'mdc-dialog__actions',
+        scrim: 'mdc-dialog__scrim',
 
+        button: 'mdc-button mdc-dialog__button',
+        buttonLabel: 'mdc-button__label',
+    };
+    
+    export const StringKey = {
+        close: 'ui.dialog.close'
+    };
+    
     /**
-     * Open the dialog
+     * Ptototype of MDC dialog components
+     * 
+     * Should check if the ctrl is null and call render() if it is in open()
      */
-    open() {
-        if (!this.ctrl) this.render();
-        this.ctrl.open();
+    export class DialogPrototype extends UIPrototype {
+    
+        ctrl: MDCDialog = null; // MDC dialog controller
+    
+        /**
+         * Open the dialog
+         */
+        open() {
+            if (!this.ctrl) this.render();
+            this.ctrl.open();
+        }
     }
 
     /**
@@ -25,16 +48,19 @@ export default class DialogPrototype extends UIPrototype {
      * @param contents Elements inside dialog
      * @returns The dialog element
      */
-    static buildDialog(className: string, contents: Array<HTMLElement>): HTMLDivElement {
+    export function buildDialog(
+        name: string,
+        contents: Array<HTMLElement>
+    ): HTMLDivElement {
         return eli.build('div', {
-            className: `mdc-dialog ${className}`,
+            className: `${ClassName.dialog} ${name}`,
             role: 'dialog',
             ariaModal: true,
         }, [
-            eli.build('div', { className: 'mdc-dialog__container' }, [
-                eli.build('div', { className: 'mdc-dialog__surface' }, contents),
+            eli.build('div', { className: ClassName.container }, [
+                eli.build('div', { className: ClassName.surface }, contents),
             ]),
-            eli.build('div', { className: 'mdc-dialog__scrim' }),
+            eli.build('div', { className: ClassName.scrim }),
         ]);
     }
 
@@ -43,13 +69,16 @@ export default class DialogPrototype extends UIPrototype {
      * @param action Identifier of the action
      * @param text Text on the action
      */
-    static buildDialogAction(action: string, text: string): HTMLButtonElement {
+    export function buildDialogAction(
+        action: string,
+        text: string
+    ): HTMLButtonElement {
         return eli.build('button', {
-            className: 'mdc-button mdc-dialog__button',
+            className: ClassName.button,
             dataset: { mdcDialogAction: action, },
         }, [
             eli.build('span', {
-                className: 'mdc-button__label', innerHTML: text
+                className: ClassName.buttonLabel, innerHTML: text
             }),
         ]);
     }
@@ -60,7 +89,11 @@ export default class DialogPrototype extends UIPrototype {
      * @param title Text to show when mouse hovers
      * @param text Text to display in the link, will use `title` if not provided
      */
-    static buildLink(href: string, title: string, text?: string): HTMLAnchorElement {
+    export function buildLink(
+        href: string,
+        title: string,
+        text?: string
+    ): HTMLAnchorElement {
         return eli.build('a', {
             href: href,
             title: title,
