@@ -1,7 +1,51 @@
 @use '@material/button';
 @use '@material/card';
 @use '@material/icon-button';
+@use "@material/typography";
 
 @include button.core-styles;
 @include card.core-styles;
 @include icon-button.core-styles;
+
+.nomination-card {
+
+    flex-shrink: 0;
+
+    > .info-box {
+        display: flex;
+        flex-flow: row nowrap;
+
+        > img {
+            object-fit: cover;
+            object-position: center;
+            width: 120px;
+            min-width: 120px;
+            height: 120px;
+            min-height: 120px;
+            border-top-left-radius: 4px;
+        }
+    
+        > div {
+    
+            padding: 8px;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: flex-start;
+            align-items: flex-start;
+    
+            > span {
+                @include typography.typography(headline6);
+            }
+    
+            > div {
+                display: flex;
+                flex-flow: row wrap;
+                @include typography.typography(body2);
+
+                > span {
+                    margin-left: 4px;
+                }
+            }
+        }
+    }
+}

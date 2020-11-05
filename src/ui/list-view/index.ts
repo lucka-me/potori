@@ -5,7 +5,7 @@ import { service } from 'service';
 import Nomination from 'service/nomination';
 import UIPrototype from 'ui/base';
 
-import NominationCard from './card';
+import NominationCard, { NominationCardEvents } from './card';
 
 interface ListViewEvents {
     alert: (message: string) => void;
@@ -54,37 +54,16 @@ class ListView extends UIPrototype {
     show(nominations: Array<Nomination>) {
         this.clear();
         const cards = nominations.map((nomination) => {
-            const card = NominationCard.build(nomination, this.now, {
-                focus: () => { this.events.focus(nomination) },
-                openBs: () => {
-                    if (service.version.full) {
-                        window.open(nomination.bsUrl, '_blank', 'noopener');
-                    } else {
-                        const textarea = eli.build('textarea', {
-                            value: nomination.id, readOnly: true
-                        });
-                        document.body.append(textarea);
-                        textarea.select();
-                        document.execCommand('copy');
-                        textarea.remove();
-                        this.events.alert(i18next.t('message:ui.list-view.bsIdCopied', { id: nomination.id }));
-                    }
-                },
-                openDetails: () => this.events.openDetails(nomination),
-            });
-            NominationCard.update(nomination, card);
-            if (nomination.lngLat) {
-                NominationCard.updateLocation(nomination, card);
-            }
-            return card;
+            const c = NominationCard.build(nomination);
+            NominationCard.update(c, nomination, this.now, this.createCardEvents(nomination));
+            return c;
         });
         this.root.append(...cards);
     }
 
     update(nomination: Nomination, visibility: boolean) {
         const card = this.root.querySelector(`#card-${nomination.id}`) as HTMLDivElement;
-        NominationCard.update(nomination, card);
-        NominationCard.updateLocation(nomination, card);
+        NominationCard.update(card, nomination, this.now, this.createCardEvents(nomination));
         card.hidden = !visibility;
     }
 
@@ -97,6 +76,31 @@ class ListView extends UIPrototype {
 
     switchView() {
         this.root.classList.toggle('view-hide');
+    }
+
+    /**
+     * Create event handlers for card actions
+     * @param nomination Nomination
+     */
+    private createCardEvents(nomination: Nomination): NominationCardEvents {
+        return {
+            focus: () => { this.events.focus(nomination) },
+            openBs: () => {
+                if (service.version.full) {
+                    window.open(nomination.bsUrl, '_blank', 'noopener');
+                } else {
+                    const textarea = eli.build('textarea', {
+                        value: nomination.id, readOnly: true
+                    });
+                    document.body.append(textarea);
+                    textarea.select();
+                    document.execCommand('copy');
+                    textarea.remove();
+                    this.events.alert(i18next.t('message:ui.list-view.bsIdCopied', { id: nomination.id }));
+                }
+            },
+            openDetails: () => this.events.openDetails(nomination),
+        }
     }
 };
 
