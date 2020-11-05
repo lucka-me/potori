@@ -5,7 +5,7 @@ import { MDCTopAppBar } from '@material/top-app-bar';
 import { eli } from 'ui/eli';
 import UIPrototype from 'ui/base';
 
-import { AppBarActions } from './constants';
+import { AppBarActions, ClassName, StringKey } from './constants';
 import { AppBarMenuItems } from './menu/constants';
 
 import type AppBarMenu from './menu';
@@ -38,14 +38,11 @@ class AppBar extends UIPrototype {
 
     render() {
         this.sectionActions = eli.build('section', {
-            className: [
-                'mdc-top-app-bar__section',
-                'mdc-top-app-bar__section--align-end'
-            ].join(' '),
+            className: ClassName.sectionActions,
         });
         for (const value of Object.values(AppBarActions)) {
             const elementAction = eli.build('button', {
-                className: 'fa mdc-icon-button',
+                className: ClassName.action,
                 title: i18next.t(value.title),
                 innerHTML: value.icon,
             });
@@ -62,16 +59,13 @@ class AppBar extends UIPrototype {
         this.actions.get(AppBarActions.about.key).hidden = false;
 
         const elementAppBar = eli.build('header', {
-            className: 'mdc-top-app-bar mdc-top-app-bar--fixed',
+            className: ClassName.appBar,
         }, [
             eli.build('div', {
                 className: 'mdc-top-app-bar__row',
             }, [
                 eli.build('section', {
-                    className: [
-                        'mdc-top-app-bar__section',
-                        'mdc-top-app-bar__section--align-start'
-                    ].join(' '),
+                    className: ClassName.sectionTitle,
                 }, [
                     eli.build('span', {
                         className: 'mdc-top-app-bar__title',
@@ -112,7 +106,7 @@ class AppBar extends UIPrototype {
         const actionView = this.actions.get(AppBarActions.view.key);
         const switchToList = actionView.innerHTML === '\uf00b';
         actionView.innerHTML = switchToList ? '\uf3fd' : '\uf00b';
-        actionView.title = i18next.t(switchToList ? 'ui.app-bar.dashboard' : 'ui.app-bar.list');
+        actionView.title = i18next.t(switchToList ? StringKey.dashboard : StringKey.list);
     }
 }
 
