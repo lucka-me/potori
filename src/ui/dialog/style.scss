@@ -1,3 +1,9 @@
+@use '@material/button';
+@use '@material/dialog';
+@use '@material/typography/mdc-typography';
+
+@include dialog.core-styles;
+
 .mdc-dialog-content-block {
     padding: 0px 8px;
     display: flex;

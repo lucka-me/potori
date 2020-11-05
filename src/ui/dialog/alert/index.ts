@@ -11,13 +11,13 @@ import './style.scss';
  */
 export default class AlertDialog extends DialogPrototype {
 
-    textMessage: HTMLDivElement = null; // Dialog element
+    private textMessage: HTMLDivElement = null; // Dialog element
 
     render() {
         this.textMessage = eli.build('div', {
             className: 'mdc-dialog__content',
         });
-        const element = DialogPrototype.buildDialog('', [
+        const element = DialogPrototype.buildDialog('alert-dialog', [
             this.textMessage,
             eli.build('footer', { className: 'mdc-dialog__actions' }, [
                 DialogPrototype.buildDialogAction('close', i18next.t('ui.dialog.close'))
@@ -28,12 +28,16 @@ export default class AlertDialog extends DialogPrototype {
     }
 
     /**
-     * Open dialog and show alert message
+     * Set the alert message
      * @param message Alert message to display
      */
-    open(message: string) {
+    set message(message: string) {
+        if (!this.ctrl) this.render();
+        this.textMessage.innerHTML = message;
+    }
+
+    open() {
         if (!this.ctrl) this.render();
         this.ctrl.open();
-        this.textMessage.innerHTML = message;
     }
 }

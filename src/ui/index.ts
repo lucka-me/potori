@@ -97,7 +97,8 @@ export namespace ui {
             })
         }
         service.events.alert = (message) => {
-            dialog.alert.open(message);
+            dialog.alert.message = message;
+            dialog.alert.open();
         }
         service.events.info = (message) => {
             snackbar.show(message);
@@ -273,7 +274,8 @@ export namespace ui {
         list.init(mainBox);
 
         list.events.alert = (message) => {
-            dialog.alert.open(message);
+            dialog.alert.message = message;
+            dialog.alert.open();
         };
         list.events.focus = (nomination) => {
             dashboard.map.easeTo(nomination.lngLat);
@@ -286,7 +288,8 @@ export namespace ui {
         await dialog.prepare();
         // Details dialog
         dialog.details.events.alert = (message) => {
-            dialog.alert.open(message);
+            dialog.alert.message = message;
+            dialog.alert.open();
         };
         dialog.details.events.query = (nomination, succeed, failed) => {
             service.bs.query(nomination, succeed, failed);
@@ -295,7 +298,8 @@ export namespace ui {
             update(nomination);
         };
         dialog.details.map.events.alert = (message) => {
-            dialog.alert.open(message);
+            dialog.alert.message = message;
+            dialog.alert.open();
         };
         dialog.details.map.events.queryLngLat = (nomination, succeed, failed) => {
             service.bs.queryLocation(nomination, succeed, failed);
