@@ -6,6 +6,8 @@ import UIPrototype from 'ui/base';
 
 import './style.scss';
 
+import { ClassName, Icon, StringKey } from './constants';
+
 /**
  * Snackbar component for showing information message
  */
@@ -14,23 +16,22 @@ export default class Snackbar extends UIPrototype {
     ctrl: MDCSnackbar = null;   // MDC snackbar controller
 
     render() {
-        const textMessage = eli.build('div', {
-            className: 'mdc-snackbar__label',
-            role: 'status', ariaLive: 'polite',
-        });
-        const elementActions = eli.build('div', {
-            className: 'mdc-snackbar__actions'
-        }, [
-            eli.build('button', {
-                className: 'fa mdc-icon-button mdc-snackbar__dismiss',
-                title: i18next.t('ui.snackbar.dismiss'),
-                innerHTML: '&#xf00d',
-            }),
-        ]);
         const element = eli.build('div', { className: 'mdc-snackbar' }, [
             eli.build('div', { className: 'mdc-snackbar__surface' }, [
-                textMessage,
-                elementActions,
+                eli.build('div', {
+                    className: 'mdc-snackbar__label',
+                    role: 'status',
+                    ariaLive: 'polite',
+                }),
+                eli.build('div', {
+                    className: 'mdc-snackbar__actions'
+                }, [
+                    eli.build('button', {
+                        className: ClassName.actionDismiss,
+                        title: i18next.t(StringKey.dismiss),
+                        innerHTML: Icon.times,
+                    }),
+                ]),
             ]),
         ]);
         this.parent.append(element);
