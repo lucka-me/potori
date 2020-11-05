@@ -1,6 +1,6 @@
 import i18next from 'i18next';
 
-import { eli } from 'ui/eli';
+import { eli } from 'eli/eli';
 import { service } from 'service';
 import Nomination from 'service/nomination';
 import UIPrototype from 'ui/base';
@@ -32,7 +32,7 @@ export default class NominationList extends UIPrototype {
     }
 
     render() {
-        this.root = eli.build('div', { className: 'list-view view-hide' });
+        this.root = eli('div', { className: 'list-view view-hide' });
         this.parent.append(this.root);
     }
 
@@ -77,14 +77,7 @@ export default class NominationList extends UIPrototype {
                 if (service.version.full) {
                     window.open(nomination.bsUrl, '_blank', 'noopener');
                 } else {
-                    const textarea = eli.build('textarea', {
-                        value: nomination.id,
-                        readOnly: true
-                    });
-                    document.body.append(textarea);
-                    textarea.select();
-                    document.execCommand('copy');
-                    textarea.remove();
+                    eli.copy(nomination.id);
                     this.events.alert(i18next.t('message:ui.list-view.bsIdCopied', { id: nomination.id }));
                 }
             },

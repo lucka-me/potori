@@ -1,7 +1,7 @@
 import i18next from 'i18next';
 import { MDCDialog } from '@material/dialog';
 
-import { eli } from 'ui/eli';
+import { eli } from 'eli/eli';
 import { service } from 'service';
 import { base } from 'ui/dialog/base';
 
@@ -33,33 +33,33 @@ export default class AboutDialog extends base.DialogPrototype {
             return false;
         }
         const element = base.buildDialog('about-dialog', [
-            eli.build('h2', {
+            eli('h2', {
                 className: base.ClassName.title,
                 innerHTML: i18next.t(StringKey.title)
             }),
-            eli.build('div', {
+            eli('div', {
                 className: base.ClassName.content,
             }, [
-                eli.build('span', { }, [
+                eli('span', { }, [
                     base.buildLink(
                         Link.documents, i18next.t(StringKey.documents),
                     )
                 ]),
-                eli.build('span', { }, [
+                eli('span', { }, [
                     base.buildLink(
                         Link.repo, i18next.t(StringKey.repo)
                     ),
                 ]),
-                eli.build('span', { }, [
+                eli('span', { }, [
                     base.buildLink(
                         Link.changelog,
                         i18next.t(StringKey.changelog),
                         service.version.string
                     ),
                 ]),
-                eli.build('span', { }, [ elementExportError ]),
+                eli('span', { }, [ elementExportError ]),
             ]),
-            eli.build('footer', {
+            eli('footer', {
                 className: base.ClassName.actions,
             }, [
                 base.buildDialogAction(
@@ -88,13 +88,7 @@ export default class AboutDialog extends base.DialogPrototype {
             }
             message += `[${error.filename}][${error.lineno}:${error.colno}]${details}\n`;
         }
-        const textarea = eli.build('textarea', {
-            value: message, readOnly: true
-        });
-        document.body.append(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        textarea.remove();
+        eli.copy(message);
         this.events.info(i18next.t(StringKey.messageExportErrorCopied, {
             count: service.errors.length
         }));

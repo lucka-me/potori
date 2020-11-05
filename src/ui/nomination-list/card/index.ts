@@ -1,11 +1,13 @@
 import i18next from 'i18next';
 import { MDCRipple } from '@material/ripple';
 
-import { eli } from 'ui/eli';
+import { eli } from 'eli/eli';
+import { eliCard } from 'eli/card';
+import { eliIcon } from 'eli/icon';
 import { service } from 'service';
 import Nomination from 'service/nomination';
 
-import { ClassName, Icon, StringKey } from './constants';
+import { StringKey } from './constants';
 
 import './style.scss';
 
@@ -30,29 +32,25 @@ export default class NominationCard {
      * @param nomination Nomination to display
      */
     static build(nomination: Nomination) {
-        return eli.build('div', {
-            className: ClassName.card,
-            id: `card-${nomination.id}`,
-        }, [
-            eli.build('div', {
+        const element = eliCard([
+            eli('div', {
                 className: 'info-box',
             }, [
-                eli.build('img', {
+                eli('img', {
                     src: nomination.imageUrl,
                     loading: 'lazy',
                 }),
-                eli.build('div', { }, [
-                    eli.build('span', { innerHTML: nomination.title }),
-                    eli.build('div', { }),
+                eli('div', { }, [
+                    eli('span', { innerHTML: nomination.title }),
+                    // Details
+                    eli('div', { }),
                 ]),
             ]),
-            eli.build('div', {
-                className: 'mdc-card__actions',
-            }, [
-                eli.build('div', { className: 'mdc-card__action-buttons' }),
-                eli.build('div', { className: 'mdc-card__action-icons' }),
-            ]),
+            eliCard.actions({ buttons: [], icons: []}),
         ]);
+        element.classList.add('nomination-card');
+        element.id = `card-${nomination.id}`;
+        return element;
     }
 
     /**
@@ -70,21 +68,21 @@ export default class NominationCard {
     ) {
         const elementDetails = card.querySelector('.info-box > div > div') as HTMLDivElement;
         elementDetails.innerHTML = '';
-        // Confimed date
+        // Confirmed date
         elementDetails.append(NominationCard.buildDetail(
-            Icon.arrowUp, nomination.confirmedDateString
+            eliIcon.Icon.arrowUp, nomination.confirmedDateString
         ));
         // Restore interval
         const restoreTime = nomination.restoreTime;
         if (restoreTime > now) {
             elementDetails.append(NominationCard.buildDetail(
-                Icon.redoAlt, nomination.restoreIntervalString
+                eliIcon.Icon.redoAlt, nomination.restoreIntervalString
             ));
         }
         // Interval
         if (nomination.confirmedTime > 0) {
             elementDetails.append(NominationCard.buildDetail(
-                Icon.clock, nomination.intervalString
+                eliIcon.Icon.clock, nomination.intervalString
             ));
         }
         // Result
@@ -98,19 +96,10 @@ export default class NominationCard {
 
         const elementButtons = card.querySelector('.mdc-card__action-buttons') as HTMLDivElement;
         elementButtons.innerHTML = '';
-        const elementStatus = eli.build('button', {
-            className: `${ClassName.statusAction} status-${type}`,
-        }, [
-            eli.build('div', { className: 'mdc-button__ripple' }),
-            eli.build('i', {
-                className: ClassName.statusActionIcon,
-                innerHTML: nomination.status.icon
-            }),
-            eli.build('span', {
-                className: 'mdc-button__label',
-                innerHTML: i18next.t(nomination.status.title)
-            }),
-        ]);
+        const elementStatus = eliCard.buttonAction(
+            nomination.status.icon, i18next.t(nomination.status.title)
+        );
+        elementStatus.classList.add(`status-${type}`);
         elementButtons.append(elementStatus);
         const rippleStatus = new MDCRipple(elementStatus);
         rippleStatus.unbounded = true;
@@ -121,19 +110,19 @@ export default class NominationCard {
         if (nomination.lngLat) {
             // Focus on Map
             elementIcons.append(NominationCard.buildIconAction(
-                Icon.mapMarkerAlt, StringKey.location, events.focus
+                eliIcon.Icon.mapMarkerAlt, StringKey.location, events.focus
             ));
             if (service.version.full) {
                 // Intel Map
                 elementIcons.append(NominationCard.buildIconAction(
-                    Icon.globe, StringKey.intelMap,
+                    eliIcon.Icon.globe, StringKey.intelMap,
                     () => window.open(nomination.intelUrl, '_blank', 'noopener')
                 ));
             }
         }
         // Brainstorming watermeter
         elementIcons.append(NominationCard.buildIconAction(
-            Icon.brain, StringKey.bsWatermeter, events.openBs
+            eliIcon.Icon.brain, StringKey.bsWatermeter, events.openBs
         ));
     }
 
@@ -143,9 +132,9 @@ export default class NominationCard {
      * @param text Text to display
      */
     private static buildDetail(icon: string, text: string): HTMLSpanElement {
-        return eli.build('span', { }, [
-            eli.icon(icon),
-            eli.build('span', { innerHTML: text }),
+        return eli('span', { }, [
+            eliIcon(icon),
+            eli('span', { innerHTML: text }),
         ]);
     }
 
@@ -158,11 +147,7 @@ export default class NominationCard {
     private static buildIconAction(
         icon: string, title: string, click: BasicCallback
     ): HTMLButtonElement {
-        const element = eli.build('button', {
-            className: ClassName.iconAction,
-            title: i18next.t(title),
-            innerHTML: icon,
-        });
+        const element = eliCard.iconAction(icon, i18next.t(title));
         const rippleLocation = new MDCRipple(element);
         rippleLocation.unbounded = true;
         rippleLocation.listen('click', click);
