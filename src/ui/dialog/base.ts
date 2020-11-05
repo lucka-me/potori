@@ -13,6 +13,14 @@ export default class DialogPrototype extends UIPrototype {
     ctrl: MDCDialog = null; // MDC dialog controller
 
     /**
+     * Open the dialog
+     */
+    open() {
+        if (!this.ctrl) this.render();
+        this.ctrl.open();
+    }
+
+    /**
      * Build a MDC dialog element
      * @param contents Elements inside dialog
      * @returns The dialog element

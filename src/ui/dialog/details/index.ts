@@ -31,7 +31,7 @@ interface DetailsDialogEvents {
 
 class DetailsDialog extends DialogPrototype {
 
-    nomination: Nomination = null;
+    private _nomination: Nomination = null;
 
     private textConfirmedTime: HTMLSpanElement = null;
 
@@ -191,7 +191,7 @@ class DetailsDialog extends DialogPrototype {
         this.map.init(elementContents);
         this.map.events.alert = (message) => this.events.alert(message);
         this.map.events.queryLngLat = (succeed, failed) => {
-            this.events.query(this.nomination, (data) => {
+            this.events.query(this._nomination, (data) => {
                 succeed({
                     lng: parseFloat(data.lng),
                     lat: parseFloat(data.lat)
@@ -220,64 +220,13 @@ class DetailsDialog extends DialogPrototype {
         rippleReasonExpand.layout();
     }
 
-    opened() {
-        this.fieldResultTime.layout();
-        this.fieldReason.layout();
-        this.map.layout();
-        this.map.opened = true;
+    updateStyle() {
+        this.map.updateStyle();
     }
 
-    closed(event: CustomEvent) {
-        this.map.opened = false;
-        if (event.detail.action !== Action.save) return;
-        const keys = {
-            type: this.nomination.status.type,
-            reason: this.nomination.status.code < 100 ? null : this.nomination.status,
-        }
-        let shouldUpdate = false;
-        if (this.selectedStatus !== 'pending') {
-            const time = Date.parse(this.fieldResultTime.value);
-            if (!time) {
-                this.events.alert(i18next.t(StringKey.messageInvalidTime));
-                return;
-            }
-            const newTime = time + (new Date().getTimezoneOffset() * 60000);
-            if (!this.nomination.resultTime || (Math.floor(this.nomination.resultTime / 60000) !== Math.floor(newTime / 60000))) {
-                this.nomination.resultTime = newTime;
-                shouldUpdate = true;
-            }
-        }
-        const reason = this.chipSetReason.selectedChipIds.length > 0 ? this.chipSetReason.selectedChipIds[0].replace('details-reason-', '') : 'undeclared';
-        if (this.selectedStatus !== keys.type) {
-            shouldUpdate = true;
-        } else if ((keys.type === 'rejected') && (keys.reason.key !== reason)) {
-            shouldUpdate = true;
-        }
-        const lngLat = this.map.lngLat;
-        if (lngLat) {
-            if (!this.nomination.lngLat
-                || (this.nomination.lngLat.lng !== lngLat.lng || this.nomination.lngLat.lat !== lngLat.lat)
-            ) {
-                this.nomination.lngLat = lngLat;
-                shouldUpdate = true;
-            }
-        } else if (this.nomination.lngLat) {
-            this.nomination.lngLat = null;
-            shouldUpdate = true;
-        }
-        if (shouldUpdate) {
-            if (this.selectedStatus !== 'rejected') {
-                this.nomination.status = service.status.types.get(this.selectedStatus);
-            } else {
-                this.nomination.status = service.status.reasons.get(reason);
-            }
-            this.events.update(this.nomination);
-        }
-    }
-
-    open(nomination: Nomination) {
+    set nomination(nomination: Nomination) {
         if (!this.ctrl) this.render();
-        this.nomination = nomination;
+        this._nomination = nomination;
         this.map.lngLat = nomination.lngLat;
         const type = nomination.status.type;
 
@@ -315,12 +264,61 @@ class DetailsDialog extends DialogPrototype {
 
         this.status.get(type).checked = true;
         this.selectedStatus = type;
-
-        this.ctrl.open();
     }
 
-    updateStyle() {
-        this.map.updateStyle();
+    private opened() {
+        this.fieldResultTime.layout();
+        this.fieldReason.layout();
+        this.map.layout();
+        this.map.opened = true;
+    }
+
+    private closed(event: CustomEvent) {
+        this.map.opened = false;
+        if (event.detail.action !== Action.save) return;
+        const keys = {
+            type: this._nomination.status.type,
+            reason: this._nomination.status.code < 100 ? null : this._nomination.status,
+        }
+        let shouldUpdate = false;
+        if (this.selectedStatus !== 'pending') {
+            const time = Date.parse(this.fieldResultTime.value);
+            if (!time) {
+                this.events.alert(i18next.t(StringKey.messageInvalidTime));
+                return;
+            }
+            const newTime = time + (new Date().getTimezoneOffset() * 60000);
+            if (!this._nomination.resultTime || (Math.floor(this._nomination.resultTime / 60000) !== Math.floor(newTime / 60000))) {
+                this._nomination.resultTime = newTime;
+                shouldUpdate = true;
+            }
+        }
+        const reason = this.chipSetReason.selectedChipIds.length > 0 ? this.chipSetReason.selectedChipIds[0].replace('details-reason-', '') : 'undeclared';
+        if (this.selectedStatus !== keys.type) {
+            shouldUpdate = true;
+        } else if ((keys.type === 'rejected') && (keys.reason.key !== reason)) {
+            shouldUpdate = true;
+        }
+        const lngLat = this.map.lngLat;
+        if (lngLat) {
+            if (!this._nomination.lngLat
+                || (this._nomination.lngLat.lng !== lngLat.lng || this._nomination.lngLat.lat !== lngLat.lat)
+            ) {
+                this._nomination.lngLat = lngLat;
+                shouldUpdate = true;
+            }
+        } else if (this._nomination.lngLat) {
+            this._nomination.lngLat = null;
+            shouldUpdate = true;
+        }
+        if (shouldUpdate) {
+            if (this.selectedStatus !== 'rejected') {
+                this._nomination.status = service.status.types.get(this.selectedStatus);
+            } else {
+                this._nomination.status = service.status.reasons.get(reason);
+            }
+            this.events.update(this._nomination);
+        }
     }
 
     /**
@@ -328,7 +326,7 @@ class DetailsDialog extends DialogPrototype {
      * @param labelOptions Options for the label element
      * @returns The outline element
      */
-    static buildNotchedOutline(labelOptions: any): HTMLDivElement {
+    private static buildNotchedOutline(labelOptions: any): HTMLDivElement {
         labelOptions.className = 'mdc-floating-label';
         return eli.build('div', { className: 'mdc-notched-outline' }, [
             eli.build('div', { className: 'mdc-notched-outline__leading' }),

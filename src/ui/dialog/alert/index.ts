@@ -35,9 +35,4 @@ export default class AlertDialog extends DialogPrototype {
         if (!this.ctrl) this.render();
         this.textMessage.innerHTML = message;
     }
-
-    open() {
-        if (!this.ctrl) this.render();
-        this.ctrl.open();
-    }
 }

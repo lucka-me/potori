@@ -70,14 +70,6 @@ export default class AboutDialog extends DialogPrototype {
     }
 
     /**
-     * Open the dialog
-     */
-    open() {
-        if (!this.ctrl) this.render();
-        this.ctrl.open();
-    }
-
-    /**
      * Export error message to clipboard
      */
     private exportError() {

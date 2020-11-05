@@ -85,8 +85,7 @@ export default class ImportDialog extends DialogPrototype {
      * Open dialog
      */
     open() {
-        if (!this.ctrl) this.render();
+        super.open();
         this.textField.value = '';
-        this.ctrl.open();
     }
 }

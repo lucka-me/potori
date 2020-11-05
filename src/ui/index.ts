@@ -300,7 +300,8 @@ export namespace ui {
         };
 
         list.events.openDetails = (nomination) => {
-            dialog.details.open(nomination);
+            dialog.details.nomination = nomination;
+            dialog.details.open();
         };
 
         // Import dialog

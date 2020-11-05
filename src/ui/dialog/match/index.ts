@@ -62,14 +62,6 @@ class MatchDialog extends DialogPrototype {
         }
     }
 
-    /**
-     * Open the dialog
-     */
-    open() {
-        if (!this.ctrl) this.render();
-        this.ctrl.open();
-    }
-
     private buildBlock(nomination: Nomination) {
         const details = [];
         this.buildDetail(Icon.arrowUp, nomination.confirmedDateString);
