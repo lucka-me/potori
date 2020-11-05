@@ -13,8 +13,8 @@ import Dialog       from './dialog';
 import Progress     from './progress';
 import Snackbar     from './snackbar';
 
-import type Dashboard   from './dashboard';
-import type ListView    from './list-view';
+import type Dashboard       from './dashboard';
+import type NominationList  from './nomination-list';
 
 export namespace ui {
 
@@ -26,7 +26,7 @@ export namespace ui {
 
     let mainBox  : HTMLDivElement    = null;
     let dashboard: Dashboard         = null;
-    let list     : ListView          = null;
+    let list     : NominationList          = null;
 
     export function init() {
         document.documentElement.lang = i18next.language;
@@ -178,7 +178,7 @@ export namespace ui {
      */
     function preloadModules() {
         import(/* webpackChunkName: 'ui-async' */ './dashboard');
-        import(/* webpackChunkName: 'ui-async' */  './list-view');
+        import(/* webpackChunkName: 'ui-async' */  './nomination-list');
     }
 
     /**
@@ -267,7 +267,7 @@ export namespace ui {
         // Lazyload ListView
         const ListView = await import(
             /* webpackChunkName: 'ui-async' */
-            './list-view'
+            './nomination-list'
         );
         list = new ListView.default();
         list.init(mainBox);

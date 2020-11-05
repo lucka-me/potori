@@ -9,18 +9,18 @@ import './style.scss';
 
 import NominationCard, { NominationCardEvents } from './card';
 
-interface ListViewEvents {
+interface NominationListEvents {
     alert: (message: string) => void;
     focus: (nomination: Nomination) => void;
     openDetails: (nomination: Nomination) => void;
 }
 
-class ListView extends UIPrototype {
+export default class NominationList extends UIPrototype {
 
     private root: HTMLDivElement = null;
     private now = Date.now();
 
-    events: ListViewEvents = {
+    events: NominationListEvents = {
         alert:          () => { },
         focus:          () => { },
         openDetails:    () => { },
@@ -92,5 +92,3 @@ class ListView extends UIPrototype {
         }
     }
 };
-
-export default ListView;
