@@ -10,7 +10,9 @@ const ClassName = {
 
 type OnChangeEvent = (value: string) => void;
 
-export function eliRadio(id: string, name: string, value: string, onchange: OnChangeEvent) {
+export function eliRadio(
+    id: string, name: string, value: string, onchange: OnChangeEvent
+): HTMLDivElement {
     const input = eli('input', {
         type: 'radio',
         className: ClassName.control,

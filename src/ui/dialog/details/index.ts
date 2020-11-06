@@ -7,9 +7,11 @@ import { MDCRipple } from '@material/ripple';
 import { MDCTextField } from '@material/textfield';
 
 import { eli } from 'eli/eli';
+import { eliChipSet } from 'eli/chip';
 import { eliDialog } from 'eli/dialog';
 import { eliIcon } from 'eli/icon';
 import { eliRadio } from 'eli/radio';
+import { eliTextField } from 'eli/text-field';
 
 import { service } from 'service';
 import { base } from 'ui/dialog/base';
@@ -20,7 +22,6 @@ import './style.scss';
 
 import { Action, StringKey } from './constants';
 import DetailsDialogMap from './map';
-import { eliTextField } from 'eli/text-field';
 
 type MessageCallback = (message: string) => void;
 type QuerySucceedCallback = (data: any) => void;
@@ -109,32 +110,13 @@ class DetailsDialog extends base.DialogPrototype {
             inputType: 'text'
         });
         // Chip set
-        const elementChipsReason: Array<HTMLDivElement> = [];
-        for (const [key, value] of service.status.reasons.entries()) {
-            elementChipsReason.push(eli('div', {
-                className: 'mdc-chip',
-                id: `details-reason-${key}`,
-                role: 'row',
-            }, [
-                eli('div', { className: 'mdc-chip__ripple' }),
-                eli('span', { role: 'gridcell' }, [
-                    eli('span', {
-                        className: 'mdc-chip__primary-action',
-                        role: 'button'
-                    }, [
-                        eli('span', {
-                            className: 'mdc-chip__text',
-                            innerHTML: i18next.t(value.title),
-                        })
-                    ])
-                ])
-            ]));
+        const chipItems = [];
+        for (const [key, reason] of service.status.reasons) {
+            chipItems.push(
+                { id: `details-reason-${key}`, text: i18next.t(reason.title) }
+            );
         }
-        const elementChipSetReason = eli('div', {
-            className: 'mdc-chip-set mdc-chip-set--choice',
-            role: 'grid',
-            hidden: true
-        }, elementChipsReason);
+        const elementChipSetReason = eliChipSet(chipItems);
         this.chipSetReason = new MDCChipSet(elementChipSetReason);
         // Button
         const elementReasonExpand = eli('button', {
@@ -151,12 +133,7 @@ class DetailsDialog extends base.DialogPrototype {
         this.blockReason = eli('div', {
             className: 'reason-selector'
         }, [
-            eli('div', {
-                className: 'controller'
-            }, [
-                elementReason,
-                elementReasonExpand,
-            ]),
+            eli('div', { className: 'controller' }, [ elementReason, elementReasonExpand ]),
             elementChipSetReason
         ]);
         for (const chip of this.chipSetReason.chips) {
