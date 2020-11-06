@@ -2,16 +2,18 @@ import Chart from 'chart.js';
 import i18next from 'i18next';
 import moment from 'moment';
 
-import { eli } from 'ui/eli';
+import { eli } from 'eli/eli';
 import { base } from 'ui/dashboard/base';
 import Nomination from 'service/nomination';
 
 import './style.scss';
 
+import { StringKey } from './constants';
+
 class CountByMonthCard extends base.ChartCardProtorype {
     render() {
-        const canvasChart = eli.build('canvas', { className: 'canvas-chart--h' });
-        this.root = base.buildChartCard(i18next.t('ui.dashboard.count-by-month.title'), canvasChart, 3, 300);
+        const canvasChart = eli('canvas', { });
+        this.root = base.eliChartCard('count-by-month-card', i18next.t(StringKey.title), canvasChart);
         this.setVisible(false);
         this.parent.append(this.root);
 
@@ -23,14 +25,14 @@ class CountByMonthCard extends base.ChartCardProtorype {
             data: {
                 labels: [],
                 datasets: [{
-                    label: i18next.t('ui.dashboard.count-by-month.submissions'),
+                    label: i18next.t(StringKey.submissions),
                     data: [],
                     borderColor: colorPrimary,
                     pointBackgroundColor: colorPrimary,
                     pointRadius: 0,
                     fill: false,
                 }, {
-                    label: i18next.t('ui.dashboard.count-by-month.results'),
+                    label: i18next.t(StringKey.results),
                     data: [],
                     borderColor: colorSecondary,
                     pointBackgroundColor: colorSecondary,
