@@ -1,22 +1,27 @@
 import i18next from 'i18next';
 import { MDCRipple } from '@material/ripple';
 
-import { eli } from 'ui/eli';
+import { eli } from 'eli/eli';
+import { eliCard } from 'eli/card';
+import { eliIcon } from 'eli/icon';
+
 import { BrainstormingStats } from 'service/brainstorming';
 import { base } from 'ui/dashboard/brainstorming/base';
 
 import './style.scss';
 
+import { StringKey } from './constants';
+
+type BasicCallback = () => void;
+
 interface BSBasicCardEvents {
-    refresh:    () => void,
-    clear:      () => void;
+    refresh:    BasicCallback,
+    clear:      BasicCallback;
 }
 
 class BSBasicCard extends base.CardPrototype {
 
-    textReviews     : HTMLSpanElement   = null;
-    textSubtitle    : HTMLSpanElement   = null;
-    actionRefresh   : HTMLButtonElement = null;
+    private actionRefresh: HTMLButtonElement = null;
 
     events: BSBasicCardEvents = {
         refresh:    () => {},
@@ -24,23 +29,7 @@ class BSBasicCard extends base.CardPrototype {
     };
 
     render() {
-        this.textReviews = eli.build('span', {
-            cssText: 'font-weight:300;font-size:4.5rem;line-height:4.5rem;',
-            innerHTML: '0',
-        });
-        this.textSubtitle = eli.build('span', {
-            className: 'mdc-typography--body1 text-nowrap',
-            innerHTML: i18next.t('ui.dashboard.brainstorming.basic.desc', { count: 0 }),
-        });
-
-        this.actionRefresh = eli.build('button', {
-            className: 'mdc-button mdc-card__action mdc-card__action--button',
-            disabled: true,
-        }, [
-            eli.build('div', { className: 'mdc-button__ripple' }),
-            eli.build('i', { className: 'fa fa-fw mdc-button__icon', innerHTML: '\uf2f1' }),
-            eli.build('span', { className: 'mdc-button__label', innerHTML: i18next.t('ui.dashboard.brainstorming.basic.refresh') }),
-        ]);
+        this.actionRefresh = eliCard.buttonAction(eliIcon.Icon.syncAlt, i18next.t(StringKey.refresh));
         const rippleRefresh = new MDCRipple(this.actionRefresh);
         rippleRefresh.unbounded = true;
         rippleRefresh.listen('click', () => {
@@ -48,56 +37,32 @@ class BSBasicCard extends base.CardPrototype {
             this.events.refresh();
         });
 
-        const actionClear = eli.build('button', {
-            className: [
-                'fa',
-                'mdc-icon-button',
-                'mdc-card__action',
-                'mdc-card__action--icon'
-            ].join(' '),
-            title: i18next.t('ui.dashboard.brainstorming.basic.clear'),
-            id: 'button-card-nomination-location',
-            innerHTML: '\uf1f8',
-        });
+        const actionClear = eliCard.iconAction(eliIcon.Icon.trash, i18next.t(StringKey.clear));
         const rippleClear = new MDCRipple(actionClear);
         rippleClear.unbounded = true;
         rippleClear.listen('click', () => {
             this.events.clear();
         });
 
-        this.root = eli.build('div', {
-            className: [
-                'mdc-card',
-                'mdc-card--outlined',
-                'flex--1',
-                'flex-shrink--1'
-            ].join(' '),
-        }, [
-            eli.build('div', {
-                className: [
-                    'flex-box-col',
-                    'padding--8',
-                    'flex-grow--1',
-                    'flex-justify-content--between'
-                ].join(' '),
-            }, [
-                eli.build('span', {
-                    className: 'mdc-typography--headline6',
-                    innerHTML: i18next.t('ui.dashboard.brainstorming.basic.title'),
+        this.root = eliCard('bs-basic-card', [
+            eli('div', { className: 'content' }, [
+                eli('span', {
+                    className: 'title',
+                    innerHTML: i18next.t(StringKey.title),
                 }),
-                this.textReviews,
-                this.textSubtitle,
+                eli('span', {
+                    className: 'count',
+                    innerHTML: '0',
+                }),
+                eli('span', {
+                    className: 'desc',
+                    innerHTML: i18next.t(StringKey.desc, { count: 0 }),
+                })
             ]),
-            eli.build('div', {
-                className: 'mdc-card__actions',
-            }, [
-                eli.build('div', {
-                    className: 'mdc-card__action-buttons',
-                }, [ this.actionRefresh ]),
-                eli.build('div', {
-                    className: 'mdc-card__action-icons',
-                }, [ actionClear ]),
-            ]),
+            eliCard.actions({
+                buttons: [],
+                icons: [ actionClear ]
+            })
         ]);
 
         this.setVisible(false);
@@ -105,8 +70,8 @@ class BSBasicCard extends base.CardPrototype {
     }
 
     updateStats(stats: BrainstormingStats) {
-        this.textReviews.innerHTML = `${stats.review}`;
-        this.textSubtitle.innerHTML = i18next.t('ui.dashboard.brainstorming.basic.desc', { count: stats.nomination });
+        this.root.querySelector('count').innerHTML = `${stats.review}`;
+        this.root.querySelector('desc').innerHTML = i18next.t(StringKey.desc, { count: stats.nomination });
         this.actionRefresh.disabled = false;
     }
 }

@@ -20,6 +20,7 @@ export namespace eliIcon {
         angleUp:    '\uf106',
         angleDown:  '\uf107',
         trash:  '\uf1f8',
+        syncAlt:    '\uf2f1',
         redoAlt:    '\uf2f9',
         mapMarkerAlt:   '\uf3c5',
         brain:  '\uf5dc',

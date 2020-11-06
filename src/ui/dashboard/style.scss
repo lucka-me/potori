@@ -1,4 +1,5 @@
 @use '@material/card';
+@use '@material/typography';
 
 @include card.core-styles;
 
@@ -7,6 +8,10 @@
         height: 200px;
         margin: 4px !important;
         flex-basis: 0%;
+
+        .title {
+            @include typography.typography(headline6);
+        }
 
         .container-chart {
             flex-grow: 1;

@@ -1,6 +1,24 @@
-@use '@material/card';
-@use '@material/icon-button';
-@use '@material/typography/mdc-typography';
+@use '@material/typography';
 
-@include card.core-styles;
-@include icon-button.core-styles;
+.bs-basic-card {
+    flex: 1;
+    flex-shrink: 1;
+    > .content {
+        padding: 8px;
+        flex-grow: 1;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-between;
+
+        > .count {
+            font-weight: 300;
+            font-size: 4.5rem;
+            line-height: 4.5rem;
+        }
+
+        > .desc {
+            @include typography.typography(body1);
+            white-space: nowrap;
+        }
+    }
+}
