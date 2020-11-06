@@ -10,10 +10,7 @@ import { Status, StatusType, StatusReason } from 'service/status';
 import './style.scss';
 
 import { StringKey } from './constants';
-
-interface FilterCardBlock {
-    root: HTMLDivElement;
-}
+import { eliSwitch } from 'eli/switch';
 
 interface FilterCardEvents {
     switchType:     (type   : Status, visible: boolean) => void,
@@ -21,11 +18,6 @@ interface FilterCardEvents {
 }
 
 export default class FilterCard extends base.CardPrototype {
-
-    block = {
-        type    : { root: null } as FilterCardBlock,
-        reason  : { root: null } as FilterCardBlock,
-    }
 
     types: Map<StatusType, MDCSwitch> = new Map();
     reasons: Map<StatusReason, MDCSwitch> = new Map();
@@ -36,34 +28,32 @@ export default class FilterCard extends base.CardPrototype {
     }
 
     render() {
-        this.block.type.root = eli('div', { className: 'flex-box-row--nowrap' });
-        this.block.reason.root = eli('div', {
-            cssText: 'overflow-y: auto;',
-            className: 'flex-box-row--wrap'
-        });
+        const typeBox = eli('div', { className: 'type-box' });
+        const reasonBox = eli('div', { className: 'rejected-box' });
         this.root = eliCard('filter-card', [
             eli('div', { className: 'content' }, [
                 eli('span', { className: 'title', innerHTML: i18next.t(StringKey.title) }),
                 eli('span', { className: 'subtitle', innerHTML: i18next.t(StringKey.type) }),
-                this.block.type.root,
+                typeBox,
                 eli('span', { className: 'subtitle', innerHTML: i18next.t(StringKey.rejected) }),
-                this.block.reason.root,
+                reasonBox,
             ]),
         ]);
         this.setVisible(false);
         this.parent.append(this.root);
-        
+
+        for (const type of service.status.types.values()) {
+            const switchCtrl = FilterCard.buildSwitch(typeBox, type, type.key);
+            switchCtrl.listen('change', () => this.switchType(type, switchCtrl.checked));
+            this.types.set(type, switchCtrl);
+        }
+
         for (const reason of service.status.reasons.values()) {
-            const switchCtrl = FilterCard.buildSwitch(this.block.reason, reason, 'rejected');
+            const switchCtrl = FilterCard.buildSwitch(reasonBox, reason, 'rejected');
             switchCtrl.listen('change', () => {
                 this.switchReason(reason, switchCtrl.checked);
             });
             this.reasons.set(reason, switchCtrl);
-        }
-        for (const type of service.status.types.values()) {
-            const switchCtrl = FilterCard.buildSwitch(this.block.type, type, type.key);
-            switchCtrl.listen('change', () => this.switchType(type, switchCtrl.checked));
-            this.types.set(type, switchCtrl);
         }
     }
 
@@ -102,26 +92,10 @@ export default class FilterCard extends base.CardPrototype {
         return this.getFilter(this.reasons);
     }
 
-    private static buildSwitch(block: FilterCardBlock, status: Status, type: string) {
+    private static buildSwitch(parent: HTMLElement, status: Status, type: string) {
         const id = `switch-filter-${status.key}`;
-        const element = eli('div', { className: 'mdc-switch' }, [
-            eli('div', { className: 'mdc-switch__track' }),
-            eli('div', {
-                className: 'mdc-switch__thumb-underlay',
-                id: id,
-            }, [
-                eli('div', { className: 'mdc-switch__thumb' }, [
-                    eli('input', {
-                        type: 'checkbox',
-                        className: 'mdc-switch__native-control',
-                        role: 'switch',
-                    }),
-                ]),
-            ]),
-        ]);
-        const container = eli('div', {
-            className: 'mdc-switch-box margin-h--4',
-        }, [
+        const element = eliSwitch(id);
+        const box = eli('div', { }, [
             element,
             eli('label', {
                 className: `fa fa-fw status-${type}`,
@@ -130,7 +104,7 @@ export default class FilterCard extends base.CardPrototype {
                 innerHTML: status.icon,
             })
         ]);
-        block.root.append(container);
+        parent.append(box);
         const ctrl = new MDCSwitch(element);
         ctrl.checked = true;
         return ctrl;

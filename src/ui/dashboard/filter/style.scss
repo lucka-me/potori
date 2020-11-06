@@ -11,15 +11,29 @@
             @include typography.typography(subtitle1);
         }
 
-        .mdc-switch-box {
-            padding: 4px 0px;
+        .type-box {
             display: flex;
             flex-flow: row nowrap;
-            align-items: center;
         }
-        
-        .mdc-switch-box > label {
-            margin-left: 0.4rem;
+
+        .reason-box {
+            display: flex;
+            flex-flow: row wrap;
+            overflow-y: auto;
+        }
+
+        .type-box,.reason-box {
+            > div {
+                margin: unset 4px;
+                padding: 4px 0px;
+                display: flex;
+                flex-flow: row nowrap;
+                align-items: center;
+
+                > label {
+                    margin-left: 0.4rem;
+                }
+            }
         }
     }
 }
