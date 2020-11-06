@@ -2,14 +2,14 @@ import i18next from 'i18next';
 import mapboxgl from 'mapbox-gl';
 import { MDCRipple } from '@material/ripple';
 
-import { eli } from 'ui/eli';
+import { eli } from 'eli/eli';
+import { eliIcon } from 'eli/icon';
+import { eliIconButton } from 'eli/icon-button';
 import { LngLat } from 'service/nomination';
 import { QueryFailReason } from 'service/brainstorming';
 import UIPrototype from 'ui/base';
 
 import './style.scss';
-
-import { Icon } from './constants';
 
 type MessageCallback = (message: string) => void;
 type QueryFailCallback = (reason: QueryFailReason) => void;
@@ -34,17 +34,17 @@ export default class DetailsDialogMap extends UIPrototype {
     private buttons = {
         edit: {
             ctrl: null,
-            icon: Icon.edit,
+            icon: eliIcon.Icon.edit,
             clicked: () => this.edit(),
         } as MapButton,
         search: {
             ctrl: null,
-            icon: Icon.search,
+            icon: eliIcon.Icon.search,
             clicked: () => this.search(),
         } as MapButton,
         delete: {
             ctrl: null,
-            icon: Icon.trash,
+            icon: eliIcon.Icon.trash,
             clicked: () => this.delete(),
         } as MapButton,
     };
@@ -62,18 +62,15 @@ export default class DetailsDialogMap extends UIPrototype {
     }
 
     render() {
-        const elementMap = eli.build('div', { className: 'map' });
+        const elementMap = eli('div', { className: 'map' });
 
-        this.parent.append(eli.build('div', {
+        this.parent.append(eli('div', {
             className: 'details-map',
         }, [
-            eli.build(
+            eli(
                 'div', { className: 'buttons' },
                 Object.values(this.buttons).map((button) => {
-                    const element = eli.build('button', {
-                        className: 'fa mdc-icon-button',
-                        innerHTML: button.icon,
-                    });
+                    const element = eliIconButton(button.icon);
                     button.ctrl = new MDCRipple(element);
                     button.ctrl.unbounded = true;
                     button.ctrl.listen('click', button.clicked);
@@ -106,7 +103,7 @@ export default class DetailsDialogMap extends UIPrototype {
                     .setLngLat(lngLat).addTo(this.ctrl);
                 this.ctrl.jumpTo({ center: lngLat, zoom: 16 });
                 this.buttons.delete.ctrl.disabled = false;
-                this.buttons.edit.ctrl.root.innerHTML = Icon.edit;
+                this.buttons.edit.ctrl.root.innerHTML = eliIcon.Icon.edit;
             });
         }
         this.buttons.search.ctrl.disabled = false;
@@ -135,7 +132,7 @@ export default class DetailsDialogMap extends UIPrototype {
                     .setDraggable(true)
                     .addTo(this.ctrl);
                 this.buttons.delete.ctrl.disabled = false;
-                this.buttons.edit.ctrl.root.innerHTML = Icon.edit;
+                this.buttons.edit.ctrl.root.innerHTML = eliIcon.Icon.edit;
             });
         } else {
             this.marker.setDraggable(true);
@@ -160,7 +157,7 @@ export default class DetailsDialogMap extends UIPrototype {
                 this.marker.setDraggable(false);
             }
             this.ctrl.easeTo({ center: lngLat, zoom: 16 });
-            this.buttons.edit.ctrl.root.innerHTML = Icon.edit;
+            this.buttons.edit.ctrl.root.innerHTML = eliIcon.Icon.edit;
             this.buttons.search.ctrl.disabled = false;
             this.buttons.delete.ctrl.disabled = false;
         };
@@ -176,7 +173,7 @@ export default class DetailsDialogMap extends UIPrototype {
     private delete() {
         if (this.marker) this.marker.remove();
         this.marker = null;
-        this.buttons.edit.ctrl.root.innerHTML = Icon.plus;
+        this.buttons.edit.ctrl.root.innerHTML = eliIcon.Icon.plus;
         this.buttons.delete.ctrl.disabled = true;
     }
 
