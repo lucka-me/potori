@@ -1,6 +1,6 @@
 import { BrainstormingStats } from 'service/brainstorming';
-import { DashboardBsPrototype } from './base';
-import { DashboardPrototype } from 'ui/dashboard/base';
+import { base as bsBase } from './base';
+import { base } from 'ui/dashboard/base';
 import Nomination from 'service/nomination';
 
 import BSBasicCard      from './basic';
@@ -12,7 +12,7 @@ interface BSGroupEvents {
     analyse: (nominations: Array<Nomination>) => BrainstormingStats;
 }
 
-class BSGroup extends DashboardPrototype {
+class BSGroup extends base.CardPrototype {
 
     basic   = new BSBasicCard();
     rates   = new BSRatesCard();
@@ -61,7 +61,7 @@ class BSGroup extends DashboardPrototype {
         });
     }
 
-    forEach(callback: (card: DashboardBsPrototype) => void) {
+    forEach(callback: (card: bsBase.CardPrototype) => void) {
         Object.values(this).forEach(callback);
     }
 }
