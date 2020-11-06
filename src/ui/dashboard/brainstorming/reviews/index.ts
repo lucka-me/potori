@@ -2,16 +2,18 @@ import Chart from 'chart.js';
 import i18next from 'i18next';
 import moment from 'moment';
 
-import { eli } from 'ui/eli';
+import { eli } from 'eli/eli';
 import { BrainstormingStats } from 'service/brainstorming';
 import { base } from 'ui/dashboard/brainstorming/base';
 
 import './style.scss';
 
+import { StringKey } from './constants';
+
 class BSReviewsCard extends base.ChartCardPrototype {
     render() {
-        const canvasChart = eli.build('canvas', { className: 'canvas-chart--h' });
-        this.root = base.buildChartCard(i18next.t('ui.dashboard.brainstorming.reviews.title'), canvasChart, 3, 300);
+        const canvasChart = eli('canvas', { });
+        this.root = base.eliChartCard('bs-reviews-card', i18next.t(StringKey.title), canvasChart);
         this.setVisible(false);
         this.parent.append(this.root);
 
