@@ -8,11 +8,13 @@ import Nomination from 'service/nomination';
 
 import './style.scss';
 
+import { StringKey } from './constants';
+
 class StatsTypeCard extends base.ChartCardProtorype {
 
     render() {
-        const canvasChart = eli.build('canvas', { className: 'canvas-chart--v' });
-        this.root = base.buildChartCard(i18next.t('ui.dashboard.stats-type.title'), canvasChart, 2, 250);
+        const canvasChart = eli.build('canvas', { });
+        this.root = base.eliChartCard('stats-type-card', i18next.t(StringKey.title), canvasChart);
         this.setVisible(false);
         this.parent.append(this.root);
 
