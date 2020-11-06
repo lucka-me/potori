@@ -10,6 +10,7 @@ import { eli } from 'eli/eli';
 import { eliChipSet } from 'eli/chip';
 import { eliDialog } from 'eli/dialog';
 import { eliIcon } from 'eli/icon';
+import { eliIconButton } from 'eli/icon-button';
 import { eliRadio } from 'eli/radio';
 import { eliTextField } from 'eli/text-field';
 
@@ -119,10 +120,7 @@ class DetailsDialog extends base.DialogPrototype {
         const elementChipSetReason = eliChipSet(chipItems);
         this.chipSetReason = new MDCChipSet(elementChipSetReason);
         // Button
-        const elementReasonExpand = eli('button', {
-            className: 'fa mdc-icon-button',
-            innerHTML: eliIcon.Icon.angleDown,
-        });
+        const elementReasonExpand = eliIconButton(eliIcon.Icon.angleDown);
         const rippleReasonExpand = new MDCRipple(elementReasonExpand);
         rippleReasonExpand.unbounded = true;
         rippleReasonExpand.listen('click', () => {
@@ -156,11 +154,12 @@ class DetailsDialog extends base.DialogPrototype {
         });
 
         this.parent.append(elementDialog);
-        elementDialog.querySelector('.mdc-dialog__surface').insertBefore(
-            eli('img', { }), elementDialog.querySelector('.mdc-dialog__content')
-        );
+        const elementContent = elementDialog.querySelector('.mdc-dialog__content') as HTMLElement;
+        elementDialog
+            .querySelector('.mdc-dialog__surface')
+            .insertBefore(eli('img', { }), elementContent);
         // Map
-        this.map.init(elementDialog.querySelector('.mdc-dialog__content'));
+        this.map.init(elementContent);
         this.map.events.alert = (message) => this.events.alert(message);
         this.map.events.queryLngLat = (succeed, failed) => {
             this.events.query(
