@@ -4,16 +4,18 @@ import i18next from 'i18next';
 import { eli } from 'ui/eli';
 import { service } from 'service';
 import { base } from 'ui/dashboard/base';
-import Nomination from 'service/nomination';
-import { StatusReason } from 'service/status';
+import type Nomination from 'service/nomination';
+import type { StatusReason } from 'service/status';
 
 import './style.scss';
+
+import { StringKey } from './constants';
 
 class StatsRejectedCard extends base.ChartCardProtorype {
 
     render() {
-        const canvasChart = eli.build('canvas', { className: 'canvas-chart--v' });
-        this.root = base.buildChartCard(i18next.t('ui.dashboard.stats-rejected.title'), canvasChart, 3, 300);
+        const canvasChart = eli.build('canvas', { });
+        this.root = base.eliChartCard('stats-rejected-card', i18next.t(StringKey.title), canvasChart);
         this.setVisible(false);
         this.parent.append(this.root);
 
