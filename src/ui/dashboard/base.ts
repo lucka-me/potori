@@ -29,13 +29,6 @@ export class DashboardChartProtorype extends DashboardPrototype {
 
     chart: Chart = null;
 
-    static get color() {
-        return {
-            border: 'rgba(0, 0, 0, 0.2)',
-            borderHover: 'rgba(0, 0, 0, 0.4)',
-        };
-    }
-
     /**
      * Build a MDC card with chart inside
      * @param title     Title of the card

@@ -24,9 +24,9 @@ class StatsTypeCard extends DashboardChartProtorype {
                     data: [],
                     backgroundColor: [],
                     borderAlign: 'inner',
-                    borderColor: StatsTypeCard.color.border,
+                    borderColor: 'rgba(0, 0, 0, 0.2)',
                     hoverBackgroundColor: [],
-                    hoverBorderColor: StatsTypeCard.color.borderHover,
+                    hoverBorderColor: 'rgba(0, 0, 0, 0.4)',
                 }]
             },
             options: {

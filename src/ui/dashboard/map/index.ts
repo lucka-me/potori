@@ -1,7 +1,9 @@
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-import { eli } from 'ui/eli';
+import { eli } from 'eli/eli';
+import { eliCard } from 'eli/card';
+
 import { service } from 'service';
 import { DashboardPrototype } from 'ui/dashboard/base';
 import Nomination, { LngLat } from 'service/nomination';
@@ -24,18 +26,8 @@ class MapCard extends DashboardPrototype {
     private tasks: Array<() => void> = [];
 
     render() {
-        const elementMap = eli.build('div', {
-            cssText: [
-                'width: 100%',
-                'height: 100%',
-                'clip-path: inset(100% round 4px)',
-                '-webkit-clip-path: inset(0 round 4px)',
-            ].join(';'),
-        });
-        this.root = eli.build('div', {
-            className: 'mdc-card mdc-card--outlined flex--3 flex-shrink--1',
-            cssText: 'min-width: 300px;',
-        }, [ elementMap ]);
+        const elementMap = eli('div', { });
+        this.root = eliCard('map-card', [ elementMap ]);
         this.parent.append(this.root);
 
         mapboxgl.accessToken = 'pk.eyJ1IjoibHVja2EtbWUiLCJhIjoiY2p2NDk5NmRvMHFreTQzbzduemM1MHV4cCJ9.7XGmxnEJRoCDr-i5BBmBfw';
