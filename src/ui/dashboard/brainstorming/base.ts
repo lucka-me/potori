@@ -11,7 +11,5 @@ export namespace base {
     }
 
     export const eliChartCard = dashboardBase.eliChartCard;
-
-    export const buildChartCard = dashboardBase.buildChartCard;
-    export const fillTimeDataMap = dashboardBase.fillTimeDataMap
+    export const fillTimeDataMap = dashboardBase.fillTimeDataMap;
 }

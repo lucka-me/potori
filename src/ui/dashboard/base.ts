@@ -31,43 +31,19 @@ export namespace base {
         chart: Chart = null;
     }
 
+    /**
+     * Build a MDC card with chart inside
+     * @param name      CSS name of the card
+     * @param title     Title of the card
+     * @param canvas    Canvas element for the chart
+     * @returns The card element
+     */
     export function eliChartCard(name: string, title: string, canvas: HTMLCanvasElement) {
         return eliCard(name, [
             eli('div', { className: 'content' }, [
                 eli('span', { className: 'title', innerHTML: title }),
                 eli('div', { className: 'chart-container' }, [ canvas ]),
             ]),
-        ]);
-    }
-
-    /**
-     * Build a MDC card with chart inside
-     * @param title     Title of the card
-     * @param canvas    Canvas element for the chart
-     * @param flex      Flex size of the card
-     * @param minWidth  Mininum width fo the card
-     * @returns The card element
-     */
-    export function buildChartCard(
-        title: string, canvas: HTMLCanvasElement, flex: number, minWidth: number
-    ): HTMLDivElement {
-        return eli('div', {
-            className: [
-                'mdc-card',
-                'mdc-card--outlined',
-                'padding--8',
-                `flex--${flex}`,
-                'flex-shrink--1'
-            ].join(' '),
-            cssText: `min-width:${minWidth}px`,
-        }, [
-            eli('span', {
-                className: 'mdc-typography--headline6',
-                innerHTML: title,
-            }),
-            eli('div', {
-                className: 'chart-container',
-            }, [ canvas ]),
         ]);
     }
 
