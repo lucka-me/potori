@@ -25,13 +25,5 @@
                 position: relative;
             }
         }
-
-        .container-chart {
-            flex-grow: 1;
-            position: relative;
-
-            canvas.canvas-chart--h { width:  100% !important; }
-            canvas.canvas-chart--v { height: 100% !important; }
-        }
     }
 }
