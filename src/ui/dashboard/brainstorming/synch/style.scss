@@ -1,4 +1,33 @@
-@use '@material/card';
-@use '@material/typography/mdc-typography';
+@use '@material/typography';
 
-@include card.core-styles;
+.bs-synch-card {
+    flex: 1;
+    flex-shrink: 1;
+    > .content {
+        padding: 8px;
+        flex-grow: 1;
+        display: flex;
+        flex-flow: column nowrap;
+        justify-content: space-between;
+
+        > .synch {
+            white-space: nowrap;
+
+            > .number {
+                font-weight: 300;
+                font-size: 6rem;
+                line-height: 6rem;
+            }
+
+            > .percent {
+                font-size: 2rem;
+                line-height: 2rem;
+            }
+        }
+
+        > .desc {
+            @include typography.typography(body1);
+            white-space: nowrap;
+        }
+    }
+}
