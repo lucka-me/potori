@@ -1,11 +1,19 @@
 import { eli } from './eli';
 
 const ClassName = {
-    textfieldTextarea: [
+    textField: [
         'mdc-text-field',
         'mdc-text-field--outlined',
+    ].join(' '),
+    textfieldTextarea: [
         'mdc-text-field--textarea',
         'mdc-text-field--fullwidth'
+    ].join(' '),
+    textFieldWitchIcon: 'mdc-text-field--with-leading-icon',
+    textFieldIcon: [
+        'fa',
+        'mdc-text-field__icon',
+        'mdc-text-field__icon--leading'
     ].join(' '),
     input: 'mdc-text-field__input',
     outline: 'mdc-notched-outline',
@@ -22,33 +30,50 @@ interface EliTextFieldOptions {
     id: string,
     label: string,
     textarea?: boolean,
+    icon?: string,
+    inputType?: string,
 }
 
 export function eliTextField(options: EliTextFieldOptions): HTMLDivElement {
-    return eli('div', {
-        className: ClassName.textfieldTextarea,
-    }, [
-        eli('textarea', {
+    let classNameRoot = ClassName.textField;
+    const contents = [];
+    if (options.textarea) {
+        classNameRoot += ` ${ClassName.textfieldTextarea}`;
+        contents.push(eli('textarea', {
             className: ClassName.input,
             id: options.id,
             rows: 8, cols: 80
-        }),
+        }));
+    } else {
+        if (options.icon) {
+            classNameRoot += ` ${ClassName.textFieldWitchIcon}`;
+            contents.push(eli('i', {
+                className: ClassName.textFieldIcon,
+                innerHTML: options.icon,
+            }));
+        }
+        contents.push(eli('input', {
+            type: options.inputType,
+            className: ClassName.input,
+            id: options.id,
+        }));
+    }
+    contents.push(eli('div', {
+        className: ClassName.outline,
+    }, [
+        eli('div', { className: ClassName.outlineLeading }),
         eli('div', {
-            className: ClassName.outline,
+            className: ClassName.outlineNotch,
         }, [
-            eli('div', { className: ClassName.outlineLeading }),
-            eli('div', {
-                className: ClassName.outlineNotch,
-            }, [
-                eli('label', {
-                    className: ClassName.label,
-                    for: options.id,
-                    innerHTML: options.label,
-                }),
-            ]),
-            eli('div', { className: ClassName.outlineTrailing }),
+            eli('label', {
+                className: ClassName.label,
+                for: options.id,
+                innerHTML: options.label,
+            }),
         ]),
-    ]);
+        eli('div', { className: ClassName.outlineTrailing }),
+    ]));
+    return eli('div', { className: classNameRoot, }, contents);
 }
 
 export namespace eliTextField {
