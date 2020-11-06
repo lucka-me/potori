@@ -11,10 +11,10 @@ import './style.scss';
 /**
  * Virtual component to host all dialogs
  */
-class Dialog extends UIPrototype {
+export default class Dialog extends UIPrototype {
 
-    about       = new AboutDialog();
-    alert       = new AlertDialog();
+    about = new AboutDialog();
+    alert = new AlertDialog();
 
     details:    DetailsDialog   = null;
     import:     ImportDialog    = null;
@@ -54,5 +54,3 @@ class Dialog extends UIPrototype {
         this.match.init(this.parent);
     }
 }
-
-export default Dialog;

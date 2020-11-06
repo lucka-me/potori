@@ -191,7 +191,7 @@ class DetailsDialog extends base.DialogPrototype {
         this.map.lngLat = nomination.lngLat;
         const type = nomination.status.type;
 
-        this.ctrl.root.querySelector(`.${base.ClassName.title}`).innerHTML = nomination.title;
+        this.ctrl.root.querySelector('.mdc-dialog__title').innerHTML = nomination.title;
         this.ctrl.root.querySelector('img').src = nomination.imageUrl;
         this.textConfirmedTime.innerHTML = new Date(nomination.confirmedTime).toLocaleString();
 
