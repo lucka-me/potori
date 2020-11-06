@@ -5,7 +5,7 @@ import { eli } from 'eli/eli';
 import { eliCard } from 'eli/card';
 
 import { service } from 'service';
-import { DashboardPrototype } from 'ui/dashboard/base';
+import { base } from 'ui/dashboard/base';
 import Nomination, { LngLat } from 'service/nomination';
 
 import './style.scss';
@@ -15,7 +15,7 @@ interface MapCardEvents {
     styleLoaded: () => Array<Nomination>,
 }
 
-class MapCard extends DashboardPrototype {
+class MapCard extends base.CardPrototype {
 
     ctrl: mapboxgl.Map = null;
     events: MapCardEvents = {

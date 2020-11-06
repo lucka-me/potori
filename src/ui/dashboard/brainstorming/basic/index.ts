@@ -3,7 +3,7 @@ import { MDCRipple } from '@material/ripple';
 
 import { eli } from 'ui/eli';
 import { BrainstormingStats } from 'service/brainstorming';
-import { DashboardBsPrototype } from 'ui/dashboard/brainstorming/base';
+import { base } from 'ui/dashboard/brainstorming/base';
 
 import './style.scss';
 
@@ -12,7 +12,7 @@ interface BSBasicCardEvents {
     clear:      () => void;
 }
 
-class BSBasicCard extends DashboardBsPrototype {
+class BSBasicCard extends base.CardPrototype {
 
     textReviews     : HTMLSpanElement   = null;
     textSubtitle    : HTMLSpanElement   = null;

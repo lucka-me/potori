@@ -3,14 +3,14 @@ import i18next from 'i18next';
 
 import { eli } from 'ui/eli';
 import { BrainstormingStats, RateItems } from 'service/brainstorming';
-import { DashboardBsChartPrototype } from 'ui/dashboard/brainstorming/base';
+import { base } from 'ui/dashboard/brainstorming/base';
 
 import './style.scss';
 
-class BSRatesCard extends DashboardBsChartPrototype {
+class BSRatesCard extends base.ChartCardPrototype {
     render() {
         const canvasChart = eli.build('canvas', { className: 'canvas-chart--h' });
-        this.root = DashboardBsChartPrototype.buildChartCard(i18next.t('ui.dashboard.brainstorming.rates.title'), canvasChart, 1, 240);
+        this.root = base.buildChartCard(i18next.t('ui.dashboard.brainstorming.rates.title'), canvasChart, 1, 240);
         this.setVisible(false);
         this.parent.append(this.root);
 

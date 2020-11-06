@@ -2,15 +2,15 @@ import Chart from 'chart.js';
 import i18next from 'i18next';
 
 import { eli } from 'ui/eli';
-import { DashboardChartProtorype } from 'ui/dashboard/base';
+import { base } from 'ui/dashboard/base';
 import Nomination from 'service/nomination';
 
 import './style.scss';
 
-class QuotasCard extends DashboardChartProtorype {
+class QuotasCard extends base.ChartCardProtorype {
     render() {
         const canvasChart = eli.build('canvas', { className: 'canvas-chart--h' });
-        this.root = DashboardChartProtorype.buildChartCard(i18next.t('ui.dashboard.quotas.title'), canvasChart, 2, 200);
+        this.root = base.buildChartCard(i18next.t('ui.dashboard.quotas.title'), canvasChart, 2, 200);
 
         this.setVisible(false);
         this.parent.append(this.root);

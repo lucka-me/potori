@@ -3,7 +3,7 @@ import { MDCSwitch } from '@material/switch';
 
 import { eli } from 'ui/eli';
 import { service } from 'service';
-import { DashboardPrototype } from 'ui/dashboard/base';
+import { base } from 'ui/dashboard/base';
 import { Status, StatusType, StatusReason } from 'service/status';
 
 import './style.scss';
@@ -17,7 +17,7 @@ interface FilterCardEvents {
     switchReason:   (reason : Status, visible: boolean) => void,
 }
 
-export default class FilterCard extends DashboardPrototype {
+export default class FilterCard extends base.CardPrototype {
 
     block = {
         type    : { root: null } as FilterCardBlock,

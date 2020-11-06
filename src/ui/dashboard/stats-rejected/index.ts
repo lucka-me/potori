@@ -3,17 +3,17 @@ import i18next from 'i18next';
 
 import { eli } from 'ui/eli';
 import { service } from 'service';
-import { DashboardChartProtorype } from 'ui/dashboard/base';
+import { base } from 'ui/dashboard/base';
 import Nomination from 'service/nomination';
 import { StatusReason } from 'service/status';
 
 import './style.scss';
 
-class StatsRejectedCard extends DashboardChartProtorype {
+class StatsRejectedCard extends base.ChartCardProtorype {
 
     render() {
         const canvasChart = eli.build('canvas', { className: 'canvas-chart--v' });
-        this.root = DashboardChartProtorype.buildChartCard(i18next.t('ui.dashboard.stats-rejected.title'), canvasChart, 3, 300);
+        this.root = base.buildChartCard(i18next.t('ui.dashboard.stats-rejected.title'), canvasChart, 3, 300);
         this.setVisible(false);
         this.parent.append(this.root);
 
@@ -25,9 +25,9 @@ class StatsRejectedCard extends DashboardChartProtorype {
                     data: [],
                     backgroundColor: [],
                     borderAlign: 'inner',
-                    borderColor: StatsRejectedCard.color.border,
+                    borderColor: 'rgba(0, 0, 0, 0.2)',
                     hoverBackgroundColor: [],
-                    hoverBorderColor: StatsRejectedCard.color.borderHover,
+                    hoverBorderColor: 'rgba(0, 0, 0, 0.4)',
                 }],
             },
             options: {

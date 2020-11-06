@@ -3,16 +3,16 @@ import i18next from 'i18next';
 
 import { eli } from 'ui/eli';
 import { service } from 'service';
-import { DashboardChartProtorype } from 'ui/dashboard/base';
+import { base } from 'ui/dashboard/base';
 import Nomination from 'service/nomination';
 
 import './style.scss';
 
-class StatsTypeCard extends DashboardChartProtorype {
+class StatsTypeCard extends base.ChartCardProtorype {
 
     render() {
         const canvasChart = eli.build('canvas', { className: 'canvas-chart--v' });
-        this.root = DashboardChartProtorype.buildChartCard(i18next.t('ui.dashboard.stats-type.title'), canvasChart, 2, 250);
+        this.root = base.buildChartCard(i18next.t('ui.dashboard.stats-type.title'), canvasChart, 2, 250);
         this.setVisible(false);
         this.parent.append(this.root);
 

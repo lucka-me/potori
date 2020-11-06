@@ -4,30 +4,31 @@ import { eli } from 'ui/eli';
 import Nomination from 'service/nomination';
 import UIPrototype from 'ui/base';
 
-export class DashboardPrototype extends UIPrototype {
+export namespace base {
+    export class CardPrototype extends UIPrototype {
 
-    root: HTMLElement = null;
-
-    constructor() {
-        super();
-        Object.defineProperty(this, 'root', {
-            enumerable: false,
-        });
-    }
-    update(nominations: Array<Nomination>) { nominations }
-    updateStyle() { }
-    setVisible(visible: boolean) {
-        if (!this.root) {
-            if (!visible) return;
-            this.render();
+        root: HTMLElement = null;
+    
+        constructor() {
+            super();
+            Object.defineProperty(this, 'root', {
+                enumerable: false,
+            });
         }
-        this.root.hidden = !visible;
+        update(nominations: Array<Nomination>) { nominations }
+        updateStyle() { }
+        setVisible(visible: boolean) {
+            if (!this.root) {
+                if (!visible) return;
+                this.render();
+            }
+            this.root.hidden = !visible;
+        }
     }
-}
 
-export class DashboardChartProtorype extends DashboardPrototype {
-
-    chart: Chart = null;
+    export class ChartCardProtorype extends CardPrototype {
+        chart: Chart = null;
+    }
 
     /**
      * Build a MDC card with chart inside
@@ -37,7 +38,7 @@ export class DashboardChartProtorype extends DashboardPrototype {
      * @param minWidth  Mininum width fo the card
      * @returns The card element
      */
-    static buildChartCard(
+    export function buildChartCard(
         title: string, canvas: HTMLCanvasElement, flex: number, minWidth: number
     ): HTMLDivElement {
         return eli.build('div', {
@@ -66,7 +67,7 @@ export class DashboardChartProtorype extends DashboardPrototype {
      * @param start Start time
      * @param end End time
      */
-    static fillTimeDataMap(dataMap: Map<number, number>, start: number, end: number) {
+    export function fillTimeDataMap(dataMap: Map<number, number>, start: number, end: number) {
         let scan = start;
         while (scan <= end) {
             const month = moment(scan + 1000).startOf('month');

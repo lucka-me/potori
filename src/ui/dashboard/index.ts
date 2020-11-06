@@ -1,7 +1,7 @@
 import Chart from 'chart.js';
 
 import { eli } from 'ui/eli';
-import { DashboardPrototype } from './base';
+import { base as dashboardBase } from './base';
 import Nomination from 'service/nomination';
 import UIPrototype from 'ui/base';
 
@@ -126,7 +126,7 @@ class Dashboard extends UIPrototype {
         this.root.classList.toggle('view-hide');
     }
 
-    forEach(callback: (card: DashboardPrototype) => void) {
+    forEach(callback: (card: dashboardBase.CardPrototype) => void) {
         Object.values(this).forEach(callback);
     }
 }

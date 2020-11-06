@@ -3,15 +3,15 @@ import i18next from 'i18next';
 import moment from 'moment';
 
 import { eli } from 'ui/eli';
-import { DashboardChartProtorype } from 'ui/dashboard/base';
+import { base } from 'ui/dashboard/base';
 import Nomination from 'service/nomination';
 
 import './style.scss';
 
-class CountByMonthCard extends DashboardChartProtorype {
+class CountByMonthCard extends base.ChartCardProtorype {
     render() {
         const canvasChart = eli.build('canvas', { className: 'canvas-chart--h' });
-        this.root = DashboardChartProtorype.buildChartCard(i18next.t('ui.dashboard.count-by-month.title'), canvasChart, 3, 300);
+        this.root = base.buildChartCard(i18next.t('ui.dashboard.count-by-month.title'), canvasChart, 3, 300);
         this.setVisible(false);
         this.parent.append(this.root);
 
@@ -90,8 +90,8 @@ class CountByMonthCard extends DashboardChartProtorype {
             }
         }
         // Fill the empty months
-        DashboardChartProtorype.fillTimeDataMap(mapSub, min, max);
-        DashboardChartProtorype.fillTimeDataMap(mapRet, min, max);
+        base.fillTimeDataMap(mapSub, min, max);
+        base.fillTimeDataMap(mapRet, min, max);
         const dataSub: Array<{ t: number, y: number }> = [];
         const dataRet: Array<{ t: number, y: number }> = [];
         mapSub.forEach((value, key) => {

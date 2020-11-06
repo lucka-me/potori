@@ -2,11 +2,11 @@ import i18next from 'i18next';
 
 import { eli } from 'ui/eli';
 import { BrainstormingStats } from 'service/brainstorming';
-import { DashboardBsPrototype } from 'ui/dashboard/brainstorming/base';
+import { base } from 'ui/dashboard/brainstorming/base';
 
 import './style.scss';
 
-class BSSynchCard extends DashboardBsPrototype {
+class BSSynchCard extends base.ChartCardPrototype {
 
     textSynch: HTMLSpanElement = null;
 

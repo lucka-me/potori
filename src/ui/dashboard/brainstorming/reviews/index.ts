@@ -4,14 +4,14 @@ import moment from 'moment';
 
 import { eli } from 'ui/eli';
 import { BrainstormingStats } from 'service/brainstorming';
-import { DashboardBsChartPrototype } from 'ui/dashboard/brainstorming/base';
+import { base } from 'ui/dashboard/brainstorming/base';
 
 import './style.scss';
 
-class BSReviewsCard extends DashboardBsChartPrototype {
+class BSReviewsCard extends base.ChartCardPrototype {
     render() {
         const canvasChart = eli.build('canvas', { className: 'canvas-chart--h' });
-        this.root = DashboardBsChartPrototype.buildChartCard(i18next.t('ui.dashboard.brainstorming.reviews.title'), canvasChart, 3, 300);
+        this.root = base.buildChartCard(i18next.t('ui.dashboard.brainstorming.reviews.title'), canvasChart, 3, 300);
         this.setVisible(false);
         this.parent.append(this.root);
 
@@ -65,7 +65,7 @@ class BSReviewsCard extends DashboardBsChartPrototype {
                 mapTimes.set(sub, 1);
             }
         }
-        DashboardBsChartPrototype.fillTimeDataMap(mapTimes, min, max);
+        base.fillTimeDataMap(mapTimes, min, max);
         const dataTimes: Array<{ t: number, y: number }> = [];
         mapTimes.forEach((value, key) => {
             dataTimes.push({ t: key, y: value, });
