@@ -12,15 +12,16 @@ import './style.scss';
  */
 export default class AlertDialog extends base.DialogPrototype {
 
-    private textMessage: HTMLDivElement = null; // Dialog element
+    private textMessage: HTMLSpanElement = null; // Dialog element
 
     render() {
-        this.textMessage = eli('div', { className: base.ClassName.content });
+        this.textMessage = eli('span', { });
         const element = eliDialog(
             'alert-dialog', '',
             [ this.textMessage, ],
             [ { action: base.Action.close, text: i18next.t(base.StringKey.close) } ]
         );
+        
         this.parent.append(element);
         this.ctrl = new MDCDialog(element);
     }
