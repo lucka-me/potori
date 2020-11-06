@@ -9,6 +9,7 @@ import { MDCTextField } from '@material/textfield';
 import { eli } from 'eli/eli';
 import { eliDialog } from 'eli/dialog';
 import { eliIcon } from 'eli/icon';
+import { eliRadio } from 'eli/radio';
 
 import { service } from 'service';
 import { base } from 'ui/dialog/base';
@@ -69,42 +70,17 @@ class DetailsDialog extends base.DialogPrototype {
         const statusRadios: Array<HTMLDivElement> = [];
         for (const key of service.status.types.keys()) {
             const radioId = `radio-dialog-details-status-${key}`;
-
-            const inputRadio = eli('input', {
-                type: 'radio',
-                className: 'mdc-radio__native-control',
-                name: 'radio-dialog-details-status',
-                value: key,
-            });
-            inputRadio.addEventListener('change', (event: Event) => {
-                const target = event.target as HTMLInputElement;
-                this.selectedStatus = target.value;
-                (this.fieldResultTime.root as HTMLElement).hidden = (target.value === 'pending');
+            const elementRadio = eliRadio(radioId, 'radio-dialog-details-status', key, (value) => {
+                this.selectedStatus = value;
+                (this.fieldResultTime.root as HTMLElement).hidden = (value === 'pending');
                 this.fieldResultTime.layout();
-                this.blockReason.hidden = !(target.value === 'rejected');
+                this.blockReason.hidden = !(value === 'rejected');
                 this.map.layout();
             });
-            const elementRadio = eli('div', {
-                className: 'mdc-radio',
-            }, [
-                inputRadio,
-                eli('div', {
-                    className: 'mdc-radio__background',
-                }, [
-                    eli('div', { className: 'mdc-radio__outer-circle' }),
-                    eli('div', { className: 'mdc-radio__inner-circle' }),
-                ]),
-            ]);
-            const elementField = eli('div', {
-                className: 'mdc-form-field',
-            }, [
+            const elementField = eliRadio.form(
                 elementRadio,
-                eli('label', {
-                    for: radioId,
-                    className: `fa status-${key}`,
-                    innerHTML: service.status.types.get(key).icon,
-                }),
-            ]);
+                service.status.types.get(key).icon, radioId, `fa status-${key}`
+            );
 
             const radioCtrl = new MDCRadio(elementRadio);
             this.status.set(key, radioCtrl);
