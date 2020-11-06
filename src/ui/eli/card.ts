@@ -17,8 +17,8 @@ const ClassName = {
     buttonActionLabel: 'mdc-button__label',
 };
 
-export function eliCard(contents: Array<HTMLElement>): HTMLDivElement {
-    return eli('div', { className: ClassName.card }, contents);
+export function eliCard(name: string, contents: Array<HTMLElement>): HTMLDivElement {
+    return eli('div', { className: `${ClassName.card} ${name}` }, contents);
 }
 
 export namespace eliCard {

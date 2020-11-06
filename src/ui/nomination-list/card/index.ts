@@ -32,7 +32,7 @@ export default class NominationCard {
      * @param nomination Nomination to display
      */
     static build(nomination: Nomination) {
-        const element = eliCard([
+        const element = eliCard('nomination-card', [
             eli('div', {
                 className: 'info-box',
             }, [
@@ -48,7 +48,6 @@ export default class NominationCard {
             ]),
             eliCard.actions({ buttons: [], icons: []}),
         ]);
-        element.classList.add('nomination-card');
         element.id = `card-${nomination.id}`;
         return element;
     }
