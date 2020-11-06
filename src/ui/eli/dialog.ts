@@ -19,28 +19,38 @@ interface DialigAction {
 }
 
 export function eliDialog(
-    name: string, title: string, content: Array<HTMLElement>, actions: Array<DialigAction>
+    name: string, title: string,
+    content: Array<HTMLElement>,
+    actions: Array<DialigAction>
 ): HTMLDivElement {
+    const surface = [];
+    if (title.length > 0) {
+        surface.push(eli('h2', {
+            className: ClassName.title, innerHTML: title
+        }));
+    }
+    surface.push(eli('div', { className: ClassName.content }, content));
+    if (actions.length > 0) {
+        surface.push(eli(
+            'footer', { className: ClassName.actions },
+            actions.map((action) => eli('button', {
+                className: ClassName.button,
+                dataset: { mdcDialogAction: action.action, },
+            }, [
+                eli('span', {
+                     className: ClassName.buttonLabel, innerHTML: action.text
+                    }),
+                ])
+            ))
+        );
+    }
     return eli('div', {
         className: `${ClassName.dialog} ${name}`,
         role: 'dialog',
         ariaModal: true,
     }, [
         eli('div', { className: ClassName.container }, [
-            eli('div', { className: ClassName.surface }, [
-                eli('h2', { className: ClassName.title, innerHTML: title }),
-                eli('div', { className: ClassName.content }, content),
-                eli('footer', { className: ClassName.actions }, actions.map((action) => {
-                    return eli('button', {
-                        className: ClassName.button,
-                        dataset: { mdcDialogAction: action.action, },
-                    }, [
-                        eli('span', {
-                            className: ClassName.buttonLabel, innerHTML: action.text
-                        }),
-                    ]);
-                }))
-            ]),
+            eli('div', { className: ClassName.surface }, surface),
         ]),
         eli('div', { className: ClassName.scrim }),
     ]);
