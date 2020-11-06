@@ -1,4 +1,4 @@
-interface EliOption {
+interface EliOptions {
     className?: string,
     cssText?: string,
     innerHTML?: string,
@@ -10,7 +10,7 @@ interface EliOption {
 }
 
 export function eli<K extends keyof HTMLElementTagNameMap>(
-    tag: K, options: EliOption, children?: Array<HTMLElement | SVGElement | string>
+    tag: K, options: EliOptions, children?: Array<HTMLElement | SVGElement | string>
 ): HTMLElementTagNameMap[K] {
     const element = document.createElement(tag);
     for (const [key, value] of Object.entries(options)) {

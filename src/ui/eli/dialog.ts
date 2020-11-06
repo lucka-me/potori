@@ -18,22 +18,24 @@ interface DialigAction {
     text: string,
 }
 
-export function eliDialog(
-    name: string, title: string,
-    content: Array<HTMLElement>,
-    actions: Array<DialigAction>
-): HTMLDivElement {
+interface EliDialogOptions {
+    title?: string,
+    contents: Array<HTMLElement>,
+    actions?: Array<DialigAction>
+}
+
+export function eliDialog(name: string, options: EliDialogOptions): HTMLDivElement {
     const surface = [];
-    if (title.length > 0) {
+    if (options.title) {
         surface.push(eli('h2', {
-            className: ClassName.title, innerHTML: title
+            className: ClassName.title, innerHTML: options.title
         }));
     }
-    surface.push(eli('div', { className: ClassName.content }, content));
-    if (actions.length > 0) {
+    surface.push(eli('div', { className: ClassName.content }, options.contents));
+    if (options.actions) {
         surface.push(eli(
             'footer', { className: ClassName.actions },
-            actions.map((action) => eli('button', {
+            options.actions.map((action) => eli('button', {
                 className: ClassName.button,
                 dataset: { mdcDialogAction: action.action, },
             }, [

@@ -33,24 +33,28 @@ export default class AboutDialog extends base.DialogPrototype {
             this.exportError();
             return false;
         }
-        const element = eliDialog('about-dialog', i18next.t(StringKey.title), [
-            eli('span', { }, [
-                eliDialog.link(i18next.t(StringKey.documents), Link.documents)
-            ]),
-            eli('span', { }, [
-                eliDialog.link(i18next.t(StringKey.repo), Link.repo),
-            ]),
-            eli('span', { }, [
-                eliDialog.link(
-                    service.version.string,
-                    Link.changelog,
-                    i18next.t(StringKey.changelog)
-                ),
-            ]),
-            eli('span', { }, [ elementExportError ]),
-        ], [
-            { action: base.Action.close, text: i18next.t(base.StringKey.close) }
-        ]);
+        const element = eliDialog('about-dialog', {
+            title: i18next.t(StringKey.title),
+            contents: [
+                eli('span', { }, [
+                    eliDialog.link(i18next.t(StringKey.documents), Link.documents)
+                ]),
+                eli('span', { }, [
+                    eliDialog.link(i18next.t(StringKey.repo), Link.repo),
+                ]),
+                eli('span', { }, [
+                    eliDialog.link(
+                        service.version.string,
+                        Link.changelog,
+                        i18next.t(StringKey.changelog)
+                    ),
+                ]),
+                eli('span', { }, [ elementExportError ]),
+            ],
+            actions: [
+                { action: base.Action.close, text: i18next.t(base.StringKey.close) }
+            ]
+        });
         this.parent.append(element);
         this.ctrl = new MDCDialog(element);
     }

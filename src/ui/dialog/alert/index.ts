@@ -16,11 +16,12 @@ export default class AlertDialog extends base.DialogPrototype {
 
     render() {
         this.textMessage = eli('span', { });
-        const element = eliDialog(
-            'alert-dialog', '',
-            [ this.textMessage, ],
-            [ { action: base.Action.close, text: i18next.t(base.StringKey.close) } ]
-        );
+        const element = eliDialog('alert-dialog', { 
+            contents: [ this.textMessage, ],
+            actions: [
+                { action: base.Action.close, text: i18next.t(base.StringKey.close) }
+            ]
+        });
         
         this.parent.append(element);
         this.ctrl = new MDCDialog(element);
