@@ -1,7 +1,7 @@
 import Chart from 'chart.js';
 import i18next from 'i18next';
 
-import { eli } from 'ui/eli';
+import { eli } from 'eli/eli';
 import { base } from 'ui/dashboard/base';
 import Nomination from 'service/nomination';
 
@@ -11,7 +11,7 @@ import { StringKey } from './constants';
 
 class QuotasCard extends base.ChartCardProtorype {
     render() {
-        const canvasChart = eli.build('canvas', { });
+        const canvasChart = eli('canvas', { });
         this.root = base.eliChartCard('quotas-card', i18next.t(StringKey.title), canvasChart);
         this.setVisible(false);
         this.parent.append(this.root);

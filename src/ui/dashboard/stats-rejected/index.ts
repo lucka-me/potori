@@ -1,7 +1,7 @@
 import Chart from 'chart.js';
 import i18next from 'i18next';
 
-import { eli } from 'ui/eli';
+import { eli } from 'eli/eli';
 import { service } from 'service';
 import { base } from 'ui/dashboard/base';
 import type Nomination from 'service/nomination';
@@ -14,7 +14,7 @@ import { StringKey } from './constants';
 class StatsRejectedCard extends base.ChartCardProtorype {
 
     render() {
-        const canvasChart = eli.build('canvas', { });
+        const canvasChart = eli('canvas', { });
         this.root = base.eliChartCard('stats-rejected-card', i18next.t(StringKey.title), canvasChart);
         this.setVisible(false);
         this.parent.append(this.root);
