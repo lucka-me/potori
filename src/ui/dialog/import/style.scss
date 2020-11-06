@@ -3,3 +3,10 @@
 @use '@material/textfield';
 
 @include textfield.core-styles;
+
+.import-dialog {
+    textarea {
+        font-family: monospace;
+        line-height: 1rem !important;
+    }
+}

@@ -8,7 +8,7 @@ import { base } from 'ui/dialog/base';
 
 import './style.scss'
 
-import { Action, ClassName, Link, StringKey } from './constants';
+import { Action, Link, StringKey } from './constants';
 
 type ImportCallback = (raw: string) => void;
 
@@ -24,7 +24,6 @@ export default class ImportDialog extends base.DialogPrototype {
             label: i18next.t(StringKey.json),
             textarea: true,
         });
-        elementTextField.querySelector('textarea').classList.add('code');
         const elementDialog = eliDialog('import-dialog', {
             title: i18next.t(StringKey.title),
             contents: [

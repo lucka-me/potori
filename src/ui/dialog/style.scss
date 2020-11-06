@@ -11,11 +11,6 @@
     flex-grow: 1;
 }
 
-textarea.code {
-    font-family: monospace;
-    line-height: 1rem !important;
-}
-
 @media (prefers-color-scheme: dark) {
     .mdc-dialog .mdc-dialog__content,
     .mdc-dialog .mdc-dialog__title {

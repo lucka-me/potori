@@ -4,15 +4,6 @@ export const Action = {
     import: 'import',
 };
 
-export const ClassName = {
-    textfield: [
-        'mdc-text-field',
-        'mdc-text-field--outlined',
-        'mdc-text-field--textarea',
-        'mdc-text-field--fullwidth'
-    ].join(' '),
-};
-
 export const Link = {
     wayfarer: 'https://wayfarer.nianticlabs.com/api/v1/vault/manage',
 };
