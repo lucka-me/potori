@@ -1,6 +1,7 @@
 import moment from 'moment';
 
-import { eli } from 'ui/eli';
+import { eli } from 'eli/eli';
+import { eliCard } from 'eli/card';
 import Nomination from 'service/nomination';
 import UIPrototype from 'ui/base';
 
@@ -30,6 +31,15 @@ export namespace base {
         chart: Chart = null;
     }
 
+    export function eliChartCard(name: string, title: string, canvas: HTMLCanvasElement) {
+        return eliCard(name, [
+            eli('div', { className: 'content' }, [
+                eli('span', { className: 'title', innerHTML: title }),
+                eli('div', { className: 'chart-container' }, [ canvas ]),
+            ]),
+        ]);
+    }
+
     /**
      * Build a MDC card with chart inside
      * @param title     Title of the card
@@ -41,7 +51,7 @@ export namespace base {
     export function buildChartCard(
         title: string, canvas: HTMLCanvasElement, flex: number, minWidth: number
     ): HTMLDivElement {
-        return eli.build('div', {
+        return eli('div', {
             className: [
                 'mdc-card',
                 'mdc-card--outlined',
@@ -51,12 +61,12 @@ export namespace base {
             ].join(' '),
             cssText: `min-width:${minWidth}px`,
         }, [
-            eli.build('span', {
+            eli('span', {
                 className: 'mdc-typography--headline6',
                 innerHTML: title,
             }),
-            eli.build('div', {
-                className: 'container-chart',
+            eli('div', {
+                className: 'chart-container',
             }, [ canvas ]),
         ]);
     }

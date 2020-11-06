@@ -10,6 +10,8 @@ export namespace base {
         chart: Chart = null;
     }
 
+    export const eliChartCard = dashboardBase.eliChartCard;
+
     export const buildChartCard = dashboardBase.buildChartCard;
     export const fillTimeDataMap = dashboardBase.fillTimeDataMap
 }
