@@ -1,7 +1,7 @@
 import i18next from 'i18next';
 import { MDCMenu } from '@material/menu';
 
-import { eli } from 'ui/eli';
+import { eliMenu } from 'eli/menu';
 import UIPrototype from 'ui/base';
 
 import { AppBarMenuItems } from './constants';
@@ -25,39 +25,14 @@ export default class AppBarMenu extends UIPrototype {
     }
 
     render() {
-        const elementList = eli.build('ul', {
-            className: 'mdc-list',
-            role: 'menu',
-            ariaOrientation: 'vertical',
-        });
-        for (const value of Object.values(AppBarMenuItems)) {
-            const element = eli.build('li', {
-                className: 'mdc-list-item',
-                role: 'menuitem',
-                dataset: { code : value.key },
-                hidden: true,
-            }, [
-                eli.build('span', {
-                    className: 'mdc-list-item__text',
-                    innerHTML: i18next.t(value.title),
-                }),
-            ]);
-            this.items.set(value.key, element);
-            elementList.append(element);
-        }
+        const element = eliMenu(Object.values(AppBarMenuItems).map((item) => {
+            const elementItem = eliMenu.item(item.key, i18next.t(item.title));
+            this.items.set(item.key, elementItem);
+            return elementItem;
+        }));
         this.items.get(AppBarMenuItems.about.key).hidden = false;
 
-        const elementSurface = eli.build('div', {
-            className: 'mdc-menu mdc-menu-surface',
-        }, [ elementList ]);
-        const elementAnchor = eli.build('div', {
-            className: 'mdc-menu-surface--anchor',
-        }, [ elementSurface ]);
-        this.parent.append(eli.build('div', {
-            className: 'mdc-menu-surface--anchor'
-        }, [ elementSurface ]));
-
-        this.ctrl = new MDCMenu(elementSurface);
+        this.ctrl = new MDCMenu(element.querySelector('.mdc-menu'));
         this.ctrl.listen(
             'MDCMenu:selected',
             (event: CustomEvent) => {
