@@ -1,12 +1,15 @@
 import i18next from 'i18next';
 import { MDCSwitch } from '@material/switch';
 
-import { eli } from 'ui/eli';
+import { eli } from 'eli/eli';
+import { eliCard } from 'eli/card';
 import { service } from 'service';
 import { base } from 'ui/dashboard/base';
 import { Status, StatusType, StatusReason } from 'service/status';
 
 import './style.scss';
+
+import { StringKey } from './constants';
 
 interface FilterCardBlock {
     root: HTMLDivElement;
@@ -33,35 +36,19 @@ export default class FilterCard extends base.CardPrototype {
     }
 
     render() {
-        this.block.type.root = eli.build('div', { className: 'flex-box-row--nowrap' });
-        this.block.reason.root = eli.build('div', {
+        this.block.type.root = eli('div', { className: 'flex-box-row--nowrap' });
+        this.block.reason.root = eli('div', {
             cssText: 'overflow-y: auto;',
             className: 'flex-box-row--wrap'
         });
-        this.root = eli.build('div', {
-            className: [
-                'mdc-card',
-                'mdc-card--outlined',
-                'padding--8',
-                'flex--2',
-                'flex-shrink--0'
-            ].join(' '),
-            cssText: 'min-width: 250px',
-        }, [
-            eli.build('span', {
-                className: 'mdc-typography--headline6',
-                innerHTML: i18next.t('ui.dashboard.filter.title')
-            }),
-            eli.build('span', {
-                className: 'mdc-typography--subtitle1',
-                innerHTML: i18next.t('ui.dashboard.filter.type')
-            }),
-            this.block.type.root,
-            eli.build('span', {
-                className: 'mdc-typography--subtitle1',
-                innerHTML: i18next.t('ui.dashboard.filter.rejected')
-            }),
-            this.block.reason.root,
+        this.root = eliCard('filter-card', [
+            eli('div', { className: 'content' }, [
+                eli('span', { className: 'title', innerHTML: i18next.t(StringKey.title) }),
+                eli('span', { className: 'subtitle', innerHTML: i18next.t(StringKey.type) }),
+                this.block.type.root,
+                eli('span', { className: 'subtitle', innerHTML: i18next.t(StringKey.rejected) }),
+                this.block.reason.root,
+            ]),
         ]);
         this.setVisible(false);
         this.parent.append(this.root);
@@ -117,14 +104,14 @@ export default class FilterCard extends base.CardPrototype {
 
     private static buildSwitch(block: FilterCardBlock, status: Status, type: string) {
         const id = `switch-filter-${status.key}`;
-        const element = eli.build('div', { className: 'mdc-switch' }, [
-            eli.build('div', { className: 'mdc-switch__track' }),
-            eli.build('div', {
+        const element = eli('div', { className: 'mdc-switch' }, [
+            eli('div', { className: 'mdc-switch__track' }),
+            eli('div', {
                 className: 'mdc-switch__thumb-underlay',
                 id: id,
             }, [
-                eli.build('div', { className: 'mdc-switch__thumb' }, [
-                    eli.build('input', {
+                eli('div', { className: 'mdc-switch__thumb' }, [
+                    eli('input', {
                         type: 'checkbox',
                         className: 'mdc-switch__native-control',
                         role: 'switch',
@@ -132,11 +119,11 @@ export default class FilterCard extends base.CardPrototype {
                 ]),
             ]),
         ]);
-        const container = eli.build('div', {
+        const container = eli('div', {
             className: 'mdc-switch-box margin-h--4',
         }, [
             element,
-            eli.build('label', {
+            eli('label', {
                 className: `fa fa-fw status-${type}`,
                 for: id,
                 title: i18next.t(status.title),

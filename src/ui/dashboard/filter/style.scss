@@ -3,13 +3,23 @@
 
 @include switch.core-styles;
 
-.mdc-switch-box {
-    padding: 4px 0px;
-    display: flex;
-    flex-flow: row nowrap;
-    align-items: center;
-}
+.stats-type-card {
+    flex: 2;
+    min-width: 250px;
+    > .content {
+        > .subtitle {
+            @include typography.typography(subtitle1);
+        }
 
-.mdc-switch-box > label {
-    margin-left: 0.4rem;
+        .mdc-switch-box {
+            padding: 4px 0px;
+            display: flex;
+            flex-flow: row nowrap;
+            align-items: center;
+        }
+        
+        .mdc-switch-box > label {
+            margin-left: 0.4rem;
+        }
+    }
 }
