@@ -9,8 +9,21 @@
         margin: 4px !important;
         flex-basis: 0%;
 
-        .title {
-            @include typography.typography(headline6);
+        > .content {
+            padding: 8px;
+            flex-grow: 1;
+            display: flex;
+            flex-flow: column nowrap;
+            justify-content: space-between;
+
+            > .title {
+                @include typography.typography(headline6);
+            }
+    
+            > .chart-container {
+                flex-grow: 1;
+                position: relative;
+            }
         }
 
         .container-chart {
