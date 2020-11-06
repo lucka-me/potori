@@ -7,11 +7,12 @@ import Nomination from 'service/nomination';
 
 import './style.scss';
 
+import { StringKey } from './constants';
+
 class QuotasCard extends base.ChartCardProtorype {
     render() {
-        const canvasChart = eli.build('canvas', { className: 'canvas-chart--h' });
-        this.root = base.buildChartCard(i18next.t('ui.dashboard.quotas.title'), canvasChart, 2, 200);
-
+        const canvasChart = eli.build('canvas', { });
+        this.root = base.eliChartCard('quotas-card', i18next.t(StringKey.title), canvasChart);
         this.setVisible(false);
         this.parent.append(this.root);
 
@@ -37,7 +38,7 @@ class QuotasCard extends base.ChartCardProtorype {
                     xAxes: [{
                         scaleLabel: {
                             display: true,
-                            labelString: i18next.t('ui.dashboard.quotas.xAxis')
+                            labelString: i18next.t(StringKey.xAxis)
                         },
                     }],
                 },
