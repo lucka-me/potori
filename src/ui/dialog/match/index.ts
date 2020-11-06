@@ -1,14 +1,16 @@
 import i18next from 'i18next';
 import { MDCDialog } from '@material/dialog';
 
-import { eli } from 'ui/eli';
+import { eli } from 'eli/eli';
+import { eliIcon } from 'eli/icon';
 import { service } from 'service';
 import Nomination from 'service/nomination';
 import { base } from 'ui/dialog/base';
 
 import './style.scss';
 
-import { Action, Icon, Link, StringKey } from './constants';
+import { Action, Link, StringKey } from './constants';
+import { eliDialog } from 'eli/dialog';
 
 type CloseCallback = (matched: boolean) => void;
 
@@ -28,23 +30,16 @@ class MatchDialog extends base.DialogPrototype {
     };
 
     render() {
-        this.content = eli.build('div', {
-            className: base.ClassName.content,
+        const element = eliDialog('match-dialog',  {
+            title: i18next.t(StringKey.title),
+            contents: [],
+            actions: [
+                { action: Action.no,    text: i18next.t(StringKey.no)   },
+                { action: Action.yes,   text: i18next.t(StringKey.yes)  }
+            ]
         });
-        const element = base.buildDialog('match-dialog', [
-            eli.build('h2', {
-                className: base.ClassName.title,
-                innerHTML: i18next.t(StringKey.title)
-            }),
-            this.content,
-            eli.build('footer', {
-                className: base.ClassName.actions,
-            }, [
-                base.buildDialogAction(Action.no, i18next.t(StringKey.no)),
-                base.buildDialogAction(Action.yes, i18next.t(StringKey.yes))
-            ]),
-        ]);
         this.parent.append(element);
+        this.content = element.querySelector('.mdc-dialog__content');
         this.ctrl = new MDCDialog(element);
         this.ctrl.listen('MDCDialog:closed', (event: CustomEvent) => {
             this.events.close(event.detail.action === Action.yes);
@@ -61,8 +56,9 @@ class MatchDialog extends base.DialogPrototype {
     }
 
     private buildBlock(nomination: Nomination) {
-        const details = [];
-        this.buildDetail(Icon.arrowUp, nomination.confirmedDateString);
+        const details = [
+            this.buildDetail(eliIcon.Icon.arrowUp, nomination.confirmedDateString)
+        ];
         if (nomination.status.code > 0) {
             const type = nomination.status.type;
             details.push(this.buildDetail(
@@ -74,15 +70,15 @@ class MatchDialog extends base.DialogPrototype {
             elementResult.classList.add(`status-${type}`);
             details.push(elementResult);
         }
-        const element = eli.build('div', {
+        const element = eli('div', {
             className: 'nomination-block'
         }, [
-            eli.build('img', {
+            eli('img', {
                 src: nomination.image.length > 0 ? nomination.imageUrl : Link.missing
             }),
-            eli.build('div', {  }, [
-                eli.build('span', { innerHTML: nomination.title }),
-                eli.build('div', { }, details),
+            eli('div', {  }, [
+                eli('span', { innerHTML: nomination.title }),
+                eli('div', { }, details),
             ]),
         ]);
         this.content.append(element);
@@ -94,9 +90,9 @@ class MatchDialog extends base.DialogPrototype {
      * @param text Text to display
      */
     private buildDetail(icon: string, text: string): HTMLSpanElement {
-        return eli.build('span', { }, [
-            eli.icon(icon),
-            eli.build('span', { innerHTML: text }),
+        return eli('span', { }, [
+            eliIcon(icon),
+            eli('span', { innerHTML: text }),
         ]);
     }
 };

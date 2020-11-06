@@ -5,10 +5,6 @@ export const Action = {
     yes: 'yes',
 };
 
-export const Icon = {
-    arrowUp: '\uf062',
-};
-
 export const Link = {
     missing: 'https://wayfarer.nianticlabs.com/img/missing_image.png',
 };
