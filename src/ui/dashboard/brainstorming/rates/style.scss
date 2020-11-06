@@ -1,3 +1,9 @@
-@use '@material/card';
-
-@include card.core-styles;
+.bs-rates-card {
+    flex: 1;
+    min-width: 240px;
+    > .content {
+        canvas {
+            width:  100% !important;
+        }
+    }
+}
