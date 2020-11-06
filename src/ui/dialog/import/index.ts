@@ -2,8 +2,8 @@ import i18next from 'i18next';
 import { MDCDialog } from '@material/dialog';
 import { MDCTextField } from '@material/textfield';
 
-import { eli } from 'eli/eli';
 import { eliDialog } from 'eli/dialog';
+import { eliTextField } from 'eli/text-field';
 import { base } from 'ui/dialog/base';
 
 import './style.scss'
@@ -19,46 +19,20 @@ export default class ImportDialog extends base.DialogPrototype {
     import: ImportCallback = () => { }; // Triggered when click Import button
 
     render() {
-        const elementTextField = eli('div', {
-            className: ClassName.textfield,
-        }, [
-            eli('textarea', {
-                className: 'mdc-text-field__input code',
-                id: 'input-dialog-import-wayfarer',
-                rows: 8, cols: 80
-            }),
-            eli('div', {
-                className: 'mdc-notched-outline',
-            }, [
-                eli('div', { className: 'mdc-notched-outline__leading' }),
-                eli('div', {
-                    className: 'mdc-notched-outline__notch',
-                }, [
-                    eli('label', {
-                        className: 'mdc-floating-label',
-                        for: 'input-dialog-import-wayfarer',
-                        innerHTML: i18next.t(StringKey.json),
-                    }),
-                ]),
-                eli('div', { className: 'mdc-notched-outline__trailing' }),
-            ]),
-        ]);
+        const elementTextField = eliTextField({
+            id: 'input-dialog-import-wayfarer',
+            label: i18next.t(StringKey.json),
+            textarea: true,
+        });
+        elementTextField.querySelector('textarea').classList.add('code');
         const elementDialog = eliDialog('import-dialog', {
             title: i18next.t(StringKey.title),
             contents: [
                 elementTextField,
-                eli('div', {
-                    className: 'mdc-text-field-helper-line',
-                }, [
-                    eli('div', {
-                        className: 'mdc-text-field-helper-text mdc-text-field-helper-text--persistent',
-                    }, [
-                        i18next.t(StringKey.from),
-                        eliDialog.link(
-                            i18next.t(StringKey.wayfarer), Link.wayfarer
-                        ),
-                    ]),
-                ]),
+                eliTextField.helper([
+                    i18next.t(StringKey.from),
+                    eliDialog.link(i18next.t(StringKey.wayfarer), Link.wayfarer),
+                ])
             ],
             actions: [
                 { action: base.Action.close, text: i18next.t(base.StringKey.close) },
