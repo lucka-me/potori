@@ -3,6 +3,7 @@ import { eli } from './eli';
 const ClassName = {
     anchor: 'mdc-menu-surface--anchor',
     surface: 'mdc-menu mdc-menu-surface',
+    list: 'mdc-list',
     item: 'mdc-list-item',
     itemText: 'mdc-list-item__text',
 };
@@ -13,7 +14,14 @@ export function eliMenu(items: Array<HTMLLIElement>): HTMLDivElement {
     }, [ 
         eli('div', {
             className: ClassName.surface,
-        }, items)
+        }, [
+            eli('ul', {
+                className: ClassName.list,
+                role: 'menu',
+                ariaHidden: true,
+                ariaOrientation: 'vertical',
+            }, items)
+        ])
     ]);
 }
 
