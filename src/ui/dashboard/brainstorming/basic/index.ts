@@ -70,8 +70,8 @@ class BSBasicCard extends base.CardPrototype {
     }
 
     updateStats(stats: BrainstormingStats) {
-        this.root.querySelector('count').innerHTML = `${stats.review}`;
-        this.root.querySelector('desc').innerHTML = i18next.t(StringKey.desc, { count: stats.nomination });
+        this.root.querySelector('.count').innerHTML = `${stats.review}`;
+        this.root.querySelector('.desc').innerHTML = i18next.t(StringKey.desc, { count: stats.nomination });
         this.actionRefresh.disabled = false;
     }
 }
