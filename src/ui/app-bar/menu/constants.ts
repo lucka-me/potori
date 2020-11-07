@@ -9,5 +9,5 @@ export const AppBarMenuItems = {
     upload   : { key: 'upload'  , title: `${StringKeyBase}.upload`  },
     import   : { key: 'import'  , title: `${StringKeyBase}.import`  },
     about    : { key: 'about'   , title: `${StringKeyBase}.about`   },
-    signout  : { key: 'signout' , title: `${StringKeyBase}.signout` },
+    signout  : { key: 'signout' , title: `${StringKeyBase}.signOut` },
 };
