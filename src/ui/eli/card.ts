@@ -32,7 +32,7 @@ export namespace eliCard {
             element.append(eli('div', { className: ClassName.actionButtons }, content.buttons));
         }
         if (content.icons) {
-            element.append(eli('div', { className: ClassName.actionIcons }, content.buttons));
+            element.append(eli('div', { className: ClassName.actionIcons }, content.icons));
         }
         return element;
     }
