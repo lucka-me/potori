@@ -1,6 +1,6 @@
 import Chart from 'chart.js';
 
-import { eli } from 'ui/eli';
+import { eli } from 'eli/eli';
 import { base as dashboardBase } from './base';
 import Nomination from 'service/nomination';
 import UIPrototype from 'ui/base';
@@ -72,22 +72,8 @@ class Dashboard extends UIPrototype {
     }
 
     render() {
-        this.root = eli.build('div', {
-            className: [
-                'flex--2',
-                'flex-box-row--wrap',
-                'flex-align-items--start',
-                'flex-align-content--start',
-                'padding--4',
-                'dashboard',
-            ].join(' '),
-            cssText: [
-                'height: 100%',
-                'box-sizing: border-box',
-                'overflow-y: auto',
-                'scroll-behavior: smooth',
-                '-webkit-overflow-scrolling: touch',
-            ].join(';'),
+        this.root = eli('div', {
+            className: 'dashboard',
         });
         this.parent.append(this.root);
     }

@@ -4,6 +4,18 @@
 @include card.core-styles;
 
 .dashboard {
+    flex: 2;
+    height: 100%;
+    box-sizing: border-box;
+    padding: 4px;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: flex-start;
+    align-content: flex-start;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+
     > .mdc-card {
         height: 200px;
         margin: 4px !important;
