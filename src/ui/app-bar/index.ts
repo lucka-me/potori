@@ -2,15 +2,17 @@ import i18next from 'i18next';
 import { MDCRipple } from '@material/ripple';
 import { MDCTopAppBar } from '@material/top-app-bar';
 
-import { eli } from 'ui/eli';
+import { eliAppBar } from 'eli/app-bar';
+import { eliIcon } from 'eli/icon';
+import { eliIconButton } from 'eli/icon-button';
 import UIPrototype from 'ui/base';
 
-import { AppBarActions, ClassName, StringKey } from './constants';
-import { AppBarMenuItems } from './menu/constants';
+import './style.scss';
+
+import { AppBarActions, StringKey } from './constants';
 
 import type AppBarMenu from './menu';
-
-import './style.scss';
+import { AppBarMenuItems } from './menu/constants';
 
 type AppBarActionClickCallback = () => void;
 
@@ -19,12 +21,14 @@ type AppBarActionClickCallback = () => void;
  */
 class AppBar extends UIPrototype {
 
+    private root: HTMLHeadElement = null;
+
     menu: AppBarMenu = null;    // Menu component
 
     actions: Map<string, HTMLButtonElement> = new Map();        // Actions
     events: Map<string, AppBarActionClickCallback> = new Map(); // Click events for actions
 
-    private sectionActions: HTMLElement = null;
+    // private sectionActions: HTMLElement = null;
 
     constructor() {
         super();
@@ -37,16 +41,10 @@ class AppBar extends UIPrototype {
     }
 
     render() {
-        this.sectionActions = eli.build('section', {
-            className: ClassName.sectionActions,
-        });
+        const actions = [];
         for (const value of Object.values(AppBarActions)) {
-            const elementAction = eli.build('button', {
-                className: ClassName.action,
-                title: i18next.t(value.title),
-                innerHTML: value.icon,
-            });
-            this.sectionActions.append(elementAction);
+            const elementAction = eliIconButton(value.icon, i18next.t(value.title))
+            actions.push(elementAction);
             const rippleAction = new MDCRipple(elementAction);
             rippleAction.unbounded = true;
             rippleAction.listen('click', this.events.get(value.key));
@@ -58,29 +56,11 @@ class AppBar extends UIPrototype {
         this.actions.get(AppBarActions.open.key).hidden = false;
         this.actions.get(AppBarActions.about.key).hidden = false;
 
-        const elementAppBar = eli.build('header', {
-            className: ClassName.appBar,
-        }, [
-            eli.build('div', {
-                className: 'mdc-top-app-bar__row',
-            }, [
-                eli.build('section', {
-                    className: ClassName.sectionTitle,
-                }, [
-                    eli.build('span', {
-                        className: 'mdc-top-app-bar__title',
-                        innerHTML: 'Potori',
-                    }),
-                ]),
-                this.sectionActions,
-            ]),
-        ]);
+        this.root = eliAppBar('Potori', actions);
 
-        this.parent.append(elementAppBar);
-        this.parent.append(eli.build('div', {
-            className: 'mdc-top-app-bar--fixed-adjust'
-        }));
-        new MDCTopAppBar(elementAppBar);
+        this.parent.append(this.root);
+        this.parent.append(eliAppBar.fixedAdjust());
+        new MDCTopAppBar(this.root);
     }
 
     async prepare() {
@@ -92,7 +72,7 @@ class AppBar extends UIPrototype {
             './menu'
         );
         this.menu = new AppBarMenu.default();
-        this.menu.init(this.sectionActions);
+        this.menu.init(this.root.querySelector('.mdc-top-app-bar__section--align-end'));
 
         this.actions.get(AppBarActions.menu.key).hidden = false;
         this.actions.get(AppBarActions.open.key).hidden = true;
@@ -104,8 +84,8 @@ class AppBar extends UIPrototype {
      */
     switchView() {
         const actionView = this.actions.get(AppBarActions.view.key);
-        const switchToList = actionView.innerHTML === '\uf00b';
-        actionView.innerHTML = switchToList ? '\uf3fd' : '\uf00b';
+        const switchToList = actionView.innerHTML === eliIcon.Icon.thList;
+        actionView.innerHTML = switchToList ? eliIcon.Icon.tachometerAlt : eliIcon.Icon.thList;
         actionView.title = i18next.t(switchToList ? StringKey.dashboard : StringKey.list);
     }
 }
