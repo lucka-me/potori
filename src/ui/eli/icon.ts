@@ -28,6 +28,7 @@ export namespace eliIcon {
         syncAlt:    '\uf2f1',
         redoAlt:    '\uf2f9',
         mapMarkerAlt:   '\uf3c5',
+        tachometerAlt:  '\uf3fd',
         brain:  '\uf5dc',
     };
 }
