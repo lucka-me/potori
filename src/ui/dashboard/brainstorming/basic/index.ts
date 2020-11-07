@@ -60,7 +60,7 @@ class BSBasicCard extends base.CardPrototype {
                 })
             ]),
             eliCard.actions({
-                buttons: [],
+                buttons: [ this.actionRefresh ],
                 icons: [ actionClear ]
             })
         ]);
