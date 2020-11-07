@@ -103,6 +103,13 @@ body {
 h1, h2, h3, h4 { margin-block-end: 0; }
 a { color: var(--mdc-theme-text-primary-on-light); }
 
+.main-box {
+    min-height: 0%;
+    flex: 1;
+    display: flex;
+    flex-flow: row nowrap;
+}
+
 .fa.mdc-icon-button,
 .far.mdc-icon-button {
     font-size: 18px;

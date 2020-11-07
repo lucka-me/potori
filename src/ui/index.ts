@@ -1,6 +1,6 @@
 import i18next from 'i18next';
 
-import { eli } from './eli';
+import { eli } from 'eli/eli';
 import { service } from 'service';
 import Nomination from 'service/nomination';
 import { StatusReason, StatusType } from 'service/status';
@@ -46,16 +46,7 @@ export namespace ui {
         progress.init(body);
 
         // MainBox
-        mainBox = eli.build('div', {
-            className: [
-                'flex--1',
-                'flex-box-row--wrap',
-                'main-box'
-            ].join(' '),
-            cssText: [
-                'min-height: 0%',
-            ].join(';'),
-        });
+        mainBox = eli('div', { className: 'main-box' });
         body.append(mainBox);
 
         // Snackbar
@@ -327,7 +318,7 @@ export namespace ui {
     }
 
     function openFileUI(opened: (file: File) => void) {
-        const element = eli.build('input', {
+        const element = eli('input', {
             cssText: 'display:none;',
             type: 'file', accept: 'json'
         });
@@ -342,7 +333,7 @@ export namespace ui {
     }
 
     function saveFileUI(filename: string, href: string) {
-        const element = eli.build('a', {
+        const element = eli('a', {
             cssText: 'display:none',
             href: href,
             download: filename,
