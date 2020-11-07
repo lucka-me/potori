@@ -32,7 +32,6 @@ export namespace ui {
         document.documentElement.lang = i18next.language;
 
         const body = document.body;
-        body.className = 'mdc-typography flex-box-col';
 
         // AppBar
         appBar.events.set(AppBarActions.view.key    , () => switchView());
