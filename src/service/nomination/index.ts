@@ -3,6 +3,8 @@ import i18next from 'i18next';
 import { service } from 'service';
 import { Status } from 'service/status';
 
+import { StringKey } from './constants';
+
 const now = Date.now();
 
 /**
@@ -66,7 +68,7 @@ export default class Nomination {
         if (this.confirmedTime > 0) {
             return new Date(this.confirmedTime).toLocaleDateString();
         }
-        return i18next.t('service.nomination.missing');
+        return i18next.t(StringKey.missing);
     }
 
     /**
@@ -81,7 +83,7 @@ export default class Nomination {
      */
     get intervalString(): string {
         const end = this.resultTime ? this.resultTime : now;
-        return i18next.t('service.nomination.day', {
+        return i18next.t(StringKey.day, {
             count: Math.floor((end - this.confirmedTime) / (24 * 3600 * 1000))
         });
     }
@@ -90,7 +92,7 @@ export default class Nomination {
      * Get string of interval between now and restore time
      */
     get restoreIntervalString(): string {
-        return i18next.t('service.nomination.day', {
+        return i18next.t(StringKey.day, {
             count: Math.floor((this.restoreTime - now) / (24 * 3600 * 1000))
         });
     }
@@ -124,20 +126,19 @@ export default class Nomination {
      * @throws An `Error` when JSON missing `id`, `title`, `image` or `confirmedTime`
      */
     static parse(json: any): Nomination {
-        if (!json.id) throw new Error('message:service.nomination.parseNoId');
-        if (!json.title) throw new Error('message:service.nomination.parseNoTitle');
-        if (!json.image) throw new Error('message:service.nomination.parseNoImage');
-        if (!json.confirmedTime) throw new Error('message:service.nomination.parseNoConfirmedTime');
+        if (!json.id) throw new Error(StringKey.messageParseErrorMissingId);
+        if (!json.title) throw new Error(StringKey.messageParseErrorMissingTitle);
+        if (!json.image) throw new Error(StringKey.messageParseErrorMissingImage);
 
         // Fix old issues
         const image = (json.image as string).replace('\r', '');
 
         // Test format
         if (!/^[a-zA-Z0-9]+$/.test(json.id)) {
-            throw new Error('message:service.nomination.parseFormatId');
+            throw new Error(StringKey.messageParseErrorInvalidId);
         }
         if (!/^[0-9a-zA-Z\-\_]+$/.test(image)) {
-            throw new Error('message:service.nomination.parseFormatImage');
+            throw new Error(StringKey.messageParseErrorInvalidImage);
         }
 
         const nomination = new Nomination();
@@ -167,6 +168,6 @@ export default class Nomination {
      * @param imgUrl Hash part of the image URL
      */
     static parseId(imgUrl: string): string {
-        return imgUrl.replace(/[^a-zA-Z0-9]/g, '').slice(- 10).toLowerCase();
+        return imgUrl.replace(/[^a-zA-Z0-9]/g, '').slice(-10).toLowerCase();
     }
 }
