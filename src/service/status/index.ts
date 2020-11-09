@@ -67,8 +67,6 @@ export class StatusReason extends Status {
  * Keep all status data
  */
 export default class StatusKit {
-
-    readonly version: string = data.version;    // Data version
     
     readonly types  : Map<string, StatusType>   = new Map();    // <key, type>
     readonly reasons: Map<string, StatusReason> = new Map();    // <key, reason>
