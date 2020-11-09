@@ -23,7 +23,7 @@ class BSReviewsCard extends base.ChartCardPrototype {
             data: {
                 labels: [],
                 datasets: [{
-                    label: i18next.t('ui.dashboard.brainstorming.reviews.desc'),
+                    label: i18next.t(StringKey.desc),
                     data: [],
                     borderColor: style.getPropertyValue('--mdc-theme-primary'),
                     pointRadius: 0,

@@ -8,6 +8,7 @@ import UIPrototype from 'ui/base';
 import './style.scss';
 
 import NominationCard, { NominationCardEvents } from './card';
+import { StringKey } from './constants';
 
 interface NominationListEvents {
     alert: (message: string) => void;
@@ -78,7 +79,7 @@ export default class NominationList extends UIPrototype {
                     window.open(nomination.bsUrl, '_blank', 'noopener');
                 } else {
                     eli.copy(nomination.id);
-                    this.events.alert(i18next.t('message:ui.list-view.bsIdCopied', { id: nomination.id }));
+                    this.events.alert(i18next.t(StringKey.messageBsIdCopied, { id: nomination.id }));
                 }
             },
             openDetails: () => this.events.openDetails(nomination),

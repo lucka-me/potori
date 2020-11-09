@@ -1,4 +1,4 @@
-const StringKeyBase = 'ui.list-view.card';
+const StringKeyBase = 'ui.nomination-list.card';
 
 export const StringKey = {
     location: `${StringKeyBase}.location`,

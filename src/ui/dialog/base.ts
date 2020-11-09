@@ -3,12 +3,15 @@ import type { MDCDialog } from '@material/dialog';
 import UIPrototype from 'ui/base';
 
 export namespace base {
+
+    const StringKeyBase = 'ui.dialog';
+
     export const Action = {
         close: 'close'
     };
     
     export const StringKey = {
-        close: 'ui.dialog.close'
+        close: `${StringKeyBase}.close`,
     };
     
     /**
