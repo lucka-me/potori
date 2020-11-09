@@ -1,14 +1,18 @@
 # Changelog
 Noteable changes of Potori will be documented here. For [Status Data](./src/data/status.json), please refer to [Data Changelog](#data-changelog).
 
-## [0.7.10](https://github.com/lucka-me/potori/releases/tag/0.7.10) - 2020-TBA
-- TBA
+## [0.7.10](https://github.com/lucka-me/potori/releases/tag/0.7.10) - 2020-11-09
+- Optimize and add error handlers
 
 ### Added
 - Display an dialog to ask manually match if the nomination's image is missing
 - Display an alert to ask report when error occurs during parsing mail
 - Log error and export in About dialog
 
+### Changed
+- Allow `confirmedTime` being missing
+- Ignore nominations missing `confirmedTime` in Count By Month card
+- Optimize element creation process
 
 ## [0.7.9](https://github.com/lucka-me/potori/releases/tag/0.7.9) - 2020-10-24
 - Fixed various issues caused by incorrect data
