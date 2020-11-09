@@ -120,9 +120,11 @@ export default class NominationCard {
             }
         }
         // Brainstorming watermeter
-        elementIcons.append(NominationCard.buildIconAction(
-            eliIcon.Icon.brain, StringKey.bsWatermeter, events.openBs
-        ));
+        if (!service.bs.beforeCreate(nomination)) {
+            elementIcons.append(NominationCard.buildIconAction(
+                eliIcon.Icon.brain, StringKey.bsWatermeter, events.openBs
+            ));
+        }
     }
 
     /**
