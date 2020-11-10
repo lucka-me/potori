@@ -32,7 +32,7 @@
     "@types/gapi.auth2": "0.0.52",
     "@types/gapi.client.drive": "^3.0.12",
     "@types/gapi.client.gmail": "^1.0.2",
-    "@types/lodash": "^4.14.163",
+    "@types/lodash": "^4.14.165",
     "@types/mapbox-gl": "^1.12.5",
     "@types/mini-css-extract-plugin": "^1.2.0",
     "@types/terser-webpack-plugin": "^5.0.1",
