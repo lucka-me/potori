@@ -34,7 +34,7 @@
     "@types/gapi.client.gmail": "^1.0.2",
     "@types/lodash": "^4.14.165",
     "@types/mapbox-gl": "^1.12.5",
-    "@types/mini-css-extract-plugin": "^1.2.0",
+    "@types/mini-css-extract-plugin": "^1.2.1",
     "@types/terser-webpack-plugin": "^5.0.1",
     "@types/webpack": "^4.41.24",
     "@types/webpack-bundle-analyzer": "^3.9.0",
