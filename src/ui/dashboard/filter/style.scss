@@ -7,6 +7,8 @@
     flex: 2;
     min-width: 250px;
     > .content {
+        justify-content: flex-start !important;
+
         > .subtitle {
             @include typography.typography(subtitle1);
         }
@@ -17,12 +19,15 @@
         }
 
         .reason-box {
+            flex: 1;
             display: flex;
             flex-flow: row wrap;
             overflow-y: auto;
         }
 
         .type-box,.reason-box {
+            align-content: flex-start;
+
             > div {
                 margin: unset 4px;
                 padding: 4px 0px;

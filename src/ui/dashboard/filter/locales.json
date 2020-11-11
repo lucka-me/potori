@@ -6,12 +6,6 @@
             "zh-HK": "篩選",
             "zh-TW": "篩選"
         },
-        "type": {
-            "en-US": "Type",
-            "zh-CN": "类型",
-            "zh-HK": "類型",
-            "zh-TW": "類型"
-        },
         "rejected": {
             "en-US": "Rejected",
             "zh-CN": "拒绝",

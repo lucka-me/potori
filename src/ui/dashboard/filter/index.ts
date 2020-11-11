@@ -33,7 +33,6 @@ export default class FilterCard extends base.CardPrototype {
         this.root = eliCard('filter-card', [
             eli('div', { className: 'content' }, [
                 eli('span', { className: 'title', innerHTML: i18next.t(StringKey.title) }),
-                eli('span', { className: 'subtitle', innerHTML: i18next.t(StringKey.type) }),
                 typeBox,
                 eli('span', { className: 'subtitle', innerHTML: i18next.t(StringKey.rejected) }),
                 reasonBox,
