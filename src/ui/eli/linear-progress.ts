@@ -13,6 +13,10 @@ const ClassName = {
 export function eliLinearProgress() {
     return eli('div', {
         className: ClassName.linearProgress,
+        role: 'progressbar',
+        ariaValuemin: 0,
+        ariaValuemax: 1,
+        ariaValuenow: 0,
     }, [
         eli('div', { className: ClassName.buffer }, [
             eli('div', { className: ClassName.bufferBar }),
