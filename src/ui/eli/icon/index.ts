@@ -1,5 +1,7 @@
 import { eli } from 'eli/eli';
 
+import './style.scss';
+
 export function eliIcon(icon: string): HTMLElement {
     return eli('i', {
         className: 'fa fa-fw',
