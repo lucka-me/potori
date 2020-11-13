@@ -1,10 +1,9 @@
 @use '@material/chips/mdc-chips';
 @use '@material/form-field';
-@use '@material/radio';
+@use '~@material/radio/styles';
 @use '@material/typography';
 
 @include form-field.core-styles;
-@include radio.core-styles;
 
 .details-dialog {
     img {

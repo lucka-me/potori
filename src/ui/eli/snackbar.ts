@@ -16,9 +16,13 @@ export function eliSnackbar() {
             role: 'status',
             ariaRelevant: 'additions',
         }, [
-            eli('div', { className: ClassName.label }),
+            eli('div', {
+                className: ClassName.label,
+                ariaAtomic: false,
+            }),
             eli('div', {
                 className: ClassName.actions,
+                ariaAtomic: true,
             }, [
                 eli('button', {
                     className: ClassName.dismiss,

@@ -32,6 +32,7 @@ export function eliAppBar(title: string, actions: Array<HTMLElement>) {
             ]),
             eli('section', {
                 className: ClassName.sectionEnd,
+                role: 'toolbar'
             }, actions)
         ]),
     ]);

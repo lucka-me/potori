@@ -10,6 +10,7 @@ const ClassName = {
     scrim: 'mdc-dialog__scrim',
 
     button: 'mdc-button mdc-dialog__button',
+    buttonRipple: 'mdc-button__ripple',
     buttonLabel: 'mdc-button__label',
 };
 
@@ -35,16 +36,20 @@ export function eliDialog(name: string, options: EliDialogOptions): HTMLDivEleme
     if (options.actions) {
         surface.push(eli(
             'footer', { className: ClassName.actions },
-            options.actions.map((action) => eli('button', {
-                className: ClassName.button,
-                dataset: { mdcDialogAction: action.action, },
-            }, [
-                eli('span', {
-                     className: ClassName.buttonLabel, innerHTML: action.text
+            options.actions.map((action) => eli(
+                'button',
+                {
+                    className: ClassName.button,
+                    dataset: { mdcDialogAction: action.action, },
+                }, 
+                [
+                    eli('div', { className: ClassName.buttonRipple }),
+                    eli('span', {
+                        className: ClassName.buttonLabel, innerHTML: action.text
                     }),
-                ])
+                ]
             ))
-        );
+        ));
     }
     return eli('div', {
         className: `${ClassName.dialog} ${name}`,

@@ -36,7 +36,23 @@ interface EliTextFieldOptions {
 
 export function eliTextField(options: EliTextFieldOptions): HTMLDivElement {
     let classNameRoot = ClassName.textField;
-    const contents = [];
+    const contents: Array<HTMLElement> = [
+        eli('div', {
+            className: ClassName.outline,
+        }, [
+            eli('div', { className: ClassName.outlineLeading }),
+            eli('div', {
+                className: ClassName.outlineNotch,
+            }, [
+                eli('span', {
+                    className: ClassName.label,
+                    id: options.id,
+                    innerHTML: options.label,
+                }),
+            ]),
+            eli('div', { className: ClassName.outlineTrailing }),
+        ])
+    ];
     if (options.textarea) {
         classNameRoot += ` ${ClassName.textfieldTextarea}`;
         contents.push(eli('textarea', {
@@ -55,24 +71,10 @@ export function eliTextField(options: EliTextFieldOptions): HTMLDivElement {
         contents.push(eli('input', {
             type: options.inputType,
             className: ClassName.input,
-            id: options.id,
+            ariaLabelledby: options.id,
         }));
     }
-    contents.push(eli('div', {
-        className: ClassName.outline,
-    }, [
-        eli('div', { className: ClassName.outlineLeading }),
-        eli('div', {
-            className: ClassName.outlineNotch,
-        }, [
-            eli('label', {
-                className: ClassName.label,
-                for: options.id,
-                innerHTML: options.label,
-            }),
-        ]),
-        eli('div', { className: ClassName.outlineTrailing }),
-    ]));
+    
     return eli('div', { className: classNameRoot, }, contents);
 }
 
