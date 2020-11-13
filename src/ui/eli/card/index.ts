@@ -1,4 +1,4 @@
-import { eli } from './eli';
+import { eli } from 'eli/eli';
 
 const ClassName = {
     card: 'mdc-card mdc-card--outlined',

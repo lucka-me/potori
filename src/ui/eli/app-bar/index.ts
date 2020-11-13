@@ -1,4 +1,4 @@
-import { eli } from './eli';
+import { eli } from '../eli';
 
 const ClassName = {
     appBar: 'mdc-top-app-bar mdc-top-app-bar--fixed',

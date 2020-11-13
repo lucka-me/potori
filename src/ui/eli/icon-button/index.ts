@@ -1,4 +1,4 @@
-import { eli } from './eli';
+import { eli } from 'eli/eli';
 
 export function eliIconButton(icon: string, title?: string) {
     return eli('button', {

@@ -1,5 +1,5 @@
-import { eli } from './eli';
-import { eliIcon } from './icon';
+import { eli } from 'eli/eli';
+import { eliIcon } from 'eli/icon';
 
 const ClassName = {
     snackbar: 'mdc-snackbar',
