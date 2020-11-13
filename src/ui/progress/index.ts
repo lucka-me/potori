@@ -3,8 +3,6 @@ import { MDCLinearProgress } from '@material/linear-progress';
 import { eliLinearProgress } from 'eli/linear-progress';
 import UIPrototype from 'ui/base';
 
-import './style.scss';
-
 /**
  * Progress bar component
  */

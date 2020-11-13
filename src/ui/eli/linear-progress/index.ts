@@ -1,5 +1,7 @@
 import { eli } from 'eli/eli';
 
+import './style.scss';
+
 const ClassName = {
     linearProgress: 'mdc-linear-progress',
     buffer: 'mdc-linear-progress__buffer',
