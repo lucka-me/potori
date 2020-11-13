@@ -1,8 +1,6 @@
 @use '@material/button';
-@use '@material/dialog';
 @use '@material/typography/mdc-typography';
 
-@include dialog.core-styles;
 @include button.core-styles;
 
 .mdc-dialog-content-block {

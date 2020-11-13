@@ -1,5 +1,7 @@
 import { eli } from 'eli/eli';
 
+import './style.scss';
+
 const ClassName = {
     dialog: 'mdc-dialog',
     container: 'mdc-dialog__container',
