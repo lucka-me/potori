@@ -1,5 +1,7 @@
 import { eli } from 'eli/eli';
 
+import './style.scss';
+
 const ClassName = {
     chip: 'mdc-chip',
     ripple: 'mdc-chip__ripple',
