@@ -36,7 +36,7 @@
     "@types/mapbox-gl": "^1.12.5",
     "@types/mini-css-extract-plugin": "^1.2.1",
     "@types/terser-webpack-plugin": "^5.0.1",
-    "@types/webpack": "^4.41.24",
+    "@types/webpack": "^4.41.25",
     "@types/webpack-bundle-analyzer": "^3.9.0",
     "@types/webpack-dev-server": "^3.11.1",
     "@types/workbox-webpack-plugin": "^5.1.5",
