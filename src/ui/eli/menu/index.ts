@@ -1,5 +1,7 @@
 import { eli } from 'eli/eli';
 
+import './style.scss';
+
 const ClassName = {
     anchor: 'mdc-menu-surface--anchor',
     surface: 'mdc-menu mdc-menu-surface',
