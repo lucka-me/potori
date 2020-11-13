@@ -1,5 +1,7 @@
 import { eli } from 'eli/eli';
 
+import './style.scss';
+
 const ClassName = {
     textField: [
         'mdc-text-field',

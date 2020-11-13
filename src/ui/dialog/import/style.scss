@@ -1,9 +1,3 @@
-@use '@material/floating-label/mdc-floating-label';
-@use '@material/notched-outline/mdc-notched-outline';
-@use '@material/textfield';
-
-@include textfield.core-styles;
-
 .import-dialog {
     .mdc-dialog__content > :first-child.mdc-text-field {
         margin-top: 8px;
