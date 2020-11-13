@@ -1,10 +1,8 @@
 @use '@material/button';
-@use '@material/card';
 @use '@material/icon-button';
 @use "@material/typography";
 
 @include button.core-styles;
-@include card.core-styles;
 @include icon-button.core-styles;
 
 .nomination-card {
