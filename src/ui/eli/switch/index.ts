@@ -1,5 +1,7 @@
 import { eli } from 'eli/eli';
 
+import './style.scss';
+
 const ClassName = {
     switch: 'mdc-switch',
     track: 'mdc-switch__track',
