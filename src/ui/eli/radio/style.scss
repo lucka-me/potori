@@ -1,0 +1,10 @@
+@use '~@material/form-field';
+@use '~@material/radio/styles';
+
+@include form-field.core-styles;
+
+@media (prefers-color-scheme: dark) {
+    .mdc-radio__native-control:enabled:not(:checked)+.mdc-radio__background .mdc-radio__outer-circle {
+        border-color: #FFF !important;
+    }
+}
