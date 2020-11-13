@@ -1,5 +1,7 @@
 import { eli } from 'eli/eli';
 
+import './style.scss';
+
 export function eliIconButton(icon: string, title?: string) {
     return eli('button', {
         className: 'fa mdc-icon-button',
