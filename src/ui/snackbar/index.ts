@@ -3,8 +3,6 @@ import { MDCSnackbar } from '@material/snackbar';
 import { eliSnackbar } from 'eli/snackbar';
 import UIPrototype from 'ui/base';
 
-import './style.scss';
-
 /**
  * Snackbar component for showing information message
  */

@@ -1,6 +1,8 @@
 import { eli } from 'eli/eli';
 import { eliIcon } from 'eli/icon';
 
+import './style.scss';
+
 const ClassName = {
     snackbar: 'mdc-snackbar',
     surface: 'mdc-snackbar__surface',
