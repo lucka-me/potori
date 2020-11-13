@@ -1,4 +1,6 @@
-import { eli } from '../eli';
+import { eli } from 'eli/eli';
+
+import './style.scss';
 
 const ClassName = {
     appBar: 'mdc-top-app-bar mdc-top-app-bar--fixed',
