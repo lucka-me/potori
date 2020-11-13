@@ -1,5 +1,7 @@
 import { eli } from 'eli/eli';
 
+import './style.scss';
+
 const ClassName = {
     card: 'mdc-card mdc-card--outlined',
     actions: 'mdc-card__actions',
