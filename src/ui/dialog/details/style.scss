@@ -15,6 +15,13 @@
     }
 
     .mdc-dialog__content {
+        display: flex;
+        flex-flow: column nowrap;
+
+        > * {
+            flex-shrink: 0;
+        }
+
         > .confirmed-time {
             display: flex;
             flex-flow: row nowrap;
@@ -27,7 +34,6 @@
         }
 
         > .status-form {
-            width: 100%;
             display: flex;
             flex-flow: row nowrap;
             justify-content: space-around;
@@ -38,12 +44,7 @@
             margin-bottom: 8px;
         }
 
-        > .mdc-text-field.result-time {
-            width: 100%;
-        }
-
         > .reason-selector {
-            width: 100%;
 
             > .controller {
                 width: 100%;
