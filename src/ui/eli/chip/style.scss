@@ -1,1 +1,9 @@
 @use '~@material/chips/mdc-chips';
+
+@media (prefers-color-scheme: dark) {
+    .mdc-chip {
+        // 24dp
+        background-color: #282828;
+        color: rgba(255, 255, 255, 0.87);
+    }
+}
