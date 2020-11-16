@@ -23,7 +23,7 @@
   "author": "lucka-me",
   "license": "MIT",
   "devDependencies": {
-    "@firebase/app": "^0.6.12",
+    "@firebase/app": "^0.6.13",
     "@firebase/database": "^0.7.1",
     "@fortawesome/fontawesome-free": "^5.15.1",
     "@types/chart.js": "^2.9.27",
