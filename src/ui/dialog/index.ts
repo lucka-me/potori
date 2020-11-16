@@ -6,8 +6,6 @@ import type DetailsDialog   from './details';
 import type ImportDialog    from './import';
 import type MatchDialog     from './match';
 
-import './style.scss';
-
 /**
  * Virtual component to host all dialogs
  */

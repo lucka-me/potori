@@ -2,8 +2,6 @@ import UIPrototype from 'ui/base';
 
 type DarkModeChangeCallback = (enabled: boolean) => void;
 
-import './style.scss';
-
 /**
  * Handle the dark mode
  */

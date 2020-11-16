@@ -1,3 +1,20 @@
 @use '~@material/card';
 
 @include card.core-styles;
+
+.mdc-card {
+    margin: 4px 8px;
+    flex-basis: auto;
+}
+
+@media (prefers-color-scheme: dark) {
+    .mdc-card--outlined {
+        border-style: none !important;
+    }
+    .mdc-card__action--icon:not(:disabled) {
+        color: var(--mdc-theme-primary) !important;
+    }
+    .mdc-card__primary-action::before, .mdc-card__primary-action::after {
+        background: #FFF !important;
+    }
+}

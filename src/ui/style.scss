@@ -1,5 +1,5 @@
 @use '~@material/theme/mdc-theme';
-@use '@material/typography';
+@use '~@material/typography';
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap');
 
 :root {
@@ -67,16 +67,6 @@ a { color: var(--mdc-theme-text-primary-on-light); }
     flex: 1;
     display: flex;
     flex-flow: row nowrap;
-}
-
-.fa.mdc-icon-button,
-.far.mdc-icon-button {
-    font-size: 18px;
-}
-
-.mdc-card {
-    margin: 4px 8px;
-    flex-basis: auto;
 }
 
 /* Mobile View */
