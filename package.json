@@ -22,7 +22,7 @@
   "author": "lucka-me",
   "license": "MIT",
   "devDependencies": {
-    "@firebase/app": "^0.6.12",
+    "@firebase/app": "^0.6.13",
     "@firebase/database": "^0.7.1",
     "@fortawesome/fontawesome-free": "^5.15.1",
     "@types/chart.js": "^2.9.27",
@@ -35,7 +35,7 @@
     "@types/mapbox-gl": "^1.12.5",
     "@types/mini-css-extract-plugin": "^1.2.1",
     "@types/terser-webpack-plugin": "^5.0.1",
-    "@types/webpack": "^4.41.24",
+    "@types/webpack": "^4.41.25",
     "@types/webpack-bundle-analyzer": "^3.9.0",
     "@types/webpack-dev-server": "^3.11.1",
     "@types/workbox-webpack-plugin": "^5.1.5",
