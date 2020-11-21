@@ -149,7 +149,7 @@ const config: webpack.Configuration = {
         new HtmlWebpackPlugin({
             title: 'Potori',
             inject: true,
-            favicon: 'assets/icon.png',
+            favicon: 'assets/icon-transparent.png',
             scriptLoading: 'defer',
             chunks: ['potori'],
             filename: 'index.html',
@@ -163,7 +163,7 @@ const config: webpack.Configuration = {
             name: 'Potori',
             description: 'Web App to Visualize Ingress Nominations',
             filename: 'manifest.webmanifest',
-            fingerprints: false,
+            fingerprints: true,
             orientation: 'any',
             start_url: '/',
             scope: '/',
@@ -174,18 +174,25 @@ const config: webpack.Configuration = {
             },
             icons: [
                 {
-                    src: path.resolve('assets/icon.png'),
-                    size: 180,
-                    destination: path.join('assets'),
-                    purpose: 'maskable any',
-                    ios: true,
-                },
-                {
-                    src: path.resolve('assets/icon.png'),
+                    src: path.resolve('assets/icon-maskable.png'),
                     size: 512,
                     destination: path.join('assets'),
-                    purpose: 'maskable any',
-                }
+                    purpose: 'maskable',
+                },
+                {
+                    src: path.resolve('assets/icon-rounded.png'),
+                    size: 512,
+                    destination: path.join('assets'),
+                    purpose: 'any',
+                },
+                {
+                    src: path.resolve('assets/icon-maskable.png'),
+                    size: 180,
+                    destination: path.join('assets'),
+                    purpose: 'maskable',
+                    ios: true,
+                },
+                
             ],
         }),
         new GenerateSW({
