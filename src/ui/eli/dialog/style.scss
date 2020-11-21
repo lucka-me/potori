@@ -1,5 +1,7 @@
+@use '~@material/button';
 @use '~@material/dialog';
 
+@include button.core-styles;
 @include dialog.core-styles;
 
 @media (prefers-color-scheme: dark) {
