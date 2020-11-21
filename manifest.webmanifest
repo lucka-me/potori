@@ -1,16 +1,22 @@
 {
   "icons": [
     {
-      "src": "/assets/icon_512x512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "maskable any"
-    },
-    {
-      "src": "/assets/icon_180x180.png",
+      "src": "/assets/icon_180x180.11b1251e7711eeecef27030b45af50f4.png",
       "sizes": "180x180",
       "type": "image/png",
-      "purpose": "maskable any"
+      "purpose": "maskable"
+    },
+    {
+      "src": "/assets/icon_512x512.692f5b061abe75b4ce5872abe7662f3e.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/assets/icon_512x512.57efc0e2c03968e8458fd24e35086e2d.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
   "name": "Potori",
