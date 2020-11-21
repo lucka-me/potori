@@ -2,12 +2,12 @@ import i18next from 'i18next';
 import mapboxgl from 'mapbox-gl';
 import { MDCRipple } from '@material/ripple';
 
+import { base } from 'ui/base';
 import { eli } from 'eli/eli';
 import { eliIcon } from 'eli/icon';
 import { eliIconButton } from 'eli/icon-button';
 import { LngLat } from 'service/nomination';
 import { QueryFailReason } from 'service/brainstorming';
-import UIPrototype from 'ui/base';
 
 import './style.scss';
 
@@ -27,7 +27,7 @@ interface MapButton {
     clicked: () => void,
 }
 
-export default class DetailsDialogMap extends UIPrototype {
+export default class DetailsDialogMap extends base.Prototype {
 
     private ctrl: mapboxgl.Map = null;
     private marker: mapboxgl.Marker = null;

@@ -1,4 +1,4 @@
-import UIPrototype from 'ui/base';
+import { base } from 'ui/base';
 
 import AboutDialog      from './about';
 import AlertDialog      from './alert';
@@ -9,7 +9,7 @@ import type MatchDialog     from './match';
 /**
  * Virtual component to host all dialogs
  */
-export default class Dialog extends UIPrototype {
+export default class Dialog extends base.Prototype {
 
     about = new AboutDialog();
     alert = new AlertDialog();

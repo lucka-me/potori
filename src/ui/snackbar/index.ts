@@ -1,12 +1,12 @@
 import { MDCSnackbar } from '@material/snackbar';
 
+import { base } from 'ui/base';
 import { eliSnackbar } from 'eli/snackbar';
-import UIPrototype from 'ui/base';
 
 /**
  * Snackbar component for showing information message
  */
-export default class Snackbar extends UIPrototype {
+export default class Snackbar extends base.Prototype {
 
     ctrl: MDCSnackbar = null;   // MDC snackbar controller
 

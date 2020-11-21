@@ -1,12 +1,12 @@
 import { MDCLinearProgress } from '@material/linear-progress';
 
+import { base } from 'ui/base';
 import { eliLinearProgress } from 'eli/linear-progress';
-import UIPrototype from 'ui/base';
 
 /**
  * Progress bar component
  */
-class Progress extends UIPrototype {
+class Progress extends base.Prototype {
 
     private ctrl: MDCLinearProgress = null; // MDC linear progress controller
     private root: HTMLDivElement = null;    // The progress bar element

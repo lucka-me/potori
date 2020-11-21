@@ -1,9 +1,9 @@
 import i18next from 'i18next';
 
+import { base } from 'ui/base';
 import { eli } from 'eli/eli';
 import { service } from 'service';
 import Nomination from 'service/nomination';
-import UIPrototype from 'ui/base';
 
 import './style.scss';
 
@@ -16,7 +16,7 @@ interface NominationListEvents {
     openDetails: (nomination: Nomination) => void;
 }
 
-export default class NominationList extends UIPrototype {
+export default class NominationList extends base.Prototype {
 
     private root: HTMLDivElement = null;
     private now = Date.now();

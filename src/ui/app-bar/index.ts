@@ -2,10 +2,10 @@ import i18next from 'i18next';
 import { MDCRipple } from '@material/ripple';
 import { MDCTopAppBar } from '@material/top-app-bar';
 
+import { base } from 'ui/base';
 import { eliAppBar } from 'eli/app-bar';
 import { eliIcon } from 'eli/icon';
 import { eliIconButton } from 'eli/icon-button';
-import UIPrototype from 'ui/base';
 
 import './style.scss';
 
@@ -19,7 +19,7 @@ type AppBarActionClickCallback = () => void;
 /**
  * App bar component
  */
-class AppBar extends UIPrototype {
+class AppBar extends base.Prototype {
 
     private root: HTMLHeadElement = null;
 

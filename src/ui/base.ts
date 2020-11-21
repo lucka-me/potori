@@ -1,26 +1,28 @@
-/**
- * Prototype of UI components
- */
-export default class UIPrototype {
-    
-    parent: HTMLElement = null; // Parent element, not enumerable
-
-    constructor() {
-        Object.defineProperty(this, 'parent', {
-            enumerable: false,
-        });
-    }
-    
+export namespace base {
     /**
-     * Initialize and setup component
-     * @param parent Parent element
+     * Prototype of UI components
      */
-    init(parent: HTMLElement) {
-        this.parent = parent;
-    }
+    export class Prototype {
+        
+        parent: HTMLElement = null; // Parent element, not enumerable
 
-    /**
-     * Build element and render
-     */
-    render() { }
+        constructor() {
+            Object.defineProperty(this, 'parent', {
+                enumerable: false,
+            });
+        }
+        
+        /**
+         * Initialize and setup component
+         * @param parent Parent element
+         */
+        init(parent: HTMLElement) {
+            this.parent = parent;
+        }
+
+        /**
+         * Build element and render
+         */
+        render() { }
+    }
 }

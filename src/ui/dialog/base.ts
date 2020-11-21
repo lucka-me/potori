@@ -1,6 +1,6 @@
 import type { MDCDialog } from '@material/dialog';
 
-import UIPrototype from 'ui/base';
+import { base as uiBase } from 'ui/base';
 
 export namespace base {
 
@@ -19,7 +19,7 @@ export namespace base {
      * 
      * Should check if the ctrl is null and call render() if it is in open()
      */
-    export class DialogPrototype extends UIPrototype {
+    export class DialogPrototype extends uiBase.Prototype {
     
         ctrl: MDCDialog = null; // MDC dialog controller
     

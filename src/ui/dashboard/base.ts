@@ -1,12 +1,12 @@
 import moment from 'moment';
 
+import { base as uiBase } from 'ui/base';
 import { eli } from 'eli/eli';
 import { eliCard } from 'eli/card';
 import Nomination from 'service/nomination';
-import UIPrototype from 'ui/base';
 
 export namespace base {
-    export class CardPrototype extends UIPrototype {
+    export class CardPrototype extends uiBase.Prototype {
 
         root: HTMLElement = null;
     

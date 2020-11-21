@@ -1,8 +1,8 @@
 import i18next from 'i18next';
 import { MDCMenu } from '@material/menu';
 
+import { base } from 'ui/base';
 import { eliMenu } from 'eli/menu';
-import UIPrototype from 'ui/base';
 
 import { AppBarMenuItems } from './constants';
 
@@ -11,7 +11,7 @@ type MenuItemClickCallback = () => void;
 /**
  * Menu component in app bar
  */
-export default class AppBarMenu extends UIPrototype {
+export default class AppBarMenu extends base.Prototype {
 
     private ctrl: MDCMenu = null;                           // MDC controller
     items: Map<string, HTMLLIElement> = new Map();          // Menu items

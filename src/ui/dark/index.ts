@@ -1,11 +1,11 @@
-import UIPrototype from 'ui/base';
+import { base } from 'ui/base';
 
 type DarkModeChangeCallback = (enabled: boolean) => void;
 
 /**
  * Handle the dark mode
  */
-export default class Dark extends UIPrototype {
+export default class Dark extends base.Prototype {
 
     change: DarkModeChangeCallback = () => {};
 

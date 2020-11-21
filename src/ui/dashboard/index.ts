@@ -1,9 +1,9 @@
 import Chart from 'chart.js';
 
 import { eli } from 'eli/eli';
+import { base } from 'ui/base';
 import { base as dashboardBase } from './base';
 import Nomination from 'service/nomination';
-import UIPrototype from 'ui/base';
 
 import BSGroup              from './brainstorming';
 import CountByMonthCard     from './count-by-month';
@@ -15,7 +15,7 @@ import StatsTypeCard        from './stats-type';
 
 import './style.scss';
 
-class Dashboard extends UIPrototype {
+class Dashboard extends base.Prototype {
 
     root: HTMLDivElement = null;
 
