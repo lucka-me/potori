@@ -6,8 +6,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import path from 'path';
 import TerserPlugin from 'terser-webpack-plugin';
-// Attribute purpose is not added to Icon in index.d.ts
-const WebpackPwaManifest = require('webpack-pwa-manifest');
+import WebpackPwaManifest from 'webpack-pwa-manifest';
 
 const config: webpack.Configuration = {
     entry: { potori: './src/index.ts', },
