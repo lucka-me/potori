@@ -1,19 +1,19 @@
 {
   "icons": [
     {
-      "src": "/assets/icon_180x180.c786d034c71480401ac71ccae2b10409.png",
+      "src": "/assets/icon_180x180.44eb740c2956fecd1f19e31415b06b4e.png",
       "sizes": "180x180",
       "type": "image/png",
       "purpose": "maskable"
     },
     {
-      "src": "/assets/icon_512x512.1ee94ea90a097c3fb2d755c78b921f01.png",
+      "src": "/assets/icon_512x512.ee1897c4e3102c4ecae8775419ad3229.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "/assets/icon_512x512.e406b5923f2917d2ed2e4548ddc7a614.png",
+      "src": "/assets/icon_512x512.102c793d8484a674e36778e185b7349c.png",
       "sizes": "512x512",
       "type": "image/png",
       "purpose": "maskable"
