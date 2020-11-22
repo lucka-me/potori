@@ -4,8 +4,8 @@
 @include button.core-styles;
 
 .nomination-card {
-
-    flex-shrink: 0;
+    margin: 4px 8px;
+    flex: 1 0 auto;
 
     > .info-box {
         display: flex;

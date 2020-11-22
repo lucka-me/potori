@@ -2,11 +2,6 @@
 
 @include card.core-styles;
 
-.mdc-card {
-    margin: 4px 8px;
-    flex-basis: auto;
-}
-
 @media (prefers-color-scheme: dark) {
     .mdc-card--outlined {
         border-style: none !important;

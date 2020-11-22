@@ -13,10 +13,22 @@
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
 
+    @media screen and (max-width: 620px) {
+        flex-flow: column nowrap;
+        align-items: stretch;
+    }
+
     > .mdc-card {
         height: 200px;
-        margin: 4px !important;
+        margin: 4px;
         flex-basis: 0%;
+
+        @media screen and (max-width: 620px) {
+            margin: 4px 8px;
+            min-width: 0;
+            min-height: 200px;
+            flex: 1 0;
+        }
 
         > .content {
             padding: 8px;
