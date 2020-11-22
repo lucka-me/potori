@@ -1,4 +1,5 @@
 import { eli } from 'eli/eli';
+import 'eli/button';
 
 import './style.scss';
 
