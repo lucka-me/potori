@@ -28,8 +28,6 @@ class AppBar extends base.Prototype {
     actions: Map<string, HTMLButtonElement> = new Map();        // Actions
     events: Map<string, AppBarActionClickCallback> = new Map(); // Click events for actions
 
-    // private sectionActions: HTMLElement = null;
-
     constructor() {
         super();
         this.events.set(AppBarActions.menu.key, () => this.menu.open());
