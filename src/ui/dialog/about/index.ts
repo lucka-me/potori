@@ -3,6 +3,7 @@ import { MDCDialog } from '@material/dialog';
 
 import { eli } from 'eli/eli';
 import { eliDialog } from 'eli/dialog';
+import { eliUtil } from 'eli/util';
 import { service } from 'service';
 import { base } from 'ui/dialog/base';
 
@@ -76,7 +77,7 @@ export default class AboutDialog extends base.DialogPrototype {
             }
             message += `[${error.filename}][${error.lineno}:${error.colno}]${details}\n`;
         }
-        eli.copy(message);
+        eliUtil.copy(message);
         this.events.info(i18next.t(StringKey.messageExportErrorCopied, {
             count: service.errors.length
         }));

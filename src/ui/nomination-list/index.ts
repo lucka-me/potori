@@ -2,6 +2,7 @@ import i18next from 'i18next';
 
 import { base } from 'ui/base';
 import { eli } from 'eli/eli';
+import { eliUtil } from 'eli/util';
 import { service } from 'service';
 import Nomination from 'service/nomination';
 
@@ -78,7 +79,7 @@ export default class NominationList extends base.Prototype {
                 if (service.version.full) {
                     window.open(nomination.bsUrl, '_blank', 'noopener');
                 } else {
-                    eli.copy(nomination.id);
+                    eliUtil.copy(nomination.id);
                     this.events.alert(i18next.t(StringKey.messageBsIdCopied, { id: nomination.id }));
                 }
             },

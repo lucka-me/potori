@@ -29,16 +29,3 @@ export function eli<K extends keyof HTMLElementTagNameMap>(
     if (children) element.append(...children);
     return element;
 }
-
-export namespace eli {
-    export function copy(text: string) {
-        const textarea = eli('textarea', {
-            value: text,
-            readOnly: true
-        });
-        document.body.append(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        textarea.remove();
-    }
-}
