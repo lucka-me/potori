@@ -1,4 +1,4 @@
-# ![](./assets/title.png)
+# ![](./src/assets/title.png)
 
 [![CI Status](https://github.com/lucka-me/potori/workflows/CI/badge.svg)](https://github.com/lucka-me/potori/actions?query=workflow%3ACI "CI Workflow") [![CD Status](https://github.com/lucka-me/potori/workflows/CD/badge.svg)](https://github.com/lucka-me/potori/actions?query=workflow%3ACD "CD Workflow")  
 [![Release](https://img.shields.io/github/v/release/lucka-me/potori)](https://github.com/lucka-me/potori/releases/latest "Last release") [![Website](https://img.shields.io/website?url=https%3A%2F%2Fpotori.lucka.moe)](https://lucka.moe/potori "Website") [![License](https://img.shields.io/github/license/lucka-me/potori)](./LICENSE "License")  
