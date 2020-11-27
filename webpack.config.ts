@@ -149,7 +149,7 @@ const config: webpack.Configuration = {
         new HtmlWebpackPlugin({
             title: 'Potori',
             inject: true,
-            favicon: 'assets/icon-transparent.png',
+            favicon: 'src/assets/icon-transparent.png',
             scriptLoading: 'defer',
             chunks: ['potori'],
             filename: 'index.html',
@@ -174,19 +174,19 @@ const config: webpack.Configuration = {
             },
             icons: [
                 {
-                    src: path.resolve('assets/icon-maskable.png'),
+                    src: path.resolve('src/assets/icon-maskable.png'),
                     size: 512,
                     destination: path.join('assets'),
                     purpose: 'maskable',
                 },
                 {
-                    src: path.resolve('assets/icon-rounded.png'),
+                    src: path.resolve('src/assets/icon-rounded.png'),
                     size: 512,
                     destination: path.join('assets'),
                     purpose: 'any',
                 },
                 {
-                    src: path.resolve('assets/icon-maskable.png'),
+                    src: path.resolve('src/assets/icon-maskable.png'),
                     size: 180,
                     destination: path.join('assets'),
                     purpose: 'maskable',
