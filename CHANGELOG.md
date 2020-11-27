@@ -1,6 +1,13 @@
 # Changelog
 Noteable changes of Potori will be documented here. For [Status Data](./src/data/status.json), please refer to [Data Changelog](#data-changelog).
 
+## [0.7.12](https://github.com/lucka-me/potori/releases/tag/0.7.12) - 2020-TBA
+- TBA
+
+### Changed
+- Minor UI improved
+
+
 ## [0.7.11](https://github.com/lucka-me/potori/releases/tag/0.7.11) - 2020-11-23
 - UI improved
 
@@ -12,6 +19,9 @@ Noteable changes of Potori will be documented here. For [Status Data](./src/data
 
 ### Fixed
 - Ripples are missing in menu items
+
+<details><summary>0.7.x</summary>
+<p>
 
 ## [0.7.10](https://github.com/lucka-me/potori/releases/tag/0.7.10) - 2020-11-09
 - Optimize and add error handlers
@@ -26,8 +36,6 @@ Noteable changes of Potori will be documented here. For [Status Data](./src/data
 - Ignore nominations missing `confirmedTime` in Count By Month card
 - Optimize element creation process
 
-<details><summary>0.7.x</summary>
-<p>
 
 ## [0.7.9](https://github.com/lucka-me/potori/releases/tag/0.7.9) - 2020-10-24
 - Fixed various issues caused by incorrect data
