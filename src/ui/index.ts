@@ -318,8 +318,7 @@ export namespace ui {
 
     function openFileUI(opened: (file: File) => void) {
         const element = eli('input', {
-            cssText: 'display:none;',
-            type: 'file', accept: 'json'
+            type: 'file', accept: 'json', hidden: true,
         });
         element.addEventListener('change', (event) => {
             opened((event.target as HTMLInputElement).files[0]);
@@ -333,9 +332,9 @@ export namespace ui {
 
     function saveFileUI(filename: string, href: string) {
         const element = eli('a', {
-            cssText: 'display:none',
             href: href,
             download: filename,
+            hidden: true,
         });
         document.body.append(element);
         element.click();
