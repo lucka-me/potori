@@ -160,7 +160,7 @@ export namespace service {
                     if (!target.lngLat) target.lngLat = current.lngLat;
                 } else {
                     target.status = current.status;
-                    target.lngLat = current.lngLat;
+                    if (current.lngLat) target.lngLat = current.lngLat;
                     target.resultTime = current.resultTime;
                     target.resultMailId = current.resultMailId;
                 }
