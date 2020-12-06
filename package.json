@@ -54,7 +54,7 @@
     "style-loader": "^2.0.0",
     "terser-webpack-plugin": "^4.2.3",
     "ts-loader": "^8.0.11",
-    "ts-node": "^9.0.0",
+    "ts-node": "^9.1.0",
     "tsconfig-paths": "^3.9.0",
     "typescript": "^4.1.2",
     "vuepress": "^1.7.1",
