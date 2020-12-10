@@ -6,7 +6,7 @@ import { MDCRadio } from '@material/radio';
 import { MDCRipple } from '@material/ripple';
 import { MDCTextField } from '@material/textfield';
 
-import { eli } from 'eli/eli';
+import { eli } from '@lucka-labs/eli';
 import { eliChipSet } from 'eli/chip';
 import { eliDialog } from 'eli/dialog';
 import { eliIcon } from 'eli/icon';

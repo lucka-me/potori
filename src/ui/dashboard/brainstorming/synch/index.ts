@@ -1,6 +1,6 @@
 import i18next from 'i18next';
 
-import { eli } from 'eli/eli';
+import { eli } from '@lucka-labs/eli';
 import { eliCard } from 'eli/card';
 
 import { BrainstormingStats } from 'service/brainstorming';

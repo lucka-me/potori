@@ -1,4 +1,4 @@
-import { eli } from 'eli/eli';
+import { eli } from '@lucka-labs/eli';
 
 export namespace eliUtil {
     export function copy(text: string) {

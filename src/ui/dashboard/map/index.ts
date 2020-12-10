@@ -1,7 +1,7 @@
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-import { eli } from 'eli/eli';
+import { eli } from '@lucka-labs/eli';
 import { eliCard } from 'eli/card';
 
 import { service } from 'service';

@@ -1,4 +1,4 @@
-import { eli } from 'eli/eli';
+import { eli } from '@lucka-labs/eli';
 import { eliIcon } from 'eli/icon';
 
 import './style.scss';

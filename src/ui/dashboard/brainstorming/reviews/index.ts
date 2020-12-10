@@ -2,7 +2,7 @@ import Chart from 'chart.js';
 import i18next from 'i18next';
 import moment from 'moment';
 
-import { eli } from 'eli/eli';
+import { eli } from '@lucka-labs/eli';
 import { BrainstormingStats } from 'service/brainstorming';
 import { base } from 'ui/dashboard/brainstorming/base';
 

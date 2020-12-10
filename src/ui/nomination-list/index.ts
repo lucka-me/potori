@@ -1,7 +1,7 @@
 import i18next from 'i18next';
 
 import { base } from 'ui/base';
-import { eli } from 'eli/eli';
+import { eli } from '@lucka-labs/eli';
 import { eliUtil } from 'eli/util';
 import { service } from 'service';
 import Nomination from 'service/nomination';

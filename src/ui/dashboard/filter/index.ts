@@ -1,7 +1,7 @@
 import i18next from 'i18next';
 import { MDCSwitch } from '@material/switch';
 
-import { eli } from 'eli/eli';
+import { eli } from '@lucka-labs/eli';
 import { eliCard } from 'eli/card';
 import { service } from 'service';
 import { base } from 'ui/dashboard/base';

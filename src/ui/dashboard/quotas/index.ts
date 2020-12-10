@@ -1,7 +1,7 @@
 import Chart from 'chart.js';
 import i18next from 'i18next';
 
-import { eli } from 'eli/eli';
+import { eli } from '@lucka-labs/eli';
 import { base } from 'ui/dashboard/base';
 import Nomination from 'service/nomination';
 

@@ -1,7 +1,7 @@
 import moment from 'moment';
 
 import { base as uiBase } from 'ui/base';
-import { eli } from 'eli/eli';
+import { eli } from '@lucka-labs/eli';
 import { eliCard } from 'eli/card';
 import Nomination from 'service/nomination';
 

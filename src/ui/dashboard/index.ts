@@ -1,6 +1,6 @@
 import Chart from 'chart.js';
 
-import { eli } from 'eli/eli';
+import { eli } from '@lucka-labs/eli';
 import { base } from 'ui/base';
 import { base as dashboardBase } from './base';
 import Nomination from 'service/nomination';

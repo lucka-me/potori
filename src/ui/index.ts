@@ -1,6 +1,6 @@
 import i18next from 'i18next';
 
-import { eli } from 'eli/eli';
+import { eli } from '@lucka-labs/eli';
 import { service } from 'service';
 import Nomination from 'service/nomination';
 import { StatusReason, StatusType } from 'service/status';

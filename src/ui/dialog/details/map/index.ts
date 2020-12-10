@@ -3,7 +3,7 @@ import mapboxgl from 'mapbox-gl';
 import { MDCRipple } from '@material/ripple';
 
 import { base } from 'ui/base';
-import { eli } from 'eli/eli';
+import { eli } from '@lucka-labs/eli';
 import { eliIcon } from 'eli/icon';
 import { eliIconButton } from 'eli/icon-button';
 import { LngLat } from 'service/nomination';

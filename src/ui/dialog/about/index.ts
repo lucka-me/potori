@@ -1,7 +1,7 @@
 import i18next from 'i18next';
 import { MDCDialog } from '@material/dialog';
 
-import { eli } from 'eli/eli';
+import { eli } from '@lucka-labs/eli';
 import { eliDialog } from 'eli/dialog';
 import { eliUtil } from 'eli/util';
 import { service } from 'service';

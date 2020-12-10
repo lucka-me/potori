@@ -1,7 +1,7 @@
 import i18next from 'i18next';
 import { MDCRipple } from '@material/ripple';
 
-import { eli } from 'eli/eli';
+import { eli } from '@lucka-labs/eli';
 import { eliCard } from 'eli/card';
 import { eliIcon } from 'eli/icon';
 
