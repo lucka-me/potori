@@ -7,7 +7,7 @@ const StringKeyBase = 'ui.app-bar';
  */
 export const AppBarActions = {
     view:   { key: 'view'   , title: `${StringKeyBase}.list`    , icon: eliIcon.Icon.thList     },
-    signin: { key: 'signin' , title: `${StringKeyBase}.signIn`  , icon: eliIcon.Icon.userCircle },
+    signin: { key: 'signin' , title: `${StringKeyBase}.signIn`  , icon: eliIcon.Icon.signInAlt  },
     open:   { key: 'open'   , title: `${StringKeyBase}.open`    , icon: eliIcon.Icon.folderOpen },
     about:  { key: 'about'  , title: `${StringKeyBase}.about`   , icon: eliIcon.Icon.infoCircle },
     menu:   { key: 'menu'   , title: `${StringKeyBase}.menu`    , icon: eliIcon.Icon.ellipsisV  },
