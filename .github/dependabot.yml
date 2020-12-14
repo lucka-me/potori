@@ -3,9 +3,17 @@
 
 version: 2
 updates:
-  - package-ecosystem: "npm"
-    directory: "/"
+  - package-ecosystem: 'npm'
+    directory: '/'
     schedule:
-      interval: "weekly"
-      day: "sunday"
-      time: "21:00" # 05:00 for UTC+8
+      interval: 'weekly'
+      day: 'sunday'
+      time: '21:00' # 05:00 for UTC+8
+    open-pull-requests-limit: 10
+  
+  - package-ecosystem: 'github-actions'
+    directory: '/'
+    schedule:
+      interval: 'weekly'
+      day: 'sunday'
+      time: '21:00'
