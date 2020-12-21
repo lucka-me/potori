@@ -68,8 +68,3 @@ a { color: var(--mdc-theme-text-primary-on-light); }
     display: flex;
     flex-flow: row nowrap;
 }
-
-/* Mobile View */
-@media screen and (max-width: 620px) {
-    .view-hide { display: none !important; }
-}

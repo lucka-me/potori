@@ -9,4 +9,10 @@
     overflow-y: auto;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
+
+    @media not all and (min-width: 620px) {
+        &.view-hide {
+            display: none;
+        }
+    }
 }
