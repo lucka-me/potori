@@ -24,9 +24,9 @@ export namespace ui {
     const progress   = new Progress();
     const snackbar   = new Snackbar();
 
-    let mainBox  : HTMLDivElement    = null;
-    let dashboard: Dashboard         = null;
-    let list     : NominationList          = null;
+    let mainBox  : HTMLDivElement   = null;
+    let dashboard: Dashboard        = null;
+    let list     : NominationList   = null;
 
     export function init() {
         document.documentElement.lang = i18next.language;
@@ -34,10 +34,14 @@ export namespace ui {
         const body = document.body;
 
         // AppBar
-        appBar.events.set(AppBarActions.view.key    , () => switchView());
-        appBar.events.set(AppBarActions.signin.key  , () => service.auth.signIn());
-        appBar.events.set(AppBarActions.open.key    , () => service.open());
-        appBar.events.set(AppBarActions.about.key   , () => dialog.about.open());
+        appBar.events.action.set(AppBarActions.view.key    , () => switchView());
+        appBar.events.action.set(AppBarActions.signin.key  , () => service.auth.signIn());
+        appBar.events.action.set(AppBarActions.open.key    , () => service.open());
+        appBar.events.action.set(AppBarActions.about.key   , () => dialog.about.open());
+        appBar.events.backToTop = () => {
+            if (!list) return;
+            list.backToTop();
+        };
         
         appBar.init(body);
 

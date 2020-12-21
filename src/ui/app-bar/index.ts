@@ -14,7 +14,13 @@ import { AppBarActions, StringKey } from './constants';
 import type AppBarMenu from './menu';
 import { AppBarMenuItems } from './menu/constants';
 
-type AppBarActionClickCallback = () => void;
+type BasicCallback = () => void;
+type AppBarActionEventsMap = Map<string, BasicCallback>;
+
+interface AppBarEvents {
+    action: AppBarActionEventsMap;  // Click events for actions
+    backToTop: BasicCallback;
+}
 
 /**
  * App bar component
@@ -26,11 +32,14 @@ class AppBar extends base.Prototype {
     menu: AppBarMenu = null;    // Menu component
 
     actions: Map<string, HTMLButtonElement> = new Map();        // Actions
-    events: Map<string, AppBarActionClickCallback> = new Map(); // Click events for actions
+    events: AppBarEvents = {
+        action: new Map(),
+        backToTop: () => { },
+    };
 
     constructor() {
         super();
-        this.events.set(AppBarActions.menu.key, () => this.menu.open());
+        this.events.action.set(AppBarActions.menu.key, () => this.menu.open());
     }
 
     init(parent: HTMLElement) {
@@ -45,7 +54,7 @@ class AppBar extends base.Prototype {
             actions.push(elementAction);
             const rippleAction = new MDCRipple(elementAction);
             rippleAction.unbounded = true;
-            rippleAction.listen('click', this.events.get(value.key));
+            rippleAction.listen('click', this.events.action.get(value.key));
             elementAction.hidden = true;
             this.actions.set(value.key, elementAction);
         }
@@ -58,7 +67,10 @@ class AppBar extends base.Prototype {
 
         this.parent.append(this.root);
         this.parent.append(eliAppBar.fixedAdjust());
-        new MDCTopAppBar(this.root);
+        const ctrl = new MDCTopAppBar(this.root)
+        ctrl.listen('dblclick', () => {
+            this.events.backToTop();
+        });
     }
 
     async prepare() {

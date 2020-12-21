@@ -38,6 +38,10 @@ export default class NominationList extends base.Prototype {
         this.parent.append(this.root);
     }
 
+    backToTop() {
+        this.root.scrollTo(0, 0);
+    }
+
     clear() {
         this.root.innerHTML = '';
     }
