@@ -58,8 +58,7 @@ class AppBar extends base.Prototype {
             elementAction.hidden = true;
             this.actions.set(value.key, elementAction);
         }
-        this.actions.get(AppBarActions.view.key).hidden = false;
-        this.actions.get(AppBarActions.view.key).id = 'button-appBar-view';
+        this.actions.get(AppBarActions.view.key).classList.add('action-view');
         this.actions.get(AppBarActions.open.key).hidden = false;
         this.actions.get(AppBarActions.about.key).hidden = false;
 

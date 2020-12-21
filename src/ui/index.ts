@@ -161,6 +161,7 @@ export namespace ui {
             dashboard.refresh(service.nominations);
             list.show(service.nominations);
 
+            appBar.actions.get(AppBarActions.view.key).hidden = false;
             appBar.menu.items.get(AppBarMenuItems.open.key).hidden = true;
             appBar.menu.items.get(AppBarMenuItems.save.key).hidden = false;
             appBar.menu.items.get(AppBarMenuItems.upload.key).hidden = !service.auth.signedIn;

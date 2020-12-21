@@ -1,5 +1,5 @@
-#button-appBar-view { display: none; }
-
-@media screen and (max-width: 620px) {
-    #button-appBar-view { display: block; }
+.mdc-top-app-bar {
+    @media screen and (min-width: 620px) {
+        .action-view { display: none; }
+    }
 }
