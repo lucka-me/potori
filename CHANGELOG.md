@@ -1,8 +1,8 @@
 # Changelog
 Noteable changes of Potori will be documented here. For [Status Data](./src/data/status.json), please refer to [Data Changelog](#data-changelog).
 
-## [0.7.12](https://github.com/lucka-me/potori/releases/tag/0.7.12) - 2020-TBA
-- TBA
+## [0.7.12](https://github.com/lucka-me/potori/releases/tag/0.7.12) - 2020-12-23
+- UI improved
 
 ### Added
 - Double click app bar to back to top
