@@ -26,23 +26,21 @@ export default class Parser {
         for (let i = 0; i < mail.payload.headers.length; i++) {
             const header = mail.payload.headers[i];
             if (header.name === 'Subject') {
-                const subject = header.value;
-                const hwPos = subject.search(':');
-                const fwPos = subject.search('：');
-                nomination.title = subject
-                    .slice((fwPos < 0 ? hwPos : (hwPos < 0 ? fwPos : (fwPos < hwPos ? fwPos : hwPos))) + 1)
-                    .trim();
+                const matched = header.value.match(/[:：](.+)/);
+                if (matched && matched.length > 1) {
+                    nomination.title = matched[1];
+                }
                 break;
             }
         }
 
-        // Body -> image, id lngLat and rejectReason
+        // Body -> image, id, lngLat and reason
         for (const part of mail.payload.parts) {
             if (part.partId !== '1') continue;
             const mailBody = this.base64(part.body.data);
-            const matchedImages = mailBody.match(/googleusercontent\.com\/[0-9a-zA-Z\-\_]+/);
-            if (matchedImages) {
-                nomination.image = matchedImages[0].replace('googleusercontent.com/', '');
+            const matched = mailBody.match(/googleusercontent\.com\/([0-9a-zA-Z\-\_]+)/);
+            if (matched && matched.length > 1) {
+                nomination.image = matched[1];
                 nomination.id = Nomination.parseId(nomination.image);
             }
             if (keys.scanner === 'redacted' && keys.type !== 'pending') {
@@ -62,11 +60,16 @@ export default class Parser {
      * @param scanner The scanner key for fetch the keywords
      */
     static reason(mail: string, scanner: string) {
-        const mainBody = mail.slice(0, mail.search('-NianticOps'));
         const undeclared = service.status.reasons.get('undeclared');
+        const matchedMainBody = mail.match(/(\n|\r|.)+?\-NianticOps/);
+        if (!matchedMainBody || matchedMainBody.length < 1) {
+            return undeclared;
+        }
+        const mainBody = matchedMainBody[0];
+        
         // Get first result
         let result = undeclared;
-        let firstPos = mail.length;
+        let firstPos = mainBody.length;
         for (const reason of service.status.reasons.values()) {
             for (const keyword of reason.keywords.get(scanner)) {
                 const pos = mainBody.search(keyword);
@@ -85,12 +88,13 @@ export default class Parser {
      * @param mail Body (content) of the mail
      */
     static lngLat(mail: string): LngLat {
-        let intel = mail.slice(mail.search('https://www.ingress.com/intel'));
-        intel = intel.slice(0, intel.search('">'));
-        const lngLatPair = intel.slice(intel.search('ll=') + 3, intel.search('&z=18')).split(',');
+        const matched = mail.match(/www\.ingress\.com\/intel\?ll\=([\.\d]+),([\.\d]+)/);
+        if (!matched || matched.length < 3) {
+            return null;
+        }
         return {
-            lng: parseFloat(lngLatPair[1]),
-            lat: parseFloat(lngLatPair[0])
+            lng: parseFloat(matched[2]),
+            lat: parseFloat(matched[1])
         };
     }
 
