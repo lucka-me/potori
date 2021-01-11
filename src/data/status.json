@@ -1,52 +1,70 @@
 {
-    "version": "8",
+    "version": "9",
+    "scanners": [
+        {
+            "code": 0,
+            "title": "Unknown"
+        },
+        {
+            "code": 1,
+            "title": "Redacted"
+        },
+        {
+            "code": 2,
+            "title": "Prime"
+        }
+    ],
     "types": [
         {
             "key": "pending",
             "code": 0,
             "title": "data.pending",
-            "icon":  "\uf017",
+            "iconFA": "\uf017",
+            "iconSF": "clock",
             "queries": [
-                [
-                    "redacted",
-                    "from:ingress-support@nianticlabs.com Portal submission confirmation -edit -photo"
-                ],
-                [
-                    "prime",
-                    "from:nominations@portals.ingress.com subject:(\"能量塔提交確認\" OR \"Portal申請の受領確認\" OR \"Portal submission confirmation\") -AP"
-                ]
+                {
+                    "scanner": 1,
+                    "query": "from:ingress-support@nianticlabs.com Portal submission confirmation -edit -photo"
+                    
+                },
+                {
+                    "scanner": 2,
+                    "query": "from:nominations@portals.ingress.com subject:(\"能量塔提交確認\" OR \"Portal申請の受領確認\" OR \"Portal submission confirmation\") -AP"
+                }
             ]
         },
         {
             "key": "accepted",
             "code": 1,
             "title": "data.accepted",
-            "icon":  "\uf00c",
+            "iconFA": "\uf00c",
+            "iconSF": "checkmark.circle",
             "queries": [
-                [
-                    "redacted",
-                    "from:ingress-support@nianticlabs.com Portal review complete now available -edit -photo"
-                ],
-                [
-                    "prime",
-                    "from:nominations@portals.ingress.com Intel Map AP"
-                ]
+                {
+                    "scanner": 1,
+                    "query": "from:ingress-support@nianticlabs.com Portal review complete now available -edit -photo"
+                },
+                {
+                    "scanner": 2,
+                    "query": "from:nominations@portals.ingress.com Intel Map AP"
+                }
             ]
         },
         {
             "key": "rejected",
             "code": 101,
             "title": "data.rejected",
-            "icon":  "\uf00d",
+            "iconFA": "\uf00d",
+            "iconSF": "xmark.circle",
             "queries": [
-                [
-                    "redacted",
-                    "from:ingress-support@nianticlabs.com Portal review complete reviewed -edit -photo"
-                ],
-                [
-                    "prime",
-                    "from:nominations@portals.ingress.com subject:(\"能量塔審查完畢\" OR \"Portal審査の完了\" OR \"Portal review complete\") -AP"
-                ]
+                {
+                    "scanner": 1,
+                    "query": "from:ingress-support@nianticlabs.com Portal review complete reviewed -edit -photo"
+                },
+                {
+                    "scanner": 2,
+                    "query": "from:nominations@portals.ingress.com subject:(\"能量塔審查完畢\" OR \"Portal審査の完了\" OR \"Portal review complete\") -AP"
+                }
             ]
         }
     ],
@@ -55,45 +73,45 @@
             "key": "undeclared",
             "code": 101,
             "title": "data.undeclared",
-            "icon":  "\uf00d",
+            "iconFA": "\uf00d",
+            "iconSF": "xmark.circle",
             "color": "#B0373C",
-            "keywords": [
-                [ "redacted", [] ],
-                [ "prime", [] ]
-            ]
+            "keywords": [ ]
         },
         {
             "key": "duplicated",
             "code": 102,
             "title": "data.duplicated",
-            "icon":  "\uf24d",
+            "iconFA": "\uf24d",
+            "iconSF": "doc.on.doc",
             "color": "#5E90B8",
             "keywords": [
-                [
-                    "redacted",
-                    [ "duplicate of either an existing Portal" ]
-                ],
-                [
-                    "prime",
-                    [ "duplicate of an existing Portal" ]
-                ]
+                {
+                    "scanner": 1,
+                    "keywords": [ "duplicate of either an existing Portal" ]
+                },
+                {
+                    "scanner": 2,
+                    "keywords": [ "duplicate of an existing Portal" ]
+                }
             ]
         },
         {
             "key": "close",
             "code": 103,
             "title": "data.close",
-            "icon":  "\uf547",
+            "iconFA": "\uf547",
+            "iconSF": "ruler",
             "color": "#009345",
             "keywords": [
-                [
-                    "redacted",
-                    ["too close to an existing Portal"]
-                ],
-                [
-                    "prime",
-                    [ "能量塔過近", "too close to" ]
-                ]
+                {
+                    "scanner": 1,
+                    "keywords": [ "too close to an existing Portal" ]
+                },
+                {
+                    "scanner": 2,
+                    "keywords": [ "能量塔過近", "too close to" ]
+                }
             ]
         },
 
@@ -101,42 +119,42 @@
             "key": "criteria:criteria",
             "code": 112,
             "title": "data.criteriaCriteria",
-            "icon":  "\uf05e",
+            "iconFA": "\uf05e",
+            "iconSF": "xmark.octagon",
             "color": "#B80233",
             "keywords": [
-                [ "redacted", [] ],
-                [
-                    "prime",
-                    [ "meet acceptance criteria" ]
-                ]
-            ]
-        },
-        {
-            "key": "criteria:generic",
-            "code": 105,
-            "title": "data.criteriaGeneric",
-            "icon":  "\uf54e",
-            "color": "#F0C649",
-            "keywords": [
-                [ "redacted", [] ],
-                [
-                    "prime",
-                    [ "generic store" ]
-                ]
+                {
+                    "scanner": 1,
+                    "keywords": [ "meet acceptance criteria" ]
+                }
             ]
         },
         {
             "key": "criteria:temporary",
             "code": 104,
             "title": "data.criteriaTemporary",
-            "icon":  "\uf1da",
+            "iconFA": "\uf1da",
+            "iconSF": "circle.dashed",
             "color": "#647372",
             "keywords": [
-                [ "redacted", [] ],
-                [
-                    "prime",
-                    [ "seasonal display" ]
-                ]
+                {
+                    "scanner": 2,
+                    "keywords": [ "seasonal display" ]
+                }
+            ]
+        },
+        {
+            "key": "criteria:generic",
+            "code": 105,
+            "title": "data.criteriaGeneric",
+            "iconFA": "\uf54e",
+            "iconSF": "shippingbox",
+            "color": "#F0C649",
+            "keywords": [
+                {
+                    "scanner": 2,
+                    "keywords": [ "generic store" ]
+                }
             ]
         },
 
@@ -144,14 +162,14 @@
             "key": "location:private",
             "code": 124,
             "title": "data.locationPrivate",
-            "icon":  "\uf023",
+            "iconFA": "\uf023",
+            "iconSF": "lock",
             "color": "#5A4C4C",
             "keywords": [
-                [ "redacted", [] ],
-                [
-                    "prime",
-                    [ "private residential" ]
-                ]
+                {
+                    "scanner": 2,
+                    "keywords": [ "private residential" ]
+                }
             ]
         },
         
@@ -159,28 +177,28 @@
             "key": "photo:plate",
             "code": 106,
             "title": "data.photoPlate",
-            "icon":  "\uf1b9",
+            "iconFA": "\uf1b9",
+            "iconSF": "car",
             "color": "#004DB5",
             "keywords": [
-                [ "redacted", [] ],
-                [
-                    "prime",
-                    [ "license plate" ]
-                ]
+                {
+                    "scanner": 2,
+                    "keywords": [ "license plate" ]
+                }
             ]
         },
         {
             "key": "photo:quality",
             "code": 133,
             "title": "data.photoQuality",
-            "icon":  "\uf03e",
+            "iconFA": "\uf03e",
+            "iconSF": "photo",
             "color": "#5A715F",
             "keywords": [
-                [ "redacted", [] ],
-                [
-                    "prime",
-                    [ "Photo is low quality" ]
-                ]
+                {
+                   "scanner": 2,
+                   "keywords": [ "Photo is low quality" ]
+                }
             ]
         }
     ]

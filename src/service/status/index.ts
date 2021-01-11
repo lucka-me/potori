@@ -1,5 +1,16 @@
 import data from 'data/status.json';
 
+export enum ScannerCode {
+    Unknown     = 0,
+    Redacted    = 1,
+    Prime       = 2,
+}
+
+export interface Scanner {
+    readonly code: ScannerCode;
+    readonly title: string;
+}
+
 /**
  * Basic information of all status
  */
@@ -34,11 +45,11 @@ export class Status {
  */
 export class StatusType extends Status {
 
-    readonly queries: Map<string, string>;  // Queries to search mails, <scanner, query>
+    readonly queries: Map<ScannerCode, string>;  // Queries to search mails, <scanner, query>
 
     constructor(
         key: string, code: number, title: string, icon: string,
-        queries: Map<string, string>
+        queries: Map<ScannerCode, string>
     ) {
         super(key, code, title, icon);
         this.queries = queries;
@@ -51,11 +62,11 @@ export class StatusType extends Status {
 export class StatusReason extends Status {
 
     readonly color: string; // Color to represent the reason in charts
-    readonly keywords: Map<string, Array<string>>;  // Keywords to identify the reason, <scanner, keywords>
+    readonly keywords: Map<ScannerCode, Array<string>>;  // Keywords to identify the reason, <scanner, keywords>
 
     constructor(
         key: string, code: number, title: string, icon: string,
-        color: string, keyword: Map<string, Array<string>>
+        color: string, keyword: Map<ScannerCode, Array<string>>
     ) {
         super(key, code, title, icon);
         this.color = color;
@@ -68,15 +79,25 @@ export class StatusReason extends Status {
  */
 export default class StatusKit {
     
+    readonly scanner: Map<ScannerCode, Scanner>;
     readonly types  : Map<string, StatusType>   = new Map();    // <key, type>
     readonly reasons: Map<string, StatusReason> = new Map();    // <key, reason>
     readonly codes  : Map<number, Status>       = new Map();    // <code, status>
 
     constructor() {
+
+        this.scanner = data.scanners.reduce((map, scanner) => {
+            map.set(scanner.code, scanner);
+            return map;
+        }, new Map());
+
         for (const type of data.types) {
             const status = new StatusType(
-                type.key, type.code, type.title, type.icon,
-                new Map(type.queries as Array<[string, string]>)
+                type.key, type.code, type.title, type.iconFA,
+                type.queries.reduce((map, query) => {
+                    map.set(query.scanner, query.query);
+                    return map;
+                }, new Map<ScannerCode, string>())
             );
             this.types.set(type.key, status);
             this.codes.set(type.code, status);
@@ -84,8 +105,11 @@ export default class StatusKit {
 
         for (const reason of data.reasons) {
             const status = new StatusReason(
-                reason.key, reason.code, reason.title, reason.icon, reason.color,
-                new Map(reason.keywords as Array<[string, Array<string>]>)
+                reason.key, reason.code, reason.title, reason.iconFA, reason.color,
+                reason.keywords.reduce((map, keywords) => {
+                    map.set(keywords.scanner, keywords.keywords);
+                    return map;
+                }, new Map<ScannerCode, Array<string>>())
             );
             this.reasons.set(reason.key, status);
             this.codes.set(reason.code, status);

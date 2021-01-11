@@ -2,8 +2,9 @@ import i18next from 'i18next';
 
 import { service } from 'service';
 import Nomination from 'service/nomination';
+import { ScannerCode } from 'service/status';
 
-import Parser from './tools';
+import Parser, { QueryKeys } from './tools';
 
 type MessageCallback = (message: string) => void;
 type FinishCallback = () => void;
@@ -33,7 +34,7 @@ interface Progress {
  */
 export default class Mari {
 
-    private scanners: Array<string> = [];           // List of scanner keys
+    private scanners: Array<ScannerCode> = [];           // List of scanner keys
     private types: Array<string> = [];              // List of type keys
 
     private ignoreMailIds: Array<string> = [];      // List of ids of mails that should be ignored
@@ -54,11 +55,12 @@ export default class Mari {
      * Initiate Mari
      */
     init() {
+        for (const code of service.status.scanner.keys()) {
+            if (code == ScannerCode.Unknown) continue;
+            this.scanners.push(code);
+        }
         for (const type of service.status.types.keys()) {
             this.types.push(type);
-        }
-        for (const scanner of service.status.types.get(this.types[0]).queries.keys()) {
-            this.scanners.push(scanner);
         }
     }
 

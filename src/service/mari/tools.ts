@@ -1,5 +1,14 @@
 import { service } from 'service';
 import Nomination, { LngLat } from 'service/nomination';
+import { ScannerCode } from 'service/status';
+
+/**
+ * Query keys
+ */
+export interface QueryKeys {
+    scanner: ScannerCode;    // Scanner key, redacted, prime etc.
+    type: string;       // Type key, pending, accepted, rejected
+}
 
 /**
  * Parsers for mail content
@@ -43,7 +52,7 @@ export default class Parser {
                 nomination.image = matched[1];
                 nomination.id = Nomination.parseId(nomination.image);
             }
-            if (keys.scanner === 'redacted' && keys.type !== 'pending') {
+            if (keys.scanner === ScannerCode.Redacted && keys.type !== 'pending') {
                 nomination.lngLat = this.lngLat(mailBody);
             }
             if (keys.type === 'rejected') {
@@ -59,7 +68,7 @@ export default class Parser {
      * @param mail Body (content) of the mail
      * @param scanner The scanner key for fetch the keywords
      */
-    static reason(mail: string, scanner: string) {
+    static reason(mail: string, scanner: ScannerCode) {
         const undeclared = service.status.reasons.get('undeclared');
         const matchedMainBody = mail.match(/(\n|\r|.)+?\-NianticOps/);
         if (!matchedMainBody || matchedMainBody.length < 1) {
@@ -71,6 +80,7 @@ export default class Parser {
         let result = undeclared;
         let firstPos = mainBody.length;
         for (const reason of service.status.reasons.values()) {
+            if (!reason.keywords.has(scanner)) continue;
             for (const keyword of reason.keywords.get(scanner)) {
                 const pos = mainBody.search(keyword);
                 if (pos > -1 && pos < firstPos) {
