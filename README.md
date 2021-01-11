@@ -3,13 +3,16 @@
 [![CD Status](https://img.shields.io/github/workflow/status/lucka-me/potori/CD?label=CD&logo=github-actions&logoColor=white)](https://github.com/lucka-me/potori/actions?query=workflow%3ACD "CD Workflow")  
 [![Release](https://img.shields.io/github/v/release/lucka-me/potori)](https://github.com/lucka-me/potori/releases/latest "Last release")
 [![Deployed Version](https://img.shields.io/github/package-json/v/lucka-me/potori/main?label=deployed)](https://github.com/lucka-me/potori/tree/main "Main Branch")
-[![Website](https://img.shields.io/website?url=https%3A%2F%2Fpotori.lucka.moe)](https://potori.lucka.moe "Website")
+[![Website](https://img.shields.io/website?url=https%3A%2F%2Fpotori.lucka.moe)](https://potori.lucka.moe "Website")  
+[![Lines of code](https://img.shields.io/tokei/lines/github/lucka-me/potori)](https://github.com/lucka-me/potori "Repository")
 [![License](https://img.shields.io/github/license/lucka-me/potori)](./LICENSE "License")  
 [![Telegram Channel](https://img.shields.io/badge/telegram-channel-37aee2?logo=telegram)](https://t.me/potori "Telegram Channel")
 
 ## Description
 
 A web app to visualize Ingress nominations from Gmail inbox.
+
+**A native app for macOS and iOS built with Swift is WIP [here](https://github.com/lucka-me/potori-swift).**
 
 ## Build & Run
 ```sh
