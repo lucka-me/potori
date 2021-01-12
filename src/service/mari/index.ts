@@ -21,12 +21,81 @@ interface MariEvents {
 }
 
 /**
- * Progress of {@link Mari} process
+ * Item of {@link Progress}
  */
-interface Progress {
-    list: number,       // Number of mail lists
-    total: number,      // Number of mails
-    finished: number,   // Number of finished mails
+class ProgressItem {
+    total: number = 0;
+    finished: number = 0;
+
+    clear() {
+        this.total = 0;
+        this.finished = 0;
+    }
+
+    /**
+     * Detect if the progress is not 100%
+     */
+    get left() {
+        return this.finished < this.total;
+    }
+
+    /**
+     * The percentage of progress
+     */
+    get percent() {
+        return this.total === 0 ? 0.0 : (this.finished / this.total);
+    }
+}
+
+/**
+ * Manage the progress of mail processing
+ */
+class Progress {
+
+    lists = new ProgressItem();
+    messages = new ProgressItem();
+
+    onBuffer    : ProgressCallback  = () => { };    // Triggered when a list finished
+    onProgress  : ProgressCallback  = () => { };    // Triggered when a message finished if all lists are finished
+    onFinish    : FinishCallback    = () => { };    // Triggered when all lists and messages are finished
+
+    /**
+     * Clear all progress
+     */
+    clear() {
+        this.lists.clear();
+        this.messages.clear();
+    }
+
+    /**
+     * Add a WIP list
+     */
+    addList() {
+        this.lists.total += 1;
+    }
+
+    /**
+     * Finish a list
+     * @param messages Count of the messages to process
+     */
+    finishList(messages: number) {
+        this.lists.finished += 1;
+        this.messages.total += messages;
+        this.onBuffer(this.lists.percent);
+    }
+
+    /**
+     * Finish a message and check finish
+     */
+    finishMessage() {
+        this.messages.finished += 1;
+        if (!this.lists.left) {
+            this.onProgress(this.messages.percent);
+            if (!this.messages.left) {
+                this.onFinish();
+            }
+        }
+    }
 }
 
 /**
@@ -34,15 +103,10 @@ interface Progress {
  */
 export default class Mari {
 
-    private scanners: Array<ScannerCode> = [];           // List of scanner keys
-    private types: Array<string> = [];              // List of type keys
-
     private ignoreMailIds: Array<string> = [];      // List of ids of mails that should be ignored
     private nominations: Array<Nomination> = [];    // List of nominations
 
-    private progress: Progress = {
-        list: 0, total: 0, finished: 0,
-    };
+    private progress = new Progress();  // Progress manager
 
     events: MariEvents = {
         alert:  () => {},
@@ -55,12 +119,14 @@ export default class Mari {
      * Initiate Mari
      */
     init() {
-        for (const code of service.status.scanner.keys()) {
-            if (code == ScannerCode.Unknown) continue;
-            this.scanners.push(code);
+        this.progress.onBuffer = (percent) => {
+            this.events.buffer(percent);
         }
-        for (const type of service.status.types.keys()) {
-            this.types.push(type);
+        this.progress.onProgress = (percent) => {
+            this.events.progress(percent);
+        }
+        this.progress.onFinish = () => {
+            this.events.finish();
         }
     }
 
@@ -71,9 +137,8 @@ export default class Mari {
     start(nominations: Array<Nomination>) {
         this.nominations = nominations;
 
-        this.progress.list = 0;
-        this.progress.total = 0;
-        this.progress.finished = 0;
+        this.progress.lists.clear();
+        this.progress.messages.clear();
 
         // Ignore the mails already in the list
         this.ignoreMailIds  = [];
@@ -81,15 +146,23 @@ export default class Mari {
             this.ignoreMailIds.push(nomination.confirmationMailId);
             if (nomination.resultMailId) this.ignoreMailIds.push(nomination.resultMailId);
         }
-        for (const scanner of this.scanners) {
-            for (const type of this.types) {
-                const keys: QueryKeys = { scanner: scanner, type: type };
-                const listRequest = Mari.getListRequest(null, keys);
-                listRequest.execute((response) => {
-                    this.handleListRequest(response, keys, []);
-                });
+        for (const status of service.status.types.values()) {
+            for (const scanner of status.queries.keys()) {
+                this.queryList({ scanner: scanner, type: status.key });
             }
         }
+    }
+
+    /**
+     * Start to query message list
+     * @param keys Query keys for the list
+     */
+    private queryList(keys: QueryKeys) {
+        this.progress.addList();
+        const listRequest = Mari.getListRequest(null, keys);
+        listRequest.execute((response) => {
+            this.handleListRequest(response, keys, []);
+        });
     }
 
     /**
@@ -132,9 +205,7 @@ export default class Mari {
                     }
                 }
             }
-            this.progress.list += 1;
-            this.events.buffer(this.progress.list / this.scanners.length);
-            this.processList(keys, list);
+            this.queryMessages(keys, list);
         }
     }
 
@@ -143,17 +214,8 @@ export default class Mari {
      * @param keys Keys of the scanner-type group
      * @param list Complete mail list
      */
-    private processList(keys: QueryKeys, list: Array<gapi.client.gmail.Message>) {
-        this.progress.total += list.length;
-
-        const checkFinish = () => {
-            if (this.progress.list === this.scanners.length * this.types.length
-                && this.progress.total === this.progress.finished) {
-                this.events.finish();
-            }
-        };
-
-        checkFinish();
+    private queryMessages(keys: QueryKeys, list: Array<gapi.client.gmail.Message>) {
+        this.progress.finishList(list.length);
 
         for (const mail of list) {
             gapi.client.gmail.users.messages.get({
@@ -186,11 +248,7 @@ export default class Mari {
                     }));
                 }
 
-                this.progress.finished += 1;
-                this.events.progress(
-                    this.progress.finished / this.progress.total * (this.progress.list / this.scanners.length)
-                );
-                checkFinish();
+                this.progress.finishMessage();
             });
         }
     }
