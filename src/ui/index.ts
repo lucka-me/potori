@@ -1,9 +1,9 @@
+import { eli } from '@lucka-labs/eli';
 import i18next from 'i18next';
 
-import { eli } from '@lucka-labs/eli';
 import { service } from 'service';
+import { umi } from 'service/umi';
 import Nomination from 'service/nomination';
-import { StatusReason, StatusType } from 'service/umi';
 
 import './style.scss';
 
@@ -313,9 +313,9 @@ export namespace ui {
         if (!dashboard) return;
         dashboard.update(service.nominations);
         let visibility = false;
-        if (nomination.status instanceof StatusReason) {
+        if (nomination.status instanceof umi.StatusReason) {
             visibility = dashboard.filter.reasons.get(nomination.status).checked;
-        } else if (nomination.status instanceof StatusType) {
+        } else if (nomination.status instanceof umi.StatusType) {
             visibility = dashboard.filter.types.get(nomination.status).checked;
         }
         list.update(nomination, visibility);

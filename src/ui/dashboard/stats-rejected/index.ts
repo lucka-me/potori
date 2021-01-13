@@ -4,7 +4,7 @@ import i18next from 'i18next';
 import { eli } from '@lucka-labs/eli';
 import { base } from 'ui/dashboard/base';
 import type Nomination from 'service/nomination';
-import { StatusReason, umi } from 'service/umi';
+import { umi } from 'service/umi';
 
 import './style.scss';
 
@@ -39,13 +39,13 @@ class StatsRejectedCard extends base.ChartCardProtorype {
 
     update(nominations: Array<Nomination>) {
 
-        const stats = new Map<StatusReason, number>();
+        const stats = new Map<umi.StatusReason, number>();
         for (const reason of umi.reasons.values()) {
             stats.set(reason, 0);
         }
         nominations.reduce((map, nomination) => {
             if (nomination.status.code < 100) return map;
-            const reason = nomination.status as StatusReason;
+            const reason = nomination.status as umi.StatusReason;
             map.set(reason, map.get(reason) + 1);
             return map;
         }, stats);

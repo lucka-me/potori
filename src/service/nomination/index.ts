@@ -1,6 +1,6 @@
 import i18next from 'i18next';
 
-import { Status, umi } from 'service/umi';
+import { umi } from 'service/umi';
 
 import { StringKey } from './constants';
 
@@ -23,7 +23,7 @@ export default class Nomination {
     title = ''; // Title
     image = ''; // Hash part of the image URL
 
-    status: Status = null;  // Status of nomination
+    status: umi.Status = null;  // Status of nomination
 
     confirmedTime = 0;              // Confirmed time, the timestamp of confirmation mail
     confirmationMailId = '';        // ID of confirmation mail

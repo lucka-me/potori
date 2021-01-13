@@ -1,11 +1,11 @@
+import { umi } from 'service/umi';
 import Nomination, { LngLat } from 'service/nomination';
-import { ScannerCode, umi } from 'service/umi';
 
 /**
  * Query keys
  */
 export interface QueryKeys {
-    scanner: ScannerCode;    // Scanner key, redacted, prime etc.
+    scanner: umi.ScannerCode;    // Scanner key, redacted, prime etc.
     type: string;       // Type key, pending, accepted, rejected
 }
 
@@ -51,7 +51,7 @@ export default class Parser {
                 nomination.image = matched[1];
                 nomination.id = Nomination.parseId(nomination.image);
             }
-            if (keys.scanner === ScannerCode.Redacted && keys.type !== 'pending') {
+            if (keys.scanner === umi.ScannerCode.Redacted && keys.type !== 'pending') {
                 nomination.lngLat = this.lngLat(mailBody);
             }
             if (keys.type === 'rejected') {
@@ -67,7 +67,7 @@ export default class Parser {
      * @param mail Body (content) of the mail
      * @param scanner The scanner key for fetch the keywords
      */
-    static reason(mail: string, scanner: ScannerCode) {
+    static reason(mail: string, scanner: umi.ScannerCode) {
         const undeclared = umi.reasons.get('undeclared');
         const matchedMainBody = mail.match(/(\n|\r|.)+?\-NianticOps/);
         if (!matchedMainBody || matchedMainBody.length < 1) {

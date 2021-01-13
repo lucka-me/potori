@@ -3,9 +3,8 @@ import { MDCSwitch } from '@material/switch';
 
 import { eli } from '@lucka-labs/eli';
 import { eliCard } from 'eli/card';
-import { service } from 'service';
 import { base } from 'ui/dashboard/base';
-import { Status, StatusType, StatusReason, umi } from 'service/umi';
+import { umi } from 'service/umi';
 
 import './style.scss';
 
@@ -13,14 +12,14 @@ import { StringKey } from './constants';
 import { eliSwitch } from 'eli/switch';
 
 interface FilterCardEvents {
-    switchType:     (type   : Status, visible: boolean) => void,
-    switchReason:   (reason : Status, visible: boolean) => void,
+    switchType:     (type   : umi.Status, visible: boolean) => void,
+    switchReason:   (reason : umi.Status, visible: boolean) => void,
 }
 
 export default class FilterCard extends base.CardPrototype {
 
-    types: Map<StatusType, MDCSwitch> = new Map();
-    reasons: Map<StatusReason, MDCSwitch> = new Map();
+    types: Map<umi.StatusType, MDCSwitch> = new Map();
+    reasons: Map<umi.StatusReason, MDCSwitch> = new Map();
 
     events: FilterCardEvents = {
         switchType:     () => { },
@@ -56,7 +55,7 @@ export default class FilterCard extends base.CardPrototype {
         }
     }
 
-    switchType(type: Status, checked: boolean) {
+    switchType(type: umi.Status, checked: boolean) {
         if (type.code > 100) {
             for (const ctrl of this.reasons.values()) {
                 ctrl.checked = checked;
@@ -65,7 +64,7 @@ export default class FilterCard extends base.CardPrototype {
         this.events.switchType(type, checked);
     }
 
-    switchReason(reason: Status, checked: boolean) {
+    switchReason(reason: umi.Status, checked: boolean) {
         this.events.switchReason(reason, checked);
         const statusRejected = umi.types.get('rejected');
         if (checked && !this.types.get(statusRejected).checked) {
@@ -74,7 +73,7 @@ export default class FilterCard extends base.CardPrototype {
         }
     }
 
-    private getFilter(map: Map<Status, MDCSwitch>): Map<number, boolean> {
+    private getFilter(map: Map<umi.Status, MDCSwitch>): Map<number, boolean> {
         const filter = new Map<number, boolean>();
         for (const [key, value] of map.entries()) {
             if (!value.checked) continue;
@@ -91,7 +90,7 @@ export default class FilterCard extends base.CardPrototype {
         return this.getFilter(this.reasons);
     }
 
-    private static buildSwitch(parent: HTMLElement, status: Status, type: string) {
+    private static buildSwitch(parent: HTMLElement, status: umi.Status, type: string) {
         const id = `switch-filter-${status.key}`;
         const element = eliSwitch(id);
         const box = eli('div', { }, [
