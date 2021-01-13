@@ -154,15 +154,17 @@ export namespace service {
             for (let j = 0; j < i; j++) {
                 const target = nominations[j];
                 if (current.id !== target.id) continue;
-                if (target.resultMailId) {
+                if (target.status === umi.StatusCode.Pending) {
+                    target.title = current.title;
+                    target.status = current.status;
+                    target.reasons = current.reasons;
+                    target.resultTime = current.resultTime;
+                    target.resultMailId = current.resultMailId;
+                    if (current.lngLat) target.lngLat = current.lngLat;
+                } else {
                     target.confirmedTime = current.confirmedTime;
                     target.confirmationMailId = current.confirmationMailId;
                     if (!target.lngLat) target.lngLat = current.lngLat;
-                } else {
-                    target.status = current.status;
-                    if (current.lngLat) target.lngLat = current.lngLat;
-                    target.resultTime = current.resultTime;
-                    target.resultMailId = current.resultMailId;
                 }
                 nominations.splice(i, 1);
                 pending = true;
