@@ -39,22 +39,29 @@ class StatsRejectedCard extends base.ChartCardProtorype {
 
     update(nominations: Array<Nomination>) {
 
-        const stats = new Map<umi.StatusReason, number>();
-        for (const reason of umi.reasons.values()) {
-            stats.set(reason, 0);
+        const stats = new Map<umi.ReasonCode, number>();
+        for (const code of umi.reason.keys()) {
+            stats.set(code, 0);
         }
         nominations.reduce((map, nomination) => {
-            if (nomination.status < 100) return map;
-            const reason = umi.codes.get(nomination.status) as umi.StatusReason;
-            map.set(reason, map.get(reason) + 1);
+            if (nomination.status !== umi.StatusCode.Rejected) return map;
+            if (nomination.reasons.length > 0) {
+                for (const code of nomination.reasons) {
+                    map.set(code, map.get(code) + 1);
+                }
+            } else {
+                const reason = umi.StatusReason.undeclared;
+                map.set(reason, map.get(reason) + 1);
+            }
             return map;
         }, stats);
 
         const labels = [];
         const colors = [];
         const data = [];
-        for (const [reason, count] of stats.entries()) {
+        for (const [code, count] of stats.entries()) {
             if (count < 1) continue;
+            const reason = umi.reason.get(code);
             labels.push(i18next.t(reason.title));
             colors.push(reason.color);
             data.push(count);
