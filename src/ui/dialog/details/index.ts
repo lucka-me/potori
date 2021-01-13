@@ -43,8 +43,7 @@ class DetailsDialog extends base.DialogPrototype {
 
     private textConfirmedTime: HTMLSpanElement = null;
 
-    private status = new Map<string, MDCRadio>();
-    private selectedStatus: string = null;
+    private radioStatus = new Map<umi.StatusCode, MDCRadio>();
     private fieldResultTime: MDCTextField = null;
 
     private blockReason: HTMLDivElement = null;
@@ -71,10 +70,9 @@ class DetailsDialog extends base.DialogPrototype {
 
         // Status form
         const statusRadios: Array<HTMLDivElement> = [];
-        for (const key of umi.types.keys()) {
-            const radioId = `radio-dialog-details-status-${key}`;
-            const elementRadio = eliRadio(radioId, 'radio-dialog-details-status', key, (value) => {
-                this.selectedStatus = value;
+        for (const [code, status] of umi.status) {
+            const radioId = `radio-dialog-details-status-${code}`;
+            const elementRadio = eliRadio(radioId, 'radio-dialog-details-status', `${code}`, (value) => {
                 (this.fieldResultTime.root as HTMLElement).hidden = (value === 'pending');
                 this.fieldResultTime.layout();
                 this.blockReason.hidden = !(value === 'rejected');
@@ -82,11 +80,11 @@ class DetailsDialog extends base.DialogPrototype {
             });
             const elementField = eliRadio.form(
                 elementRadio,
-                umi.types.get(key).icon, radioId, `fa status-${key}`
+                status.icon, radioId, `fa status-${status.key}`
             );
 
             const radioCtrl = new MDCRadio(elementRadio);
-            this.status.set(key, radioCtrl);
+            this.radioStatus.set(code, radioCtrl);
             const field = new MDCFormField(elementField);
             field.input = radioCtrl;
             statusRadios.push(elementField);
@@ -113,9 +111,9 @@ class DetailsDialog extends base.DialogPrototype {
         });
         // Chip set
         const chipItems = [];
-        for (const [key, reason] of umi.reasons) {
+        for (const [code, reason] of umi.reason) {
             chipItems.push(
-                { id: `details-reason-${key}`, text: i18next.t(reason.title) }
+                { id: `details-reason-${code}`, text: i18next.t(reason.title) }
             );
         }
         const elementChipSetReason = eliChipSet(chipItems);
@@ -190,13 +188,13 @@ class DetailsDialog extends base.DialogPrototype {
         if (!this.ctrl) this.render();
         this._nomination = nomination;
         this.map.lngLat = nomination.lngLat;
-        const type = nomination.status > 100 ? 'rejected' : nomination.status > 0 ? 'accepted' : 'pending';
+        //const type = nomination.status > 100 ? 'rejected' : nomination.status > 0 ? 'accepted' : 'pending';
 
         this.ctrl.root.querySelector('.mdc-dialog__title').innerHTML = nomination.title;
         this.ctrl.root.querySelector('img').src = nomination.imageUrl;
         this.textConfirmedTime.innerHTML = new Date(nomination.confirmedTime).toLocaleString();
 
-        (this.fieldResultTime.root as HTMLElement).hidden = (type === 'pending');
+        (this.fieldResultTime.root as HTMLElement).hidden = (nomination.status === umi.StatusCode.Pending);
         const getLocalDateTimeISOString = (time: number) => {
             const date = new Date();
             date.setTime(time - date.getTimezoneOffset() * 60000);
@@ -207,17 +205,27 @@ class DetailsDialog extends base.DialogPrototype {
         );
         this.fieldResultTime.value = resultTimeString.slice(0, resultTimeString.lastIndexOf(':'));
 
-        this.blockReason.hidden = !(type === 'rejected');
-        if (type === 'rejected') {
-            const reasonData = umi.codes.get(nomination.status);
-            const targetId = `details-reason-${reasonData.key}`;
-            this.chipSetReason.chips.forEach((chip) => {
-                chip.selected = chip.id === targetId;
-            })
-            this.fieldReason.leadingIconContent = reasonData.icon;
-            this.fieldReason.value = i18next.t(reasonData.title);
+        this.blockReason.hidden = !(nomination.status === umi.StatusCode.Rejected);
+        if (nomination.status === umi.StatusCode.Rejected) {
+            if (nomination.reasons.length > 0) {
+                const selectedIds = nomination.reasons.map((code) => `details-reason-${code}`);
+                this.chipSetReason.chips.forEach((chip) => {
+                    chip.selected = selectedIds.includes(chip.id);
+                });
+                const firstReason = nomination.reasonsData[0];
+                this.fieldReason.leadingIconContent = firstReason.icon;
+                this.fieldReason.value = i18next.t(firstReason.title);
+            } else {
+                const reason = umi.reason.get(umi.StatusReason.undeclared);
+                const selectedId = `details-reason-${reason.code}`;
+                this.chipSetReason.chips.forEach((chip) => {
+                    chip.selected = chip.id === selectedId;
+                });
+                this.fieldReason.leadingIconContent = reason.icon;
+                this.fieldReason.value = i18next.t(reason.title);
+            }
         }
-        if (type === 'pending') {
+        if (nomination.status === umi.StatusCode.Pending) {
             this.events.query(nomination, (data) => {
                 const timeString = getLocalDateTimeISOString(data.lastTime);
                 this.fieldResultTime.value = timeString.slice(0, timeString.lastIndexOf(':'));
@@ -225,8 +233,7 @@ class DetailsDialog extends base.DialogPrototype {
             }, () => {});
         }
 
-        this.status.get(type).checked = true;
-        this.selectedStatus = type;
+        this.radioStatus.get(nomination.status).checked = true;
     }
 
     private opened() {
@@ -244,7 +251,13 @@ class DetailsDialog extends base.DialogPrototype {
             reason: this._nomination.status < 100 ? null : umi.codes.get(this._nomination.status),
         }
         let shouldUpdate = false;
-        if (this.selectedStatus !== 'pending') {
+        let selectedStatus = umi.StatusCode.Pending;
+        for (const [code, radio] of this.radioStatus) {
+            if (radio.checked) continue;
+            selectedStatus = code;
+            break;
+        }
+        if (selectedStatus !== umi.StatusCode.Pending) {
             const time = Date.parse(this.fieldResultTime.value);
             if (!time) {
                 this.events.alert(i18next.t(StringKey.messageInvalidTime));
@@ -257,11 +270,12 @@ class DetailsDialog extends base.DialogPrototype {
             }
         }
         const reason = this.chipSetReason.selectedChipIds.length > 0 ? this.chipSetReason.selectedChipIds[0].replace('details-reason-', '') : 'undeclared';
-        if (this.selectedStatus !== keys.type) {
-            shouldUpdate = true;
-        } else if ((keys.type === 'rejected') && (keys.reason.key !== reason)) {
+        if (selectedStatus !== this._nomination.status) {
             shouldUpdate = true;
         }
+        // } else if ((keys.type === 'rejected') && (keys.reason.key !== reason)) {
+        //     shouldUpdate = true;
+        // }
         const lngLat = this.map.lngLat;
         if (lngLat) {
             if (!this._nomination.lngLat
@@ -275,11 +289,7 @@ class DetailsDialog extends base.DialogPrototype {
             shouldUpdate = true;
         }
         if (shouldUpdate) {
-            if (this.selectedStatus !== 'rejected') {
-                this._nomination.status = umi.types.get(this.selectedStatus).code;
-            } else {
-                this._nomination.status = umi.reasons.get(reason).code;
-            }
+            this._nomination.status = selectedStatus;
             this.events.update(this._nomination);
         }
     }
