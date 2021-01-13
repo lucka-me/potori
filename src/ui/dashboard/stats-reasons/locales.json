@@ -1,10 +1,10 @@
 {
     "general": {
         "title": {
-            "en-US": "Stats: Rejected",
-            "zh-CN": "统计：拒绝",
-            "zh-HK": "統計：拒絕",
-            "zh-TW": "統計：拒絕"
+            "en-US": "Stats: Reasons",
+            "zh-CN": "统计：原因",
+            "zh-HK": "統計：原因",
+            "zh-TW": "統計：原因"
         }
     }
 }
