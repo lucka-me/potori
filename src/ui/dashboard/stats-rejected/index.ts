@@ -44,8 +44,8 @@ class StatsRejectedCard extends base.ChartCardProtorype {
             stats.set(reason, 0);
         }
         nominations.reduce((map, nomination) => {
-            if (nomination.status.code < 100) return map;
-            const reason = nomination.status as umi.StatusReason;
+            if (nomination.status < 100) return map;
+            const reason = umi.codes.get(nomination.status) as umi.StatusReason;
             map.set(reason, map.get(reason) + 1);
             return map;
         }, stats);

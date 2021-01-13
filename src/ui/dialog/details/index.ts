@@ -190,7 +190,7 @@ class DetailsDialog extends base.DialogPrototype {
         if (!this.ctrl) this.render();
         this._nomination = nomination;
         this.map.lngLat = nomination.lngLat;
-        const type = nomination.status.type;
+        const type = nomination.status > 100 ? 'rejected' : nomination.status > 0 ? 'accepted' : 'pending';
 
         this.ctrl.root.querySelector('.mdc-dialog__title').innerHTML = nomination.title;
         this.ctrl.root.querySelector('img').src = nomination.imageUrl;
@@ -209,12 +209,13 @@ class DetailsDialog extends base.DialogPrototype {
 
         this.blockReason.hidden = !(type === 'rejected');
         if (type === 'rejected') {
-            const targetId = `details-reason-${nomination.status.key}`;
+            const reasonData = umi.codes.get(nomination.status);
+            const targetId = `details-reason-${reasonData.key}`;
             this.chipSetReason.chips.forEach((chip) => {
                 chip.selected = chip.id === targetId;
             })
-            this.fieldReason.leadingIconContent = nomination.status.icon;
-            this.fieldReason.value = i18next.t(nomination.status.title);
+            this.fieldReason.leadingIconContent = reasonData.icon;
+            this.fieldReason.value = i18next.t(reasonData.title);
         }
         if (type === 'pending') {
             this.events.query(nomination, (data) => {
@@ -239,8 +240,8 @@ class DetailsDialog extends base.DialogPrototype {
         this.map.opened = false;
         if (event.detail.action !== Action.save) return;
         const keys = {
-            type: this._nomination.status.type,
-            reason: this._nomination.status.code < 100 ? null : this._nomination.status,
+            type: this._nomination.status > 100 ? 'rejected' : this._nomination.status > 0 ? 'accepted' : 'pending',
+            reason: this._nomination.status < 100 ? null : umi.codes.get(this._nomination.status),
         }
         let shouldUpdate = false;
         if (this.selectedStatus !== 'pending') {
@@ -275,9 +276,9 @@ class DetailsDialog extends base.DialogPrototype {
         }
         if (shouldUpdate) {
             if (this.selectedStatus !== 'rejected') {
-                this._nomination.status = umi.types.get(this.selectedStatus);
+                this._nomination.status = umi.types.get(this.selectedStatus).code;
             } else {
-                this._nomination.status = umi.reasons.get(reason);
+                this._nomination.status = umi.reasons.get(reason).code;
             }
             this.events.update(this._nomination);
         }

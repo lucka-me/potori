@@ -21,7 +21,7 @@ export default class Parser {
      */
     static mail(mail: gapi.client.gmail.Message, keys: QueryKeys): Nomination {
         const nomination = new Nomination();
-        nomination.status = umi.types.get(keys.type);
+        nomination.status = umi.types.get(keys.type).code;
         if (keys.type === 'pending') {
             nomination.confirmedTime = parseInt(mail.internalDate);
             nomination.confirmationMailId = mail.id;
@@ -55,7 +55,7 @@ export default class Parser {
                 nomination.lngLat = this.lngLat(mailBody);
             }
             if (keys.type === 'rejected') {
-                nomination.status = this.reason(mailBody, keys.scanner);
+                nomination.status = this.reason(mailBody, keys.scanner).code;
             }
             break;
         }

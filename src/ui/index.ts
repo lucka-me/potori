@@ -15,6 +15,8 @@ import Snackbar     from './snackbar';
 
 import type Dashboard       from './dashboard';
 import type NominationList  from './nomination-list';
+import { tryParseInt } from '@firebase/database/dist/src/core/util/util';
+import { Template } from 'webpack';
 
 export namespace ui {
 
@@ -222,14 +224,14 @@ export namespace ui {
         dashboard.filter.events.switchType = (type, visible) => {
             if (type.key !== 'rejected') {
                 for (const nomination of service.nominations) {
-                    if (!nomination.status.isType(type.code)) continue;
+                    if (!type.isType(nomination.status)) continue;
                     document.getElementById(`card-${nomination.id}`).hidden = !visible;
                 }
             } else {
                 const reasonFilter = dashboard.filter.reasonFilter;
                 for (const nomination of service.nominations) {
-                    if (nomination.status.code < 100) continue;
-                    document.getElementById(`card-${nomination.id}`).hidden = !reasonFilter.get(nomination.status.code);
+                    if (nomination.status < 100) continue;
+                    document.getElementById(`card-${nomination.id}`).hidden = !reasonFilter.get(nomination.status);
                 }
                 dashboard.map.reasonFilter = reasonFilter;
                 dashboard.map.updateRejected(service.nominations);
@@ -238,7 +240,7 @@ export namespace ui {
         };
         dashboard.filter.events.switchReason = (reason, visible) => {
             for (const nomination of service.nominations) {
-                if (nomination.status.code !== reason.code) continue;
+                if (nomination.status !== reason.code) continue;
                 document.getElementById(`card-${nomination.id}`).hidden = !visible;
             }
             dashboard.map.reasonFilter = dashboard.filter.reasonFilter;
@@ -313,10 +315,12 @@ export namespace ui {
         if (!dashboard) return;
         dashboard.update(service.nominations);
         let visibility = false;
-        if (nomination.status instanceof umi.StatusReason) {
-            visibility = dashboard.filter.reasons.get(nomination.status).checked;
-        } else if (nomination.status instanceof umi.StatusType) {
-            visibility = dashboard.filter.types.get(nomination.status).checked;
+        if (nomination.status > 100) {
+            const reason = umi.codes.get(nomination.status) as umi.StatusReason;
+            visibility = dashboard.filter.reasons.get(reason).checked;
+        } else {
+            const status = umi.codes.get(nomination.status) as umi.StatusType;
+            visibility = dashboard.filter.types.get(status).checked;
         }
         list.update(nomination, visibility);
     }

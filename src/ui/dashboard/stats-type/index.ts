@@ -45,7 +45,7 @@ class StatsTypeCard extends base.ChartCardProtorype {
             stats.set(type.key, 0);
         }
         nominations.reduce((map, nomination) => {
-            const key = nomination.status.code > 100 ? 'rejected' : nomination.status.key;
+            const key = nomination.status > 100 ? 'rejected' : nomination.status > 0 ? 'accepted' : 'pending';
             map.set(key, map.get(key) + 1);
             return map;
         }, stats);

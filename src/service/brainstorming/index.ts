@@ -133,7 +133,7 @@ class BrainstormingKit {
      * @param nomination The nomination
      */
     beforeCreate(nomination: Nomination): boolean {
-        return nomination.status.code > 0 && nomination.resultTime < 1518796800000;
+        return nomination.status !== umi.StatusCode.Pending && nomination.resultTime < 1518796800000;
     }
 
     /**
@@ -172,10 +172,10 @@ class BrainstormingKit {
                     statsRate(rateJson, rateKey);
                 }
                 stats.reviewTimes.push(review.Timestamp);
-                if (nomination.status.code < 1) continue;
+                if (nomination.status === umi.StatusCode.Pending) continue;
                 // Synch
                 stats.synch.total += 1;
-                if (this.isSynched(review.stars, nomination.status.code)) {
+                if (this.isSynched(review.stars, nomination.status)) {
                     stats.synch.synched += 1;
                 }
             }
@@ -197,13 +197,13 @@ class BrainstormingKit {
      */
     private isSynched(stars: string, status: number) {
         const reasons = umi.reasons;
-        if (stars === 'D' && status === reasons.get('duplicated').code) {
+        if (stars === 'D' && status === umi.StatusReason.duplicated) {
             return true;
         }
         const general = parseFloat(stars);
         if (isNaN(general)) return false;
         const types = umi.types;
-        if (status === types.get('accepted').code || status === reasons.get('close').code) {
+        if (status === types.get('accepted').code || status === umi.StatusReason.close) {
             // Accepted
             if (general >= 3) return true;
         } else {

@@ -23,7 +23,7 @@ export default class Nomination {
     title = ''; // Title
     image = ''; // Hash part of the image URL
 
-    status: umi.Status = null;  // Status of nomination
+    status: umi.StatusCode | umi.ReasonCode = umi.StatusCode.Pending;  // Status / reason code of nomination
 
     confirmedTime = 0;              // Confirmed time, the timestamp of confirmation mail
     confirmationMailId = '';        // ID of confirmation mail
@@ -104,7 +104,7 @@ export default class Nomination {
             id: this.id,
             title: this.title,
             image: this.image,
-            status: this.status.code,
+            status: this.status,
             confirmedTime: this.confirmedTime,
             confirmationMailId: this.confirmationMailId,
         };
@@ -145,7 +145,18 @@ export default class Nomination {
         nomination.title = json.title;
         nomination.image = image;
 
-        nomination.status = umi.codes.get(json.status);
+        if (json.status === umi.StatusCode.Pending) {
+            nomination.status = umi.StatusCode.Pending;
+        } else if (json.status === umi.StatusCode.Accepted) {
+            nomination.status = umi.StatusCode.Accepted;
+        } else {
+            nomination.status = umi.StatusCode.Rejected;
+            if (json.status !== umi.StatusReason.undeclared) {
+                if (umi.codes.has(json.status)) {
+                    nomination.status = umi.codes.get(json.status).code;
+                }
+            }
+        }
 
         nomination.confirmedTime = json.confirmedTime;
         nomination.confirmationMailId = json.confirmationMailId;

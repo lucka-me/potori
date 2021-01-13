@@ -61,13 +61,14 @@ class MatchDialog extends base.DialogPrototype {
         const details = [
             this.buildDetail(eliIcon.Icon.arrowUp, nomination.confirmedDateString)
         ];
-        if (nomination.status.code > 0) {
-            const type = nomination.status.type;
+        if (nomination.status !== umi.StatusCode.Pending) {
+            const type = nomination.status > 100 ? 'rejected' : nomination.status > 0 ? 'accepted' : 'pending';
             details.push(this.buildDetail(
                 umi.types.get(type).icon, nomination.resultDateString
             ));
+            const statusData = umi.codes.get(nomination.status);
             const elementResult = this.buildDetail(
-                nomination.status.icon, i18next.t(nomination.status.title)
+                statusData.icon, i18next.t(statusData.title)
             );
             elementResult.classList.add(`status-${type}`);
             details.push(elementResult);

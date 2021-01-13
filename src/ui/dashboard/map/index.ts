@@ -245,7 +245,7 @@ class MapCard extends base.CardPrototype {
         };
         if (codes.length < 1) return geoJson;
         for (const nomination of nominations) {
-            if (!codes.includes(nomination.status.code)) continue;
+            if (!codes.includes(nomination.status)) continue;
             if (!nomination.lngLat) continue;
             geoJson.features.push({
                 type: 'Feature',

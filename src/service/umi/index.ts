@@ -28,7 +28,7 @@ export namespace umi {
     export enum StatusCode {
         Pending     = 0,
         Accepted    = 1,
-        Reejected   = 101,
+        Rejected    = 101,
     }
 
     /**
@@ -85,6 +85,10 @@ export namespace umi {
      * Information of reject reasons
      */
     export class StatusReason extends Status {
+
+        static undeclared: ReasonCode = 101;
+        static duplicated: ReasonCode = 102;
+        static close: ReasonCode = 103;
     
         readonly color: string; // Color to represent the reason in charts
         readonly keywords: Map<ScannerCode, Array<string>>;  // Keywords to identify the reason, <scanner, keywords>

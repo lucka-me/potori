@@ -87,8 +87,8 @@ export default class NominationCard {
             ));
         }
         // Result
-        const type = nomination.status.type;
-        if (nomination.status.code > 0) {
+        const type = nomination.status > 100 ? 'rejected' : nomination.status > 0 ? 'accepted' : 'pending';
+        if (nomination.status !== umi.StatusCode.Pending) {
             elementDetails.append(NominationCard.buildDetail(
                 umi.types.get(type).icon,
                 nomination.resultDateString
@@ -97,8 +97,9 @@ export default class NominationCard {
 
         const elementButtons = card.querySelector('.mdc-card__action-buttons') as HTMLDivElement;
         elementButtons.innerHTML = '';
+        const statusData = umi.codes.get(nomination.status);
         const elementStatus = eliCard.buttonAction(
-            nomination.status.icon, i18next.t(nomination.status.title)
+            statusData.icon, i18next.t(statusData.title)
         );
         elementStatus.classList.add(`status-${type}`);
         elementButtons.append(elementStatus);
