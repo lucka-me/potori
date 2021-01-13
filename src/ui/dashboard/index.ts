@@ -11,7 +11,7 @@ import FilterCard           from './filter';
 import MapCard              from './map';
 import QuotasCard           from './quotas';
 import StatsRejectedCard    from './stats-rejected';
-import StatsTypeCard        from './stats-type';
+import StatsStatusCard        from './stats-status';
 
 import './style.scss';
 
@@ -21,7 +21,7 @@ class Dashboard extends base.Prototype {
 
     map             = new MapCard();
     filter          = new FilterCard();
-    statsType       = new StatsTypeCard();
+    statsType       = new StatsStatusCard();
     statsRejected   = new StatsRejectedCard();
     countByMonth    = new CountByMonthCard();
     quotas          = new QuotasCard();

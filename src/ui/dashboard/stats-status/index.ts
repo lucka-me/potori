@@ -6,16 +6,15 @@ import { base } from 'ui/dashboard/base';
 import { umi } from 'service/umi';
 import Nomination from 'service/nomination';
 
-import './style.scss';
-
 import { StringKey } from './constants';
 
+import './style.scss';
 
-class StatsTypeCard extends base.ChartCardProtorype {
+class StatsStatusCard extends base.ChartCardProtorype {
 
     render() {
         const canvasChart = eli('canvas', { });
-        this.root = base.eliChartCard('stats-type-card', i18next.t(StringKey.title), canvasChart);
+        this.root = base.eliChartCard('stats-status-card', i18next.t(StringKey.title), canvasChart);
         this.setVisible(false);
         this.parent.append(this.root);
 
@@ -69,4 +68,4 @@ class StatsTypeCard extends base.ChartCardProtorype {
     }
 }
 
-export default StatsTypeCard;
+export default StatsStatusCard;
