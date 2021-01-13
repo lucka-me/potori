@@ -147,7 +147,7 @@ export default class Mari {
         }
         for (const status of umi.types.values()) {
             for (const scanner of status.queries.keys()) {
-                this.queryList({ scanner: scanner, type: status.key });
+                this.queryList({ status: status.code, scanner: scanner });
             }
         }
     }
@@ -172,7 +172,7 @@ export default class Mari {
     private static getListRequest(pageToken: string, keys: QueryKeys) {
         return gapi.client.gmail.users.messages.list({
             'userId': 'me',
-            'q': umi.types.get(keys.type).queries.get(keys.scanner),
+            'q': umi.status.get(keys.status).queries.get(keys.scanner),
             'pageToken': pageToken
         });
     }
@@ -243,7 +243,7 @@ export default class Mari {
                     }
                     this.events.alert(i18next.t('message:service.mari.reportParserError', {
                         subject: subject,
-                        message: `[${keys.scanner}:${keys.type}]${details}`
+                        message: `[${keys.scanner}:${keys.status}]${details}`
                     }));
                 }
 

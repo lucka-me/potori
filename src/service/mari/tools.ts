@@ -5,8 +5,8 @@ import Nomination, { LngLat } from 'service/nomination';
  * Query keys
  */
 export interface QueryKeys {
+    status: umi.StatusCode;       // Type key, pending, accepted, rejected
     scanner: umi.ScannerCode;    // Scanner key, redacted, prime etc.
-    type: string;       // Type key, pending, accepted, rejected
 }
 
 /**
@@ -21,8 +21,8 @@ export default class Parser {
      */
     static mail(mail: gapi.client.gmail.Message, keys: QueryKeys): Nomination {
         const nomination = new Nomination();
-        nomination.status = umi.types.get(keys.type).code;
-        if (keys.type === 'pending') {
+        nomination.status = keys.status;
+        if (keys.status === umi.StatusCode.Pending) {
             nomination.confirmedTime = parseInt(mail.internalDate);
             nomination.confirmationMailId = mail.id;
         } else {
@@ -51,10 +51,10 @@ export default class Parser {
                 nomination.image = matched[1];
                 nomination.id = Nomination.parseId(nomination.image);
             }
-            if (keys.scanner === umi.ScannerCode.Redacted && keys.type !== 'pending') {
+            if (keys.scanner === umi.ScannerCode.Redacted && keys.status !== umi.StatusCode.Pending) {
                 nomination.lngLat = this.lngLat(mailBody);
             }
-            if (keys.type === 'rejected') {
+            if (keys.status === umi.StatusCode.Rejected) {
                 nomination.status = umi.StatusCode.Rejected;
                 nomination.reasons = this.reason(mailBody, keys.scanner);
             }
