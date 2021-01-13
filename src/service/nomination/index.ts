@@ -54,6 +54,20 @@ export default class Nomination {
     }
 
     /**
+     * Get status data
+     */
+    get statusData(): umi.StatusType {
+        return umi.status.get(this.status);
+    }
+
+    /**
+     * Get data of reasons
+     */
+    get reasonsData(): Array<umi.StatusReason> {
+        return [ umi.reason.get(this.status) ];
+    }
+
+    /**
      * Get the time of quota being restored
      */
     get restoreTime(): number {

@@ -103,10 +103,34 @@ export namespace umi {
         }
     }
     
-    export const scanner: Map<ScannerCode, Scanner> = data.scanners.reduce((map, scanner) => {
+    export const scanner = data.scanners.reduce((map, scanner) => {
         map.set(scanner.code, scanner);
         return map;
-    }, new Map());
+    }, new Map<ScannerCode, Scanner>());
+
+    export const status = data.statuses.reduce((map, json) => {
+        const status = new StatusType(
+            json.key, json.code, json.title, json.iconFA,
+            json.queries.reduce((quries, query) => {
+                quries.set(query.scanner, query.query);
+                return quries;
+            }, new Map<ScannerCode, string>())
+        );
+        map.set(status.code, status);
+        return map;
+    }, new Map<StatusCode, StatusType>());
+
+    export const reason = data.reasons.reduce((map, json) => {
+        const reason = new StatusReason(
+            json.key, json.code, json.title, json.iconFA, json.color,
+            json.keywords.reduce((mapKeywords, keywords) => {
+                mapKeywords.set(keywords.scanner, keywords.keywords);
+                return mapKeywords;
+            }, new Map<ScannerCode, Array<string>>())
+        );
+        map.set(reason.code, reason);
+        return map;
+    }, new Map<ReasonCode, StatusReason>());
 
     export const codes  : Map<number, Status>       = new Map();            // <code, status>
     export const types  : Map<string, StatusType>   = generateTypes();      // <key, type>
