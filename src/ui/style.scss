@@ -9,15 +9,15 @@
     --mdc-theme-on-surface: #000;
     --mdc-theme-text-disabled-on-light: rgba(0, 0, 0, 0.5);
 
-    --color-pending: #CAAF85;
-    --color-pending--dark: #988058;
-    --color-pending--light: #fEE1B5;
-    --color-accepted: #35C572;
-    --color-accepted--dark: #009345;
-    --color-accepted--light: #71F9A1;
-    --color-rejected: #B0373C;
-    --color-rejected--dark: #7A0016;
-    --color-rejected--light: #E76866;
+    --color-0: #CAAF85;
+    --color-0--dark: #988058;
+    --color-0--light: #fEE1B5;
+    --color-1: #35C572;
+    --color-1--dark: #009345;
+    --color-1--light: #71F9A1;
+    --color-101: #B0373C;
+    --color-101--dark: #7A0016;
+    --color-101--light: #E76866;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -35,13 +35,13 @@
     }
 }
 
-.status-pending  { color: var(--color-pending ) !important; }
-.status-accepted { color: var(--color-accepted) !important; }
-.status-rejected { color: var(--color-rejected) !important; }
+.status-0   { color: var(--color-0  ) !important; }
+.status-1   { color: var(--color-1  ) !important; }
+.status-101 { color: var(--color-101) !important; }
 
-.status-pending--bg  { background-color: var(--color-pending ) !important; }
-.status-accepted--bg { background-color: var(--color-accepted) !important; }
-.status-rejected--bg { background-color: var(--color-rejected) !important; }
+.status-0--bg   { background-color: var(--color-0   ) !important; }
+.status-1--bg   { background-color: var(--color-1   ) !important; }
+.status-101--bg { background-color: var(--color-101 ) !important; }
 
 [hidden]{ display:none !important; }
 

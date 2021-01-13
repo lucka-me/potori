@@ -109,7 +109,7 @@ export default class NominationCard {
         const elementDetails = eliCard.buttonAction(
             detailsButtonInfo.icon, i18next.t(detailsButtonInfo.title)
         );
-        elementDetails.classList.add(`status-${status.key}`);
+        elementDetails.classList.add(`status-${status.code}`);
         elementButtons.append(elementDetails);
         const rippleDetails = new MDCRipple(elementDetails);
         rippleDetails.unbounded = true;

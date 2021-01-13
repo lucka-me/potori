@@ -42,14 +42,14 @@ export default class FilterCard extends base.CardPrototype {
         this.parent.append(this.root);
 
         for (const status of umi.status.values()) {
-            const switchCtrl = FilterCard.buildSwitch(statusBox, status, status.key);
+            const switchCtrl = FilterCard.buildSwitch(statusBox, status, status.code);
             switchCtrl.listen('change', () => this.switchType(status.code, switchCtrl.checked));
             this.status.set(status.code, switchCtrl);
         }
 
         for (const [code, reason] of umi.reason) {
             if (code !== reason.code) continue;
-            const switchCtrl = FilterCard.buildSwitch(reasonBox, reason, 'rejected');
+            const switchCtrl = FilterCard.buildSwitch(reasonBox, reason, umi.StatusCode.Rejected);
             switchCtrl.listen('change', () => {
                 this.switchReason(switchCtrl.checked);
             });
@@ -95,16 +95,16 @@ export default class FilterCard extends base.CardPrototype {
         return map;
     }
 
-    private static buildSwitch(parent: HTMLElement, status: umi.Status | umi.Reason, type: string) {
-        const id = `switch-filter-${status.key}`;
+    private static buildSwitch(parent: HTMLElement, data: umi.Status | umi.Reason, status: umi.StatusCode) {
+        const id = `switch-filter-${data.code}`;
         const element = eliSwitch(id);
         const box = eli('div', { }, [
             element,
             eli('label', {
-                className: `fa fa-fw status-${type}`,
+                className: `fa fa-fw status-${status}`,
                 for: id,
-                title: i18next.t(status.title),
-                innerHTML: status.icon,
+                title: i18next.t(data.title),
+                innerHTML: data.icon,
             })
         ]);
         parent.append(box);

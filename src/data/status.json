@@ -16,7 +16,6 @@
     ],
     "statuses": [
         {
-            "key": "pending",
             "code": 0,
             "title": "data.pending",
             "iconFA": "\uf017",
@@ -34,7 +33,6 @@
             ]
         },
         {
-            "key": "accepted",
             "code": 1,
             "title": "data.accepted",
             "iconFA": "\uf00c",
@@ -51,7 +49,6 @@
             ]
         },
         {
-            "key": "rejected",
             "code": 101,
             "title": "data.rejected",
             "iconFA": "\uf00d",
@@ -70,7 +67,6 @@
     ],
     "reasons": [
         {
-            "key": "undeclared",
             "code": 101,
             "title": "data.undeclared",
             "iconFA": "\uf00d",
@@ -79,7 +75,6 @@
             "keywords": [ ]
         },
         {
-            "key": "duplicated",
             "code": 102,
             "title": "data.duplicated",
             "iconFA": "\uf24d",
@@ -97,7 +92,6 @@
             ]
         },
         {
-            "key": "close",
             "code": 103,
             "title": "data.close",
             "iconFA": "\uf547",
@@ -116,7 +110,6 @@
         },
 
         {
-            "key": "criteria:criteria",
             "code": 112,
             "title": "data.criteriaCriteria",
             "iconFA": "\uf05e",
@@ -130,7 +123,6 @@
             ]
         },
         {
-            "key": "criteria:temporary",
             "code": 116,
             "oldCode": 104,
             "title": "data.criteriaTemporary",
@@ -145,7 +137,6 @@
             ]
         },
         {
-            "key": "criteria:generic",
             "code": 117,
             "oldCode": 105,
             "title": "data.criteriaGeneric",
@@ -161,7 +152,6 @@
         },
 
         {
-            "key": "location:private",
             "code": 124,
             "title": "data.locationPrivate",
             "iconFA": "\uf023",
@@ -176,7 +166,6 @@
         },
         
         {
-            "key": "photo:plate",
             "code": 106,
             "title": "data.photoPlate",
             "iconFA": "\uf1b9",
@@ -190,7 +179,6 @@
             ]
         },
         {
-            "key": "photo:quality",
             "code": 133,
             "title": "data.photoQuality",
             "iconFA": "\uf03e",

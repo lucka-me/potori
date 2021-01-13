@@ -56,7 +56,7 @@ class StatsStatusCard extends base.ChartCardProtorype {
             if (count < 1) continue;
             const status = umi.status.get(code);
             labels.push(i18next.t(status.title));
-            colors.push(style.getPropertyValue(`--color-${status.key}`));
+            colors.push(style.getPropertyValue(`--color-${status.code}`));
             data.push(count);
         }
 

@@ -41,7 +41,6 @@ export namespace umi {
      */
     export class Status {
 
-        readonly key: string;   // Key of the status
         readonly code: StatusCode; // Code to identify the status and saved in file
         readonly title: string; // Title to display
         readonly icon: string;  // Icon to represent the status
@@ -49,10 +48,9 @@ export namespace umi {
         readonly queries: Map<ScannerCode, string>;  // Queries to search mails, <scanner, query>
     
         constructor(
-            key: string, code: number, title: string, icon: string,
+            code: number, title: string, icon: string,
             queries: Map<ScannerCode, string>
         ) {
-            this.key = key;
             this.code = code;
             this.title = title;
             this.icon = icon;
@@ -70,7 +68,7 @@ export namespace umi {
         static duplicated: ReasonCode = 102;
         static close: ReasonCode = 103;
 
-        readonly key: string;   // Key of the status
+        //readonly key: string;   // Key of the status
         readonly code: ReasonCode; // Code to identify the status and saved in file
         readonly title: string; // Title to display
         readonly icon: string;  // Icon to represent the status
@@ -79,10 +77,9 @@ export namespace umi {
         readonly keywords: Map<ScannerCode, Array<string>>;  // Keywords to identify the reason, <scanner, keywords>
     
         constructor(
-            key: string, code: number, title: string, icon: string,
+            code: number, title: string, icon: string,
             color: string, keyword: Map<ScannerCode, Array<string>>
         ) {
-            this.key = key;
             this.code = code;
             this.title = title;
             this.icon = icon;
@@ -99,7 +96,7 @@ export namespace umi {
 
     export const status = data.statuses.reduce((map, json) => {
         const status = new Status(
-            json.key, json.code, json.title, json.iconFA,
+            json.code, json.title, json.iconFA,
             json.queries.reduce((quries, query) => {
                 quries.set(query.scanner, query.query);
                 return quries;
@@ -111,7 +108,7 @@ export namespace umi {
 
     export const reason = data.reasons.reduce((map, json) => {
         const reason = new Reason(
-            json.key, json.code, json.title, json.iconFA, json.color,
+            json.code, json.title, json.iconFA, json.color,
             json.keywords.reduce((mapKeywords, keywords) => {
                 mapKeywords.set(keywords.scanner, keywords.keywords);
                 return mapKeywords;

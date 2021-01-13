@@ -80,7 +80,7 @@ class DetailsDialog extends base.DialogPrototype {
             });
             const elementField = eliRadio.form(
                 elementRadio,
-                status.icon, radioId, `fa status-${status.key}`
+                status.icon, radioId, `fa status-${status.code}`
             );
 
             const radioCtrl = new MDCRadio(elementRadio);
