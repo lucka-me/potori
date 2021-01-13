@@ -67,45 +67,53 @@ export default class NominationCard {
         now: number,
         events: NominationCardEvents
     ) {
-        const elementDetails = card.querySelector('.info-box > div > div') as HTMLDivElement;
-        elementDetails.innerHTML = '';
+        const elementDetailsBox = card.querySelector('.info-box > div > div') as HTMLDivElement;
+        elementDetailsBox.innerHTML = '';
         // Confirmed date
-        elementDetails.append(NominationCard.buildDetail(
+        elementDetailsBox.append(NominationCard.buildDetail(
             eliIcon.Icon.arrowUp, nomination.confirmedDateString
         ));
         // Restore interval
         const restoreTime = nomination.restoreTime;
         if (restoreTime > now) {
-            elementDetails.append(NominationCard.buildDetail(
+            elementDetailsBox.append(NominationCard.buildDetail(
                 eliIcon.Icon.redoAlt, nomination.restoreIntervalString
             ));
         }
         // Interval
         if (nomination.confirmedTime > 0) {
-            elementDetails.append(NominationCard.buildDetail(
+            elementDetailsBox.append(NominationCard.buildDetail(
                 eliIcon.Icon.clock, nomination.intervalString
             ));
         }
         // Result
-        const type = nomination.status > 100 ? 'rejected' : nomination.status > 0 ? 'accepted' : 'pending';
+        const status = nomination.statusData;
         if (nomination.status !== umi.StatusCode.Pending) {
-            elementDetails.append(NominationCard.buildDetail(
-                umi.types.get(type).icon,
+            elementDetailsBox.append(NominationCard.buildDetail(
+                status.icon,
                 nomination.resultDateString
             ));
         }
 
         const elementButtons = card.querySelector('.mdc-card__action-buttons') as HTMLDivElement;
         elementButtons.innerHTML = '';
-        const statusData = umi.codes.get(nomination.status);
-        const elementStatus = eliCard.buttonAction(
-            statusData.icon, i18next.t(statusData.title)
+        
+        let detailsButtonInfo: umi.StatusType | umi.StatusReason;
+        if (nomination.status !== umi.StatusCode.Rejected) {
+            detailsButtonInfo = status
+        } else if (nomination.reasons.length > 0) {
+            detailsButtonInfo = nomination.reasonsData[0];
+        } else {
+            detailsButtonInfo = umi.reason.get(umi.StatusReason.undeclared);
+        } 
+        const elementDetails = eliCard.buttonAction(
+            detailsButtonInfo.icon, i18next.t(detailsButtonInfo.title)
         );
-        elementStatus.classList.add(`status-${type}`);
-        elementButtons.append(elementStatus);
-        const rippleStatus = new MDCRipple(elementStatus);
-        rippleStatus.unbounded = true;
-        rippleStatus.listen('click', events.openDetails);
+        elementDetails.classList.add(`status-${status.key}`);
+        elementButtons.append(elementDetails);
+        const rippleDetails = new MDCRipple(elementDetails);
+        rippleDetails.unbounded = true;
+        rippleDetails.listen('click', events.openDetails);
 
         const elementIcons = card.querySelector('.mdc-card__action-icons') as HTMLDivElement;
         elementIcons.innerHTML = '';
