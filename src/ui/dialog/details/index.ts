@@ -133,14 +133,14 @@ class DetailsDialog extends base.DialogPrototype {
             eli('div', { className: 'controller' }, [ elementReason, elementReasonExpand ]),
             elementChipSetReason
         ]);
-        for (const chip of this.chipSetReason.chips) {
-            chip.listen('MDCChip:selection', () => {
-                const key = this.chipSetReason.selectedChipIds.length > 0 ? this.chipSetReason.selectedChipIds[0].replace('details-reason-', '') : 'undeclared';
-                const reason = umi.reasons.get(key);
-                this.fieldReason.leadingIconContent = reason.icon;
-                this.fieldReason.value = i18next.t(reason.title);
-            });
-        }
+        // for (const chip of this.chipSetReason.chips) {
+        //     chip.listen('MDCChip:selection', () => {
+        //         const key = this.chipSetReason.selectedChipIds.length > 0 ? this.chipSetReason.selectedChipIds[0].replace('details-reason-', '') : 'undeclared';
+        //         const reason = umi.reason.get(key);
+        //         this.fieldReason.leadingIconContent = reason.icon;
+        //         this.fieldReason.value = i18next.t(reason.title);
+        //     });
+        // }
         contents.push(this.blockReason);
         
         const elementDialog = eliDialog('details-dialog', {
@@ -216,7 +216,7 @@ class DetailsDialog extends base.DialogPrototype {
                 this.fieldReason.leadingIconContent = firstReason.icon;
                 this.fieldReason.value = i18next.t(firstReason.title);
             } else {
-                const reason = umi.reason.get(umi.StatusReason.undeclared);
+                const reason = umi.reason.get(umi.Reason.undeclared);
                 const selectedId = `details-reason-${reason.code}`;
                 this.chipSetReason.chips.forEach((chip) => {
                     chip.selected = chip.id === selectedId;
@@ -246,10 +246,6 @@ class DetailsDialog extends base.DialogPrototype {
     private closed(event: CustomEvent) {
         this.map.opened = false;
         if (event.detail.action !== Action.save) return;
-        const keys = {
-            type: this._nomination.status > 100 ? 'rejected' : this._nomination.status > 0 ? 'accepted' : 'pending',
-            reason: this._nomination.status < 100 ? null : umi.codes.get(this._nomination.status),
-        }
         let shouldUpdate = false;
         let selectedStatus = umi.StatusCode.Pending;
         for (const [code, radio] of this.radioStatus) {
@@ -269,7 +265,6 @@ class DetailsDialog extends base.DialogPrototype {
                 shouldUpdate = true;
             }
         }
-        const reason = this.chipSetReason.selectedChipIds.length > 0 ? this.chipSetReason.selectedChipIds[0].replace('details-reason-', '') : 'undeclared';
         if (selectedStatus !== this._nomination.status) {
             shouldUpdate = true;
         }

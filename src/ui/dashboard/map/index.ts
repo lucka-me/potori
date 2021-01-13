@@ -254,7 +254,7 @@ class MapCard extends base.CardPrototype {
         const geoJson: GeoJSON.FeatureCollection<GeoJSON.Geometry> = {
             type: 'FeatureCollection', features: [],
         };
-        let undeclaredVisible = (status === umi.StatusCode.Rejected) && this.reasonFilter.get(umi.StatusReason.undeclared);
+        let undeclaredVisible = (status === umi.StatusCode.Rejected) && this.reasonFilter.get(umi.Reason.undeclared);
         for (const nomination of nominations) {
             if (nomination.status !== status) continue;
             if (!nomination.lngLat) continue;

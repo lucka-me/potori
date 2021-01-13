@@ -50,7 +50,7 @@ class StatsReasonsCard extends base.ChartCardProtorype {
                     map.set(code, map.get(code) + 1);
                 }
             } else {
-                const reason = umi.StatusReason.undeclared;
+                const reason = umi.Reason.undeclared;
                 map.set(reason, map.get(reason) + 1);
             }
             return map;

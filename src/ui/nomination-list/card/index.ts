@@ -98,13 +98,13 @@ export default class NominationCard {
         const elementButtons = card.querySelector('.mdc-card__action-buttons') as HTMLDivElement;
         elementButtons.innerHTML = '';
         
-        let detailsButtonInfo: umi.StatusType | umi.StatusReason;
+        let detailsButtonInfo: umi.Status | umi.Reason;
         if (nomination.status !== umi.StatusCode.Rejected) {
             detailsButtonInfo = status
         } else if (nomination.reasons.length > 0) {
             detailsButtonInfo = nomination.reasonsData[0];
         } else {
-            detailsButtonInfo = umi.reason.get(umi.StatusReason.undeclared);
+            detailsButtonInfo = umi.reason.get(umi.Reason.undeclared);
         } 
         const elementDetails = eliCard.buttonAction(
             detailsButtonInfo.icon, i18next.t(detailsButtonInfo.title)

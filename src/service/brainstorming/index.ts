@@ -199,7 +199,7 @@ class BrainstormingKit {
         if (
             stars === 'D'
             && nomination.status === umi.StatusCode.Rejected
-            && nomination.reasons.includes(umi.StatusReason.duplicated)
+            && nomination.reasons.includes(umi.Reason.duplicated)
         ) {
             return true;
         }
@@ -208,7 +208,7 @@ class BrainstormingKit {
         
         if (
             nomination.status === umi.StatusCode.Accepted
-            || (nomination.status === umi.StatusCode.Rejected && nomination.reasons.includes(umi.StatusReason.close))
+            || (nomination.status === umi.StatusCode.Rejected && nomination.reasons.includes(umi.Reason.close))
         ) {
             // Accepted
             if (general >= 3) return true;

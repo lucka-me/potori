@@ -37,38 +37,14 @@ export namespace umi {
     export type ReasonCode = number;
     
     /**
-     * Basic information of all status
+     * Status information
      */
     export class Status {
-    
+
         readonly key: string;   // Key of the status
-        readonly code: StatusCode | ReasonCode; // Code to identify the status and saved in file
+        readonly code: StatusCode; // Code to identify the status and saved in file
         readonly title: string; // Title to display
         readonly icon: string;  // Icon to represent the status
-    
-        constructor(key: string, code: number, title: string, icon: string) {
-            this.key = key;
-            this.code = code;
-            this.title = title;
-            this.icon = icon;
-        }
-    
-        get type(): string {
-            if (this.code === 0) return 'pending';
-            if (this.code === 1) return 'accepted';
-            return 'rejected';
-        }
-    
-        isType(type: number): boolean {
-            if (type < 101) return this.code === type;
-            return this.code > 100;
-        }
-    }
-    
-    /**
-     * Information of types
-     */
-    export class StatusType extends Status {
     
         readonly queries: Map<ScannerCode, string>;  // Queries to search mails, <scanner, query>
     
@@ -76,19 +52,28 @@ export namespace umi {
             key: string, code: number, title: string, icon: string,
             queries: Map<ScannerCode, string>
         ) {
-            super(key, code, title, icon);
+            this.key = key;
+            this.code = code;
+            this.title = title;
+            this.icon = icon;
+
             this.queries = queries;
         }
     }
     
     /**
-     * Information of reject reasons
+     * Reason information
      */
-    export class StatusReason extends Status {
+    export class Reason {
 
         static undeclared: ReasonCode = 101;
         static duplicated: ReasonCode = 102;
         static close: ReasonCode = 103;
+
+        readonly key: string;   // Key of the status
+        readonly code: ReasonCode; // Code to identify the status and saved in file
+        readonly title: string; // Title to display
+        readonly icon: string;  // Icon to represent the status
     
         readonly color: string; // Color to represent the reason in charts
         readonly keywords: Map<ScannerCode, Array<string>>;  // Keywords to identify the reason, <scanner, keywords>
@@ -97,7 +82,11 @@ export namespace umi {
             key: string, code: number, title: string, icon: string,
             color: string, keyword: Map<ScannerCode, Array<string>>
         ) {
-            super(key, code, title, icon);
+            this.key = key;
+            this.code = code;
+            this.title = title;
+            this.icon = icon;
+
             this.color = color;
             this.keywords = keyword;
         }
@@ -109,7 +98,7 @@ export namespace umi {
     }, new Map<ScannerCode, Scanner>());
 
     export const status = data.statuses.reduce((map, json) => {
-        const status = new StatusType(
+        const status = new Status(
             json.key, json.code, json.title, json.iconFA,
             json.queries.reduce((quries, query) => {
                 quries.set(query.scanner, query.query);
@@ -118,10 +107,10 @@ export namespace umi {
         );
         map.set(status.code, status);
         return map;
-    }, new Map<StatusCode, StatusType>());
+    }, new Map<StatusCode, Status>());
 
     export const reason = data.reasons.reduce((map, json) => {
-        const reason = new StatusReason(
+        const reason = new Reason(
             json.key, json.code, json.title, json.iconFA, json.color,
             json.keywords.reduce((mapKeywords, keywords) => {
                 mapKeywords.set(keywords.scanner, keywords.keywords);
@@ -133,47 +122,5 @@ export namespace umi {
             map.set(json.oldCode, reason);
         }
         return map;
-    }, new Map<ReasonCode, StatusReason>());
-
-    export const codes  : Map<number, Status>       = new Map();            // <code, status>
-    export const types  : Map<string, StatusType>   = generateTypes();      // <key, type>
-    export const reasons: Map<string, StatusReason> = generateReasons();    // <key, reason>
-
-    function generateTypes() {
-
-        const map = new Map<string, StatusType>();
-
-        for (const value of data.statuses) {
-            const status = new StatusType(
-                value.key, value.code, value.title, value.iconFA,
-                value.queries.reduce((map, query) => {
-                    map.set(query.scanner, query.query);
-                    return map;
-                }, new Map<ScannerCode, string>())
-            );
-            map.set(status.key, status);
-            codes.set(status.code, status);
-        }
-
-        return map;
-    }
-
-    function generateReasons() {
-
-        const map = new Map<string, StatusReason>();
-
-        for (const reason of data.reasons) {
-            const status = new StatusReason(
-                reason.key, reason.code, reason.title, reason.iconFA, reason.color,
-                reason.keywords.reduce((map, keywords) => {
-                    map.set(keywords.scanner, keywords.keywords);
-                    return map;
-                }, new Map<ScannerCode, Array<string>>())
-            );
-            map.set(reason.key, status);
-            codes.set(reason.code, status);
-        }
-
-        return map;
-    }
+    }, new Map<ReasonCode, Reason>());
 }

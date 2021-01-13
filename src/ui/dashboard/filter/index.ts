@@ -95,7 +95,7 @@ export default class FilterCard extends base.CardPrototype {
         return map;
     }
 
-    private static buildSwitch(parent: HTMLElement, status: umi.Status, type: string) {
+    private static buildSwitch(parent: HTMLElement, status: umi.Status | umi.Reason, type: string) {
         const id = `switch-filter-${status.key}`;
         const element = eliSwitch(id);
         const box = eli('div', { }, [

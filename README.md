@@ -47,7 +47,6 @@ Potori is NOT fully compatible with Prime yet, we still need more [mail samples]
   Done in `0.7.0`
 - [ ] Upgrade data struct
   - [ ] Add more properties like `scanner`, `reasons`
-  - [ ] Add struct version along with nominations for future extending
 
 ## Changelog
 See [CHANGELOG.md](./CHANGELOG.md).

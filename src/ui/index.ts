@@ -232,7 +232,7 @@ export namespace ui {
                     }
                     document.getElementById(`card-${nomination.id}`).hidden = !visible;
                 } else {
-                    document.getElementById(`card-${nomination.id}`).hidden = !reasonMap.get(umi.StatusReason.undeclared);
+                    document.getElementById(`card-${nomination.id}`).hidden = !reasonMap.get(umi.Reason.undeclared);
                 }
             }
             dashboard.map.filter(statusMap, reasonMap);
@@ -316,7 +316,7 @@ export namespace ui {
                     break;
                 }
             } else {
-                visibility = dashboard.filter.reason.get(umi.StatusReason.undeclared).checked;
+                visibility = dashboard.filter.reason.get(umi.Reason.undeclared).checked;
             }
         } else {
             visibility = dashboard.filter.status.get(nomination.status).checked;

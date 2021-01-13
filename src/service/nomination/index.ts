@@ -57,16 +57,16 @@ export default class Nomination {
     /**
      * Get status data
      */
-    get statusData(): umi.StatusType {
+    get statusData(): umi.Status{
         return umi.status.get(this.status);
     }
 
     /**
      * Get data of reasons
      */
-    get reasonsData(): Array<umi.StatusReason> {
+    get reasonsData(): Array<umi.Reason> {
         return this.reasons.map((code) => {
-            return umi.reason.get(umi.reason.has(code) ? code : umi.StatusReason.undeclared);
+            return umi.reason.get(umi.reason.has(code) ? code : umi.Reason.undeclared);
         });
     }
 
@@ -171,9 +171,9 @@ export default class Nomination {
             nomination.status = umi.StatusCode.Accepted;
         } else {
             nomination.status = umi.StatusCode.Rejected;
-            if (json.status !== umi.StatusReason.undeclared) {
-                if (umi.codes.has(json.status)) {
-                    nomination.status = umi.codes.get(json.status).code;
+            if (json.status !== umi.Reason.undeclared) {
+                if (umi.reason.has(json.status)) {
+                    nomination.reasons.push(json.status);
                 }
             }
         }
