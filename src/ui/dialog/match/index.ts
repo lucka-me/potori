@@ -3,16 +3,14 @@ import { eli } from '@lucka-labs/eli';
 import { MDCDialog } from '@material/dialog';
 
 import { base } from 'ui/dialog/base';
+import { eliDialog } from 'eli/dialog';
 import { eliIcon } from 'eli/icon';
 import { umi } from 'service/umi';
 import Nomination from 'service/nomination';
 
+import { Action, Link, StringKey } from './constants';
 
 import './style.scss';
-
-import { Action, Link, StringKey } from './constants';
-import { eliDialog } from 'eli/dialog';
-
 
 type CloseCallback = (matched: boolean) => void;
 
@@ -62,16 +60,18 @@ class MatchDialog extends base.DialogPrototype {
             this.buildDetail(eliIcon.Icon.arrowUp, nomination.confirmedDateString)
         ];
         if (nomination.status !== umi.StatusCode.Pending) {
-            const type = nomination.status > 100 ? 'rejected' : nomination.status > 0 ? 'accepted' : 'pending';
             details.push(this.buildDetail(
-                umi.types.get(type).icon, nomination.resultDateString
+                nomination.statusData.icon, nomination.resultDateString
             ));
-            const statusData = umi.codes.get(nomination.status);
-            const elementResult = this.buildDetail(
-                statusData.icon, i18next.t(statusData.title)
-            );
-            elementResult.classList.add(`status-${type}`);
-            details.push(elementResult);
+            if (nomination.status === umi.StatusCode.Rejected) {
+                for (const reason of nomination.reasonsData) {
+                    const elementResult = this.buildDetail(
+                        reason.icon, i18next.t(reason.title)
+                    );
+                    elementResult.classList.add(`status-rejected`);
+                    details.push(elementResult);
+                }
+            }
         }
         const element = eli('div', {
             className: 'nomination-block'
