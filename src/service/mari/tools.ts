@@ -55,7 +55,8 @@ export default class Parser {
                 nomination.lngLat = this.lngLat(mailBody);
             }
             if (keys.type === 'rejected') {
-                nomination.status = this.reason(mailBody, keys.scanner).code;
+                nomination.status = umi.StatusCode.Rejected;
+                nomination.reasons = this.reason(mailBody, keys.scanner);
             }
             break;
         }
@@ -67,29 +68,27 @@ export default class Parser {
      * @param mail Body (content) of the mail
      * @param scanner The scanner key for fetch the keywords
      */
-    static reason(mail: string, scanner: umi.ScannerCode) {
-        const undeclared = umi.reasons.get('undeclared');
+    static reason(mail: string, scanner: umi.ScannerCode): Array<umi.ReasonCode> {
         const matchedMainBody = mail.match(/(\n|\r|.)+?\-NianticOps/);
         if (!matchedMainBody || matchedMainBody.length < 1) {
-            return undeclared;
+            return [ ];
         }
         const mainBody = matchedMainBody[0];
-        
-        // Get first result
-        let result = undeclared;
-        let firstPos = mainBody.length;
-        for (const reason of umi.reasons.values()) {
+
+        const indexReasons: Array<[number, umi.ReasonCode]> = []
+        for (const [code, reason] of umi.reason) {
+            if (code !== reason.code) continue;
             if (!reason.keywords.has(scanner)) continue;
             for (const keyword of reason.keywords.get(scanner)) {
                 const pos = mainBody.search(keyword);
-                if (pos > -1 && pos < firstPos) {
-                    result = reason;
-                    firstPos = pos;
-                    break;
-                }
+                if (pos < 0) continue;
+                indexReasons.push([pos, code]);
+                break;
             }
         }
-        return result;
+        return indexReasons
+            .sort((a, b) => a[0] > b[0] ? 1 : -1)
+            .map((pair) => pair[1]);
     }
 
     /**
