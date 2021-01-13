@@ -175,7 +175,7 @@ class BrainstormingKit {
                 if (nomination.status === umi.StatusCode.Pending) continue;
                 // Synch
                 stats.synch.total += 1;
-                if (this.isSynched(review.stars, nomination.status)) {
+                if (this.isSynched(review.stars, nomination)) {
                     stats.synch.synched += 1;
                 }
             }
@@ -195,15 +195,20 @@ class BrainstormingKit {
      * @param stars Stars of the review
      * @param status Status code of the resulted nomination
      */
-    private isSynched(stars: string, status: number) {
-        const reasons = umi.reasons;
-        if (stars === 'D' && status === umi.StatusReason.duplicated) {
+    private isSynched(stars: string, nomination: Nomination) {
+        if (
+            stars === 'D'
+            && nomination.status === umi.StatusCode.Rejected
+            && nomination.containsReason(umi.StatusReason.duplicated)
+        ) {
             return true;
         }
         const general = parseFloat(stars);
         if (isNaN(general)) return false;
-        const types = umi.types;
-        if (status === types.get('accepted').code || status === umi.StatusReason.close) {
+        if (
+            nomination.status === umi.StatusCode.Accepted
+            || (nomination.status === umi.StatusCode.Rejected && nomination.containsReason(umi.StatusReason.close))
+        ) {
             // Accepted
             if (general >= 3) return true;
         } else {
