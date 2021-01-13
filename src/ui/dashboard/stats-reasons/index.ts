@@ -1,20 +1,20 @@
 import Chart from 'chart.js';
+import { eli } from '@lucka-labs/eli';
 import i18next from 'i18next';
 
-import { eli } from '@lucka-labs/eli';
 import { base } from 'ui/dashboard/base';
-import type Nomination from 'service/nomination';
 import { umi } from 'service/umi';
-
-import './style.scss';
+import type Nomination from 'service/nomination';
 
 import { StringKey } from './constants';
 
-class StatsRejectedCard extends base.ChartCardProtorype {
+import './style.scss';
+
+class StatsReasonsCard extends base.ChartCardProtorype {
 
     render() {
         const canvasChart = eli('canvas', { });
-        this.root = base.eliChartCard('stats-rejected-card', i18next.t(StringKey.title), canvasChart);
+        this.root = base.eliChartCard('stats-reasons-card', i18next.t(StringKey.title), canvasChart);
         this.setVisible(false);
         this.parent.append(this.root);
 
@@ -75,4 +75,4 @@ class StatsRejectedCard extends base.ChartCardProtorype {
     }
 }
 
-export default StatsRejectedCard;
+export default StatsReasonsCard;

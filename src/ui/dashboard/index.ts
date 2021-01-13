@@ -5,13 +5,13 @@ import { base } from 'ui/base';
 import { base as dashboardBase } from './base';
 import Nomination from 'service/nomination';
 
-import BSGroup              from './brainstorming';
-import CountByMonthCard     from './count-by-month';
-import FilterCard           from './filter';
-import MapCard              from './map';
-import QuotasCard           from './quotas';
-import StatsRejectedCard    from './stats-rejected';
-import StatsStatusCard        from './stats-status';
+import BSGroup          from './brainstorming';
+import CountByMonthCard from './count-by-month';
+import FilterCard       from './filter';
+import MapCard          from './map';
+import QuotasCard       from './quotas';
+import StatsReasonsCard from './stats-reasons';
+import StatsStatusCard  from './stats-status';
 
 import './style.scss';
 
@@ -21,8 +21,8 @@ class Dashboard extends base.Prototype {
 
     map             = new MapCard();
     filter          = new FilterCard();
-    statsType       = new StatsStatusCard();
-    statsRejected   = new StatsRejectedCard();
+    statsStatus     = new StatsStatusCard();
+    statsReasons    = new StatsReasonsCard();
     countByMonth    = new CountByMonthCard();
     quotas          = new QuotasCard();
     bs              = new BSGroup();
@@ -89,8 +89,8 @@ class Dashboard extends base.Prototype {
         this.map.reasonFilter = this.filter.reasonFilter;
 
         this.map.update(nominations);
-        this.statsType.update(nominations);
-        this.statsRejected.update(nominations);
+        this.statsStatus.update(nominations);
+        this.statsReasons.update(nominations);
         this.countByMonth.update(nominations);
         this.bs.update(nominations);
     }
