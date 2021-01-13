@@ -131,7 +131,8 @@
         },
         {
             "key": "criteria:temporary",
-            "code": 104,
+            "code": 116,
+            "oldCode": 104,
             "title": "data.criteriaTemporary",
             "iconFA": "\uf1da",
             "iconSF": "circle.dashed",
@@ -145,7 +146,8 @@
         },
         {
             "key": "criteria:generic",
-            "code": 105,
+            "code": 117,
+            "oldCode": 105,
             "title": "data.criteriaGeneric",
             "iconFA": "\uf54e",
             "iconSF": "shippingbox",
