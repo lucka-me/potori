@@ -219,30 +219,24 @@ export namespace ui {
         dashboard.map.events.styleLoaded = () => {
             return service.nominations;
         }
-        dashboard.filter.events.switchType = (type, visible) => {
-            if (type.key !== 'rejected') {
-                for (const nomination of service.nominations) {
-                    if (!type.isType(nomination.status)) continue;
-                    document.getElementById(`card-${nomination.id}`).hidden = !visible;
-                }
-            } else {
-                const reasonFilter = dashboard.filter.reasonFilter;
-                for (const nomination of service.nominations) {
-                    if (nomination.status < 100) continue;
-                    document.getElementById(`card-${nomination.id}`).hidden = !reasonFilter.get(nomination.status);
-                }
-                dashboard.map.reasonFilter = reasonFilter;
-                dashboard.map.updateRejected(service.nominations);
-            }
-            dashboard.map.setTypeVisible(type.key, visible);
-        };
-        dashboard.filter.events.switchReason = (reason, visible) => {
+        dashboard.filter.events.switched = (statusMap, reasonMap, reasonChanged) => {
             for (const nomination of service.nominations) {
-                if (nomination.status !== reason.code) continue;
-                document.getElementById(`card-${nomination.id}`).hidden = !visible;
+                if (nomination.status !== umi.StatusCode.Rejected) {
+                    document.getElementById(`card-${nomination.id}`).hidden = !statusMap.get(nomination.status);
+                } else if (nomination.reasons.length > 0) {
+                    let visible = false;
+                    for (const code of nomination.reasons) {
+                        if (!reasonMap.get(code)) continue;
+                        visible = true;
+                        break;
+                    }
+                    document.getElementById(`card-${nomination.id}`).hidden = !visible;
+                } else {
+                    document.getElementById(`card-${nomination.id}`).hidden = !reasonMap.get(umi.StatusReason.undeclared);
+                }
             }
-            dashboard.map.reasonFilter = dashboard.filter.reasonFilter;
-            dashboard.map.updateRejected(service.nominations);
+            dashboard.map.filter(statusMap, reasonMap);
+            if (reasonChanged) dashboard.map.updateRejected(service.nominations);
         };
         dashboard.bs.events.analyse = (nominations) => {
             return service.bs.analyse(nominations);
@@ -313,12 +307,19 @@ export namespace ui {
         if (!dashboard) return;
         dashboard.update(service.nominations);
         let visibility = false;
-        if (nomination.status > 100) {
-            const reason = umi.codes.get(nomination.status) as umi.StatusReason;
-            visibility = dashboard.filter.reasons.get(reason).checked;
+        if (nomination.status === umi.StatusCode.Rejected) {
+            if (nomination.reasons.length > 0) {
+                visibility = false;
+                for (const [code, ctrl] of dashboard.filter.reason) {
+                    if (!ctrl.checked || !nomination.reasons.includes(code)) continue;
+                    visibility = true;
+                    break;
+                }
+            } else {
+                visibility = dashboard.filter.reason.get(umi.StatusReason.undeclared).checked;
+            }
         } else {
-            const status = umi.codes.get(nomination.status) as umi.StatusType;
-            visibility = dashboard.filter.types.get(status).checked;
+            visibility = dashboard.filter.status.get(nomination.status).checked;
         }
         list.update(nomination, visibility);
     }

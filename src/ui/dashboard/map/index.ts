@@ -1,15 +1,16 @@
+import { eli } from '@lucka-labs/eli';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-import { eli } from '@lucka-labs/eli';
-import { eliCard } from 'eli/card';
-
 import { base } from 'ui/dashboard/base';
+import { eliCard } from 'eli/card';
 import { umi } from 'service/umi';
 import Nomination, { LngLat } from 'service/nomination';
 
 import './style.scss';
 
+type StatusFilterMap = Map<umi.StatusCode, boolean>;
+type ReasonFilterMap = Map<umi.ReasonCode, boolean>;
 
 interface MapCardEvents {
     focus: (id: string) => void,
@@ -23,8 +24,20 @@ class MapCard extends base.CardPrototype {
         focus: () => { },
         styleLoaded: () => [],
     }
-    private enabledReasons: Array<number> = [];
+    private statusFilter: StatusFilterMap = new Map();
+    private reasonFilter: ReasonFilterMap = new Map();
     private tasks: Array<() => void> = [];
+
+    constructor() {
+        super();
+        for (const code of umi.status.keys()) {
+            this.statusFilter.set(code, true);
+        }
+        for (const [code,reason] of umi.reason) {
+            if (code !== reason.code) continue;
+            this.reasonFilter.set(code, true);
+        }
+    }
 
     render() {
         const elementMap = eli('div', { });
@@ -53,12 +66,12 @@ class MapCard extends base.CardPrototype {
         }
         this.updateRejected(nominations);
         this.updateSource(
-            'accepted',
-            MapCard.generateGeoJSON(nominations, [ umi.types.get('accepted').code ])
+            umi.StatusCode.Accepted,
+            this.generateGeoJSON(nominations, umi.StatusCode.Accepted)
         );
         this.updateSource(
-            'pending',
-            MapCard.generateGeoJSON(nominations, [ umi.types.get('pending').code ])
+            umi.StatusCode.Pending,
+            this.generateGeoJSON(nominations, umi.StatusCode.Pending)
         );
     }
 
@@ -71,26 +84,21 @@ class MapCard extends base.CardPrototype {
         this.update(this.events.styleLoaded());
     }
 
-    /**
-     * Set reason filter map, call before {@link update} and {@link updateRejected}
-     */
-    set reasonFilter(map: Map<number, boolean>) {
-        this.enabledReasons = [];
-        for (const [key, value] of map.entries()) {
-            if (!value) continue;
-            this.enabledReasons.push(key);
-        }
-    }
+    filter(status: StatusFilterMap, reason: ReasonFilterMap) {
+        this.statusFilter = status;
+        this.reasonFilter = reason;
 
-    setTypeVisible(type: string, visible: boolean) {
         if (!this.loaded) {
-            this.tasks.push(() => this.setTypeVisible(type, visible));
+            this.tasks.push(() => this.filter(status, reason));
             return;
         }
-        const visibility = visible ? 'visible' : 'none';
-        this.ctrl.setLayoutProperty(`potori-${type}-cluster`    , 'visibility', visibility);
-        this.ctrl.setLayoutProperty(`potori-${type}-count`      , 'visibility', visibility);
-        this.ctrl.setLayoutProperty(`potori-${type}-unclustered`, 'visibility', visibility);
+
+        for (const [code, visible] of this.statusFilter) {
+            const visibility = visible ? 'visible' : 'none';
+            this.ctrl.setLayoutProperty(`potori-${code}-cluster`    , 'visibility', visibility);
+            this.ctrl.setLayoutProperty(`potori-${code}-count`      , 'visibility', visibility);
+            this.ctrl.setLayoutProperty(`potori-${code}-unclustered`, 'visibility', visibility);
+        }
     }
 
     easeTo(center: LngLat) {
@@ -137,7 +145,10 @@ class MapCard extends base.CardPrototype {
             this.tasks.push(() => this.updateRejected(nominations));
             return;
         }
-        this.updateSource('rejected', MapCard.generateGeoJSON(nominations, this.enabledReasons));
+        this.updateSource(
+            umi.StatusCode.Rejected,
+            this.generateGeoJSON(nominations, umi.StatusCode.Rejected)
+        );
     }
 
     private executeTasks() {
@@ -147,8 +158,8 @@ class MapCard extends base.CardPrototype {
         }
     }
 
-    private updateSource(type: string, data: GeoJSON.FeatureCollection<GeoJSON.Geometry>) {
-        const id = `potori-${type}`;
+    private updateSource(status: umi.StatusCode, data: GeoJSON.FeatureCollection<GeoJSON.Geometry>) {
+        const id = `potori-${status}`;
         const source = this.ctrl.getSource(id) as mapboxgl.GeoJSONSource;
         if (source) {
             source.setData(data);
@@ -160,8 +171,8 @@ class MapCard extends base.CardPrototype {
             cluster: true,
         });
         const style = getComputedStyle(document.documentElement);
-        const color = style.getPropertyValue(`--color-${type}`);
-        const colorDark = style.getPropertyValue(`--color-${type}--dark`);
+        const color = style.getPropertyValue(`--color-${status}`);
+        const colorDark = style.getPropertyValue(`--color-${status}--dark`);
         this.ctrl.addLayer({
             id: `${id}-cluster`,
             type: 'circle',
@@ -239,14 +250,27 @@ class MapCard extends base.CardPrototype {
         });
     }
 
-    private static generateGeoJSON(nominations: Array<Nomination>, codes: Array<number>) {
+    private generateGeoJSON(nominations: Array<Nomination>, status: umi.StatusCode) {
         const geoJson: GeoJSON.FeatureCollection<GeoJSON.Geometry> = {
             type: 'FeatureCollection', features: [],
         };
-        if (codes.length < 1) return geoJson;
+        let undeclaredVisible = (status === umi.StatusCode.Rejected) && this.reasonFilter.get(umi.StatusReason.undeclared);
         for (const nomination of nominations) {
-            if (!codes.includes(nomination.status)) continue;
+            if (nomination.status !== status) continue;
             if (!nomination.lngLat) continue;
+            if (status === umi.StatusCode.Rejected) {
+                if (nomination.reasons.length > 0) {
+                    let visible = false;
+                    for (const code of nomination.reasons) {
+                        if (!this.reasonFilter.get(code)) continue;
+                        visible = true;
+                        break;
+                    }
+                    if (!visible) continue;
+                } else if (!undeclaredVisible) {
+                    continue;
+                }
+            }
             geoJson.features.push({
                 type: 'Feature',
                 properties: {
