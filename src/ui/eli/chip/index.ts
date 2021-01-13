@@ -8,7 +8,7 @@ const ClassName = {
     primaryAction: 'mdc-chip__primary-action',
     text: 'mdc-chip__text',
 
-    chipSet: 'mdc-chip-set mdc-chip-set--choice',
+    chipSet: 'mdc-chip-set mdc-chip-set--filter',
 };
 
 interface EliChipItem {

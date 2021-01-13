@@ -71,14 +71,6 @@ export default class Nomination {
     }
 
     /**
-     * Detect if the reasons contains a reason
-     * @param code The code of reason to detect
-     */
-    containsReason(code: umi.ReasonCode) {
-        return this.reasons.indexOf(code) > -1;
-    }
-
-    /**
      * Get the time of quota being restored
      */
     get restoreTime(): number {
@@ -187,7 +179,7 @@ export default class Nomination {
         }
         if (json.reasons) {
             for (const code of json.reasons) {
-                if (umi.reason.has(code) && !nomination.containsReason(code)) {
+                if (umi.reason.has(code) && !nomination.reasons.includes(code)) {
                     nomination.reasons.push(code);
                 }
             }

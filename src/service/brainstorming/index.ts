@@ -199,15 +199,16 @@ class BrainstormingKit {
         if (
             stars === 'D'
             && nomination.status === umi.StatusCode.Rejected
-            && nomination.containsReason(umi.StatusReason.duplicated)
+            && nomination.reasons.includes(umi.StatusReason.duplicated)
         ) {
             return true;
         }
         const general = parseFloat(stars);
         if (isNaN(general)) return false;
+        
         if (
             nomination.status === umi.StatusCode.Accepted
-            || (nomination.status === umi.StatusCode.Rejected && nomination.containsReason(umi.StatusReason.close))
+            || (nomination.status === umi.StatusCode.Rejected && nomination.reasons.includes(umi.StatusReason.close))
         ) {
             // Accepted
             if (general >= 3) return true;

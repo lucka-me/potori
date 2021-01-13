@@ -2,6 +2,7 @@ import i18next from 'i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 
 import { umi } from './umi';
+
 import AuthKit, { AuthStatusChangedCallback } from './auth';
 import BrainstormingKit from './brainstorming';
 import FileKit, { Constants as FileConst } from './file';

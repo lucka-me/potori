@@ -5,8 +5,6 @@ import { service } from 'service';
 import { umi } from 'service/umi';
 import Nomination from 'service/nomination';
 
-import './style.scss';
-
 import AppBar, { AppBarMenuItems, AppBarActions } from './app-bar';
 import Dark         from './dark';
 import Dialog       from './dialog';
@@ -15,8 +13,8 @@ import Snackbar     from './snackbar';
 
 import type Dashboard       from './dashboard';
 import type NominationList  from './nomination-list';
-import { tryParseInt } from '@firebase/database/dist/src/core/util/util';
-import { Template } from 'webpack';
+
+import './style.scss';
 
 export namespace ui {
 
