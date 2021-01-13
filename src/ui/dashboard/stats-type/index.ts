@@ -40,13 +40,12 @@ class StatsTypeCard extends base.ChartCardProtorype {
 
     update(nominations: Array<Nomination>) {
 
-        const stats = new Map<string, number>();
-        for (const type of umi.types.values()) {
-            stats.set(type.key, 0);
+        const stats = new Map<umi.StatusCode, number>();
+        for (const code of umi.status.keys()) {
+            stats.set(code, 0);
         }
         nominations.reduce((map, nomination) => {
-            const key = nomination.status > 100 ? 'rejected' : nomination.status > 0 ? 'accepted' : 'pending';
-            map.set(key, map.get(key) + 1);
+            map.set(nomination.status, map.get(nomination.status) + 1);
             return map;
         }, stats);
 
@@ -54,11 +53,11 @@ class StatsTypeCard extends base.ChartCardProtorype {
         const colors = [];
         const data = [];
         const style = getComputedStyle(document.documentElement);
-        for (const [key, count] of stats.entries()) {
+        for (const [code, count] of stats.entries()) {
             if (count < 1) continue;
-            const type = umi.types.get(key);
-            labels.push(i18next.t(type.title));
-            colors.push(style.getPropertyValue(`--color-${key}`));
+            const status = umi.status.get(code);
+            labels.push(i18next.t(status.title));
+            colors.push(style.getPropertyValue(`--color-${status.key}`));
             data.push(count);
         }
 
