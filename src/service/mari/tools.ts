@@ -1,6 +1,5 @@
-import { service } from 'service';
 import Nomination, { LngLat } from 'service/nomination';
-import { ScannerCode } from 'service/umi';
+import { ScannerCode, umi } from 'service/umi';
 
 /**
  * Query keys
@@ -22,7 +21,7 @@ export default class Parser {
      */
     static mail(mail: gapi.client.gmail.Message, keys: QueryKeys): Nomination {
         const nomination = new Nomination();
-        nomination.status = service.status.types.get(keys.type);
+        nomination.status = umi.types.get(keys.type);
         if (keys.type === 'pending') {
             nomination.confirmedTime = parseInt(mail.internalDate);
             nomination.confirmationMailId = mail.id;
@@ -69,7 +68,7 @@ export default class Parser {
      * @param scanner The scanner key for fetch the keywords
      */
     static reason(mail: string, scanner: ScannerCode) {
-        const undeclared = service.status.reasons.get('undeclared');
+        const undeclared = umi.reasons.get('undeclared');
         const matchedMainBody = mail.match(/(\n|\r|.)+?\-NianticOps/);
         if (!matchedMainBody || matchedMainBody.length < 1) {
             return undeclared;
@@ -79,7 +78,7 @@ export default class Parser {
         // Get first result
         let result = undeclared;
         let firstPos = mainBody.length;
-        for (const reason of service.status.reasons.values()) {
+        for (const reason of umi.reasons.values()) {
             if (!reason.keywords.has(scanner)) continue;
             for (const keyword of reason.keywords.get(scanner)) {
                 const pos = mainBody.search(keyword);

@@ -7,7 +7,6 @@ import BrainstormingKit from './brainstorming';
 import FileKit, { Constants as FileConst } from './file';
 import Mari, { ProgressCallback } from './mari';
 import Nomination from './nomination';
-import StatusKit from './umi';
 import translations from 'locales';
 import Version from './version';
 
@@ -51,7 +50,6 @@ export namespace service {
     export const bs         = new BrainstormingKit();
     export const file       = new FileKit();
     export const mari       = new Mari();
-    export const status     = new StatusKit();
     export const version    = new Version();
 
     export const nominations: Array<Nomination> = [];    // Nomination list

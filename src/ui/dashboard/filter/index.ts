@@ -5,7 +5,7 @@ import { eli } from '@lucka-labs/eli';
 import { eliCard } from 'eli/card';
 import { service } from 'service';
 import { base } from 'ui/dashboard/base';
-import { Status, StatusType, StatusReason } from 'service/umi';
+import { Status, StatusType, StatusReason, umi } from 'service/umi';
 
 import './style.scss';
 
@@ -41,13 +41,13 @@ export default class FilterCard extends base.CardPrototype {
         this.setVisible(false);
         this.parent.append(this.root);
 
-        for (const type of service.status.types.values()) {
+        for (const type of umi.types.values()) {
             const switchCtrl = FilterCard.buildSwitch(typeBox, type, type.key);
             switchCtrl.listen('change', () => this.switchType(type, switchCtrl.checked));
             this.types.set(type, switchCtrl);
         }
 
-        for (const reason of service.status.reasons.values()) {
+        for (const reason of umi.reasons.values()) {
             const switchCtrl = FilterCard.buildSwitch(reasonBox, reason, 'rejected');
             switchCtrl.listen('change', () => {
                 this.switchReason(reason, switchCtrl.checked);
@@ -67,7 +67,7 @@ export default class FilterCard extends base.CardPrototype {
 
     switchReason(reason: Status, checked: boolean) {
         this.events.switchReason(reason, checked);
-        const statusRejected = service.status.types.get('rejected');
+        const statusRejected = umi.types.get('rejected');
         if (checked && !this.types.get(statusRejected).checked) {
             this.types.get(statusRejected).checked = true;
             this.events.switchType(statusRejected, true);

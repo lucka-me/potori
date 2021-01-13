@@ -1,4 +1,5 @@
 import i18next from 'i18next';
+import { eli } from '@lucka-labs/eli';
 import { MDCChipSet } from '@material/chips';
 import { MDCDialog } from '@material/dialog';
 import { MDCFormField } from '@material/form-field';
@@ -6,7 +7,6 @@ import { MDCRadio } from '@material/radio';
 import { MDCRipple } from '@material/ripple';
 import { MDCTextField } from '@material/textfield';
 
-import { eli } from '@lucka-labs/eli';
 import { eliChipSet } from 'eli/chip';
 import { eliDialog } from 'eli/dialog';
 import { eliIcon } from 'eli/icon';
@@ -14,8 +14,8 @@ import { eliIconButton } from 'eli/icon-button';
 import { eliRadio } from 'eli/radio';
 import { eliTextField } from 'eli/text-field';
 
-import { service } from 'service';
 import { base } from 'ui/dialog/base';
+import { umi } from 'service/umi';
 import Nomination from 'service/nomination';
 import { QueryFailReason } from 'service/brainstorming';
 
@@ -23,6 +23,7 @@ import './style.scss';
 
 import { Action, StringKey } from './constants';
 import DetailsDialogMap from './map';
+
 
 type MessageCallback = (message: string) => void;
 type QuerySucceedCallback = (data: any) => void;
@@ -70,7 +71,7 @@ class DetailsDialog extends base.DialogPrototype {
 
         // Status form
         const statusRadios: Array<HTMLDivElement> = [];
-        for (const key of service.status.types.keys()) {
+        for (const key of umi.types.keys()) {
             const radioId = `radio-dialog-details-status-${key}`;
             const elementRadio = eliRadio(radioId, 'radio-dialog-details-status', key, (value) => {
                 this.selectedStatus = value;
@@ -81,7 +82,7 @@ class DetailsDialog extends base.DialogPrototype {
             });
             const elementField = eliRadio.form(
                 elementRadio,
-                service.status.types.get(key).icon, radioId, `fa status-${key}`
+                umi.types.get(key).icon, radioId, `fa status-${key}`
             );
 
             const radioCtrl = new MDCRadio(elementRadio);
@@ -112,7 +113,7 @@ class DetailsDialog extends base.DialogPrototype {
         });
         // Chip set
         const chipItems = [];
-        for (const [key, reason] of service.status.reasons) {
+        for (const [key, reason] of umi.reasons) {
             chipItems.push(
                 { id: `details-reason-${key}`, text: i18next.t(reason.title) }
             );
@@ -137,7 +138,7 @@ class DetailsDialog extends base.DialogPrototype {
         for (const chip of this.chipSetReason.chips) {
             chip.listen('MDCChip:selection', () => {
                 const key = this.chipSetReason.selectedChipIds.length > 0 ? this.chipSetReason.selectedChipIds[0].replace('details-reason-', '') : 'undeclared';
-                const reason = service.status.reasons.get(key);
+                const reason = umi.reasons.get(key);
                 this.fieldReason.leadingIconContent = reason.icon;
                 this.fieldReason.value = i18next.t(reason.title);
             });
@@ -274,9 +275,9 @@ class DetailsDialog extends base.DialogPrototype {
         }
         if (shouldUpdate) {
             if (this.selectedStatus !== 'rejected') {
-                this._nomination.status = service.status.types.get(this.selectedStatus);
+                this._nomination.status = umi.types.get(this.selectedStatus);
             } else {
-                this._nomination.status = service.status.reasons.get(reason);
+                this._nomination.status = umi.reasons.get(reason);
             }
             this.events.update(this._nomination);
         }

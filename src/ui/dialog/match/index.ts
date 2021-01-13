@@ -1,16 +1,18 @@
 import i18next from 'i18next';
+import { eli } from '@lucka-labs/eli';
 import { MDCDialog } from '@material/dialog';
 
-import { eli } from '@lucka-labs/eli';
-import { eliIcon } from 'eli/icon';
-import { service } from 'service';
-import Nomination from 'service/nomination';
 import { base } from 'ui/dialog/base';
+import { eliIcon } from 'eli/icon';
+import { umi } from 'service/umi';
+import Nomination from 'service/nomination';
+
 
 import './style.scss';
 
 import { Action, Link, StringKey } from './constants';
 import { eliDialog } from 'eli/dialog';
+
 
 type CloseCallback = (matched: boolean) => void;
 
@@ -62,7 +64,7 @@ class MatchDialog extends base.DialogPrototype {
         if (nomination.status.code > 0) {
             const type = nomination.status.type;
             details.push(this.buildDetail(
-                service.status.types.get(type).icon, nomination.resultDateString
+                umi.types.get(type).icon, nomination.resultDateString
             ));
             const elementResult = this.buildDetail(
                 nomination.status.icon, i18next.t(nomination.status.title)

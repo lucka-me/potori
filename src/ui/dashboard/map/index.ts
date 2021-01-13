@@ -4,11 +4,12 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { eli } from '@lucka-labs/eli';
 import { eliCard } from 'eli/card';
 
-import { service } from 'service';
 import { base } from 'ui/dashboard/base';
+import { umi } from 'service/umi';
 import Nomination, { LngLat } from 'service/nomination';
 
 import './style.scss';
+
 
 interface MapCardEvents {
     focus: (id: string) => void,
@@ -53,11 +54,11 @@ class MapCard extends base.CardPrototype {
         this.updateRejected(nominations);
         this.updateSource(
             'accepted',
-            MapCard.generateGeoJSON(nominations, [ service.status.types.get('accepted').code ])
+            MapCard.generateGeoJSON(nominations, [ umi.types.get('accepted').code ])
         );
         this.updateSource(
             'pending',
-            MapCard.generateGeoJSON(nominations, [ service.status.types.get('pending').code ])
+            MapCard.generateGeoJSON(nominations, [ umi.types.get('pending').code ])
         );
     }
 

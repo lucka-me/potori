@@ -5,11 +5,13 @@ import { eli } from '@lucka-labs/eli';
 import { eliCard } from 'eli/card';
 import { eliIcon } from 'eli/icon';
 import { service } from 'service';
+import { umi } from 'service/umi';
 import Nomination from 'service/nomination';
 
 import { StringKey } from './constants';
 
 import './style.scss';
+
 
 type BasicCallback = () => void;
 
@@ -88,7 +90,7 @@ export default class NominationCard {
         const type = nomination.status.type;
         if (nomination.status.code > 0) {
             elementDetails.append(NominationCard.buildDetail(
-                service.status.types.get(type).icon,
+                umi.types.get(type).icon,
                 nomination.resultDateString
             ));
         }

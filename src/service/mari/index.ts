@@ -1,6 +1,6 @@
 import i18next from 'i18next';
 
-import { service } from 'service';
+import { umi } from 'service/umi';
 import Nomination from 'service/nomination';
 
 import Parser, { QueryKeys } from './tools';
@@ -145,7 +145,7 @@ export default class Mari {
             this.ignoreMailIds.push(nomination.confirmationMailId);
             if (nomination.resultMailId) this.ignoreMailIds.push(nomination.resultMailId);
         }
-        for (const status of service.status.types.values()) {
+        for (const status of umi.types.values()) {
             for (const scanner of status.queries.keys()) {
                 this.queryList({ scanner: scanner, type: status.key });
             }
@@ -172,7 +172,7 @@ export default class Mari {
     private static getListRequest(pageToken: string, keys: QueryKeys) {
         return gapi.client.gmail.users.messages.list({
             'userId': 'me',
-            'q': service.status.types.get(keys.type).queries.get(keys.scanner),
+            'q': umi.types.get(keys.type).queries.get(keys.scanner),
             'pageToken': pageToken
         });
     }

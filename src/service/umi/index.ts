@@ -77,19 +77,21 @@ export class StatusReason extends Status {
 /**
  * Keep all status data
  */
-export default class StatusKit {
+export namespace umi {
     
-    readonly scanner: Map<ScannerCode, Scanner>;
-    readonly types  : Map<string, StatusType>   = new Map();    // <key, type>
-    readonly reasons: Map<string, StatusReason> = new Map();    // <key, reason>
-    readonly codes  : Map<number, Status>       = new Map();    // <code, status>
+    export const scanner: Map<ScannerCode, Scanner> = data.scanners.reduce((map, scanner) => {
+        map.set(scanner.code, scanner);
+        return map;
+    }, new Map());
 
-    constructor() {
+    export const codes  : Map<number, Status>       = new Map();    // <code, status>
 
-        this.scanner = data.scanners.reduce((map, scanner) => {
-            map.set(scanner.code, scanner);
-            return map;
-        }, new Map());
+    export const types  : Map<string, StatusType>   = generateTypes();    // <key, type>
+    export const reasons: Map<string, StatusReason> = generateReasons();    // <key, reason>
+
+    function generateTypes() {
+
+        const map = new Map<string, StatusType>();
 
         for (const type of data.types) {
             const status = new StatusType(
@@ -99,9 +101,16 @@ export default class StatusKit {
                     return map;
                 }, new Map<ScannerCode, string>())
             );
-            this.types.set(type.key, status);
-            this.codes.set(type.code, status);
+            map.set(type.key, status);
+            codes.set(type.code, status);
         }
+
+        return map;
+    }
+
+    function generateReasons() {
+
+        const map = new Map<string, StatusReason>();
 
         for (const reason of data.reasons) {
             const status = new StatusReason(
@@ -111,8 +120,10 @@ export default class StatusKit {
                     return map;
                 }, new Map<ScannerCode, Array<string>>())
             );
-            this.reasons.set(reason.key, status);
-            this.codes.set(reason.code, status);
+            map.set(reason.key, status);
+            codes.set(reason.code, status);
         }
+
+        return map;
     }
 }

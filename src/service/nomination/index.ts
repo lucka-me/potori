@@ -1,7 +1,6 @@
 import i18next from 'i18next';
 
-import { service } from 'service';
-import { Status } from 'service/umi';
+import { Status, umi } from 'service/umi';
 
 import { StringKey } from './constants';
 
@@ -146,7 +145,7 @@ export default class Nomination {
         nomination.title = json.title;
         nomination.image = image;
 
-        nomination.status = service.status.codes.get(json.status);
+        nomination.status = umi.codes.get(json.status);
 
         nomination.confirmedTime = json.confirmedTime;
         nomination.confirmationMailId = json.confirmationMailId;

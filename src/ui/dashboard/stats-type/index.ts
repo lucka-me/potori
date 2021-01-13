@@ -1,14 +1,15 @@
 import Chart from 'chart.js';
+import { eli } from '@lucka-labs/eli';
 import i18next from 'i18next';
 
-import { eli } from '@lucka-labs/eli';
-import { service } from 'service';
 import { base } from 'ui/dashboard/base';
+import { umi } from 'service/umi';
 import Nomination from 'service/nomination';
 
 import './style.scss';
 
 import { StringKey } from './constants';
+
 
 class StatsTypeCard extends base.ChartCardProtorype {
 
@@ -40,7 +41,7 @@ class StatsTypeCard extends base.ChartCardProtorype {
     update(nominations: Array<Nomination>) {
 
         const stats = new Map<string, number>();
-        for (const type of service.status.types.values()) {
+        for (const type of umi.types.values()) {
             stats.set(type.key, 0);
         }
         nominations.reduce((map, nomination) => {
@@ -55,7 +56,7 @@ class StatsTypeCard extends base.ChartCardProtorype {
         const style = getComputedStyle(document.documentElement);
         for (const [key, count] of stats.entries()) {
             if (count < 1) continue;
-            const type = service.status.types.get(key);
+            const type = umi.types.get(key);
             labels.push(i18next.t(type.title));
             colors.push(style.getPropertyValue(`--color-${key}`));
             data.push(count);

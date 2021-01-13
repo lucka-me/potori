@@ -1,6 +1,7 @@
 import type { Reference } from '@firebase/database-types';
 
 import { service } from 'service';
+import { umi } from 'service/umi';
 import Nomination, { LngLat } from 'service/nomination'
 
 import { QueryFailReason, RateItems } from './constants';
@@ -195,13 +196,13 @@ class BrainstormingKit {
      * @param status Status code of the resulted nomination
      */
     private isSynched(stars: string, status: number) {
-        const reasons = service.status.reasons;
+        const reasons = umi.reasons;
         if (stars === 'D' && status === reasons.get('duplicated').code) {
             return true;
         }
         const general = parseFloat(stars);
         if (isNaN(general)) return false;
-        const types = service.status.types;
+        const types = umi.types;
         if (status === types.get('accepted').code || status === reasons.get('close').code) {
             // Accepted
             if (general >= 3) return true;
