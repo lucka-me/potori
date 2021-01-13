@@ -23,7 +23,8 @@ export default class Nomination {
     title = ''; // Title
     image = ''; // Hash part of the image URL
 
-    status: umi.StatusCode | umi.ReasonCode = umi.StatusCode.Pending;  // Status / reason code of nomination
+    status: umi.StatusCode = umi.StatusCode.Pending;  // Status code
+    reasons: Array<umi.ReasonCode> = [];    // Reason codes
 
     confirmedTime = 0;              // Confirmed time, the timestamp of confirmation mail
     confirmationMailId = '';        // ID of confirmation mail
@@ -64,7 +65,9 @@ export default class Nomination {
      * Get data of reasons
      */
     get reasonsData(): Array<umi.StatusReason> {
-        return [ umi.reason.get(this.status) ];
+        return this.reasons.map((code) => {
+            return umi.reason.get(umi.reason.has(code) ? code : umi.StatusReason.undeclared);
+        });
     }
 
     /**
@@ -122,6 +125,9 @@ export default class Nomination {
             confirmedTime: this.confirmedTime,
             confirmationMailId: this.confirmationMailId,
         };
+        if (this.reasons.length > 0) {
+            json.reasons = this.reasons;
+        }
         if (this.resultTime) json.resultTime = this.resultTime;
         if (this.resultMailId) json.resultMailId = this.resultMailId;
         if (this.lngLat) {
@@ -168,6 +174,13 @@ export default class Nomination {
             if (json.status !== umi.StatusReason.undeclared) {
                 if (umi.codes.has(json.status)) {
                     nomination.status = umi.codes.get(json.status).code;
+                }
+            }
+        }
+        if (json.reasons) {
+            for (const code of json.reasons) {
+                if (umi.reason.has(code) && nomination.reasons.indexOf(code) < 0) {
+                    nomination.reasons.push(code);
                 }
             }
         }
