@@ -5,7 +5,7 @@ import { eli } from '@lucka-labs/eli';
 import { service } from 'service';
 import { base } from 'ui/dashboard/base';
 import type Nomination from 'service/nomination';
-import type { StatusReason } from 'service/status';
+import type { StatusReason } from 'service/umi';
 
 import './style.scss';
 

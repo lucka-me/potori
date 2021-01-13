@@ -1,6 +1,6 @@
 import { service } from 'service';
 import Nomination, { LngLat } from 'service/nomination';
-import { ScannerCode } from 'service/status';
+import { ScannerCode } from 'service/umi';
 
 /**
  * Query keys

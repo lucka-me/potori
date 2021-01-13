@@ -5,7 +5,7 @@ import { eli } from '@lucka-labs/eli';
 import { eliCard } from 'eli/card';
 import { service } from 'service';
 import { base } from 'ui/dashboard/base';
-import { Status, StatusType, StatusReason } from 'service/status';
+import { Status, StatusType, StatusReason } from 'service/umi';
 
 import './style.scss';
 

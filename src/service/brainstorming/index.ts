@@ -174,7 +174,7 @@ class BrainstormingKit {
                 if (nomination.status.code < 1) continue;
                 // Synch
                 stats.synch.total += 1;
-                if (BrainstormingKit.isSynched(review.stars, nomination.status.code)) {
+                if (this.isSynched(review.stars, nomination.status.code)) {
                     stats.synch.synched += 1;
                 }
             }
@@ -194,7 +194,7 @@ class BrainstormingKit {
      * @param stars Stars of the review
      * @param status Status code of the resulted nomination
      */
-    private static isSynched(stars: string, status: number) {
+    private isSynched(stars: string, status: number) {
         const reasons = service.status.reasons;
         if (stars === 'D' && status === reasons.get('duplicated').code) {
             return true;

@@ -7,7 +7,7 @@ import BrainstormingKit from './brainstorming';
 import FileKit, { Constants as FileConst } from './file';
 import Mari, { ProgressCallback } from './mari';
 import Nomination from './nomination';
-import StatusKit from './status';
+import StatusKit from './umi';
 import translations from 'locales';
 import Version from './version';
 

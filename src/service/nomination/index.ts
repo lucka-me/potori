@@ -1,7 +1,7 @@
 import i18next from 'i18next';
 
 import { service } from 'service';
-import { Status } from 'service/status';
+import { Status } from 'service/umi';
 
 import { StringKey } from './constants';
 

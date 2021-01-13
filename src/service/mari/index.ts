@@ -2,7 +2,6 @@ import i18next from 'i18next';
 
 import { service } from 'service';
 import Nomination from 'service/nomination';
-import { ScannerCode } from 'service/status';
 
 import Parser, { QueryKeys } from './tools';
 
