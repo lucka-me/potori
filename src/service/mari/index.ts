@@ -145,7 +145,7 @@ export default class Mari {
             this.ignoreMailIds.push(nomination.confirmationMailId);
             if (nomination.resultMailId) this.ignoreMailIds.push(nomination.resultMailId);
         }
-        for (const status of umi.types.values()) {
+        for (const status of umi.status.values()) {
             for (const scanner of status.queries.keys()) {
                 this.queryList({ status: status.code, scanner: scanner });
             }
