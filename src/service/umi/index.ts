@@ -5,16 +5,36 @@ import data from 'data/status.json';
  */
 export namespace umi {
 
+    /**
+     * Code to identify scanner
+     */
     export enum ScannerCode {
         Unknown     = 0,
         Redacted    = 1,
         Prime       = 2,
     }
     
+    /**
+     * Scanner information
+     */
     export interface Scanner {
         readonly code: ScannerCode;
         readonly title: string;
     }
+
+    /**
+     * Code to identify status
+     */
+    export enum StatusCode {
+        Pending     = 0,
+        Accepted    = 1,
+        Reejected   = 101,
+    }
+
+    /**
+     * Code to identify reason
+     */
+    export type ReasonCode = number;
     
     /**
      * Basic information of all status
@@ -22,7 +42,7 @@ export namespace umi {
     export class Status {
     
         readonly key: string;   // Key of the status
-        readonly code: number;  // Code to identify the status and saved in file
+        readonly code: StatusCode | ReasonCode; // Code to identify the status and saved in file
         readonly title: string; // Title to display
         readonly icon: string;  // Icon to represent the status
     
@@ -84,25 +104,24 @@ export namespace umi {
         return map;
     }, new Map());
 
-    export const codes  : Map<number, Status>       = new Map();    // <code, status>
-
-    export const types  : Map<string, StatusType>   = generateTypes();    // <key, type>
+    export const codes  : Map<number, Status>       = new Map();            // <code, status>
+    export const types  : Map<string, StatusType>   = generateTypes();      // <key, type>
     export const reasons: Map<string, StatusReason> = generateReasons();    // <key, reason>
 
     function generateTypes() {
 
         const map = new Map<string, StatusType>();
 
-        for (const type of data.types) {
+        for (const value of data.statuses) {
             const status = new StatusType(
-                type.key, type.code, type.title, type.iconFA,
-                type.queries.reduce((map, query) => {
+                value.key, value.code, value.title, value.iconFA,
+                value.queries.reduce((map, query) => {
                     map.set(query.scanner, query.query);
                     return map;
                 }, new Map<ScannerCode, string>())
             );
-            map.set(type.key, status);
-            codes.set(type.code, status);
+            map.set(status.key, status);
+            codes.set(status.code, status);
         }
 
         return map;

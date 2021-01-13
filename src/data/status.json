@@ -14,7 +14,7 @@
             "title": "Prime"
         }
     ],
-    "types": [
+    "statuses": [
         {
             "key": "pending",
             "code": 0,
