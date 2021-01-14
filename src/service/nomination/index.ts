@@ -22,6 +22,7 @@ export default class Nomination {
     id = '';    // Short ID, also brainstorming ID
     title = ''; // Title
     image = ''; // Hash part of the image URL
+    scanner: umi.ScannerCode = umi.ScannerCode.Unknown; // Scanner of the nomination
 
     status: umi.StatusCode = umi.StatusCode.Pending;  // Status code
     reasons: Array<umi.ReasonCode> = [];    // Reason codes
@@ -125,6 +126,9 @@ export default class Nomination {
             confirmedTime: this.confirmedTime,
             confirmationMailId: this.confirmationMailId,
         };
+        if (this.scanner != umi.ScannerCode.Unknown) {
+            json.scanner = this.scanner;
+        }
         if (this.reasons.length > 0) {
             json.reasons = this.reasons;
         }
@@ -164,6 +168,10 @@ export default class Nomination {
         nomination.id = json.id;
         nomination.title = json.title;
         nomination.image = image;
+
+        if (json.scanner) {
+            nomination.scanner = json.scanner;
+        }
 
         if (json.status === umi.StatusCode.Pending) {
             nomination.status = umi.StatusCode.Pending;

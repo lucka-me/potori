@@ -53,9 +53,9 @@ class DetailsDialog extends base.DialogPrototype {
     private map = new DetailsDialogMap();
 
     events: DetailsDialogEvents = {
-        alert       : () => { },
-        query       : () => { },
-        update      : () => { },
+        alert   : () => { },
+        query   : () => { },
+        update  : () => { },
     };
 
     render() {
