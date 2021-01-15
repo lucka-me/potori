@@ -74,13 +74,16 @@ class Progress {
     }
 
     /**
-     * Finish a list
+     * Finish a list and check finish
      * @param messages Count of the messages to process
      */
     finishList(messages: number) {
         this.lists.finished += 1;
         this.messages.total += messages;
         this.onBuffer(this.lists.percent);
+        if (!this.left) {
+            this.onFinish();
+        }
     }
 
     /**
@@ -90,10 +93,17 @@ class Progress {
         this.messages.finished += 1;
         if (!this.lists.left) {
             this.onProgress(this.messages.percent);
-            if (!this.messages.left) {
+            if (!this.left) {
                 this.onFinish();
             }
         }
+    }
+
+    /**
+     * Detect if there is list or message left
+     */
+    private get left() {
+        return this.lists.left || this.messages.left;
     }
 }
 
