@@ -179,9 +179,15 @@ export namespace service {
 
         // Find out candidates
         for (const item of matchQueue) {
+            const testScanner = item.target.scanner !== umi.ScannerCode.Unknown;
             for (const pending of pendingNominations) {
                 if (item.target.title !== pending.title) continue;
                 if (item.target.resultTime < pending.confirmedTime) continue;
+                if (
+                    testScanner
+                    && pending.scanner !== umi.ScannerCode.Unknown
+                    && pending.scanner !== item.target.scanner
+                ) continue;
                 item.candidates.push(pending);
             }
         }
