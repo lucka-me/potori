@@ -136,9 +136,8 @@ export namespace service {
      */
     function arrange() {
         events.start();
-        // Collect broken and pending nominations
+        // Collect broken nominations
         const matchQueue: Array<MatchItem> = [];
-        const pendingNominations: Array<Nomination> = [];
         // Merge duplicated nominations -> targets
         for (let i = nominations.length - 1; i >= 0; i--) {
             const current = nominations[i];
@@ -150,8 +149,6 @@ export namespace service {
                 nominations.splice(i, 1);
                 continue;
             }
-
-            let pending = current.status === umi.StatusCode.Pending;
             for (let j = 0; j < i; j++) {
                 const target = nominations[j];
                 if (current.id !== target.id) continue;
@@ -168,21 +165,18 @@ export namespace service {
                     if (!target.lngLat) target.lngLat = current.lngLat;
                 }
                 nominations.splice(i, 1);
-                pending = true;
                 break;
-            }
-
-            if (pending) {
-                pendingNominations.push(current);
             }
         }
 
+        const pendings = nominations.filter((nomination) => nomination.status === umi.StatusCode.Pending);
+
         // Find out candidates
         for (const item of matchQueue) {
-            for (const pending of pendingNominations) {
-                if (item.target.title !== pending.title) continue;
-                if (item.target.resultTime < pending.confirmedTime) continue;
-                item.candidates.push(pending);
+            for (const nomination of pendings) {
+                if (item.target.title !== nomination.title) continue;
+                if (item.target.resultTime < nomination.confirmedTime) continue;
+                item.candidates.push(nomination);
             }
         }
 
