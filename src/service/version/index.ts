@@ -1,5 +1,5 @@
 import packageData from 'root/package.json';
-import umiData from 'data/status.json';
+import umiData from 'data/umi.json';
 
 /**
  * Version information
