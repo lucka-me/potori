@@ -1,6 +1,6 @@
-import Constants from '../constants';
+import { MIMEType } from '../constants';
 
-type DownloadCallback = (file: gapi.client.drive.File, more: boolean) => boolean;
+export type DownloadCallback = (file: gapi.client.drive.File) => boolean;
 type UploadCallback = (succeed: boolean, message?: string) => void;
 
 /**
@@ -15,8 +15,8 @@ export default class GoogleDriveFileKit {
     /**
      * Download file from Google Drive.
      * 
-     * If there are multiple files (more === true), the caller should decide
-     * whether to delete the current one & download next one or not by return a boolean
+     * The caller should decide whether to delete the current one & download
+     * next one or not by return a boolean
      * 
      * @param filename Name of the file to download
      * @param callback Triggered when a file is downloaded
@@ -24,7 +24,7 @@ export default class GoogleDriveFileKit {
     download(filename: string, callback: DownloadCallback) {
         const gotList = (fileList: Array<gapi.client.drive.File>) => {
             if (fileList.length < 1) {
-                callback(null, false);
+                callback(null);
                 return;
             }
             const fileId = fileList[0].id;
@@ -32,11 +32,10 @@ export default class GoogleDriveFileKit {
                 fileId: fileId,
                 alt: 'media'
             }).then((response: gapi.client.Response<gapi.client.drive.File>) => {
-                if (!callback(response.result, true)) {
+                if (callback(response.result)) {
                     gapi.client.drive.files.delete({ fileId: fileId });
                     fileList.splice(0, 1);
                     gotList(fileList);
-                    return;
                 } else {
                     this.ids.set(filename, fileId);
                 }
@@ -51,7 +50,7 @@ export default class GoogleDriveFileKit {
         }).then((response: gapi.client.Response<gapi.client.drive.FileList>) => {
             const files = response.result.files;
             if (!files) {
-                callback(null, false);
+                callback(null);
                 return;
             }
             gotList(files);
@@ -71,7 +70,7 @@ export default class GoogleDriveFileKit {
         let method = '';
         const metadata: any = {
             name: filename,
-            mimeType: Constants.type,
+            mimeType: MIMEType.json,
         };
         // Using parent in Update will cause 403
         if (this.ids.has(filename)) {
@@ -83,7 +82,7 @@ export default class GoogleDriveFileKit {
             metadata.parents = [ GoogleDriveFileKit.folder ];
         }
         const form = new FormData();
-        form.append('metadata', new Blob([JSON.stringify(metadata)], { type: Constants.type }));
+        form.append('metadata', new Blob([JSON.stringify(metadata)], { type: MIMEType.json }));
         form.append('file', blob);
         const authHeader = `Bearer ${token}`;
         fetch(url, {
