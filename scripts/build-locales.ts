@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 
-namespace locale {
+export namespace locale {
     type Key = string;
     type Translation = string;
     type Item = [Key, Translation];
@@ -151,5 +151,3 @@ namespace locale {
         buildIndex(targetRoot);
     }
 }
-
-locale.build();

@@ -1,5 +1,5 @@
-import { version as potoriVersion } from 'root/package.json';
-import { version as dataVersion } from 'data/status.json';
+import packageData from 'root/package.json';
+import umiData from 'data/status.json';
 
 /**
  * Version information
@@ -11,7 +11,7 @@ export default class Version {
 
     constructor() {
         const published = document.URL.includes('lucka.moe');
-        this.string = `${potoriVersion}d${dataVersion}-${published ? 'lite' : 'full'}`;
+        this.string = `${packageData.version}d${umiData.version}-${published ? 'lite' : 'full'} (${packageData.build})`;
         this.full = !published;
     }
 
