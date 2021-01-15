@@ -5,7 +5,7 @@ import { umi } from './umi';
 
 import AuthKit, { AuthStatusChangedCallback } from './auth';
 import BrainstormingKit from './brainstorming';
-import FileKit, { Constants as FileConst } from './file';
+import FileKit, { DownloadCallback, Filename } from './file';
 import Mari, { ProgressCallback } from './mari';
 import Nomination from './nomination';
 import translations from 'locales';
@@ -173,9 +173,15 @@ export namespace service {
 
         // Find out candidates
         for (const item of matchQueue) {
+            const testScanner = item.target.scanner !== umi.ScannerCode.Unknown;
             for (const nomination of pendings) {
                 if (item.target.title !== nomination.title) continue;
                 if (item.target.resultTime < nomination.confirmedTime) continue;
+                if (
+                    testScanner
+                    && nomination.scanner !== umi.ScannerCode.Unknown
+                    && nomination.scanner !== item.target.scanner
+                ) continue;
                 item.candidates.push(nomination);
             }
         }
@@ -304,9 +310,9 @@ export namespace service {
             events.alert(i18next.t('message:service.nominationsEmpty'));
             return;
         }
-        file.local.save(FileConst.nominations, BlobGenerator.nominations(nominations));
+        file.local.save(Filename.nominations, BlobGenerator.nominations(nominations));
         window.setTimeout(() => {
-            file.local.save(FileConst.bsData, BlobGenerator.bsData(bs.data));
+            file.local.save(Filename.bsData, BlobGenerator.bsData(bs.data));
         }, 2000);
     }
 
@@ -322,31 +328,36 @@ export namespace service {
             if (finishedNominations && finishedBsData) finish();
         };
 
-        file.googleDrive.download(FileConst.bsData, (result, more) => {
+        file.googleDrive.download(Filename.bsData, (result) => {
             if (!result) {
                 finishedBsData = true;
                 checkFinish();
-                return true;
+                return false;
             }
 
             try {
                 bs.data = new Map(result as Array<[string, any]>);
             } catch (error) {
-                if (more) return false;
-                finishedBsData = true;
-                checkFinish();
                 return true;
             }
 
             finishedBsData = true;
             checkFinish();
-            return true;
+            return false;
         });
-        file.googleDrive.download(FileConst.nominations, (file, more) => {
+
+        let nominationsFile = Filename.nominations;
+
+        const onDownloadNominations: DownloadCallback = (file) => {
             if (!file) {
-                finishedNominations = true;
-                checkFinish();
-                return true;
+                if (nominationsFile === Filename.nominations) {
+                    nominationsFile = Filename.nominationsLegacy;
+                    service.file.googleDrive.download(nominationsFile, onDownloadNominations);
+                } else {
+                    finishedNominations = true;
+                    checkFinish();
+                }
+                return false;
             }
             try {
                 const jsonList = file as Array<any>;
@@ -359,16 +370,15 @@ export namespace service {
                     }
                 }
             } catch (error) {
-                if (more) return false;
-                finishedNominations = true;
-                checkFinish();
                 return true;
             }
 
             finishedNominations = true;
             checkFinish();
-            return true;
-        });
+            return false;
+        };
+
+        file.googleDrive.download(nominationsFile, onDownloadNominations);
     }
 
     /**
@@ -386,7 +396,7 @@ export namespace service {
         };
 
         file.googleDrive.upload(
-            FileConst.nominations,
+            Filename.nominations,
             BlobGenerator.nominations(nominations),
             auth.accessToken,
             (succeed: boolean, message?: string) => {
@@ -399,7 +409,7 @@ export namespace service {
         );
 
         file.googleDrive.upload(
-            FileConst.bsData,
+            Filename.bsData,
             BlobGenerator.bsData(bs.data),
             auth.accessToken,
             (succeed: boolean, message?: string) => {

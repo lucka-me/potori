@@ -1,4 +1,4 @@
-import data from 'data/status.json';
+import data from 'data/umi.json';
 
 /**
  * Keep all status data

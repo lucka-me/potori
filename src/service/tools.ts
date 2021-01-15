@@ -1,6 +1,6 @@
 import i18next from 'i18next';
 
-import { Constants as FileConst } from './file';
+import { MIMEType } from './file/constants';
 import Nomination from './nomination';
 
 /**
@@ -92,7 +92,7 @@ export class BlobGenerator {
         
         return new Blob(
             [ JSON.stringify(list, null, 4) ],
-            { type: FileConst.type }
+            { type: MIMEType.json }
         );
     }
 
@@ -103,7 +103,7 @@ export class BlobGenerator {
     static bsData(data: Map<string, any>) {
         return new Blob(
             [ JSON.stringify([...data], null, 4) ],
-            { type: FileConst.type }
+            { type: MIMEType.json }
         );
     }
 }
