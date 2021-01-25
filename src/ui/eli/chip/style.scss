@@ -5,5 +5,9 @@
         // 24dp
         background-color: #282828;
         color: rgba(255, 255, 255, 0.87);
+
+        .mdc-chip__checkmark-path {
+            stroke: white;
+        }
     }
 }

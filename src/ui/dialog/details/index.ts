@@ -4,13 +4,11 @@ import { MDCChipSet } from '@material/chips';
 import { MDCDialog } from '@material/dialog';
 import { MDCFormField } from '@material/form-field';
 import { MDCRadio } from '@material/radio';
-import { MDCRipple } from '@material/ripple';
 import { MDCTextField } from '@material/textfield';
 
 import { eliChipSet } from 'eli/chip';
 import { eliDialog } from 'eli/dialog';
 import { eliIcon } from 'eli/icon';
-import { eliIconButton } from 'eli/icon-button';
 import { eliRadio } from 'eli/radio';
 import { eliTextField } from 'eli/text-field';
 
@@ -46,9 +44,8 @@ class DetailsDialog extends base.DialogPrototype {
     private radioStatus = new Map<umi.StatusCode, MDCRadio>();
     private fieldResultTime: MDCTextField = null;
 
-    private blockReason: HTMLDivElement = null;
-    private fieldReason: MDCTextField = null;
-    private chipSetReason: MDCChipSet = null;
+    private elementReasons: HTMLDivElement = null;
+    private chipSetReasons: MDCChipSet = null;
 
     private map = new DetailsDialogMap();
 
@@ -73,9 +70,9 @@ class DetailsDialog extends base.DialogPrototype {
         for (const [code, status] of umi.status) {
             const radioId = `radio-dialog-details-status-${code}`;
             const elementRadio = eliRadio(radioId, 'radio-dialog-details-status', `${code}`, (value) => {
-                (this.fieldResultTime.root as HTMLElement).hidden = (value === 'pending');
+                (this.fieldResultTime.root as HTMLElement).hidden = (value === `${umi.StatusCode.Pending}`);
                 this.fieldResultTime.layout();
-                this.blockReason.hidden = !(value === 'rejected');
+                this.elementReasons.hidden = !(value === `${umi.StatusCode.Rejected}`);
                 this.map.layout();
             });
             const elementField = eliRadio.form(
@@ -102,46 +99,21 @@ class DetailsDialog extends base.DialogPrototype {
         contents.push(elementResultTime);
 
         // Reason block
-        // Text field
-        const elementReason = eliTextField({
-            id: 'input-dialog-details-reason',
-            label: i18next.t(StringKey.reason),
-            icon: ' ',
-            inputType: 'text'
-        });
         // Chip set
         const chipItems = [];
         for (const [code, reason] of umi.reason) {
+            if (code === umi.Reason.undeclared) continue;
             chipItems.push(
                 { id: `details-reason-${code}`, text: i18next.t(reason.title) }
             );
         }
         const elementChipSetReason = eliChipSet(chipItems);
-        this.chipSetReason = new MDCChipSet(elementChipSetReason);
+        this.chipSetReasons = new MDCChipSet(elementChipSetReason);
         // Button
-        const elementReasonExpand = eliIconButton(eliIcon.Icon.angleDown);
-        const rippleReasonExpand = new MDCRipple(elementReasonExpand);
-        rippleReasonExpand.unbounded = true;
-        rippleReasonExpand.listen('click', () => {
-            elementChipSetReason.hidden = !elementChipSetReason.hidden;
-            elementReasonExpand.innerHTML = elementChipSetReason.hidden ? eliIcon.Icon.angleDown : eliIcon.Icon.angleUp;
-            this.map.layout();
-        });
-        this.blockReason = eli('div', {
+        this.elementReasons = eli('div', {
             className: 'reason-selector'
-        }, [
-            eli('div', { className: 'controller' }, [ elementReason, elementReasonExpand ]),
-            elementChipSetReason
-        ]);
-        // for (const chip of this.chipSetReason.chips) {
-        //     chip.listen('MDCChip:selection', () => {
-        //         const key = this.chipSetReason.selectedChipIds.length > 0 ? this.chipSetReason.selectedChipIds[0].replace('details-reason-', '') : 'undeclared';
-        //         const reason = umi.reason.get(key);
-        //         this.fieldReason.leadingIconContent = reason.icon;
-        //         this.fieldReason.value = i18next.t(reason.title);
-        //     });
-        // }
-        contents.push(this.blockReason);
+        }, [ elementChipSetReason ]);
+        contents.push(this.elementReasons);
         
         const elementDialog = eliDialog('details-dialog', {
             title: ' ',
@@ -171,13 +143,10 @@ class DetailsDialog extends base.DialogPrototype {
         };
 
         this.fieldResultTime = new MDCTextField(elementResultTime);
-        this.fieldReason = new MDCTextField(elementReason);
-        this.fieldReason.disabled = true
 
         this.ctrl = new MDCDialog(elementDialog);
         this.ctrl.listen('MDCDialog:opened', () => this.opened());
         this.ctrl.listen('MDCDialog:closed', (event: CustomEvent) => this.closed(event));
-        rippleReasonExpand.layout();
     }
 
     updateStyle() {
@@ -205,25 +174,14 @@ class DetailsDialog extends base.DialogPrototype {
         );
         this.fieldResultTime.value = resultTimeString.slice(0, resultTimeString.lastIndexOf(':'));
 
-        this.blockReason.hidden = !(nomination.status === umi.StatusCode.Rejected);
+        this.elementReasons.hidden = !(nomination.status === umi.StatusCode.Rejected);
         if (nomination.status === umi.StatusCode.Rejected) {
-            if (nomination.reasons.length > 0) {
-                const selectedIds = nomination.reasons.map((code) => `details-reason-${code}`);
-                this.chipSetReason.chips.forEach((chip) => {
-                    chip.selected = selectedIds.includes(chip.id);
-                });
-                const firstReason = nomination.reasonsData[0];
-                this.fieldReason.leadingIconContent = firstReason.icon;
-                this.fieldReason.value = i18next.t(firstReason.title);
-            } else {
-                const reason = umi.reason.get(umi.Reason.undeclared);
-                const selectedId = `details-reason-${reason.code}`;
-                this.chipSetReason.chips.forEach((chip) => {
-                    chip.selected = chip.id === selectedId;
-                });
-                this.fieldReason.leadingIconContent = reason.icon;
-                this.fieldReason.value = i18next.t(reason.title);
-            }
+            const selectedIds = nomination.reasons.map((code) => `details-reason-${code}`);
+            this.chipSetReasons.chips.forEach((chip) => {
+                chip.selected = selectedIds.includes(chip.id);
+            });
+        } else {
+            this.chipSetReasons.chips.forEach((chip) => chip.selected = false);
         }
         if (nomination.status === umi.StatusCode.Pending) {
             this.events.query(nomination, (data) => {
@@ -238,7 +196,6 @@ class DetailsDialog extends base.DialogPrototype {
 
     private opened() {
         this.fieldResultTime.layout();
-        this.fieldReason.layout();
         this.map.layout();
         this.map.opened = true;
     }
