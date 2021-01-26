@@ -37,6 +37,8 @@ interface DetailsDialogEvents {
 
 class DetailsDialog extends base.DialogPrototype {
 
+    private static reasonChipIdPrefix = 'details-reason-';
+
     private _nomination: Nomination = null;
 
     private textConfirmedTime: HTMLSpanElement = null;
@@ -104,7 +106,7 @@ class DetailsDialog extends base.DialogPrototype {
         for (const [code, reason] of umi.reason) {
             if (code === umi.Reason.undeclared) continue;
             chipItems.push(
-                { id: `details-reason-${code}`, text: i18next.t(reason.title) }
+                { id: `${DetailsDialog.reasonChipIdPrefix}${code}`, text: i18next.t(reason.title) }
             );
         }
         const elementChipSetReason = eliChipSet(chipItems);
@@ -157,7 +159,6 @@ class DetailsDialog extends base.DialogPrototype {
         if (!this.ctrl) this.render();
         this._nomination = nomination;
         this.map.lngLat = nomination.lngLat;
-        //const type = nomination.status > 100 ? 'rejected' : nomination.status > 0 ? 'accepted' : 'pending';
 
         this.ctrl.root.querySelector('.mdc-dialog__title').innerHTML = nomination.title;
         this.ctrl.root.querySelector('img').src = nomination.imageUrl;
@@ -176,7 +177,7 @@ class DetailsDialog extends base.DialogPrototype {
 
         this.elementReasons.hidden = !(nomination.status === umi.StatusCode.Rejected);
         if (nomination.status === umi.StatusCode.Rejected) {
-            const selectedIds = nomination.reasons.map((code) => `details-reason-${code}`);
+            const selectedIds = nomination.reasons.map((code) => `${DetailsDialog.reasonChipIdPrefix}${code}`);
             this.chipSetReasons.chips.forEach((chip) => {
                 chip.selected = selectedIds.includes(chip.id);
             });
@@ -225,9 +226,13 @@ class DetailsDialog extends base.DialogPrototype {
         if (selectedStatus !== this._nomination.status) {
             shouldUpdate = true;
         }
-        // } else if ((keys.type === 'rejected') && (keys.reason.key !== reason)) {
-        //     shouldUpdate = true;
-        // }
+        if (selectedStatus === umi.StatusCode.Rejected) {
+            let reasons = this.chipSetReasons.selectedChipIds.map((id) => parseInt(id.replace(DetailsDialog.reasonChipIdPrefix, '')));
+            if (reasons !== this._nomination.reasons) {
+                this._nomination.reasons = reasons;
+                shouldUpdate = true;
+            }
+        }
         const lngLat = this.map.lngLat;
         if (lngLat) {
             if (!this._nomination.lngLat
