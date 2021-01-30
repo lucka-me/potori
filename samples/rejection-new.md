@@ -62,6 +62,17 @@ Nomination does not appear to be permanent or appears to be a seasonal display t
 </details>
 
 ## Location
+### Mismatched
+<details><summary>en</summary>
+<p>
+
+```
+Insufficient evidence that the nomination accurately reflects the submitted real-world location based on comparison of the submitted photo and map views
+```
+
+</p>
+</details>
+
 ### Private
 <details><summary>en</summary>
 <p>
