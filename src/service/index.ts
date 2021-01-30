@@ -346,17 +346,10 @@ export namespace service {
             return false;
         });
 
-        let nominationsFile = Filename.nominations;
-
-        const onDownloadNominations: DownloadCallback = (file) => {
+        file.googleDrive.download(Filename.nominations, (file) => {
             if (!file) {
-                if (nominationsFile === Filename.nominations) {
-                    nominationsFile = Filename.nominationsLegacy;
-                    service.file.googleDrive.download(nominationsFile, onDownloadNominations);
-                } else {
-                    finishedNominations = true;
-                    checkFinish();
-                }
+                finishedNominations = true;
+                checkFinish();
                 return false;
             }
             try {
@@ -376,9 +369,7 @@ export namespace service {
             finishedNominations = true;
             checkFinish();
             return false;
-        };
-
-        file.googleDrive.download(nominationsFile, onDownloadNominations);
+        });
     }
 
     /**

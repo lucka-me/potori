@@ -123,7 +123,7 @@ export default class Nomination {
             title: this.title,
             image: this.image,
             status: this.status,
-            confirmedTime: this.confirmedTime,
+            confirmedTime: this.confirmedTime / 1000,
             confirmationMailId: this.confirmationMailId,
         };
         if (this.scanner != umi.ScannerCode.Unknown) {
@@ -132,7 +132,7 @@ export default class Nomination {
         if (this.reasons.length > 0) {
             json.reasons = this.reasons;
         }
-        if (this.resultTime) json.resultTime = this.resultTime;
+        if (this.resultTime) json.resultTime = this.resultTime / 1000;
         if (this.resultMailId) json.resultMailId = this.resultMailId;
         if (this.lngLat) {
             json.lngLat = {
@@ -193,10 +193,10 @@ export default class Nomination {
             }
         }
 
-        nomination.confirmedTime = json.confirmedTime;
+        nomination.confirmedTime = json.confirmedTime * 1000;
         nomination.confirmationMailId = json.confirmationMailId;
 
-        if (json.resultTime) nomination.resultTime = json.resultTime;
+        if (json.resultTime) nomination.resultTime = json.resultTime * 1000;
         if (json.resultMailId) nomination.resultMailId = json.resultMailId;
 
         if (json.lngLat) {
