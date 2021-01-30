@@ -39,12 +39,12 @@ Nomination does not meet acceptance criteria
 </p>
 </details>
 
-### Generic Store
+### Natural
 <details><summary>en</summary>
 <p>
 
 ```
-The real-world location of the nomination appears to represent a generic store or restaurant
+Nomination appears to be a natural feature (waterfall, mountian, lake, etc.) that is not connected to a man-made object
 ```
 
 </p>
@@ -56,6 +56,17 @@ The real-world location of the nomination appears to represent a generic store o
 
 ```
 Nomination does not appear to be permanent or appears to be a seasonal display that is only put up during certain times of the year
+```
+
+</p>
+</details>
+
+### Generic Store
+<details><summary>en</summary>
+<p>
+
+```
+The real-world location of the nomination appears to represent a generic store or restaurant
 ```
 
 </p>

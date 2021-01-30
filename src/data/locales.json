@@ -44,11 +44,11 @@
             "zh-HK": "不合標準",
             "zh-TW": "不合標準"
         },
-        "criteriaGeneric": {
-            "en-US": "Generic Store",
-            "zh-CN": "一般商家",
-            "zh-HK": "一般商家",
-            "zh-TW": "一般商家"
+        "criteriaNatural": {
+            "en-US": "Natural",
+            "zh-CN": "天然地貌",
+            "zh-HK": "天然地貌",
+            "zh-TW": "天然地貌"
         },
         "criteriaTemporary": {
             "en-US": "Temporary",
@@ -56,7 +56,19 @@
             "zh-HK": "臨時",
             "zh-TW": "臨時"
         },
+        "criteriaGeneric": {
+            "en-US": "Generic Store",
+            "zh-CN": "一般商家",
+            "zh-HK": "一般商家",
+            "zh-TW": "一般商家"
+        },
 
+        "locationMismatched": {
+            "en-US": "Mismatched",
+            "zh-CN": "地点不符",
+            "zh-HK": "地點不符",
+            "zh-TW": "地點不符"
+        },
         "locationPrivate": {
             "en-US": "Private",
             "zh-CN": "私人",

@@ -123,6 +123,19 @@
             ]
         },
         {
+            "code": 236,
+            "title": "data.criteriaNatural",
+            "iconFA": "\uf06c",
+            "iconSF": "leaf",
+            "color": "#5F8FAD",
+            "keywords": [
+                {
+                    "scanner": 2,
+                    "keywords": [ "be a natural feature" ]
+                }
+            ]
+        },
+        {
             "code": 246,
             "title": "data.criteriaTemporary",
             "iconFA": "\uf1da",
