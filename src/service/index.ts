@@ -119,6 +119,53 @@ export namespace service {
         })
     }
 
+    export function migrate() {
+        events.progressUpdate(0);
+        events.start()
+        file.googleDrive.download(Filename.nominationsLegacy, (file) => {
+            if (!file) {
+                events.idle();
+                return false;
+            }
+            const legacyList = []
+            try {
+                const jsonList = file as Array<any>;
+                for (const json of jsonList) {
+                    try {
+                        legacyList.push(Nomination.parse(json));
+                    } catch (error) {
+                        // Log or alert
+                    }
+                }
+            } catch (error) {
+                return true;
+            }
+            merge(legacyList);
+            return false;
+        });
+    }
+
+    function merge(legacyList: Array<Nomination>) {
+        for (const legacy of legacyList) {
+            let merged = false;
+            for (const nomination of nominations) {
+                if (legacy.id !== nomination.id) continue;
+                if (nomination.status === umi.StatusCode.Pending && legacy.status !== umi.StatusCode.Pending) {
+                    nomination.status = legacy.status;
+                    nomination.reasons = legacy.reasons;
+                }
+                if (!nomination.resultTime) nomination.resultTime = legacy.resultTime;
+                if (!nomination.resultMailId) nomination.resultMailId = legacy.resultMailId;
+                if (!nomination.lngLat) nomination.lngLat = legacy.lngLat;
+                merged = true;
+            }
+            if (!merged) {
+                nominations.push(legacy);
+            }
+        }
+        sort();
+    }
+
     /**
      * Start to download data and process mail
      */
