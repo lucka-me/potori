@@ -24,6 +24,12 @@
             "zh-HK": "匯入",
             "zh-TW": "匯入"
         },
+        "migrate": {
+            "en-US": "Migrate",
+            "zh-CN": "迁移",
+            "zh-HK": "遷移",
+            "zh-TW": "遷移"
+        },
         "about": {
             "en-US": "About",
             "zh-CN": "关于",
