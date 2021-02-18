@@ -48,7 +48,6 @@ export default class FilterCard extends base.CardPrototype {
         }
 
         for (const [code, reason] of umi.reason) {
-            if (code !== reason.code) continue;
             const switchCtrl = FilterCard.buildSwitch(reasonBox, reason, umi.StatusCode.Rejected);
             switchCtrl.listen('change', () => {
                 this.switchReason(switchCtrl.checked);

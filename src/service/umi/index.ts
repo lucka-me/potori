@@ -115,9 +115,6 @@ export namespace umi {
             }, new Map<ScannerCode, Array<string>>())
         );
         map.set(reason.code, reason);
-        if (json.oldCode) {
-            map.set(json.oldCode, reason);
-        }
         return map;
     }, new Map<ReasonCode, Reason>());
 }

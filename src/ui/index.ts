@@ -165,6 +165,7 @@ export namespace ui {
             appBar.menu.items.get(AppBarMenuItems.open.key).hidden = true;
             appBar.menu.items.get(AppBarMenuItems.save.key).hidden = false;
             appBar.menu.items.get(AppBarMenuItems.upload.key).hidden = !service.auth.signedIn;
+            appBar.menu.items.get(AppBarMenuItems.migrate.key).hidden = !service.auth.signedIn;
             appBar.menu.items.get(AppBarMenuItems.import.key).hidden = false;
             progress.close();
         });
@@ -198,6 +199,9 @@ export namespace ui {
         );
         appBar.menu.events.set(
             AppBarMenuItems.upload.key, () => service.upload()
+        );
+        appBar.menu.events.set(
+            AppBarMenuItems.migrate.key, () => service.migrate()
         );
         appBar.menu.events.set(
             AppBarMenuItems.about.key, () => dialog.about.open()

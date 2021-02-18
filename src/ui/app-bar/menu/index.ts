@@ -28,7 +28,6 @@ export default class AppBarMenu extends base.Prototype {
             this.items.set(item.key, elementItem);
             return elementItem;
         }));
-        this.items.get(AppBarMenuItems.about.key).hidden = false;
         this.parent.append(element);
 
         this.ctrl = new MDCMenu(element.querySelector('.mdc-menu'));

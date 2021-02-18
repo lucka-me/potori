@@ -19,6 +19,8 @@ export interface LngLat {
  */
 export default class Nomination {
 
+    static timestampSecondBound = 1E12;
+
     id = '';    // Short ID, also brainstorming ID
     title = ''; // Title
     image = ''; // Hash part of the image URL
@@ -193,10 +195,10 @@ export default class Nomination {
             }
         }
 
-        nomination.confirmedTime = json.confirmedTime * 1000;
+        nomination.confirmedTime = json.confirmedTime > Nomination.timestampSecondBound ? json.confirmedTime : json.confirmedTime * 1000;
         nomination.confirmationMailId = json.confirmationMailId;
 
-        if (json.resultTime) nomination.resultTime = json.resultTime * 1000;
+        if (json.resultTime) nomination.resultTime = json.resultTime > Nomination.timestampSecondBound ? json.resultTime : json.resultTime * 1000;
         if (json.resultMailId) nomination.resultMailId = json.resultMailId;
 
         if (json.lngLat) {

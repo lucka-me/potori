@@ -77,7 +77,6 @@ export default class Parser {
 
         const indexReasons: Array<[number, umi.ReasonCode]> = []
         for (const [code, reason] of umi.reason) {
-            if (code !== reason.code) continue;
             if (!reason.keywords.has(scanner)) continue;
             for (const keyword of reason.keywords.get(scanner)) {
                 const pos = mainBody.search(keyword);

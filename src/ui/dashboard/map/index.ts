@@ -34,7 +34,6 @@ class MapCard extends base.CardPrototype {
             this.statusFilter.set(code, true);
         }
         for (const [code,reason] of umi.reason) {
-            if (code !== reason.code) continue;
             this.reasonFilter.set(code, true);
         }
     }
