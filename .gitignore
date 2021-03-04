@@ -1,4 +1,5 @@
 /node_modules
 /dist
 /src/locales
+/src/data/version.json
 .DS_Store

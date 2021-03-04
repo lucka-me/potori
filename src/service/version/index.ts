@@ -1,4 +1,4 @@
-import packageData from 'root/package.json';
+import versionData from 'data/version.json';
 import umiData from 'data/umi.json';
 
 /**
@@ -11,7 +11,7 @@ export default class Version {
 
     constructor() {
         const published = document.URL.includes('lucka.moe');
-        this.string = `${packageData.version}d${umiData.version}-${published ? 'lite' : 'full'} (${packageData.build})`;
+        this.string = `${versionData.version}d${umiData.version}-${published ? 'lite' : 'full'} (${versionData.build})`;
         this.full = !published;
     }
 

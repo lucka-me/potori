@@ -1,15 +1,13 @@
 {
   "name": "potori",
-  "version": "0.7.13",
-  "build": "__BUILD_NUMBER__",
+  "version": "0.8.0",
   "description": "Web App to Visualize Ingress Nominations",
   "main": "src/potori.ts",
   "scripts": {
     "postinstall": "ts-node --project scripts/tsconfig.json ./scripts/prepare.ts",
     "prestart": "ts-node --project scripts/tsconfig.json ./scripts/prepare.ts",
     "predev": "ts-node --project scripts/tsconfig.json ./scripts/prepare.ts",
-    "prebuild": "ts-node --project scripts/tsconfig.json ./scripts/pre-build.ts",
-    "postbuild": "ts-node --project scripts/tsconfig.json ./scripts/post-build.ts",
+    "prebuild": "ts-node --project scripts/tsconfig.json ./scripts/prepare.ts",
     "start": "TS_NODE_PROJECT=\"scripts/tsconfig.json\" webpack serve",
     "dev": "TS_NODE_PROJECT=\"scripts/tsconfig.json\" webpack --mode development",
     "build": "TS_NODE_PROJECT=\"scripts/tsconfig.json\" webpack --mode production",
