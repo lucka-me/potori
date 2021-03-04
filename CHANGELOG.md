@@ -1,8 +1,12 @@
 # Changelog
 Noteable changes of Potori will be documented here. For [Status Data](./src/data/status.json), please refer to [Data Changelog](#data-changelog).
 
-## [0.7.13](https://github.com/lucka-me/potori/releases/tag/0.7.13) - 2021-TBA
+## [0.8.0](https://github.com/lucka-me/potori/releases/tag/0.8.0) - 2021-03-TBA
 TBA
+
+### Added
+- Multiple reasons and scanner for nominations
+- Migrate from legacy data file
 
 ### Changed
 - Use more regex when processing mails
@@ -818,9 +822,20 @@ Bug fixed
 
 # Data Changelog
 
+## d9 - 2021-03-TBA
+### Added
+- Scanner
+- SF Symbols
+
+### Changed
+- Reason codes
+
 ## d8 - 2020-10-15
 ### Changed
 - Use new i18n keys for title
+
+<details><summary>Earlier</summary>
+<p>
 
 ## d7 - 2020-09-24
 ### Added
@@ -831,9 +846,6 @@ Bug fixed
 ### Changed
 - Add prefix for new reasons
 - Not use `code` as index any more
-
-<details><summary>Earlier</summary>
-<p>
 
 ## d6 - 2020-09-12
 ### Added
