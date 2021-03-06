@@ -1,124 +1,134 @@
-import i18next from 'i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
+import { Store } from 'vuex'
 
-import { umi } from './umi';
-
-import AuthKit, { AuthStatusChangedCallback } from './auth';
-import BrainstormingKit from './brainstorming';
-import FileKit, { DownloadCallback, Filename } from './file';
-import Mari, { ProgressCallback } from './mari';
+import { State } from '@/store';
+import GoogleKit from './google';
+import Mari from './mari';
 import Nomination from './nomination';
-import translations from 'locales';
-import Version from './version';
+import { preferences } from './preferences';
 
-import { BlobGenerator, Parser } from './tools';
-
-type BasicCallback = () => void;
-type MessageCallback = (message: string) => void;
-type MatchCallback = (target: Nomination, candidate: Nomination, callback: (matched: boolean) => void) => void;
-
-/**
- * Events for {@link Service}
- */
-interface ServiceEvents {
-    authStatusChanged   : AuthStatusChangedCallback,    // Triggered when authentication status changed
-    progressUpdate      : ProgressCallback, // Triggered when progress updated
-    bufferUpdate        : ProgressCallback, // Triggered when buffer (secondary progress) updated
-    bsUpdate            : BasicCallback,    // Triggered when brainstorming data updated
-
-    start   : BasicCallback,    // Triggered when progress bar should show up
-    idle    : BasicCallback,    // Triggered when process is finished
-    clear   : BasicCallback,    // Triggered when UI should be cleared
-
-    match   : MatchCallback,    // Triggered when a manually matching required
-
-    alert   : MessageCallback,  // Triggered when alert raised
-    info    : MessageCallback,  // Triggered when some information should be passed to user
-}
-
-/**
- * Item for manually matching
- */
-interface MatchItem {
-    target: Nomination,             // The broken nomination, should be rejected and missing image
-    candidates: Array<Nomination>,  // Candidates, pending, early than target and with same title
-}
-
-/**
- * Handle all non-UI tasks and host data
- */
 export namespace service {
 
-    export const auth       = new AuthKit();
-    export const bs         = new BrainstormingKit();
-    export const file       = new FileKit();
-    export const mari       = new Mari();
-    export const version    = new Version();
+    type BasicCallback = () => void;
 
-    export const nominations: Array<Nomination> = [];    // Nomination list
+    const google = new GoogleKit();
+    const mari = new Mari();
+    let _store: Store<State>;
 
-    export const errors: Array<ErrorEvent> = [];
+    export function init(store: Store<State>) {
+        _store = store;
 
-    export const events: ServiceEvents = {
-        authStatusChanged:  () => { },
-        progressUpdate:     () => { },
-        bufferUpdate:       () => { },
-        bsUpdate:           () => { },
-        
-        start:  () => { },
-        idle:   () => { },
-        clear:  () => { },
+        load();
 
-        match:  () => { },
-        
-        alert:  () => { },
-        info:   () => { },
-    };
+        google.init(() => {
+            google.auth.events.authStatusChanged = (authed) => {
+                _store.commit('setGAPIAuthed', authed);
+                _store.commit('gapiLoaded');
+            };
+            google.auth.init();
 
-    export function init() {
-        // Register service worker
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js');
-            });
-        }
-
-        i18next
-            .use(LanguageDetector)
-            .init({
-                fallbackLng: 'en-US',
-                keySeparator: false,
-                resources: translations,
-                ns: ['general', 'message'],
-                defaultNS: 'general',
-            });
-
-        auth.events.authStatusChanged = (signedIn) => {
-            if (!signedIn) {
-                nominations.length = 0;
-            }
-            events.authStatusChanged(signedIn);
-            if (signedIn) {
-                startMail();
-            }
-        };
-        auth.events.error = (error) => {
-            events.alert(JSON.stringify(error, null, 2));
-        }
-
-        auth.init();
-
-        mari.events.alert = (message) => events.alert(message);
-        mari.events.progress = (percent) => events.progressUpdate(percent * 0.9);
-        mari.events.buffer = (percent) => events.bufferUpdate(percent);
-        mari.events.finish = () => arrange();
-        mari.init();
-
-        window.addEventListener('error', (errorEvent) => {
-            errors.push(errorEvent);
-        })
+            mari.events.finish = (nominations) => {
+                arrange(nominations);
+            };
+            mari.init();
+        });
     }
 
+    export function signIn() {
+        google.auth.signIn();
+    }
+
+    export function signOut() {
+        google.auth.signOut();
+    }
+
+    export function refresh() {
+        if (preferences.google.sync()) {
+            download(() => {
+                processMails();
+            })
+        } else {
+            processMails();
+        }
+    }
+
+    function processMails() {
+        _store.commit('setStatus', State.Status.processingMails);
+        mari.start(_store.state.nominations);
+    }
+
+    function arrange(nominations: Array<Nomination>) {
+        const matchTarget: Array<Nomination> = [];
+        const reduced = nominations.reduce((list, nomination) => {
+            if (nomination.id.length < 1) {
+                matchTarget.push(nomination);
+                return list;
+            }
+            // Merge
+            let merged = false;
+            for (const target of list) {
+                if (target.merge(nomination)) {
+                    merged = true;
+                    break;
+                }
+            }
+            if (!merged) {
+                list.push(nomination);
+            }
+            return list;
+        }, new Array<Nomination>());
+        _store.commit('setNominations', reduced);
+        save();
+        _store.commit('setStatus', State.Status.idle);
+    }
+
+    function download(callback: BasicCallback) {
+        _store.commit('setStatus', State.Status.syncing);
+        google.drive.download('nominations.json', (file) => {
+            if (!file) {
+                callback();
+                return false;
+            }
+            try {
+                importNominations(file as Array<any>);
+                callback();
+            } catch (error) {
+                return true;
+            }
+            return false;
+        });
+    }
+
+    function importNominations(jsonList: Array<any>) {
+        try {
+            const nominations = jsonList.map(json => Nomination.parse(json));
+            _store.commit('setNominations', nominations);
+            save();
+        } catch (error) {
+            
+        }
+    }
+
+    function load() {
+        const jsonString = localStorage.getItem('potori.nominations');
+        if (jsonString) {
+            try {
+                const jsonList = JSON.parse(jsonString) as Array<any>;
+                const nominations = jsonList.map(json => Nomination.parse(json));
+                _store.commit('setNominations', nominations);
+            } catch (error) {
+                
+            }
+        }
+    }
+
+    function save() {
+        localStorage.setItem(
+            'potori.nominations',
+            JSON.stringify(_store.state.nominations.map(nomination => nomination.json))
+        );
+    }
+
+    /*
     export function migrate() {
         events.progressUpdate(0);
         events.start()
@@ -165,82 +175,14 @@ export namespace service {
         }
         sort();
     }
-
-    /**
-     * Start to download data and process mail
-     */
-    function startMail() {
-        events.clear();
-        events.start();
-        download(() => {
-            mari.start(nominations);
-        });
-    }
-
-    /**
-     * Arrange nominations, merge duplicated nominations
-     * Next step is {@link sort}
-     */
-    function arrange() {
-        events.start();
-        // Collect broken nominations
-        const matchQueue: Array<MatchItem> = [];
-        // Merge duplicated nominations -> targets
-        for (let i = nominations.length - 1; i >= 0; i--) {
-            const current = nominations[i];
-            if (current.id.length < 1) {
-                matchQueue.push({
-                    target: current,
-                    candidates: []
-                });
-                nominations.splice(i, 1);
-                continue;
-            }
-            for (let j = 0; j < i; j++) {
-                const target = nominations[j];
-                if (current.id !== target.id) continue;
-                if (target.status === umi.StatusCode.Pending) {
-                    target.title = current.title;
-                    target.status = current.status;
-                    target.reasons = current.reasons;
-                    target.resultTime = current.resultTime;
-                    target.resultMailId = current.resultMailId;
-                    if (current.lngLat) target.lngLat = current.lngLat;
-                } else {
-                    target.confirmedTime = current.confirmedTime;
-                    target.confirmationMailId = current.confirmationMailId;
-                    if (!target.lngLat) target.lngLat = current.lngLat;
-                }
-                nominations.splice(i, 1);
-                break;
-            }
-        }
-
-        const pendings = nominations.filter((nomination) => nomination.status === umi.StatusCode.Pending);
-
-        // Find out candidates
-        for (const item of matchQueue) {
-            const testScanner = item.target.scanner !== umi.ScannerCode.Unknown;
-            for (const nomination of pendings) {
-                if (item.target.title !== nomination.title) continue;
-                if (item.target.resultTime < nomination.confirmedTime) continue;
-                if (
-                    testScanner
-                    && nomination.scanner !== umi.ScannerCode.Unknown
-                    && nomination.scanner !== item.target.scanner
-                ) continue;
-                item.candidates.push(nomination);
-            }
-        }
-
-        manuallyMatch(matchQueue);
-    }
+    */
 
     /**
      * Match the first target in queue and first candidate in its cadidates
      * Next step is {@link sort}
      * @param queue Queue to match
      */
+    /*
     function manuallyMatch(queue: Array<MatchItem>) {
         if (queue.length < 1) {
             sort();
@@ -270,25 +212,13 @@ export namespace service {
             manuallyMatch(queue);
         });
     }
-
-    /**
-     * Sort nominations by result time or confirmed time
-     * Next step is {@link queryLocation}
-     */
-    function sort() {
-        nominations.sort((a, b) => {
-            const timeA = a.resultTime ? a.resultTime : a.confirmedTime;
-            const timeB = b.resultTime ? b.resultTime : b.confirmedTime;
-            return timeA < timeB ? 1 : -1;
-        });
-
-        queryLocation();
-    }
+    */
 
     /**
      * Query locations
      * Next step is {@link event.idle}
      */
+    /*
     function queryLocation() {
         const finished = () => {
             events.idle();
@@ -321,10 +251,12 @@ export namespace service {
             );
         }
     }
+    */
 
     /**
      * Open local file
      */
+    /*
     export function open() {
         events.clear();
         const onload = (content: string) => {
@@ -348,10 +280,12 @@ export namespace service {
         };
         file.local.open(onload, events.alert);
     }
+    */
 
     /**
      * Save local file
      */
+    /*
     export function save() {
         if (nominations.length < 1) {
             events.alert(i18next.t('message:service.nominationsEmpty'));
@@ -362,66 +296,12 @@ export namespace service {
             file.local.save(Filename.bsData, BlobGenerator.bsData(bs.data));
         }, 2000);
     }
-
-    /**
-     * Download data files from Google Drive
-     * @param finish Triggered when download finishes
-     */
-    function download(finish: BasicCallback) {
-        let finishedNominations = false;
-        let finishedBsData = false;
-
-        const checkFinish = () => {
-            if (finishedNominations && finishedBsData) finish();
-        };
-
-        file.googleDrive.download(Filename.bsData, (result) => {
-            if (!result) {
-                finishedBsData = true;
-                checkFinish();
-                return false;
-            }
-
-            try {
-                bs.data = new Map(result as Array<[string, any]>);
-            } catch (error) {
-                return true;
-            }
-
-            finishedBsData = true;
-            checkFinish();
-            return false;
-        });
-
-        file.googleDrive.download(Filename.nominations, (file) => {
-            if (!file) {
-                finishedNominations = true;
-                checkFinish();
-                return false;
-            }
-            try {
-                const jsonList = file as Array<any>;
-                nominations.length = 0;
-                for (const json of jsonList) {
-                    try {
-                        nominations.push(Nomination.parse(json));
-                    } catch (error) {
-                        // Log or alert
-                    }
-                }
-            } catch (error) {
-                return true;
-            }
-
-            finishedNominations = true;
-            checkFinish();
-            return false;
-        });
-    }
+    */
 
     /**
      * Upload data to Google Drive
      */
+    /*
     export function upload() {
 
         let uploadedNominations = false;
@@ -460,11 +340,13 @@ export namespace service {
         );
 
     }
+    */
 
     /**
      * Import JSON from Wayfarer API response
      * @param raw Raw JSON
      */
+    /*
     export function importJSON(raw: string) {
         let parsed;
         try {
@@ -499,21 +381,26 @@ export namespace service {
         events.info(i18next.t('message:service.imported', { count: count }));
         events.idle();
     }
-
+    */
+    
     /**
      * Query Brainstorming firebase and update local bs data
      */
+    /*
     export function updateBsData() {
         bs.update(nominations, () => {
             events.bsUpdate();
             events.info(i18next.t('message:service.bsDataUpdated'));
         });
     }
+    */
 
     /**
      * Clear Brainstorming database
      */
+    /*
     export function clearBsData() {
         bs.clear();
     }
+    */
 }
