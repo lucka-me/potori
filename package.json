@@ -1,16 +1,16 @@
 {
   "name": "potori",
-  "version": "0.8.0",
+  "version": "0.9.0",
   "description": "Web App to Visualize Ingress Nominations",
-  "main": "src/potori.ts",
+  "main": "src/main.ts",
   "scripts": {
     "postinstall": "ts-node --project scripts/tsconfig.json ./scripts/prepare.ts",
     "prestart": "ts-node --project scripts/tsconfig.json ./scripts/prepare.ts",
     "prebuild": "ts-node --project scripts/tsconfig.json ./scripts/prepare.ts",
     "start": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build:docs": "vuepress build docs",
-    "deploy": "gh-pages -d dist -m \"Deploy $(date)\""
+    "start:docs": "vuepress dev docs",
+    "build:docs": "vuepress build docs"
   },
   "repository": {
     "type": "git",
@@ -26,27 +26,15 @@
     "vuex": "^4.0.0"
   },
   "devDependencies": {
-    "@firebase/app": "^0.6.13",
-    "@firebase/database": "^0.8.1",
-    "@fortawesome/fontawesome-free": "^5.15.1",
-    "@types/chart.js": "^2.9.29",
-    "@types/gapi": "0.0.39",
     "@types/gapi.auth2": "0.0.52",
     "@types/gapi.client.drive": "^3.0.13",
     "@types/gapi.client.gmail": "^1.0.3",
-    "@types/mapbox-gl": "^2.0.0",
     "@vue/cli-plugin-pwa": "^4.5.11",
     "@vue/cli-plugin-router": "^4.5.11",
     "@vue/cli-plugin-typescript": "^4.5.11",
     "@vue/cli-plugin-vuex": "^4.5.11",
     "@vue/cli-service": "^4.5.11",
     "@vue/compiler-sfc": "^3.0.7",
-    "chart.js": "^2.9.4",
-    "i18next": "^19.8.4",
-    "i18next-browser-languagedetector": "^6.0.1",
-    "mapbox-gl": "^2.0.1",
-    "material-components-web": "^8.0.0",
-    "moment": "^2.29.1",
     "sass": "^1.30.0",
     "sass-loader": "^10.1.0",
     "ts-node": "^9.1.1",
