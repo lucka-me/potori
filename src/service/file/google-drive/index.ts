@@ -1,12 +1,10 @@
-import { MIMEType } from '../constants';
-
-export type DownloadCallback = (file: gapi.client.drive.File) => boolean;
+export type DownloadCallback = (file?: gapi.client.drive.File) => boolean;
 type UploadCallback = (succeed: boolean, message?: string) => void;
 
 /**
  * Download and upload from / to Google Drive
  */
-export default class GoogleDriveFileKit {
+export default class GoogleDriveKit {
 
     private static readonly folder = 'appDataFolder';   // The private folder in Google Drive
 
@@ -22,12 +20,12 @@ export default class GoogleDriveFileKit {
      * @param callback Triggered when a file is downloaded
      */
     download(filename: string, callback: DownloadCallback) {
-        const gotList = (fileList: Array<gapi.client.drive.File>) => {
+        const listHandler = (fileList: Array<gapi.client.drive.File>) => {
             if (fileList.length < 1) {
-                callback(null);
+                callback();
                 return;
             }
-            const fileId = fileList[0].id;
+            const fileId = fileList[0].id!;
             gapi.client.drive.files.get({
                 fileId: fileId,
                 alt: 'media'
@@ -35,7 +33,7 @@ export default class GoogleDriveFileKit {
                 if (callback(response.result)) {
                     gapi.client.drive.files.delete({ fileId: fileId });
                     fileList.splice(0, 1);
-                    gotList(fileList);
+                    listHandler(fileList);
                 } else {
                     this.ids.set(filename, fileId);
                 }
@@ -45,32 +43,33 @@ export default class GoogleDriveFileKit {
         gapi.client.drive.files.list({
             q: `name = '${filename}'`,
             pageSize: 10,
-            spaces: GoogleDriveFileKit.folder,
+            spaces: GoogleDriveKit.folder,
             fields: 'files(id)'
         }).then((response: gapi.client.Response<gapi.client.drive.FileList>) => {
             const files = response.result.files;
             if (!files) {
-                callback(null);
+                callback();
                 return;
             }
-            gotList(files);
+            listHandler(files);
         });
     }
 
     /**
      * Upload file to Google Drive
      * @param filename Filename to upload
+     * @param mimeType MIME type of the file
      * @param blob Content to upload
      * @param token The Google account access token
      * @param callback Triggered when process finished
      */
-    upload(filename: string, blob: Blob, token: string, callback: UploadCallback) {
+    upload(filename: string, mimeType: string, blob: Blob, token: string, callback: UploadCallback) {
         // Ref: https://gist.github.com/tanaikech/bd53b366aedef70e35a35f449c51eced
         let url = '';
         let method = '';
         const metadata: any = {
             name: filename,
-            mimeType: MIMEType.json,
+            mimeType: mimeType,
         };
         // Using parent in Update will cause 403
         if (this.ids.has(filename)) {
@@ -79,10 +78,10 @@ export default class GoogleDriveFileKit {
         } else {
             method = 'POST';
             url = 'https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart';
-            metadata.parents = [ GoogleDriveFileKit.folder ];
+            metadata.parents = [ GoogleDriveKit.folder ];
         }
         const form = new FormData();
-        form.append('metadata', new Blob([JSON.stringify(metadata)], { type: MIMEType.json }));
+        form.append('metadata', new Blob([JSON.stringify(metadata)], { type: mimeType }));
         form.append('file', blob);
         const authHeader = `Bearer ${token}`;
         fetch(url, {
