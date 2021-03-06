@@ -1,9 +1,11 @@
 <template>
 <div class="highlight">
-    <div @click="open()">All: {{ $store.state.nominations.length }}</div>
-    <div v-for="status of statuses" :key="status.code" @click="open(status)">
-        {{ status.title }}: {{ $store.getters.count(status.predicator) }}
-    </div>
+    <dashboard-card title="All" icon="arrow-up" :text="$store.state.nominations.length" @click="open()" />
+    <dashboard-card
+        v-for="status of statuses" :key="status.code"
+        :title="status.title" :icon="status.icon" :text="$store.getters.count(status.predicator)"
+        @click="open(status)"
+    />
 </div>
 </template>
 
@@ -13,9 +15,11 @@ import { RouteLocationRaw } from 'vue-router';
 
 import { umi } from '@/service/umi';
 
+import DashboardCard from './Card.vue';
+
 @Options({
     components: {
-
+        DashboardCard
     },
 })
 export default class Highlight extends Vue {
@@ -34,3 +38,11 @@ export default class Highlight extends Vue {
     }
 }
 </script>
+
+<style lang="scss">
+.highlight {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));
+    gap: 1em;
+}
+</style>

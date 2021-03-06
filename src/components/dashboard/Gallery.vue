@@ -1,5 +1,5 @@
 <template>
-<div class="highlight">
+<div class="gallery">
     <div v-for="nomination of nominations" :key="nomination.id" @click="open(nomination.id)">
         {{ nomination.title }}
     </div>
