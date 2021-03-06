@@ -24,7 +24,7 @@ import MaterialTopAppBarAdjust from '@/components/material/TopAppBarAdjust.vue';
 })
 export default class NominationList extends Vue {
     get title(): string {
-        return this.commonSense?.title || 'All';
+        return this.commonSense?.title ?? 'All';
     }
 
     get nominations(): Array<Nomination> {

@@ -6,9 +6,7 @@
 <material-top-app-bar-adjust/>
 <div class="dashboard">
     <status/>
-    <hr/>
     <highlight/>
-    <hr/>
     <gallery/>
     <hr/>
     <scanners/>
@@ -56,7 +54,15 @@ export default class Dashboard extends Vue {
 </script>
 
 <style lang="scss">
+@use '~@material/typography';
+
 .dashboard {
     padding: 1rem;
+
+    > .title {
+        @include typography.typography(headline4);
+
+        margin-bottom: 0.2em;
+    }
 }
 </style>

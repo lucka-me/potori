@@ -23,8 +23,8 @@ export default class NominationDetails extends Vue {
 
     nomination?: Nomination;
 
-    get title() {
-        return this.nomination?.title || 'Not Found';
+    get title(): string {
+        return this.nomination?.title ?? 'Not Found';
     }
 
     created() {
