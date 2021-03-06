@@ -1,4 +1,5 @@
-import data from 'data/umi/umi.json';
+import data from '@/data/umi/umi.json';
+import { Predicator } from '@/service/nomination';
 
 /**
  * Keep all status data
@@ -17,9 +18,17 @@ export namespace umi {
     /**
      * Scanner information
      */
-    export interface Scanner {
+    export class Scanner {
         readonly code: ScannerCode;
         readonly title: string;
+
+        readonly predicator: Predicator;    // Predicator for filter
+
+        constructor(code: ScannerCode, title: string) {
+            this.code = code;
+            this.title = title;
+            this.predicator = (nomination) => nomination.scanner === this.code;
+        }
     }
 
     /**
@@ -46,6 +55,8 @@ export namespace umi {
         readonly icon: string;  // Icon to represent the status
     
         readonly queries: Map<ScannerCode, string>;  // Queries to search mails, <scanner, query>
+
+        readonly predicator: Predicator;    // Predicator for filter
     
         constructor(
             code: number, title: string, icon: string,
@@ -56,6 +67,7 @@ export namespace umi {
             this.icon = icon;
 
             this.queries = queries;
+            this.predicator = (nomination) => nomination.status === this.code;
         }
     }
     
@@ -75,6 +87,8 @@ export namespace umi {
     
         readonly color: string; // Color to represent the reason in charts
         readonly keywords: Map<ScannerCode, Array<string>>;  // Keywords to identify the reason, <scanner, keywords>
+
+        readonly predicator: Predicator;    // Predicator for filter
     
         constructor(
             code: number, title: string, icon: string,
@@ -86,10 +100,22 @@ export namespace umi {
 
             this.color = color;
             this.keywords = keyword;
+
+            if (code === Reason.undeclared) {
+                this.predicator = (nomination) => nomination.status === StatusCode.Rejected && nomination.reasons.length < 1;
+            } else {
+                this.predicator = (nomination) => nomination.status === StatusCode.Rejected && nomination.reasons.indexOf(code) > -1;
+            }
         }
     }
+
+    /**
+     * Common type of `Scanner`, `Status` and `Reason`
+     */
+    export type CommonSense = Scanner | Status | Reason;
     
-    export const scanner = data.scanners.reduce((map, scanner) => {
+    export const scanner = data.scanners.reduce((map, json) => {
+        const scanner = new Scanner(json.code, json.title);
         map.set(scanner.code, scanner);
         return map;
     }, new Map<ScannerCode, Scanner>());
