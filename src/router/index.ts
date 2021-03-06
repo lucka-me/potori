@@ -7,11 +7,6 @@ const routes: Array<RouteRecordRaw> = [
     //     component: () => import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard.vue')
     // },
     // {
-    //     path: '/preferences',
-    //     name: 'Preferences',
-    //     component: () => import(/* webpackChunkName: "preferences" */ '@/views/Preferences.vue')
-    // },
-    // {
     //     path: '/list',
     //     name: 'List',
     //     component: () => import(/* webpackChunkName: "nomination-list" */ '@/views/NominationList.vue'),
@@ -21,11 +16,16 @@ const routes: Array<RouteRecordRaw> = [
     //     name: 'Details',
     //     component: () => import(/* webpackChunkName: "nomination-details" */ '@/views/NominationDetails.vue'),
     // }
+    {
+      path: '/preferences',
+      name: 'Preferences',
+      component: () => import(/* webpackChunkName: "preferences" */ '@/views/Preferences.vue')
+    },
 ];
 
 const router = createRouter({
-  history: createWebHashHistory(),
-  routes
+    history: createWebHashHistory(),
+    routes
 });
 
 export default router
