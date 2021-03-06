@@ -2,4 +2,6 @@
 /dist
 /src/locales
 /src/data/version.json
+.cache
+.temp
 .DS_Store
