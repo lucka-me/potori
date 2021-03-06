@@ -2,9 +2,6 @@
 <material-top-app-bar title="Preferences" navi-back/>
 <material-top-app-bar-adjust/>
 <div class="preferences">
-    Preferences
-    <router-link to="../">Back</router-link>
-    <hr/>
     <google-preferences/>
     <hr/>
     <about-preferences/>

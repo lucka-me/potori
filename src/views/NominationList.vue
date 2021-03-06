@@ -2,10 +2,6 @@
 <material-top-app-bar :title="title" navi-back/>
 <material-top-app-bar-adjust/>
 <div class="nomination-list">
-    {{ title }}
-    |
-    <router-link to="../">Back</router-link>
-    <hr>
     <div v-for="nomination in nominations" :key="nomination.id" @click="open(nomination.id)">
         {{ nomination.title }}
     </div>

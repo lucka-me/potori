@@ -1,15 +1,8 @@
 <template>
 <material-top-app-bar :title="title" navi-back/>
 <material-top-app-bar-adjust/>
-<div class="nomination-details">
-    <span v-if="nomination">{{ nomination.title }}</span>
-    <span v-else>Not found</span>
-    |
-    <span @click="$router.back()">Back</span>
-    <hr>
-    <div v-if="nomination">
-        Details...
-    </div>
+<div v-if="nomination" class="nomination-details">
+    Details...
 </div>
 </template>
 
@@ -29,6 +22,10 @@ import MaterialTopAppBarAdjust from '@/components/material/TopAppBarAdjust.vue';
 export default class NominationDetails extends Vue {
 
     nomination?: Nomination;
+
+    get title() {
+        return this.nomination?.title || 'Not Found';
+    }
 
     created() {
         const id = this.$route.query.id;
