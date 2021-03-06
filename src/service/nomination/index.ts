@@ -15,7 +15,7 @@ export interface LngLat {
  */
 export default class Nomination {
 
-    static timestampSecondBound = 1E12;
+    private static timestampSecondBound = 1E12;
 
     /**
      * Comparator for sorting by time
@@ -69,8 +69,8 @@ export default class Nomination {
     /**
      * Get status data
      */
-    get statusData(): umi.Status{
-        return umi.status.get(this.status);
+    get statusData(): umi.Status {
+        return umi.status.get(this.status)!;
     }
 
     /**
@@ -78,7 +78,7 @@ export default class Nomination {
      */
     get reasonsData(): Array<umi.Reason> {
         return this.reasons.map((code) => {
-            return umi.reason.get(umi.reason.has(code) ? code : umi.Reason.undeclared);
+            return umi.reason.get(code)!;
         });
     }
 
@@ -92,7 +92,7 @@ export default class Nomination {
     /**
      * Serialize to JSON
      */
-     get json(): any {
+    get json(): any {
         let json: any = {
             id: this.id,
             title: this.title,
