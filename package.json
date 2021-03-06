@@ -18,6 +18,7 @@
   "author": "lucka-me",
   "license": "MIT",
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.2",
     "@types/gapi.auth2": "0.0.53",
     "@types/gapi.client.drive": "^3.0.13",
     "@types/gapi.client.gmail": "^1.0.3",
