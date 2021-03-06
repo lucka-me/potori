@@ -1,10 +1,13 @@
 <template>
 <div class="nomination-details">
-    <span v-if="nomination">Details</span>
+    <span v-if="nomination">{{ nomination.title }}</span>
     <span v-else>Not found</span>
     |
     <span @click="$router.back()">Back</span>
-    <hr/>
+    <hr>
+    <div v-if="nomination">
+        Details...
+    </div>
 </div>
 </template>
 
@@ -15,10 +18,24 @@ import Nomination from '@/service/nomination';
 
 @Options({
     components: {
-
     }
 })
 export default class NominationDetails extends Vue {
+
     nomination?: Nomination;
+
+    created() {
+        const id = this.$route.query.id;
+        if (id && typeof(id) === 'string') {
+            const nomination = this.$store.state.nominations.find((nomination) => nomination.id === id);
+            if (nomination) {
+                this.nomination = nomination;
+            }
+        }
+    }
 }
 </script>
+
+<style lang="scss">
+
+</style>
