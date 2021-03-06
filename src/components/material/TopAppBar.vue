@@ -25,7 +25,6 @@ import { Options, Vue } from 'vue-class-component';
 })
 export default class MaterialTopAppBar extends Vue {
 
-    private title!: string;
     private ctrl?: MDCTopAppBar;
 
     mounted() {

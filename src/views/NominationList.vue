@@ -46,7 +46,6 @@ export default class NominationList extends Vue {
         }
         if (this.$route.query.reason && typeof(this.$route.query.reason) === 'string') {
             const code = parseInt(this.$route.query.reason);
-            console.log(code);
             return umi.reason.get(code) || null;
         }
         if (this.$route.query.scanner && typeof(this.$route.query.scanner) === 'string') {
