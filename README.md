@@ -17,6 +17,7 @@ A web app to visualize Ingress nominations from Gmail inbox.
 ## Build & Run
 ```sh
 $ git checkout main # If you want to run the version deployed on website
+$ git submodule init
 $ npm i
 $ npm start
 ```
