@@ -1,4 +1,5 @@
 <template>
+<div class="title">Last 30 Days</div>
 <div class="gallery">
     <div v-for="nomination of nominations" :key="nomination.id" @click="open(nomination.id)">
         {{ nomination.title }}

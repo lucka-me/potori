@@ -9,12 +9,12 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/list',
         name: 'List',
-        component: () => import(/* webpackChunkName: "nomination-list" */ '@/views/NominationList.vue'),
+        component: () => import(/* webpackChunkName: "list" */ '@/views/NominationList.vue'),
     },
     {
         path: '/details',
         name: 'Details',
-        component: () => import(/* webpackChunkName: "nomination-details" */ '@/views/NominationDetails.vue'),
+        component: () => import(/* webpackChunkName: "details" */ '@/views/NominationDetails.vue'),
     },
     {
       path: '/preferences',
