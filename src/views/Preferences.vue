@@ -3,9 +3,9 @@
     Preferences
     <router-link to="../">Back</router-link>
     <!--<hr/>
-    <google-preferences/>
+    <google-preferences/>-->
     <hr/>
-    <about-preferences/>-->
+    <about-preferences/>
 </div>
 </template>
 
@@ -13,12 +13,12 @@
 import { Options, Vue } from 'vue-class-component';
 
 // import GooglePreferences from '@/components/preferences/Google.vue';
-// import AboutPreferences from '@/components/preferences/About.vue';
+import AboutPreferences from '@/components/preferences/About.vue';
 
 @Options({
     components: {
         // GooglePreferences,
-        // AboutPreferences
+        AboutPreferences
     },
 })
 export default class Preferences extends Vue {}
