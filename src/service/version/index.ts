@@ -1,5 +1,5 @@
 import versionData from 'data/version.json';
-import umiData from 'data/umi.json';
+import umiData from 'data/umi/umi.json';
 
 /**
  * Version information

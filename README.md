@@ -26,7 +26,7 @@ Open `http://localhost:8000/` in browser.
 ## Notice
 Due to Google's policy (which aims to protect user's data), some features related to 3rd-party are suspended in the public web app (as a lite version).
 
-Potori is NOT fully compatible with Prime yet, we still need more [mail samples](./samples) to figure out how to query all related and localized mails exactly and identify each reason for rejection. If you have any trouble or want to help, please open an issue or contact us via Telegram@SeeleUN.
+Potori is NOT fully compatible with Prime yet, we still need more [mail samples](https://github.com/lucka-me/potori-umi/tree/main/samples) to figure out how to query all related and localized mails exactly and identify each reason for rejection. If you have any trouble or want to help, please open an issue or contact us via Telegram@SeeleUN.
 
 ## Future Style
 > Since Niantic launched the Niantic Wayfarer which contains a nomination manager, I've thought a lot about the future of Potori. I've learned a lot during the development and I do not want to abandon.  

@@ -1,5 +1,9 @@
 # Changelog
-Noteable changes of Potori will be documented here. For [Status Data](./src/data/status.json), please refer to [Data Changelog](#data-changelog).
+Noteable changes of Potori will be documented here.
+
+## [0.9.0](https://github.com/lucka-me/potori/releases/tag/0.8.0) - 2021-TBA
+TBA
+
 
 ## [0.8.0](https://github.com/lucka-me/potori/releases/tag/0.8.0) - 2021-03-06
 Update structure
@@ -11,6 +15,8 @@ Update structure
 ### Changed
 - Use more regex when processing mails
 
+<details><summary>0.7.x</summary>
+<p>
 
 ## [0.7.12](https://github.com/lucka-me/potori/releases/tag/0.7.12) - 2020-12-23
 - UI improved
@@ -24,8 +30,6 @@ Update structure
 ### Fixed
 - Location may lost when nomination from Prime gets result
 
-<details><summary>0.7.x</summary>
-<p>
 
 ## [0.7.11](https://github.com/lucka-me/potori/releases/tag/0.7.11) - 2020-11-23
 - UI improved
@@ -815,61 +819,6 @@ Bug fixed
 
 ## 0.1 - 2019-01-12
 - Initial version with basic functions
-
-</p>
-</details>
-
-
-# Data Changelog
-
-## d9 - 2021-03-06
-### Added
-- Scanner
-- SF Symbols
-
-### Changed
-- Reason codes
-
-## d8 - 2020-10-15
-### Changed
-- Use new i18n keys for title
-
-<details><summary>Earlier</summary>
-<p>
-
-## d7 - 2020-09-24
-### Added
-- Reason: Criteria - en
-- Reason: Private - en
-- Reason: Photo Quality -en
-
-### Changed
-- Add prefix for new reasons
-- Not use `code` as index any more
-
-## d6 - 2020-09-12
-### Added
-- Keyword: Duplicated - en
-
-## d5 - 2020-09-08
-### Added
-- Reason: Generic Store - en
-- Reason: License Plate - en
-
-## d4 - 2020-08-12
-### Added
-- Reason: Temporary - en
-
-## d3 - 2020-08-12
-### Added
-- Keyword: Too Close - en
-
-## d2 - 2020-06-09
-### Changed
-- Convert to new structure
-
-## d1 - 2019-01-12
-- Initial version
 
 </p>
 </details>
