@@ -1,4 +1,6 @@
 <template>
+<material-top-app-bar title="Dashboard"/>
+<material-top-app-bar-adjust/>
 <div class="dashboard">
     Dashboard
     |
@@ -24,6 +26,8 @@ import { Options, Vue } from 'vue-class-component';
 import { service } from '@/service';
 import { State } from '@/store';
 
+import MaterialTopAppBar from '@/components/material/TopAppBar.vue';
+import MaterialTopAppBarAdjust from '@/components/material/TopAppBarAdjust.vue';
 import Status from '@/components/dashboard/Status.vue';
 import Highlight from '@/components/dashboard/Highlight.vue';
 import Gallery from '@/components/dashboard/Gallery.vue';
@@ -32,6 +36,7 @@ import Reasons from '@/components/dashboard/Reasons.vue';
 
 @Options({
     components: {
+        MaterialTopAppBar, MaterialTopAppBarAdjust,
         Status, Highlight, Gallery, Scanners, Reasons
     },
 })

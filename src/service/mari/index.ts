@@ -143,7 +143,6 @@ export default class Mari {
      * @param nominations Existing nominations
      */
     start(nominations: Array<Nomination>) {
-        console.log('Mari start');
         this.nominations = nominations.map(nomination => nomination);
         this.progress.lists.clear();
         this.progress.messages.clear();

@@ -1,4 +1,6 @@
 <template>
+<material-top-app-bar :title="title"/>
+<material-top-app-bar-adjust/>
 <div class="nomination-list">
     {{ title }}
     |
@@ -11,13 +13,17 @@
 </template>
 
 <script lang="ts">
+import { Options, Vue } from 'vue-class-component';
+
 import Nomination from '@/service/nomination';
 import { umi } from '@/service/umi';
-import { Options, Vue } from 'vue-class-component';
+
+import MaterialTopAppBar from '@/components/material/TopAppBar.vue';
+import MaterialTopAppBarAdjust from '@/components/material/TopAppBarAdjust.vue';
 
 @Options({
     components: {
-
+        MaterialTopAppBar, MaterialTopAppBarAdjust,
     },
 })
 export default class NominationList extends Vue {
