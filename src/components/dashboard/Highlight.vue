@@ -1,6 +1,6 @@
 <template>
 <div class="title">Hightlight</div>
-<div class="highlight">
+<div class="card-grid">
     <dashboard-card title="All" icon="arrow-up" :text="$store.state.nominations.length" @click="open()" />
     <dashboard-card
         v-for="status of statuses" :key="status.code"
@@ -41,9 +41,5 @@ export default class Highlight extends Vue {
 </script>
 
 <style lang="scss">
-.highlight {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(10em, 1fr));
-    gap: 1rem;
-}
+
 </style>

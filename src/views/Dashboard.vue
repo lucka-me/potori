@@ -8,9 +8,7 @@
     <status/>
     <highlight/>
     <gallery/>
-    <hr/>
     <scanners/>
-    <hr/>
     <reasons/>
 </div>
 </template>
@@ -63,6 +61,12 @@ export default class Dashboard extends Vue {
         @include typography.typography(headline4);
 
         margin-bottom: 0.2em;
+    }
+
+    > .card-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+        gap: 1rem;
     }
 }
 </style>

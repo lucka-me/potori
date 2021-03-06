@@ -1,8 +1,11 @@
 <template>
-<div class="reasons">
-    <div v-for="reason of reasons" :key="reason.code" @click="open(reason)">
-        {{ reason.title }}: {{ $store.getters.count(reason.predicator) }}
-    </div>
+<div class="title">Reasons</div>
+<div class="card-grid">
+    <dashboard-card
+        v-for="reason of reasons" :key="reason.code"
+        :title="reason.title" :icon="reason.icon" :text="$store.getters.count(reason.predicator)"
+        @click="open(reason)"
+    />
 </div>
 </template>
 
@@ -11,9 +14,11 @@ import { Options, Vue } from 'vue-class-component';
 
 import { umi } from '@/service/umi';
 
+import DashboardCard from './Card.vue';
+
 @Options({
     components: {
-
+        DashboardCard
     },
 })
 export default class Reasons extends Vue {
@@ -34,3 +39,7 @@ export default class Reasons extends Vue {
     }
 }
 </script>
+
+<style lang="scss">
+
+</style>

@@ -1,8 +1,11 @@
 <template>
-<div class="scanners">
-    <div v-for="scanner of scanners" :key="scanner.code" @click="open(scanner)">
-        {{ scanner.title }}: {{ $store.getters.count(scanner.predicator) }}
-    </div>
+<div class="title">Scanners</div>
+<div class="card-grid">
+    <dashboard-card
+        v-for="scanner of scanners" :key="scanner.code"
+        :title="scanner.title" icon="mobile-alt" :text="$store.getters.count(scanner.predicator)"
+        @click="open(scanner)"
+    />
 </div>
 </template>
 
@@ -11,9 +14,11 @@ import { Options, Vue } from 'vue-class-component';
 
 import { umi } from '@/service/umi';
 
+import DashboardCard from './Card.vue';
+
 @Options({
     components: {
-
+        DashboardCard
     },
 })
 export default class Scanners extends Vue {
@@ -35,3 +40,7 @@ export default class Scanners extends Vue {
     }
 }
 </script>
+
+<style lang="scss">
+
+</style>

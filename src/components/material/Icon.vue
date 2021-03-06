@@ -28,6 +28,7 @@ const IconSymbolMap: Record<string, string> = {
     'sign-in-alt'   : '\uf2f6',
     'redo-alt'  : '\uf2f9',
     'map-marker-alt': '\uf3c5',
+    'mobile-alt': '\uf3cd',
     'tachometer-alt': '\uf3fd',
     'brain' : '\uf5dc',
 }
