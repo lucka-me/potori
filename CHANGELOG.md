@@ -1,8 +1,8 @@
 # Changelog
 Noteable changes of Potori will be documented here. For [Status Data](./src/data/status.json), please refer to [Data Changelog](#data-changelog).
 
-## [0.8.0](https://github.com/lucka-me/potori/releases/tag/0.8.0) - 2021-03-TBA
-TBA
+## [0.8.0](https://github.com/lucka-me/potori/releases/tag/0.8.0) - 2021-03-06
+Update structure
 
 ### Added
 - Multiple reasons and scanner for nominations
@@ -822,7 +822,7 @@ Bug fixed
 
 # Data Changelog
 
-## d9 - 2021-03-TBA
+## d9 - 2021-03-06
 ### Added
 - Scanner
 - SF Symbols

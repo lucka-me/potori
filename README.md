@@ -29,7 +29,9 @@ Due to Google's policy (which aims to protect user's data), some features relate
 Potori is NOT fully compatible with Prime yet, we still need more [mail samples](./samples) to figure out how to query all related and localized mails exactly and identify each reason for rejection. If you have any trouble or want to help, please open an issue or contact us via Telegram@SeeleUN.
 
 ## Future Style
-> Since Niantic launched the Niantic Wayfarer which contains a nomination manager, I've thought a lot about the future of Potori. I've learned a lot during the development and I do not want to abandon. There are still many posibilities: re-writing the entire Potori with ~~Angular~~ ~~Vue~~ TypeScript and Webpack, extending it to a data visualization tool, import from [Wayfarer Nomination Manage API response data](https://wayfarer.nianticlabs.com/api/v1/vault/manage)... ~~I'm actually working on them, which is little bit tough for me, though.~~ I've done most part of them.
+> Since Niantic launched the Niantic Wayfarer which contains a nomination manager, I've thought a lot about the future of Potori. I've learned a lot during the development and I do not want to abandon.  
+> There are still many posibilities: re-writing the entire Potori with ~~Angular~~ ~~Vue~~ TypeScript and Webpack, extending it to a data visualization tool, import from [Wayfarer Nomination Manage API response data](https://wayfarer.nianticlabs.com/api/v1/vault/manage)...  
+> ~~I'm actually working on them, which is little bit tough for me, though.~~ I've done most part of them, and hope to keep Potori evolving.
 > 
 > Lucka.
 
@@ -45,8 +47,9 @@ Potori is NOT fully compatible with Prime yet, we still need more [mail samples]
   Done in `0.7.0`
 - [x] A new logo  
   Done in `0.7.0`
-- [ ] Upgrade data struct
-  - [ ] Add more properties like `scanner`, `reasons`
+- [x] Upgrade data struct
+  Done in `0.8.0`
+- [ ] Convert to Vue app
 
 ## Changelog
 See [CHANGELOG.md](./CHANGELOG.md).
