@@ -34,13 +34,21 @@ const IconSymbolMap: Record<string, string> = {
 
 @Options({
     props: {
-        name: String
+        icon: String
     },
 })
 export default class MaterialIcon extends Vue {
-    name!: string;
+
+    private static nameRegex = /^[a-z\-]+$/;
+
+    icon!: string;
+
     get symbol() {
-        return IconSymbolMap[this.name];
+        if (MaterialIcon.nameRegex.test(this.icon)) {
+            return IconSymbolMap[this.icon];
+        } else {
+            return this.icon;
+        }
     }
 }
 </script>

@@ -1,6 +1,6 @@
 <template>
 <button class="fa mdc-icon-button">
-    <material-icon :name="icon"/>
+    <material-icon :icon="icon"/>
 </button>
 </template>
 
