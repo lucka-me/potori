@@ -1,5 +1,5 @@
 <template>
-<material-top-app-bar title="Preferences"/>
+<material-top-app-bar title="Preferences" navi-back/>
 <material-top-app-bar-adjust/>
 <div class="preferences">
     Preferences

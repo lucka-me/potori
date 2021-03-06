@@ -1,5 +1,5 @@
 <template>
-<material-top-app-bar :title="title"/>
+<material-top-app-bar :title="title" navi-back/>
 <material-top-app-bar-adjust/>
 <div class="nomination-list">
     {{ title }}

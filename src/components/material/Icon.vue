@@ -14,6 +14,7 @@ const IconSymbolMap: Record<string, string> = {
     'redo'  : '\uf01e',
     'edit'  : '\uf044',
     'info-circle'   : '\uf05a',
+    'arrow-left': '\uf060',
     'arrow-up'  : '\uf062',
     'plus'  : '\uf067',
     'calendar-alt'  : '\uf073',

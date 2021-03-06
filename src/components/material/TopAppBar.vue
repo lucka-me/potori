@@ -2,7 +2,8 @@
 <header class="mdc-top-app-bar mdc-top-app-bar--fixed">
     <div class="mdc-top-app-bar__row">
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-        <span class="mdc-top-app-bar__title">{{ title }}</span>
+            <material-icon-button v-if="naviBack" class="mdc-top-app-bar__navigation-icon" icon="arrow-left" @click="$router.back()"/>
+            <span class="mdc-top-app-bar__title">{{ title }}</span>
         </section>
         <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end" role="toolbar">
             <slot/>
@@ -15,12 +16,15 @@
 import { MDCTopAppBar } from '@material/top-app-bar';
 import { Options, Vue } from 'vue-class-component';
 
+import MaterialIconButton from './IconButton.vue';
+
 @Options({
     props: {
-        title: String
+        title: String,
+        naviBack: Boolean
     },
     components: {
-
+        MaterialIconButton
     },
 })
 export default class MaterialTopAppBar extends Vue {
