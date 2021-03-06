@@ -2,7 +2,6 @@
   "name": "potori",
   "version": "0.9.0",
   "description": "Web App to Visualize Ingress Nominations",
-  "main": "src/main.ts",
   "scripts": {
     "postinstall": "ts-node --project scripts/tsconfig.json ./scripts/prepare.ts",
     "prestart": "ts-node --project scripts/tsconfig.json ./scripts/prepare.ts",
