@@ -1,40 +1,36 @@
-import { umi } from 'service/umi';
-import Nomination, { LngLat } from 'service/nomination';
-
-/**
- * Query keys
- */
-export interface QueryKeys {
-    status: umi.StatusCode;       // Type key, pending, accepted, rejected
-    scanner: umi.ScannerCode;    // Scanner key, redacted, prime etc.
-}
+import { umi } from '@/service/umi';
+import Nomination, { LngLat } from '@/service/nomination';
 
 /**
  * Parsers for mail content
  */
-export default class Parser {
+export namespace parser {
     /**
      * Parse the full mail to nomination
      * @param mail The full mail to parse
-     * @param keys Query keys
+     * @param status Statue of the mail
+     * @param scanner Scanner of the mail
      * @returns The parsed nomination
      */
-    static mail(mail: gapi.client.gmail.Message, keys: QueryKeys): Nomination {
+    export function parse(
+        mail: gapi.client.gmail.Message,
+        status: umi.StatusCode,
+        scanner: umi.ScannerCode
+    ): Nomination {
         const nomination = new Nomination();
-        nomination.status = keys.status;
-        if (keys.status === umi.StatusCode.Pending) {
-            nomination.confirmedTime = parseInt(mail.internalDate);
-            nomination.confirmationMailId = mail.id;
+        nomination.status = status;
+        if (status === umi.StatusCode.Pending) {
+            nomination.confirmedTime = parseInt(mail.internalDate!);
+            nomination.confirmationMailId = mail.id!;
         } else {
-            nomination.resultTime = parseInt(mail.internalDate);
-            nomination.resultMailId = mail.id;
+            nomination.resultTime = parseInt(mail.internalDate!);
+            nomination.resultMailId = mail.id!;
         }
 
         // Subject -> Title
-        for (let i = 0; i < mail.payload.headers.length; i++) {
-            const header = mail.payload.headers[i];
+        for (const header of mail.payload!.headers!) {
             if (header.name === 'Subject') {
-                const matched = header.value.match(/[:：](.+)/);
+                const matched = header.value!.match(/[:：](.+)/);
                 if (matched && matched.length > 1) {
                     nomination.title = matched[1];
                 }
@@ -43,20 +39,20 @@ export default class Parser {
         }
 
         // Body -> image, id, lngLat and reason
-        for (const part of mail.payload.parts) {
+        for (const part of mail.payload!.parts!) {
             if (part.partId !== '1') continue;
-            const mailBody = this.base64(part.body.data);
+            const mailBody = base64(part.body!.data!);
             const matched = mailBody.match(/googleusercontent\.com\/([0-9a-zA-Z\-\_]+)/);
             if (matched && matched.length > 1) {
                 nomination.image = matched[1];
                 nomination.id = Nomination.parseId(nomination.image);
             }
-            if (keys.scanner === umi.ScannerCode.Redacted && keys.status !== umi.StatusCode.Pending) {
-                nomination.lngLat = this.lngLat(mailBody);
+            if (scanner === umi.ScannerCode.Redacted && status !== umi.StatusCode.Pending) {
+                nomination.lngLat = lngLat(mailBody);
             }
-            if (keys.status === umi.StatusCode.Rejected) {
+            if (status === umi.StatusCode.Rejected) {
                 nomination.status = umi.StatusCode.Rejected;
-                nomination.reasons = this.reason(mailBody, keys.scanner);
+                nomination.reasons = reason(mailBody, scanner);
             }
             break;
         }
@@ -68,7 +64,7 @@ export default class Parser {
      * @param mail Body (content) of the mail
      * @param scanner The scanner key for fetch the keywords
      */
-    static reason(mail: string, scanner: umi.ScannerCode): Array<umi.ReasonCode> {
+    function reason(mail: string, scanner: umi.ScannerCode): Array<umi.ReasonCode> {
         const matchedMainBody = mail.match(/(\n|\r|.)+?\-NianticOps/);
         if (!matchedMainBody || matchedMainBody.length < 1) {
             return [ ];
@@ -77,8 +73,9 @@ export default class Parser {
 
         const indexReasons: Array<[number, umi.ReasonCode]> = []
         for (const [code, reason] of umi.reason) {
-            if (!reason.keywords.has(scanner)) continue;
-            for (const keyword of reason.keywords.get(scanner)) {
+            const keywords = reason.keywords.get(scanner);
+            if (!keywords) continue;
+            for (const keyword of keywords) {
                 const pos = mainBody.search(keyword);
                 if (pos < 0) continue;
                 indexReasons.push([pos, code]);
@@ -94,10 +91,10 @@ export default class Parser {
      * Parse the location from mail body, only redacted mails contain location
      * @param mail Body (content) of the mail
      */
-    static lngLat(mail: string): LngLat {
+    function lngLat(mail: string): LngLat | undefined {
         const matched = mail.match(/www\.ingress\.com\/intel\?ll\=([\.\d]+),([\.\d]+)/);
         if (!matched || matched.length < 3) {
-            return null;
+            return undefined;
         }
         return {
             lng: parseFloat(matched[2]),
@@ -111,7 +108,7 @@ export default class Parser {
      * @see https://nelluil.postach.io/post/btoa-atob-zhi-yuan-zhong-wen-de-fang-fa
      * @see https://cnodejs.org/topic/4fd6b7ba839e1e581407aac8
      */
-    static base64(text: string) {
+    function base64(text: string) {
         return unescape(
             decodeURIComponent(
                 escape(window.atob(text.replace(/\-/g, '+').replace(/\_/g, '/')))
