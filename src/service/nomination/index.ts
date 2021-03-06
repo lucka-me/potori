@@ -1,10 +1,6 @@
-import i18next from 'i18next';
-
-import { umi } from 'service/umi';
+import { umi } from '@/service/umi';
 
 import { StringKey } from './constants';
-
-const now = Date.now();
 
 /**
  * Location
@@ -21,6 +17,15 @@ export default class Nomination {
 
     static timestampSecondBound = 1E12;
 
+    /**
+     * Comparator for sorting by time
+     */
+    static readonly comparatorByTime = (a: Nomination, b: Nomination) => {
+        const timeA = a.resultTime ? a.resultTime : a.confirmedTime;
+        const timeB = b.resultTime ? b.resultTime : b.confirmedTime;
+        return timeA < timeB ? 1 : -1;
+    };
+
     id = '';    // Short ID, also brainstorming ID
     title = ''; // Title
     image = ''; // Hash part of the image URL
@@ -29,12 +34,12 @@ export default class Nomination {
     status: umi.StatusCode = umi.StatusCode.Pending;  // Status code
     reasons: Array<umi.ReasonCode> = [];    // Reason codes
 
-    confirmedTime = 0;              // Confirmed time, the timestamp of confirmation mail
-    confirmationMailId = '';        // ID of confirmation mail
-    resultTime: number = null;      // Result time, the timestamp of result mail
-    resultMailId: string = null;    // ID of result mail
+    confirmedTime = 0;          // Confirmed time, the timestamp of confirmation mail
+    confirmationMailId = '';    // ID of confirmation mail
+    resultTime: number = 0;     // Result time, the timestamp of result mail
+    resultMailId: string = "";  // ID of result mail
 
-    lngLat: LngLat = null;  // Location
+    lngLat?: LngLat = undefined;    // Location
 
     /**
      * Get the image URL
@@ -47,7 +52,11 @@ export default class Nomination {
      * Get Intel Maps URL
      */
     get intelUrl(): string {
-        return `https://intel.ingress.com/intel?ll=${this.lngLat.lat},${this.lngLat.lng}&z=18`;
+        if (this.lngLat) {
+            return `https://intel.ingress.com/intel?ll=${this.lngLat.lat},${this.lngLat.lng}&z=18`;
+        } else {
+            return 'https://intel.ingress.com/intel';
+        }
     }
 
     /**
@@ -81,45 +90,9 @@ export default class Nomination {
     }
 
     /**
-     * Get the string of confirmedTime
-     */
-    get confirmedDateString(): string {
-        if (this.confirmedTime > 0) {
-            return new Date(this.confirmedTime).toLocaleDateString();
-        }
-        return i18next.t(StringKey.missing);
-    }
-
-    /**
-     * Get the string of resultTime
-     */
-    get resultDateString(): string {
-        return new Date(this.resultTime).toLocaleDateString();
-    }
-
-    /**
-     * Get string of interval between confirmedTime and resultTime or now
-     */
-    get intervalString(): string {
-        const end = this.resultTime ? this.resultTime : now;
-        return i18next.t(StringKey.day, {
-            count: Math.floor((end - this.confirmedTime) / (24 * 3600 * 1000))
-        });
-    }
-
-    /**
-     * Get string of interval between now and restore time
-     */
-    get restoreIntervalString(): string {
-        return i18next.t(StringKey.day, {
-            count: Math.floor((this.restoreTime - now) / (24 * 3600 * 1000))
-        });
-    }
-
-    /**
      * Serialize to JSON
      */
-    get json(): any {
+     get json(): any {
         let json: any = {
             id: this.id,
             title: this.title,
@@ -143,6 +116,29 @@ export default class Nomination {
             };
         }
         return json;
+    }
+
+    /**
+     * Merge from another nomination
+     * @param nomination The nomination to merge from
+     * @returns Succeed or not
+     */
+    merge(nomination: Nomination): boolean {
+        if (this.id !== nomination.id) return false;
+        if (this.status === umi.StatusCode.Pending) {
+            this.title = nomination.title;
+            this.status = nomination.status;
+            this.reasons = nomination.reasons;
+            this.resultTime = nomination.resultTime;
+            this.resultMailId = nomination.resultMailId;
+        } else {
+            this.confirmedTime = nomination.confirmedTime;
+            this.confirmationMailId = nomination.confirmationMailId;
+        }
+        if (!this.lngLat) {
+            this.lngLat = nomination.lngLat;
+        }
+        return true;
     }
 
     /**
@@ -218,3 +214,8 @@ export default class Nomination {
         return imgUrl.replace(/[^a-zA-Z0-9]/g, '').slice(-10).toLowerCase();
     }
 }
+
+/**
+ * Callback for Array<Nomination>.filter()
+ */
+export type Predicator = (nomination: Nomination) => boolean;
