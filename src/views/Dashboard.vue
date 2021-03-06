@@ -60,7 +60,8 @@ export default class Dashboard extends Vue {
     > .title {
         @include typography.typography(headline4);
 
-        margin-bottom: 0.2em;
+        margin-top: 0.2em;
+        margin-bottom: 0.1em;
     }
 
     > .card-grid {
