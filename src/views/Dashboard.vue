@@ -67,7 +67,7 @@ export default class Dashboard extends Vue {
     > .card-grid {
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
-        gap: 1rem;
+        gap: 0.6rem;
     }
 }
 </style>

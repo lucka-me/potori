@@ -45,7 +45,7 @@ export default class Gallery extends Vue {
 .gallery {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));
-    gap: 1rem;
+    gap: 0.6rem;
 
     > div {
         
