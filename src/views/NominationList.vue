@@ -1,11 +1,13 @@
 <template>
 <material-top-app-bar :title="title" navi-back/>
 <material-top-app-bar-adjust/>
-<div class="nomination-list">
-    <div v-for="nomination in nominations" :key="nomination.id" @click="open(nomination.id)">
-        {{ nomination.title }}
-    </div>
-</div>
+<material-list class="nomination-list" leading="image" two-line>
+    <nomination-list-row
+        v-for="nomination in nominations" :key="nomination.id"
+        :nomination="nomination"
+        @click="open(nomination.id)"
+    />
+</material-list>
 </template>
 
 <script lang="ts">
@@ -14,12 +16,16 @@ import { Options, Vue } from 'vue-class-component';
 import Nomination from '@/service/nomination';
 import { umi } from '@/service/umi';
 
+import MaterialList from '@/components/material/List.vue';
 import MaterialTopAppBar from '@/components/material/TopAppBar.vue';
 import MaterialTopAppBarAdjust from '@/components/material/TopAppBarAdjust.vue';
+import NominationListRow from '@/components/list/Row.vue';
 
 @Options({
     components: {
         MaterialTopAppBar, MaterialTopAppBarAdjust,
+        MaterialList,
+        NominationListRow
     },
 })
 export default class NominationList extends Vue {
@@ -61,5 +67,12 @@ export default class NominationList extends Vue {
 </script>
 
 <style lang="scss">
-
+.nomination-list {
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }
+}
 </style>
