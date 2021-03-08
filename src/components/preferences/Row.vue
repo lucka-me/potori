@@ -57,12 +57,8 @@ export default class PreferenceRow extends Vue {
 
         > .divider {
             align-self: stretch;
-            margin-inline-end: 0.2em;
-            min-width: 0.2em;
+            min-width: 1rem;
             flex: 1;
-
-            border-inline-end: 1px solid;
-            @include theme.property(border-inline-end-color, text-secondary-on-light);
         }
     }
 }

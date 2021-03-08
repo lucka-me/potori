@@ -53,6 +53,4 @@ export default class MaterialButton extends Vue {
 
 <style lang="scss">
 @use '~@material/button/styles';
-
-//@include button.core-styles;
 </style>
