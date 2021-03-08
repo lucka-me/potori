@@ -1,7 +1,7 @@
 <template>
 <material-list-item :text="nomination.title" :secondary="time">
     <template #leading>
-        <img :src="nomination.imageUrl" />
+        <img :src="nomination.imageUrl" loading="lazy"/>
     </template>
     <template #meta>
         <span class="fa fa-fw">{{ nomination.statusData.icon }}</span>

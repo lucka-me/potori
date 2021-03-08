@@ -1,13 +1,13 @@
 <template>
 <div class="section-title">Google</div>
-<preference-row v-if="gapiLoaded" text="Account" desc="Link / unlink Google Account">
+<preference-row v-if="loaded" text="Account" desc="Link / unlink Google Account">
     <material-button v-if="authed" @click="signOut()">Unlink</material-button>
     <material-button v-else @click="signIn()">Link</material-button>
 </preference-row>
-<preference-row v-if="gapiLoaded" text="Sync Google Drive" desc="Sync with Google Drive when refresh">
+<preference-row v-if="authed" text="Sync Google Drive" desc="Sync with Google Drive when refresh">
     <material-switch v-model="sync"/>
 </preference-row>
-<div v-else>Loading Google API</div>
+<div v-if="!loaded">Loading Google API</div>
 </template>
 
 <script lang="ts">
@@ -28,7 +28,7 @@ import PreferenceRow from './Row.vue';
 })
 export default class GooglePreferences extends Vue {
 
-    get gapiLoaded() {
+    get loaded() {
         return this.$store.state.gapiLoaded;
     }
 
