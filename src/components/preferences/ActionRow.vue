@@ -33,13 +33,17 @@ export default class PreferenceActionRow extends Vue {
 
 .preferences {
     > .action-row {
+        padding-top: 0.2em;
+        padding-bottom: 0.2em;
+
         display: flex;
         flex-flow: row nowrap;
+        align-items: center;
 
         > .text {
             display: flex;
             flex-flow: column nowrap;
-            
+
             white-space: nowrap;
             @include typography.overflow-ellipsis;
 
@@ -50,8 +54,13 @@ export default class PreferenceActionRow extends Vue {
         }
 
         > .divider {
-            min-width: 0.1em;
+            align-self: stretch;
+            margin-inline-end: 0.2em;
+            min-width: 0.2em;
             flex: 1;
+
+            border-inline-end: 1px solid;
+            @include theme.property(border-inline-end-color, text-secondary-on-light);
         }
     }
 }
