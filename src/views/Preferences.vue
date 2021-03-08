@@ -3,7 +3,6 @@
 <material-top-app-bar-adjust/>
 <div class="preferences">
     <google-preferences/>
-    <hr/>
     <about-preferences/>
 </div>
 </template>

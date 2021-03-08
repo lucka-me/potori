@@ -37,10 +37,13 @@ export default class DashboardCard extends Vue {}
     .content {
 
         margin: 0.4em;
-        overflow: auto;
+        overflow: hidden;
+
+        > div {
+            @include typography.overflow-ellipsis;
+        }
 
         > .label {
-            @include typography.overflow-ellipsis;
             > .title {
                 margin-inline-start: 0.2em;
             }
@@ -48,8 +51,6 @@ export default class DashboardCard extends Vue {}
 
         > .text {
             @include typography.typography(headline2);
-            @include typography.overflow-ellipsis;
-
             margin-top: 0.1em;
         }
     }

@@ -1,15 +1,13 @@
 <template>
 <div class="section-title">Google</div>
-<template v-if="gapiLoaded">
-    <preference-action-row text="Account" desc="Google Account">
-        <material-button v-if="authed" @click="signOut()">Unlink</material-button>
-        <material-button v-else @click="signIn()">Link</material-button>
-    </preference-action-row>
-    <div>
-        <input type="checkbox" id="pref-google-sync" v-model="googleSync">
-        <label for="pref-google-sync">Sync Google Drive</label>
-    </div>
-</template>
+<preference-action-row v-if="gapiLoaded" text="Account" desc="Link / unlink Google Account">
+    <material-button v-if="authed" @click="signOut()">Unlink</material-button>
+    <material-button v-else @click="signIn()">Link</material-button>
+</preference-action-row>
+<div v-if="gapiLoaded">
+    <input type="checkbox" id="pref-google-sync" v-model="googleSync">
+    <label for="pref-google-sync">Sync Google Drive</label>
+</div>
 <div v-else>Loading Google API</div>
 </template>
 

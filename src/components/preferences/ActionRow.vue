@@ -43,9 +43,11 @@ export default class PreferenceActionRow extends Vue {
         > .text {
             display: flex;
             flex-flow: column nowrap;
+            overflow: hidden;
 
-            white-space: nowrap;
-            @include typography.overflow-ellipsis;
+            > span {
+                @include typography.overflow-ellipsis;
+            }
 
             > .desc {
                 @include typography.typography(body2);
