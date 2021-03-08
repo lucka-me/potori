@@ -43,11 +43,18 @@ export default class Gallery extends Vue {
 @use '~@material/typography';
 
 .gallery {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(6rem, 1fr));
-    gap: 0.6rem;
+    display: flex;
+    flex-flow: row nowrap;
+    margin-left: -1rem;
+    margin-right: -1rem;
+    overflow: auto;
 
     > div {
+        margin-inline-end: 1rem;
+
+        &:first-child {
+            margin-inline-start: 1rem;
+        }
         
         > img {
             @include shape.radius(medium);
