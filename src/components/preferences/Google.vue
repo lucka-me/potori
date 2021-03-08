@@ -4,10 +4,9 @@
     <material-button v-if="authed" @click="signOut()">Unlink</material-button>
     <material-button v-else @click="signIn()">Link</material-button>
 </preference-row>
-<div v-if="gapiLoaded">
-    <input type="checkbox" id="pref-google-sync" v-model="googleSync">
-    <label for="pref-google-sync">Sync Google Drive</label>
-</div>
+<preference-row v-if="gapiLoaded" text="Sync Google Drive" desc="Sync with Google Drive when refresh">
+    <material-switch v-model="sync"/>
+</preference-row>
 <div v-else>Loading Google API</div>
 </template>
 
@@ -18,11 +17,12 @@ import { service } from '@/service';
 import { preferences } from '@/service/preferences';
 
 import MaterialButton from '@/components/material/Button.vue';
+import MaterialSwitch from '@/components/material/Switch.vue';
 import PreferenceRow from './Row.vue';
 
 @Options({
     components: {
-        MaterialButton,
+        MaterialButton, MaterialSwitch,
         PreferenceRow
     },
 })
@@ -36,11 +36,11 @@ export default class GooglePreferences extends Vue {
         return this.$store.state.gapiAuthed;
     }
 
-    get googleSync() {
+    get sync(): boolean {
         return preferences.google.sync();
     }
 
-    set googleSync(value: boolean) {
+    set sync(value: boolean) {
         preferences.google.setSync(value);
     }
 

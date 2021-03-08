@@ -3,6 +3,7 @@
 <material-top-app-bar-adjust/>
 <div class="preferences">
     <google-preferences/>
+    <hr/>
     <about-preferences/>
 </div>
 </template>
@@ -26,6 +27,7 @@ export default class Preferences extends Vue {}
 </script>
 
 <style lang="scss">
+@use '~@material/theme';
 @use '~@material/typography';
 
 .preferences {
@@ -33,6 +35,15 @@ export default class Preferences extends Vue {}
 
     > .section-title {
         @include typography.typography(overline);
+    }
+
+    > hr {
+        border: none;
+        height: 1px;
+        border-top: 1px solid;
+        @include theme.property(border-top-color, text-secondary-on-light);
+        margin-inline-start: -1rem;
+        margin-inline-end: -1rem;
     }
 }
 </style>
