@@ -25,3 +25,15 @@ import GooglePreferences from '@/components/preferences/Google.vue';
 })
 export default class Preferences extends Vue {}
 </script>
+
+<style lang="scss">
+@use '~@material/typography';
+
+.preferences {
+    padding: 1rem;
+
+    > .section-title {
+        @include typography.typography(overline);
+    }
+}
+</style>
