@@ -1,11 +1,14 @@
 <template>
 <div class="section-title">Google</div>
 <preference-row v-if="loaded" text="Account" desc="Link / unlink Google Account">
-    <material-button v-if="authed" @click="signOut()">Unlink</material-button>
-    <material-button v-else @click="signIn()">Link</material-button>
+    <material-button v-if="authed" @click="unlink()">Unlink</material-button>
+    <material-button v-else @click="link()">Link</material-button>
 </preference-row>
 <preference-row v-if="authed" text="Sync Google Drive" desc="Sync with Google Drive when refresh">
     <material-switch v-model="sync"/>
+</preference-row>
+<preference-row v-if="authed" text="Migrate" desc="Migrate data from Potori before 0.8.0">
+    <material-button @click="migrate()">Migrate</material-button>
 </preference-row>
 <div v-if="!loaded">Loading Google API</div>
 </template>
@@ -44,13 +47,16 @@ export default class GooglePreferences extends Vue {
         preferences.google.setSync(value);
     }
 
-    signIn() {
+    link() {
         service.signIn();
     }
 
-    signOut() {
+    unlink() {
         service.signOut();
     }
 
+    migrate() {
+        service.migrate();
+    }
 }
 </script>

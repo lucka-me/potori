@@ -8,7 +8,12 @@ import { preferences } from './preferences';
 
 export namespace service {
 
-    type BasicCallback = () => void;
+    type DownloadCallback = (count: number) => void;
+
+    enum Filename {
+        nominations = 'nominations.json',
+        legacy = 'potori.json'
+    }
 
     const google = new GoogleKit();
     const mari = new Mari();
@@ -43,12 +48,18 @@ export namespace service {
 
     export function refresh() {
         if (preferences.google.sync()) {
-            download(() => {
+            download(Filename.nominations, () => {
                 processMails();
             })
         } else {
             processMails();
         }
+    }
+
+    export function migrate() {
+        download(Filename.legacy, (count) => {
+            // Alert count
+        });
     }
 
     function processMails() {
@@ -81,16 +92,16 @@ export namespace service {
         _store.commit('setStatus', State.Status.idle);
     }
 
-    function download(callback: BasicCallback) {
+    function download(file: Filename, callback: DownloadCallback) {
         _store.commit('setStatus', State.Status.syncing);
-        google.drive.download('nominations.json', (file) => {
+        google.drive.download(file, (file) => {
             if (!file) {
-                callback();
+                callback(0);
                 return false;
             }
             try {
-                importNominations(file as Array<any>);
-                callback();
+                const count = importNominations(file as Array<any>);
+                callback(count);
             } catch (error) {
                 return true;
             }
@@ -98,14 +109,29 @@ export namespace service {
         });
     }
 
-    function importNominations(jsonList: Array<any>) {
+    function importNominations(jsonList: Array<any>): number {
+        let count = 0;
         try {
-            const nominations = jsonList.map(json => Nomination.parse(json));
+            const sources = jsonList.map(json => Nomination.parse(json));
+            const nominations = _store.state.nominations.map((nomination) => nomination);
+            for (const nomination of sources) {
+                let merged = false;
+                for (const target of nominations) {
+                    merged = target.merge(nomination);
+                    if (merged) {
+                        count += 1;
+                        break;
+                    }
+                }
+                if (merged) continue;
+                nominations.push(nomination);
+            }
             _store.commit('setNominations', nominations);
             save();
         } catch (error) {
-            
+            count = 0;
         }
+        return count;
     }
 
     function load() {
@@ -127,55 +153,6 @@ export namespace service {
             JSON.stringify(_store.state.nominations.map(nomination => nomination.json))
         );
     }
-
-    /*
-    export function migrate() {
-        events.progressUpdate(0);
-        events.start()
-        file.googleDrive.download(Filename.nominationsLegacy, (file) => {
-            if (!file) {
-                events.idle();
-                return false;
-            }
-            const legacyList = []
-            try {
-                const jsonList = file as Array<any>;
-                for (const json of jsonList) {
-                    try {
-                        legacyList.push(Nomination.parse(json));
-                    } catch (error) {
-                        // Log or alert
-                    }
-                }
-            } catch (error) {
-                return true;
-            }
-            merge(legacyList);
-            return false;
-        });
-    }
-
-    function merge(legacyList: Array<Nomination>) {
-        for (const legacy of legacyList) {
-            let merged = false;
-            for (const nomination of nominations) {
-                if (legacy.id !== nomination.id) continue;
-                if (nomination.status === umi.StatusCode.Pending && legacy.status !== umi.StatusCode.Pending) {
-                    nomination.status = legacy.status;
-                    nomination.reasons = legacy.reasons;
-                }
-                if (!nomination.resultTime) nomination.resultTime = legacy.resultTime;
-                if (!nomination.resultMailId) nomination.resultMailId = legacy.resultMailId;
-                if (!nomination.lngLat) nomination.lngLat = legacy.lngLat;
-                merged = true;
-            }
-            if (!merged) {
-                nominations.push(legacy);
-            }
-        }
-        sort();
-    }
-    */
 
     /**
      * Match the first target in queue and first candidate in its cadidates
