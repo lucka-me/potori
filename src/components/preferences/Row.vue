@@ -1,12 +1,12 @@
 <template>
-<div class="action-row">
+<div class="row">
     <div class="text">
         <span>{{ text }}</span>
         <span v-if="desc" class="desc">{{ desc }}</span>
     </div>
-    <div class="divider" />
-    <div class="action">
-        <slot />
+    <div v-if="$slots.default" class="divider"/>
+    <div v-if="$slots.default" class="action">
+        <slot/>
     </div>
 </div>
 </template>
@@ -23,7 +23,7 @@ import { Options, Vue } from 'vue-class-component';
         
     },
 })
-export default class PreferenceActionRow extends Vue {
+export default class PreferenceRow extends Vue {
 }
 </script>
 
@@ -32,7 +32,7 @@ export default class PreferenceActionRow extends Vue {
 @use '~@material/typography';
 
 .preferences {
-    > .action-row {
+    > .row {
         padding-top: 0.2em;
         padding-bottom: 0.2em;
 

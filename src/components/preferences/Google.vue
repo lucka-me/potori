@@ -1,9 +1,9 @@
 <template>
 <div class="section-title">Google</div>
-<preference-action-row v-if="gapiLoaded" text="Account" desc="Link / unlink Google Account">
+<preference-row v-if="gapiLoaded" text="Account" desc="Link / unlink Google Account">
     <material-button v-if="authed" @click="signOut()">Unlink</material-button>
     <material-button v-else @click="signIn()">Link</material-button>
-</preference-action-row>
+</preference-row>
 <div v-if="gapiLoaded">
     <input type="checkbox" id="pref-google-sync" v-model="googleSync">
     <label for="pref-google-sync">Sync Google Drive</label>
@@ -18,12 +18,12 @@ import { service } from '@/service';
 import { preferences } from '@/service/preferences';
 
 import MaterialButton from '@/components/material/Button.vue';
-import PreferenceActionRow from './ActionRow.vue';
+import PreferenceRow from './Row.vue';
 
 @Options({
     components: {
         MaterialButton,
-        PreferenceActionRow
+        PreferenceRow
     },
 })
 export default class GooglePreferences extends Vue {
