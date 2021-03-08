@@ -17,12 +17,12 @@ A web app to visualize Ingress nominations from Gmail inbox.
 ## Build & Run
 ```sh
 $ git checkout main # If you want to run the version deployed on website
-$ git submodule init
+$ git submodule update --init # For dev branch
 $ npm i
 $ npm start
 ```
 
-Open `http://localhost:8000/` in browser.
+Open `http://localhost:8080/` (`dev` branch) or `http://localhost:80800/` (`main` branch) in browser.
 
 ## Notice
 Due to Google's policy (which aims to protect user's data), some features related to 3rd-party are suspended in the public web app (as a lite version).
