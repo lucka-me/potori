@@ -1,13 +1,14 @@
 <template>
 <material-top-app-bar :title="title" navi-back/>
-<material-top-app-bar-adjust/>
-<material-list class="nomination-list" leading="image" two-line>
-    <nomination-list-row
-        v-for="nomination in nominations" :key="nomination.id"
-        :nomination="nomination"
-        @click="open(nomination.id)"
-    />
-</material-list>
+<material-top-app-bar-adjust>
+    <material-list class="nomination-list" leading="image" two-line>
+        <nomination-list-row
+            v-for="nomination in nominations" :key="nomination.id"
+            :nomination="nomination"
+            @click="open(nomination.id)"
+        />
+    </material-list>
+</material-top-app-bar-adjust>
 </template>
 
 <script lang="ts">
