@@ -3,7 +3,7 @@
 <preference-row text="App Version" :desc="appVersion"/>
 <preference-row text="Data Version" :desc="dataVersion"/>
 <preference-row text="Code Repository" desc="GitHub">
-    <material-button @click="openRepo()">Open</material-button>
+    <material-button @click="openRepo">Open</material-button>
 </preference-row>
 </template>
 

@@ -36,6 +36,7 @@ export default class DetailsMap extends Vue {
                 zoom: 16
             });
             new mapboxgl.Marker().setLngLat(this.lngLat).addTo(this.ctrl);
+            this.ctrl.resize();
         });
     }
 }

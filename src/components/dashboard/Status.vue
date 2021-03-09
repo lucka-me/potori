@@ -2,7 +2,7 @@
 <div class="status">
     <div v-if="processingMails">Processing Mails</div>
     <div v-else-if="syncing">Syncing</div>
-    <material-button v-else-if="gapiLoaded && !authed" outlined @click="link()">Link Google Account</material-button>
+    <material-button v-else-if="gapiLoaded && !authed" outlined @click="link">Link Google Account</material-button>
     <div v-else>
         Latest: XXX
     </div>

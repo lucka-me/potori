@@ -1,7 +1,7 @@
 <template>
 <div class="title">Hightlight</div>
 <div class="card-grid">
-    <dashboard-card title="All" icon="arrow-up" :text="$store.state.nominations.length" @click="open()" />
+    <dashboard-card title="All" icon="arrow-up" :text="$store.state.nominations.length" @click="open" />
     <dashboard-card
         v-for="status of statuses" :key="status.code"
         :title="status.title" :icon="status.icon" :text="$store.getters.count(status.predicator)"

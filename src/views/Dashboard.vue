@@ -1,7 +1,7 @@
 <template>
 <material-top-app-bar title="Dashboard">
-    <material-icon-button v-if="canRefresh" icon="redo" @click="refresh()" />
-    <material-icon-button icon="cog" @click="openPreference()" />
+    <material-icon-button v-if="canRefresh" icon="redo" @click="refresh" />
+    <material-icon-button icon="cog" @click="openPreference" />
 </material-top-app-bar>
 <material-top-app-bar-adjust>
     <div class="dashboard">
