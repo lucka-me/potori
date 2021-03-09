@@ -1,10 +1,8 @@
 <template>
 <div class="status">
-    <div v-if="gapiLoaded">
-        <button v-if="!authed" @click="signIn()">Sign In</button>
-    </div>
     <div v-if="processingMails">Processing Mails</div>
     <div v-else-if="syncing">Syncing</div>
+    <material-button v-else-if="gapiLoaded && !authed" outlined @click="link()">Link Google Account</material-button>
     <div v-else>
         Latest: XXX
     </div>
@@ -17,9 +15,11 @@ import { Options, Vue } from 'vue-class-component';
 import { service } from '@/service';
 import { State } from '@/store';
 
+import MaterialButton from '@/components/material/Button.vue';
+
 @Options({
     components: {
-
+        MaterialButton
     },
 })
 export default class Status extends Vue {
@@ -44,7 +44,7 @@ export default class Status extends Vue {
         return this.$store.state.status === State.Status.syncing;
     }
 
-    signIn() {
+    link() {
         service.signIn();
     }
 }
