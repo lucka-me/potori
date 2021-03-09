@@ -44,7 +44,7 @@ export default class MaterialIconRaw extends Vue {
 
     icon!: string;
 
-    get symbol() {
+    get symbol(): string {
         if (MaterialIconRaw.nameRegex.test(this.icon)) {
             return IconSymbolMap[this.icon];
         } else {

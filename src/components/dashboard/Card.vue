@@ -2,7 +2,7 @@
 <material-card class="dashboard-card">
     <div class="content">
         <div class="label">
-            <span class="fa fa-fw"><material-icon-raw :icon="icon" /></span>
+            <material-icon :icon="icon" fixed-width/>
             <span class="title">{{ title }}</span>
         </div>
         <div class="text">{{ text }}</div>
@@ -14,7 +14,7 @@
 import { Options, Vue } from 'vue-class-component';
 
 import MaterialCard from '@/components/material/Card.vue';
-import MaterialIconRaw from '@/components/material/IconRaw.vue';
+import MaterialIcon from '@/components/material/Icon.vue';
 
 @Options({
     props: {
@@ -23,7 +23,7 @@ import MaterialIconRaw from '@/components/material/IconRaw.vue';
         text: Number,
     },
     components: {
-        MaterialCard, MaterialIconRaw
+        MaterialCard, MaterialIcon
     },
 })
 export default class DashboardCard extends Vue {}

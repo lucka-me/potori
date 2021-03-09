@@ -4,7 +4,7 @@
         <img :src="nomination.imageUrl" loading="lazy"/>
     </template>
     <template #meta>
-        <span class="fa fa-fw">{{ nomination.statusData.icon }}</span>
+        <material-icon :icon="nomination.statusData.icon" fixed-width/>
     </template>
 </material-list-item>
 </template>
@@ -15,7 +15,7 @@ import { Options, Vue } from 'vue-class-component';
 import Nomination from '@/service/nomination';
 import { umi } from '@/service/umi';
 
-import MaterialIconRaw from '@/components/material/IconRaw.vue';
+import MaterialIcon from '@/components/material/Icon.vue';
 import MaterialListItem from '@/components/material/ListItem.vue';
 
 @Options({
@@ -24,7 +24,7 @@ import MaterialListItem from '@/components/material/ListItem.vue';
     },
     components: {
         MaterialListItem,
-        MaterialIconRaw
+        MaterialIcon
     },
 })
 export default class NominationListRow extends Vue {
