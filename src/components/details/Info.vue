@@ -111,6 +111,8 @@ export default class NominationDetails extends Vue {
 
     > .map {
         @include shape.radius(medium);
+        clip-path: inset(100% round 4px);
+        -webkit-clip-path: inset(0 round 4px);
         padding-top: 0.2rem;
         padding-bottom: 0.2rem;
 

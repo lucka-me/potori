@@ -28,9 +28,9 @@ export default class DetailsMap extends Vue {
             /* webpackChunkName: 'mapbox' */
             'mapbox-gl'
         ).then((mapboxgl) => {
-            mapboxgl.accessToken = 'pk.eyJ1IjoibHVja2EtbWUiLCJhIjoiY2p2NDk5NmRvMHFreTQzbzduemM1MHV4cCJ9.7XGmxnEJRoCDr-i5BBmBfw';
             this.ctrl = new mapboxgl.Map({
                 container: this.$el,
+                accessToken: 'pk.eyJ1IjoibHVja2EtbWUiLCJhIjoiY2p2NDk5NmRvMHFreTQzbzduemM1MHV4cCJ9.7XGmxnEJRoCDr-i5BBmBfw',
                 style: 'mapbox://styles/mapbox/outdoors-v11',
                 center: this.lngLat,
                 zoom: 16
