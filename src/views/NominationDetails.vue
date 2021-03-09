@@ -2,7 +2,9 @@
 <material-top-app-bar :title="title" navi-back/>
 <material-top-app-bar-adjust>
     <div v-if="nomination" class="nomination-details">
-        Details...
+        <actions-block :nomination="nomination"/>
+        <div class="divider"/>
+        <info-block :nomination="nomination"/>
     </div>
 </material-top-app-bar-adjust>
 </template>
@@ -14,10 +16,13 @@ import Nomination from '@/service/nomination';
 
 import MaterialTopAppBar from '@/components/material/TopAppBar.vue';
 import MaterialTopAppBarAdjust from '@/components/material/TopAppBarAdjust.vue';
+import ActionsBlock from '@/components/details/Actions.vue';
+import InfoBlock from '@/components/details/Info.vue';
 
 @Options({
     components: {
         MaterialTopAppBar, MaterialTopAppBarAdjust,
+        ActionsBlock, InfoBlock,
     }
 })
 export default class NominationDetails extends Vue {
@@ -41,5 +46,28 @@ export default class NominationDetails extends Vue {
 </script>
 
 <style lang="scss">
+@use '~@material/theme';
 
+.nomination-details {
+    padding: 1rem;
+
+    display: flex;
+    flex-flow: column nowrap;
+
+    > .divider {
+        display: none;
+    }
+
+    @media screen and (min-width: 600px) {
+        flex-flow: row nowrap;
+
+        > .divider {
+            display: block;
+            border-inline-end: 1px solid;
+            @include theme.property(border-inline-end-color, text-secondary-on-light);
+            width: 0.5rem;
+            margin-inline-end: 0.5rem;
+        }
+    }
+}
 </style>

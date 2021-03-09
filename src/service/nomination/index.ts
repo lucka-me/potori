@@ -66,6 +66,10 @@ export default class Nomination {
         return `https://brainstorming.azurewebsites.net/watermeter.html#${this.id}`;
     }
 
+    get scannerData(): umi.Scanner {
+        return umi.scanner.get(this.scanner)!;
+    }
+
     /**
      * Get status data
      */
