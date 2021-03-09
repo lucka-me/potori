@@ -65,8 +65,8 @@ export default class NominationDetails extends Vue {
             display: block;
             border-inline-end: 1px solid;
             @include theme.property(border-inline-end-color, text-secondary-on-light);
-            width: 0.5rem;
-            margin-inline-end: 0.5rem;
+            width: 1rem;
+            margin-inline-end: 1rem;
         }
     }
 }

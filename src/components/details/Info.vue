@@ -1,17 +1,27 @@
 <template>
 <div class="info-block">
-    <div class="highlights">
-        <material-card>
-            <div class="contents">
-                Comfirmed {{ confirmedTime }}
-            </div>
-        </material-card>
-        <material-card>
-            <div class="contents">
-                Scanner {{ nomination.scannerData.title }}
-            </div>
-        </material-card>
+    <div class="row">
+        <span>Comfirmed</span>
+        <div class="divider"/>
+        <span>{{ confirmedTime }}</span>
     </div>
+    <div class="row">
+        <span>{{ nomination.statusData.title }}</span>
+        <div class="divider"/>
+        <span>{{ resultTime }}</span>
+    </div>
+    <div class="row">
+        <span>Scanner</span>
+        <div class="divider"/>
+        <span>{{ nomination.scannerData.title }}</span>
+    </div>
+    <hr v-if="rejected" />
+    <div v-if="rejected" class="section-title">Reasons</div>
+    <div v-for="reason in reasons" :key="reason.code" class="row">
+        <span>{{ reason.title }}</span>
+    </div>
+    <hr v-if="nomination.lngLat"/>
+    <div v-if="nomination.lngLat" class="section-title">Location</div>
 </div>
 </template>
 
@@ -21,6 +31,7 @@ import { Options, Vue } from 'vue-class-component';
 import Nomination from '@/service/nomination';
 
 import MaterialCard from '@/components/material/Card.vue';
+import { umi } from '@/service/umi';
 
 @Options({
     props: {
@@ -35,26 +46,66 @@ export default class NominationDetails extends Vue {
     nomination!: Nomination;
 
     get confirmedTime(): string {
-        if (!this.nomination) return '';
-        return new Date(this.nomination?.confirmedTime).toLocaleDateString();
+        return new Date(this.nomination.confirmedTime).toLocaleDateString();
+    }
+
+    get resultTime(): string {
+        if (this.nomination.status === umi.StatusCode.Pending) return '';
+        return new Date(this.nomination.resultTime).toLocaleDateString();
+    }
+
+    get rejected(): boolean {
+        return this.nomination.status === umi.StatusCode.Rejected;
+    }
+
+    get reasons(): Array<umi.Reason> {
+        if (!this.rejected) return [];
+        if (this.nomination.reasons.length < 1) return [ umi.reason.get(umi.Reason.undeclared)! ];
+        return this.nomination.reasonsData;
     }
 }
 </script>
 
 <style lang="scss">
+@use '~@material/theme';
+@use '~@material/typography';
+
 .info-block {
     flex: 2;
     display: flex;
     flex-flow: column nowrap;
     align-items: stretch;
 
-    > .highlights {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
-        gap: 0.6rem;
+    > .section-title {
+        @include typography.typography(overline);
+    }
 
-        .contents {
-            margin: 0.4em;
+    > hr {
+        border: none;
+        height: 1px;
+        width: 100%;
+        border-top: 1px solid;
+        @include theme.property(border-top-color, text-secondary-on-light);
+        // margin-inline-start: -1rem;
+        // margin-inline-end: -1rem;
+    }
+
+    > .row {
+        padding-top: 0.2rem;
+        padding-bottom: 0.2rem;
+        display: flex;
+        flex-flow: row nowrap;
+        align-items: baseline;
+
+        overflow: hidden;
+
+        > span {
+            @include typography.overflow-ellipsis;
+        }
+
+        > .divider {
+            flex: 1;
+            min-width: 0.5rem;
         }
     }
 }
