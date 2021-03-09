@@ -86,6 +86,11 @@ export namespace service {
         });
     }
 
+    export function clearNominations() {
+        _store.commit('setNominations', []);
+        save();
+    }
+
     function processMails() {
         _store.commit('setStatus', State.Status.processingMails);
         mari.start(_store.state.nominations);

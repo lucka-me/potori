@@ -4,6 +4,8 @@
     <div class="preferences">
         <google-preferences/>
         <hr/>
+        <data-preferences/>
+        <hr/>
         <about-preferences/>
     </div>
 </material-top-app-bar-adjust>
@@ -15,12 +17,14 @@ import { Options, Vue } from 'vue-class-component';
 import MaterialTopAppBar from '@/components/material/TopAppBar.vue';
 import MaterialTopAppBarAdjust from '@/components/material/TopAppBarAdjust.vue';
 import AboutPreferences from '@/components/preferences/About.vue';
+import DataPreferences from '@/components/preferences/Data.vue';
 import GooglePreferences from '@/components/preferences/Google.vue';
 
 @Options({
     components: {
         MaterialTopAppBar, MaterialTopAppBarAdjust,
         AboutPreferences,
+        DataPreferences,
         GooglePreferences
     },
 })
