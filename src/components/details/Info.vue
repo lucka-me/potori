@@ -22,6 +22,7 @@
     </div>
     <hr v-if="nomination.lngLat"/>
     <div v-if="nomination.lngLat" class="section-title">Location</div>
+    <details-map v-if="nomination.lngLat" :lngLat="nomination.lngLat"/>
 </div>
 </template>
 
@@ -29,16 +30,16 @@
 import { Options, Vue } from 'vue-class-component';
 
 import Nomination from '@/service/nomination';
-
-import MaterialCard from '@/components/material/Card.vue';
 import { umi } from '@/service/umi';
+
+import DetailsMap from './Map.vue';
 
 @Options({
     props: {
         nomination: Nomination
     },
     components: {
-        MaterialCard,
+        DetailsMap,
     }
 })
 export default class NominationDetails extends Vue {
@@ -67,6 +68,7 @@ export default class NominationDetails extends Vue {
 </script>
 
 <style lang="scss">
+@use "~@material/shape";
 @use '~@material/theme';
 @use '~@material/typography';
 
@@ -86,8 +88,6 @@ export default class NominationDetails extends Vue {
         width: 100%;
         border-top: 1px solid;
         @include theme.property(border-top-color, text-secondary-on-light);
-        // margin-inline-start: -1rem;
-        // margin-inline-end: -1rem;
     }
 
     > .row {
@@ -107,6 +107,14 @@ export default class NominationDetails extends Vue {
             flex: 1;
             min-width: 0.5rem;
         }
+    }
+
+    > .map {
+        @include shape.radius(medium);
+        padding-top: 0.2rem;
+        padding-bottom: 0.2rem;
+
+        height: 20rem;
     }
 }
 </style>

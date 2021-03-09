@@ -22,6 +22,7 @@
     "@types/gapi.auth2": "0.0.53",
     "@types/gapi.client.drive": "^3.0.13",
     "@types/gapi.client.gmail": "^1.0.3",
+    "mapbox-gl": "^2.1.1",
     "material-components-web": "^10.0.0",
     "register-service-worker": "^1.7.2",
     "vue": "^3.0.7",
@@ -30,6 +31,7 @@
     "vuex": "^4.0.0"
   },
   "devDependencies": {
+    "@types/mapbox-gl": "^2.1.0",
     "@vue/cli-plugin-pwa": "^4.5.11",
     "@vue/cli-plugin-router": "^4.5.11",
     "@vue/cli-plugin-typescript": "^4.5.11",
