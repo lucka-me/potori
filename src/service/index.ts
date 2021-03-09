@@ -9,11 +9,14 @@ import { preferences } from './preferences';
 export namespace service {
 
     type DownloadCallback = (count: number) => void;
+    type UploadCallback = (succeed: boolean, message?: string) => void;
 
     enum Filename {
         nominations = 'nominations.json',
         legacy = 'potori.json'
     }
+
+    const mimeJSON = 'application/json';
 
     const google = new GoogleKit();
     const mari = new Mari();
@@ -56,6 +59,27 @@ export namespace service {
         }
     }
 
+    export function sync() {
+        download(Filename.nominations, () => {
+            upload(() => {
+
+            });
+        });
+    }
+
+    export function upload(callback: UploadCallback) {
+        _store.commit('setStatus', State.Status.syncing);
+        const jsonList = _store.state.nominations.map((nomination) => nomination.json);
+        const blob = new Blob(
+            [ JSON.stringify(jsonList, null, 4) ],
+            { type: mimeJSON }
+        )
+        google.drive.upload(Filename.nominations, mimeJSON, blob, google.auth.accessToken, (succeed, message) => {
+            _store.commit('setStatus', State.Status.idle);
+            callback(succeed, message);
+        });
+    }
+
     export function migrate() {
         download(Filename.legacy, (count) => {
             // Alert count
@@ -87,9 +111,17 @@ export namespace service {
             }
             return list;
         }, new Array<Nomination>());
-        _store.commit('setNominations', reduced);
-        save();
-        _store.commit('setStatus', State.Status.idle);
+        if (preferences.google.sync()) {
+            upload(() => {
+                _store.commit('setNominations', reduced);
+                save();
+                _store.commit('setStatus', State.Status.idle);
+            });
+        } else {
+            _store.commit('setNominations', reduced);
+            save();
+            _store.commit('setStatus', State.Status.idle);
+        }
     }
 
     function download(file: Filename, callback: DownloadCallback) {
@@ -272,50 +304,6 @@ export namespace service {
         window.setTimeout(() => {
             file.local.save(Filename.bsData, BlobGenerator.bsData(bs.data));
         }, 2000);
-    }
-    */
-
-    /**
-     * Upload data to Google Drive
-     */
-    /*
-    export function upload() {
-
-        let uploadedNominations = false;
-        let uploadedBsData = false;
-
-        const checkFinish = () => {
-            if (uploadedNominations && uploadedBsData) {
-                events.info(i18next.t('message:service.uploaded'));
-            };
-        };
-
-        file.googleDrive.upload(
-            Filename.nominations,
-            BlobGenerator.nominations(nominations),
-            auth.accessToken,
-            (succeed: boolean, message?: string) => {
-                uploadedNominations = true;
-                if (!succeed) {
-                    events.alert(`${i18next.t('message:service.uploadNominationsError')}${message ? `\n${message}` : ''}`);
-                }
-                checkFinish();
-            }
-        );
-
-        file.googleDrive.upload(
-            Filename.bsData,
-            BlobGenerator.bsData(bs.data),
-            auth.accessToken,
-            (succeed: boolean, message?: string) => {
-                uploadedBsData = true;
-                if (!succeed) {
-                    events.alert(`${i18next.t('message:service.uploadBsDataError')}${message ? `\n${message}` : ''}`);
-                }
-                checkFinish();
-            }
-        );
-
     }
     */
 
