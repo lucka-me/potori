@@ -1,6 +1,6 @@
 <template>
 <button class="fa mdc-icon-button">
-    <material-icon :icon="icon"/>
+    <material-icon-raw :icon="icon"/>
 </button>
 </template>
 
@@ -8,14 +8,14 @@
 import { MDCRipple } from '@material/ripple';
 import { Options, Vue } from 'vue-class-component';
 
-import MaterialIcon from './Icon.vue';
+import MaterialIconRaw from './IconRaw.vue';
 
 @Options({
     props: {
         icon: String
     },
     components: {
-        MaterialIcon
+        MaterialIconRaw
     },
 })
 export default class MaterialTopAppBar extends Vue {

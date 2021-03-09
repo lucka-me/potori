@@ -38,14 +38,14 @@ const IconSymbolMap: Record<string, string> = {
         icon: String
     },
 })
-export default class MaterialIcon extends Vue {
+export default class MaterialIconRaw extends Vue {
 
     private static nameRegex = /^[a-z\-]+$/;
 
     icon!: string;
 
     get symbol() {
-        if (MaterialIcon.nameRegex.test(this.icon)) {
+        if (MaterialIconRaw.nameRegex.test(this.icon)) {
             return IconSymbolMap[this.icon];
         } else {
             return this.icon;

@@ -15,7 +15,7 @@ import { Options, Vue } from 'vue-class-component';
 import Nomination from '@/service/nomination';
 import { umi } from '@/service/umi';
 
-import MaterialIcon from '@/components/material/Icon.vue';
+import MaterialIconRaw from '@/components/material/IconRaw.vue';
 import MaterialListItem from '@/components/material/ListItem.vue';
 
 @Options({
@@ -24,7 +24,7 @@ import MaterialListItem from '@/components/material/ListItem.vue';
     },
     components: {
         MaterialListItem,
-        MaterialIcon
+        MaterialIconRaw
     },
 })
 export default class NominationListRow extends Vue {
