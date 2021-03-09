@@ -1,16 +1,19 @@
 <template>
 <div class="info-block">
     <div class="row">
+        <material-icon icon="arrow-up" fixed-width/>
         <span>Comfirmed</span>
         <div class="divider"/>
         <span>{{ confirmedTime }}</span>
     </div>
     <div class="row">
+        <material-icon :icon="nomination.statusData.icon" fixed-width/>
         <span>{{ nomination.statusData.title }}</span>
         <div class="divider"/>
         <span>{{ resultTime }}</span>
     </div>
     <div class="row">
+        <material-icon icon="mobile-alt" fixed-width/>
         <span>Scanner</span>
         <div class="divider"/>
         <span>{{ nomination.scannerData.title }}</span>
@@ -18,6 +21,7 @@
     <hr v-if="rejected" />
     <div v-if="rejected" class="section-title">Reasons</div>
     <div v-for="reason in reasons" :key="reason.code" class="row">
+        <material-icon :icon="reason.icon" fixed-width/>
         <span>{{ reason.title }}</span>
     </div>
     <hr v-if="nomination.lngLat"/>
@@ -32,6 +36,7 @@ import { Options, Vue } from 'vue-class-component';
 import Nomination from '@/service/nomination';
 import { umi } from '@/service/umi';
 
+import MaterialIcon from '@/components/material/Icon.vue';
 import DetailsMap from './Map.vue';
 
 @Options({
@@ -39,6 +44,7 @@ import DetailsMap from './Map.vue';
         nomination: Nomination
     },
     components: {
+        MaterialIcon,
         DetailsMap,
     }
 })
@@ -98,6 +104,10 @@ export default class NominationDetails extends Vue {
         align-items: baseline;
 
         overflow: hidden;
+
+        > i {
+            margin-inline-end: 0.2em;
+        }
 
         > span {
             @include typography.overflow-ellipsis;
