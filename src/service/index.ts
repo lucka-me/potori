@@ -69,11 +69,7 @@ export namespace service {
 
     export function upload(callback: UploadCallback) {
         _store.commit('setStatus', State.Status.syncing);
-        const jsonList = _store.state.nominations.map((nomination) => nomination.json);
-        const blob = new Blob(
-            [ JSON.stringify(jsonList, null, 4) ],
-            { type: mimeJSON }
-        )
+        const blob = getNominationsBlod();
         google.drive.upload(Filename.nominations, mimeJSON, blob, google.auth.accessToken, (succeed, message) => {
             _store.commit('setStatus', State.Status.idle);
             callback(succeed, message);
@@ -84,6 +80,43 @@ export namespace service {
         download(Filename.legacy, (count) => {
             // Alert count
         });
+    }
+
+    export function importNominationsFile() {
+        const input = document.createElement('input');
+        input.type = 'file';
+        input.accept = 'json';
+        input.hidden = true;
+        input.addEventListener('change', () => {
+            setTimeout(() => {
+                input.remove();
+            }, 1000);
+            if (!input.files || input.files.length < 1) return;
+            const file = input.files[0];
+            const fileReader = new FileReader();
+            fileReader.onload = () => {
+                if (typeof fileReader.result !== 'string') return;
+                try {
+                    const jsonList = JSON.parse(fileReader.result) as Array<any>;
+                    importNominations(jsonList);
+                } catch (error) {
+
+                }
+            };
+            fileReader.readAsText(file);
+        }, false);
+        document.body.append(input);
+        input.click();
+    }
+
+    export function exportNominationsFile() {
+        const anchor = document.createElement('a');
+        anchor.href = URL.createObjectURL(getNominationsBlod());
+        anchor.download = Filename.nominations;
+        anchor.hidden = true;
+        document.body.append(anchor);
+        anchor.click();
+        anchor.remove();
     }
 
     export function clearNominations() {
@@ -169,6 +202,14 @@ export namespace service {
             count = 0;
         }
         return count;
+    }
+
+    function getNominationsBlod(): Blob {
+        const jsonList = _store.state.nominations.map((nomination) => nomination.json);
+        return new Blob(
+            [ JSON.stringify(jsonList, null, 4) ],
+            { type: mimeJSON }
+        )
     }
 
     function load() {
@@ -293,22 +334,6 @@ export namespace service {
             // Parse as other contents
         };
         file.local.open(onload, events.alert);
-    }
-    */
-
-    /**
-     * Save local file
-     */
-    /*
-    export function save() {
-        if (nominations.length < 1) {
-            events.alert(i18next.t('message:service.nominationsEmpty'));
-            return;
-        }
-        file.local.save(Filename.nominations, BlobGenerator.nominations(nominations));
-        window.setTimeout(() => {
-            file.local.save(Filename.bsData, BlobGenerator.bsData(bs.data));
-        }, 2000);
     }
     */
 
