@@ -51,5 +51,10 @@ export default class MaterialTopAppBar extends Vue {
 
 .mdc-top-app-bar {
     padding-top: env(safe-area-inset-top);
+
+    > .mdc-top-app-bar__row {
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+    }
 }
 </style>

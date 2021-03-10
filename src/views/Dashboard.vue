@@ -4,13 +4,13 @@
     <material-icon-button icon="cog" @click="openPreference" />
 </material-top-app-bar>
 <material-top-app-bar-adjust/>
-<div class="dashboard">
+<main class="dashboard">
     <status/>
     <highlight/>
     <gallery/>
     <scanners/>
     <reasons/>
-</div>
+</main>
 </template>
 
 <script lang="ts">
