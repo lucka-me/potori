@@ -1,14 +1,13 @@
 <template>
 <material-top-app-bar title="Preferences" navi-back/>
-<material-top-app-bar-adjust>
-    <div class="preferences">
-        <google-preferences/>
-        <hr/>
-        <data-preferences/>
-        <hr/>
-        <about-preferences/>
-    </div>
-</material-top-app-bar-adjust>
+<material-top-app-bar-adjust/>
+<div class="preferences">
+    <google-preferences/>
+    <hr/>
+    <data-preferences/>
+    <hr/>
+    <about-preferences/>
+</div>
 </template>
 
 <script lang="ts">

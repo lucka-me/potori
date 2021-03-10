@@ -1,12 +1,11 @@
 <template>
 <material-top-app-bar :title="title" navi-back/>
-<material-top-app-bar-adjust>
-    <div v-if="nomination" class="nomination-details">
-        <actions-block :nomination="nomination"/>
-        <div class="divider"/>
-        <info-block :nomination="nomination"/>
-    </div>
-</material-top-app-bar-adjust>
+<material-top-app-bar-adjust/>
+<div v-if="nomination" class="nomination-details">
+    <actions-block :nomination="nomination"/>
+    <div class="divider"/>
+    <info-block :nomination="nomination"/>
+</div>
 </template>
 
 <script lang="ts">

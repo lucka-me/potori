@@ -1,5 +1,5 @@
 <template>
-<main class="mdc-top-app-bar--fixed-adjust"><slot/></main>
+<div class="mdc-top-app-bar--fixed-adjust"/>
 </template>
 
 <script lang="ts">
@@ -9,5 +9,7 @@ export default class MaterialTopAppBarAdjust extends Vue {}
 </script>
 
 <style lang="scss">
-
+.mdc-top-app-bar--fixed-adjust {
+    height: env(safe-area-inset-top);
+}
 </style>

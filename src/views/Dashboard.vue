@@ -3,15 +3,14 @@
     <material-icon-button v-if="canRefresh" icon="redo" @click="refresh" />
     <material-icon-button icon="cog" @click="openPreference" />
 </material-top-app-bar>
-<material-top-app-bar-adjust>
-    <div class="dashboard">
-        <status/>
-        <highlight/>
-        <gallery/>
-        <scanners/>
-        <reasons/>
-    </div>
-</material-top-app-bar-adjust>
+<material-top-app-bar-adjust/>
+<div class="dashboard">
+    <status/>
+    <highlight/>
+    <gallery/>
+    <scanners/>
+    <reasons/>
+</div>
 </template>
 
 <script lang="ts">

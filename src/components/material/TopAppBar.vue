@@ -48,4 +48,8 @@ export default class MaterialTopAppBar extends Vue {
 
 <style lang="scss">
 @use '~@material/top-app-bar/mdc-top-app-bar';
+
+.mdc-top-app-bar {
+    padding-top: env(safe-area-inset-top);
+}
 </style>
