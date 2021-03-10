@@ -16,27 +16,27 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/assets/title.png"
   },
   {
-    "revision": "dcfc36fbb8a5b014eeee",
-    "url": "/next/css/app.244e81e7.css"
+    "revision": "01e53533f2546e1dc1a1",
+    "url": "/next/css/app.0c54b0d1.css"
   },
   {
-    "revision": "1f8bab595024c79eaabb",
+    "revision": "100e11fa81f3e2c10679",
     "url": "/next/css/dashboard.3b29d95a.css"
   },
   {
-    "revision": "8c141927034c73f712c5",
-    "url": "/next/css/dashboard~details~list~preferences.2bdbec0e.css"
+    "revision": "dddb9bfc33f1aaf79b35",
+    "url": "/next/css/dashboard~details~list~preferences.7eed8b5f.css"
   },
   {
-    "revision": "c2c42dd78ca500937e48",
+    "revision": "d2a73580a56eff4fd537",
     "url": "/next/css/details.b40c4493.css"
   },
   {
-    "revision": "f5f752d161d3e569ac8f",
+    "revision": "2f6fa5b0b9c413fa2f77",
     "url": "/next/css/list.6a9f041e.css"
   },
   {
-    "revision": "df6fa473f27fd7da5dc0",
+    "revision": "ab74b6ca5ed54b40cfda",
     "url": "/next/css/preferences.51ed4ac5.css"
   },
   {
@@ -60,40 +60,40 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/img/fa-solid-900.2306f642.svg"
   },
   {
-    "revision": "0946602855dfb5eb1995f589631f36ed",
+    "revision": "3dbcc51d24a553cafe4ace7917ef1e6d",
     "url": "/next/index.html"
   },
   {
-    "revision": "dcfc36fbb8a5b014eeee",
-    "url": "/next/js/app.a8bc4840.js"
+    "revision": "01e53533f2546e1dc1a1",
+    "url": "/next/js/app.ce8d318f.js"
   },
   {
-    "revision": "f16b5fa32ae3d14c0b94",
-    "url": "/next/js/chunk-vendors.f0500b9b.js"
+    "revision": "e970bd48a27a4a3c93a9",
+    "url": "/next/js/chunk-vendors.68ac0efa.js"
   },
   {
-    "revision": "1f8bab595024c79eaabb",
-    "url": "/next/js/dashboard.2cc83fe7.js"
+    "revision": "100e11fa81f3e2c10679",
+    "url": "/next/js/dashboard.ba8e33f7.js"
   },
   {
-    "revision": "8c141927034c73f712c5",
-    "url": "/next/js/dashboard~details~list~preferences.b66d1f77.js"
+    "revision": "dddb9bfc33f1aaf79b35",
+    "url": "/next/js/dashboard~details~list~preferences.6c6a580d.js"
   },
   {
-    "revision": "c2c42dd78ca500937e48",
-    "url": "/next/js/details.b37747a3.js"
+    "revision": "d2a73580a56eff4fd537",
+    "url": "/next/js/details.ee3595ef.js"
   },
   {
-    "revision": "f5f752d161d3e569ac8f",
-    "url": "/next/js/list.f61f66ea.js"
+    "revision": "2f6fa5b0b9c413fa2f77",
+    "url": "/next/js/list.620693d8.js"
   },
   {
     "revision": "57b18bfa296f433c13ae",
     "url": "/next/js/mapbox.2dcfe6ae.js"
   },
   {
-    "revision": "df6fa473f27fd7da5dc0",
-    "url": "/next/js/preferences.d1efd570.js"
+    "revision": "ab74b6ca5ed54b40cfda",
+    "url": "/next/js/preferences.4a10c1cc.js"
   },
   {
     "revision": "5cb7b528a3ca6d3556bb865a33515b1a",
