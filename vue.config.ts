@@ -9,8 +9,23 @@ try {
 
 }
 
+const publicPath = next ? '/next/' : '/';
+
 const options: ProjectOptions = {
-    publicPath: next ? '/next/' : '/',
+    publicPath: publicPath,
+    pwa: {
+        name: 'Potori',
+        themeColor: '#3B1E5F',
+        msTileColor: '#3B1E5F',
+        appleMobileWebAppCapable: 'yes',
+        appleMobileWebAppStatusBarStyle: 'black-translucent',
+        manifestOptions: {
+            description: 'Web App to Visualize Ingress Nominations',
+            start_url: publicPath,
+            scope: publicPath,
+            display: 'standalone'
+        }
+    }
 };
 
 module.exports = options;
