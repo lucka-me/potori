@@ -24,8 +24,8 @@ const routes: Array<RouteRecordRaw> = [
 ];
 
 const router = createRouter({
-    history: createWebHashHistory(),
-    routes
+    history: createWebHashHistory('/next/'),
+    routes: routes,
 });
 
 export default router
