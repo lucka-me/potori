@@ -1,4 +1,4 @@
-# ![](./src/assets/title.png)
+# ![](./public/assets/title.png)
 [![CI Status](https://img.shields.io/github/workflow/status/lucka-me/potori/CI?label=CI&logo=github-actions&logoColor=white)](https://github.com/lucka-me/potori/actions/workflows/ci.yml "CI Workflow")
 [![CD Status](https://img.shields.io/github/workflow/status/lucka-me/potori/CD?label=CD&logo=github-actions&logoColor=white)](https://github.com/lucka-me/potori/actions/workflows/cd.yml "CD Workflow")
 [![CD Next Status](https://img.shields.io/github/workflow/status/lucka-me/potori/CD-Next?label=CD-Next&logo=github-actions&logoColor=white)](https://github.com/lucka-me/potori/actions/workflows/cd-next.yml "CD-Next Workflow")  
