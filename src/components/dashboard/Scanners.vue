@@ -3,7 +3,7 @@
 <div class="card-grid">
     <dashboard-card
         v-for="scanner of scanners" :key="scanner.code"
-        :title="scanner.title" icon="mobile-alt" :text="$store.getters.count(scanner.predicator)"
+        :title="scanner.title" icon="mobile-alt" :count="$store.getters.count(scanner.predicator)"
         @click="open(scanner)"
     />
 </div>

@@ -3,7 +3,7 @@
 <div class="card-grid">
     <dashboard-card
         v-for="data of reasons" :key="data.reason.code"
-        :title="data.reason.title" :icon="data.reason.icon" :text="data.count"
+        :title="data.reason.title" :icon="data.reason.icon" :count="data.count"
         @click="open(reason)"
     />
 </div>

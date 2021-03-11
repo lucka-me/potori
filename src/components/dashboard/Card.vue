@@ -5,7 +5,7 @@
             <material-icon :icon="icon" fixed-width/>
             <span class="title">{{ title }}</span>
         </div>
-        <div class="text">{{ text }}</div>
+        <div class="count">{{ count }}</div>
     </div>
 </material-card>
 </template>
@@ -20,7 +20,7 @@ import MaterialIcon from '@/components/material/Icon.vue';
     props: {
         icon: String,
         title: String,
-        text: Number,
+        count: Number,
     },
     components: {
         MaterialCard, MaterialIcon
@@ -49,7 +49,7 @@ export default class DashboardCard extends Vue {}
             }
         }
 
-        > .text {
+        > .count {
             @include typography.typography(headline2);
             margin-top: 0.1em;
         }
