@@ -8,7 +8,7 @@
     <dashboard-card
         v-for="data of reasons" :key="data.reason.code"
         :title="data.reason.title" :icon="data.reason.icon" :count="data.count"
-        @click="open(reason)"
+        @click="open(data.reason)"
     />
 </div>
 </template>

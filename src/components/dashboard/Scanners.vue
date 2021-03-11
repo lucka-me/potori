@@ -4,7 +4,7 @@
     <dashboard-card
         v-for="data of scanners" :key="data.scanner.code"
         :title="data.scanner.title" icon="mobile-alt" :count="data.count"
-        @click="open(scanner)"
+        @click="open(data.scanner)"
     />
 </div>
 </template>
