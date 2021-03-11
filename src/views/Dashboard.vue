@@ -6,10 +6,10 @@
 <material-top-app-bar-adjust/>
 <main class="dashboard">
     <status/>
-    <highlight/>
-    <gallery/>
-    <scanners/>
-    <reasons/>
+    <highlight v-if="notEmpty"/>
+    <gallery v-if="notEmpty"/>
+    <scanners v-if="notEmpty"/>
+    <reasons v-if="notEmpty"/>
 </main>
 </template>
 
@@ -39,6 +39,10 @@ export default class Dashboard extends Vue {
 
     get canRefresh() {
         return this.$store.state.status === State.Status.idle && this.$store.state.gapiAuthed;
+    }
+
+    get notEmpty(): boolean {
+        return this.$store.state.nominations.length > 0;
     }
 
     refresh() {
