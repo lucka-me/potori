@@ -3,19 +3,19 @@
     <div class="row">
         <material-icon icon="arrow-up" fixed-width/>
         <span>Comfirmed</span>
-        <div class="divider"/>
+        <div class="spacer"/>
         <span>{{ confirmedTime }}</span>
     </div>
     <div class="row">
         <material-icon :icon="nomination.statusData.icon" fixed-width/>
         <span>{{ nomination.statusData.title }}</span>
-        <div class="divider"/>
+        <div class="spacer"/>
         <span>{{ resultTime }}</span>
     </div>
     <div class="row">
         <material-icon icon="mobile-alt" fixed-width/>
         <span>Scanner</span>
-        <div class="divider"/>
+        <div class="spacer"/>
         <span>{{ nomination.scannerData.title }}</span>
     </div>
     <hr v-if="rejected" />
@@ -113,7 +113,7 @@ export default class NominationDetails extends Vue {
             @include typography.overflow-ellipsis;
         }
 
-        > .divider {
+        > .spacer {
             flex: 1;
             min-width: 0.5rem;
         }

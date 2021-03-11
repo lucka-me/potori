@@ -4,7 +4,7 @@
         <span>{{ text }}</span>
         <span v-if="desc" class="desc">{{ desc }}</span>
     </div>
-    <div v-if="$slots.default" class="divider"/>
+    <div v-if="$slots.default" class="spacer"/>
     <div v-if="$slots.default" class="action">
         <slot/>
     </div>
@@ -55,7 +55,7 @@ export default class PreferenceRow extends Vue {
             }
         }
 
-        > .divider {
+        > .spacer {
             align-self: stretch;
             min-width: 1rem;
             flex: 1;
