@@ -2,8 +2,8 @@
 <div class="title">Reasons</div>
 <div class="card-grid">
     <dashboard-card
-        v-for="reason of reasons" :key="reason.code"
-        :title="reason.title" :icon="reason.icon" :text="$store.getters.count(reason.predicator)"
+        v-for="data of reasons" :key="data.reason.code"
+        :title="data.reason.title" :icon="data.reason.icon" :text="data.count"
         @click="open(reason)"
     />
 </div>
@@ -16,6 +16,11 @@ import { umi } from '@/service/umi';
 
 import DashboardCard from './Card.vue';
 
+interface ReasonData {
+    reason: umi.Reason;
+    count: number;
+}
+
 @Options({
     components: {
         DashboardCard
@@ -23,10 +28,12 @@ import DashboardCard from './Card.vue';
 })
 export default class Reasons extends Vue {
 
-    get reasons(): Array<umi.Reason> {
-        const list: Array<umi.Reason> = [];
+    get reasons(): Array<ReasonData> {
+        const list: Array<ReasonData> = [];
         for (const reason of umi.reason.values()) {
-            list.push(reason);
+            const count = this.$store.getters.count(reason.predicator);
+            if (count < 1) continue;
+            list.push({ reason: reason, count: count });
         }
         return list;
     }
