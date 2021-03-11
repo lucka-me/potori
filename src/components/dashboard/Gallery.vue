@@ -50,10 +50,14 @@ export default class Gallery extends Vue {
     overflow: auto;
 
     > div {
-        margin-inline-end: 1rem;
+        padding-inline-start: 0.6rem;
 
         &:first-child {
-            margin-inline-start: 1rem;
+            padding-inline-start: 1rem;
+        }
+
+        &:last-child {
+            padding-inline-end: 1rem;
         }
         
         > img {
