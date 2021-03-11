@@ -2,8 +2,8 @@
 <div class="title">Scanners</div>
 <div class="card-grid">
     <dashboard-card
-        v-for="scanner of scanners" :key="scanner.code"
-        :title="scanner.title" icon="mobile-alt" :count="$store.getters.count(scanner.predicator)"
+        v-for="data of scanners" :key="data.scanner.code"
+        :title="data.scanner.title" icon="mobile-alt" :count="data.count"
         @click="open(scanner)"
     />
 </div>
@@ -16,6 +16,11 @@ import { umi } from '@/service/umi';
 
 import DashboardCard from './Card.vue';
 
+interface ScannerData {
+    scanner: umi.Scanner;
+    count: number;
+}
+
 @Options({
     components: {
         DashboardCard
@@ -23,11 +28,16 @@ import DashboardCard from './Card.vue';
 })
 export default class Scanners extends Vue {
 
-    get scanners(): Array<umi.Scanner> {
-        const list: Array<umi.Scanner> = [];
+    get scanners(): Array<ScannerData> {
+        const list: Array<ScannerData> = [];
         for (const scanner of umi.scanner.values()) {
             if (scanner.code === umi.ScannerCode.Unknown) continue;
-            list.push(scanner);
+            const count = this.$store.getters.count(scanner.predicator);
+            if (count < 1) continue;
+            list.push({
+                scanner: scanner,
+                count: count
+            });
         }
         return list;
     }
