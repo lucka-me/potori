@@ -25,6 +25,9 @@ export default createStore<State>({
         nominations: [],
     },
     getters: {
+        empty(state: State) {
+            return state.nominations.length < 1;
+        },
         count: (state: State) => (predicator: Predicator) => {
             return state.nominations.filter(predicator).length;
         }

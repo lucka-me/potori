@@ -3,6 +3,8 @@
     <div v-if="processingMails">Processing Mails</div>
     <div v-else-if="syncing">Syncing</div>
     <material-button v-else-if="gapiLoaded && !authed" outlined @click="link">Link Google Account</material-button>
+    <div v-else-if="gapiLoaded && $store.getters.empty">Please refresh to get nominations</div>
+    <div v-else-if="!gapiLoaded && $store.getters.empty">Loading Google API</div>
     <div v-else>
         Latest: XXX
     </div>
