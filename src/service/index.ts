@@ -224,7 +224,7 @@ export namespace service {
     }
 
     function setStatus(status: State.Status) {
-        setStatus(status);
+        _store.commit('setStatus', status);
     }
 
     function download(file: Filename, callback: DownloadCallback) {
