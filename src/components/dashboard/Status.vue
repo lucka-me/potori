@@ -3,6 +3,7 @@
     <div v-if="processingMails">Processing Mails</div>
     <div v-else-if="syncing">Syncing</div>
     <material-button v-else-if="gapiLoaded && !authed" outlined @click="link">Link Google Account</material-button>
+    <material-button v-else-if="requestMatch" outlined @click="match">Manually Match</material-button>
     <div v-else-if="gapiLoaded && $store.getters.empty">Please refresh to get nominations</div>
     <div v-else-if="!gapiLoaded && $store.getters.empty">Loading Google API</div>
     <div v-else>
@@ -46,8 +47,16 @@ export default class Status extends Vue {
         return this.$store.state.status === State.Status.syncing;
     }
 
+    get requestMatch() {
+        return this.$store.state.status === State.Status.requestMatch;
+    }
+
     link() {
         service.signIn();
+    }
+
+    match() {
+        this.$router.push({ path: '/match' });
     }
 }
 </script>
