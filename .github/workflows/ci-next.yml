@@ -1,10 +1,8 @@
 name: CI
 
 on:
-  push:
-    branches: [ dev-0.8 ]
   pull_request:
-    branches: [ dev-0.8 ]
+    branches: [ dev ]
 
 jobs:
   build:
@@ -21,5 +19,5 @@ jobs:
         run: npm ci
       - name: Build Potori
         run: npm run build
-      - name: Build Documents
-        run: npm run build:docs
+      # - name: Build Documents
+      #   run: npm run build:docs
