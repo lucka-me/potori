@@ -5,6 +5,13 @@ Noteable changes of Potori will be documented here.
 TBA
 
 
+## [0.8.1](https://github.com/lucka-me/potori/releases/tag/0.8.1) - 2021-03-TBA
+TBA
+
+### Changed
+- Load umi data from submodule
+
+
 ## [0.8.0](https://github.com/lucka-me/potori/releases/tag/0.8.0) - 2021-03-06
 Update structure
 
