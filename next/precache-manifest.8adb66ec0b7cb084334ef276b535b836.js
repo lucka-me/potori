@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/assets/title.png"
   },
   {
-    "revision": "af6ec451e140e90f1ee5",
+    "revision": "47c88214e3571e26ad93",
     "url": "/next/css/app.0c54b0d1.css"
   },
   {
@@ -24,8 +24,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/dashboard.b5205fe1.css"
   },
   {
-    "revision": "dddb9bfc33f1aaf79b35",
-    "url": "/next/css/dashboard~details~list~preferences.7eed8b5f.css"
+    "revision": "e2db57d0b88583059616",
+    "url": "/next/css/dashboard~details~list~match~preferences.7eed8b5f.css"
   },
   {
     "revision": "7a60f2562f8f94c9c94d",
@@ -36,7 +36,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/list.6a9f041e.css"
   },
   {
-    "revision": "cc2e5279338a7307c99c",
+    "revision": "39f0a395300e3a1607fa",
     "url": "/next/css/preferences.2bbb92e5.css"
   },
   {
@@ -60,24 +60,24 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/img/fa-solid-900.2306f642.svg"
   },
   {
-    "revision": "bbb9f7cf2a661da0a68a76a461f19441",
+    "revision": "1a07074c2d8298991dfd825783b234c5",
     "url": "/next/index.html"
   },
   {
-    "revision": "af6ec451e140e90f1ee5",
-    "url": "/next/js/app.1401de7b.js"
+    "revision": "47c88214e3571e26ad93",
+    "url": "/next/js/app.009e5449.js"
   },
   {
-    "revision": "e970bd48a27a4a3c93a9",
-    "url": "/next/js/chunk-vendors.68ac0efa.js"
+    "revision": "21144f740ad6b33663de",
+    "url": "/next/js/chunk-vendors.f2e71e77.js"
   },
   {
     "revision": "7d059b5461ee07d333c7",
     "url": "/next/js/dashboard.5ab1586a.js"
   },
   {
-    "revision": "dddb9bfc33f1aaf79b35",
-    "url": "/next/js/dashboard~details~list~preferences.6c6a580d.js"
+    "revision": "e2db57d0b88583059616",
+    "url": "/next/js/dashboard~details~list~match~preferences.f04f3d75.js"
   },
   {
     "revision": "7a60f2562f8f94c9c94d",
@@ -92,8 +92,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/mapbox.2dcfe6ae.js"
   },
   {
-    "revision": "cc2e5279338a7307c99c",
-    "url": "/next/js/preferences.de564e7e.js"
+    "revision": "9288e8d7f082e1a12b4f",
+    "url": "/next/js/match.2189d49e.js"
+  },
+  {
+    "revision": "39f0a395300e3a1607fa",
+    "url": "/next/js/preferences.a36e19c3.js"
   },
   {
     "revision": "5cb7b528a3ca6d3556bb865a33515b1a",
