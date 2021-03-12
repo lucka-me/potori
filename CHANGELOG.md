@@ -6,7 +6,7 @@ Split umi data and mail samples to independent repository
 
 ### Changed
 - Load umi data from submodule
-- Update umi to 9
+- Update umi to 10
 
 ## [0.8.0](https://github.com/lucka-me/potori/releases/tag/0.8.0) - 2021-03-06
 Update structure
