@@ -1,3 +1,4 @@
 [submodule "src/data/umi"]
 	path = src/data/umi
 	url = https://github.com/lucka-me/potori-umi.git
+	branch = main
