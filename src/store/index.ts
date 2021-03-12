@@ -6,6 +6,7 @@ export namespace State {
     export enum Status {
         idle,
         processingMails,
+        requestMatch,
         syncing
     }
 }

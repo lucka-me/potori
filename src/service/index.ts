@@ -5,6 +5,7 @@ import GoogleKit from './google';
 import Mari from './mari';
 import Nomination from './nomination';
 import { preferences } from './preferences';
+import { umi } from './umi';
 
 export namespace service {
 
@@ -16,11 +17,27 @@ export namespace service {
         legacy = 'potori.json'
     }
 
+    interface MatchPack {
+        target: Nomination;
+        candidates: Array<Nomination>;
+        selected: string;
+    }
+
+    export interface MatchData {
+        packs: Array<MatchPack>;
+        callback: () => void;
+    }
+
     const mimeJSON = 'application/json';
 
     const google = new GoogleKit();
     const mari = new Mari();
     let _store: Store<State>;
+
+    export const matchData: MatchData = {
+        packs: [],
+        callback: () => { }
+    };
 
     export function init(store: Store<State>) {
         _store = store;
@@ -68,10 +85,10 @@ export namespace service {
     }
 
     export function upload(callback: UploadCallback) {
-        _store.commit('setStatus', State.Status.syncing);
+        setStatus(State.Status.syncing);
         const blob = getNominationsBlod();
         google.drive.upload(Filename.nominations, mimeJSON, blob, google.auth.accessToken, (succeed, message) => {
-            _store.commit('setStatus', State.Status.idle);
+            setStatus(State.Status.idle);
             callback(succeed, message);
         });
     }
@@ -125,15 +142,15 @@ export namespace service {
     }
 
     function processMails() {
-        _store.commit('setStatus', State.Status.processingMails);
+        setStatus(State.Status.processingMails);
         mari.start(_store.state.nominations);
     }
 
     function arrange(nominations: Array<Nomination>) {
-        const matchTarget: Array<Nomination> = [];
+        const matchTargets: Array<Nomination> = [];
         const reduced = nominations.reduce((list, nomination) => {
             if (nomination.id.length < 1) {
-                matchTarget.push(nomination);
+                matchTargets.push(nomination);
                 return list;
             }
             // Merge
@@ -149,21 +166,69 @@ export namespace service {
             }
             return list;
         }, new Array<Nomination>());
-        if (preferences.google.sync()) {
-            upload(() => {
-                _store.commit('setNominations', reduced);
-                save();
-                _store.commit('setStatus', State.Status.idle);
-            });
+        if (matchTargets.length > 0) {
+            match(matchTargets, reduced);
         } else {
-            _store.commit('setNominations', reduced);
-            save();
-            _store.commit('setStatus', State.Status.idle);
+            if (preferences.google.sync()) {
+                upload(() => { finish(reduced); });
+            } else {
+                finish(reduced);
+            }
         }
     }
 
+    function match(targets: Array<Nomination>, list: Array<Nomination>) {
+        const pendings = list.filter(umi.status.get(umi.StatusCode.Pending)!.predicator);
+        const packs: Array<MatchPack> = [];
+        for (const target of targets) {
+            const checkScanner = target.scanner !== umi.ScannerCode.Unknown;
+            const candidates = pendings.filter((nomination) => {
+                if (nomination.title !== target.title) return false;
+                if (nomination.confirmedTime >= target.resultTime) return false;
+                if (checkScanner && nomination.scanner !== umi.ScannerCode.Unknown && nomination.scanner !== nomination.scanner) return false;
+                return true;
+            });
+            if (candidates.length < 1) continue;
+            packs.push({ target: target, candidates: candidates, selected: '' });
+        }
+        if (packs.length < 1) {
+            finish(list);
+        } else {
+            matchData.packs = packs;
+            matchData.callback = () => {
+                for (const pack of matchData.packs) {
+                    if (pack.selected.length < 1) continue;
+                    for (const candidate of pack.candidates) {
+                        if (candidate.id !== pack.selected) continue;
+                        pack.target.image = candidate.image;
+                        pack.target.id = candidate.id;
+                        break;
+                    }
+                    if (pack.target.id.length < 1) continue;
+                    for (const nomination of list) {
+                        nomination.merge(pack.target);
+                    }
+                }
+                matchData.packs = [];
+                matchData.callback = () => { };
+                finish(list);
+            };
+            setStatus(State.Status.requestMatch);
+        }
+    }
+
+    function finish(list: Array<Nomination>) {
+        _store.commit('setNominations', list);
+        save();
+        setStatus(State.Status.idle);
+    }
+
+    function setStatus(status: State.Status) {
+        setStatus(status);
+    }
+
     function download(file: Filename, callback: DownloadCallback) {
-        _store.commit('setStatus', State.Status.syncing);
+        setStatus(State.Status.syncing);
         google.drive.download(file, (file) => {
             if (!file) {
                 callback(0);

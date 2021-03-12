@@ -21,6 +21,12 @@ const routes: Array<RouteRecordRaw> = [
       name: 'Preferences',
       component: () => import(/* webpackChunkName: "preferences" */ '@/views/Preferences.vue')
     },
+
+    {
+        path: '/match',
+        name: 'Match',
+        component: () => import(/* webpackChunkName: "match" */ '@/views/MatchView.vue')
+    },
 ];
 
 const router = createRouter({
