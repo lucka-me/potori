@@ -1,4 +1,4 @@
-name: CI
+name: CI-Next
 
 on:
   pull_request:
