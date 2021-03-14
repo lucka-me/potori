@@ -1,5 +1,7 @@
 <template>
-<material-top-app-bar :title="title" navi-back/>
+<material-top-app-bar :title="title" navi-back>
+    <material-icon-button icon="map" @click="openMap"/>
+</material-top-app-bar>
 <material-top-app-bar-adjust/>
 <main>
     <material-list class="nomination-list" leading="image" two-line>
@@ -18,6 +20,7 @@ import { Options, Vue } from 'vue-class-component';
 import Nomination from '@/service/nomination';
 import { umi } from '@/service/umi';
 
+import MaterialIconButton from '@/components/material/IconButton.vue';
 import MaterialList from '@/components/material/List.vue';
 import MaterialTopAppBar from '@/components/material/TopAppBar.vue';
 import MaterialTopAppBarAdjust from '@/components/material/TopAppBarAdjust.vue';
@@ -26,6 +29,7 @@ import NominationListRow from '@/components/list/Row.vue';
 @Options({
     components: {
         MaterialTopAppBar, MaterialTopAppBarAdjust,
+        MaterialIconButton,
         MaterialList,
         NominationListRow
     },
@@ -57,6 +61,10 @@ export default class NominationList extends Vue {
             return umi.scanner.get(code) || null;
         }
         return null;
+    }
+
+    openMap() {
+        
     }
 
     open(id: string) {

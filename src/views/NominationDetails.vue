@@ -1,5 +1,8 @@
 <template>
-<material-top-app-bar :title="title" navi-back/>
+<material-top-app-bar :title="title" navi-back>
+    <material-icon-button v-if="editing" icon="check" @click="save"/>
+    <material-icon-button v-else icon="pen" @click="edit"/>
+</material-top-app-bar>
 <material-top-app-bar-adjust/>
 <main v-if="nomination" class="nomination-details">
     <actions-block :nomination="nomination"/>
@@ -13,6 +16,7 @@ import { Options, Vue } from 'vue-class-component';
 
 import Nomination from '@/service/nomination';
 
+import MaterialIconButton from '@/components/material/IconButton.vue';
 import MaterialTopAppBar from '@/components/material/TopAppBar.vue';
 import MaterialTopAppBarAdjust from '@/components/material/TopAppBarAdjust.vue';
 import ActionsBlock from '@/components/details/Actions.vue';
@@ -21,12 +25,14 @@ import InfoBlock from '@/components/details/Info.vue';
 @Options({
     components: {
         MaterialTopAppBar, MaterialTopAppBarAdjust,
+        MaterialIconButton,
         ActionsBlock, InfoBlock,
     }
 })
 export default class NominationDetails extends Vue {
 
     nomination?: Nomination;
+    editing: boolean = false;
 
     get title(): string {
         return this.nomination?.title ?? 'Not Found';
@@ -40,6 +46,14 @@ export default class NominationDetails extends Vue {
                 this.nomination = nomination;
             }
         }
+    }
+
+    edit() {
+        this.editing = true;
+    }
+
+    save() {
+        this.editing = false;
     }
 }
 </script>
