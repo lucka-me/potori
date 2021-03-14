@@ -63,7 +63,132 @@ export default class NominationMap extends Vue {
                 style: 'mapbox://styles/mapbox/outdoors-v11',
             });
             this.ctrl.resize();
+            this.ctrl.once('idle', () => {
+                this.pourData();
+            });
         });
+    }
+
+    private pourData() {
+        if (!this.ctrl) return;
+        const nominations = this.nominations;
+        // Generate GeoJSON and get bounds
+        const boundsNE = { lng: -181.0, lat: -91.0 };
+        const boundsSW = { lng:  181.0, lat:  91.0 };
+        const geoJSON: GeoJSON.FeatureCollection<GeoJSON.Geometry> = {
+            type: 'FeatureCollection',
+            features: nominations.map((nomination) => {
+                const lngLat = nomination.lngLat!;
+                if (lngLat.lng > boundsNE.lng) boundsNE.lng = lngLat.lng;
+                if (lngLat.lng < boundsSW.lng) boundsSW.lng = lngLat.lng;
+                if (lngLat.lat > boundsNE.lat) boundsNE.lat = lngLat.lat;
+                if (lngLat.lat < boundsSW.lat) boundsSW.lat = lngLat.lat;
+                return {
+                    type: 'Feature',
+                    properties: { title: nomination.title },
+                    geometry: {
+                        type: 'Point',
+                        coordinates: [lngLat.lng, lngLat.lat],
+                    }
+                }
+            }),
+        };
+        const id = 'nominations';
+        const color = '#2578B5';
+        const colorDark = '#004D85';
+
+        // Add source and layers
+        this.ctrl.addSource(id, {
+            type: 'geojson',
+            data: geoJSON,
+            cluster: true,
+        });
+        this.ctrl.addLayer({
+            id: `${id}-cluster`,
+            type: 'circle',
+            source: id,
+            filter: ['has', 'point_count'],
+            paint: {
+                'circle-color': color,
+                'circle-opacity': 0.6,
+                'circle-stroke-width': 4,
+                'circle-stroke-color': colorDark,
+                'circle-radius': [
+                    'step', ['get', 'point_count'],
+                    20, 50,
+                    30, 100,
+                    40
+                ]
+            }
+        });
+        this.ctrl.addLayer({
+            id: `${id}-count`,
+            type: 'symbol',
+            source: id,
+            filter: ['has', 'point_count'],
+            layout: {
+                'text-field': '{point_count_abbreviated}',
+                'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
+                'text-size': 12,
+            },
+            paint: {
+                'text-color': '#000',
+            }
+        });
+        this.ctrl.addLayer({
+            id: `${id}-unclustered`,
+            type: 'circle',
+            source: id,
+            filter: ['!', ['has', 'point_count']],
+            paint: {
+                'circle-color': color,
+                'circle-radius': 5,
+                'circle-stroke-width': 2,
+                'circle-stroke-color': colorDark
+            }
+        });
+
+        // Set listener
+        this.ctrl.on('click', `${id}-cluster`, event => {
+            if (!this.ctrl || !event.features) return;
+            const feature = event.features[0];
+            const clusterId = feature.properties!.cluster_id;
+            (this.ctrl.getSource(id) as mapboxgl.GeoJSONSource).getClusterExpansionZoom(
+                clusterId,
+                (err, zoom) => {
+                    if (!this.ctrl || err) return;
+                    this.ctrl.easeTo({
+                        center: (feature.geometry as GeoJSON.Point).coordinates as [number, number],
+                        zoom: zoom
+                    });
+                }
+            );
+        });
+
+        this.ctrl.on('click', `${id}-unclustered`, event => {
+            if (!this.ctrl || !event.features) return;
+            const feature = event.features[0];
+            const coordinates = (feature.geometry as GeoJSON.Point).coordinates as [number, number];
+            while (Math.abs(event.lngLat.lng - coordinates[0]) > 180) {
+                coordinates[0] += event.lngLat.lng > coordinates[0] ? 360 : -360;
+            }
+
+            import(
+                /* webpackChunkName: 'mapbox' */
+                'mapbox-gl'
+            ).then((mapboxgl) => {
+                if (!this.ctrl) return;
+                new mapboxgl.Popup()
+                    .setLngLat(coordinates)
+                    .setText(feature.properties!.title)
+                    .addTo(this.ctrl);
+            });
+        });
+
+        // Fit the bounds
+        if (boundsSW.lng > -181) {
+            this.ctrl.fitBounds([boundsSW, boundsNE], { linear: true, padding: 16 });
+        }
     }
 }
 </script>
