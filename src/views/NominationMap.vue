@@ -1,8 +1,7 @@
 <template>
 <material-top-app-bar :title="title" navi-back/>
 <material-top-app-bar-adjust/>
-<main class="nomination-map">
-    <div id="map-container"/>
+<main id="nomination-map">
 </main>
 </template>
 
@@ -58,7 +57,7 @@ export default class NominationMap extends Vue {
             'mapbox-gl'
         ).then((mapboxgl) => {
             this.ctrl = new mapboxgl.Map({
-                container: 'map-container',
+                container: 'nomination-map',
                 accessToken: 'pk.eyJ1IjoibHVja2EtbWUiLCJhIjoiY2p2NDk5NmRvMHFreTQzbzduemM1MHV4cCJ9.7XGmxnEJRoCDr-i5BBmBfw',
                 style: 'mapbox://styles/mapbox/outdoors-v11',
             });
@@ -194,18 +193,9 @@ export default class NominationMap extends Vue {
 </script>
 
 <style lang="scss">
-body {
+#nomination-map {
     margin: 0;
-}
-
-.nomination-map {
-    margin: 0;
-    display: flex;
-    flex-flow: column nowrap;
-
-    > #map-container {
-        width: 100%;
-        height: 30rem;
-    }
+    width: 100%;
+    height: 30rem;
 }
 </style>
