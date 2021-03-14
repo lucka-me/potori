@@ -47,4 +47,4 @@ const options: ProjectOptions = {
     }
 };
 
-export default options;
+module.exports = options;
