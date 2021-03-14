@@ -5,7 +5,6 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 
-import type mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 import { LngLat } from '@/service/nomination';

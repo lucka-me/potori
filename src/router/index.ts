@@ -17,6 +17,11 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import(/* webpackChunkName: "details" */ '@/views/NominationDetails.vue'),
     },
     {
+        path: '/map',
+        name: 'Map',
+        component: () => import(/* webpackChunkName: "map" */ '@/views/NominationMap.vue'),
+    },
+    {
       path: '/preferences',
       name: 'Preferences',
       component: () => import(/* webpackChunkName: "preferences" */ '@/views/Preferences.vue')

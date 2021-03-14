@@ -1,49 +1,38 @@
 <template>
-<material-top-app-bar :title="title" navi-back>
-    <material-icon-button icon="map" @click="openMap"/>
-</material-top-app-bar>
+<material-top-app-bar :title="title" navi-back/>
 <material-top-app-bar-adjust/>
-<main>
-    <material-list class="nomination-list" leading="image" two-line>
-        <nomination-list-row
-            v-for="nomination in nominations" :key="nomination.id"
-            :nomination="nomination"
-            @click="open(nomination.id)"
-        />
-    </material-list>
+<main class="nomination-map">
+    <div id="map-container"/>
 </main>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
+import 'mapbox-gl/dist/mapbox-gl.css';
 
 import Nomination from '@/service/nomination';
 import { umi } from '@/service/umi';
 
-import MaterialIconButton from '@/components/material/IconButton.vue';
-import MaterialList from '@/components/material/List.vue';
 import MaterialTopAppBar from '@/components/material/TopAppBar.vue';
 import MaterialTopAppBarAdjust from '@/components/material/TopAppBarAdjust.vue';
-import NominationListRow from '@/components/list/Row.vue';
 
 @Options({
     components: {
         MaterialTopAppBar, MaterialTopAppBarAdjust,
-        MaterialIconButton,
-        MaterialList,
-        NominationListRow
     },
 })
-export default class NominationList extends Vue {
+export default class NominationMap extends Vue {
+
+    private ctrl?: mapboxgl.Map;
+
     get title(): string {
         return this.commonSense?.title ?? 'All';
     }
 
     get nominations(): Array<Nomination> {
-        let list = this.$store.state.nominations;
+        let list = this.$store.state.nominations.filter((nomination) => nomination.lngLat);
         const commonSense = this.commonSense;
         if (commonSense) list = list.filter(commonSense.predicator);
-        list = list.sort(Nomination.comparatorByTime);
         return list;
     }
 
@@ -63,29 +52,35 @@ export default class NominationList extends Vue {
         return null;
     }
 
-    openMap() {
-        this.$router.push({
-            path: '/map',
-            query: this.$route.query
-        });
-    }
-
-    open(id: string) {
-        this.$router.push({
-            path: '/details',
-            query: { id: id }
+    mounted() {
+        import(
+            /* webpackChunkName: 'mapbox' */
+            'mapbox-gl'
+        ).then((mapboxgl) => {
+            this.ctrl = new mapboxgl.Map({
+                container: 'map-container',
+                accessToken: 'pk.eyJ1IjoibHVja2EtbWUiLCJhIjoiY2p2NDk5NmRvMHFreTQzbzduemM1MHV4cCJ9.7XGmxnEJRoCDr-i5BBmBfw',
+                style: 'mapbox://styles/mapbox/outdoors-v11',
+            });
+            this.ctrl.resize();
         });
     }
 }
 </script>
 
 <style lang="scss">
-.nomination-list {
-    img {
+body {
+    margin: 0;
+}
+
+.nomination-map {
+    margin: 0;
+    display: flex;
+    flex-flow: column nowrap;
+
+    > #map-container {
         width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: center;
+        height: 30rem;
     }
 }
 </style>
