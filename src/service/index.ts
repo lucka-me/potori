@@ -17,7 +17,7 @@ export namespace service {
         legacy = 'potori.json'
     }
 
-    interface MatchPack {
+    export interface MatchPack {
         target: Nomination;
         candidates: Array<Nomination>;
         selected: string;
@@ -177,6 +177,11 @@ export namespace service {
         }
     }
 
+    /**
+     * Some result mails don't contain image URL, should match from pending nominations manually.
+     * @param targets Nominations without image
+     * @param list Normal nominations
+     */
     function match(targets: Array<Nomination>, list: Array<Nomination>) {
         const pendings = list.filter(umi.status.get(umi.StatusCode.Pending)!.predicator);
         const packs: Array<MatchPack> = [];

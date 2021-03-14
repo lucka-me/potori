@@ -8,6 +8,7 @@ import { Options, Vue } from 'vue-class-component';
 const IconSymbolMap: Record<string, string> = {
     'search': '\uf002',
     'th-list'   : '\uf00b',
+    'check' : '\uf00c',
     'times' : '\uf00d',
     'cog'   : '\uf013',
     'clock' : '\uf017',
