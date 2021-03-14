@@ -201,6 +201,7 @@ export namespace service {
         } else {
             matchData.packs = packs;
             matchData.callback = () => {
+                matchData.callback = () => { };
                 for (const pack of matchData.packs) {
                     if (pack.selected.length < 1) continue;
                     for (const candidate of pack.candidates) {
@@ -215,7 +216,6 @@ export namespace service {
                     }
                 }
                 matchData.packs = [];
-                matchData.callback = () => { };
                 finish(list);
             };
             setStatus(State.Status.requestMatch);
