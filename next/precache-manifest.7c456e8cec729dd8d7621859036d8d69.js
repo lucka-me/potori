@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/assets/title.png"
   },
   {
-    "revision": "be615de47a103404ccd4",
+    "revision": "a9b07763b50c85d1f827",
     "url": "/next/css/app.0c54b0d1.css"
   },
   {
@@ -40,15 +40,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/list.6a9f041e.css"
   },
   {
-    "revision": "c446d22f351d0886e8ed",
-    "url": "/next/css/map.1e329196.css"
+    "revision": "bbd679b72e38f727e48c",
+    "url": "/next/css/map.1cfb0654.css"
   },
   {
     "revision": "2e891d470b70e150f7d3",
     "url": "/next/css/match.4e5ee524.css"
   },
   {
-    "revision": "500ba36d0b8cd11384fc",
+    "revision": "7a22581cae4b47798b36",
     "url": "/next/css/preferences.2bbb92e5.css"
   },
   {
@@ -72,12 +72,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/img/fa-solid-900.2306f642.svg"
   },
   {
-    "revision": "275652e84563f042568ebcae569d4223",
+    "revision": "ef9cc2dd330498b2485c75e2eb414fb8",
     "url": "/next/index.html"
   },
   {
-    "revision": "be615de47a103404ccd4",
-    "url": "/next/js/app.a5611234.js"
+    "revision": "a9b07763b50c85d1f827",
+    "url": "/next/js/app.90b2876a.js"
   },
   {
     "revision": "5584610f0fbdcfad1ee0",
@@ -104,8 +104,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/list.85ccd492.js"
   },
   {
-    "revision": "c446d22f351d0886e8ed",
-    "url": "/next/js/map.d3a3bd3e.js"
+    "revision": "bbd679b72e38f727e48c",
+    "url": "/next/js/map.1dd701d4.js"
   },
   {
     "revision": "57b18bfa296f433c13ae",
@@ -116,8 +116,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/match.fdb783cc.js"
   },
   {
-    "revision": "500ba36d0b8cd11384fc",
-    "url": "/next/js/preferences.9d1d68ce.js"
+    "revision": "7a22581cae4b47798b36",
+    "url": "/next/js/preferences.a280972a.js"
   },
   {
     "revision": "5cb7b528a3ca6d3556bb865a33515b1a",
