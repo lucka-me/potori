@@ -16,15 +16,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/assets/title.png"
   },
   {
-    "revision": "2634e3fa63840b944524",
+    "revision": "56e7df5a999d7bdbcb45",
     "url": "/next/css/app.0c54b0d1.css"
   },
   {
-    "revision": "b02030fdce3447e85ad1",
+    "revision": "37e29d87d3b4a1e706f6",
     "url": "/next/css/dashboard.b5205fe1.css"
   },
   {
-    "revision": "e2db57d0b88583059616",
+    "revision": "45b3c72f85d47deabfd6",
     "url": "/next/css/dashboard~details~list~match~preferences.7eed8b5f.css"
   },
   {
@@ -36,7 +36,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/list.6a9f041e.css"
   },
   {
-    "revision": "5a5be6036d7ab5a32a3e",
+    "revision": "7d849ceab2974142453c",
+    "url": "/next/css/match.4e5ee524.css"
+  },
+  {
+    "revision": "1c8c2507e52a851494c5",
     "url": "/next/css/preferences.2bbb92e5.css"
   },
   {
@@ -60,24 +64,24 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/img/fa-solid-900.2306f642.svg"
   },
   {
-    "revision": "51b022710eeaa832d2ddb8db7e5802df",
+    "revision": "40a81374c4bf7fa70ef4ea707de08c19",
     "url": "/next/index.html"
   },
   {
-    "revision": "2634e3fa63840b944524",
-    "url": "/next/js/app.ebba635d.js"
+    "revision": "56e7df5a999d7bdbcb45",
+    "url": "/next/js/app.61350a4e.js"
   },
   {
-    "revision": "21144f740ad6b33663de",
-    "url": "/next/js/chunk-vendors.f2e71e77.js"
+    "revision": "5584610f0fbdcfad1ee0",
+    "url": "/next/js/chunk-vendors.84ef4d1e.js"
   },
   {
-    "revision": "b02030fdce3447e85ad1",
-    "url": "/next/js/dashboard.297a38a6.js"
+    "revision": "37e29d87d3b4a1e706f6",
+    "url": "/next/js/dashboard.26e17412.js"
   },
   {
-    "revision": "e2db57d0b88583059616",
-    "url": "/next/js/dashboard~details~list~match~preferences.f04f3d75.js"
+    "revision": "45b3c72f85d47deabfd6",
+    "url": "/next/js/dashboard~details~list~match~preferences.8df560b3.js"
   },
   {
     "revision": "7a60f2562f8f94c9c94d",
@@ -92,12 +96,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/mapbox.2dcfe6ae.js"
   },
   {
-    "revision": "9288e8d7f082e1a12b4f",
-    "url": "/next/js/match.2189d49e.js"
+    "revision": "7d849ceab2974142453c",
+    "url": "/next/js/match.0c41e170.js"
   },
   {
-    "revision": "5a5be6036d7ab5a32a3e",
-    "url": "/next/js/preferences.d84286c0.js"
+    "revision": "1c8c2507e52a851494c5",
+    "url": "/next/js/preferences.11784033.js"
   },
   {
     "revision": "5cb7b528a3ca6d3556bb865a33515b1a",
