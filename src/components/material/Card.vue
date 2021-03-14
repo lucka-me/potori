@@ -1,7 +1,7 @@
 <template>
 <div class="mdc-card mdc-card--outlined">
     <div class="mdc-card__primary-action">
-        <div v-if="image" class="mdc-card__media mdc-card__media--16-9" :style="style"/>
+        <div v-if="image" :class="mediaClassName" :style="mediaStyle"/>
         <slot/>
     </div>
 </div>
@@ -12,7 +12,8 @@ import { Options, Vue } from 'vue-class-component';
 
 @Options({
     props: {
-        image: String
+        image: String,
+        squareImage: Boolean
     },
     components: {
         
@@ -21,8 +22,13 @@ import { Options, Vue } from 'vue-class-component';
 export default class MaterialCard extends Vue {
 
     image?: string;
+    squareImage?: boolean;
 
-    get style(): string {
+    get mediaClassName(): string {
+        return `mdc-card__media mdc-card__media--${this.squareImage ? 'square' : '16-9'}`;
+    }
+
+    get mediaStyle(): string {
         if (!this.image) return '';
         return `background-image: url("${this.image}")`;
     }

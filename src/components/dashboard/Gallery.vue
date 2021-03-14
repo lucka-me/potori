@@ -1,10 +1,16 @@
 <template>
 <div class="title">Last 30 Days</div>
 <div class="gallery">
-    <div v-for="nomination of nominations" :key="nomination.id">
-        <img :src="nomination.imageUrl" @click="open(nomination.id)" />
-        <div class="caption">{{ nomination.title }}</div>
-    </div>
+    <material-card
+        v-for="nomination of nominations" :key="nomination.id"
+        :image="nomination.imageUrl" square-image
+        @click="open(nomination.id)"
+    >
+        <div class="caption">
+            <material-icon :icon="nomination.statusData.icon" fixed-width/>
+            <span>{{ nomination.title }}</span>
+        </div>
+    </material-card>
 </div>
 </template>
 
@@ -13,9 +19,12 @@ import { Options, Vue } from 'vue-class-component';
 
 import Nomination, { Predicator } from '@/service/nomination';
 
+import MaterialCard from '@/components/material/Card.vue';
+import MaterialIcon from '@/components/material/Icon.vue';
+
 @Options({
     components: {
-
+        MaterialCard, MaterialIcon
     },
 })
 export default class Gallery extends Vue {
@@ -49,33 +58,28 @@ export default class Gallery extends Vue {
     margin-right: -1rem;
     overflow: auto;
 
-    > div {
-        padding-inline-start: 0.6rem;
+    > .mdc-card {
+        margin-inline-start: 0.6rem;
+        min-width: 6rem;
+        width: 6rem;
 
         &:first-child {
-            padding-inline-start: 1rem;
+            margin-inline-start: 1rem;
         }
 
         &:last-child {
-            padding-inline-end: 1rem;
-        }
-        
-        > img {
-            @include shape.radius(medium);
-
-            width: 6rem;
-            height: 6rem;
-            object-fit: cover;
-            object-position: center;
-            cursor: pointer;
+            margin-inline-end: 1rem;
         }
 
-        > .caption {
+        .caption {
             @include typography.typography(caption);
             @include typography.overflow-ellipsis;
 
-            margin-left: 0.4em;
-            margin-right: 0.4em;
+            margin: 0.4em;
+
+            > i {
+                margin-inline-end: 0.2em;
+            }
         }
     }
 }
