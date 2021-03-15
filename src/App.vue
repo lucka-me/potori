@@ -7,8 +7,8 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap');
 
 html, body, #app {
-    height: 100%;
     margin: 0;
+    height: 100vh;
 }
 
 #app {
