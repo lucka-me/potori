@@ -6,7 +6,12 @@
 @use '~@material/typography';
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap');
 
-html, body, #app {
+html {
+    // Fix for iOS standalone mode
+    height: calc(100% + env(safe-area-inset-top, 0));
+}
+
+body, #app {
     margin: 0;
     height: 100%;
 }
