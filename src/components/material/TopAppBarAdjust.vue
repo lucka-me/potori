@@ -11,5 +11,6 @@ export default class MaterialTopAppBarAdjust extends Vue {}
 <style lang="scss">
 .mdc-top-app-bar--fixed-adjust {
     height: env(safe-area-inset-top);
+    min-height: env(safe-area-inset-top);
 }
 </style>
