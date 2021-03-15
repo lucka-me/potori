@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/assets/title.png"
   },
   {
-    "revision": "7d4c698383b8f956579c",
-    "url": "/next/css/app.20211e9d.css"
+    "revision": "d4dcdfb238e5cae0db05",
+    "url": "/next/css/app.1ff94c88.css"
   },
   {
     "revision": "d9de26a7365504a7fe13",
@@ -40,15 +40,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/list.6a9f041e.css"
   },
   {
-    "revision": "1031c82a11728c8727ac",
-    "url": "/next/css/map.f22d88ba.css"
+    "revision": "7a8f69ca8721be73aeca",
+    "url": "/next/css/map.dc687b38.css"
   },
   {
     "revision": "2e891d470b70e150f7d3",
     "url": "/next/css/match.4e5ee524.css"
   },
   {
-    "revision": "3d11f2a064ff8b07358d",
+    "revision": "e18ee5e0cbbd70ba99c8",
     "url": "/next/css/preferences.2bbb92e5.css"
   },
   {
@@ -72,12 +72,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/img/fa-solid-900.2306f642.svg"
   },
   {
-    "revision": "a5d4f790dd55d0a799e8e6d98ae8f8db",
+    "revision": "278f55a82a7183f3d6c2b26137ce03fa",
     "url": "/next/index.html"
   },
   {
-    "revision": "7d4c698383b8f956579c",
-    "url": "/next/js/app.5de497a1.js"
+    "revision": "d4dcdfb238e5cae0db05",
+    "url": "/next/js/app.613d7e99.js"
   },
   {
     "revision": "5584610f0fbdcfad1ee0",
@@ -104,8 +104,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/list.85ccd492.js"
   },
   {
-    "revision": "1031c82a11728c8727ac",
-    "url": "/next/js/map.d3611f5b.js"
+    "revision": "7a8f69ca8721be73aeca",
+    "url": "/next/js/map.ad860a04.js"
   },
   {
     "revision": "57b18bfa296f433c13ae",
@@ -116,8 +116,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/match.fdb783cc.js"
   },
   {
-    "revision": "3d11f2a064ff8b07358d",
-    "url": "/next/js/preferences.2a10b156.js"
+    "revision": "e18ee5e0cbbd70ba99c8",
+    "url": "/next/js/preferences.8ad7389c.js"
   },
   {
     "revision": "5cb7b528a3ca6d3556bb865a33515b1a",
