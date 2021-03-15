@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/assets/title.png"
   },
   {
-    "revision": "a9b07763b50c85d1f827",
-    "url": "/next/css/app.0c54b0d1.css"
+    "revision": "4413e1af1d410b9e7cca",
+    "url": "/next/css/app.840f1212.css"
   },
   {
     "revision": "6510a89a698259c93acf",
@@ -40,15 +40,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/list.6a9f041e.css"
   },
   {
-    "revision": "bbd679b72e38f727e48c",
-    "url": "/next/css/map.1cfb0654.css"
+    "revision": "6a1da67c909eae9d4eb6",
+    "url": "/next/css/map.70a51fad.css"
   },
   {
     "revision": "2e891d470b70e150f7d3",
     "url": "/next/css/match.4e5ee524.css"
   },
   {
-    "revision": "7a22581cae4b47798b36",
+    "revision": "32ae0b8188739c04df69",
     "url": "/next/css/preferences.2bbb92e5.css"
   },
   {
@@ -72,12 +72,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/img/fa-solid-900.2306f642.svg"
   },
   {
-    "revision": "ef9cc2dd330498b2485c75e2eb414fb8",
+    "revision": "61a07ca9041953a3e26cc0c6059aef98",
     "url": "/next/index.html"
   },
   {
-    "revision": "a9b07763b50c85d1f827",
-    "url": "/next/js/app.90b2876a.js"
+    "revision": "4413e1af1d410b9e7cca",
+    "url": "/next/js/app.2cfcdc70.js"
   },
   {
     "revision": "5584610f0fbdcfad1ee0",
@@ -104,8 +104,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/list.85ccd492.js"
   },
   {
-    "revision": "bbd679b72e38f727e48c",
-    "url": "/next/js/map.1dd701d4.js"
+    "revision": "6a1da67c909eae9d4eb6",
+    "url": "/next/js/map.816e8a37.js"
   },
   {
     "revision": "57b18bfa296f433c13ae",
@@ -116,8 +116,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/match.fdb783cc.js"
   },
   {
-    "revision": "7a22581cae4b47798b36",
-    "url": "/next/js/preferences.a280972a.js"
+    "revision": "32ae0b8188739c04df69",
+    "url": "/next/js/preferences.bc4c4a96.js"
   },
   {
     "revision": "5cb7b528a3ca6d3556bb865a33515b1a",
