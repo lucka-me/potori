@@ -1,16 +1,14 @@
 <template>
 <div class="title">Last 30 Days</div>
 <div class="gallery">
-    <material-card
-        v-for="nomination of nominations" :key="nomination.id"
-        :image="nomination.imageUrl" square-image
-        @click="open(nomination.id)"
-    >
-        <div class="caption">
-            <material-icon :icon="nomination.statusData.icon" fixed-width/>
-            <span>{{ nomination.title }}</span>
-        </div>
-    </material-card>
+    <div v-for="nomination of nominations" :key="nomination.id">
+        <material-card :image="nomination.imageUrl" square-image @click="open(nomination.id)">
+            <div class="caption">
+                <material-icon :icon="nomination.statusData.icon" fixed-width/>
+                <span>{{ nomination.title }}</span>
+            </div>
+        </material-card>
+    </div>
 </div>
 </template>
 
@@ -58,18 +56,20 @@ export default class Gallery extends Vue {
     margin-right: -1rem;
     overflow: auto;
 
-    > .mdc-card {
-        margin-inline-start: 0.6rem;
-        min-width: 6rem;
-        width: 6rem;
+    > div {
+        padding-inline-start: 0.6rem;
 
         &:first-child {
-            margin-inline-start: 1rem;
+            padding-inline-start: 1rem;
         }
 
         &:last-child {
-            margin-inline-end: 1rem;
+            padding-inline-end: 1rem;
         }
+
+        > .mdc-card {
+        min-width: 6rem;
+        width: 6rem;
 
         .caption {
             @include typography.typography(caption);
@@ -81,6 +81,7 @@ export default class Gallery extends Vue {
                 margin-inline-end: 0.2em;
             }
         }
+    }
     }
 }
 </style>
