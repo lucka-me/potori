@@ -204,6 +204,8 @@ main.nomination-map {
     #map-container {
         width: 100%;
         height: 100%;
+        // Fix for iOS standalone mode
+        padding-top: env(safe-area-inset-top);
 
         // Adjust for safe area
         .mapboxgl-control-container {
