@@ -1,7 +1,7 @@
 <template>
 <material-top-app-bar :title="title" navi-back/>
 <material-top-app-bar-adjust/>
-<main id="nomination-map">
+<main class="ignore-safe-area" id="nomination-map">
 </main>
 </template>
 
@@ -61,8 +61,9 @@ export default class NominationMap extends Vue {
                 accessToken: 'pk.eyJ1IjoibHVja2EtbWUiLCJhIjoiY2p2NDk5NmRvMHFreTQzbzduemM1MHV4cCJ9.7XGmxnEJRoCDr-i5BBmBfw',
                 style: 'mapbox://styles/mapbox/outdoors-v11',
             });
-            this.ctrl.resize();
             this.ctrl.once('idle', () => {
+                if (!this.ctrl) return;
+                this.ctrl.resize();
                 this.pourData();
             });
         });
@@ -193,9 +194,13 @@ export default class NominationMap extends Vue {
 </script>
 
 <style lang="scss">
-#nomination-map {
+main#nomination-map {
     margin: 0;
-    width: 100%;
-    height: 30rem;
+    flex: 1;
+    
+    // > #map-container {
+    //     width: 100%;
+    //     height: 100%;
+    // }
 }
 </style>

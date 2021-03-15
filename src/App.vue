@@ -6,14 +6,17 @@
 @use '~@material/typography';
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap');
 
-body {
+html, body, #app {
+    height: 100%;
     margin: 0;
 }
 
 #app {
     @include typography.base();
+    display: flex;
+    flex-flow: column nowrap;
 
-    > main {
+    > main:not(.ignore-safe-area) {
         margin-bottom: env(safe-area-inset-bottom);
         margin-left: env(safe-area-inset-left);
         margin-right: env(safe-area-inset-right);
