@@ -61,6 +61,8 @@ export default class NominationMap extends Vue {
                 accessToken: 'pk.eyJ1IjoibHVja2EtbWUiLCJhIjoiY2p2NDk5NmRvMHFreTQzbzduemM1MHV4cCJ9.7XGmxnEJRoCDr-i5BBmBfw',
                 style: 'mapbox://styles/mapbox/outdoors-v11',
             });
+            this.ctrl.addControl(new mapboxgl.NavigationControl());
+            this.ctrl.addControl(new mapboxgl.FullscreenControl());
             this.ctrl.once('idle', () => {
                 if (!this.ctrl) return;
                 this.ctrl.resize();
@@ -197,10 +199,5 @@ export default class NominationMap extends Vue {
 main#nomination-map {
     margin: 0;
     flex: 1;
-    
-    // > #map-container {
-    //     width: 100%;
-    //     height: 100%;
-    // }
 }
 </style>
