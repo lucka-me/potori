@@ -10,34 +10,25 @@
 
 <script lang="ts">
 import { MDCSwitch } from '@material/switch';
-import { Options, Vue } from 'vue-class-component';
+import { Vue, Model } from 'vue-property-decorator';
 
-@Options({
-    props: {
-        modelValue: Boolean
-    },
-    emits: [
-        'update:modelValue'
-    ],
-    components: {
-        
-    },
-})
 export default class MaterialSwitch extends Vue {
 
+    @Model('modelValue', { type: Boolean, default: false }) readonly value!: boolean;
+
     private ctrl?: MDCSwitch;
-    modelValue!: boolean;
 
     mounted() {
         this.ctrl = MDCSwitch.attachTo(this.$el);
-        this.ctrl.checked = this.modelValue;
+        this.ctrl.checked = this.value;
         this.ctrl.listen('change', this.changed)
     }
 
     updated() {
+        console.log('updated');
         this.ctrl?.destroy();
         this.ctrl = MDCSwitch.attachTo(this.$el);
-        this.ctrl.checked = this.modelValue;
+        this.ctrl.checked = this.value;
         this.ctrl.listen('change', this.changed)
     }
 
