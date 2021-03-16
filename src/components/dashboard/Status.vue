@@ -7,7 +7,7 @@
     <div v-else-if="gapiLoaded && $store.getters.empty">Please refresh to get nominations</div>
     <div v-else-if="!gapiLoaded && $store.getters.empty">Loading Google API</div>
     <div v-else>
-        Latest: XXX
+        <material-linear-progress :progress="0.5"/>
     </div>
 </div>
 </template>
@@ -19,10 +19,12 @@ import { service } from '@/service';
 import { State } from '@/store';
 
 import MaterialButton from '@/components/material/Button.vue';
+import MaterialLinearProgress from '@/components/material/LinearProgress.vue';
 
 @Options({
     components: {
-        MaterialButton
+        MaterialButton,
+        MaterialLinearProgress
     },
 })
 export default class Status extends Vue {
