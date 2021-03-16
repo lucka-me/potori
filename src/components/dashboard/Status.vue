@@ -1,13 +1,16 @@
 <template>
 <div class="status">
-    <div v-if="processingMails">Processing Mails</div>
+    <div v-if="processingMails">
+        <div>Processing Mails</div>
+        <material-linear-progress :progress="$store.state.progress"/>
+    </div>
     <div v-else-if="syncing">Syncing</div>
     <material-button v-else-if="gapiLoaded && !authed" outlined @click="link">Link Google Account</material-button>
     <material-button v-else-if="requestMatch" outlined @click="match">Manually Match</material-button>
     <div v-else-if="gapiLoaded && $store.getters.empty">Please refresh to get nominations</div>
     <div v-else-if="!gapiLoaded && $store.getters.empty">Loading Google API</div>
     <div v-else>
-        <material-linear-progress :progress="0.5"/>
+        Latest: XXX
     </div>
 </div>
 </template>

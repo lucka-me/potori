@@ -13,6 +13,7 @@ export namespace State {
 
 export interface State {
     status: State.Status;
+    progress: number;
     gapiLoaded: boolean;
     gapiAuthed: boolean;
     nominations: Array<Nomination>;
@@ -21,6 +22,7 @@ export interface State {
 export default createStore<State>({
     state: {
         status: State.Status.idle,
+        progress: 0,
         gapiLoaded: false,
         gapiAuthed: false,
         nominations: [],
@@ -36,6 +38,9 @@ export default createStore<State>({
     mutations: {
         setStatus(state: State, payload: State.Status) {
             state.status = payload;
+        },
+        setProgress(state: State, payload: number) {
+            state.progress = payload;
         },
         gapiLoaded(state: State) {
             state.gapiLoaded = true;

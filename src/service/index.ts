@@ -51,6 +51,9 @@ export namespace service {
             };
             google.auth.init();
 
+            mari.events.progress = (progress) => {
+                setProgress(progress);
+            };
             mari.events.finish = (nominations) => {
                 arrange(nominations);
             };
@@ -142,6 +145,7 @@ export namespace service {
     }
 
     function processMails() {
+        setProgress(0);
         setStatus(State.Status.processingMails);
         mari.start(_store.state.nominations);
     }
@@ -230,6 +234,10 @@ export namespace service {
 
     function setStatus(status: State.Status) {
         _store.commit('setStatus', status);
+    }
+
+    function setProgress(progress: number) {
+        _store.commit('setProgress', progress);
     }
 
     function download(file: Filename, callback: DownloadCallback) {

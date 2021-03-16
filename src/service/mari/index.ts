@@ -13,7 +13,6 @@ export type ProgressCallback = (percent: number) => void;
  */
 interface MariEvents {
     alert:      MessageCallback;    // Triggered when alert should be displayed
-    buffer:     ProgressCallback;   // Triggered when buffer (secondary progress) updates
     progress:   ProgressCallback,   // Triggered when main progress update
     finish:     FinishCallback;     // Triggered when processes all finish
 }
@@ -53,7 +52,6 @@ class Progress {
     lists = new ProgressItem();
     messages = new ProgressItem();
 
-    onBuffer    : ProgressCallback  = () => { };    // Triggered when a list finished
     onProgress  : ProgressCallback  = () => { };    // Triggered when a message finished if all lists are finished
     onFinish    : BasicCallback     = () => { };    // Triggered when all lists and messages are finished
 
@@ -79,7 +77,7 @@ class Progress {
     finishList(messages: number) {
         this.lists.finished += 1;
         this.messages.total += messages;
-        this.onBuffer(this.lists.percent);
+        this.onProgress(this.percent);
         if (!this.left) {
             this.onFinish();
         }
@@ -91,7 +89,7 @@ class Progress {
     finishMessage() {
         this.messages.finished += 1;
         if (!this.lists.left) {
-            this.onProgress(this.messages.percent);
+            this.onProgress(this.percent);
             if (!this.left) {
                 this.onFinish();
             }
@@ -103,6 +101,19 @@ class Progress {
      */
     private get left() {
         return this.lists.left || this.messages.left;
+    }
+
+    /**
+     * The percentage of progress
+     */
+    private get percent() {
+        if (this.lists.total === 0 || this.messages.total === 0) {
+            return 0.0
+        }
+        if (this.lists.left) {
+            return this.lists.percent * 0.2;
+        }
+        return 0.2 + this.messages.percent * 0.8;
     }
 }
 
@@ -119,7 +130,6 @@ export default class Mari {
     events: MariEvents = {
         alert:  () => {},
         finish: () => {},
-        buffer: () => {},
         progress: () => {},
     };
 
@@ -127,9 +137,6 @@ export default class Mari {
      * Initiate Mari
      */
     init() {
-        this.progress.onBuffer = (percent) => {
-            this.events.buffer(percent);
-        }
         this.progress.onProgress = (percent) => {
             this.events.progress(percent);
         }
