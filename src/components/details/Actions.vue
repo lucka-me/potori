@@ -9,23 +9,20 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { Vue, Options, Prop } from 'vue-property-decorator';
 
 import Nomination from '@/service/nomination';
 
 import MaterialIconButton from '@/components/material/IconButton.vue';
 
 @Options({
-    props: {
-        nomination: Nomination
-    },
     components: {
         MaterialIconButton,
     }
 })
 export default class ActionsBlock extends Vue {
 
-    nomination!: Nomination;
+    @Prop(Nomination) readonly nomination!: Nomination;
 
     openIntel() {
         window.open(this.nomination.intelUrl, '_blank');

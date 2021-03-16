@@ -31,7 +31,7 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { Vue, Options, Prop } from 'vue-property-decorator';
 
 import Nomination from '@/service/nomination';
 import { umi } from '@/service/umi';
@@ -40,9 +40,6 @@ import MaterialIcon from '@/components/material/Icon.vue';
 import DetailsMap from './Map.vue';
 
 @Options({
-    props: {
-        nomination: Nomination
-    },
     components: {
         MaterialIcon,
         DetailsMap,
@@ -50,7 +47,7 @@ import DetailsMap from './Map.vue';
 })
 export default class NominationDetails extends Vue {
 
-    nomination!: Nomination;
+    @Prop(Nomination) readonly nomination!: Nomination;
 
     get confirmedTime(): string {
         return new Date(this.nomination.confirmedTime).toLocaleDateString();

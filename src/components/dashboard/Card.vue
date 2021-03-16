@@ -11,22 +11,21 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { Vue, Options, Prop } from 'vue-property-decorator';
 
 import MaterialCard from '@/components/material/Card.vue';
 import MaterialIcon from '@/components/material/Icon.vue';
 
 @Options({
-    props: {
-        icon: String,
-        title: String,
-        count: Number,
-    },
     components: {
         MaterialCard, MaterialIcon
     },
 })
-export default class DashboardCard extends Vue {}
+export default class DashboardCard extends Vue {
+    @Prop(String) readonly icon!: string;
+    @Prop(String) readonly title!: string;
+    @Prop(Number) readonly count!: number;
+}
 </script>
 
 <style lang="scss">

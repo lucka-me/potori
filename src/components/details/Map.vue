@@ -3,24 +3,17 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { Vue, Prop } from 'vue-property-decorator';
 
 import 'mapbox-gl/dist/mapbox-gl.css';
 
 import { LngLat } from '@/service/nomination';
 
-@Options({
-    props: {
-        lngLat: Object
-    },
-    components: {
-        
-    }
-})
 export default class DetailsMap extends Vue {
 
+    @Prop(Object) readonly lngLat!: LngLat;
+
     private ctrl?: mapboxgl.Map;
-    lngLat!: LngLat;
 
     mounted() {
         import(

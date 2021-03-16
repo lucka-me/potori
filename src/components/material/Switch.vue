@@ -25,7 +25,6 @@ export default class MaterialSwitch extends Vue {
     }
 
     updated() {
-        console.log('updated');
         this.ctrl?.destroy();
         this.ctrl = MDCSwitch.attachTo(this.$el);
         this.ctrl.checked = this.value;

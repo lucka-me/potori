@@ -32,7 +32,7 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { Vue, Options, Prop } from 'vue-property-decorator';
 
 import { service } from '@/service';
 
@@ -40,9 +40,6 @@ import MaterialCard from '@/components/material/Card.vue';
 import MaterialIcon from '@/components/material/Icon.vue';
 
 @Options({
-    props: {
-        pack: Object
-    },
     components: {
         MaterialCard,
         MaterialIcon
@@ -50,7 +47,7 @@ import MaterialIcon from '@/components/material/Icon.vue';
 })
 export default class MatchPackView extends Vue {
 
-    pack!: service.MatchPack;
+    @Prop(Object) readonly pack!: service.MatchPack;
 
     getTimeString(time: number) {
         return new Date(time).toLocaleString()

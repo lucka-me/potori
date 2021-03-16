@@ -12,18 +12,11 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { Vue, Prop } from 'vue-property-decorator';
 
-@Options({
-    props: {
-        text: String,
-        desc: String
-    },
-    components: {
-        
-    },
-})
 export default class PreferenceRow extends Vue {
+    @Prop(String) readonly text!: string;
+    @Prop(String) readonly desc?: string;
 }
 </script>
 
