@@ -14,20 +14,19 @@
 
 <script lang="ts">
 import { MDCTopAppBar } from '@material/top-app-bar';
-import { Options, Vue } from 'vue-class-component';
+import { Vue, Options, Prop } from 'vue-property-decorator';
 
 import MaterialIconButton from './IconButton.vue';
 
 @Options({
-    props: {
-        title: String,
-        naviBack: Boolean
-    },
     components: {
         MaterialIconButton
     },
 })
 export default class MaterialTopAppBar extends Vue {
+
+    @Prop(String) readonly title!: string;
+    @Prop(Boolean) readonly naviBack?: boolean;
 
     private ctrl?: MDCTopAppBar;
 

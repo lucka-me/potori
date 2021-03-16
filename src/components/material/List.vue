@@ -1,29 +1,19 @@
 <template>
 <ul :class="className">
-    <slot />
+    <slot/>
 </ul>
 </template>
 
 <script lang="ts">
 import { MDCList } from '@material/list';
-import { Options, Vue } from 'vue-class-component';
+import { Vue, Prop } from 'vue-property-decorator';
 
-
-@Options({
-    props: {
-        twoLine: Boolean,
-        leading: String
-    },
-    components: {
-        
-    },
-})
 export default class MaterialList extends Vue {
 
-    private ctrl?: MDCList;
+    @Prop(Boolean) readonly twoLine!: boolean;
+    @Prop(String) readonly leading?: string;
 
-    twoLine!: boolean
-    leading?: string
+    private ctrl?: MDCList;
 
     get className() {
         let name = 'mdc-list';

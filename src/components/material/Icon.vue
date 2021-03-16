@@ -3,23 +3,19 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { Vue, Options, Prop } from 'vue-property-decorator';
 
 import MaterialIconRaw from './IconRaw.vue';
 
 @Options({
-    props: {
-        icon: String,
-        fixedWidth: Boolean
-    },
     components: {
         MaterialIconRaw
-    }
+    },
 })
 export default class MaterialIcon extends Vue {
 
-    icon!: string;
-    fixedWidth?: boolean;
+    @Prop(String) readonly icon!: string;
+    @Prop(Boolean) readonly fixedWidth?: boolean;
 
     get className(): string {
         let name = 'fa';

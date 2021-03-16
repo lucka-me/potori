@@ -7,22 +7,14 @@
 
 <script lang="ts">
 import { MDCRipple } from '@material/ripple';
-import { Options, Vue } from 'vue-class-component';
+import { Vue, Prop } from 'vue-property-decorator';
 
-@Options({
-    props: {
-        outlined: Boolean,
-        raised: Boolean
-    },
-    components: {
-        
-    },
-})
 export default class MaterialButton extends Vue {
 
+    @Prop(Boolean) readonly outlined?: boolean;
+    @Prop(Boolean) readonly raised?: boolean;
+
     private ctrl?: MDCRipple;
-    outlined?: boolean;
-    raised?: boolean;
 
     get className(): string {
         let name = 'mdc-button';

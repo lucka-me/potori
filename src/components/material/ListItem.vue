@@ -17,26 +17,14 @@
 
 <script lang="ts">
 import { MDCRipple } from '@material/ripple';
-import { Options, Vue } from 'vue-class-component';
+import { Vue, Prop } from 'vue-property-decorator';
 
-@Options({
-    props: {
-        text: String,
-        secondary: String,
-    },
-    components: {
-        
-    },
-})
 export default class MaterialList extends Vue {
 
+    @Prop(String) readonly text!: String;
+    @Prop(String) readonly secondary?: String;
+
     private ctrl?: MDCRipple;
-
-    twoLine!: Boolean
-
-    get className() {
-        return this.twoLine ? 'mdc-list mdc-list--two-line' : 'mdc-list';
-    }
 
     mounted() {
         this.ctrl = MDCRipple.attachTo(this.$el);

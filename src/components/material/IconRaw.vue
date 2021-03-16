@@ -3,7 +3,7 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { Vue, Prop } from 'vue-property-decorator';
 
 const IconSymbolMap: Record<string, string> = {
     'search': '\uf002',
@@ -36,16 +36,11 @@ const IconSymbolMap: Record<string, string> = {
     'brain' : '\uf5dc',
 }
 
-@Options({
-    props: {
-        icon: String
-    },
-})
 export default class MaterialIconRaw extends Vue {
 
     private static nameRegex = /^[a-z\-]+$/;
 
-    icon!: string;
+    @Prop(String) readonly icon!: string;
 
     get symbol(): string {
         if (MaterialIconRaw.nameRegex.test(this.icon)) {

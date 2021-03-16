@@ -8,21 +8,12 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { Vue, Prop } from 'vue-property-decorator';
 
-@Options({
-    props: {
-        image: String,
-        squareImage: Boolean
-    },
-    components: {
-        
-    },
-})
 export default class MaterialCard extends Vue {
 
-    image?: string;
-    squareImage?: boolean;
+    @Prop(String) readonly image?: string;
+    @Prop(Boolean) readonly squareImage?: boolean;
 
     get mediaClassName(): string {
         return `mdc-card__media mdc-card__media--${this.squareImage ? 'square' : '16-9'}`;

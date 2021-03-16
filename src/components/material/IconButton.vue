@@ -6,19 +6,18 @@
 
 <script lang="ts">
 import { MDCRipple } from '@material/ripple';
-import { Options, Vue } from 'vue-class-component';
+import { Vue, Options, Prop } from 'vue-property-decorator';
 
 import MaterialIconRaw from './IconRaw.vue';
 
 @Options({
-    props: {
-        icon: String
-    },
     components: {
         MaterialIconRaw
     },
 })
 export default class MaterialTopAppBar extends Vue {
+
+    @Prop(String) readonly icon!: string;
 
     private ctrl?: MDCRipple;
 
