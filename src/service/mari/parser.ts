@@ -32,7 +32,7 @@ export namespace parser {
             if (header.name === 'Subject') {
                 const matched = header.value!.match(/[:：](.+)/);
                 if (matched && matched.length > 1) {
-                    nomination.title = matched[1];
+                    nomination.title = matched[1].trim();
                 }
                 break;
             }
