@@ -16,19 +16,19 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/assets/title.png"
   },
   {
-    "revision": "fa47886c7ad4479027bd",
+    "revision": "e1460cd5d0ad034a65fa",
     "url": "/next/css/app.1ff94c88.css"
   },
   {
-    "revision": "9eb1783f2d05beb907f8",
-    "url": "/next/css/dashboard.b90fffbd.css"
+    "revision": "91a47699f55c12f0233e",
+    "url": "/next/css/dashboard.a5a886b2.css"
   },
   {
-    "revision": "b2ac430d68614c6c96e9",
+    "revision": "0dbc841eded63a5c3736",
     "url": "/next/css/dashboard~details~list~map~match~preferences.a7e1cbc2.css"
   },
   {
-    "revision": "349941d89a10cddabab1",
+    "revision": "5b859987e22939f212c0",
     "url": "/next/css/details.c91c85a7.css"
   },
   {
@@ -36,19 +36,19 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/details~map.370ca2bc.css"
   },
   {
-    "revision": "05a5df52096abe310723",
+    "revision": "85d330e223b7a3558395",
     "url": "/next/css/list.6a9f041e.css"
   },
   {
-    "revision": "a814317fb50f7c31ee61",
+    "revision": "d4790d81e42e1cfd8740",
     "url": "/next/css/map.dc687b38.css"
   },
   {
-    "revision": "d5c11eddb15a9e5585cf",
+    "revision": "d5f841a1ebee1d0c451e",
     "url": "/next/css/match.4e5ee524.css"
   },
   {
-    "revision": "8052df13df74cd70327e",
+    "revision": "36584309e2491ce81d05",
     "url": "/next/css/preferences.2bbb92e5.css"
   },
   {
@@ -72,52 +72,52 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/img/fa-solid-900.2306f642.svg"
   },
   {
-    "revision": "d644d8e4bc81754a830b1e5657746d2c",
+    "revision": "4d953f9cbb02bf2cb7bff4f70af4caf0",
     "url": "/next/index.html"
   },
   {
-    "revision": "fa47886c7ad4479027bd",
-    "url": "/next/js/app.282ef389.js"
+    "revision": "e1460cd5d0ad034a65fa",
+    "url": "/next/js/app.0f5016e4.js"
   },
   {
-    "revision": "00d1070b86477b537597",
-    "url": "/next/js/chunk-vendors.ff2831b5.js"
+    "revision": "9cbe46972079220473ab",
+    "url": "/next/js/chunk-vendors.322d39ad.js"
   },
   {
-    "revision": "9eb1783f2d05beb907f8",
-    "url": "/next/js/dashboard.e6ce0763.js"
+    "revision": "91a47699f55c12f0233e",
+    "url": "/next/js/dashboard.1ed9d8ed.js"
   },
   {
-    "revision": "b2ac430d68614c6c96e9",
-    "url": "/next/js/dashboard~details~list~map~match~preferences.3effef64.js"
+    "revision": "0dbc841eded63a5c3736",
+    "url": "/next/js/dashboard~details~list~map~match~preferences.349f229d.js"
   },
   {
-    "revision": "349941d89a10cddabab1",
-    "url": "/next/js/details.76bfe049.js"
+    "revision": "5b859987e22939f212c0",
+    "url": "/next/js/details.fcd26eeb.js"
   },
   {
     "revision": "5eff018f37f10358cec5",
     "url": "/next/js/details~map.df86ac01.js"
   },
   {
-    "revision": "05a5df52096abe310723",
-    "url": "/next/js/list.4687c07b.js"
+    "revision": "85d330e223b7a3558395",
+    "url": "/next/js/list.363d656a.js"
   },
   {
-    "revision": "a814317fb50f7c31ee61",
-    "url": "/next/js/map.532f6dd9.js"
+    "revision": "d4790d81e42e1cfd8740",
+    "url": "/next/js/map.405a83af.js"
   },
   {
     "revision": "57b18bfa296f433c13ae",
     "url": "/next/js/mapbox.2dcfe6ae.js"
   },
   {
-    "revision": "d5c11eddb15a9e5585cf",
-    "url": "/next/js/match.41adb5c5.js"
+    "revision": "d5f841a1ebee1d0c451e",
+    "url": "/next/js/match.75f270bf.js"
   },
   {
-    "revision": "8052df13df74cd70327e",
-    "url": "/next/js/preferences.bec8db80.js"
+    "revision": "36584309e2491ce81d05",
+    "url": "/next/js/preferences.ed8b4d54.js"
   },
   {
     "revision": "5cb7b528a3ca6d3556bb865a33515b1a",
