@@ -45,7 +45,7 @@ export default class Nomination {
      * Get the image URL
      */
     get imageUrl(): string {
-        return `https://lh3.googleusercontent.com/${this.image}`;
+        return `https://lh4.googleusercontent.com/${this.image}`;
     }
 
     /**
