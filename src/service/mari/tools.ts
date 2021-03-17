@@ -46,7 +46,7 @@ export default class Parser {
         for (const part of mail.payload.parts) {
             if (part.partId !== '1') continue;
             const mailBody = this.base64(part.body.data);
-            const matched = mailBody.match(/googleusercontent\.com\/([0-9a-zA-Z\-\_]+)/);
+            const matched = mailBody.match(/(?:googleusercontent|ggpht)\.com\/([0-9a-zA-Z\-\_]+)/);
             if (matched && matched.length > 1) {
                 nomination.image = matched[1];
                 nomination.id = Nomination.parseId(nomination.image);

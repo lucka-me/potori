@@ -5,6 +5,7 @@ Noteable changes of Potori will be documented here.
 Split umi data and mail samples to independent repository
 
 ### Changed
+- Support old photo hosted on ggpht.com
 - Load umi data from submodule
 - Update umi to 11
 
