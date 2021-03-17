@@ -34,12 +34,12 @@ const options: ProjectOptions = {
             icons: [
                 {
                     src: `${publicPath}assets/icon-maskable.png`,
-                    size: 512,
+                    size: "512x512",
                     purpose: 'maskable',
                 },
                 {
                     src: `${publicPath}assets/icon-rounded.png`,
-                    size: 512,
+                    size: "512x512",
                     purpose: 'any',
                 },
             ]
