@@ -78,6 +78,7 @@ class Progress {
         this.lists.finished += 1;
         this.messages.total += messages;
         this.onProgress(this.percent);
+        console.log(`Mari progress: [list][${this.lists.finished}/${this.lists.total}]`);
         if (!this.left) {
             this.onFinish();
         }
@@ -88,6 +89,7 @@ class Progress {
      */
     finishMessage() {
         this.messages.finished += 1;
+        console.log(`Mari progress: [message][${this.messages.finished}/${this.messages.total}]`);
         if (!this.lists.left) {
             this.onProgress(this.percent);
             if (!this.left) {
@@ -264,6 +266,7 @@ export default class Mari {
                     //     subject: subject,
                     //     message: `[${keys.scanner}:${keys.status}]${details}`
                     // }));
+                    console.log(`message:service.mari.reportParserError ${subject} [${status}:${scanner}]${details}`);
                     this.events.alert(`message:service.mari.reportParserError ${subject} [${status}:${scanner}]${details}`);
                 }
 

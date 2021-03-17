@@ -154,6 +154,7 @@ export namespace service {
         const matchTargets: Array<Nomination> = [];
         const reduced = nominations.reduce((list, nomination) => {
             if (nomination.id.length < 1) {
+                console.log(`service.arrange: Need match: #${nomination.id}[${nomination.title}]`);
                 matchTargets.push(nomination);
                 return list;
             }
@@ -170,6 +171,7 @@ export namespace service {
             }
             return list;
         }, new Array<Nomination>());
+        console.log(`service.arrange: ${nominations.length} reduced to ${reduced.length}`);
         if (matchTargets.length > 0) {
             match(matchTargets, reduced);
         } else {
