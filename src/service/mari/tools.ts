@@ -22,6 +22,7 @@ export default class Parser {
     static mail(mail: gapi.client.gmail.Message, keys: QueryKeys): Nomination {
         const nomination = new Nomination();
         nomination.status = keys.status;
+        nomination.scanner = keys.scanner;
         if (keys.status === umi.StatusCode.Pending) {
             nomination.confirmedTime = parseInt(mail.internalDate);
             nomination.confirmationMailId = mail.id;
