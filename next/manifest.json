@@ -1,0 +1,1 @@
+{"name":"Potori","short_name":"Potori","theme_color":"#3B1E5F","icons":[{"src":"/next/assets/icon-maskable.png","size":"512x512","purpose":"maskable"},{"src":"/next/assets/icon-rounded.png","size":"512x512","purpose":"any"}],"start_url":"/next/","display":"standalone","background_color":"#000000","description":"Web App to Visualize Ingress Nominations","scope":"/next/"}
