@@ -19,6 +19,7 @@ export namespace parser {
     ): Nomination {
         const nomination = new Nomination();
         nomination.status = status;
+        nomination.scanner = scanner;
         if (status === umi.StatusCode.Pending) {
             nomination.confirmedTime = parseInt(mail.internalDate!);
             nomination.confirmationMailId = mail.id!;
