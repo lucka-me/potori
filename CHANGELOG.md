@@ -1,7 +1,7 @@
 # Changelog
 Noteable changes of Potori will be documented here.
 
-## [0.8.1](https://github.com/lucka-me/potori/releases/tag/0.8.1) - 2021-03-16
+## [0.8.1](https://github.com/lucka-me/potori/releases/tag/0.8.1) - 2021-03-TBA
 Split umi data and mail samples to independent repository
 
 ### Changed
@@ -9,6 +9,7 @@ Split umi data and mail samples to independent repository
 - Update umi to 11
 
 ### Fixed
+- Not set scanner for nominations when parsing mails
 - Remove leading white space in title
 
 
