@@ -1,32 +1,35 @@
 <template>
-<div class="mdc-switch">
-    <div class="mdc-switch__track"></div>
-    <div class="mdc-switch__thumb-underlay">
-        <div class="mdc-switch__thumb"></div>
-        <input type="checkbox" class="mdc-switch__native-control" role="switch"/>
+<div class="mdc-radio">
+    <input class="mdc-radio__native-control" type="radio" :id="inputId" :name="inputName">
+    <div class="mdc-radio__background">
+      <div class="mdc-radio__outer-circle"></div>
+      <div class="mdc-radio__inner-circle"></div>
     </div>
+    <div class="mdc-radio__ripple"></div>
 </div>
 </template>
 
 <script lang="ts">
-import { MDCSwitch } from '@material/switch';
-import { Vue, Model } from 'vue-property-decorator';
+import { MDCRadio } from '@material/radio';
+import { Vue, Model, Prop } from 'vue-property-decorator';
 
 export default class MaterialSwitch extends Vue {
 
     @Model('modelValue', { type: Boolean, default: false }) readonly value!: boolean;
+    @Prop(String) readonly inputId?: string;
+    @Prop(String) readonly inputName?: string;
 
-    private ctrl?: MDCSwitch;
+    private ctrl?: MDCRadio;
 
     mounted() {
-        this.ctrl = MDCSwitch.attachTo(this.$el);
+        this.ctrl = MDCRadio.attachTo(this.$el);
         this.ctrl.checked = this.value;
         this.ctrl.listen('change', this.changed);
     }
 
     updated() {
         this.ctrl?.destroy();
-        this.ctrl = MDCSwitch.attachTo(this.$el);
+        this.ctrl = MDCRadio.attachTo(this.$el);
         this.ctrl.checked = this.value;
         this.ctrl.listen('change', this.changed);
     }
@@ -43,11 +46,5 @@ export default class MaterialSwitch extends Vue {
 </script>
 
 <style lang="scss">
-@use "@material/switch";
-
-@include switch.core-styles;
-
-.mdc-switch {
-    margin: 1rem;
-}
+@use "@material/radio/styles";
 </style>
