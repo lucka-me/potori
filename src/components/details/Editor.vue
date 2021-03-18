@@ -20,6 +20,16 @@
     </section>
     <section>
         <h2>Location</h2>
+        <material-textfield
+            v-model="lngLat"
+            label="Latitude,Longitude"
+            type="text"
+            input-id="location-editor"
+            pattern="\-?[0-9]{1,2}\.?[0-9]*,\-?[0-9]{1,3}\.?[0-9]*"
+        />
+        <div class="buttons">
+            <material-button @click="pasteIntelURL">Paste Intel Map URL</material-button>
+        </div>
     </section>
 </div>
 </template>
@@ -30,6 +40,7 @@ import { Vue, Options, Prop } from 'vue-property-decorator';
 import Nomination, { LngLat } from '@/service/nomination';
 import { umi } from '@/service/umi';
 
+import MaterialButton from '@/components/material/Button.vue';
 import MaterialTextfield from '@/components/material/Textfield.vue';
 import StatusSelector from './editor/StatusSelector.vue';
 
@@ -50,6 +61,7 @@ export class EditData {
 
 @Options({
     components: {
+        MaterialButton,
         MaterialTextfield,
         StatusSelector
     }
@@ -78,6 +90,31 @@ export default class NominationEditor extends Vue {
         if (!time) return;
         this.editData.resultTime = time + (new Date().getTimezoneOffset() * 60000);
     }
+
+    get lngLat(): string {
+        if (!this.editData.lngLat) return '';
+        return `${this.editData.lngLat.lat},${this.editData.lngLat.lng}`;
+    }
+
+    set lngLat(value: string) {
+        const pair = value.split(',');
+        if (pair.length !== 2) return;
+        const lat = parseFloat(pair[0]);
+        const lng = parseFloat(pair[1]);
+        if (lat < -90 || lat > 90 || lng < -180 || lng > 180) return;
+        this.editData.lngLat = { lng, lat };
+    }
+
+    pasteIntelURL() {
+        const url = window.prompt('Paste Intel Map URL');
+        if (!url) return;
+        const matched = url.match(/ll\=([\.\d]+),([\.\d]+)/);
+        if (!matched || matched.length < 3) return;
+        const lat = parseFloat(matched[1]);
+        const lng = parseFloat(matched[2]);
+        if (lat < -90 || lat > 90 || lng < -180 || lng > 180) return;
+        this.editData.lngLat = { lng, lat };
+    }
 }
 </script>
 
@@ -89,7 +126,6 @@ export default class NominationEditor extends Vue {
 .nomination-details {
 
     > .editor {
-
         max-width: 50rem;
         margin-left: auto;
         margin-right: auto;
@@ -103,8 +139,11 @@ export default class NominationEditor extends Vue {
             > h2 {
                 @include typography.typography(overline);
             }
+
+            > .buttons {
+                margin-block-start: 0.2em;
+            }
         }
     }
-
 }
 </style>
