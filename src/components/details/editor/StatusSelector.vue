@@ -47,7 +47,7 @@ export default class StatusSelector extends Vue {
 <style lang="scss">
 .status-selector {
     display: flex;
-    flex-flow: row nowrap;
+    flex-flow: row wrap;
     justify-content: space-around;
 }
 </style>

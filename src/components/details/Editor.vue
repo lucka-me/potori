@@ -6,6 +6,14 @@
     </section>
     <section v-if="editResultTime">
         <h2>Result Time</h2>
+        <material-textfield
+            v-model="resultTime"
+            label="YYYY-MM-DDTHH:MM"
+            type="datetime-local"
+            input-id="result-time-editor"
+            pattern="[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}"
+            required
+        />
     </section>
     <section v-if="editReasons">
         <h2>Reasons</h2>
@@ -22,6 +30,7 @@ import { Vue, Options, Prop } from 'vue-property-decorator';
 import Nomination, { LngLat } from '@/service/nomination';
 import { umi } from '@/service/umi';
 
+import MaterialTextfield from '@/components/material/Textfield.vue';
 import StatusSelector from './editor/StatusSelector.vue';
 
 export class EditData {
@@ -41,6 +50,7 @@ export class EditData {
 
 @Options({
     components: {
+        MaterialTextfield,
         StatusSelector
     }
 })
@@ -54,6 +64,19 @@ export default class NominationEditor extends Vue {
 
     get editReasons(): boolean {
         return this.editData.status === umi.StatusCode.Rejected;
+    }
+
+    get resultTime(): string {
+        const date = new Date();
+        date.setTime(this.editData.resultTime - date.getTimezoneOffset() * 60000);
+        console.log(`get resultTime ${date.toISOString()}`);
+        return date.toISOString().match(/[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}/)![0];
+    }
+
+    set resultTime(value: string) {
+        const time = Date.parse(value);
+        if (!time) return;
+        this.editData.resultTime = time + (new Date().getTimezoneOffset() * 60000);
     }
 }
 </script>
@@ -72,6 +95,10 @@ export default class NominationEditor extends Vue {
         margin-right: auto;
 
         > section {
+
+            > * {
+                width: 100%;
+            }
 
             > h2 {
                 @include typography.typography(overline);
