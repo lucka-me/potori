@@ -98,7 +98,7 @@ export default class NominationMap extends Vue {
         };
         const id = 'nominations';
         const color = '#2578B5';
-        const colorDark = '#004D85';
+        const colorLight = '#63A7E7';
 
         // Add source and layers
         this.ctrl.addSource(id, {
@@ -112,10 +112,10 @@ export default class NominationMap extends Vue {
             source: id,
             filter: ['has', 'point_count'],
             paint: {
-                'circle-color': color,
+                'circle-color': colorLight,
                 'circle-opacity': 0.6,
                 'circle-stroke-width': 4,
-                'circle-stroke-color': colorDark,
+                'circle-stroke-color': color,
                 'circle-radius': [
                     'step', ['get', 'point_count'],
                     20, 50,
@@ -144,10 +144,10 @@ export default class NominationMap extends Vue {
             source: id,
             filter: ['!', ['has', 'point_count']],
             paint: {
-                'circle-color': color,
+                'circle-color': colorLight,
                 'circle-radius': 5,
                 'circle-stroke-width': 2,
-                'circle-stroke-color': colorDark
+                'circle-stroke-color': color
             }
         });
 
