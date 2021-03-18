@@ -125,7 +125,7 @@ class Progress {
  */
 export default class Mari {
 
-    private latest: number = 0;
+    private queryAfter: string = '';
     private ignoreMailIds: Array<string> = [];      // List of ids of mails that should be ignored
     private nominations: Array<Nomination> = [];    // List of nominations
 
@@ -163,11 +163,12 @@ export default class Mari {
             return nomination.resultMailId.length > 0 ? [ nomination.confirmationMailId, nomination.resultMailId ] : [ nomination.confirmationMailId ];
         });
         if (preferences.general.queryAfterLatest()) {
-            this.latest = Math.floor(this.nominations.reduce((time, nomination) => {
+            const latest = Math.floor(this.nominations.reduce((time, nomination) => {
                 return Math.max(time, nomination.confirmedTime, nomination.resultTime)
             }, 0) / 1000);
+            this.queryAfter = ` after:${latest}`;
         } else {
-            this.latest = 0;
+            this.queryAfter = '';
         }
         for (const status of umi.status.values()) {
             for (const scanner of status.queries.keys()) {
@@ -198,7 +199,7 @@ export default class Mari {
     private getListRequest(pageToken: string | undefined, status: umi.StatusCode, scanner: umi.ScannerCode) {
         return gapi.client.gmail.users.messages.list({
             userId: 'me',
-            q: `${umi.status.get(status)!.queries.get(scanner)!}${this.latest > 0 ? ` after:${this.latest}` : ''}`,
+            q: `${umi.status.get(status)!.queries.get(scanner)!}${this.queryAfter}`,
             pageToken: pageToken
         });
     }
