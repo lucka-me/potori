@@ -17,6 +17,7 @@
     </section>
     <section v-if="editReasons">
         <h2>Reasons</h2>
+        <reasons-selector v-model="editData.reasons"/>
     </section>
     <section>
         <h2>Location</h2>
@@ -42,6 +43,7 @@ import { umi } from '@/service/umi';
 
 import MaterialButton from '@/components/material/Button.vue';
 import MaterialTextfield from '@/components/material/Textfield.vue';
+import ReasonsSelector from './editor/ReasonsSelector.vue';
 import StatusSelector from './editor/StatusSelector.vue';
 
 export class EditData {
@@ -54,8 +56,24 @@ export class EditData {
     from(nomination: Nomination) {
         this.status = nomination.status;
         this.resultTime = nomination.resultTime;
-        this.reasons = nomination.reasons;
+        this.reasons = nomination.reasons.map((code) => code);
         this.lngLat = nomination.lngLat;
+    }
+
+    save(nomination: Nomination) {
+        nomination.status = this.status;
+        nomination.resultTime = this.resultTime;
+        nomination.reasons = this.reasons;
+        nomination.lngLat = this.lngLat;
+    }
+
+    setLngLat(text: string) {
+        const pair = text.split(',');
+        if (pair.length !== 2) return;
+        const lat = parseFloat(pair[0]);
+        const lng = parseFloat(pair[1]);
+        if (lat < -90 || lat > 90 || lng < -180 || lng > 180) return;
+        this.lngLat = { lng, lat };
     }
 }
 
@@ -63,7 +81,8 @@ export class EditData {
     components: {
         MaterialButton,
         MaterialTextfield,
-        StatusSelector
+        StatusSelector,
+        ReasonsSelector
     }
 })
 export default class NominationEditor extends Vue {
@@ -81,7 +100,6 @@ export default class NominationEditor extends Vue {
     get resultTime(): string {
         const date = new Date();
         date.setTime(this.editData.resultTime - date.getTimezoneOffset() * 60000);
-        console.log(`get resultTime ${date.toISOString()}`);
         return date.toISOString().match(/[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}/)![0];
     }
 
@@ -97,23 +115,15 @@ export default class NominationEditor extends Vue {
     }
 
     set lngLat(value: string) {
-        const pair = value.split(',');
-        if (pair.length !== 2) return;
-        const lat = parseFloat(pair[0]);
-        const lng = parseFloat(pair[1]);
-        if (lat < -90 || lat > 90 || lng < -180 || lng > 180) return;
-        this.editData.lngLat = { lng, lat };
+        this.editData.setLngLat(value);
     }
 
     pasteIntelURL() {
         const url = window.prompt('Paste Intel Map URL');
         if (!url) return;
-        const matched = url.match(/ll\=([\.\d]+),([\.\d]+)/);
-        if (!matched || matched.length < 3) return;
-        const lat = parseFloat(matched[1]);
-        const lng = parseFloat(matched[2]);
-        if (lat < -90 || lat > 90 || lng < -180 || lng > 180) return;
-        this.editData.lngLat = { lng, lat };
+        const matched = url.match(/ll\=([\.\d]+,[\.\d]+)/);
+        if (!matched || matched.length < 2) return;
+        this.lngLat = matched[1];
     }
 }
 </script>
@@ -126,7 +136,7 @@ export default class NominationEditor extends Vue {
 .nomination-details {
 
     > .editor {
-        max-width: 50rem;
+        max-width: 40rem;
         margin-left: auto;
         margin-right: auto;
 
