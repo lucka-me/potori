@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/assets/title.png"
   },
   {
-    "revision": "9019fe50fe3e7f8b45fe",
+    "revision": "59db2f4b36b68e405c38",
     "url": "/next/css/app.1ff94c88.css"
   },
   {
@@ -24,19 +24,19 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/dashboard.a5a886b2.css"
   },
   {
-    "revision": "0dbc841eded63a5c3736",
+    "revision": "70f3a7b26ecd7f92915a",
     "url": "/next/css/dashboard~details~list~map~match~preferences.a7e1cbc2.css"
   },
   {
-    "revision": "5b859987e22939f212c0",
-    "url": "/next/css/details.c91c85a7.css"
+    "revision": "29acdf2ca6b327507f09",
+    "url": "/next/css/details.745966ae.css"
   },
   {
     "revision": "5eff018f37f10358cec5",
     "url": "/next/css/details~map.370ca2bc.css"
   },
   {
-    "revision": "85d330e223b7a3558395",
+    "revision": "ad922306150c466cf910",
     "url": "/next/css/list.6a9f041e.css"
   },
   {
@@ -48,7 +48,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/match.4e5ee524.css"
   },
   {
-    "revision": "77b3b66d6f404c7d6bf2",
+    "revision": "2e5e12737fcfb337a044",
     "url": "/next/css/preferences.2bbb92e5.css"
   },
   {
@@ -72,12 +72,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/img/fa-solid-900.2306f642.svg"
   },
   {
-    "revision": "82b84edbd1153ef15ff73f67cdd3d61f",
+    "revision": "343efbf611e200a1eb2ab16a3ec2ac7e",
     "url": "/next/index.html"
   },
   {
-    "revision": "9019fe50fe3e7f8b45fe",
-    "url": "/next/js/app.5ed0b660.js"
+    "revision": "59db2f4b36b68e405c38",
+    "url": "/next/js/app.3981534a.js"
   },
   {
     "revision": "9cbe46972079220473ab",
@@ -88,20 +88,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/dashboard.1ed9d8ed.js"
   },
   {
-    "revision": "0dbc841eded63a5c3736",
-    "url": "/next/js/dashboard~details~list~map~match~preferences.349f229d.js"
+    "revision": "70f3a7b26ecd7f92915a",
+    "url": "/next/js/dashboard~details~list~map~match~preferences.df9c6443.js"
   },
   {
-    "revision": "5b859987e22939f212c0",
-    "url": "/next/js/details.fcd26eeb.js"
+    "revision": "29acdf2ca6b327507f09",
+    "url": "/next/js/details.796cbf81.js"
   },
   {
     "revision": "5eff018f37f10358cec5",
     "url": "/next/js/details~map.df86ac01.js"
   },
   {
-    "revision": "85d330e223b7a3558395",
-    "url": "/next/js/list.363d656a.js"
+    "revision": "ad922306150c466cf910",
+    "url": "/next/js/list.0173434a.js"
   },
   {
     "revision": "d4790d81e42e1cfd8740",
@@ -116,8 +116,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/match.75f270bf.js"
   },
   {
-    "revision": "77b3b66d6f404c7d6bf2",
-    "url": "/next/js/preferences.5fc8489d.js"
+    "revision": "2e5e12737fcfb337a044",
+    "url": "/next/js/preferences.268ad0c8.js"
   },
   {
     "revision": "6dcd4e60aac327b475c67359318dc9ab",
