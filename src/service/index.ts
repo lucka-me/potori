@@ -144,6 +144,13 @@ export namespace service {
         save();
     }
 
+    export function save() {
+        localStorage.setItem(
+            'potori.nominations',
+            JSON.stringify(_store.state.nominations.map(nomination => nomination.json))
+        );
+    }
+
     function processMails() {
         setProgress(0);
         setStatus(State.Status.processingMails);
@@ -303,13 +310,6 @@ export namespace service {
                 
             }
         }
-    }
-
-    function save() {
-        localStorage.setItem(
-            'potori.nominations',
-            JSON.stringify(_store.state.nominations.map(nomination => nomination.json))
-        );
     }
 
     /**

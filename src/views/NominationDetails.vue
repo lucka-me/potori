@@ -18,6 +18,7 @@
 import { Options, Vue } from 'vue-class-component';
 
 import Nomination from '@/service/nomination';
+import { service } from '@/service';
 
 import MaterialIconButton from '@/components/material/IconButton.vue';
 import MaterialTopAppBar from '@/components/material/TopAppBar.vue';
@@ -62,7 +63,9 @@ export default class NominationDetails extends Vue {
     }
 
     save() {
-        console.log(this.editData);
+        if (!this.nomination) return;
+        this.editData.save(this.nomination);
+        service.save();
         this.editing = false;
     }
 }
