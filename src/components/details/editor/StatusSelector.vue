@@ -1,17 +1,17 @@
 <template>
 <div class="status-selector">
-    <form-field>
+    <material-form-field>
         <material-radio inputId="status-selector-pending" inputName="status-selector" v-model="pending"/>
         <label for="status-selector-pending">Pending</label>
-    </form-field>
-    <form-field>
+    </material-form-field>
+    <material-form-field>
         <material-radio inputId="status-selector-accepted" inputName="status-selector" v-model="accepted"/>
         <label for="status-selector-accepted">Accepted</label>
-    </form-field>
-    <form-field>
+    </material-form-field>
+    <material-form-field>
         <material-radio inputId="status-selector-rejected" inputName="status-selector" v-model="rejected"/>
         <label for="status-selector-rejected">Rejected</label>
-    </form-field>
+    </material-form-field>
 </div>
 </template>
 
