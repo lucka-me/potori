@@ -10,6 +10,19 @@ export namespace preferences {
         return def;
     }
 
+    export namespace general {
+
+        const keyQueryAfterLatest = 'potori.pref.general.queryAfterLatest';
+
+        export function queryAfterLatest(): boolean {
+            return preferences.get(keyQueryAfterLatest, false);
+        }
+
+        export function setQueryAfterLatest(value: boolean) {
+            preferences.set(keyQueryAfterLatest, value);
+        }
+    }
+
     export namespace google {
         
         const keySync = 'potori.pref.google.sync';

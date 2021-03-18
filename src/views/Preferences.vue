@@ -2,6 +2,8 @@
 <material-top-app-bar title="Preferences" navi-back/>
 <material-top-app-bar-adjust/>
 <main class="preferences">
+    <general-preferences/>
+    <hr/>
     <google-preferences/>
     <hr/>
     <data-preferences/>
@@ -17,14 +19,16 @@ import MaterialTopAppBar from '@/components/material/TopAppBar.vue';
 import MaterialTopAppBarAdjust from '@/components/material/TopAppBarAdjust.vue';
 import AboutPreferences from '@/components/preferences/About.vue';
 import DataPreferences from '@/components/preferences/Data.vue';
+import GeneralPreferences from '@/components/preferences/General.vue';
 import GooglePreferences from '@/components/preferences/Google.vue';
 
 @Options({
     components: {
         MaterialTopAppBar, MaterialTopAppBarAdjust,
-        AboutPreferences,
+        GeneralPreferences,
+        GooglePreferences,
         DataPreferences,
-        GooglePreferences
+        AboutPreferences,
     },
 })
 export default class Preferences extends Vue {}

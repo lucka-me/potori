@@ -1,5 +1,6 @@
-import { umi } from '@/service/umi';
 import Nomination from '@/service/nomination';
+import { preferences } from '@/service/preferences';
+import { umi } from '@/service/umi';
 
 import { parser } from './parser';
 
@@ -124,6 +125,7 @@ class Progress {
  */
 export default class Mari {
 
+    private latest: number = 0;
     private ignoreMailIds: Array<string> = [];      // List of ids of mails that should be ignored
     private nominations: Array<Nomination> = [];    // List of nominations
 
@@ -160,6 +162,13 @@ export default class Mari {
         this.ignoreMailIds = this.nominations.flatMap(nomination => {
             return nomination.resultMailId.length > 0 ? [ nomination.confirmationMailId, nomination.resultMailId ] : [ nomination.confirmationMailId ];
         });
+        if (preferences.general.queryAfterLatest()) {
+            this.latest = Math.floor(this.nominations.reduce((time, nomination) => {
+                return Math.max(time, nomination.confirmedTime, nomination.resultTime)
+            }, 0) / 1000);
+        } else {
+            this.latest = 0;
+        }
         for (const status of umi.status.values()) {
             for (const scanner of status.queries.keys()) {
                 this.queryList(status.code, scanner);
@@ -174,7 +183,7 @@ export default class Mari {
      */
     private queryList(status: umi.StatusCode, scanner: umi.ScannerCode) {
         this.progress.addList();
-        const listRequest = Mari.getListRequest(undefined, status, scanner);
+        const listRequest = this.getListRequest(undefined, status, scanner);
         listRequest.execute((response) => {
             this.handleListRequest(response, [], status, scanner);
         });
@@ -186,10 +195,10 @@ export default class Mari {
      * @param status Status to query
      * @param scanner Scanner to query, must exist in the `queries` of the status
      */
-    private static getListRequest(pageToken: string | undefined, status: umi.StatusCode, scanner: umi.ScannerCode) {
+    private getListRequest(pageToken: string | undefined, status: umi.StatusCode, scanner: umi.ScannerCode) {
         return gapi.client.gmail.users.messages.list({
             userId: 'me',
-            q: umi.status.get(status)!.queries.get(scanner)!,
+            q: `${umi.status.get(status)!.queries.get(scanner)!}${this.latest > 0 ? ` after:${this.latest}` : ''}`,
             pageToken: pageToken
         });
     }
@@ -211,7 +220,7 @@ export default class Mari {
             list.push(...response.result.messages);
         }
         if (response.result.nextPageToken) {
-            const request = Mari.getListRequest(response.result.nextPageToken, status, scanner);
+            const request = this.getListRequest(response.result.nextPageToken, status, scanner);
             request.execute((newResponse) => {
                 this.handleListRequest(newResponse, list, status, scanner);
             });
