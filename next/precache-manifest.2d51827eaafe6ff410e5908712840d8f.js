@@ -16,20 +16,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/assets/title.png"
   },
   {
-    "revision": "59db2f4b36b68e405c38",
+    "revision": "cfaf733e0000bfe98b6d",
     "url": "/next/css/app.1ff94c88.css"
   },
   {
-    "revision": "91a47699f55c12f0233e",
-    "url": "/next/css/dashboard.a5a886b2.css"
+    "revision": "ea647b2e3bbb1b7f536a",
+    "url": "/next/css/dashboard.e47d67f1.css"
   },
   {
     "revision": "70f3a7b26ecd7f92915a",
     "url": "/next/css/dashboard~details~list~map~match~preferences.a7e1cbc2.css"
   },
   {
-    "revision": "29acdf2ca6b327507f09",
-    "url": "/next/css/details.745966ae.css"
+    "revision": "ed51cdf63d87de82a749",
+    "url": "/next/css/details.e0353b85.css"
   },
   {
     "revision": "5eff018f37f10358cec5",
@@ -40,7 +40,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/list.6a9f041e.css"
   },
   {
-    "revision": "d4790d81e42e1cfd8740",
+    "revision": "fdfe000f267086d1387d",
     "url": "/next/css/map.dc687b38.css"
   },
   {
@@ -48,8 +48,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/match.4e5ee524.css"
   },
   {
-    "revision": "2e5e12737fcfb337a044",
-    "url": "/next/css/preferences.2bbb92e5.css"
+    "revision": "9bc924b98794dad37367",
+    "url": "/next/css/preferences.5362f2a4.css"
   },
   {
     "revision": "00bb62bc33034479d5e82a0fd1c5efe3",
@@ -72,28 +72,28 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/img/fa-solid-900.2306f642.svg"
   },
   {
-    "revision": "343efbf611e200a1eb2ab16a3ec2ac7e",
+    "revision": "860693001162bd1c504f8661fa5b1f8a",
     "url": "/next/index.html"
   },
   {
-    "revision": "59db2f4b36b68e405c38",
-    "url": "/next/js/app.3981534a.js"
+    "revision": "cfaf733e0000bfe98b6d",
+    "url": "/next/js/app.25217ac6.js"
   },
   {
     "revision": "9cbe46972079220473ab",
     "url": "/next/js/chunk-vendors.322d39ad.js"
   },
   {
-    "revision": "91a47699f55c12f0233e",
-    "url": "/next/js/dashboard.1ed9d8ed.js"
+    "revision": "ea647b2e3bbb1b7f536a",
+    "url": "/next/js/dashboard.1e04adee.js"
   },
   {
     "revision": "70f3a7b26ecd7f92915a",
     "url": "/next/js/dashboard~details~list~map~match~preferences.df9c6443.js"
   },
   {
-    "revision": "29acdf2ca6b327507f09",
-    "url": "/next/js/details.796cbf81.js"
+    "revision": "ed51cdf63d87de82a749",
+    "url": "/next/js/details.1cce521d.js"
   },
   {
     "revision": "5eff018f37f10358cec5",
@@ -104,8 +104,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/list.0173434a.js"
   },
   {
-    "revision": "d4790d81e42e1cfd8740",
-    "url": "/next/js/map.405a83af.js"
+    "revision": "fdfe000f267086d1387d",
+    "url": "/next/js/map.e52c3758.js"
   },
   {
     "revision": "57b18bfa296f433c13ae",
@@ -116,8 +116,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/match.75f270bf.js"
   },
   {
-    "revision": "2e5e12737fcfb337a044",
-    "url": "/next/js/preferences.268ad0c8.js"
+    "revision": "9bc924b98794dad37367",
+    "url": "/next/js/preferences.d5165fa4.js"
   },
   {
     "revision": "6dcd4e60aac327b475c67359318dc9ab",
