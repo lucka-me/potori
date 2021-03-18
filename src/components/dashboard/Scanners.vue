@@ -1,5 +1,5 @@
 <template>
-<div class="title">Scanners</div>
+<h2>Scanners</h2>
 <div class="card-grid">
     <dashboard-card
         v-for="data of scanners" :key="data.scanner.code"

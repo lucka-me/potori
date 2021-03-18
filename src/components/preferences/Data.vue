@@ -1,5 +1,5 @@
 <template>
-<div class="section-title">Data</div>
+<h2>Data</h2>
 <preference-row v-if="idle" text="Import Nominations" desc="Import nominations from file">
     <material-button @click="importNominations">Import</material-button>
 </preference-row>

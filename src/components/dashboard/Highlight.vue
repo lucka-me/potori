@@ -1,5 +1,5 @@
 <template>
-<div class="title">Hightlight</div>
+<h2>Hightlight</h2>
 <div class="card-grid">
     <dashboard-card title="All" icon="arrow-up" :count="$store.state.nominations.length" @click="open" />
     <dashboard-card

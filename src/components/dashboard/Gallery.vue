@@ -1,5 +1,5 @@
 <template>
-<div class="title">Last 30 Days</div>
+<h2>Last 30 Days</h2>
 <div class="gallery">
     <div v-for="nomination of nominations" :key="nomination.id">
         <material-card :image="nomination.imageUrl" square-image @click="open(nomination.id)">

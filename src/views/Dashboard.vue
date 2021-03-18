@@ -57,7 +57,7 @@ export default class Dashboard extends Vue {
 .dashboard {
     padding: 1rem;
 
-    > .title {
+    > h2 {
         @include typography.typography(headline4);
 
         margin-top: 0.2em;

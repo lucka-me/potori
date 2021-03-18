@@ -266,7 +266,6 @@ export default class Mari {
                     //     subject: subject,
                     //     message: `[${keys.scanner}:${keys.status}]${details}`
                     // }));
-                    console.log(`message:service.mari.reportParserError ${subject} [${status}:${scanner}]${details}`);
                     this.events.alert(`message:service.mari.reportParserError ${subject} [${status}:${scanner}]${details}`);
                 }
 

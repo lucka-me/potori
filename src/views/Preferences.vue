@@ -37,8 +37,9 @@ export default class Preferences extends Vue {}
 .preferences {
     padding: 1rem;
 
-    > .section-title {
+    > h2 {
         @include typography.typography(overline);
+        margin: 0;
     }
 
     > hr {

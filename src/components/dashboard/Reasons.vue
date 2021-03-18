@@ -1,9 +1,9 @@
 <template>
-<div class="title title-with-action">
+<h2 class="title-with-action">
     <span>Reasons</span>
     <div class="spacer"/>
     <material-button @click="toggleMore">{{ more ? 'Less' : 'More' }}</material-button>
-</div>
+</h2>
 <div class="card-grid">
     <dashboard-card
         v-for="data of reasons" :key="data.reason.code"

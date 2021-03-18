@@ -1,5 +1,5 @@
 <template>
-<div class="section-title">Google</div>
+<h2>Google</h2>
 <preference-row v-if="loaded" text="Account" desc="Link / unlink Google Account">
     <material-button v-if="authed" @click="unlink">Unlink</material-button>
     <material-button v-else @click="link">Link</material-button>

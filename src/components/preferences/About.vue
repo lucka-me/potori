@@ -1,5 +1,5 @@
 <template>
-<div class="section-title">About</div>
+<h2>About</h2>
 <preference-row text="App Version" :desc="appVersion"/>
 <preference-row text="Data Version" :desc="dataVersion"/>
 <preference-row text="Code Repository" desc="GitHub">
