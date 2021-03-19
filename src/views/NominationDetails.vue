@@ -1,5 +1,6 @@
 <template>
 <material-top-app-bar :title="title" navi-back>
+    <material-icon-button v-if="editing" icon="times" @click="cancel"/>
     <material-icon-button v-if="editing" icon="check" @click="save"/>
     <material-icon-button v-else icon="pen" @click="edit"/>
 </material-top-app-bar>
@@ -60,6 +61,10 @@ export default class NominationDetails extends Vue {
         if (!this.nomination) return;
         this.editData.from(this.nomination);
         this.editing = true;
+    }
+
+    cancel() {
+        this.editing = false;
     }
 
     save() {

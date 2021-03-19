@@ -50,6 +50,9 @@ export default createStore<State>({
         },
         setNominations(state: State, payload: Array<Nomination>) {
             state.nominations = payload;
+        },
+        deleteNomination(state: State, payload: string) {
+            state.nominations = state.nominations.filter((nomination) => nomination.id !== payload);
         }
     },
     actions: {

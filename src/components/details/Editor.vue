@@ -32,6 +32,10 @@
             <material-button @click="pasteIntelURL">Paste Intel Map URL</material-button>
         </div>
     </section>
+    <hr/>
+    <div class="actions">
+        <material-icon-button icon="trash" @click="deleteNomination"/>
+    </div>
 </div>
 </template>
 
@@ -39,21 +43,25 @@
 import { Vue, Options, Prop } from 'vue-property-decorator';
 
 import Nomination, { LngLat } from '@/service/nomination';
+import { service } from '@/service';
 import { umi } from '@/service/umi';
 
 import MaterialButton from '@/components/material/Button.vue';
+import MaterialIconButton from '@/components/material/IconButton.vue';
 import MaterialTextfield from '@/components/material/Textfield.vue';
 import ReasonsSelector from './editor/ReasonsSelector.vue';
 import StatusSelector from './editor/StatusSelector.vue';
 
 export class EditData {
 
+    id: string = '';
     status: umi.StatusCode = umi.StatusCode.Pending;
     resultTime: number = 0;
     reasons: Array<umi.ReasonCode> = [];
     lngLat?: LngLat;
 
     from(nomination: Nomination) {
+        this.id = nomination.id;
         this.status = nomination.status;
         this.resultTime = nomination.resultTime;
         this.reasons = nomination.reasons.map((code) => code);
@@ -80,6 +88,7 @@ export class EditData {
 @Options({
     components: {
         MaterialButton,
+        MaterialIconButton,
         MaterialTextfield,
         StatusSelector,
         ReasonsSelector
@@ -125,6 +134,12 @@ export default class NominationEditor extends Vue {
         if (!matched || matched.length < 2) return;
         this.lngLat = matched[1];
     }
+
+    deleteNomination() {
+        this.$store.commit('deleteNomination', this.editData.id);
+        service.save();
+        this.$router.back();
+    }
 }
 </script>
 
@@ -153,6 +168,21 @@ export default class NominationEditor extends Vue {
             > .buttons {
                 margin-block-start: 0.2em;
             }
+        }
+
+        > hr {
+            border: none;
+            height: 1px;
+            width: 100%;
+            border-top: 1px solid;
+            @include theme.property(border-top-color, text-secondary-on-light);
+        }
+
+        > .actions {
+            display: flex;
+            flex-flow: row wrap;
+            align-items: center;
+            justify-content: space-around;
         }
     }
 }
