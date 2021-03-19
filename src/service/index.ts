@@ -139,6 +139,46 @@ export namespace service {
         anchor.remove();
     }
 
+    /**
+     * Import JSON from Wayfarer API response
+     * @param raw Raw JSON
+     */
+    export function importWayfarerJSON(raw: string) {
+        let parsed;
+        try {
+            parsed = JSON.parse(raw);
+        } catch (error) {
+            // Parse error
+            return;
+        }
+        if (!parsed.result || parsed.result.length < 1) {
+            // Invalid Data
+            return;
+        }
+
+        const nominations = _store.state.nominations;
+        const mapNomination = nominations.reduce((map, nomination) => {
+            map.set(nomination.id, nomination);
+            return map;
+        }, new Map<string, Nomination>());
+        
+        let count = 0;
+        for (const json of parsed.result) {
+            const imageUrl = json.imageUrl.replace('https://lh3.googleusercontent.com/', '');
+            const id = Nomination.parseId(imageUrl);
+            const nomination = mapNomination.get(id);
+            if (!nomination) continue;
+            nomination.title = json.title;
+            nomination.lngLat = {
+                lng: parseFloat(json.lng),
+                lat: parseFloat(json.lat)
+            };
+            count += 1;
+        }
+        // Inform count
+        save();
+    }
+
     export function clearNominations() {
         _store.commit('setNominations', []);
         save();
@@ -313,43 +353,6 @@ export namespace service {
     }
 
     /**
-     * Match the first target in queue and first candidate in its cadidates
-     * Next step is {@link sort}
-     * @param queue Queue to match
-     */
-    /*
-    function manuallyMatch(queue: Array<MatchItem>) {
-        if (queue.length < 1) {
-            sort();
-            return;
-        }
-        const item = queue[0];
-        if (item.candidates.length < 1) {
-            queue.shift();
-            manuallyMatch(queue);
-            return;
-        }
-        const candidate = item.candidates[0];
-        events.match(item.target, candidate, (matched) => {
-            if (matched) {
-                candidate.status = item.target.status;
-                candidate.resultTime = item.target.resultTime;
-                candidate.resultMailId = item.target.resultMailId;
-                queue.shift();
-                for (const item of queue) {
-                    const index = item.candidates.indexOf(candidate);
-                    if (index < 0) continue;
-                    item.candidates.splice(index, 1);
-                }
-            } else {
-                item.candidates.shift();
-            }
-            manuallyMatch(queue);
-        });
-    }
-    */
-
-    /**
      * Query locations
      * Next step is {@link event.idle}
      */
@@ -414,47 +417,6 @@ export namespace service {
             // Parse as other contents
         };
         file.local.open(onload, events.alert);
-    }
-    */
-
-    /**
-     * Import JSON from Wayfarer API response
-     * @param raw Raw JSON
-     */
-    /*
-    export function importJSON(raw: string) {
-        let parsed;
-        try {
-            parsed = JSON.parse(raw);
-        } catch (error) {
-            events.alert(i18next.t('message:service.parseError'));
-            return;
-        }
-        if (!parsed.result || parsed.result.length < 1) {
-            events.alert(i18next.t('message:service.invalidData'));
-            return;
-        }
-        const mapNomination = new Map<string, Nomination>();
-        
-        for (const monination of nominations) {
-            mapNomination.set(monination.id, monination);
-        }
-        let count = 0;
-        for (const nomination of parsed.result) {
-            const imageUrl = nomination.imageUrl.replace('https://lh3.googleusercontent.com/', '');
-            const id = Nomination.parseId(imageUrl);
-            if (!mapNomination.has(id)) continue;
-
-            const monination = mapNomination.get(id);
-            monination.title = nomination.title;
-            monination.lngLat = {
-                lng: parseFloat(nomination.lng),
-                lat: parseFloat(nomination.lat)
-            };
-            count += 1;
-        }
-        events.info(i18next.t('message:service.imported', { count: count }));
-        events.idle();
     }
     */
     

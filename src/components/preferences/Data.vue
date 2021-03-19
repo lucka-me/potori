@@ -6,6 +6,9 @@
 <preference-row v-if="idle" text="Export Nominations" desc="Export nominations to file">
     <material-button @click="exportNominations">Export</material-button>
 </preference-row>
+<preference-row v-if="idle" text="Import Wayfarer JSON" desc="Export JSON from https://wayfarer.nianticlabs.com/api/v1/vault/manage">
+    <material-button @click="importWayfarerJSON">Import</material-button>
+</preference-row>
 <preference-row v-if="idle" text="Clear Nominations" desc="Clear all nominations from local storage">
     <material-button @click="clearNominations">Clear</material-button>
 </preference-row>
@@ -38,6 +41,12 @@ export default class DataPreferences extends Vue {
 
     exportNominations() {
         service.exportNominationsFile();
+    }
+
+    importWayfarerJSON() {
+        const text = window.prompt('Paste Wayfarer JSON');
+        if (!text) return;
+        service.importWayfarerJSON(text);
     }
 
     clearNominations() {
