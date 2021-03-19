@@ -2,6 +2,9 @@
 <h2>About</h2>
 <preference-row text="App Version" :desc="appVersion"/>
 <preference-row text="Data Version" :desc="dataVersion"/>
+<preference-row text="Document">
+    <material-button @click="openDoc">Open</material-button>
+</preference-row>
 <preference-row text="Code Repository" desc="GitHub">
     <material-button @click="openRepo">Open</material-button>
 </preference-row>
@@ -28,6 +31,10 @@ export default class AboutPreferences extends Vue {
 
     get dataVersion() {
         return version.data;
+    }
+
+    openDoc() {
+        window.open('/docs', '_blank');
     }
 
     openRepo() {
