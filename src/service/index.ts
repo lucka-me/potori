@@ -39,8 +39,14 @@ export namespace service {
         callback: () => { }
     };
 
+    export const errors: Array<ErrorEvent> = [];
+
     export function init(store: Store<State>) {
         _store = store;
+
+        window.addEventListener('error', (errorEvent) => {
+            errors.push(errorEvent);
+        });
 
         load();
 

@@ -8,11 +8,15 @@
 <preference-row text="Code Repository" desc="GitHub">
     <material-button @click="openRepo">Open</material-button>
 </preference-row>
+<preference-row v-if="hasErrors" text="Export Errors" desc="Export errors logged by Potori">
+    <material-button @click="exportErrors">Export</material-button>
+</preference-row>
 </template>
 
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 
+import { service } from '@/service';
 import { version } from '@/service/version';
 
 import MaterialButton from '@/components/material/Button.vue';
@@ -33,12 +37,35 @@ export default class AboutPreferences extends Vue {
         return version.data;
     }
 
+    get hasErrors(): boolean {
+        return service.errors.length > 0;
+    }
+
     openDoc() {
         window.open('/docs', '_blank');
     }
 
     openRepo() {
         window.open('https://github.com/lucka-me/potori', '_blank');
+    }
+
+    exportErrors() {
+        let message = '';
+        for (const error of service.errors) {
+            let details = error.message;
+            if ('message' in error.error) {
+                const typedError = error.error as Error;
+                details = typedError.stack || typedError.message;
+            }
+            message += `[${error.filename}][${error.lineno}:${error.colno}]${details}\n`;
+        }
+        const textarea = document.createElement('textarea');
+        textarea.value = message;
+        textarea.readOnly = true;
+        document.body.append(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        textarea.remove();
     }
 }
 </script>
