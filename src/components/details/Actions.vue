@@ -47,11 +47,10 @@ export default class ActionsBlock extends Vue {
 
     > img {
         @include shape.radius(medium);
-
-        width: 100%;
         max-width: 20rem;
-        width: 100%;
         max-height: 20rem;
+        width: auto;
+        width: auto;
         object-fit: cover;
         object-position: center;
     }
