@@ -136,8 +136,7 @@ export default class NominationEditor extends Vue {
     }
 
     deleteNomination() {
-        this.$store.commit('deleteNomination', this.editData.id);
-        service.save();
+        service.deleteNomination(this.editData.id);
         this.$router.back();
     }
 }

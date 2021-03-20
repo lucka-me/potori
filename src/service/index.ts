@@ -1,11 +1,13 @@
 import { Store } from 'vuex'
 
 import { State } from '@/store';
+import { dia } from './dia';
 import GoogleKit from './google';
 import Mari from './mari';
-import Nomination from './nomination';
+import Nomination, { NominationData } from './nomination';
 import { preferences } from './preferences';
 import { umi } from './umi';
+import { toRaw } from '@vue/reactivity';
 
 export namespace service {
 
@@ -123,8 +125,8 @@ export namespace service {
             fileReader.onload = () => {
                 if (typeof fileReader.result !== 'string') return;
                 try {
-                    const jsonList = JSON.parse(fileReader.result) as Array<any>;
-                    importNominations(jsonList);
+                    const list = JSON.parse(fileReader.result) as Array<NominationData>;
+                    importNominations(list);
                 } catch (error) {
 
                 }
@@ -149,10 +151,10 @@ export namespace service {
      * Import JSON from Wayfarer API response
      * @param raw Raw JSON
      */
-    export function importWayfarerJSON(raw: string) {
+    export function importWayfarerJSON(json: string) {
         let parsed;
         try {
-            parsed = JSON.parse(raw);
+            parsed = JSON.parse(json);
         } catch (error) {
             // Parse error
             return;
@@ -169,15 +171,15 @@ export namespace service {
         }, new Map<string, Nomination>());
         
         let count = 0;
-        for (const json of parsed.result) {
-            const imageUrl = json.imageUrl.replace('https://lh3.googleusercontent.com/', '');
+        for (const data of parsed.result) {
+            const imageUrl = data.imageUrl.replace('https://lh3.googleusercontent.com/', '');
             const id = Nomination.parseId(imageUrl);
             const nomination = mapNomination.get(id);
             if (!nomination) continue;
-            nomination.title = json.title;
+            nomination.title = data.title;
             nomination.lngLat = {
-                lng: parseFloat(json.lng),
-                lat: parseFloat(json.lat)
+                lng: parseFloat(data.lng),
+                lat: parseFloat(data.lat)
             };
             count += 1;
         }
@@ -185,22 +187,29 @@ export namespace service {
         save();
     }
 
+    export function update(nomination: Nomination) {
+        dia.save(toRaw(nomination));
+    }
+
     export function clearNominations() {
+        dia.clear();
         _store.commit('setNominations', []);
-        save();
+    }
+
+    export function deleteNomination(id: string) {
+        dia.remove(id);
+        _store.commit('deleteNomination', id);
     }
 
     export function save() {
-        localStorage.setItem(
-            'potori.nominations',
-            JSON.stringify(_store.state.nominations.map(nomination => nomination.json))
-        );
+        const raws = getRaws();
+        dia.saveAll(raws);
     }
 
     function processMails() {
         setProgress(0);
         setStatus(State.Status.processingMails);
-        mari.start(_store.state.nominations);
+        mari.start(getRaws());
     }
 
     function arrange(nominations: Array<Nomination>) {
@@ -312,10 +321,10 @@ export namespace service {
         });
     }
 
-    function importNominations(jsonList: Array<any>): number {
+    function importNominations(list: Array<NominationData>): number {
         let count = 0;
         try {
-            const sources = jsonList.map(json => Nomination.parse(json));
+            const sources = list.map(data => Nomination.from(data));
             const nominations = _store.state.nominations.map((nomination) => nomination);
             for (const nomination of sources) {
                 let merged = false;
@@ -337,25 +346,23 @@ export namespace service {
         return count;
     }
 
+    function getRaws(): Array<Nomination> {
+        return _store.state.nominations.map(nomination => toRaw(nomination));
+    }
+
     function getNominationsBlod(): Blob {
-        const jsonList = _store.state.nominations.map((nomination) => nomination.json);
+        const raws = _store.state.nominations.map((nomination) => nomination.data);
         return new Blob(
-            [ JSON.stringify(jsonList, null, 4) ],
+            [ JSON.stringify(raws, null, 4) ],
             { type: mimeJSON }
         )
     }
 
-    function load() {
-        const jsonString = localStorage.getItem('potori.nominations');
-        if (jsonString) {
-            try {
-                const jsonList = JSON.parse(jsonString) as Array<any>;
-                const nominations = jsonList.map(json => Nomination.parse(json));
-                _store.commit('setNominations', nominations);
-            } catch (error) {
-                
-            }
-        }
+    async function load() {
+        await dia.init();
+        const raws = await dia.load();
+        const nominations = raws.map(raw => Nomination.from(raw));
+        _store.commit('setNominations', nominations);
     }
 
     /**

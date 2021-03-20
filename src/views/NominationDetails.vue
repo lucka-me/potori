@@ -70,7 +70,7 @@ export default class NominationDetails extends Vue {
     save() {
         if (!this.nomination) return;
         this.editData.save(this.nomination);
-        service.save();
+        service.update(this.nomination);
         this.editing = false;
     }
 }

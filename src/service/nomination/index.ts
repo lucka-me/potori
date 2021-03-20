@@ -10,10 +10,27 @@ export interface LngLat {
     lat: number;    // Latitude
 }
 
+export interface NominationData {
+    id: string;     // Short ID, also brainstorming ID
+    title: string;  // Title
+    image: string;  // Hash part of the image URL
+    scanner: umi.ScannerCode;   // Scanner of the nomination
+
+    status: umi.StatusCode; // Status code
+    reasons?: Array<umi.ReasonCode>; // Reason codes
+
+    confirmedTime: number;  // Confirmed time, the timestamp of confirmation mail
+    confirmationMailId: string; // ID of confirmation mail
+    resultTime?: number; // Result time, the timestamp of result mail
+    resultMailId?: string;   // ID of result mail
+
+    lngLat?: LngLat;    // Location
+}
+
 /**
  * Nomination data
  */
-export default class Nomination {
+export default class Nomination implements NominationData {
 
     private static timestampSecondBound = 1E12;
 
@@ -26,20 +43,20 @@ export default class Nomination {
         return timeA < timeB ? 1 : -1;
     };
 
-    id = '';    // Short ID, also brainstorming ID
-    title = ''; // Title
-    image = ''; // Hash part of the image URL
-    scanner: umi.ScannerCode = umi.ScannerCode.Unknown; // Scanner of the nomination
+    id = '';
+    title = '';
+    image = '';
+    scanner: umi.ScannerCode = umi.ScannerCode.Unknown;
 
-    status: umi.StatusCode = umi.StatusCode.Pending;  // Status code
-    reasons: Array<umi.ReasonCode> = [];    // Reason codes
+    status: umi.StatusCode = umi.StatusCode.Pending;
+    reasons: Array<umi.ReasonCode> = [];
 
-    confirmedTime = 0;          // Confirmed time, the timestamp of confirmation mail
-    confirmationMailId = '';    // ID of confirmation mail
-    resultTime: number = 0;     // Result time, the timestamp of result mail
-    resultMailId: string = "";  // ID of result mail
+    confirmedTime = 0;
+    confirmationMailId = '';
+    resultTime = 0;
+    resultMailId = '';
 
-    lngLat?: LngLat = undefined;    // Location
+    lngLat?: LngLat = undefined;
 
     /**
      * Get the image URL
@@ -96,30 +113,28 @@ export default class Nomination {
     /**
      * Serialize to JSON
      */
-    get json(): any {
-        let json: any = {
+    get data(): NominationData {
+        let data: NominationData = {
             id: this.id,
             title: this.title,
             image: this.image,
+            scanner: this.scanner,
             status: this.status,
             confirmedTime: this.confirmedTime / 1000,
             confirmationMailId: this.confirmationMailId,
         };
-        if (this.scanner != umi.ScannerCode.Unknown) {
-            json.scanner = this.scanner;
-        }
         if (this.reasons.length > 0) {
-            json.reasons = this.reasons;
+            data.reasons = this.reasons;
         }
-        if (this.resultTime) json.resultTime = this.resultTime / 1000;
-        if (this.resultMailId) json.resultMailId = this.resultMailId;
+        if (this.resultTime) data.resultTime = this.resultTime / 1000;
+        if (this.resultMailId) data.resultMailId = this.resultMailId;
         if (this.lngLat) {
-            json.lngLat = {
+            data.lngLat = {
                 lng: this.lngLat.lng,
                 lat: this.lngLat.lat
             };
         }
-        return json;
+        return data;
     }
 
     /**
@@ -147,19 +162,19 @@ export default class Nomination {
 
     /**
      * Parse nomination from JSON
-     * @param json JSON to be parsed
-     * @throws An `Error` when JSON missing `id`, `title`, `image` or `confirmedTime`
+     * @param data Raw data to be parsed
+     * @throws An `Error` when JSON missing `id`, `title` or `image`
      */
-    static parse(json: any): Nomination {
-        if (!json.id) throw new Error(StringKey.messageParseErrorMissingId);
-        if (!json.title) throw new Error(StringKey.messageParseErrorMissingTitle);
-        if (!json.image) throw new Error(StringKey.messageParseErrorMissingImage);
+    static from(data: NominationData): Nomination {
+        if (!data.id) throw new Error(StringKey.messageParseErrorMissingId);
+        if (!data.title) throw new Error(StringKey.messageParseErrorMissingTitle);
+        if (!data.image) throw new Error(StringKey.messageParseErrorMissingImage);
 
         // Fix old issues
-        const image = (json.image as string).replace('\r', '');
+        const image = data.image.replace('\r', '');
 
         // Test format
-        if (!/^[a-zA-Z0-9]+$/.test(json.id)) {
+        if (!/^[a-zA-Z0-9]+$/.test(data.id)) {
             throw new Error(StringKey.messageParseErrorInvalidId);
         }
         if (!/^[0-9a-zA-Z\-\_]+$/.test(image)) {
@@ -167,44 +182,44 @@ export default class Nomination {
         }
 
         const nomination = new Nomination();
-        nomination.id = json.id;
-        nomination.title = json.title;
+        nomination.id = data.id;
+        nomination.title = data.title;
         nomination.image = image;
 
-        if (json.scanner) {
-            nomination.scanner = json.scanner;
+        if (data.scanner) {
+            nomination.scanner = data.scanner;
         }
 
-        if (json.status === umi.StatusCode.Pending) {
+        if (data.status === umi.StatusCode.Pending) {
             nomination.status = umi.StatusCode.Pending;
-        } else if (json.status === umi.StatusCode.Accepted) {
+        } else if (data.status === umi.StatusCode.Accepted) {
             nomination.status = umi.StatusCode.Accepted;
         } else {
             nomination.status = umi.StatusCode.Rejected;
-            if (json.status !== umi.Reason.undeclared) {
-                if (umi.reason.has(json.status)) {
-                    nomination.reasons.push(json.status);
+            if (data.status !== umi.Reason.undeclared) {
+                if (umi.reason.has(data.status)) {
+                    nomination.reasons.push(data.status);
                 }
             }
         }
-        if (json.reasons) {
-            for (const code of json.reasons) {
+        if (data.reasons) {
+            for (const code of data.reasons) {
                 if (umi.reason.has(code) && !nomination.reasons.includes(code)) {
                     nomination.reasons.push(code);
                 }
             }
         }
 
-        nomination.confirmedTime = json.confirmedTime > Nomination.timestampSecondBound ? json.confirmedTime : json.confirmedTime * 1000;
-        nomination.confirmationMailId = json.confirmationMailId;
+        nomination.confirmedTime = data.confirmedTime > Nomination.timestampSecondBound ? data.confirmedTime : data.confirmedTime * 1000;
+        nomination.confirmationMailId = data.confirmationMailId;
 
-        if (json.resultTime) nomination.resultTime = json.resultTime > Nomination.timestampSecondBound ? json.resultTime : json.resultTime * 1000;
-        if (json.resultMailId) nomination.resultMailId = json.resultMailId;
+        if (data.resultTime) nomination.resultTime = data.resultTime > Nomination.timestampSecondBound ? data.resultTime : data.resultTime * 1000;
+        if (data.resultMailId) nomination.resultMailId = data.resultMailId;
 
-        if (json.lngLat) {
+        if (data.lngLat) {
             nomination.lngLat = {
-                lng: json.lngLat.lng,
-                lat: json.lngLat.lat,
+                lng: data.lngLat.lng,
+                lat: data.lngLat.lat,
             }
         }
         return nomination;
