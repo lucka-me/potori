@@ -16,19 +16,19 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/assets/title.png"
   },
   {
-    "revision": "eb206cc20b5de0c6528e",
+    "revision": "79eafb3eb7b9ec67395b",
     "url": "/next/css/app.1ff94c88.css"
   },
   {
-    "revision": "ea647b2e3bbb1b7f536a",
+    "revision": "6cff5045060646b2fea3",
     "url": "/next/css/dashboard.e47d67f1.css"
   },
   {
-    "revision": "70f3a7b26ecd7f92915a",
+    "revision": "8110f0f76247599c3e74",
     "url": "/next/css/dashboard~details~list~map~match~preferences.a7e1cbc2.css"
   },
   {
-    "revision": "1dc84c930c7433cdbe0d",
+    "revision": "c8d7b77a30b5d2952306",
     "url": "/next/css/details.d1ffb34f.css"
   },
   {
@@ -36,19 +36,19 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/details~map.370ca2bc.css"
   },
   {
-    "revision": "ad922306150c466cf910",
+    "revision": "a413e25388aff61f491b",
     "url": "/next/css/list.6a9f041e.css"
   },
   {
-    "revision": "fdfe000f267086d1387d",
+    "revision": "cb4ed75e4f101b4126e0",
     "url": "/next/css/map.dc687b38.css"
   },
   {
-    "revision": "d5f841a1ebee1d0c451e",
+    "revision": "581c4d4a171995ef27e5",
     "url": "/next/css/match.4e5ee524.css"
   },
   {
-    "revision": "a97fa2ec929f450f3860",
+    "revision": "169187c317e7b563010c",
     "url": "/next/css/preferences.5362f2a4.css"
   },
   {
@@ -72,52 +72,52 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/img/fa-solid-900.2306f642.svg"
   },
   {
-    "revision": "edad668e33fad4d716e2122d40df1bc4",
+    "revision": "d9bd50bac11885f28eb7ac2c240941f4",
     "url": "/next/index.html"
   },
   {
-    "revision": "eb206cc20b5de0c6528e",
-    "url": "/next/js/app.d8c5a58b.js"
+    "revision": "79eafb3eb7b9ec67395b",
+    "url": "/next/js/app.341da259.js"
   },
   {
-    "revision": "9cbe46972079220473ab",
-    "url": "/next/js/chunk-vendors.322d39ad.js"
+    "revision": "696c8c3825794b63fb50",
+    "url": "/next/js/chunk-vendors.7366df02.js"
   },
   {
-    "revision": "ea647b2e3bbb1b7f536a",
-    "url": "/next/js/dashboard.1e04adee.js"
+    "revision": "6cff5045060646b2fea3",
+    "url": "/next/js/dashboard.6d395a0c.js"
   },
   {
-    "revision": "70f3a7b26ecd7f92915a",
-    "url": "/next/js/dashboard~details~list~map~match~preferences.df9c6443.js"
+    "revision": "8110f0f76247599c3e74",
+    "url": "/next/js/dashboard~details~list~map~match~preferences.bfa170ac.js"
   },
   {
-    "revision": "1dc84c930c7433cdbe0d",
-    "url": "/next/js/details.a49b0434.js"
+    "revision": "c8d7b77a30b5d2952306",
+    "url": "/next/js/details.8b8df274.js"
   },
   {
     "revision": "5eff018f37f10358cec5",
     "url": "/next/js/details~map.df86ac01.js"
   },
   {
-    "revision": "ad922306150c466cf910",
-    "url": "/next/js/list.0173434a.js"
+    "revision": "a413e25388aff61f491b",
+    "url": "/next/js/list.d5fa2259.js"
   },
   {
-    "revision": "fdfe000f267086d1387d",
-    "url": "/next/js/map.e52c3758.js"
+    "revision": "cb4ed75e4f101b4126e0",
+    "url": "/next/js/map.c0b7e21c.js"
   },
   {
     "revision": "57b18bfa296f433c13ae",
     "url": "/next/js/mapbox.2dcfe6ae.js"
   },
   {
-    "revision": "d5f841a1ebee1d0c451e",
-    "url": "/next/js/match.75f270bf.js"
+    "revision": "581c4d4a171995ef27e5",
+    "url": "/next/js/match.18935d21.js"
   },
   {
-    "revision": "a97fa2ec929f450f3860",
-    "url": "/next/js/preferences.3f1fc0d4.js"
+    "revision": "169187c317e7b563010c",
+    "url": "/next/js/preferences.4e11dbb9.js"
   },
   {
     "revision": "6dcd4e60aac327b475c67359318dc9ab",
