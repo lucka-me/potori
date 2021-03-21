@@ -7,8 +7,6 @@ import { Chart } from 'chart.js';
 import { DateTime } from 'luxon';
 import { Vue, Options } from 'vue-property-decorator';
 
-import { umi } from '@/service/umi';
-
 import ChartBlock, { fillTimeCountMap } from './ChartBlock.vue';
 
 @Options({
@@ -69,8 +67,8 @@ export default class CountByMonthChart extends Vue {
                 }, {
                     label: 'Results',
                     data: dataResults,
-                    borderColor: 'blue',
-                    pointBackgroundColor: 'blue',
+                    borderColor: 'royalblue',
+                    pointBackgroundColor: 'royalblue',
                     pointRadius: 0,
                     fill: false,
                 }],

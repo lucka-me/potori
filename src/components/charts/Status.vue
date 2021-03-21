@@ -16,6 +16,7 @@ import ChartBlock from './ChartBlock.vue';
 })
 export default class StatusChart extends Vue {
 
+    private static readonly colors = [ '#CAAF85', '#35C572', '#B0373C' ];
     private chart?: Chart;
     $el!: HTMLDivElement;
     
@@ -42,10 +43,10 @@ export default class StatusChart extends Vue {
                 labels: labels,
                 datasets: [{
                     data: data,
-                    backgroundColor: [ 'yellow', 'green', 'red' ],
+                    backgroundColor: StatusChart.colors,
                     borderAlign: 'inner',
                     borderColor: 'rgba(0, 0, 0, 0.2)',
-                    hoverBackgroundColor: [ 'yellow', 'green', 'red' ],
+                    hoverBackgroundColor: StatusChart.colors,
                     hoverBorderColor: 'rgba(0, 0, 0, 0.4)',
                 }]
             },
