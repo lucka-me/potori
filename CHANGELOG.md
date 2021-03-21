@@ -1,7 +1,7 @@
 # Changelog
 Noteable changes of Potori will be documented here.
 
-## [0.8.1](https://github.com/lucka-me/potori/releases/tag/0.8.1) - 2021-03-TBA
+## [0.8.1](https://github.com/lucka-me/potori/releases/tag/0.8.1) - 2021-03-21
 Split umi data and mail samples to independent repository
 
 ### Changed
