@@ -6,11 +6,28 @@
 </template>
 
 <script lang="ts">
+import { DateTime } from 'luxon';
 import { Vue, Prop } from 'vue-property-decorator';
 
 export default class ChartBlock extends Vue {
     @Prop(String) readonly title!: string;
 }
+
+/**
+     * Fill the <time, count> map with empty months
+     * @param dataMap The map to be filled
+     * @param start Start time
+     * @param end End time
+     */
+    export function fillTimeCountMap(map: Map<number, number>, start: number, end: number) {
+        let scan = start;
+        while (scan <= end) {
+            const month = DateTime.fromMillis(scan + 1000).startOf('month');
+            const key = month.valueOf();
+            if (!map.has(key)) map.set(key, 0);
+            scan = month.endOf('month').valueOf();
+        }
+    }
 </script>
 
 <style lang="scss">
@@ -25,7 +42,7 @@ export default class ChartBlock extends Vue {
     > div {
         margin-block-start: 0.2rem;
         flex: 1;
-        height: 10rem;
+        height: 12rem;
         position: relative;
 
         > canvas {

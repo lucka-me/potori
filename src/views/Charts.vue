@@ -6,42 +6,47 @@
         <status-chart/>
         <reasons-chart/>
     </div>
-    <status-chart/>
+    <count-by-month-chart/>
 </main>
 </template>
 
 <script lang="ts">
 import {
     Chart,
-    ArcElement,
-    DoughnutController,
-    Tooltip,
-    Legend
+    ArcElement, LineElement, PointElement,
+    DoughnutController, LineController,
+    LinearScale, TimeScale,
+    Tooltip, Legend
 } from 'chart.js';
+import 'chartjs-adapter-luxon';
 import { Vue, Options } from 'vue-class-component';
 
 import MaterialTopAppBar from '@/components/material/TopAppBar.vue';
 import MaterialTopAppBarAdjust from '@/components/material/TopAppBarAdjust.vue';
+import CountByMonthChart from '@/components/charts/CountByMonth.vue';
 import ReasonsChart from '@/components/charts/Reasons.vue';
 import StatusChart from '@/components/charts/Status.vue';
 
 @Options({
     components: {
         MaterialTopAppBar, MaterialTopAppBarAdjust,
-        StatusChart, ReasonsChart
+        StatusChart, ReasonsChart,
+        CountByMonthChart
     },
 })
 export default class Charts extends Vue {
 
     created() {
         Chart.register(
-            ArcElement,
-            DoughnutController,
-            Tooltip,
-            Legend
+            ArcElement, LineElement, PointElement,
+            DoughnutController, LineController,
+            LinearScale, TimeScale,
+            Tooltip, Legend
         );
         Chart.defaults.maintainAspectRatio = false;
         Chart.defaults.plugins.legend!.labels.boxWidth = 10;
+        Chart.defaults.plugins.tooltip!.intersect = false;
+        Chart.defaults.elements.line!.tension = 1;
     }
 }
 </script>
