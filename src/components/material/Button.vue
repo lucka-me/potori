@@ -1,7 +1,7 @@
 <template>
 <button :class="className">
     <span class="mdc-button__ripple"></span>
-    <span class="mdc-button__labbel"><slot/></span>
+    <span class="mdc-button__label"><slot/></span>
 </button>
 </template>
 

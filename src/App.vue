@@ -1,5 +1,6 @@
 <template>
 <router-view/>
+<material-dialog v-model="alertOpen">{{ alertMessage }}</material-dialog>
 <material-snackbar :message="informMessage" v-model="informOpen"/>
 </template>
 
@@ -8,23 +9,32 @@ import { Vue, Options } from 'vue-property-decorator';
 
 import { delibird } from './service/delibird';
 
+import MaterialDialog from '@/components/material/Dialog.vue';
 import MaterialSnackbar from '@/components/material/Snackbar.vue';
 
 @Options({
     components: {
+        MaterialDialog,
         MaterialSnackbar
     }
 })
 export default class App extends Vue {
 
+    alertMessage: string = '';
+    alertOpen: boolean = false;
+
     informMessage: string = '';
     informOpen: boolean = false;
 
     mounted() {
+        delibird.events.alert = (message) => {
+            this.alertMessage = message;
+            this.alertOpen = true;
+        };
         delibird.events.inform = (message) => {
             this.informMessage = message;
             this.informOpen = true;
-        }
+        };
     }
 }
 </script>

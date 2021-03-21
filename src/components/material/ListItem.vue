@@ -19,7 +19,7 @@
 import { MDCRipple } from '@material/ripple';
 import { Vue, Prop } from 'vue-property-decorator';
 
-export default class MaterialList extends Vue {
+export default class MaterialListItem extends Vue {
 
     @Prop(String) readonly text!: String;
     @Prop(String) readonly secondary?: String;
