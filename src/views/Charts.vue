@@ -1,7 +1,7 @@
 <template>
 <material-top-app-bar title="Charts" navi-back/>
 <material-top-app-bar-adjust/>
-<main class="charts">
+<main v-if="!$store.getters.empty" class="charts">
     <div class="grid grid--1-1">
         <status-chart/>
         <reasons-chart/>
