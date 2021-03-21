@@ -16,6 +16,7 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 
+import { delibird } from '@/service/delibird';
 import { service } from '@/service';
 import { version } from '@/service/version';
 
@@ -66,6 +67,7 @@ export default class AboutPreferences extends Vue {
         textarea.select();
         document.execCommand('copy');
         textarea.remove();
+        delibird.inform(`Copied ${service.errors.length} errors to clipboard.`);
     }
 }
 </script>
