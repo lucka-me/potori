@@ -7,6 +7,11 @@ const routes: Array<RouteRecordRaw> = [
         component: () => import(/* webpackChunkName: "dashboard" */ '@/views/Dashboard.vue')
     },
     {
+        path: '/charts',
+        name: 'Charts',
+        component: () => import(/* webpackChunkName: "charts" */ '@/views/Charts.vue'),
+    },
+    {
         path: '/list',
         name: 'List',
         component: () => import(/* webpackChunkName: "list" */ '@/views/NominationList.vue'),

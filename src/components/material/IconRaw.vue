@@ -20,6 +20,7 @@ const IconSymbolMap: Record<string, string> = {
     'plus'  : '\uf067',
     'calendar-alt'  : '\uf073',
     'folder-open'   : '\uf07c',
+    'chart-bar' : '\uf080',
     'globe' : '\uf0ac',
     'angle-up'  : '\uf106',
     'angle-down': '\uf107',
