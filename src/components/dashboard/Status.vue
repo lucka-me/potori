@@ -1,16 +1,13 @@
 <template>
 <div class="status">
-    <div v-if="processingMails">
-        <div>Processing Mails</div>
-        <material-linear-progress :progress="$store.state.progress"/>
+    <div v-if="showProgress" class="progress">
+        <div>{{ progressText }}</div>
+        <material-linear-progress :progress="$store.state.progress" :determinate="progressDeterminate"/>
     </div>
-    <div v-else-if="syncing">Syncing</div>
-    <material-button v-else-if="gapiLoaded && !authed" outlined @click="link">Link Google Account</material-button>
-    <material-button v-else-if="requestMatch" outlined @click="match">Manually Match</material-button>
-    <div v-else-if="gapiLoaded && $store.getters.empty">Please refresh to get nominations</div>
-    <div v-else-if="!gapiLoaded && $store.getters.empty">Loading Google API</div>
-    <div v-else>
-        Latest: XXX
+    <div v-if="showActions" class="actions">
+        <material-button v-if="showLinkButton" outlined @click="link">Link Google Account</material-button>
+        <material-button v-if="showMatchButton" outlined @click="match">Manually Match</material-button>
+        <material-button v-if="showChartsButton" outlined @click="openCharts">Charts</material-button>
     </div>
 </div>
 </template>
@@ -22,38 +19,58 @@ import { service } from '@/service';
 import { State } from '@/store';
 
 import MaterialButton from '@/components/material/Button.vue';
+import MaterialIconButton from '@/components/material/IconButton.vue';
 import MaterialLinearProgress from '@/components/material/LinearProgress.vue';
 
 @Options({
     components: {
         MaterialButton,
+        MaterialIconButton,
         MaterialLinearProgress
     },
 })
 export default class Status extends Vue {
 
-    get gapiLoaded() {
-        return this.$store.state.gapiLoaded;
+    get showProgress(): boolean {
+        if (this.$store.state.status === State.Status.processingMails) return true;
+        if (this.$store.state.status === State.Status.syncing) return true;
+        if (this.$store.getters.empty && this.gapiLoaded) return true;
+        return false;
     }
 
-    get authed() {
-        return this.$store.state.gapiAuthed;
+    get progressText(): string {
+        if (this.$store.state.status === State.Status.processingMails) return 'Processing Mails';
+        if (this.$store.state.status === State.Status.syncing) return 'Syncing';
+        if (this.$store.getters.empty && this.gapiLoaded) return 'Loading Google API';
+        return '';
+    }
+
+    get progressDeterminate(): boolean {
+        return this.$store.state.status === State.Status.processingMails;
+    }
+
+    get showLinkButton(): boolean {
+        return this.gapiLoaded && !this.$store.state.gapiAuthed;
+    }
+
+    get showMatchButton(): boolean {
+        return this.$store.state.status === State.Status.requestMatch;
+    }
+
+    get showChartsButton(): boolean {
+        return !this.$store.getters.empty;
+    }
+
+    get showActions(): boolean {
+        return this.showLinkButton || this.showMatchButton || this.showChartsButton;
     }
 
     get idle() {
         return this.$store.state.status === State.Status.idle;
     }
 
-    get processingMails() {
-        return this.$store.state.status === State.Status.processingMails;
-    }
-
-    get syncing() {
-        return this.$store.state.status === State.Status.syncing;
-    }
-
-    get requestMatch() {
-        return this.$store.state.status === State.Status.requestMatch;
+    get gapiLoaded() {
+        return this.$store.state.gapiLoaded;
     }
 
     link() {
@@ -63,5 +80,22 @@ export default class Status extends Vue {
     match() {
         this.$router.push({ path: '/match' });
     }
+
+    openCharts() {
+        this.$router.push({ path: '/charts' });
+    }
 }
 </script>
+
+<style lang="scss">
+.status {
+    > .actions {
+        display: flex;
+        flex-flow: row nowrap;
+    }
+
+    > .progress + .actions {
+        margin-block-start: 0.4rem;
+    }
+}
+</style>

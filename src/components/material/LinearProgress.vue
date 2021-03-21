@@ -20,6 +20,7 @@ import { Vue, Prop, Watch } from 'vue-property-decorator';
 export default class MaterialSwitch extends Vue {
 
     @Prop(Number) readonly progress!: number;
+    @Prop(Boolean) readonly determinate!: boolean;
 
     private ctrl?: MDCLinearProgress;
 
@@ -29,16 +30,16 @@ export default class MaterialSwitch extends Vue {
         this.ctrl.progress = newVal;
     }
 
+    @Watch('determinate')
+    onDeterminateChanged(newVal: boolean, _: boolean) {
+        if (!this.ctrl) return;
+        this.ctrl.determinate = newVal;
+    }
+
     mounted() {
         this.ctrl = MDCLinearProgress.attachTo(this.$el);
         this.ctrl.progress = this.progress;
-    }
-
-    updated() {
-        this.ctrl?.destroy();
-        this.ctrl = MDCLinearProgress.attachTo(this.$el);
-        this.ctrl.open();
-        this.ctrl.progress = this.progress;
+        this.ctrl.determinate = this.determinate;
     }
 
     unmounted() {
