@@ -1,13 +1,15 @@
 import { Store } from 'vuex'
+import { toRaw } from '@vue/reactivity';
 
-import { State } from '@/store';
-import { dia } from './dia';
 import GoogleKit from './google';
 import Mari from './mari';
 import Nomination, { NominationData } from './nomination';
+import { delibird } from './delibird';
+import { dia } from './dia';
 import { preferences } from './preferences';
 import { umi } from './umi';
-import { toRaw } from '@vue/reactivity';
+import { CountCallback } from './types';
+import { State } from '@/store';
 
 export namespace service {
 
@@ -59,6 +61,9 @@ export namespace service {
             };
             google.auth.init();
 
+            mari.events.alert = (message) => {
+                delibird.alert(message);
+            }
             mari.events.progress = (progress) => {
                 setProgress(progress);
             };
@@ -110,7 +115,7 @@ export namespace service {
         });
     }
 
-    export function importNominationsFile() {
+    export function importNominationsFile(callback: CountCallback) {
         const input = document.createElement('input');
         input.type = 'file';
         input.accept = 'json';
@@ -126,9 +131,10 @@ export namespace service {
                 if (typeof fileReader.result !== 'string') return;
                 try {
                     const list = JSON.parse(fileReader.result) as Array<NominationData>;
-                    importNominations(list);
+                    const count = importNominations(list);
+                    callback(count);
                 } catch (error) {
-
+                    callback(0);
                 }
             };
             fileReader.readAsText(file);
@@ -149,19 +155,24 @@ export namespace service {
 
     /**
      * Import JSON from Wayfarer API response
-     * @param raw Raw JSON
+     * 
+     * Error codes
+     * - `-1` Parse error
+     * - `-2` Invalid data
+     * @param json Raw JSON
+     * @returns Count of updated nominations or error code
      */
-    export function importWayfarerJSON(json: string) {
+    export function importWayfarerJSON(json: string): number {
         let parsed;
         try {
             parsed = JSON.parse(json);
         } catch (error) {
             // Parse error
-            return;
+            return -1;
         }
         if (!parsed.result || parsed.result.length < 1) {
-            // Invalid Data
-            return;
+            // Invalid data
+            return -2;
         }
 
         const nominations = _store.state.nominations;
@@ -183,8 +194,8 @@ export namespace service {
             };
             count += 1;
         }
-        // Inform count
         save();
+        return count;
     }
 
     export function update(nomination: Nomination) {

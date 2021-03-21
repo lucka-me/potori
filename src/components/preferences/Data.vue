@@ -17,6 +17,7 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 
+import { delibird } from '@/service/delibird';
 import { service } from '@/service';
 import { State } from '@/store';
 
@@ -36,7 +37,9 @@ export default class DataPreferences extends Vue {
     }
 
     importNominations() {
-        service.importNominationsFile();
+        service.importNominationsFile((count) => {
+            delibird.inform(`Imported ${count} nominations.`);
+        });
     }
 
     exportNominations() {
@@ -46,7 +49,18 @@ export default class DataPreferences extends Vue {
     importWayfarerJSON() {
         const text = window.prompt('Paste Wayfarer JSON');
         if (!text) return;
-        service.importWayfarerJSON(text);
+        const result = service.importWayfarerJSON(text);
+        switch (result) {
+            case -1:
+                delibird.alert('Unable to parse the JSON.');
+                break;
+            case -2:
+                delibird.alert('The data is invalid.')
+                break;
+            default:
+                delibird.inform(`Updated ${result} nominations.`);
+                break;
+        }
     }
 
     clearNominations() {

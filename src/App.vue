@@ -1,6 +1,33 @@
 <template>
 <router-view/>
+<material-snackbar :message="informMessage" v-model="informOpen"/>
 </template>
+
+<script lang="ts">
+import { Vue, Options } from 'vue-property-decorator';
+
+import { delibird } from './service/delibird';
+
+import MaterialSnackbar from '@/components/material/Snackbar.vue';
+
+@Options({
+    components: {
+        MaterialSnackbar
+    }
+})
+export default class App extends Vue {
+
+    informMessage: string = '';
+    informOpen: boolean = false;
+
+    mounted() {
+        delibird.events.inform = (message) => {
+            this.informMessage = message;
+            this.informOpen = true;
+        }
+    }
+}
+</script>
 
 <style lang="scss">
 @use '~@material/typography';

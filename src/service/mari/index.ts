@@ -1,11 +1,11 @@
 import Nomination from '@/service/nomination';
+import { MessageCallback } from '@/service/types';
 import { preferences } from '@/service/preferences';
 import { umi } from '@/service/umi';
 
 import { parser } from './parser';
 
 type BasicCallback = () => void;
-type MessageCallback = (message: string) => void;
 type FinishCallback = (nominations: Array<Nomination>) => void;
 export type ProgressCallback = (percent: number) => void;
 
