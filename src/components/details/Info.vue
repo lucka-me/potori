@@ -2,7 +2,7 @@
 <div class="info-block">
     <div class="row">
         <material-icon icon="arrow-up" fixed-width/>
-        <span>Comfirmed</span>
+        <span>Confirmed</span>
         <div class="spacer"/>
         <span>{{ confirmedTime }}</span>
     </div>
