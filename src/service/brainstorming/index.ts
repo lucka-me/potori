@@ -1,10 +1,8 @@
 import type { Reference } from '@firebase/database-types';
 
-import { service } from 'service';
-import { umi } from 'service/umi';
-import Nomination, { LngLat } from 'service/nomination'
-
-import { QueryFailReason, RateItems } from './constants';
+import { umi } from '@/service/umi';
+import { version } from '@/service/version';
+import Nomination from '@/service/nomination'
 
 /**
  * Result for {@link BrainstormingKit.analyse}
@@ -20,18 +18,69 @@ interface BrainstormingStats {
     },
 }
 
-type FailCallback = (reason: QueryFailReason) => void;
-type QueryCallback = (data: any) => void;
-type QueryLocationCallback = (lngLat: LngLat) => void;
-type UpdateCallback = () => void;
-
 /**
  * Host Brainstorming data and handle tasks related to Brainstorming
  */
-class BrainstormingKit {
+export namespace brainstorming {
 
-    data: Map<string, any> = new Map();     // Local database
-    private reference: Reference = null;    // Firebase reference
+    export enum FailReason {
+        INDEXEDDB_ERROR = 'message:service.brainstorming.indexedDBError',   // Unable to query local database
+        FIREBASE_ERROR  = 'message:service.brainstorming.firebaseError',    // Unable to query firebase
+        NOT_EXISTS      = 'message:service.brainstorming.notExists',        // Nomination not exists in local database or firebase
+        EARLY           = 'message:service.brainstorming.early',            // Nomination got result before firebase exists
+    };
+
+    export interface ReviewRaw {
+        cultural: string;
+        description: string;
+        location: string;
+        quality: string;
+        safety: string;
+        uniqueness: string;
+    }
+
+    export interface Review {
+        JSON: ReviewRaw;
+        Timestamp: number;
+        author: string;
+        reasons: string;
+        stars: string;
+    }
+
+    export interface Record {
+        description: string;
+        hashTags: Array<string>;
+        imageUrl: string;
+        lastTime: number;
+        lat: string;
+        lng: string;
+        statement?: string;
+        streetAddress: string;
+        supportingImageUrl?: string;
+        title: string;
+        [name: string]: any | Review;
+    }
+
+    const databaseName = 'brainstorming';
+    const databaseVersion = 1;
+    const storeName = 'record';
+
+    let database: IDBDatabase | undefined = undefined;  // Local database
+    let reference: Reference | undefined = undefined;   // Firebase reference
+
+    export async function init() {
+        return new Promise<boolean>((resolve, reject) => {
+            const request = window.indexedDB.open(databaseName, databaseVersion);
+            request.onsuccess = () => {
+                database = request.result;
+                resolve(true);
+            };
+            request.onerror = () => reject(request.error);
+            request.onupgradeneeded = () => {
+                request.result.createObjectStore(storeName);
+            };
+        });
+    }
 
     /**
      * Query data from local databse and firebase (full version only)
@@ -39,32 +88,24 @@ class BrainstormingKit {
      * @param succeed Triggered when succeed to query data
      * @param failed Triggered when Failed to query data
      */
-    query(nomination: Nomination, succeed: QueryCallback, failed: FailCallback) {
-        if (this.beforeCreate(nomination)) {
-            failed(QueryFailReason.EARLY);
-            return;
+    export async function query(nomination: Nomination): Promise<Record> {
+        if (beforeCreate(nomination)) {
+            throw new Error(FailReason.EARLY);
         }
-        if (this.data.has(nomination.id)) {
-            succeed(this.data.get(nomination.id));
-            return;
+        let record = await queryDatabase(nomination.id).catch(error => {
+            throw error;
+        });
+        if (record) {
+            return record;
         }
-        if (!service.version.full) {
-            failed(QueryFailReason.NOT_EXISTS);
-            return;
+        if (!version.full) {
+            throw new Error(FailReason.NOT_EXISTS);
         }
-        this.queryFirebase(nomination, succeed, failed);
-    }
-
-    /**
-     * Query location data from local databse and firebase (full version only)
-     * @param nomination Nomination to query
-     * @param succeed Triggered when succeed to query location
-     * @param failed Triggered when Failed to query location
-     */
-    queryLocation(nomination: Nomination, succeed: QueryLocationCallback, failed: FailCallback) {
-        this.query(nomination, (data) => {
-            succeed({ lng: parseFloat(data.lng), lat: parseFloat(data.lat) });
-        }, failed);
+        record = await queryFirebase(nomination.id).catch(error => {
+            throw error;
+        });
+        if (!record) throw new Error(FailReason.NOT_EXISTS);
+        return record;
     }
 
     /**
@@ -72,74 +113,91 @@ class BrainstormingKit {
      * @param nominations Nomination list
      * @param finish Triggered when all query finishes
      */
-    update(nominations: Array<Nomination>, finish: UpdateCallback) {
-        const queryList = [];
+    export async function update(nominations: Array<Nomination>): Promise<number> {
+        const quries: Array<Promise<Record | undefined>> = [];
         for (const nomination of nominations) {
-            if (this.beforeCreate(nomination)) continue;
-            queryList.push(nomination);
+            if (beforeCreate(nomination)) continue;
+            quries.push(queryFirebase(nomination.id));
         }
-        let left = queryList.length;
-        const queried = () => {
-            left--;
-            if (left < 1) finish();
-        }
-        for (const nomination of queryList) {
-            this.queryFirebase(nomination, (value) => {
-                this.data.set(nomination.id, value);
-                queried();
-            }, queried);
-        }
+        const results = await Promise.allSettled(quries);
+        return results.reduce((count, result) => {
+            return count + result.status === 'fulfilled' ? 1 : 0;
+        }, 0);
     }
 
     /**
-     * Query the firebase
-     * @param bsId Brainstorming ID
-     * @param succeed Triggered when succeed
-     * @param failed Triggered when failed
+     * Query from the local IndexedDB database
+     * @param id Brainstorming ID
      */
-    private queryFirebase(nomination: Nomination, succeed: QueryCallback, failed: FailCallback) {
-        if (this.beforeCreate(nomination)) {
-            failed(QueryFailReason.EARLY);
-            return;
-        }
-        Promise.all([
-            import(/* webpackChunkName: 'modules-async' */ '@firebase/app'),
-            import(/* webpackChunkName: 'modules-async' */ '@firebase/database'),
-        ]).then(([ firebase, _ ]) => {
-            if (!this.reference) {
-                const app = firebase.default.initializeApp({ databaseURL: 'https://oprbrainstorming.firebaseio.com' });
-                if (!this.reference) this.reference = app.database().ref('c/reviews/');
+    function queryDatabase(id: string) {
+        return new Promise<Record | undefined>((resolve, reject) => {
+            const store = getStore('readonly');
+            if (!store) {
+                reject(FailReason.INDEXEDDB_ERROR);
+                return;
             }
-            this.reference.child(nomination.id).once('value', (data) => {
-                const value = data.val();
-                if (!value) {
-                    failed(QueryFailReason.NOT_EXISTS);
-                    return;
-                }
-                succeed(value);
-            }, () => failed(QueryFailReason.FIREBASE_ERROR));
+            const request = store.get(id);
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = () => resolve(undefined);
         });
+    }
+
+    /**
+     * Query from the Firebase database
+     * @param id Brainstorming ID
+     */
+    async function queryFirebase(id: string): Promise<Record | undefined> {
+        const [ firebase, _ ] = await Promise.all([
+            import(/* webpackChunkName: 'firebase' */ '@firebase/app'),
+            import(/* webpackChunkName: 'firebase' */ '@firebase/database'),
+        ]).catch(_ => {
+            throw new Error(FailReason.FIREBASE_ERROR);
+        });
+        if (!reference) {
+            const app = firebase.default.initializeApp({ databaseURL: 'https://oprbrainstorming.firebaseio.com' });
+            if (!reference) reference = app.database!().ref('c/reviews/');
+        }
+        const data = await reference.child(id).once('value').catch(_ => {
+            throw new Error(FailReason.FIREBASE_ERROR);
+        });
+        const record: Record | undefined = data.val();
+        if (record) save(record);
+        return record;
+    }
+
+    function save(record: Record) {
+        const store = getStore('readwrite');
+        if (!store) return;
+        store.put(record);
     }
 
     /**
      * Clear local database
      */
-    clear() {
-        this.data.clear();
+    function clear() {
+        const store = getStore('readwrite');
+        if (!store) return;
+        store.clear();
     }
 
     /**
      * Check if the nomination got result before creation of firebase, should skip query if true
      * @param nomination The nomination
      */
-    beforeCreate(nomination: Nomination): boolean {
+    function beforeCreate(nomination: Nomination): boolean {
         return nomination.status !== umi.StatusCode.Pending && nomination.resultTime < 1518796800000;
+    }
+
+    function getStore(mode: IDBTransactionMode): IDBObjectStore | undefined {
+        if (!database) return undefined;
+        return database.transaction([ storeName ], mode).objectStore(storeName);
     }
 
     /**
      * Analyse reviews of given nominations
      * @param nominations Nomination list
      */
+    /*
     analyse(nominations: Array<Nomination>): BrainstormingStats {
         const stats: BrainstormingStats = {
             review: 0,
@@ -184,6 +242,7 @@ class BrainstormingKit {
         }
         return stats;
     }
+    */
 
     /**
      * Detect if a review matches the result
@@ -195,6 +254,7 @@ class BrainstormingKit {
      * @param stars Stars of the review
      * @param status Status code of the resulted nomination
      */
+    /*
     private isSynched(stars: string, nomination: Nomination) {
         if (
             stars === 'D'
@@ -218,8 +278,5 @@ class BrainstormingKit {
         }
         
         return false;
-    }
+    }*/
 }
-
-export default BrainstormingKit;
-export { BrainstormingStats, QueryFailReason, RateItems };
