@@ -5,12 +5,11 @@
 </template>
 
 <script lang="ts">
-import { ChartDataset, ChartOptions } from 'chart.js';
 import { DateTime } from 'luxon';
 import { Vue, Options } from 'vue-property-decorator';
 
 import ChartBlock, { fillTimeCountMap } from './ChartBlock.vue';
-import ChartView from './ChartView.vue';
+import ChartView, { ChartDataset, ChartOptions } from './ChartView.vue';
 
 @Options({
     components: {

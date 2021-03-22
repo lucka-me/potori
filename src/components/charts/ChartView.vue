@@ -48,6 +48,8 @@ export default class ChartView<
         this.chart.data.labels = newVal;
     }
 }
+
+export { ChartDataset, ChartOptions, ChartType };
 </script>
 
 <style lang="scss">
