@@ -6,7 +6,7 @@ export namespace version {
     export function build() {
         let buildNumber = '0';
         try {
-            buildNumber = execSync('git rev-list --count HEAD', { encoding: "utf-8" }).trim();
+            buildNumber = execSync('git rev-list --count HEAD', { encoding: 'utf-8' }).trim();
         } catch(error) {
 
         }

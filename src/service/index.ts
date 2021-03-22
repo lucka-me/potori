@@ -183,8 +183,7 @@ export namespace service {
         
         let count = 0;
         for (const data of parsed.result) {
-            const imageUrl = data.imageUrl.replace('https://lh3.googleusercontent.com/', '');
-            const id = Nomination.parseId(imageUrl);
+            const id = Nomination.parseId(data.imageUrl);
             const nomination = mapNomination.get(id);
             if (!nomination) continue;
             nomination.title = data.title;

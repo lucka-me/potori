@@ -1,4 +1,4 @@
-import { MessageCallback } from "@/service/types";
+import { MessageCallback } from '@/service/types';
 
 export namespace delibird {
     interface Events {
