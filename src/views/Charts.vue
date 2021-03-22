@@ -2,7 +2,7 @@
 <material-top-app-bar title="Charts" navi-back/>
 <material-top-app-bar-adjust/>
 <main v-if="!$store.getters.empty" class="charts">
-    <div class="grid grid--1-1">
+    <div class="grid grid--1-2">
         <status-chart/>
         <reasons-chart/>
     </div>
@@ -74,6 +74,10 @@ export default class Charts extends Vue {
         @media screen and (min-width: 600px) {
             &--1-1 {
                 grid-template-columns: 1fr 1fr;
+            }
+
+            &--1-2 {
+                grid-template-columns: 1fr 2fr;
             }
 
             &--2-1 {
