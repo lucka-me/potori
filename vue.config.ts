@@ -3,7 +3,7 @@ import { ProjectOptions } from '@vue/cli-service';
 
 let next = true;
 try {
-    const branch = execSync('git rev-parse --abbrev-ref HEAD', { encoding: "utf-8" }).trim();
+    const branch = execSync('git rev-parse --abbrev-ref HEAD', { encoding: 'utf-8' }).trim();
     next = branch === 'dev';
 } catch(error) {
 
@@ -34,12 +34,12 @@ const options: ProjectOptions = {
             icons: [
                 {
                     src: `${publicPath}assets/icon-maskable.png`,
-                    size: "512x512",
+                    size: '512x512',
                     purpose: 'maskable',
                 },
                 {
                     src: `${publicPath}assets/icon-rounded.png`,
-                    size: "512x512",
+                    size: '512x512',
                     purpose: 'any',
                 },
             ]
