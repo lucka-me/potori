@@ -23,12 +23,14 @@
 import { Options, Vue } from 'vue-class-component';
 
 import { service } from '@/service';
-import { State } from '@/store';
+import { delibird } from '@/service/delibird';
 import { preferences } from '@/service/preferences';
+import { State } from '@/store';
 
 import MaterialButton from '@/components/material/Button.vue';
 import MaterialSwitch from '@/components/material/Switch.vue';
 import PreferenceRow from './Row.vue';
+
 
 @Options({
     components: {
@@ -75,7 +77,9 @@ export default class GooglePreferences extends Vue {
     }
 
     migrate() {
-        service.migrate();
+        service.migrate((count) => {
+            delibird.inform(`Migrated ${count} nominations.`);
+        });
     }
 }
 </script>

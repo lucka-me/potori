@@ -13,7 +13,6 @@ import { State } from '@/store';
 
 export namespace service {
 
-    type DownloadCallback = (count: number) => void;
     type UploadCallback = (succeed: boolean, message?: string) => void;
 
     enum Filename {
@@ -109,9 +108,10 @@ export namespace service {
         });
     }
 
-    export function migrate() {
+    export function migrate(callback: CountCallback) {
         download(Filename.legacy, (count) => {
-            // Alert count
+            setStatus(State.Status.idle);
+            callback(count);
         });
     }
 
@@ -315,7 +315,7 @@ export namespace service {
         _store.commit('setProgress', progress);
     }
 
-    function download(file: Filename, callback: DownloadCallback) {
+    function download(file: Filename, callback: CountCallback) {
         setStatus(State.Status.syncing);
         google.drive.download(file, (file) => {
             if (!file) {
