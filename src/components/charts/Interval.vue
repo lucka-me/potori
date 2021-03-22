@@ -1,18 +1,21 @@
 <template>
-<chart-block title="Interval (Days)"/>
+<chart-block title="Interval (Days)">
+    <chart-view chart-type="bar" :chart-datasets="datasets" :chart-labels="labels" :chart-options="options"/>
+</chart-block>
 </template>
 
 <script lang="ts">
-import { Chart } from 'chart.js';
+import { Chart, ChartDataset, ChartOptions } from 'chart.js';
 import { Vue, Options } from 'vue-property-decorator';
 
 import { umi } from '@/service/umi';
 
 import ChartBlock from './ChartBlock.vue';
+import ChartView from './ChartView.vue';
 
 @Options({
     components: {
-        ChartBlock
+        ChartBlock, ChartView
     }
 })
 export default class IntervalChart extends Vue {
@@ -20,12 +23,29 @@ export default class IntervalChart extends Vue {
     private static readonly timeValid = 1325347200;
     private static readonly timeDay = 24 * 3600 * 1000;
 
-    private chart?: Chart;
-    $el!: HTMLDivElement;
-    
-    mounted() {
+    options: ChartOptions<'bar'> = {
+        plugins: {
+            legend: { display: false }
+        }
+    };
+
+    get labels(): Array<number> {
+        return this.stats.map((pair) => pair.interval);
+    }
+
+    get datasets(): Array<ChartDataset<'bar'>> {
+        const data = this.stats.map((pair) => pair.count);
+        const dataset: ChartDataset<'bar'> = {
+            data: data,
+            backgroundColor: 'royalblue',
+            hoverBackgroundColor: 'royalblue',
+        };
+        return [ dataset ];
+    }
+
+    private get stats(): Array<{ interval: number, count: number}> {
         const nominations = this.$store.state.nominations;
-        const state = nominations.reduce((map, nomination) => {
+        const raw = nominations.reduce((map, nomination) => {
             if (nomination.status === umi.StatusCode.Pending) return map;
             if (nomination.confirmedTime < IntervalChart.timeValid) return map;
             if (nomination.resultTime < IntervalChart.timeValid) return map;
@@ -34,34 +54,12 @@ export default class IntervalChart extends Vue {
             map.set(interval, (map.get(interval) ?? 0) + 1);
             return map;
         }, new Map<number, number>());
-        const pairs: Array<{ interval: number, count: number}> = [];
-        for (const [interval, count] of state) {
-            pairs.push({ interval: interval, count: count });
+        const stats: Array<{ interval: number, count: number}> = [];
+        for (const [interval, count] of raw) {
+            stats.push({ interval: interval, count: count });
         }
-        pairs.sort((a, b) => a.interval - b.interval);
-        const labels = pairs.map((pair) => pair.interval);
-        const data = pairs.map((pair) => pair.count);
-
-        this.chart = new Chart(this.$el.querySelector('canvas')!, {
-            type: 'bar',
-            data: {
-                labels: labels,
-                datasets: [{
-                    data: data,
-                    backgroundColor: 'royalblue',
-                    hoverBackgroundColor: 'royalblue',
-                }],
-            },
-            options: {
-                plugins: {
-                    legend: { display: false }
-                }
-            }
-        });
-    }
-
-    unmounted() {
-        this.chart?.destroy();
+        stats.sort((a, b) => a.interval - b.interval);
+        return stats;
     }
 }
 </script>

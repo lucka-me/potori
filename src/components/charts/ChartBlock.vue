@@ -1,7 +1,7 @@
 <template>
 <div class="chart">
     <span>{{ title }}</span>
-    <div class="chart-container"><canvas/></div>
+    <slot/>
 </div>
 </template>
 
@@ -14,20 +14,20 @@ export default class ChartBlock extends Vue {
 }
 
 /**
-     * Fill the <time, count> map with empty months
-     * @param dataMap The map to be filled
-     * @param start Start time
-     * @param end End time
-     */
-    export function fillTimeCountMap(map: Map<number, number>, start: number, end: number) {
-        let scan = start;
-        while (scan <= end) {
-            const month = DateTime.fromMillis(scan + 1000).startOf('month');
-            const key = month.valueOf();
-            if (!map.has(key)) map.set(key, 0);
-            scan = month.endOf('month').valueOf();
-        }
+ * Fill the <time, count> map with empty months
+ * @param dataMap The map to be filled
+ * @param start Start time
+ * @param end End time
+ */
+export function fillTimeCountMap(map: Map<number, number>, start: number, end: number) {
+    let scan = start;
+    while (scan <= end) {
+        const month = DateTime.fromMillis(scan + 1000).startOf('month');
+        const key = month.valueOf();
+        if (!map.has(key)) map.set(key, 0);
+        scan = month.endOf('month').valueOf();
     }
+}
 </script>
 
 <style lang="scss">
@@ -39,16 +39,12 @@ export default class ChartBlock extends Vue {
     display: flex;
     flex-flow: column nowrap;
 
-    > div {
+    > .chart-container {
         margin-block-start: 0.2rem;
         flex: 1;
         height: 12rem;
-        position: relative;
-
-        > canvas {
-            width: 100% !important;
-            height: 100% !important;
-        }
+        min-height: 12rem;
+        max-height: 12rem;
     }
 }
 </style>

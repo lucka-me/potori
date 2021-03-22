@@ -1,25 +1,41 @@
 <template>
-<chart-block title="Count by Month"/>
+<chart-block title="Count by Month">
+    <chart-view chart-type="line" :chart-datasets="datasets" :chart-options="options"/>
+</chart-block>
 </template>
 
 <script lang="ts">
-import { Chart } from 'chart.js';
+import { ChartDataset, ChartOptions } from 'chart.js';
 import { DateTime } from 'luxon';
 import { Vue, Options } from 'vue-property-decorator';
 
 import ChartBlock, { fillTimeCountMap } from './ChartBlock.vue';
+import ChartView from './ChartView.vue';
 
 @Options({
     components: {
-        ChartBlock
+        ChartBlock, ChartView
     }
 })
 export default class CountByMonthChart extends Vue {
 
-    private chart?: Chart;
-    $el!: HTMLDivElement;
-    
-    mounted() {
+    options: ChartOptions<'line'> = {
+        scales: {
+            x: {
+                type: 'time',
+                time: {
+                    unit: 'month',
+                    tooltipFormat: 'yyyy-MM',
+                    displayFormats: { month: 'yyyy-MM', }
+                }
+            }
+        },
+        plugins: {
+            tooltip: { mode: 'x' }
+        }
+    };
+
+    get datasets(): Array<ChartDataset<'line'>> {
         const nominations = this.$store.state.nominations;
         const mapSubmissions = new Map<number, number>();
         const mapResults = new Map<number, number>();
@@ -53,46 +69,23 @@ export default class CountByMonthChart extends Vue {
         dataSubmissions.sort((a, b) => a.x - b.x);
         dataResults.sort((a, b) => a.x - b.x);
 
-        this.chart = new Chart(this.$el.querySelector('canvas')!, {
-            type: 'line',
-            data: {
-                labels: [],
-                datasets: [{
-                    label: 'Submissions',
-                    data: dataSubmissions,
-                    borderColor: 'orange',
-                    pointBackgroundColor: 'orange',
-                    pointRadius: 0,
-                    fill: false,
-                }, {
-                    label: 'Results',
-                    data: dataResults,
-                    borderColor: 'royalblue',
-                    pointBackgroundColor: 'royalblue',
-                    pointRadius: 0,
-                    fill: false,
-                }],
-            },
-            options: {
-                scales: {
-                    x: {
-                        type: 'time',
-                        time: {
-                            unit: 'month',
-                            tooltipFormat: 'yyyy-MM',
-                            displayFormats: { month: 'yyyy-MM', }
-                        }
-                    }
-                },
-                plugins: {
-                    tooltip: { mode: 'x' }
-                }
-            }
-        });
-    }
-
-    unmounted() {
-        this.chart?.destroy();
+        const datasetSubmissions: ChartDataset<'line'> = {
+            label: 'Submissions',
+            data: dataSubmissions,
+            borderColor: 'orange',
+            pointBackgroundColor: 'orange',
+            pointRadius: 0,
+            fill: false,
+        };
+        const datasetResults: ChartDataset<'line'> = {
+            label: 'Results',
+            data: dataResults,
+            borderColor: 'royalblue',
+            pointBackgroundColor: 'royalblue',
+            pointRadius: 0,
+            fill: false,
+        };
+        return [ datasetSubmissions, datasetResults ];
     }
 }
 </script>
