@@ -2,27 +2,29 @@ import Nomination, { NominationData } from '@/service/nomination';
 
 export namespace dia {
 
-    const DatabaseVersion = 1;
+    const databaseName = 'potori';
+    const databaseVersion = 1;
+    const storeName = 'nomination';
 
     let database: IDBDatabase | undefined = undefined;
 
-    export async function init() {
+    export function init() {
         return new Promise<boolean>((resolve, reject) => {
-            const request = window.indexedDB.open('potori', DatabaseVersion);
+            const request = window.indexedDB.open(databaseName, databaseVersion);
             request.onsuccess = () => {
                 database = request.result;
                 resolve(true);
             };
             request.onerror = () => reject(request.error);
             request.onupgradeneeded = () => {
-                request.result.createObjectStore('nomination', {
+                request.result.createObjectStore(storeName, {
                     keyPath: 'id', autoIncrement: false
                 });
             };
         });
     }
 
-    export async function load() {
+    export function load() {
         return new Promise<Array<NominationData>>((resolve, reject) => {
             const store = getStore('readonly');
             if (!store) {
@@ -63,6 +65,6 @@ export namespace dia {
 
     function getStore(mode: IDBTransactionMode): IDBObjectStore | undefined {
         if (!database) return undefined;
-        return database.transaction([ 'nomination' ], mode).objectStore('nomination');
+        return database.transaction([ storeName ], mode).objectStore(storeName);
     }
 }
