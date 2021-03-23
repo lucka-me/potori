@@ -6,6 +6,8 @@
     <hr/>
     <google-preferences/>
     <hr/>
+    <brainstorming-preferences/>
+    <hr/>
     <data-preferences/>
     <hr/>
     <about-preferences/>
@@ -18,6 +20,7 @@ import { Options, Vue } from 'vue-class-component';
 import MaterialTopAppBar from '@/components/material/TopAppBar.vue';
 import MaterialTopAppBarAdjust from '@/components/material/TopAppBarAdjust.vue';
 import AboutPreferences from '@/components/preferences/About.vue';
+import BrainstormingPreferences from '@/components/preferences/Brainstorming.vue';
 import DataPreferences from '@/components/preferences/Data.vue';
 import GeneralPreferences from '@/components/preferences/General.vue';
 import GooglePreferences from '@/components/preferences/Google.vue';
@@ -27,6 +30,7 @@ import GooglePreferences from '@/components/preferences/Google.vue';
         MaterialTopAppBar, MaterialTopAppBarAdjust,
         GeneralPreferences,
         GooglePreferences,
+        BrainstormingPreferences,
         DataPreferences,
         AboutPreferences,
     },
