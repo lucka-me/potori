@@ -26,7 +26,7 @@
             label="Latitude,Longitude"
             type="text"
             input-id="location-editor"
-            pattern="\-?[0-9]{1,2}\.?[0-9]*,\-?[0-9]{1,3}\.?[0-9]*"
+            pattern="-?[0-9]{1,2}.?[0-9]*,-?[0-9]{1,3}.?[0-9]*"
         />
         <div class="buttons">
             <material-button @click="pasteIntelURL">Paste Intel Map URL</material-button>
