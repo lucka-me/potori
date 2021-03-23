@@ -161,14 +161,14 @@ export namespace brainstorming {
             throw new Error(FailReason.FIREBASE_ERROR);
         });
         const record: Record | undefined = data.val();
-        if (record) save(record);
+        if (record) save(id, record);
         return record;
     }
 
-    function save(record: Record) {
+    function save(id: string, record: Record) {
         const store = getStore('readwrite');
         if (!store) return;
-        store.put(record);
+        store.put(record, id);
     }
 
     /**
