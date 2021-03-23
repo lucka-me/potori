@@ -1,13 +1,9 @@
-import Nomination from '@/service/nomination';
-import { MessageCallback } from '@/service/types';
 import { preferences } from '@/service/preferences';
 import { umi } from '@/service/umi';
+import { MessageCallback, ProgressCallback } from '@/service/types';
+import Nomination from '@/service/nomination';
 
 import { parser } from './parser';
-
-type BasicCallback = () => void;
-type FinishCallback = (nominations: Array<Nomination>) => void;
-export type ProgressCallback = (percent: number) => void;
 
 /**
  * Events for {@link Mari}
@@ -15,7 +11,6 @@ export type ProgressCallback = (percent: number) => void;
 interface MariEvents {
     alert:      MessageCallback;    // Triggered when alert should be displayed
     progress:   ProgressCallback,   // Triggered when main progress update
-    finish:     FinishCallback;     // Triggered when processes all finish
 }
 
 /**
@@ -54,7 +49,6 @@ class Progress {
     messages = new ProgressItem();
 
     onProgress  : ProgressCallback  = () => { };    // Triggered when a message finished if all lists are finished
-    onFinish    : BasicCallback     = () => { };    // Triggered when all lists and messages are finished
 
     /**
      * Clear all progress
@@ -80,9 +74,6 @@ class Progress {
         this.messages.total += messages;
         this.onProgress(this.percent);
         console.log(`Mari progress: [list][${this.lists.finished}/${this.lists.total}]`);
-        if (!this.left) {
-            this.onFinish();
-        }
     }
 
     /**
@@ -93,9 +84,6 @@ class Progress {
         console.log(`Mari progress: [message][${this.messages.finished}/${this.messages.total}]`);
         if (!this.lists.left) {
             this.onProgress(this.percent);
-            if (!this.left) {
-                this.onFinish();
-            }
         }
     }
 
@@ -126,14 +114,13 @@ class Progress {
 export default class Mari {
 
     private queryAfter: string = '';
-    private ignoreMailIds: Array<string> = [];      // List of ids of mails that should be ignored
+    private ignoreIds: Array<string> = [];      // List of ids of mails that should be ignored
     private nominations: Array<Nomination> = [];    // List of nominations
 
     private progress = new Progress();  // Progress manager
 
     events: MariEvents = {
         alert:  () => {},
-        finish: () => {},
         progress: () => {},
     };
 
@@ -141,26 +128,22 @@ export default class Mari {
      * Initiate Mari
      */
     init() {
-        this.progress.onProgress = (percent) => {
-            this.events.progress(percent);
-        }
-        this.progress.onFinish = () => {
-            this.events.finish(this.nominations);
-        }
+        this.progress.onProgress = (percent) => this.events.progress(percent);
     }
 
     /**
      * Start the process
      * @param nominations Existing nominations
      */
-    start(nominations: Array<Nomination>) {
-        this.nominations = nominations.map(nomination => nomination);
+    async start(nominations: Array<Nomination>) {
+        this.nominations.length = 0;
         this.progress.lists.clear();
         this.progress.messages.clear();
 
         // Ignore the mails already in the list
-        this.ignoreMailIds = this.nominations.flatMap(nomination => {
-            return nomination.resultMailId.length > 0 ? [ nomination.confirmationMailId, nomination.resultMailId ] : [ nomination.confirmationMailId ];
+        this.ignoreIds = nominations.flatMap(nomination => {
+            return nomination.resultMailId.length > 0 
+                ? [ nomination.confirmationMailId, nomination.resultMailId ] : [ nomination.confirmationMailId ];
         });
         if (preferences.general.queryAfterLatest()) {
             const latest = Math.floor(this.nominations.reduce((time, nomination) => {
@@ -170,11 +153,15 @@ export default class Mari {
         } else {
             this.queryAfter = '';
         }
+        const queries: Array<Promise<void>> = [];
         for (const status of umi.status.values()) {
             for (const scanner of status.queries.keys()) {
-                this.queryList(status.code, scanner);
+                queries.push(this.query(status, scanner));
             }
         }
+        await Promise.allSettled(queries);
+        nominations.push(...this.nominations);
+        return nominations;
     }
 
     /**
@@ -182,105 +169,59 @@ export default class Mari {
      * @param status Status to query
      * @param scanner Scanner to query
      */
-    private queryList(status: umi.StatusCode, scanner: umi.ScannerCode) {
+    private async query(status: umi.Status, scanner: umi.ScannerCode) {
         this.progress.addList();
-        const listRequest = this.getListRequest(undefined, status, scanner);
-        listRequest.execute((response) => {
-            this.handleListRequest(response, [], status, scanner);
-        });
-    }
-
-    /**
-     * Generate a request for mail list
-     * @param pageToken Token for target page
-     * @param status Status to query
-     * @param scanner Scanner to query, must exist in the `queries` of the status
-     */
-    private getListRequest(pageToken: string | undefined, status: umi.StatusCode, scanner: umi.ScannerCode) {
-        return gapi.client.gmail.users.messages.list({
-            userId: 'me',
-            q: `${umi.status.get(status)!.queries.get(scanner)!}${this.queryAfter}`,
-            pageToken: pageToken
-        });
-    }
-
-    /**
-     * Handle the respose of mail list request, request next page or goto next step
-     * @param response Response of the request
-     * @param list Mail list
-     * @param status Status of the list
-     * @param scanner Scanner of the list
-     */
-    private handleListRequest(
-        response: gapi.client.Response<gapi.client.gmail.ListMessagesResponse>,
-        list: Array<gapi.client.gmail.Message>,
-        status: umi.StatusCode,
-        scanner: umi.ScannerCode
-    ) {
-        if (response.result.messages) {
-            list.push(...response.result.messages);
-        }
-        if (response.result.nextPageToken) {
-            const request = this.getListRequest(response.result.nextPageToken, status, scanner);
-            request.execute((newResponse) => {
-                this.handleListRequest(newResponse, list, status, scanner);
+        // Query ID list
+        const ids: Array<string> = [];
+        let pageToken: string | undefined = undefined;
+        do {
+            type ListResponse = gapi.client.Response<gapi.client.gmail.ListMessagesResponse>;
+            const response: ListResponse = await gapi.client.gmail.users.messages.list({
+                userId: 'me',
+                q: `${status.queries.get(scanner)!}${this.queryAfter}`,
+                pageToken: pageToken
             });
-        } else {
-            for (let i = list.length - 1; i >= 0; i--) {
-                for (const mailId of this.ignoreMailIds) {
-                    if (list[i].id === mailId) {
-                        list.splice(i, 1);
+            if (!response) break;
+            if (response.result.messages) {
+                const filtered = response.result.messages.filter(message => {
+                    if (!message.id) return false;
+                    return !this.ignoreIds.includes(message.id);
+                }).map(message => message.id!);
+                ids.push(...filtered);
+            }
+            pageToken = response.result.nextPageToken;
+        } while (pageToken);
+        this.progress.finishList(ids.length);
+        // Query and parse mails
+        for (const id of ids) {
+            const response = await gapi.client.gmail.users.messages.get({
+                userId: 'me',
+                id: id,
+                format: 'full',
+                metadataHeaders: 'Subject'
+            });
+            if (!response) continue;
+            const fullMail = response.result;
+            try {
+                const nomination = parser.parse(fullMail, status.code, scanner);
+                this.nominations.push(nomination);
+            } catch (error) {
+                let subject = '';
+                for (const header of fullMail.payload!.headers!) {
+                    if (header.name === 'Subject') {
+                        subject = header.value!;
                         break;
                     }
                 }
-            }
-            this.queryMessages(list, status, scanner);
-        }
-    }
-
-    /**
-     * Process mail (id) list
-     * @param list Complete mail list
-     * @param status Status of the list
-     * @param scanner Scanner of the list
-     */
-    private queryMessages(list: Array<gapi.client.gmail.Message>, status: umi.StatusCode, scanner: umi.ScannerCode) {
-        this.progress.finishList(list.length);
-
-        for (const mail of list) {
-            if (!mail.id) continue;
-            gapi.client.gmail.users.messages.get({
-                userId: 'me',
-                id: mail.id,
-                format: 'full',
-                metadataHeaders: 'Subject'
-            }).execute((response: gapi.client.Response<gapi.client.gmail.Message>) => {
-                const fullMail = response.result;
-                try {
-                    const nomination = parser.parse(fullMail, status, scanner);
-                    this.nominations.push(nomination);
-                } catch (error) {
-                    let subject = '';
-                    for (const header of fullMail.payload!.headers!) {
-                        if (header.name === 'Subject') {
-                            subject = header.value!;
-                            break;
-                        }
-                    }
-                    let details: string = error;
-                    if ('message' in error) {
-                        const typedError = error as Error;
-                        details = typedError.stack || typedError.message;
-                    }
-                    // this.events.alert(i18next.t('message:service.mari.reportParserError', {
-                    //     subject: subject,
-                    //     message: `[${keys.scanner}:${keys.status}]${details}`
-                    // }));
-                    this.events.alert(`message:service.mari.reportParserError ${subject} [${status}:${scanner}]${details}`);
+                let details: string = error;
+                if ('message' in error) {
+                    const typedError = error as Error;
+                    details = typedError.stack || typedError.message;
                 }
-
-                this.progress.finishMessage();
-            });
+                this.events.alert(`message:service.mari.reportParserError ${subject} [${status}:${scanner}]${details}`);
+            }
+            this.progress.finishMessage();
         }
+        return;
     }
 }

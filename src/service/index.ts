@@ -67,9 +67,6 @@ export namespace service {
             mari.events.progress = (progress) => {
                 setProgress(progress);
             };
-            mari.events.finish = (nominations) => {
-                arrange(nominations);
-            };
             mari.init();
         });
     }
@@ -220,7 +217,7 @@ export namespace service {
     function processMails() {
         setProgress(0);
         setStatus(State.Status.processingMails);
-        mari.start(getRaws());
+        mari.start(getRaws()).then(list => arrange(list));
     }
 
     function arrange(nominations: Array<Nomination>) {
@@ -248,7 +245,7 @@ export namespace service {
         if (matchTargets.length > 0) {
             match(matchTargets, reduced);
         } else {
-            queryLocation(reduced);
+            queryBrainstorming(reduced);
         }
     }
 
@@ -272,7 +269,7 @@ export namespace service {
             packs.push({ target: target, candidates: candidates, selected: '' });
         }
         if (packs.length < 1) {
-            queryLocation(list);
+            queryBrainstorming(list);
         } else {
             matchData.packs = packs;
             matchData.callback = () => {
@@ -291,13 +288,13 @@ export namespace service {
                     }
                 }
                 matchData.packs = [];
-                queryLocation(list);
+                queryBrainstorming(list);
             };
             setStatus(State.Status.requestMatch);
         }
     }
 
-    async function queryLocation(list: Array<Nomination>) {
+    async function queryBrainstorming(list: Array<Nomination>) {
         if (!preferences.brainstorming.autoQueryFirebase()) {
             beforeFinish(list);
             return;
@@ -407,45 +404,6 @@ export namespace service {
         _store.commit('setNominations', nominations);
         brainstorming.init();
     }
-
-    /**
-     * Query locations
-     * Next step is {@link event.idle}
-     */
-    /*
-    function queryLocation() {
-        const finished = () => {
-            events.idle();
-        };
-
-        // Query locations
-        const listNoLocation = nominations.reduce((list, nomination) => {
-            if (!nomination.lngLat) list.push(nomination);
-            return list;
-        }, new Array<Nomination>());
-        if (listNoLocation.length < 1) {
-            finished();
-            return;
-        }
-        let count = 0;
-        events.progressUpdate(0.9);
-        const countUp = () => {
-            count += 1;
-            events.progressUpdate(0.9 + (count / listNoLocation.length * 0.1));
-            if (count === listNoLocation.length) finished();
-        };
-        for (const nomination of listNoLocation) {
-            bs.queryLocation(
-                nomination,
-                (lngLat) => {
-                    nomination.lngLat = lngLat;
-                    countUp();
-                },
-                countUp
-            );
-        }
-    }
-    */
 
     /**
      * Open local file
