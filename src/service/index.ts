@@ -79,38 +79,28 @@ export namespace service {
         google.auth.signOut();
     }
 
-    export function refresh() {
-        if (preferences.google.sync()) {
-            download(Filename.nominations, () => {
-                processMails();
-            })
-        } else {
-            processMails();
-        }
+    export async function refresh() {
+        if (preferences.google.sync()) await download(Filename.nominations);
+        processMails();
     }
 
-    export function sync() {
-        download(Filename.nominations, () => {
-            upload(() => {
-
-            });
-        });
+    export async function sync() {
+        await download(Filename.nominations);
+        await upload();
     }
 
-    export function upload(callback: UploadCallback) {
+    export async function upload() {
         setStatus(State.Status.syncing);
         const blob = getNominationsBlod();
-        google.drive.upload(Filename.nominations, mimeJSON, blob, google.auth.accessToken, (succeed, message) => {
-            setStatus(State.Status.idle);
-            callback(succeed, message);
-        });
+        await google.drive.upload(Filename.nominations, mimeJSON, blob, google.auth.accessToken);
+        setStatus(State.Status.idle);
     }
 
     export function migrate(callback: CountCallback) {
-        download(Filename.legacy, (count) => {
+        download(Filename.legacy).then(count => {
             setStatus(State.Status.idle);
             callback(count);
-        });
+        })
     }
 
     export function importNominationsFile(callback: CountCallback) {
@@ -321,12 +311,11 @@ export namespace service {
         beforeFinish(list);
     }
 
-    function beforeFinish(list: Array<Nomination>) {
+    async function beforeFinish(list: Array<Nomination>) {
         if (preferences.google.sync()) {
-            upload(() => { finish(list); });
-        } else {
-            finish(list);
+            upload();
         }
+        finish(list);
     }
 
     function finish(list: Array<Nomination>) {
@@ -343,21 +332,19 @@ export namespace service {
         _store.commit('setProgress', progress);
     }
 
-    function download(file: Filename, callback: CountCallback) {
+    async function download(filename: Filename) {
         setStatus(State.Status.syncing);
-        google.drive.download(file, (file) => {
-            if (!file) {
-                callback(0);
+        const file = await google.drive.download(filename, content => {
+            try {
+                const list = content as Array<NominationData>;
+                list.forEach(data => Nomination.from(data));
+            } catch {
                 return false;
             }
-            try {
-                const count = importNominations(file as Array<any>);
-                callback(count);
-            } catch (error) {
-                return true;
-            }
-            return false;
+            return true;
         });
+        if (!file) return 0;
+        return importNominations(file as Array<NominationData>);
     }
 
     function importNominations(list: Array<NominationData>): number {

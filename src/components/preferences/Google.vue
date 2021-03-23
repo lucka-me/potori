@@ -73,7 +73,7 @@ export default class GooglePreferences extends Vue {
     }
 
     upload() {
-        service.upload(() => { });
+        service.upload();
     }
 
     migrate() {
