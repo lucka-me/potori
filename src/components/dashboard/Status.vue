@@ -5,9 +5,10 @@
         <material-linear-progress :progress="$store.state.progress" :determinate="progressDeterminate"/>
     </div>
     <div v-if="showActions" class="actions">
-        <material-button v-if="showLinkButton" outlined @click="link">Link Google Account</material-button>
-        <material-button v-if="showMatchButton" outlined @click="match">Manually Match</material-button>
-        <material-button v-if="showChartsButton" outlined @click="openCharts">Charts</material-button>
+        <material-icon-button v-if="showLinkButton" icon="sign-in-alt" @click="link" title="Link Google Account"/>
+        <material-icon-button v-if="showMatchButton" icon="user-check" @click="match" title="Manually Match"/>
+        <material-icon-button v-if="showChartsButton" icon="chart-bar" @click="openCharts" title="Charts"/>
+        <material-icon-button v-if="showChartsButton" icon="brain" @click="openBrainstorming" title="Brainstorming"/>
     </div>
 </div>
 </template>
@@ -18,13 +19,11 @@ import { Options, Vue } from 'vue-class-component';
 import { service } from '@/service';
 import { State } from '@/store';
 
-import MaterialButton from '@/components/material/Button.vue';
 import MaterialIconButton from '@/components/material/IconButton.vue';
 import MaterialLinearProgress from '@/components/material/LinearProgress.vue';
 
 @Options({
     components: {
-        MaterialButton,
         MaterialIconButton,
         MaterialLinearProgress
     },
@@ -88,6 +87,10 @@ export default class Status extends Vue {
     openCharts() {
         this.$router.push({ path: '/charts' });
     }
+
+    openBrainstorming() {
+        this.$router.push({ path: '/brainstorming' });
+    }
 }
 </script>
 
@@ -100,6 +103,12 @@ export default class Status extends Vue {
 
     > .progress + .actions {
         margin-block-start: 0.4rem;
+    }
+
+    > .progress {
+        > .mdc-linear-progress {
+            margin-block-start: 0.4em;
+        }
     }
 }
 </style>

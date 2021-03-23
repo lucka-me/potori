@@ -34,6 +34,7 @@ const IconSymbolMap: Record<string, string> = {
     'map-marker-alt': '\uf3c5',
     'mobile-alt': '\uf3cd',
     'tachometer-alt': '\uf3fd',
+    'user-check': '\uf4fc',
     'brain' : '\uf5dc',
 }
 

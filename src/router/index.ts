@@ -6,11 +6,19 @@ const routes: Array<RouteRecordRaw> = [
         name: 'Dashboard',
         component: () => import(/* webpackChunkName: 'dashboard' */ '@/views/Dashboard.vue')
     },
+
     {
         path: '/charts',
         name: 'Charts',
         component: () => import(/* webpackChunkName: 'charts' */ '@/views/Charts.vue'),
     },
+    {
+        path: '/brainstorming',
+        name: 'Brainstorming',
+        component: () => import(/* webpackChunkName: 'braainstorming' */ '@/views/Brainstorming.vue'),
+    },
+
+
     {
         path: '/list',
         name: 'List',
