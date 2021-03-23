@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { MDCSwitch } from '@material/switch';
-import { Vue, Model } from 'vue-property-decorator';
+import { Vue, Model, Watch } from 'vue-property-decorator';
 
 export default class MaterialSwitch extends Vue {
 
@@ -18,14 +18,13 @@ export default class MaterialSwitch extends Vue {
 
     private ctrl?: MDCSwitch;
 
-    mounted() {
-        this.ctrl = MDCSwitch.attachTo(this.$el);
-        this.ctrl.checked = this.value;
-        this.ctrl.listen('change', this.changed);
+    @Watch('value')
+    onValueChanged(newVal: boolean, _: string) {
+        if (!this.ctrl) return;
+        this.ctrl.checked = newVal
     }
 
-    updated() {
-        this.ctrl?.destroy();
+    mounted() {
         this.ctrl = MDCSwitch.attachTo(this.$el);
         this.ctrl.checked = this.value;
         this.ctrl.listen('change', this.changed);
