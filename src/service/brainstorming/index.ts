@@ -134,6 +134,14 @@ export namespace brainstorming {
         });
     }
 
+    export async function importDatabase() {
+
+    }
+
+    export async function exportDatabase() {
+
+    }
+
     /**
      * Clear local database
      */
