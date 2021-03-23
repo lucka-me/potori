@@ -14,8 +14,6 @@ import Nomination, { NominationData } from './nomination';
 
 export namespace service {
 
-    type UploadCallback = (succeed: boolean, message?: string) => void;
-
     enum Filename {
         nominations = 'nominations.json',
         legacy = 'potori.json'
@@ -81,7 +79,41 @@ export namespace service {
 
     export async function refresh() {
         if (preferences.google.sync()) await download(Filename.nominations);
-        processMails();
+        setProgress(0);
+        setStatus(State.Status.processingMails);
+        const raws = getRaws()
+        await mari.start(raws);
+        const matchTargets: Array<Nomination> = [];
+        const reduced = raws.reduce((list, nomination) => {
+            if (nomination.id.length < 1) {
+                console.log(`service.arrange: Need match: #${nomination.id}[${nomination.title}]`);
+                matchTargets.push(nomination);
+                return list;
+            }
+            // Merge
+            let merged = false;
+            for (const target of list) {
+                if (target.merge(nomination)) {
+                    merged = true;
+                    break;
+                }
+            }
+            if (!merged) {
+                list.push(nomination);
+            }
+            return list;
+        }, new Array<Nomination>());
+        console.log(`service.arrange: ${raws.length} reduced to ${reduced.length}`);
+        if (matchTargets.length > 0) {
+            await match(matchTargets, reduced);
+        }
+        await queryBrainstorming(reduced);
+        if (preferences.google.sync()) {
+            await upload();
+        }
+        _store.commit('setNominations', reduced);
+        save();
+        setStatus(State.Status.idle);
     }
 
     export async function sync() {
@@ -204,47 +236,12 @@ export namespace service {
         dia.saveAll(raws);
     }
 
-    function processMails() {
-        setProgress(0);
-        setStatus(State.Status.processingMails);
-        mari.start(getRaws()).then(list => arrange(list));
-    }
-
-    function arrange(nominations: Array<Nomination>) {
-        const matchTargets: Array<Nomination> = [];
-        const reduced = nominations.reduce((list, nomination) => {
-            if (nomination.id.length < 1) {
-                console.log(`service.arrange: Need match: #${nomination.id}[${nomination.title}]`);
-                matchTargets.push(nomination);
-                return list;
-            }
-            // Merge
-            let merged = false;
-            for (const target of list) {
-                if (target.merge(nomination)) {
-                    merged = true;
-                    break;
-                }
-            }
-            if (!merged) {
-                list.push(nomination);
-            }
-            return list;
-        }, new Array<Nomination>());
-        console.log(`service.arrange: ${nominations.length} reduced to ${reduced.length}`);
-        if (matchTargets.length > 0) {
-            match(matchTargets, reduced);
-        } else {
-            queryBrainstorming(reduced);
-        }
-    }
-
     /**
      * Some result mails don't contain image URL, should match from pending nominations manually.
      * @param targets Nominations without image
      * @param list Normal nominations
      */
-    function match(targets: Array<Nomination>, list: Array<Nomination>) {
+     async function match(targets: Array<Nomination>, list: Array<Nomination>) {
         const pendings = list.filter(umi.status.get(umi.StatusCode.Pending)!.predicator);
         const packs: Array<MatchPack> = [];
         for (const target of targets) {
@@ -258,9 +255,11 @@ export namespace service {
             if (candidates.length < 1) continue;
             packs.push({ target: target, candidates: candidates, selected: '' });
         }
-        if (packs.length < 1) {
-            queryBrainstorming(list);
-        } else {
+        return new Promise<void>((resolve) => {
+            if (packs.length < 1) {
+                resolve();
+                return;
+            }
             matchData.packs = packs;
             matchData.callback = () => {
                 matchData.callback = () => { };
@@ -278,17 +277,14 @@ export namespace service {
                     }
                 }
                 matchData.packs = [];
-                queryBrainstorming(list);
+                resolve();
             };
             setStatus(State.Status.requestMatch);
-        }
+        });
     }
 
     async function queryBrainstorming(list: Array<Nomination>) {
-        if (!preferences.brainstorming.autoQueryFirebase()) {
-            beforeFinish(list);
-            return;
-        }
+        if (!preferences.brainstorming.autoQueryFirebase()) return;
         setStatus(State.Status.queryingBrainstorming);
         let count = 0;
         for (const nomination of list) {
@@ -307,21 +303,6 @@ export namespace service {
             };
             setProgress(count / list.length);
         }
-        setProgress(1);
-        beforeFinish(list);
-    }
-
-    async function beforeFinish(list: Array<Nomination>) {
-        if (preferences.google.sync()) {
-            upload();
-        }
-        finish(list);
-    }
-
-    function finish(list: Array<Nomination>) {
-        _store.commit('setNominations', list);
-        save();
-        setStatus(State.Status.idle);
     }
 
     function setStatus(status: State.Status) {
@@ -430,15 +411,6 @@ export namespace service {
             events.bsUpdate();
             events.info(i18next.t('message:service.bsDataUpdated'));
         });
-    }
-    */
-
-    /**
-     * Clear Brainstorming database
-     */
-    /*
-    export function clearBsData() {
-        bs.clear();
     }
     */
 }

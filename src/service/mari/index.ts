@@ -161,7 +161,7 @@ export default class Mari {
         }
         await Promise.allSettled(queries);
         nominations.push(...this.nominations);
-        return nominations;
+        return;
     }
 
     /**
