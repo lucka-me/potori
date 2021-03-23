@@ -18,6 +18,7 @@ import { Options, Vue } from 'vue-class-component';
 
 import { delibird } from '@/service/delibird';
 import { service } from '@/service';
+import { util } from '@/service/utils';
 import { version } from '@/service/version';
 
 import MaterialButton from '@/components/material/Button.vue';
@@ -60,13 +61,7 @@ export default class AboutPreferences extends Vue {
             }
             message += `[${error.filename}][${error.lineno}:${error.colno}]${details}\n`;
         }
-        const textarea = document.createElement('textarea');
-        textarea.value = message;
-        textarea.readOnly = true;
-        document.body.append(textarea);
-        textarea.select();
-        document.execCommand('copy');
-        textarea.remove();
+        util.copy(message);
         delibird.inform(`Copied ${service.errors.length} errors to clipboard.`);
     }
 }

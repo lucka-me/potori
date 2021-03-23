@@ -1,7 +1,6 @@
 import type { Reference } from '@firebase/database-types';
 
 import { umi } from '@/service/umi';
-import { version } from '@/service/version';
 import Nomination from '@/service/nomination'
 
 /**
@@ -98,9 +97,6 @@ export namespace brainstorming {
         if (record) {
             return record;
         }
-        if (!version.full) {
-            throw new Error(FailReason.NOT_EXISTS);
-        }
         record = await queryFirebase(nomination.id).catch(error => {
             throw error;
         });
@@ -123,6 +119,28 @@ export namespace brainstorming {
         return results.reduce((count, result) => {
             return count + result.status === 'fulfilled' ? 1 : 0;
         }, 0);
+    }
+
+    export function getAll() {
+        return new Promise<Array<Record>>((resolve) => {
+            const store = getStore('readonly');
+            if (!store) {
+                resolve([]);
+                return;
+            }
+            const request = store.getAll();
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = () => resolve([]);
+        });
+    }
+
+    /**
+     * Clear local database
+     */
+     export function clear() {
+        const store = getStore('readwrite');
+        if (!store) return;
+        store.clear();
     }
 
     /**
@@ -169,15 +187,6 @@ export namespace brainstorming {
         const store = getStore('readwrite');
         if (!store) return;
         store.put(record, id);
-    }
-
-    /**
-     * Clear local database
-     */
-    function clear() {
-        const store = getStore('readwrite');
-        if (!store) return;
-        store.clear();
     }
 
     /**

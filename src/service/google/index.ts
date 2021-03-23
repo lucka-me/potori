@@ -1,3 +1,4 @@
+import { util } from '@/service/utils';
 import AuthKit from './auth';
 import GoogleDriveKit from './drive';
 
@@ -9,11 +10,9 @@ export default class GoogleKit {
     drive = new GoogleDriveKit();
 
     init(callback: BasicCallback) {
-        const scriptTag = document.createElement('script');
-        scriptTag.src = 'https://apis.google.com/js/api.js';
-        scriptTag.defer = true;
-        scriptTag.async = true;
-        scriptTag.onload = callback;
-        document.head.append(scriptTag);
+        util.loadScript('https://apis.google.com/js/api.js')
+            .then(() => {
+                callback();
+            });
     }
 }

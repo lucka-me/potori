@@ -6,6 +6,7 @@ import { delibird } from './delibird';
 import { dia } from './dia';
 import { preferences } from './preferences';
 import { umi } from './umi';
+import { util } from './utils';
 import { CountCallback } from './types';
 import { State } from '@/store';
 import GoogleKit from './google';
@@ -107,7 +108,9 @@ export namespace service {
         if (matchTargets.length > 0) {
             await match(matchTargets, reduced);
         }
-        await queryBrainstorming(reduced);
+        if (preferences.brainstorming.autoQueryFirebase()) {
+            await queryBrainstorming(reduced);
+        }
         if (preferences.google.sync()) {
             await upload();
         }
@@ -136,41 +139,19 @@ export namespace service {
     }
 
     export function importNominationsFile(callback: CountCallback) {
-        const input = document.createElement('input');
-        input.type = 'file';
-        input.accept = 'json';
-        input.hidden = true;
-        input.addEventListener('change', () => {
-            setTimeout(() => {
-                input.remove();
-            }, 1000);
-            if (!input.files || input.files.length < 1) return;
-            const file = input.files[0];
-            const fileReader = new FileReader();
-            fileReader.onload = () => {
-                if (typeof fileReader.result !== 'string') return;
-                try {
-                    const list = JSON.parse(fileReader.result) as Array<NominationData>;
-                    const count = importNominations(list);
-                    callback(count);
-                } catch (error) {
-                    callback(0);
-                }
-            };
-            fileReader.readAsText(file);
-        }, false);
-        document.body.append(input);
-        input.click();
+        util.importFile().then(content => {
+            try {
+                const list = JSON.parse(content) as Array<NominationData>;
+                const count = importNominations(list);
+                callback(count);
+            } catch (error) {
+                callback(0);
+            }
+        });
     }
 
     export function exportNominationsFile() {
-        const anchor = document.createElement('a');
-        anchor.href = URL.createObjectURL(getNominationsBlod());
-        anchor.download = Filename.nominations;
-        anchor.hidden = true;
-        document.body.append(anchor);
-        anchor.click();
-        anchor.remove();
+        util.exportFile(Filename.nominations, getNominationsBlod());
     }
 
     /**
@@ -236,6 +217,14 @@ export namespace service {
         dia.saveAll(raws);
     }
 
+    async function load() {
+        await dia.init();
+        const raws = await dia.load();
+        const nominations = raws.map(raw => Nomination.from(raw));
+        _store.commit('setNominations', nominations);
+        brainstorming.init();
+    }
+
     /**
      * Some result mails don't contain image URL, should match from pending nominations manually.
      * @param targets Nominations without image
@@ -284,7 +273,6 @@ export namespace service {
     }
 
     async function queryBrainstorming(list: Array<Nomination>) {
-        if (!preferences.brainstorming.autoQueryFirebase()) return;
         setStatus(State.Status.queryingBrainstorming);
         let count = 0;
         for (const nomination of list) {
@@ -363,14 +351,6 @@ export namespace service {
             [ JSON.stringify(raws, null, 4) ],
             { type: mimeJSON }
         )
-    }
-
-    async function load() {
-        await dia.init();
-        const raws = await dia.load();
-        const nominations = raws.map(raw => Nomination.from(raw));
-        _store.commit('setNominations', nominations);
-        brainstorming.init();
     }
 
     /**
