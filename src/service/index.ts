@@ -119,6 +119,15 @@ export namespace service {
         setStatus(State.Status.idle);
     }
 
+    export async function updateBrainstorming() {
+        setStatus(State.Status.queryingBrainstorming);
+        const count = await brainstorming.update(getRaws(), progress => {
+            setProgress(progress);
+        });
+        setStatus(State.Status.idle);
+        return count;
+    }
+
     export async function sync() {
         await download(Filename.nominations);
         await upload();

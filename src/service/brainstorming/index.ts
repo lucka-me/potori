@@ -2,7 +2,8 @@ import type { Reference } from '@firebase/database-types';
 
 import { umi } from '@/service/umi';
 import { util } from '../utils';
-import Nomination from '@/service/nomination'
+import { ProgressCallback } from '../types';
+import Nomination from '@/service/nomination';
 
 /**
  * Result for {@link BrainstormingKit.analyse}
@@ -113,16 +114,21 @@ export namespace brainstorming {
      * @param nominations Nomination list
      * @param finish Triggered when all query finishes
      */
-    export async function update(nominations: Array<Nomination>): Promise<number> {
-        const quries: Array<Promise<Record | undefined>> = [];
+    export async function update(nominations: Array<Nomination>, callback: ProgressCallback): Promise<number> {
+        let succeed = 0;
+        let processed = 0;
+        let total = nominations.length;
         for (const nomination of nominations) {
-            if (beforeCreate(nomination)) continue;
-            quries.push(queryFirebase(nomination.id));
+            processed++;
+            if (beforeCreate(nomination)) {
+                callback(processed / total);
+                continue;
+            }
+            const record = await queryFirebase(nomination.id);
+            if (record) succeed++;
+            callback(processed / total);
         }
-        const results = await Promise.allSettled(quries);
-        return results.reduce((count, result) => {
-            return count + result.status === 'fulfilled' ? 1 : 0;
-        }, 0);
+        return succeed;
     }
 
     export async function importDatabase() {
