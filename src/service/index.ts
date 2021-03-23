@@ -1,15 +1,16 @@
 import { Store } from 'vuex'
 import { toRaw } from '@vue/reactivity';
 
-import GoogleKit from './google';
-import Mari from './mari';
-import Nomination, { NominationData } from './nomination';
+import { brainstorming } from './brainstorming';
 import { delibird } from './delibird';
 import { dia } from './dia';
 import { preferences } from './preferences';
 import { umi } from './umi';
 import { CountCallback } from './types';
 import { State } from '@/store';
+import GoogleKit from './google';
+import Mari from './mari';
+import Nomination, { NominationData } from './nomination';
 
 export namespace service {
 
@@ -247,11 +248,7 @@ export namespace service {
         if (matchTargets.length > 0) {
             match(matchTargets, reduced);
         } else {
-            if (preferences.google.sync()) {
-                upload(() => { finish(reduced); });
-            } else {
-                finish(reduced);
-            }
+            queryLocation(reduced);
         }
     }
 
@@ -275,7 +272,7 @@ export namespace service {
             packs.push({ target: target, candidates: candidates, selected: '' });
         }
         if (packs.length < 1) {
-            finish(list);
+            queryLocation(list);
         } else {
             matchData.packs = packs;
             matchData.callback = () => {
@@ -294,9 +291,44 @@ export namespace service {
                     }
                 }
                 matchData.packs = [];
-                finish(list);
+                queryLocation(list);
             };
             setStatus(State.Status.requestMatch);
+        }
+    }
+
+    async function queryLocation(list: Array<Nomination>) {
+        if (!preferences.brainstorming.autoQueryFirebase()) {
+            beforeFinish(list);
+            return;
+        }
+        setStatus(State.Status.queryingBrainstorming);
+        let count = 0;
+        for (const nomination of list) {
+            count++;
+            if (nomination.lngLat) {
+                setProgress(count / list.length);
+                continue;
+            }
+            const record = await brainstorming.query(nomination).catch(_ => undefined);
+            if (!record) {
+                setProgress(count / list.length);
+                continue;
+            }
+            nomination.lngLat = {
+                lng: parseFloat(record.lng), lat: parseFloat(record.lat)
+            };
+            setProgress(count / list.length);
+        }
+        setProgress(1);
+        beforeFinish(list);
+    }
+
+    function beforeFinish(list: Array<Nomination>) {
+        if (preferences.google.sync()) {
+            upload(() => { finish(list); });
+        } else {
+            finish(list);
         }
     }
 
@@ -373,6 +405,7 @@ export namespace service {
         const raws = await dia.load();
         const nominations = raws.map(raw => Nomination.from(raw));
         _store.commit('setNominations', nominations);
+        brainstorming.init();
     }
 
     /**

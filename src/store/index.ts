@@ -7,6 +7,7 @@ export namespace State {
         idle,
         processingMails,
         requestMatch,
+        queryingBrainstorming,
         syncing
     }
 }

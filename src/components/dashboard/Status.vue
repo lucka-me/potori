@@ -33,6 +33,7 @@ export default class Status extends Vue {
 
     get showProgress(): boolean {
         if (this.$store.state.status === State.Status.processingMails) return true;
+        if (this.$store.state.status === State.Status.queryingBrainstorming) return true;
         if (this.$store.state.status === State.Status.syncing) return true;
         if (this.$store.getters.empty && !this.gapiLoaded) return true;
         return false;
@@ -40,13 +41,16 @@ export default class Status extends Vue {
 
     get progressText(): string {
         if (this.$store.state.status === State.Status.processingMails) return 'Processing Mails';
+        if (this.$store.state.status === State.Status.queryingBrainstorming) return 'Querying Brainstorming';
         if (this.$store.state.status === State.Status.syncing) return 'Syncing';
         if (this.$store.getters.empty && !this.gapiLoaded) return 'Loading Google API';
         return '';
     }
 
     get progressDeterminate(): boolean {
-        return this.$store.state.status === State.Status.processingMails;
+        if (this.$store.state.status === State.Status.processingMails) return true;
+        if (this.$store.state.status === State.Status.queryingBrainstorming) return true;
+        return false
     }
 
     get showLinkButton(): boolean {
