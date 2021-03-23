@@ -6,9 +6,9 @@
     <hr/>
     <google-preferences/>
     <hr/>
-    <brainstorming-preferences/>
-    <hr/>
     <data-preferences/>
+    <hr/>
+    <brainstorming-preferences/>
     <hr/>
     <about-preferences/>
 </main>

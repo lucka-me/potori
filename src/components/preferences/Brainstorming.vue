@@ -4,10 +4,10 @@
     <material-switch v-model="autoQueryFirebase"/>
 </preference-row>
 <preference-row text="Import Database" desc="Import records from file">
-    <material-button @click="importRecords">Import</material-button>
+    <material-button @click="importDatabase">Import</material-button>
 </preference-row>
 <preference-row text="Export Database" desc="Export records to file">
-    <material-button @click="exportRecords">Export</material-button>
+    <material-button @click="exportDatabase">Export</material-button>
 </preference-row>
 <preference-row text="Clear Database" desc="Clear all records from local storage">
     <material-button @click="clear">Clear</material-button>
@@ -18,6 +18,7 @@
 import { Options, Vue } from 'vue-class-component';
 
 import { brainstorming } from '@/service/brainstorming';
+import { delibird } from '@/service/delibird';
 import { preferences } from '@/service/preferences';
 
 import MaterialButton from '@/components/material/Button.vue';
@@ -40,12 +41,14 @@ export default class BrainstormingPreferences extends Vue {
         preferences.brainstorming.setAutoQueryFirebase(value);
     }
 
-    importRecords() {
-        brainstorming.importDatabase();
+    async importDatabase() {
+        const count = await brainstorming.importDatabase();
+        delibird.inform(`Imported ${count} records`);
     }
 
-    exportRecords() {
-        brainstorming.exportDatabase();
+    async exportDatabase() {
+        const count = await brainstorming.exportDatabase();
+        delibird.inform(`Exported ${count} records`);
     }
 
     clear() {

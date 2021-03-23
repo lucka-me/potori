@@ -1,6 +1,7 @@
 import type { Reference } from '@firebase/database-types';
 
 import { umi } from '@/service/umi';
+import { util } from '../utils';
 import Nomination from '@/service/nomination'
 
 /**
@@ -21,6 +22,9 @@ interface BrainstormingStats {
  * Host Brainstorming data and handle tasks related to Brainstorming
  */
 export namespace brainstorming {
+
+    const mimeJSON = 'application/json';
+    const filename = 'bsdata.json';
 
     export enum FailReason {
         INDEXEDDB_ERROR = 'message:service.brainstorming.indexedDBError',   // Unable to query local database
@@ -121,25 +125,28 @@ export namespace brainstorming {
         }, 0);
     }
 
-    export function getAll() {
-        return new Promise<Array<Record>>((resolve) => {
-            const store = getStore('readonly');
-            if (!store) {
-                resolve([]);
-                return;
-            }
-            const request = store.getAll();
-            request.onsuccess = () => resolve(request.result);
-            request.onerror = () => resolve([]);
-        });
-    }
-
     export async function importDatabase() {
-
+        const content = await util.importFile();
+        let data: Map<string, Record>;
+        try {
+            data = new Map(JSON.parse(content));
+        } catch (error) {
+            return 0;
+        }
+        for (const [key, record] of data) save(key, record);
+        return data.size;
     }
 
-    export async function exportDatabase() {
-
+    export async function exportDatabase(): Promise<number> {
+        const list = await getAll();
+        if (list.length < 1) return 0;
+        const pairs: Array<[string, Record]> = list.map(record => [ Nomination.parseId(record.imageUrl), record]);
+        const blob = new Blob(
+            [ JSON.stringify(pairs, null, 4) ],
+            { type: mimeJSON }
+        );
+        util.exportFile(filename, blob);
+        return pairs.length;
     }
 
     /**
@@ -189,6 +196,24 @@ export namespace brainstorming {
         const record: Record | undefined = data.val();
         if (record) save(id, record);
         return record;
+    }
+
+    function getAll() {
+        return new Promise<Array<Record>>((resolve) => {
+            const store = getStore('readonly');
+            if (!store) {
+                resolve([]);
+                return;
+            }
+            const request = store.getAll();
+            request.onsuccess = () => {
+                resolve(request.result);
+            }
+            request.onerror = () => {
+                console.log(request.error);
+                resolve([]);
+            }
+        });
     }
 
     function save(id: string, record: Record) {

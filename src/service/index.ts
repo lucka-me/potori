@@ -346,41 +346,12 @@ export namespace service {
     }
 
     function getNominationsBlod(): Blob {
-        const raws = _store.state.nominations.map((nomination) => nomination.data);
+        const raws = _store.state.nominations.map((nomination) => toRaw(nomination.data));
         return new Blob(
             [ JSON.stringify(raws, null, 4) ],
             { type: mimeJSON }
         )
     }
-
-    /**
-     * Open local file
-     */
-    /*
-    export function open() {
-        events.clear();
-        const onload = (content: string) => {
-            const resultNominations = Parser.nominations(content);
-            if (resultNominations.matched) {
-                nominations.length = 0;
-                nominations.push(...resultNominations.nominations);
-                arrange();
-                return;
-            }
-            const resultBsData = Parser.bsData(content);
-            if (resultBsData.matched) {
-                bs.data = resultBsData.data;
-                if (nominations.length > 0) {
-                    events.bsUpdate();
-                }
-                events.info(i18next.t('message:service.loadBsData'));
-                return;
-            }
-            // Parse as other contents
-        };
-        file.local.open(onload, events.alert);
-    }
-    */
     
     /**
      * Query Brainstorming firebase and update local bs data
