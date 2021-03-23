@@ -16,23 +16,31 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/assets/title.png"
   },
   {
-    "revision": "48483e91c093ac7eaaca",
+    "revision": "0bf8b67c0886028a2c1b",
     "url": "/next/css/app.09dd643c.css"
   },
   {
-    "revision": "578992a6599a3a7916ba",
+    "revision": "5d00bbf07c5350ce8b5a",
+    "url": "/next/css/braainstorming.77608084.css"
+  },
+  {
+    "revision": "9597b5062f75c383197b",
+    "url": "/next/css/braainstorming~charts~dashboard~details~list~map~match~preferences.456360f3.css"
+  },
+  {
+    "revision": "74fa55a96eaad348ea29",
+    "url": "/next/css/braainstorming~dashboard.088a28d9.css"
+  },
+  {
+    "revision": "198b20d97dbf0125a4b5",
     "url": "/next/css/charts.85a55bc5.css"
   },
   {
-    "revision": "2cf8c2494ac8c8cb546b",
-    "url": "/next/css/charts~dashboard~details~list~map~match~preferences.456360f3.css"
+    "revision": "bdb40125b577c6ba7380",
+    "url": "/next/css/dashboard.030c0685.css"
   },
   {
-    "revision": "d30dadb36013ed19cca5",
-    "url": "/next/css/dashboard.f9cc735b.css"
-  },
-  {
-    "revision": "ea89d7468b4f4be82815",
+    "revision": "6f4d28b7767e7e716e1b",
     "url": "/next/css/details.e45c7c88.css"
   },
   {
@@ -52,7 +60,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/match.4e5ee524.css"
   },
   {
-    "revision": "5bf5c395ada2179f76d3",
+    "revision": "19c7be517f39f1116fff",
     "url": "/next/css/preferences.a2815486.css"
   },
   {
@@ -76,32 +84,44 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/img/fa-solid-900.2306f642.svg"
   },
   {
-    "revision": "b9cb940aa82821c55212f6e88d235ed6",
+    "revision": "ad96db5ba59d2c268aad988c916e8cbb",
     "url": "/next/index.html"
   },
   {
-    "revision": "48483e91c093ac7eaaca",
-    "url": "/next/js/app.fad94eab.js"
+    "revision": "0bf8b67c0886028a2c1b",
+    "url": "/next/js/app.8abb1258.js"
   },
   {
-    "revision": "578992a6599a3a7916ba",
-    "url": "/next/js/charts.b4ca544b.js"
+    "revision": "5d00bbf07c5350ce8b5a",
+    "url": "/next/js/braainstorming.74024c2f.js"
   },
   {
-    "revision": "2cf8c2494ac8c8cb546b",
-    "url": "/next/js/charts~dashboard~details~list~map~match~preferences.4ace817a.js"
+    "revision": "1f750089fbc45094132f",
+    "url": "/next/js/braainstorming~charts.66c6f8a7.js"
   },
   {
-    "revision": "fd774c5de4bde2e64ed2",
-    "url": "/next/js/chunk-vendors.e0fb882b.js"
+    "revision": "9597b5062f75c383197b",
+    "url": "/next/js/braainstorming~charts~dashboard~details~list~map~match~preferences.3749e1b4.js"
   },
   {
-    "revision": "d30dadb36013ed19cca5",
-    "url": "/next/js/dashboard.f675ced2.js"
+    "revision": "74fa55a96eaad348ea29",
+    "url": "/next/js/braainstorming~dashboard.098f94dd.js"
   },
   {
-    "revision": "ea89d7468b4f4be82815",
-    "url": "/next/js/details.4038509b.js"
+    "revision": "198b20d97dbf0125a4b5",
+    "url": "/next/js/charts.9157d5d1.js"
+  },
+  {
+    "revision": "2dd33d9c6c21e9a2e692",
+    "url": "/next/js/chunk-vendors.96516a03.js"
+  },
+  {
+    "revision": "bdb40125b577c6ba7380",
+    "url": "/next/js/dashboard.e820f018.js"
+  },
+  {
+    "revision": "6f4d28b7767e7e716e1b",
+    "url": "/next/js/details.06620b56.js"
   },
   {
     "revision": "5eff018f37f10358cec5",
@@ -128,8 +148,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/match.18935d21.js"
   },
   {
-    "revision": "5bf5c395ada2179f76d3",
-    "url": "/next/js/preferences.037bf5e0.js"
+    "revision": "19c7be517f39f1116fff",
+    "url": "/next/js/preferences.eea76200.js"
   },
   {
     "revision": "6dcd4e60aac327b475c67359318dc9ab",
