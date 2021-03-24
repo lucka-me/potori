@@ -1,10 +1,6 @@
 import * as fs from 'fs';
 
 export namespace locale {
-    type Key = string;
-    type Translation = string;
-    type Item = [Key, Translation];
-    type Namespace = string;
 
     type LocaleCode = string;
     type SearchCallback = (path: string) => void;
@@ -16,114 +12,104 @@ export namespace locale {
     class LocaleData {
 
         code: LocaleCode;
-        data: Map<Namespace, Array<Item>> = new Map();
+        data: LocaleItem = { }
 
         constructor(code: string) {
             this.code = code;
         }
 
-        build(root: string) {
-            const dir = `${root}/${this.code}`;
-            if (!fs.existsSync(dir)) {
-                fs.mkdirSync(dir);
-            }
-            for (const [ns, items] of this.data) {
-                const value: any = {};
-                for (const [key, translation] of items) {
-                    value[key] = translation;
-                }
-                const file = `${dir}/${ns}.json`;
-                fs.writeFileSync(file, JSON.stringify(value, null, 4));
-                console.info(`Generated ${file}`);
-            }
+        build() {
+            const file = `${outputPath}/${this.code}.json`;
+            fs.writeFileSync(file, JSON.stringify(this.data, null, 4));
+            console.info(`Generated ${file}`);
         }
 
-        moduleName(ns: string) {
-            return `${ns}_${this.code.replace('-', '_')}`
+        get moduleName(): string {
+            return this.code.replace('-', '_');
         }
 
         get importCode(): string {
-            const code = [];
-            for (const ns of this.data.keys()) {
-                code.push(`import ${this.moduleName(ns)} from './${this.code}/${ns}.json';`);
-            }
-            return code.join('\n');
+            return `import ${this.moduleName} from './${this.code}.json'`;
         }
 
         get exportCode() {
-            const code = [];
-            for (const ns of this.data.keys()) {
-                code.push(`${ns}: ${this.moduleName(ns)},`);
-            }
-            return '\n\n'
-            + `    '${this.code}': {\n        `
-            + code.join('\n        ')
-            + '\n'
-            + '    },'
+            return `    '${this.code}': ${this.moduleName},`;
         }
     }
 
-    const data = new Map<string, LocaleData>();
+    const root = './src';   // Root path to search, will not included in namespaces
+    const target = 'locales.json';
+    const outputPath = './src/locales';
+    const data = new Map<LocaleCode, LocaleData>();
+
+    /**
+     * Build locales files
+     * @see Inspired by [Turnip-Calculator](https://github.com/elxris/Turnip-Calculator/blob/master/scripts/i18n.js)
+     */
+     export function build() {
+        collect('');
+
+        if (!fs.existsSync(outputPath)) {
+            fs.mkdirSync(outputPath);
+        }
+        for (const localeData of data.values()) {
+            localeData.build();
+        }
+
+        buildIndex();
+    }
 
     /**
      * Search for target file recursively
-     * @param dir Search directory
-     * @param target Target filename
-     * @param callback Triggered when found
+     * @param path Search path, should not contain `root`
+     * @param callback Triggered when target found
      */
-    function search(dir: string, target: string, callback: SearchCallback) {
-        const items = fs.readdirSync(dir);
+    function collect(path: string) {
+        const items = fs.readdirSync(`${root}/${path}`);
         for (const item of items) {
-            const path = `${dir}/${item}`;
             if (item === target) {
-                callback(path);
+                parse(path);
                 continue;
             }
-            if (fs.statSync(path).isDirectory()) {
-                search(path, target, callback);
+            const next = path.length > 0 ? `${path}/${item}` : item;
+            if (fs.statSync(`${root}/${next}`).isDirectory()) {
+                collect(next);
             }
         }
     }
 
     /**
-     * Parse data from `locales.json`
-     * @param path Path of the `locales.json`
+     * Parse locale data from `locales.json`
+     * @param path Path of the `locales.json`, will be used to generate namespaces
      */
     function parse(path: string) {
-        console.info(`Load locales from ${path}`);
-        const json = JSON.parse(fs.readFileSync(path, 'utf-8'));
-        const perfix = path
-            .replace('./src/', '')
-            .replace('/locales.json', '')
-            .replace(/\//g, '.');
-        for (const [ns, items] of Object.entries(json)) {
-            // Namespace
-            for (const [key, translations] of Object.entries(items)) {
-                // Keys
-                for (const [lang, translation] of Object.entries(translations)) {
-                    // Languages
-                    if (!data.has(lang)) {
-                        data.set(lang, new LocaleData(lang));
+        console.info(`Load locales from ${root}/${path}/${target}`);
+        const json = JSON.parse(fs.readFileSync(`${root}/${path}/${target}`, 'utf-8'));
+        const spaces = path.split('/');
+        for (const [key, translations] of Object.entries(json)) {
+            for (const [lang, translation] of Object.entries(translations)) {
+                if (!data.has(lang)) data.set(lang, new LocaleData(lang));
+                const localeData = data.get(lang);
+                let targetItem: LocaleItem = localeData.data;
+                for (const space of spaces) {
+                    let item = targetItem[space];
+                    if (!item || typeof item === 'string') {
+                        item = { };
+                        targetItem[space] = item;
                     }
-                    const localeData = data.get(lang);
-                    if (!localeData.data.has(ns)) {
-                        localeData.data.set(ns, []);
-                    }
-                    localeData.data.get(ns).push([
-                        `${perfix}.${key}`, translation as string
-                    ]);
+                    targetItem = item;
                 }
+                targetItem[key] = translation;
             }
         }
     }
 
     /**
      * Build the `index.ts`
-     * @param root Root directory
      */
-    function buildIndex(root: string) {
-        const codesImport = [];
-        const codesExport = [];
+    function buildIndex() {
+        const codesImport: Array<string> = [];
+        const codesExport: Array<string> = [];
         for (const localeData of data.values()) {
             codesImport.push(localeData.importCode);
             codesExport.push(localeData.exportCode);
@@ -131,30 +117,12 @@ export namespace locale {
         const code = '// This file is generated by scripts/build-locals.ts\n'
             + codesImport.join('\n')
             + '\n\n'
-            + 'export default {'
-            + codesExport.join('')
-            + '\n\n'
+            + 'export default {\n'
+            + codesExport.join('\n')
+            + '\n'
             + '};';
-        const file = `${root}/index.ts`;
+        const file = `${outputPath}/index.ts`;
         fs.writeFileSync(file, code);
         console.info(`Generated ${file}`);
-    }
-
-    /**
-     * Build locales files
-     * @see Inspired by [Turnip-Calculator](https://github.com/elxris/Turnip-Calculator/blob/master/scripts/i18n.js)
-     */
-    export function build() {
-        search('./src', 'locales.json', (path) => parse(path));
-
-        const targetRoot = './src/locales';
-        if (!fs.existsSync(targetRoot)) {
-            fs.mkdirSync(targetRoot);
-        }
-        for (const localeData of data.values()) {
-            localeData.build(targetRoot);
-        }
-
-        buildIndex(targetRoot);
     }
 }

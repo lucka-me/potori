@@ -1,68 +1,66 @@
 {
-    "general": {
-        "pending": {
-            "en": "Pending",
-            "zh": "审核中"
-        },
-        "accepted": {
-            "en": "Accepted",
-            "zh": "批准"
-        },
-        "rejected": {
-            "en": "Rejected",
-            "zh": "拒绝"
-        },
+    "pending": {
+        "en": "Pending",
+        "zh": "审核中"
+    },
+    "accepted": {
+        "en": "Accepted",
+        "zh": "批准"
+    },
+    "rejected": {
+        "en": "Rejected",
+        "zh": "拒绝"
+    },
 
-        "undeclared": {
-            "en": "Undeclared",
-            "zh": "未指明"
-        },
-        "duplicated": {
-            "en": "Duplicated",
-            "zh": "重复"
-        },
-        "close": {
-            "en": "Too Close",
-            "zh": "过近"
-        },
+    "undeclared": {
+        "en": "Undeclared",
+        "zh": "未指明"
+    },
+    "duplicated": {
+        "en": "Duplicated",
+        "zh": "重复"
+    },
+    "close": {
+        "en": "Too Close",
+        "zh": "过近"
+    },
 
-        "criteriaCriteria": {
-            "en": "Criteria",
-            "zh": "不合标准"
-        },
-        "criteriaNatural": {
-            "en": "Natural",
-            "zh": "天然地貌"
-        },
-        "criteriaTemporary": {
-            "en": "Temporary",
-            "zh": "临时"
-        },
-        "criteriaGeneric": {
-            "en": "Generic Store",
-            "zh": "一般商家"
-        },
+    "criteriaCriteria": {
+        "en": "Criteria",
+        "zh": "不合标准"
+    },
+    "criteriaNatural": {
+        "en": "Natural",
+        "zh": "天然地貌"
+    },
+    "criteriaTemporary": {
+        "en": "Temporary",
+        "zh": "临时"
+    },
+    "criteriaGeneric": {
+        "en": "Generic Store",
+        "zh": "一般商家"
+    },
 
-        "locationMismatched": {
-            "en": "Mismatched",
-            "zh": "地点不符"
-        },
-        "data.locationPedestrian": {
-            "en": "Pedestrian",
-            "zh": "行人通道"
-        },
-        "locationPrivate": {
-            "en": "Private",
-            "zh": "私人"
-        },
-        
-        "photoPlate": {
-            "en": "License Plate",
-            "zh": "车牌"
-        },
-        "photoQuality": {
-            "en": "Photo Quality",
-            "zh": "照片质量"
-        }
+    "locationMismatched": {
+        "en": "Mismatched",
+        "zh": "地点不符"
+    },
+    "locationPedestrian": {
+        "en": "Pedestrian",
+        "zh": "行人通道"
+    },
+    "locationPrivate": {
+        "en": "Private",
+        "zh": "私人"
+    },
+    
+    "photoPlate": {
+        "en": "License Plate",
+        "zh": "车牌"
+    },
+    "photoQuality": {
+        "en": "Photo Quality",
+        "zh": "照片质量"
     }
 }
