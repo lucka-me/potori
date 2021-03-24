@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/assets/title.png"
   },
   {
-    "revision": "144b332edf81d3bcd189",
+    "revision": "57e3d098e27b26e38ac7",
     "url": "/next/css/app.08c2ccb1.css"
   },
   {
@@ -40,7 +40,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/charts.a8695c17.css"
   },
   {
-    "revision": "ef4714a36b059d1cba28",
+    "revision": "b14782c29fd82a750bde",
     "url": "/next/css/dashboard.030c0685.css"
   },
   {
@@ -64,7 +64,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/match.4e5ee524.css"
   },
   {
-    "revision": "e83b7d50f043e18ec4a1",
+    "revision": "85a7ce90f08e96aa8d51",
     "url": "/next/css/preferences.a2815486.css"
   },
   {
@@ -88,12 +88,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/img/fa-solid-900.2306f642.svg"
   },
   {
-    "revision": "09db5e9a19934365a08a14e9a89212ef",
+    "revision": "d9595087cfbdf6b9e139e922a60607bd",
     "url": "/next/index.html"
   },
   {
-    "revision": "144b332edf81d3bcd189",
-    "url": "/next/js/app.bac54fd1.js"
+    "revision": "57e3d098e27b26e38ac7",
+    "url": "/next/js/app.e0213836.js"
   },
   {
     "revision": "9333f60fb9e95bafe3ac",
@@ -120,8 +120,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/chunk-vendors.ec73f7d3.js"
   },
   {
-    "revision": "ef4714a36b059d1cba28",
-    "url": "/next/js/dashboard.b0c30abb.js"
+    "revision": "b14782c29fd82a750bde",
+    "url": "/next/js/dashboard.6b413432.js"
   },
   {
     "revision": "75f6f5fc1343bce87828",
@@ -152,8 +152,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/match.bccba58b.js"
   },
   {
-    "revision": "e83b7d50f043e18ec4a1",
-    "url": "/next/js/preferences.17ddd0a6.js"
+    "revision": "85a7ce90f08e96aa8d51",
+    "url": "/next/js/preferences.dd682160.js"
   },
   {
     "revision": "0acea94284e5075dac837ad119ada8b5",
