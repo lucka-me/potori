@@ -40,8 +40,15 @@ export default class App extends Vue {
 </script>
 
 <style lang="scss">
+@use './variables';
+@use '@material/theme' with (
+    $primary: variables.$primary,
+    $secondary: variables.$secondary,
+);
 @use '~@material/typography';
 @import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500&display=swap');
+
+@include theme.core-styles;
 
 html {
     // Fix for iOS standalone mode
