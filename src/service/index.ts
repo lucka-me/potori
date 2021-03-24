@@ -1,3 +1,4 @@
+import type { Composer } from 'vue-i18n';
 import { Store } from 'vuex'
 import { toRaw } from '@vue/reactivity';
 
@@ -44,12 +45,15 @@ export namespace service {
 
     export const errors: Array<ErrorEvent> = [];
 
-    export function init(store: Store<State>) {
+    export function init(store: Store<State>, i18n: Composer<unknown, unknown, unknown>) {
         _store = store;
 
         window.addEventListener('error', (errorEvent) => {
             errors.push(errorEvent);
         });
+
+        umi.init(i18n);
+        brainstorming.init();
 
         load();
 
@@ -231,7 +235,6 @@ export namespace service {
         const raws = await dia.load();
         const nominations = raws.map(raw => Nomination.from(raw));
         _store.commit('setNominations', nominations);
-        brainstorming.init();
     }
 
     /**

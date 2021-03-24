@@ -1,3 +1,5 @@
+import type { Composer } from 'vue-i18n';
+
 import data from '@/data/umi/umi.json';
 import { Predicator } from '@/service/nomination';
 
@@ -113,34 +115,35 @@ export namespace umi {
      * Common type of `Scanner`, `Status` and `Reason`
      */
     export type CommonSense = Scanner | Status | Reason;
-    
-    export const scanner = data.scanners.reduce((map, json) => {
-        const scanner = new Scanner(json.code, json.title);
-        map.set(scanner.code, scanner);
-        return map;
-    }, new Map<ScannerCode, Scanner>());
 
-    export const status = data.statuses.reduce((map, json) => {
-        const status = new Status(
-            json.code, json.title, json.iconFA,
-            json.queries.reduce((quries, query) => {
-                quries.set(query.scanner, query.query);
-                return quries;
-            }, new Map<ScannerCode, string>())
-        );
-        map.set(status.code, status);
-        return map;
-    }, new Map<StatusCode, Status>());
+    export const scanner = new Map<ScannerCode, Scanner>();
+    export const status = new Map<StatusCode, Status>();
+    export const reason = new Map<ReasonCode, Reason>();
 
-    export const reason = data.reasons.reduce((map, json) => {
-        const reason = new Reason(
-            json.code, json.title, json.iconFA, json.color,
-            json.keywords.reduce((mapKeywords, keywords) => {
-                mapKeywords.set(keywords.scanner, keywords.keywords);
-                return mapKeywords;
-            }, new Map<ScannerCode, Array<string>>())
-        );
-        map.set(reason.code, reason);
-        return map;
-    }, new Map<ReasonCode, Reason>());
+    export function init(i18n: Composer<unknown, unknown, unknown>) {
+        for (const raw of data.scanners) {
+            const item = new Scanner(raw.code, raw.title);
+            scanner.set(item.code, item);
+        }
+        for (const raw of data.statuses) {
+            const item = new Status(
+                raw.code, i18n.t(raw.title), raw.iconFA,
+                raw.queries.reduce((map, query) => {
+                    map.set(query.scanner, query.query);
+                    return map;
+                }, new Map<ScannerCode, string>())
+            );
+            status.set(item.code, item);
+        }
+        for (const raw of data.reasons) {
+            const item = new Reason(
+                raw.code, i18n.t(raw.title), raw.iconFA, raw.color,
+                raw.keywords.reduce((map, keywords) => {
+                    map.set(keywords.scanner, keywords.keywords);
+                    return map;
+                }, new Map<ScannerCode, Array<string>>())
+            );
+            reason.set(item.code, item);
+        }
+    }
 }
