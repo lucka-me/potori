@@ -15,7 +15,7 @@ const routes: Array<RouteRecordRaw> = [
     {
         path: '/brainstorming',
         name: 'Brainstorming',
-        component: () => import(/* webpackChunkName: 'braainstorming' */ '@/views/Brainstorming.vue'),
+        component: () => import(/* webpackChunkName: 'brainstorming' */ '@/views/Brainstorming.vue'),
     },
 
 

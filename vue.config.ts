@@ -1,4 +1,5 @@
 import { execSync } from 'child_process';
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
 import { ProjectOptions } from '@vue/cli-service';
 
 let next = true;
@@ -44,7 +45,15 @@ const options: ProjectOptions = {
                 },
             ]
         }
-    }
+    },
+    chainWebpack: config => {
+        config
+            .plugin('bundle-analyzer')
+            .use(BundleAnalyzerPlugin)
+            .init((Plugin: typeof BundleAnalyzerPlugin) => new Plugin({
+                analyzerMode: 'static', openAnalyzer: false
+            }));
+    },
 };
 
 module.exports = options;
