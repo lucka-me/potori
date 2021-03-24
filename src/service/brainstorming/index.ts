@@ -117,17 +117,29 @@ export namespace brainstorming {
     export async function update(nominations: Array<Nomination>, callback: ProgressCallback): Promise<number> {
         let succeed = 0;
         let processed = 0;
-        let total = nominations.length;
+        const total = nominations.length;
+        const queries: Array<Promise<Record | undefined>> = [];
         for (const nomination of nominations) {
-            processed++;
             if (beforeCreate(nomination)) {
+                processed++;
                 callback(processed / total);
                 continue;
             }
-            const record = await queryFirebase(nomination.id);
-            if (record) succeed++;
-            callback(processed / total);
+            const query = queryFirebase(nomination.id)
+                .then(record => {
+                    processed++;
+                    if (record) succeed++;
+                    callback(processed / total);
+                    return record;
+                })
+                .catch(_ => {
+                    processed++;
+                    callback(processed / total);
+                    return undefined;
+                })
+            queries.push(query);
         }
+        await Promise.allSettled(queries);
         return succeed;
     }
 
