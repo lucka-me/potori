@@ -1,92 +1,68 @@
 {
     "general": {
         "pending": {
-            "en-US": "Pending",
-            "zh-CN": "审核中",
-            "zh-HK": "審核中",
-            "zh-TW": "審核中"
+            "en": "Pending",
+            "zh": "审核中"
         },
         "accepted": {
-            "en-US": "Accepted",
-            "zh-CN": "批准",
-            "zh-HK": "批准",
-            "zh-TW": "批准"
+            "en": "Accepted",
+            "zh": "批准"
         },
         "rejected": {
-            "en-US": "Rejected",
-            "zh-CN": "拒绝",
-            "zh-HK": "拒絕",
-            "zh-TW": "拒絕"
+            "en": "Rejected",
+            "zh": "拒绝"
         },
 
         "undeclared": {
-            "en-US": "Undeclared",
-            "zh-CN": "未指明",
-            "zh-HK": "未指明",
-            "zh-TW": "未指明"
+            "en": "Undeclared",
+            "zh": "未指明"
         },
         "duplicated": {
-            "en-US": "Duplicated",
-            "zh-CN": "重复",
-            "zh-HK": "重複",
-            "zh-TW": "重複"
+            "en": "Duplicated",
+            "zh": "重复"
         },
         "close": {
-            "en-US": "Too Close",
-            "zh-CN": "过近",
-            "zh-HK": "過近",
-            "zh-TW": "過近"
+            "en": "Too Close",
+            "zh": "过近"
         },
 
         "criteriaCriteria": {
-            "en-US": "Criteria",
-            "zh-CN": "不合标准",
-            "zh-HK": "不合標準",
-            "zh-TW": "不合標準"
+            "en": "Criteria",
+            "zh": "不合标准"
         },
         "criteriaNatural": {
-            "en-US": "Natural",
-            "zh-CN": "天然地貌",
-            "zh-HK": "天然地貌",
-            "zh-TW": "天然地貌"
+            "en": "Natural",
+            "zh": "天然地貌"
         },
         "criteriaTemporary": {
-            "en-US": "Temporary",
-            "zh-CN": "临时",
-            "zh-HK": "臨時",
-            "zh-TW": "臨時"
+            "en": "Temporary",
+            "zh": "临时"
         },
         "criteriaGeneric": {
-            "en-US": "Generic Store",
-            "zh-CN": "一般商家",
-            "zh-HK": "一般商家",
-            "zh-TW": "一般商家"
+            "en": "Generic Store",
+            "zh": "一般商家"
         },
 
         "locationMismatched": {
-            "en-US": "Mismatched",
-            "zh-CN": "地点不符",
-            "zh-HK": "地點不符",
-            "zh-TW": "地點不符"
+            "en": "Mismatched",
+            "zh": "地点不符"
+        },
+        "data.locationPedestrian": {
+            "en": "Pedestrian",
+            "zh": "行人通道"
         },
         "locationPrivate": {
-            "en-US": "Private",
-            "zh-CN": "私人",
-            "zh-HK": "私人",
-            "zh-TW": "私人"
+            "en": "Private",
+            "zh": "私人"
         },
         
         "photoPlate": {
-            "en-US": "License Plate",
-            "zh-CN": "车牌",
-            "zh-HK": "車牌",
-            "zh-TW": "車牌"
+            "en": "License Plate",
+            "zh": "车牌"
         },
         "photoQuality": {
-            "en-US": "Photo Quality",
-            "zh-CN": "照片质量",
-            "zh-HK": "照片品質",
-            "zh-TW": "照片品質"
+            "en": "Photo Quality",
+            "zh": "照片质量"
         }
     }
 }
