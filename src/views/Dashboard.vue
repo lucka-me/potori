@@ -34,11 +34,20 @@ import Reasons from '@/components/dashboard/Reasons.vue';
         MaterialIconButton,
         Status, Highlight, Gallery, Scanners, Reasons
     },
+    i18n: {
+        messages: {
+            "en": {
+                "title": "Dashboard"
+            },
+            "zh": {
+                "title": "仪表盘"
+            }
+        }
+    },
 })
 export default class Dashboard extends Vue {
 
     get canRefresh() {
-        console.log(this.$i18n);
         return this.$store.state.status === State.Status.idle && this.$store.state.gapiAuthed;
     }
 
