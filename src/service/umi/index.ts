@@ -1,4 +1,4 @@
-import type { Composer } from 'vue-i18n';
+import type { VueI18n } from 'vue-i18n';
 
 import data from '@/data/umi/umi.json';
 import { Predicator } from '@/service/nomination';
@@ -120,7 +120,7 @@ export namespace umi {
     export const status = new Map<StatusCode, Status>();
     export const reason = new Map<ReasonCode, Reason>();
 
-    export function init(i18n: Composer<unknown, unknown, unknown>) {
+    export function init(i18n: VueI18n<unknown, unknown, unknown>) {
         for (const raw of data.scanners) {
             const item = new Scanner(raw.code, raw.title);
             scanner.set(item.code, item);

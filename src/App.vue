@@ -5,6 +5,7 @@
 </template>
 
 <script lang="ts">
+import { useI18n } from 'vue-i18n';
 import { Vue, Options } from 'vue-property-decorator';
 
 import { delibird } from './service/delibird';

@@ -1,5 +1,5 @@
 <template>
-<material-top-app-bar title="Dashboard">
+<material-top-app-bar :title="$t('title')">
     <material-icon-button v-if="canRefresh" icon="redo" @click="refresh" />
     <material-icon-button icon="cog" @click="openPreference" />
 </material-top-app-bar>
@@ -38,6 +38,7 @@ import Reasons from '@/components/dashboard/Reasons.vue';
 export default class Dashboard extends Vue {
 
     get canRefresh() {
+        console.log(this.$i18n);
         return this.$store.state.status === State.Status.idle && this.$store.state.gapiAuthed;
     }
 
@@ -71,3 +72,14 @@ export default class Dashboard extends Vue {
     }
 }
 </style>
+
+<i18n>
+{
+    "en": {
+        "title": "Dashboard"
+    },
+    "zh": {
+        "title": "仪表盘"
+    }
+}
+</i18n>

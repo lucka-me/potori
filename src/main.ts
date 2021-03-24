@@ -8,17 +8,14 @@ import router from './router';
 import store from './store';
 
 const i18n = createI18n({
-    legacy: false,
     locale: navigator.language,
     fallbackLocale: 'en',
     messages: locales
 });
 
-i18n.global
-
 service.init(store, i18n.global);
 createApp(App)
+    .use(i18n)
     .use(store)
     .use(router)
-    .use(i18n)
     .mount('#app');

@@ -1,4 +1,4 @@
-import type { Composer } from 'vue-i18n';
+import type { VueI18n } from 'vue-i18n';
 import { Store } from 'vuex'
 import { toRaw } from '@vue/reactivity';
 
@@ -45,7 +45,7 @@ export namespace service {
 
     export const errors: Array<ErrorEvent> = [];
 
-    export function init(store: Store<State>, i18n: Composer<unknown, unknown, unknown>) {
+    export function init(store: Store<State>, i18n: VueI18n<unknown, unknown, unknown>) {
         _store = store;
 
         window.addEventListener('error', (errorEvent) => {
