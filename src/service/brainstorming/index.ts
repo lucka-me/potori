@@ -131,6 +131,12 @@ export namespace brainstorming {
         return succeed;
     }
 
+    export async function contains(nomination: Nomination) {
+        if (beforeCreate(nomination)) return false;
+        const record = await queryDatabase(nomination.id);
+        return typeof record !== 'undefined';
+    }
+
     export async function importDatabase() {
         const content = await util.importFile();
         let data: Map<string, Record>;
