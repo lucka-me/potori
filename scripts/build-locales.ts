@@ -6,9 +6,16 @@ export namespace locale {
     type Item = [Key, Translation];
     type Namespace = string;
 
+    type LocaleCode = string;
+    type SearchCallback = (path: string) => void;
+
+    interface LocaleItem {
+        [name: string]: string | LocaleItem;
+    }
+
     class LocaleData {
 
-        code: string;
+        code: LocaleCode;
         data: Map<Namespace, Array<Item>> = new Map();
 
         constructor(code: string) {
@@ -64,7 +71,7 @@ export namespace locale {
      * @param target Target filename
      * @param callback Triggered when found
      */
-    function search(dir: string, target: string, callback: (path: string) => void) {
+    function search(dir: string, target: string, callback: SearchCallback) {
         const items = fs.readdirSync(dir);
         for (const item of items) {
             const path = `${dir}/${item}`;
