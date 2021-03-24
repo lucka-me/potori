@@ -41,7 +41,6 @@ export default class CoverageChart extends Vue {
         for (const nomination of nominations) {
             data[await brainstorming.contains(nomination) ? 0 : 1]++;
         }
-        console.log(data);
         const dataset: ChartDataset<'doughnut'> = {
             data: data,
             backgroundColor: CoverageChart.colors,

@@ -8,8 +8,9 @@
         <div>Updating Brainstorming</div>
         <material-linear-progress :progress="$store.state.progress" determinate/>
     </div>
-    <div v-if="idle" class="grid grid--1-2">
+    <div v-if="idle" class="grid grid--1-1-1">
         <coverage-chart/>
+        <rates-chart/>
     </div>
 </main>
 </template>
@@ -17,10 +18,10 @@
 <script lang="ts">
 import {
     Chart,
-    ArcElement, BarElement, LineElement, PointElement,
-    BarController, DoughnutController, LineController,
-    CategoryScale, LogarithmicScale, LinearScale, TimeScale,
-    Tooltip, Legend
+    ArcElement, LineElement, PointElement,
+    DoughnutController, RadarController,
+    RadialLinearScale,
+    Filler, Tooltip, Legend,
 } from 'chart.js';
 import 'chartjs-adapter-luxon';
 import { Vue, Options } from 'vue-class-component';
@@ -34,13 +35,15 @@ import MaterialLinearProgress from '@/components/material/LinearProgress.vue';
 import MaterialTopAppBar from '@/components/material/TopAppBar.vue';
 import MaterialTopAppBarAdjust from '@/components/material/TopAppBarAdjust.vue';
 import CoverageChart from '@/components/brainstorming/Coverage.vue';
+import RatesChart from '@/components/brainstorming/Rates.vue';
 
 @Options({
     components: {
         MaterialTopAppBar, MaterialTopAppBarAdjust,
         MaterialIconButton,
         MaterialLinearProgress,
-        CoverageChart
+        CoverageChart,
+        RatesChart,
     },
 })
 export default class Brainstorming extends Vue {
@@ -51,10 +54,10 @@ export default class Brainstorming extends Vue {
 
     created() {
         Chart.register(
-            ArcElement, BarElement, LineElement, PointElement,
-            BarController, DoughnutController, LineController,
-            CategoryScale, LinearScale, LogarithmicScale, TimeScale,
-            Tooltip, Legend
+            ArcElement, LineElement, PointElement,
+            DoughnutController, RadarController,
+            RadialLinearScale,
+            Filler, Tooltip, Legend
         );
         Chart.defaults.maintainAspectRatio = false;
         Chart.defaults.plugins.legend!.labels.boxWidth = 10;
@@ -97,16 +100,8 @@ export default class Brainstorming extends Vue {
         gap: 0.6rem;
 
         @media screen and (min-width: 600px) {
-            &--1-1 {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            &--1-2 {
-                grid-template-columns: 1fr 2fr;
-            }
-
-            &--2-1 {
-                grid-template-columns: 2fr 1fr;
+            &--1-1-1 {
+                grid-template-columns: 1fr 1fr 1fr;
             }
         }
     }

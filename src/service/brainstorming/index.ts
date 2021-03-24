@@ -143,6 +143,11 @@ export namespace brainstorming {
         return succeed;
     }
 
+    export async function getFromLocal(nomination: Nomination) {
+        if (beforeCreate(nomination)) return undefined;
+        return await queryDatabase(nomination.id);
+    }
+
     export async function contains(nomination: Nomination) {
         if (beforeCreate(nomination)) return false;
         const record = await queryDatabase(nomination.id);
