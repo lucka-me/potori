@@ -3,6 +3,7 @@
 </template>
 
 <script lang="ts">
+import { toRaw } from '@vue/reactivity';
 import { Chart, ChartDataset, ChartOptions, ChartType, DefaultDataPoint } from 'chart.js';
 import { Vue, Prop, Watch } from 'vue-property-decorator';
 
@@ -36,16 +37,18 @@ export default class ChartView<
         this.chart?.destroy();
     }
 
-    @Watch('chartDataset')
+    @Watch('chartDatasets')
     onDatasetChanged(newVal: Array<ChartDataset<TType, TData>>, _: unknown) {
         if (!this.chart) return;
-        this.chart.data.datasets = newVal;
+        this.chart.data.datasets = toRaw(newVal);
+        this.chart.update();
     }
 
     @Watch('chartLabels')
     onLabelsUpdated(newVal: Array<TLabel>, _: unknown) {
         if (!this.chart) return;
-        this.chart.data.labels = newVal;
+        this.chart.data.labels = toRaw(newVal);
+        this.chart.update();
     }
 }
 
