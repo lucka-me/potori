@@ -16,12 +16,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/assets/title.png"
   },
   {
-    "revision": "0bf8b67c0886028a2c1b",
+    "revision": "b205648715b9f2e92157",
     "url": "/next/css/app.09dd643c.css"
   },
   {
-    "revision": "5d00bbf07c5350ce8b5a",
-    "url": "/next/css/braainstorming.77608084.css"
+    "revision": "ef2bffd70e806c6fc1d0",
+    "url": "/next/css/braainstorming.92917073.css"
+  },
+  {
+    "revision": "5c589a9c9ff25530d24d",
+    "url": "/next/css/braainstorming~charts.5109a264.css"
   },
   {
     "revision": "9597b5062f75c383197b",
@@ -32,8 +36,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/braainstorming~dashboard.088a28d9.css"
   },
   {
-    "revision": "198b20d97dbf0125a4b5",
-    "url": "/next/css/charts.85a55bc5.css"
+    "revision": "6c4ef7f65692c36f9dcb",
+    "url": "/next/css/charts.a8695c17.css"
   },
   {
     "revision": "bdb40125b577c6ba7380",
@@ -60,7 +64,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/match.4e5ee524.css"
   },
   {
-    "revision": "19c7be517f39f1116fff",
+    "revision": "7aae11bb239df94bf29c",
     "url": "/next/css/preferences.a2815486.css"
   },
   {
@@ -84,20 +88,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/img/fa-solid-900.2306f642.svg"
   },
   {
-    "revision": "ad96db5ba59d2c268aad988c916e8cbb",
+    "revision": "dfee4dd73d70c1f96affebea9bda1893",
     "url": "/next/index.html"
   },
   {
-    "revision": "0bf8b67c0886028a2c1b",
-    "url": "/next/js/app.8abb1258.js"
+    "revision": "b205648715b9f2e92157",
+    "url": "/next/js/app.a500e4d6.js"
   },
   {
-    "revision": "5d00bbf07c5350ce8b5a",
-    "url": "/next/js/braainstorming.74024c2f.js"
+    "revision": "ef2bffd70e806c6fc1d0",
+    "url": "/next/js/braainstorming.771ae2bb.js"
   },
   {
-    "revision": "1f750089fbc45094132f",
-    "url": "/next/js/braainstorming~charts.66c6f8a7.js"
+    "revision": "5c589a9c9ff25530d24d",
+    "url": "/next/js/braainstorming~charts.aa3f9f3f.js"
   },
   {
     "revision": "9597b5062f75c383197b",
@@ -108,8 +112,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/braainstorming~dashboard.098f94dd.js"
   },
   {
-    "revision": "198b20d97dbf0125a4b5",
-    "url": "/next/js/charts.9157d5d1.js"
+    "revision": "6c4ef7f65692c36f9dcb",
+    "url": "/next/js/charts.48767b8a.js"
   },
   {
     "revision": "2dd33d9c6c21e9a2e692",
@@ -148,8 +152,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/match.18935d21.js"
   },
   {
-    "revision": "19c7be517f39f1116fff",
-    "url": "/next/js/preferences.eea76200.js"
+    "revision": "7aae11bb239df94bf29c",
+    "url": "/next/js/preferences.a0821a87.js"
   },
   {
     "revision": "6dcd4e60aac327b475c67359318dc9ab",
