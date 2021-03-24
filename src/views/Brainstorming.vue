@@ -12,6 +12,7 @@
         <coverage-chart/>
         <rates-chart/>
     </div>
+    <reviews-by-month-chart v-if="idle"/>
 </main>
 </template>
 
@@ -19,8 +20,8 @@
 import {
     Chart,
     ArcElement, LineElement, PointElement,
-    DoughnutController, RadarController,
-    RadialLinearScale,
+    DoughnutController, LineController, RadarController,
+    RadialLinearScale, LinearScale, TimeScale,
     Filler, Tooltip, Legend,
 } from 'chart.js';
 import 'chartjs-adapter-luxon';
@@ -36,6 +37,7 @@ import MaterialTopAppBar from '@/components/material/TopAppBar.vue';
 import MaterialTopAppBarAdjust from '@/components/material/TopAppBarAdjust.vue';
 import CoverageChart from '@/components/brainstorming/Coverage.vue';
 import RatesChart from '@/components/brainstorming/Rates.vue';
+import ReviewsByMonthChart from '@/components/brainstorming/ReviewsByMonth.vue';
 
 @Options({
     components: {
@@ -44,6 +46,7 @@ import RatesChart from '@/components/brainstorming/Rates.vue';
         MaterialLinearProgress,
         CoverageChart,
         RatesChart,
+        ReviewsByMonthChart
     },
 })
 export default class Brainstorming extends Vue {
@@ -55,8 +58,8 @@ export default class Brainstorming extends Vue {
     created() {
         Chart.register(
             ArcElement, LineElement, PointElement,
-            DoughnutController, RadarController,
-            RadialLinearScale,
+            DoughnutController, LineController, RadarController,
+            RadialLinearScale, LinearScale, TimeScale,
             Filler, Tooltip, Legend
         );
         Chart.defaults.maintainAspectRatio = false;
