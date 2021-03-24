@@ -42,7 +42,6 @@ export default class CoverageChart extends Vue {
         const nominations = this.$store.state.nominations;
         const data = [ 0, 0 ];
         const queries: Array<Promise<void>> = [];
-
         for (const nomination of nominations) {
             if (nomination.status === umi.StatusCode.Pending) continue;
             let rejected = true;
@@ -88,7 +87,7 @@ export default class CoverageChart extends Vue {
             hoverBorderColor: 'rgba(0, 0, 0, 0.4)',
         };
         this.datasets = [ dataset ];
-        if (data[0] > 0 && data[1] > 0) {
+        if (data[0] > 0 || data[1] > 0) {
             this.title = `Synch | ${(data[0] / (data[0] + data[1]) * 100).toFixed(2)}%`;
         } else {
             this.title = 'Synch';

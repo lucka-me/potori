@@ -1,5 +1,5 @@
 <template>
-<chart-block title="Coverage">
+<chart-block :title="title">
     <chart-view chart-type="doughnut" :chart-datasets="datasets" :chart-labels="labels" :chart-options="options"/>
 </chart-block>
 </template>
@@ -21,6 +21,8 @@ export default class CoverageChart extends Vue {
 
     private static readonly colors = [ 'royalblue', 'gray' ];
 
+    title = 'Coverage';
+
     options: ChartOptions<'doughnut'> = {
         plugins: {
             legend: { display: true, position: 'right', },
@@ -38,9 +40,15 @@ export default class CoverageChart extends Vue {
     private async updateData() {
         const nominations = this.$store.state.nominations;
         const data = [ 0, 0 ];
+        const queries: Array<Promise<void>> = [];
         for (const nomination of nominations) {
-            data[await brainstorming.contains(nomination) ? 0 : 1]++;
+            const query = brainstorming.contains(nomination)
+                .then(contains => {
+                    data[contains ? 0 : 1]++;
+                })
+            queries.push(query);
         }
+        await Promise.allSettled(queries);
         const dataset: ChartDataset<'doughnut'> = {
             data: data,
             backgroundColor: CoverageChart.colors,
@@ -50,6 +58,11 @@ export default class CoverageChart extends Vue {
             hoverBorderColor: 'rgba(0, 0, 0, 0.4)',
         };
         this.datasets = [ dataset ];
+        if (data[0] > 0 || data[1] > 0) {
+            this.title = `Coverage | ${(data[0] / (data[0] + data[1]) * 100).toFixed(2)}%`;
+        } else {
+            this.title = '';
+        }
     }
 }
 </script>
