@@ -52,7 +52,7 @@ export default class RatesChart extends Vue {
         const updateReviewItem = (rate: string, item: ReviewItem) => {
             if (!rate) return;
             const rateInt = parseInt(rate);
-            if (rateInt === NaN) return;
+            if (isNaN(rateInt)) return;
             item.count++;
             item.rate += rateInt;
         };

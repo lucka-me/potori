@@ -11,6 +11,7 @@
     <div v-if="idle" class="grid grid--1-1-1">
         <coverage-chart/>
         <rates-chart/>
+        <synch-chart/>
     </div>
     <reviews-by-month-chart v-if="idle"/>
 </main>
@@ -38,14 +39,14 @@ import MaterialTopAppBarAdjust from '@/components/material/TopAppBarAdjust.vue';
 import CoverageChart from '@/components/brainstorming/Coverage.vue';
 import RatesChart from '@/components/brainstorming/Rates.vue';
 import ReviewsByMonthChart from '@/components/brainstorming/ReviewsByMonth.vue';
+import SynchChart from '@/components/brainstorming/Synch.vue';
 
 @Options({
     components: {
         MaterialTopAppBar, MaterialTopAppBarAdjust,
         MaterialIconButton,
         MaterialLinearProgress,
-        CoverageChart,
-        RatesChart,
+        CoverageChart, RatesChart, SynchChart,
         ReviewsByMonthChart
     },
 })

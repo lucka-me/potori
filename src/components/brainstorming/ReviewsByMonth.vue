@@ -79,7 +79,7 @@ export default class ReviewsByMonthChart extends Vue {
             borderColor: 'royalblue',
             pointBackgroundColor: 'royalblue',
             pointRadius: 0,
-            fill: false,
+            fill: true,
         };
         this.datasets = [ dataset ];
     }
