@@ -32,6 +32,7 @@ const options: ProjectOptions = {
             start_url: publicPath,
             scope: publicPath,
             display: 'standalone',
+            background_color: '#2578B5',
             icons: [
                 {
                     src: `${publicPath}assets/icon-maskable.png`,
