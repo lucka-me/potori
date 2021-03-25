@@ -5,7 +5,13 @@
 
         "appVersion": "App Version",
         "dataVersion": "Data Version",
+        
         "document": "Document",
+        "documentLink": "/docs",
+        "privacy": "Privacy",
+        "privacyLink": "/docs/privacy",
+
+        "telegram": "Telegram Channel",
 
         "repository": "Code Repository",
         "repositoryDesc": "GitHub",
@@ -21,7 +27,13 @@
 
         "appVersion": "应用版本",
         "dataVersion": "数据版本",
+
         "document": "文档",
+        "documentLink": "/docs/zh-CN",
+        "privacy": "隐私",
+        "privacyLink": "/docs/zh-CN/privacy",
+
+        "telegram": "Telegram频道",
 
         "repository": "代码仓库",
         "repositoryDesc": "GitHub",

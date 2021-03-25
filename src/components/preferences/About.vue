@@ -5,6 +5,12 @@
 <preference-row :text="$t('document')">
     <material-button @click="openDoc">{{ $t('openAction') }}</material-button>
 </preference-row>
+<preference-row :text="$t('privacy')">
+    <material-button @click="openPrivacy">{{ $t('openAction') }}</material-button>
+</preference-row>
+<preference-row :text="$t('telegram')">
+    <material-button @click="openTelegram">{{ $t('openAction') }}</material-button>
+</preference-row>
 <preference-row :text="$t('repository')" :desc="$t('repositoryDesc')">
     <material-button @click="openRepo">{{ $t('openAction') }}</material-button>
 </preference-row>
@@ -49,7 +55,15 @@ export default class AboutPreferences extends Vue {
     }
 
     openDoc() {
-        window.open('/docs', '_blank');
+        window.open(this.$t('documentLink'), '_blank');
+    }
+
+    openPrivacy() {
+        window.open(this.$t('privacyLink'), '_blank');
+    }
+
+    openTelegram() {
+        window.open('https://t.me/potori', '_blank');
     }
 
     openRepo() {
