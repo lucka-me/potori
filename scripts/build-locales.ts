@@ -86,21 +86,19 @@ export namespace locale {
         console.info(`Load locales from ${root}/${path}/${target}`);
         const json = JSON.parse(fs.readFileSync(`${root}/${path}/${target}`, 'utf-8'));
         const spaces = path.split('/');
-        for (const [key, translations] of Object.entries(json)) {
-            for (const [lang, translation] of Object.entries(translations)) {
-                if (!data.has(lang)) data.set(lang, new LocaleData(lang));
-                const localeData = data.get(lang);
-                let targetItem: LocaleItem = localeData.data;
-                for (const space of spaces) {
-                    let item = targetItem[space];
-                    if (!item || typeof item === 'string') {
-                        item = { };
-                        targetItem[space] = item;
-                    }
-                    targetItem = item;
+        for (const [lang, translations] of Object.entries(json)) {
+            if (!data.has(lang)) data.set(lang, new LocaleData(lang));
+            const localeData = data.get(lang);
+            let targetItem: LocaleItem = localeData.data;
+            for (const space of spaces) {
+                let item = targetItem[space];
+                if (!item || typeof item === 'string') {
+                    item = { };
+                    targetItem[space] = item;
                 }
-                targetItem[key] = translation;
+                targetItem = item;
             }
+            Object.assign(targetItem, translations);
         }
     }
 
