@@ -1,5 +1,5 @@
 <template>
-<h2>Scanners</h2>
+<h2>{{ $t('header') }}</h2>
 <div class="card-grid">
     <dashboard-card
         v-for="data of scanners" :key="data.scanner.code"
@@ -16,6 +16,8 @@ import { umi } from '@/service/umi';
 
 import DashboardCard from './Card.vue';
 
+import locales from './Scanners.locales.json';
+
 interface ScannerData {
     scanner: umi.Scanner;
     count: number;
@@ -25,6 +27,9 @@ interface ScannerData {
     components: {
         DashboardCard
     },
+    i18n: {
+        messages: locales
+    }
 })
 export default class Scanners extends Vue {
 

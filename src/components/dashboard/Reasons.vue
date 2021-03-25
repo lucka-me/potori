@@ -1,8 +1,8 @@
 <template>
 <h2 class="title-with-action">
-    <span>Reasons</span>
+    <span>{{ $t('header') }}</span>
     <div class="spacer"/>
-    <material-button @click="toggleMore">{{ more ? 'Less' : 'More' }}</material-button>
+    <material-button @click="toggleMore">{{ $t(more ? 'less' : 'more') }}</material-button>
 </h2>
 <div class="card-grid">
     <dashboard-card
@@ -21,6 +21,8 @@ import { umi } from '@/service/umi';
 import MaterialButton from '@/components/material/Button.vue';
 import DashboardCard from './Card.vue';
 
+import locales from './Reasons.locales.json';
+
 interface ReasonData {
     reason: umi.Reason;
     count: number;
@@ -31,6 +33,9 @@ interface ReasonData {
         MaterialButton,
         DashboardCard
     },
+    i18n: {
+        messages: locales
+    }
 })
 export default class Reasons extends Vue {
 

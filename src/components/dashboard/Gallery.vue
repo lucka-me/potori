@@ -1,5 +1,5 @@
 <template>
-<h2>Last 30 Days</h2>
+<h2>{{ $t('header') }}</h2>
 <div class="gallery">
     <div v-for="nomination of nominations" :key="nomination.id">
         <material-card :image="nomination.imageUrl" square-image @click="open(nomination.id)">
@@ -20,10 +20,15 @@ import Nomination, { Predicator } from '@/service/nomination';
 import MaterialCard from '@/components/material/Card.vue';
 import MaterialIcon from '@/components/material/Icon.vue';
 
+import locales from './Gallery.locales.json';
+
 @Options({
     components: {
         MaterialCard, MaterialIcon
     },
+    i18n: {
+        messages: locales
+    }
 })
 export default class Gallery extends Vue {
 

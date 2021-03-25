@@ -1,14 +1,18 @@
 <template>
 <div class="status">
     <div v-if="showProgress" class="progress">
-        <div>{{ progressText }}</div>
+        <div>{{ $t(progressText) }}</div>
         <material-linear-progress :progress="$store.state.progress" :determinate="progressDeterminate"/>
     </div>
     <div v-if="showActions" class="actions">
-        <material-icon-button v-if="showLinkButton" icon="sign-in-alt" @click="link" title="Link Google Account"/>
-        <material-icon-button v-if="showMatchButton" icon="user-check" @click="match" title="Manually Match"/>
-        <material-icon-button v-if="showChartsButton" icon="chart-bar" @click="openCharts" title="Charts"/>
-        <material-icon-button v-if="showChartsButton" icon="brain" @click="openBrainstorming" title="Brainstorming"/>
+        <material-icon-button
+            v-if="showLinkButton" icon="sign-in-alt" :title="$t('link')" @click="link"/>
+        <material-icon-button
+            v-if="showMatchButton" icon="user-check" :title="$t('match')" @click="match"/>
+        <material-icon-button
+            v-if="showChartsButton" icon="chart-bar" :title="$t('charts')" @click="openCharts"/>
+        <material-icon-button
+            v-if="showChartsButton" icon="brain" :title="$t('brainstorming')" @click="openBrainstorming"/>
     </div>
 </div>
 </template>
@@ -22,11 +26,16 @@ import { State } from '@/store';
 import MaterialIconButton from '@/components/material/IconButton.vue';
 import MaterialLinearProgress from '@/components/material/LinearProgress.vue';
 
+import locales from './Status.locales.json';
+
 @Options({
     components: {
         MaterialIconButton,
         MaterialLinearProgress
     },
+    i18n: {
+        messages: locales
+    }
 })
 export default class Status extends Vue {
 
@@ -39,10 +48,10 @@ export default class Status extends Vue {
     }
 
     get progressText(): string {
-        if (this.$store.state.status === State.Status.processingMails) return 'Processing Mails';
-        if (this.$store.state.status === State.Status.queryingBrainstorming) return 'Querying Brainstorming';
-        if (this.$store.state.status === State.Status.syncing) return 'Syncing';
-        if (this.$store.getters.empty && !this.gapiLoaded) return 'Loading Google API';
+        if (this.$store.state.status === State.Status.processingMails) return 'processingMails';
+        if (this.$store.state.status === State.Status.queryingBrainstorming) return 'queryingBrainstorming';
+        if (this.$store.state.status === State.Status.syncing) return 'syncing';
+        if (this.$store.getters.empty && !this.gapiLoaded) return 'loadingGAPI';
         return '';
     }
 

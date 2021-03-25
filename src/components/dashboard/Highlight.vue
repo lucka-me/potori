@@ -1,7 +1,7 @@
 <template>
-<h2>Hightlight</h2>
+<h2>{{ $t('header') }}</h2>
 <div class="card-grid">
-    <dashboard-card title="All" icon="arrow-up" :count="$store.state.nominations.length" @click="open" />
+    <dashboard-card :title="$t('all')" icon="arrow-up" :count="$store.state.nominations.length" @click="open"/>
     <dashboard-card
         v-for="status of statuses" :key="status.code"
         :title="status.title" :icon="status.icon" :count="$store.getters.count(status.predicator)"
@@ -18,10 +18,15 @@ import { umi } from '@/service/umi';
 
 import DashboardCard from './Card.vue';
 
+import locales from './Highlight.locales.json';
+
 @Options({
     components: {
         DashboardCard
     },
+    i18n: {
+        messages: locales
+    }
 })
 export default class Highlight extends Vue {
     get statuses(): Array<umi.Status> {
