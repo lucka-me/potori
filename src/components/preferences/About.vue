@@ -1,15 +1,15 @@
 <template>
-<h2>About</h2>
-<preference-row text="App Version" :desc="appVersion"/>
-<preference-row text="Data Version" :desc="dataVersion"/>
-<preference-row text="Document">
-    <material-button @click="openDoc">Open</material-button>
+<h2>{{ $t('header') }}</h2>
+<preference-row :text="$t('appVersion')" :desc="appVersion"/>
+<preference-row :text="$t('dataVersion')" :desc="dataVersion"/>
+<preference-row :text="$t('document')">
+    <material-button @click="openDoc">{{ $t('openAction') }}</material-button>
 </preference-row>
-<preference-row text="Code Repository" desc="GitHub">
-    <material-button @click="openRepo">Open</material-button>
+<preference-row :text="$t('repository')" :desc="$t('repositoryDesc')">
+    <material-button @click="openRepo">{{ $t('openAction') }}</material-button>
 </preference-row>
-<preference-row v-if="hasErrors" text="Export Errors" desc="Export errors logged by Potori">
-    <material-button @click="exportErrors">Export</material-button>
+<preference-row v-if="hasErrors" :text="$t('exportErrors')" :desc="$t('exportErrorsDesc')">
+    <material-button @click="exportErrors">{{ $t('exportErrorsAction') }}</material-button>
 </preference-row>
 </template>
 
@@ -24,11 +24,16 @@ import { version } from '@/service/version';
 import MaterialButton from '@/components/material/Button.vue';
 import PreferenceRow from './Row.vue';
 
+import locales from './About.locales.json';
+
 @Options({
     components: {
         MaterialButton,
         PreferenceRow
     },
+    i18n: {
+        messages: locales
+    }
 })
 export default class AboutPreferences extends Vue {
     get appVersion() {
@@ -62,7 +67,7 @@ export default class AboutPreferences extends Vue {
             message += `[${error.filename}][${error.lineno}:${error.colno}]${details}\n`;
         }
         util.copy(message);
-        delibird.inform(`Copied ${service.errors.length} errors to clipboard.`);
+        delibird.inform(this.$t('exportErrorsInform', { count: service.errors.length }));
     }
 }
 </script>

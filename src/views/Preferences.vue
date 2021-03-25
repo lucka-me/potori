@@ -1,5 +1,5 @@
 <template>
-<material-top-app-bar title="Preferences" navi-back/>
+<material-top-app-bar :title="$t('title')" navi-back/>
 <material-top-app-bar-adjust/>
 <main class="preferences">
     <general-preferences/>
@@ -25,6 +25,8 @@ import DataPreferences from '@/components/preferences/Data.vue';
 import GeneralPreferences from '@/components/preferences/General.vue';
 import GooglePreferences from '@/components/preferences/Google.vue';
 
+import locales from './Preferences.locales.json';
+
 @Options({
     components: {
         MaterialTopAppBar, MaterialTopAppBarAdjust,
@@ -34,6 +36,9 @@ import GooglePreferences from '@/components/preferences/Google.vue';
         DataPreferences,
         AboutPreferences,
     },
+    i18n: {
+        messages: locales
+    }
 })
 export default class Preferences extends Vue {}
 </script>

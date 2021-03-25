@@ -1,16 +1,16 @@
 <template>
-<h2>Data</h2>
-<preference-row v-if="idle" text="Import Nominations" desc="Import nominations from file">
-    <material-button @click="importNominations">Import</material-button>
+<h2>{{ $t('header') }}</h2>
+<preference-row v-if="idle" :text="$t('importNominations')" :desc="$t('importNominationsDesc')">
+    <material-button @click="importNominations">{{ $t('importAction') }}</material-button>
 </preference-row>
-<preference-row v-if="idle" text="Export Nominations" desc="Export nominations to file">
-    <material-button @click="exportNominations">Export</material-button>
+<preference-row v-if="idle" :text="$t('exportNominations')" :desc="$t('exportNominationsDesc')">
+    <material-button @click="exportNominations">{{ $t('exportAction') }}</material-button>
 </preference-row>
-<preference-row v-if="idle" text="Import Wayfarer JSON" desc="Export JSON from https://wayfarer.nianticlabs.com/api/v1/vault/manage">
-    <material-button @click="importWayfarerJSON">Import</material-button>
+<preference-row v-if="idle" :text="$t('importWayfarer')" :desc="$t('importWayfarerDesc')">
+    <material-button @click="importWayfarerJSON">{{ $t('importAction') }}</material-button>
 </preference-row>
-<preference-row v-if="idle" text="Clear Nominations" desc="Clear all nominations from local storage">
-    <material-button @click="clearNominations">Clear</material-button>
+<preference-row v-if="idle" :text="$t('clearNominations')" :desc="$t('clearNominationsDesc')">
+    <material-button @click="clearNominations">{{ $t('clearAction') }}</material-button>
 </preference-row>
 </template>
 
@@ -24,11 +24,16 @@ import { State } from '@/store';
 import MaterialButton from '@/components/material/Button.vue';
 import PreferenceRow from './Row.vue';
 
+import locales from './Data.locales.json';
+
 @Options({
     components: {
         MaterialButton,
         PreferenceRow
     },
+    i18n: {
+        messages: locales
+    }
 })
 export default class DataPreferences extends Vue {
 
@@ -38,7 +43,7 @@ export default class DataPreferences extends Vue {
 
     importNominations() {
         service.importNominationsFile((count) => {
-            delibird.inform(`Imported ${count} nominations.`);
+            delibird.inform(this.$t('importNominationsInform', { count: count}));
         });
     }
 
@@ -47,18 +52,18 @@ export default class DataPreferences extends Vue {
     }
 
     importWayfarerJSON() {
-        const text = window.prompt('Paste Wayfarer JSON');
+        const text = window.prompt(this.$t('importWayfarerPrompt'));
         if (!text) return;
         const result = service.importWayfarerJSON(text);
         switch (result) {
             case -1:
-                delibird.alert('Unable to parse the JSON.');
+                delibird.alert(this.$t('importWayfarerAlertParseError'));
                 break;
             case -2:
-                delibird.alert('The data is invalid.')
+                delibird.alert(this.$t('importWayfarerAlertDataInvalid'))
                 break;
             default:
-                delibird.inform(`Updated ${result} nominations.`);
+                delibird.inform(this.$t('importWayfarerInform', { count: result }));
                 break;
         }
     }

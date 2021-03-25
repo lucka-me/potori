@@ -1,16 +1,16 @@
 <template>
-<h2>Brainstorming</h2>
-<preference-row text="Automatically Query Firebase" desc="Query Firebase to get locations after processing mails">
+<h2>{{ $t('header') }}</h2>
+<preference-row :text="$t('autoQueryFirebase')" :desc="$t('autoQueryFirebaseDesc')">
     <material-switch v-model="autoQueryFirebase"/>
 </preference-row>
-<preference-row text="Import Database" desc="Import records from file">
-    <material-button @click="importDatabase">Import</material-button>
+<preference-row :text="$t('importDatabase')" :desc="$t('importDatabaseDesc')">
+    <material-button @click="importDatabase">{{ $t('importAction') }}</material-button>
 </preference-row>
-<preference-row text="Export Database" desc="Export records to file">
-    <material-button @click="exportDatabase">Export</material-button>
+<preference-row :text="$t('exportDatabase')" :desc="$t('exportDatabaseDesc')">
+    <material-button @click="exportDatabase">{{ $t('exportAction') }}</material-button>
 </preference-row>
-<preference-row text="Clear Database" desc="Clear all records from local storage">
-    <material-button @click="clear">Clear</material-button>
+<preference-row :text="$t('clearDatabase')" :desc="$t('clearDatabaseDesc')">
+    <material-button @click="clear">{{ $t('clearAction') }}</material-button>
 </preference-row>
 </template>
 
@@ -25,11 +25,16 @@ import MaterialButton from '@/components/material/Button.vue';
 import MaterialSwitch from '@/components/material/Switch.vue';
 import PreferenceRow from './Row.vue';
 
+import locales from './Brainstorming.locales.json';
+
 @Options({
     components: {
         MaterialButton, MaterialSwitch,
         PreferenceRow
     },
+    i18n: {
+        messages: locales
+    }
 })
 export default class BrainstormingPreferences extends Vue {
 
@@ -43,12 +48,12 @@ export default class BrainstormingPreferences extends Vue {
 
     async importDatabase() {
         const count = await brainstorming.importDatabase();
-        delibird.inform(`Imported ${count} records`);
+        delibird.inform(this.$t('importDatabaseInform', { count: count }));
     }
 
     async exportDatabase() {
         const count = await brainstorming.exportDatabase();
-        delibird.inform(`Exported ${count} records`);
+        delibird.inform(this.$t('exportDatabaseInform', { count: count }));
     }
 
     clear() {

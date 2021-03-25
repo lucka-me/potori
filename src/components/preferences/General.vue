@@ -1,6 +1,6 @@
 <template>
-<h2>General</h2>
-<preference-row text="Query After Latest" desc="Query mails received after the latest one">
+<h2>{{ $t('header') }}</h2>
+<preference-row :text="$t('queryAfterLatest')" :desc="$t('queryAfterLatestDesc')">
     <material-switch v-model="queryAfterLatest"/>
 </preference-row>
 </template>
@@ -13,11 +13,16 @@ import { preferences } from '@/service/preferences';
 import MaterialSwitch from '@/components/material/Switch.vue';
 import PreferenceRow from './Row.vue';
 
+import locales from './General.locales.json';
+
 @Options({
     components: {
         MaterialSwitch,
         PreferenceRow
     },
+    i18n: {
+        messages: locales
+    }
 })
 export default class GeneralPreferences extends Vue {
 

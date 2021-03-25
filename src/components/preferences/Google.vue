@@ -1,22 +1,22 @@
 <template>
-<h2>Google</h2>
-<preference-row v-if="loaded" text="Account" desc="Link / unlink Google Account">
-    <material-button v-if="authed" @click="unlink">Unlink</material-button>
-    <material-button v-else @click="link">Link</material-button>
+<h2>{{ $t('header') }}</h2>
+<preference-row v-if="loaded" :text="$t('account')" :desc="$t('accountDesc')">
+    <material-button v-if="authed" @click="unlink">{{ $t('unlink') }}</material-button>
+    <material-button v-else @click="link">{{ $t('link') }}</material-button>
 </preference-row>
-<preference-row v-if="authed && idle" text="Sync Google Drive" desc="Sync with Google Drive when refresh">
+<preference-row v-if="authed && idle" :text="$t('sync')" :desc="$t('syncDesc')">
     <material-switch v-model="sync"/>
 </preference-row>
-<preference-row v-if="authed && idle" text="Sync Now" desc="Sync with Google Drive">
-    <material-button @click="doSync">Sync</material-button>
+<preference-row v-if="authed && idle" :text="$t('syncNow')" :desc="$t('syncNowDesc')">
+    <material-button @click="doSync">{{ $t('syncNowAction') }}</material-button>
 </preference-row>
-<preference-row v-if="authed && idle" text="Upload Now" desc="Upload data to Google Drive">
-    <material-button @click="upload">Upload</material-button>
+<preference-row v-if="authed && idle" :text="$t('uploadNow')" :desc="$t('uploadNowDesc')">
+    <material-button @click="upload">{{ $t('uploadNowAction') }}</material-button>
 </preference-row>
-<preference-row v-if="authed && idle" text="Migrate" desc="Migrate data from Potori before 0.8.0">
-    <material-button @click="migrate">Migrate</material-button>
+<preference-row v-if="authed && idle" :text="$t('migrate')" :desc="$t('migrateDesc')">
+    <material-button @click="migrate">{{ $t('migrate') }}</material-button>
 </preference-row>
-<preference-row v-if="!loaded" text="Loading Google API"/>
+<preference-row v-if="!loaded" :text="$t('loadingGAPI')"/>
 </template>
 
 <script lang="ts">
@@ -31,12 +31,16 @@ import MaterialButton from '@/components/material/Button.vue';
 import MaterialSwitch from '@/components/material/Switch.vue';
 import PreferenceRow from './Row.vue';
 
+import locales from './Google.locales.json';
 
 @Options({
     components: {
         MaterialButton, MaterialSwitch,
         PreferenceRow
     },
+    i18n: {
+        messages: locales
+    }
 })
 export default class GooglePreferences extends Vue {
 

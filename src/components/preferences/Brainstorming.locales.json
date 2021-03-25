@@ -1,0 +1,42 @@
+{
+    "en": {
+        "header": "Brainstorming",
+        "importAction": "Import",
+        "exportAction": "Export",
+        "clearAction": "Clear",
+
+        "autoQueryFirebase": "Automatically Query Firebase",
+        "autoQueryFirebaseDesc": "Query Firebase to get locations of nomination after processing mails",
+
+        "importDatabase": "Import Database",
+        "importDatabaseDesc": "Import records from JSON file",
+        "importDatabaseInform": "Imported {count} records.",
+
+        "exportDatabase": "Export Database",
+        "exportDatabaseDesc": "Export records to JSON file",
+        "exportDatabaseInform": "Exported {count} records.",
+
+        "clearDatabase": "Clear Database",
+        "clearDatabaseDesc": "Clear all records from local storage"
+    },
+    "zh": {
+        "header": "Brainstorming",
+        "importAction": "导入",
+        "exportAction": "导出",
+        "clearAction": "清空",
+
+        "autoQueryFirebase": "自动查询Firebase",
+        "autoQueryFirebaseDesc": "处理邮件后自动查询Firebase以获取提名位置",
+
+        "importDatabase": "导入数据库",
+        "importDatabaseDesc": "从JSON文件中导入记录",
+        "importDatabaseInform": "导入了{count}条记录。",
+
+        "exportDatabase": "导出数据库",
+        "exportDatabaseDesc": "将记录导出至JSON文件",
+        "exportDatabaseInform": "导出了{count}条记录。",
+        
+        "clearDatabase": "清空数据库",
+        "clearDatabaseDesc": "从本地存储中清空记录"
+    }
+}

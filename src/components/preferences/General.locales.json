@@ -1,0 +1,14 @@
+{
+    "en": {
+        "header": "General",
+
+        "queryAfterLatest": "Query After Latest",
+        "queryAfterLatestDesc": "Query mails received after the latest one"
+    },
+    "zh": {
+        "header": "一般",
+        
+        "queryAfterLatest": "仅查询最新邮件",
+        "queryAfterLatestDesc": "仅查询在当前最新邮件之后收到的邮件"
+    }
+}
