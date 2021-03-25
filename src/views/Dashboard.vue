@@ -1,7 +1,7 @@
 <template>
 <material-top-app-bar :title="$t('title')">
-    <material-icon-button v-if="canRefresh" icon="redo" @click="refresh" />
-    <material-icon-button icon="cog" @click="openPreference" />
+    <material-icon-button v-if="canRefresh" icon="redo" :title="$t('refresh')" @click="refresh"/>
+    <material-icon-button icon="cog" :title="$t('preferences')" @click="openPreference"/>
 </material-top-app-bar>
 <material-top-app-bar-adjust/>
 <main class="dashboard">
@@ -28,6 +28,8 @@ import Gallery from '@/components/dashboard/Gallery.vue';
 import Scanners from '@/components/dashboard/Scanners.vue';
 import Reasons from '@/components/dashboard/Reasons.vue';
 
+import locales from './Dashboard.locales.json';
+
 @Options({
     components: {
         MaterialTopAppBar, MaterialTopAppBarAdjust,
@@ -35,15 +37,8 @@ import Reasons from '@/components/dashboard/Reasons.vue';
         Status, Highlight, Gallery, Scanners, Reasons
     },
     i18n: {
-        messages: {
-            "en": {
-                "title": "Dashboard"
-            },
-            "zh": {
-                "title": "仪表盘"
-            }
-        }
-    },
+        messages: locales
+    }
 })
 export default class Dashboard extends Vue {
 
@@ -81,14 +76,3 @@ export default class Dashboard extends Vue {
     }
 }
 </style>
-
-<i18n>
-{
-    "en": {
-        "title": "Dashboard"
-    },
-    "zh": {
-        "title": "仪表盘"
-    }
-}
-</i18n>

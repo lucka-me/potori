@@ -1,0 +1,12 @@
+{
+    "en": {
+        "title": "Dashboard",
+        "refresh": "Refresh",
+        "preferences": "Preferences"
+    },
+    "zh": {
+        "title": "仪表盘",
+        "refresh": "刷新",
+        "preferences": "偏好设置"
+    }
+}
