@@ -24,8 +24,9 @@ const options: ProjectOptions = {
         iconPaths: {
             faviconSVG: null,
             favicon16: null,
-            favicon32: null,
+            favicon32: 'assets/icon-transparent.png',
             appleTouchIcon: 'assets/icon-maskable.png',
+            maskIcon: null,
             msTileImage: 'assets/icon-transparent.png',
         },
         manifestOptions: {
