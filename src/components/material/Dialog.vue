@@ -7,7 +7,7 @@
             </div>
             <div class="mdc-dialog__actions">
                 <slot name="actions">
-                    <material-dialog-action text="Discard" action="close" as-default/>
+                    <material-dialog-action :text="$t('discard')" action="close" as-default/>
                 </slot>
             </div>
         </div>
@@ -22,9 +22,14 @@ import { Vue, Model, Options, Watch } from 'vue-property-decorator';
 
 import MaterialDialogAction from './DialogAction.vue';
 
+import locales from './Dialog.locales.json';
+
 @Options({
     components: {
         MaterialDialogAction
+    },
+    i18n: {
+        messages: locales
     }
 })
 export default class MaterialDialog extends Vue {
