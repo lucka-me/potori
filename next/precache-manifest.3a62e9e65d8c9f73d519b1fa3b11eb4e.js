@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/assets/title.png"
   },
   {
-    "revision": "72c3c348f7ec0c6d8b7c",
+    "revision": "4f7b00ea1296f8323eb2",
     "url": "/next/css/app.08c2ccb1.css"
   },
   {
@@ -44,7 +44,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/dashboard.030c0685.css"
   },
   {
-    "revision": "8cecc9da466c0ad4e910",
+    "revision": "342459b25a03d0b5a553",
     "url": "/next/css/details.e45c7c88.css"
   },
   {
@@ -64,7 +64,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/match.4e5ee524.css"
   },
   {
-    "revision": "444366d754af7fe34b18",
+    "revision": "28541c0f8d94217125ef",
     "url": "/next/css/preferences.a2815486.css"
   },
   {
@@ -88,12 +88,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/img/fa-solid-900.2306f642.svg"
   },
   {
-    "revision": "1d8ead6d97a0b415927860d82d85216f",
+    "revision": "af96f013d88c45e494cafbdd56928600",
     "url": "/next/index.html"
   },
   {
-    "revision": "72c3c348f7ec0c6d8b7c",
-    "url": "/next/js/app.81979682.js"
+    "revision": "4f7b00ea1296f8323eb2",
+    "url": "/next/js/app.be3a2859.js"
   },
   {
     "revision": "059030670caf92b20d6c",
@@ -124,8 +124,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/dashboard.85f896dc.js"
   },
   {
-    "revision": "8cecc9da466c0ad4e910",
-    "url": "/next/js/details.e260bba2.js"
+    "revision": "342459b25a03d0b5a553",
+    "url": "/next/js/details.9aecec01.js"
   },
   {
     "revision": "5eff018f37f10358cec5",
@@ -152,8 +152,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/match.232d04bd.js"
   },
   {
-    "revision": "444366d754af7fe34b18",
-    "url": "/next/js/preferences.e6b2e4f6.js"
+    "revision": "28541c0f8d94217125ef",
+    "url": "/next/js/preferences.eb5b3f26.js"
   },
   {
     "revision": "0acea94284e5075dac837ad119ada8b5",
