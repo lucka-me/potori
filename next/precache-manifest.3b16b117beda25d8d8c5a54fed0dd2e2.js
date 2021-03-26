@@ -16,11 +16,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/assets/title.png"
   },
   {
-    "revision": "17f9e52a5a6db9ae717b",
+    "revision": "6ae58aa2d424ada0cff9",
     "url": "/next/css/app.08c2ccb1.css"
   },
   {
-    "revision": "9333f60fb9e95bafe3ac",
+    "revision": "059030670caf92b20d6c",
     "url": "/next/css/brainstorming.92917073.css"
   },
   {
@@ -36,7 +36,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/brainstorming~dashboard.088a28d9.css"
   },
   {
-    "revision": "8da9fa53301d6677b55a",
+    "revision": "937a857b69e8e0adad76",
     "url": "/next/css/charts.a8695c17.css"
   },
   {
@@ -44,7 +44,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/dashboard.030c0685.css"
   },
   {
-    "revision": "75f6f5fc1343bce87828",
+    "revision": "8cecc9da466c0ad4e910",
     "url": "/next/css/details.e45c7c88.css"
   },
   {
@@ -52,19 +52,19 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/details~map.370ca2bc.css"
   },
   {
-    "revision": "428c43cb0c3599bc8381",
+    "revision": "edf33fc0e4506631015b",
     "url": "/next/css/list.6a9f041e.css"
   },
   {
-    "revision": "3076e37f86638580a050",
+    "revision": "b2dc4b9137ce390f2503",
     "url": "/next/css/map.dc687b38.css"
   },
   {
-    "revision": "e1bd1f183a8d3fbe6c5a",
+    "revision": "7c75ffe85f1ef0ced89d",
     "url": "/next/css/match.4e5ee524.css"
   },
   {
-    "revision": "fb3eb2ffaf2ddc351be6",
+    "revision": "02bdc99f01f7c572a619",
     "url": "/next/css/preferences.a2815486.css"
   },
   {
@@ -88,16 +88,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/img/fa-solid-900.2306f642.svg"
   },
   {
-    "revision": "7d1d60edb49f7a7ef33505bf42beb704",
+    "revision": "11d55118c62399767363a47fb65dc380",
     "url": "/next/index.html"
   },
   {
-    "revision": "17f9e52a5a6db9ae717b",
-    "url": "/next/js/app.719eb01a.js"
+    "revision": "6ae58aa2d424ada0cff9",
+    "url": "/next/js/app.3a083671.js"
   },
   {
-    "revision": "9333f60fb9e95bafe3ac",
-    "url": "/next/js/brainstorming.609d93ab.js"
+    "revision": "059030670caf92b20d6c",
+    "url": "/next/js/brainstorming.94bb5d42.js"
   },
   {
     "revision": "d6b30bda8d96f09e876d",
@@ -112,8 +112,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/brainstorming~dashboard.e2315c63.js"
   },
   {
-    "revision": "8da9fa53301d6677b55a",
-    "url": "/next/js/charts.c8371b53.js"
+    "revision": "937a857b69e8e0adad76",
+    "url": "/next/js/charts.48d83eba.js"
   },
   {
     "revision": "2c8eff2a313521bf5615",
@@ -124,8 +124,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/dashboard.85f896dc.js"
   },
   {
-    "revision": "75f6f5fc1343bce87828",
-    "url": "/next/js/details.507094e7.js"
+    "revision": "8cecc9da466c0ad4e910",
+    "url": "/next/js/details.e260bba2.js"
   },
   {
     "revision": "5eff018f37f10358cec5",
@@ -136,24 +136,24 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/firebase.5e48b75b.js"
   },
   {
-    "revision": "428c43cb0c3599bc8381",
-    "url": "/next/js/list.37c6526b.js"
+    "revision": "edf33fc0e4506631015b",
+    "url": "/next/js/list.fd9db85b.js"
   },
   {
-    "revision": "3076e37f86638580a050",
-    "url": "/next/js/map.ff73995c.js"
+    "revision": "b2dc4b9137ce390f2503",
+    "url": "/next/js/map.8d98cb01.js"
   },
   {
     "revision": "57b18bfa296f433c13ae",
     "url": "/next/js/mapbox.2dcfe6ae.js"
   },
   {
-    "revision": "e1bd1f183a8d3fbe6c5a",
-    "url": "/next/js/match.bccba58b.js"
+    "revision": "7c75ffe85f1ef0ced89d",
+    "url": "/next/js/match.232d04bd.js"
   },
   {
-    "revision": "fb3eb2ffaf2ddc351be6",
-    "url": "/next/js/preferences.756f2c32.js"
+    "revision": "02bdc99f01f7c572a619",
+    "url": "/next/js/preferences.4fd9b04d.js"
   },
   {
     "revision": "0acea94284e5075dac837ad119ada8b5",
