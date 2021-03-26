@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/assets/title.png"
   },
   {
-    "revision": "28e1fc371061599b9253",
+    "revision": "fee32aacb6e2c339da84",
     "url": "/next/css/app.797a826b.css"
   },
   {
@@ -64,7 +64,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/match.4e5ee524.css"
   },
   {
-    "revision": "25588c5b82ab9df4ae71",
+    "revision": "154ba035eaf3f076b9be",
     "url": "/next/css/preferences.a2815486.css"
   },
   {
@@ -88,12 +88,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/img/fa-solid-900.376c1f97.svg"
   },
   {
-    "revision": "b53716d13131faaa2efd918a97c8ecba",
+    "revision": "bf30399c16e319388d4b2dc4e54f7fd9",
     "url": "/next/index.html"
   },
   {
-    "revision": "28e1fc371061599b9253",
-    "url": "/next/js/app.4a501cd4.js"
+    "revision": "fee32aacb6e2c339da84",
+    "url": "/next/js/app.c34d707b.js"
   },
   {
     "revision": "059030670caf92b20d6c",
@@ -152,8 +152,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/match.232d04bd.js"
   },
   {
-    "revision": "25588c5b82ab9df4ae71",
-    "url": "/next/js/preferences.a8492d4f.js"
+    "revision": "154ba035eaf3f076b9be",
+    "url": "/next/js/preferences.c50928e1.js"
   },
   {
     "revision": "0acea94284e5075dac837ad119ada8b5",
