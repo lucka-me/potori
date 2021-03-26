@@ -39,11 +39,16 @@ import { service } from '@/service';
 import MaterialCard from '@/components/material/Card.vue';
 import MaterialIcon from '@/components/material/Icon.vue';
 
+import locales from './Pack.locales.json';
+
 @Options({
     components: {
         MaterialCard,
         MaterialIcon
     },
+    i18n: {
+        messages: locales
+    }
 })
 export default class MatchPackView extends Vue {
 

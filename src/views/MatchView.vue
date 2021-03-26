@@ -1,6 +1,6 @@
 <template>
-<material-top-app-bar title="Match" navi-back>
-    <material-icon-button icon="check" @click="finish" />
+<material-top-app-bar :title="$t('title')" navi-back>
+    <material-icon-button icon="check" :title="$t('finish')" @click="finish"/>
 </material-top-app-bar>
 <material-top-app-bar-adjust/>
 <main class="match-view">
@@ -18,12 +18,17 @@ import MaterialTopAppBar from '@/components/material/TopAppBar.vue';
 import MaterialTopAppBarAdjust from '@/components/material/TopAppBarAdjust.vue';
 import MatchPackView from '@/components/match/Pack.vue';
 
+import locales from './MatchView.locales.json';
+
 @Options({
     components: {
         MaterialTopAppBar, MaterialTopAppBarAdjust,
         MaterialIconButton,
         MatchPackView
     },
+    i18n: {
+        messages: locales
+    }
 })
 export default class MatchView extends Vue {
 
