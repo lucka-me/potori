@@ -1,6 +1,13 @@
 import { umi } from '@/service/umi';
 
-import { StringKey } from './constants';
+enum ParseErrorReason {
+    MISSING_ID = 'MISSING_ID',
+    MISSING_TITLE = 'MISSING_TITLE',
+    MISSING_IMAGE = 'MISSING_IMAGE',
+
+    INVALID_ID = 'INVALID_ID',
+    INVALID_IMAGE = 'INVALID_IMAGE'
+}
 
 /**
  * Location
@@ -166,19 +173,19 @@ export default class Nomination implements NominationData {
      * @throws An `Error` when JSON missing `id`, `title` or `image`
      */
     static from(data: NominationData): Nomination {
-        if (!data.id) throw new Error(StringKey.messageParseErrorMissingId);
-        if (!data.title) throw new Error(StringKey.messageParseErrorMissingTitle);
-        if (!data.image) throw new Error(StringKey.messageParseErrorMissingImage);
+        if (!data.id) throw new Error(ParseErrorReason.MISSING_ID);
+        if (!data.title) throw new Error(ParseErrorReason.MISSING_TITLE);
+        if (!data.image) throw new Error(ParseErrorReason.MISSING_IMAGE);
 
         // Fix old issues
         const image = data.image.replace('\r', '');
 
         // Test format
         if (!/^[a-zA-Z0-9]+$/.test(data.id)) {
-            throw new Error(StringKey.messageParseErrorInvalidId);
+            throw new Error(ParseErrorReason.INVALID_ID);
         }
         if (!/^[0-9a-zA-Z\-\_]+$/.test(image)) {
-            throw new Error(StringKey.messageParseErrorInvalidImage);
+            throw new Error(ParseErrorReason.INVALID_IMAGE);
         }
 
         const nomination = new Nomination();

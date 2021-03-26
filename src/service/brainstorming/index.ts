@@ -28,10 +28,10 @@ export namespace brainstorming {
     const filename = 'bsdata.json';
 
     export enum FailReason {
-        INDEXEDDB_ERROR = 'message:service.brainstorming.indexedDBError',   // Unable to query local database
-        FIREBASE_ERROR  = 'message:service.brainstorming.firebaseError',    // Unable to query firebase
-        NOT_EXISTS      = 'message:service.brainstorming.notExists',        // Nomination not exists in local database or firebase
-        EARLY           = 'message:service.brainstorming.early',            // Nomination got result before firebase exists
+        INDEXEDDB_ERROR = 'INDEXEDDB_ERROR',    // Unable to query local database
+        FIREBASE_ERROR  = 'FIREBASE_ERROR',     // Unable to query firebase
+        NOT_EXISTS      = 'NOT_EXISTS',         // Nomination not exists in local database or firebase
+        EARLY           = 'EARLY',              // Nomination got result before firebase exists
     };
 
     export interface ReviewRaw {

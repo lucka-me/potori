@@ -218,7 +218,7 @@ export default class Mari {
                     const typedError = error as Error;
                     details = typedError.stack || typedError.message;
                 }
-                this.events.alert(`message:service.mari.reportParserError ${subject} [${status}:${scanner}]${details}`);
+                this.events.alert(`An error occurs when parsing mail, you may report the mail ${subject}  with this message to developers: [${status}:${scanner}]${details}`);
             }
             this.progress.finishMessage();
         }

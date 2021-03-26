@@ -364,16 +364,4 @@ export namespace service {
             { type: mimeJSON }
         )
     }
-    
-    /**
-     * Query Brainstorming firebase and update local bs data
-     */
-    /*
-    export function updateBsData() {
-        bs.update(nominations, () => {
-            events.bsUpdate();
-            events.info(i18next.t('message:service.bsDataUpdated'));
-        });
-    }
-    */
 }
