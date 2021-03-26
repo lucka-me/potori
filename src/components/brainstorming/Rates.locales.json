@@ -1,0 +1,20 @@
+{
+    "en": {
+        "title": "Rates",
+        "quality": "Quality",
+        "description": "Description",
+        "cultural": "Cultura",
+        "uniqueness": "Uniqueness",
+        "safety": "Safety",
+        "location": "Location"
+    },
+    "zh": {
+        "title": "评分",
+        "quality": "质量",
+        "description": "描述",
+        "cultural": "文化",
+        "uniqueness": "独特",
+        "safety": "安全",
+        "location": "位置"
+    }
+}

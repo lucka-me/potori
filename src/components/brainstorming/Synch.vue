@@ -13,16 +13,19 @@ import { umi } from '@/service/umi';
 import ChartBlock from '@/components/charts/ChartBlock.vue';
 import ChartView, { ChartDataset, ChartOptions } from '@/components/charts/ChartView.vue';
 
+import locales from './Synch.locales.json';
+
 @Options({
     components: {
         ChartBlock, ChartView
+    },
+    i18n: {
+        messages: locales
     }
 })
 export default class CoverageChart extends Vue {
 
     private static readonly colors = [ 'royalblue', 'gray' ];
-
-    title = 'Synch';
 
     options: ChartOptions<'doughnut'> = {
         plugins: {
@@ -30,9 +33,19 @@ export default class CoverageChart extends Vue {
         }
     };
 
-    labels: Array<string> = [ 'Synched', 'Not Synched' ];
-
     datasets: Array<ChartDataset<'doughnut'>> = [];
+
+    private rate = 0;
+
+    get title(): string {
+        const title = this.$t('title');
+        if (this.rate === 0) return title;
+        return `${title} | ${this.rate.toFixed(2)}%`
+    }
+
+    get labels(): Array<string> {
+        return [ this.$t('synched'), this.$t('notSynched') ];
+    }
 
     mounted() {
         this.updateData();
@@ -88,9 +101,9 @@ export default class CoverageChart extends Vue {
         };
         this.datasets = [ dataset ];
         if (data[0] > 0 || data[1] > 0) {
-            this.title = `Synch | ${(data[0] / (data[0] + data[1]) * 100).toFixed(2)}%`;
+            this.rate = data[0] / (data[0] + data[1]) * 100;
         } else {
-            this.title = 'Synch';
+            this.rate = 0;
         }
     }
 }

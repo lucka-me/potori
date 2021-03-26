@@ -12,16 +12,19 @@ import { brainstorming } from '@/service/brainstorming';
 import ChartBlock from '@/components/charts/ChartBlock.vue';
 import ChartView, { ChartDataset, ChartOptions } from '@/components/charts/ChartView.vue';
 
+import locales from './Coverage.locales.json';
+
 @Options({
     components: {
         ChartBlock, ChartView
+    },
+    i18n: {
+        messages: locales
     }
 })
 export default class CoverageChart extends Vue {
 
     private static readonly colors = [ 'royalblue', 'gray' ];
-
-    title = 'Coverage';
 
     options: ChartOptions<'doughnut'> = {
         plugins: {
@@ -29,9 +32,19 @@ export default class CoverageChart extends Vue {
         }
     };
 
-    labels: Array<string> = [ 'Covered', 'Not Covered' ];
-
     datasets: Array<ChartDataset<'doughnut'>> = [];
+
+    private rate = 0;
+
+    get title(): string {
+        const title = this.$t('title');
+        if (this.rate === 0) return title;
+        return `${title} | ${this.rate.toFixed(2)}%`
+    }
+
+    get labels(): Array<string> {
+        return [ this.$t('covered'), this.$t('notCovered') ];
+    }
 
     mounted() {
         this.updateData();
@@ -59,9 +72,9 @@ export default class CoverageChart extends Vue {
         };
         this.datasets = [ dataset ];
         if (data[0] > 0 || data[1] > 0) {
-            this.title = `Coverage | ${(data[0] / (data[0] + data[1]) * 100).toFixed(2)}%`;
+            this.rate = data[0] / (data[0] + data[1]) * 100;
         } else {
-            this.title = '';
+            this.rate = 0;
         }
     }
 }

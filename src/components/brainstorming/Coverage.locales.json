@@ -1,0 +1,12 @@
+{
+    "en": {
+        "title": "Coverage",
+        "covered": "Covered",
+        "notCovered": "Not Covered"
+    },
+    "zh": {
+        "title": "覆盖率",
+        "covered": "已覆盖",
+        "notCovered": "未覆盖"
+    }
+}

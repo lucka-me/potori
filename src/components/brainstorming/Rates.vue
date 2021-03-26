@@ -1,5 +1,5 @@
 <template>
-<chart-block title="Rates">
+<chart-block :title="$t('title')">
     <chart-view chart-type="radar" :chart-datasets="datasets" :chart-labels="labels" :chart-options="options"/>
 </chart-block>
 </template>
@@ -12,9 +12,14 @@ import { brainstorming } from '@/service/brainstorming';
 import ChartBlock from '@/components/charts/ChartBlock.vue';
 import ChartView, { ChartDataset, ChartOptions } from '@/components/charts/ChartView.vue';
 
+import locales from './Rates.locales.json';
+
 @Options({
     components: {
         ChartBlock, ChartView
+    },
+    i18n: {
+        messages: locales
     }
 })
 export default class RatesChart extends Vue {
@@ -34,9 +39,18 @@ export default class RatesChart extends Vue {
         }
     };
 
-    labels: Array<string> = [ 'Quality', 'Description', 'Cultural', 'Uniqueness', 'Safety', 'Location' ];
-
     datasets: Array<ChartDataset<'radar'>> = [];
+
+    get labels(): Array<string> {
+        return [
+            this.$t('quality'),
+            this.$t('description'),
+            this.$t('cultural'),
+            this.$t('uniqueness'),
+            this.$t('safety'),
+            this.$t('location')
+        ];
+    }
 
     mounted() {
         this.updateData();

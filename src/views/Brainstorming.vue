@@ -1,11 +1,11 @@
 <template>
-<material-top-app-bar title="Brainstorming" navi-back>
-    <material-icon-button v-if="canUpdate" icon="redo" @click="update" />
+<material-top-app-bar :title="$t('title')" navi-back>
+    <material-icon-button v-if="canUpdate" icon="redo" :title="$t('update')" @click="update"/>
 </material-top-app-bar>
 <material-top-app-bar-adjust/>
 <main v-if="!$store.getters.empty" class="brainstorming">
     <div v-if="updating" class="progress">
-        <div>Updating Brainstorming</div>
+        <div>{{ $t('updating') }}</div>
         <material-linear-progress :progress="$store.state.progress" determinate/>
     </div>
     <div v-if="idle" class="grid grid--1-1-1">
@@ -41,6 +41,8 @@ import RatesChart from '@/components/brainstorming/Rates.vue';
 import ReviewsByMonthChart from '@/components/brainstorming/ReviewsByMonth.vue';
 import SynchChart from '@/components/brainstorming/Synch.vue';
 
+import locales from './Brainstorming.locales.json';
+
 @Options({
     components: {
         MaterialTopAppBar, MaterialTopAppBarAdjust,
@@ -49,6 +51,9 @@ import SynchChart from '@/components/brainstorming/Synch.vue';
         CoverageChart, RatesChart, SynchChart,
         ReviewsByMonthChart
     },
+    i18n: {
+        messages: locales
+    }
 })
 export default class Brainstorming extends Vue {
 
@@ -79,7 +84,7 @@ export default class Brainstorming extends Vue {
 
     async update() {
         const count = await service.updateBrainstorming();
-        delibird.inform(`Updated ${count} records`);
+        delibird.inform(this.$t('updateInform', { count: count }));
     }
 }
 </script>

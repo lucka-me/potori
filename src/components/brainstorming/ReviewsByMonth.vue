@@ -1,5 +1,5 @@
 <template>
-<chart-block title="Reviews by Month">
+<chart-block :title="$t('title')">
     <chart-view chart-type="line" :chart-datasets="datasets" :chart-options="options"/>
 </chart-block>
 </template>
@@ -13,9 +13,14 @@ import { brainstorming } from '@/service/brainstorming';
 import ChartBlock, { fillTimeCountMap } from '@/components/charts/ChartBlock.vue';
 import ChartView, { ChartDataset, ChartOptions } from '@/components/charts/ChartView.vue';
 
+import locales from './ReviewsByMonth.locales.json';
+
 @Options({
     components: {
         ChartBlock, ChartView
+    },
+    i18n: {
+        messages: locales
     }
 })
 export default class ReviewsByMonthChart extends Vue {
@@ -32,6 +37,7 @@ export default class ReviewsByMonthChart extends Vue {
             }
         },
         plugins: {
+            legend: { display: false },
             tooltip: { mode: 'x' }
         }
     };
@@ -74,7 +80,6 @@ export default class ReviewsByMonthChart extends Vue {
         data.sort((a, b) => a.x - b.x);
 
         const dataset: ChartDataset<'line'> = {
-            label: 'Submissions',
             data: data,
             borderColor: 'royalblue',
             pointBackgroundColor: 'royalblue',
