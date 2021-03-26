@@ -1,0 +1,20 @@
+{
+    "en": {
+        "status": "Status",
+        "resultTime": "Result Time",
+        "reasons": "Reasons",
+        "location": "Location",
+        "locationLabel": "Latitude,Longitude",
+        "pasteIntelURL": "Paste Intel Map URL",
+        "delete": "Delete"
+    },
+    "zh": {
+        "status": "状态",
+        "resultTime": "结果时间",
+        "reasons": "拒绝原因",
+        "location": "位置",
+        "locationLabel": "纬度,经度",
+        "pasteIntelURL": "粘贴Intel Map链接",
+        "delete": "删除"
+    }
+}

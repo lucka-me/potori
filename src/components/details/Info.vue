@@ -2,7 +2,7 @@
 <div class="info-block">
     <div class="row">
         <material-icon icon="arrow-up" fixed-width/>
-        <span>Confirmed</span>
+        <span>{{ $t('confirmed') }}</span>
         <div class="spacer"/>
         <span>{{ confirmedTime }}</span>
     </div>
@@ -14,18 +14,18 @@
     </div>
     <div class="row">
         <material-icon icon="mobile-alt" fixed-width/>
-        <span>Scanner</span>
+        <span>{{ $t('scanner') }}</span>
         <div class="spacer"/>
         <span>{{ nomination.scannerData.title }}</span>
     </div>
     <hr v-if="rejected" />
-    <div v-if="rejected" class="section-title">Reasons</div>
+    <div v-if="rejected" class="section-title">{{ $t('reasons') }}</div>
     <div v-for="reason in reasons" :key="reason.code" class="row">
         <material-icon :icon="reason.icon" fixed-width/>
         <span>{{ reason.title }}</span>
     </div>
     <hr v-if="nomination.lngLat"/>
-    <div v-if="nomination.lngLat" class="section-title">Location</div>
+    <div v-if="nomination.lngLat" class="section-title">{{ $t('location') }}</div>
     <details-map v-if="nomination.lngLat" :lngLat="nomination.lngLat"/>
 </div>
 </template>
@@ -39,10 +39,15 @@ import { umi } from '@/service/umi';
 import MaterialIcon from '@/components/material/Icon.vue';
 import DetailsMap from './Map.vue';
 
+import locales from './Info.locales.json';
+
 @Options({
     components: {
         MaterialIcon,
         DetailsMap,
+    },
+    i18n: {
+        messages: locales
     }
 })
 export default class NominationDetails extends Vue {

@@ -2,8 +2,8 @@
 <div class="actions-block">
     <img :src="nomination.imageUrl"/>
     <div class="actions">
-        <material-icon-button v-if="nomination.lngLat" icon="globe" @click="openIntel"/>
-        <material-icon-button icon="brain" @click="openBs"/>
+        <material-icon-button v-if="nomination.lngLat" icon="globe" :title="$t('openIntel')" @click="openIntel"/>
+        <material-icon-button icon="brain" :title="$t('openBs')" @click="openBs"/>
     </div>
 </div>
 </template>
@@ -15,9 +15,14 @@ import Nomination from '@/service/nomination';
 
 import MaterialIconButton from '@/components/material/IconButton.vue';
 
+import locales from './Actions.locales.json';
+
 @Options({
     components: {
         MaterialIconButton,
+    },
+    i18n: {
+        messages: locales
     }
 })
 export default class ActionsBlock extends Vue {

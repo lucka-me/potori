@@ -1,11 +1,11 @@
 <template>
 <div class="editor">
     <section>
-        <h2>Status</h2>
+        <h2>{{ $t('status') }}</h2>
         <status-selector v-model="editData.status"/>
     </section>
     <section v-if="editResultTime">
-        <h2>Result Time</h2>
+        <h2>{{ $t('resultTime') }}</h2>
         <material-textfield
             v-model="resultTime"
             label="YYYY-MM-DDTHH:MM"
@@ -16,25 +16,25 @@
         />
     </section>
     <section v-if="editReasons">
-        <h2>Reasons</h2>
+        <h2>{{ $t('reasons') }}</h2>
         <reasons-selector v-model="editData.reasons"/>
     </section>
     <section>
-        <h2>Location</h2>
+        <h2>{{ $t('location') }}</h2>
         <material-textfield
             v-model="lngLat"
-            label="Latitude,Longitude"
+            :label="$t('locationLabel')"
             type="text"
             input-id="location-editor"
             pattern="-?[0-9]{1,2}.?[0-9]*,-?[0-9]{1,3}.?[0-9]*"
         />
         <div class="buttons">
-            <material-button @click="pasteIntelURL">Paste Intel Map URL</material-button>
+            <material-button @click="pasteIntelURL">{{ $t('pasteIntelURL') }}</material-button>
         </div>
     </section>
     <hr/>
     <div class="actions">
-        <material-icon-button icon="trash" @click="deleteNomination"/>
+        <material-icon-button icon="trash" :title="$t('delete')" @click="deleteNomination"/>
     </div>
 </div>
 </template>
@@ -51,6 +51,8 @@ import MaterialIconButton from '@/components/material/IconButton.vue';
 import MaterialTextfield from '@/components/material/Textfield.vue';
 import ReasonsSelector from './editor/ReasonsSelector.vue';
 import StatusSelector from './editor/StatusSelector.vue';
+
+import locales from './Editor.locales.json';
 
 export class EditData {
 
@@ -92,6 +94,9 @@ export class EditData {
         MaterialTextfield,
         StatusSelector,
         ReasonsSelector
+    },
+    i18n: {
+        messages: locales
     }
 })
 export default class NominationEditor extends Vue {
@@ -128,7 +133,7 @@ export default class NominationEditor extends Vue {
     }
 
     pasteIntelURL() {
-        const url = window.prompt('Paste Intel Map URL');
+        const url = window.prompt(this.$t('pasteIntelURL'));
         if (!url) return;
         const matched = url.match(/ll\=([\.\d]+,[\.\d]+)/);
         if (!matched || matched.length < 2) return;

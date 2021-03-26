@@ -1,8 +1,8 @@
 <template>
 <material-top-app-bar :title="title" navi-back>
-    <material-icon-button v-if="editing" icon="times" @click="cancel"/>
-    <material-icon-button v-if="editing" icon="check" @click="save"/>
-    <material-icon-button v-else icon="pen" @click="edit"/>
+    <material-icon-button v-if="nomination && editing" icon="times" :title="$t('cancel')" @click="cancel"/>
+    <material-icon-button v-if="nomination && editing" icon="check" :title="$t('save')" @click="save"/>
+    <material-icon-button v-else-if="nomination" icon="pen" :title="$t('edit')" @click="edit"/>
 </material-top-app-bar>
 <material-top-app-bar-adjust/>
 <main v-if="nomination" class="nomination-details">
@@ -28,12 +28,17 @@ import ActionsBlock from '@/components/details/Actions.vue';
 import InfoBlock from '@/components/details/Info.vue';
 import NominationEditor, { EditData } from "@/components/details/Editor.vue";
 
+import locales from './NominationDetails.locales.json';
+
 @Options({
     components: {
         MaterialTopAppBar, MaterialTopAppBarAdjust,
         MaterialIconButton,
         ActionsBlock, InfoBlock,
         NominationEditor
+    },
+    i18n: {
+        messages: locales
     }
 })
 export default class NominationDetails extends Vue {
@@ -44,7 +49,7 @@ export default class NominationDetails extends Vue {
     editData = new EditData();
 
     get title(): string {
-        return this.nomination?.title ?? 'Not Found';
+        return this.nomination?.title ?? this.$t('notFound');
     }
 
     created() {
