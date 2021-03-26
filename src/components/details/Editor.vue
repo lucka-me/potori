@@ -30,6 +30,7 @@
         />
         <div class="buttons">
             <material-button @click="pasteIntelURL">{{ $t('pasteIntelURL') }}</material-button>
+            <material-button @click="queryBrainstorming">{{ $t('queryBrainstorming') }}</material-button>
         </div>
     </section>
     <hr/>
@@ -42,9 +43,11 @@
 <script lang="ts">
 import { Vue, Options, Prop } from 'vue-property-decorator';
 
-import Nomination, { LngLat } from '@/service/nomination';
+import { brainstorming } from '@/service/brainstorming';
+import { delibird } from '@/service/delibird';
 import { service } from '@/service';
 import { umi } from '@/service/umi';
+import Nomination, { LngLat } from '@/service/nomination';
 
 import MaterialButton from '@/components/material/Button.vue';
 import MaterialIconButton from '@/components/material/IconButton.vue';
@@ -138,6 +141,39 @@ export default class NominationEditor extends Vue {
         const matched = url.match(/ll\=([\.\d]+,[\.\d]+)/);
         if (!matched || matched.length < 2) return;
         this.lngLat = matched[1];
+    }
+
+    async queryBrainstorming() {
+        const mockNomination = new Nomination();
+        mockNomination.id = this.editData.id;
+        mockNomination.status = this.editData.status;
+        mockNomination.resultTime = this.editData.resultTime;
+        try {
+            const record = await brainstorming.query(mockNomination);
+            this.editData.lngLat = {
+                lng: parseFloat(record.lng),
+                lat: parseFloat(record.lat)
+            }
+        } catch(error) {
+            let message = '';
+            switch ((error as Error).message) {
+                case brainstorming.FailReason.EARLY:
+                    message = 'bsEarly';
+                    break;
+                case brainstorming.FailReason.NOT_EXISTS:
+                    message = 'bsNotExists';
+                    break;
+                case brainstorming.FailReason.INDEXEDDB_ERROR:
+                    message = 'bsIndexedDBError';
+                    break;
+                case brainstorming.FailReason.FIREBASE_ERROR:
+                    message = 'bsFirebaseError';
+                    break;
+                default:
+                    break;
+            }
+            delibird.alert(this.$t(message));
+        }
     }
 
     deleteNomination() {
