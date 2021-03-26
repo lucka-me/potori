@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@types/luxon": "^1.26.2",
-    "@types/mapbox-gl": "^2.1.0",
+    "@types/mapbox-gl": "^2.1.1",
     "@types/webpack-bundle-analyzer": "^3.9.1",
     "@vue/cli-plugin-pwa": "^4.5.12",
     "@vue/cli-plugin-router": "^4.5.12",
