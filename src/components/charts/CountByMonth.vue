@@ -1,5 +1,5 @@
 <template>
-<chart-block title="Count by Month">
+<chart-block :title="$t('title')">
     <chart-view chart-type="line" :chart-datasets="datasets" :chart-options="options"/>
 </chart-block>
 </template>
@@ -11,9 +11,14 @@ import { Vue, Options } from 'vue-property-decorator';
 import ChartBlock, { fillTimeCountMap } from './ChartBlock.vue';
 import ChartView, { ChartDataset, ChartOptions } from './ChartView.vue';
 
+import locales from './CountByMonth.locales.json';
+
 @Options({
     components: {
         ChartBlock, ChartView
+    },
+    i18n: {
+        messages: locales
     }
 })
 export default class CountByMonthChart extends Vue {
@@ -69,7 +74,7 @@ export default class CountByMonthChart extends Vue {
         dataResults.sort((a, b) => a.x - b.x);
 
         const datasetSubmissions: ChartDataset<'line'> = {
-            label: 'Submissions',
+            label: this.$t('submissions'),
             data: dataSubmissions,
             borderColor: 'orange',
             pointBackgroundColor: 'orange',
@@ -77,7 +82,7 @@ export default class CountByMonthChart extends Vue {
             fill: false,
         };
         const datasetResults: ChartDataset<'line'> = {
-            label: 'Results',
+            label: this.$t('results'),
             data: dataResults,
             borderColor: 'royalblue',
             pointBackgroundColor: 'royalblue',

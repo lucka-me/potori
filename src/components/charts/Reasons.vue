@@ -1,5 +1,5 @@
 <template>
-<chart-block title="Reasons">
+<chart-block :title="$t('title')">
     <chart-view chart-type="doughnut" :chart-datasets="datasets" :chart-labels="labels" :chart-options="opitons"/>
 </chart-block>
 </template>
@@ -12,9 +12,14 @@ import { umi } from '@/service/umi';
 import ChartBlock from './ChartBlock.vue';
 import ChartView, { ChartDataset, ChartOptions } from './ChartView.vue';
 
+import locales from './Reasons.locales.json';
+
 @Options({
     components: {
         ChartBlock, ChartView
+    },
+    i18n: {
+        messages: locales
     }
 })
 export default class ReasonsChart extends Vue {

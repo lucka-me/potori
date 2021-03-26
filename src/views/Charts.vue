@@ -1,5 +1,5 @@
 <template>
-<material-top-app-bar title="Charts" navi-back/>
+<material-top-app-bar :title="$t('title')" navi-back/>
 <material-top-app-bar-adjust/>
 <main v-if="!$store.getters.empty" class="charts">
     <div class="grid grid--1-2">
@@ -33,6 +33,8 @@ import QuotasChart from '@/components/charts/Quotas.vue';
 import ReasonsChart from '@/components/charts/Reasons.vue';
 import StatusChart from '@/components/charts/Status.vue';
 
+import locales from './Charts.locales.json';
+
 @Options({
     components: {
         MaterialTopAppBar, MaterialTopAppBarAdjust,
@@ -40,6 +42,9 @@ import StatusChart from '@/components/charts/Status.vue';
         CountByMonthChart,
         IntervalChart, QuotasChart
     },
+    i18n: {
+        messages: locales
+    }
 })
 export default class Charts extends Vue {
 
