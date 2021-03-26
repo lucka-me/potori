@@ -1,6 +1,6 @@
 <template>
 <material-top-app-bar :title="title" navi-back>
-    <material-icon-button icon="map" @click="openMap"/>
+    <material-icon-button icon="map" :title="$t('map')" @click="openMap"/>
 </material-top-app-bar>
 <material-top-app-bar-adjust/>
 <main>
@@ -26,6 +26,8 @@ import MaterialTopAppBar from '@/components/material/TopAppBar.vue';
 import MaterialTopAppBarAdjust from '@/components/material/TopAppBarAdjust.vue';
 import NominationListRow from '@/components/list/Row.vue';
 
+import locales from './NominationList.locales.json';
+
 @Options({
     components: {
         MaterialTopAppBar, MaterialTopAppBarAdjust,
@@ -33,10 +35,13 @@ import NominationListRow from '@/components/list/Row.vue';
         MaterialList,
         NominationListRow
     },
+    i18n: {
+        messages: locales
+    }
 })
 export default class NominationList extends Vue {
     get title(): string {
-        return this.commonSense?.title ?? 'All';
+        return this.commonSense?.title ?? this.$t('all');
     }
 
     get nominations(): Array<Nomination> {

@@ -16,17 +16,22 @@ import { umi } from '@/service/umi';
 import MaterialTopAppBar from '@/components/material/TopAppBar.vue';
 import MaterialTopAppBarAdjust from '@/components/material/TopAppBarAdjust.vue';
 
+import locales from './NominationMap.locales.json';
+
 @Options({
     components: {
         MaterialTopAppBar, MaterialTopAppBarAdjust,
     },
+    i18n: {
+        messages: locales
+    }
 })
 export default class NominationMap extends Vue {
 
     private ctrl?: mapboxgl.Map;
 
     get title(): string {
-        return this.commonSense?.title ?? 'All';
+        return this.commonSense?.title ?? this.$t('all');
     }
 
     get nominations(): Array<Nomination> {
