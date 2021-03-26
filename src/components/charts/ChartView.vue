@@ -52,7 +52,7 @@ export default class ChartView<
     }
 }
 
-export { ChartDataset, ChartOptions, ChartType };
+export type { ChartDataset, ChartOptions, ChartType };
 </script>
 
 <style lang="scss">
