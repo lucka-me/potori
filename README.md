@@ -15,12 +15,12 @@
 
 A web app to visualize Ingress nominations from Gmail inbox.
 
-**A native app for macOS and iOS built with Swift is WIP [here](https://github.com/lucka-me/potori-swift).**
+**A native app for macOS and iOS built with SwiftUI is [here](https://github.com/lucka-me/potori-swift).**
 
 ## Build & Run
 ```sh
 $ git checkout main # If you want to run the version deployed on website
-$ git submodule update --init # For dev branch
+$ git submodule update --init
 $ npm i
 $ npm start
 ```
@@ -30,8 +30,6 @@ Open `http://localhost:8080/next` (`dev` branch) or `http://localhost:8000/` (`m
 The `dev` branch will also be deployed continuously to the [`next` directory in website](https://potori.lucka.moe/next).
 
 ## Notice
-Due to Google's policy (which aims to protect user's data), some features related to 3rd-party are suspended in the public web app (as a lite version).
-
 Potori is NOT fully compatible with Prime yet, we still need more [mail samples](https://github.com/lucka-me/potori-umi/tree/main/samples) to figure out how to query all related and localized mails exactly and identify each reason for rejection. If you have any trouble or want to help, please open an issue or contact us via Telegram@SeeleUN.
 
 ## Future Style
