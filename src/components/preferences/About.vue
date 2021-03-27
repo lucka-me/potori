@@ -24,8 +24,9 @@ import { Options, Vue } from 'vue-class-component';
 
 import { delibird } from '@/service/delibird';
 import { service } from '@/service';
+import { umi } from '@/service/umi';
 import { util } from '@/service/utils';
-import { version } from '@/service/version';
+import version from '@/data/version.json';
 
 import MaterialButton from '@/components/material/Button.vue';
 import PreferenceRow from './Row.vue';
@@ -43,11 +44,11 @@ import locales from './About.locales.json';
 })
 export default class AboutPreferences extends Vue {
     get appVersion() {
-        return version.text;
+        return `${version.version} (${version.build})`;
     }
 
     get dataVersion() {
-        return version.data;
+        return umi.version;
     }
 
     get hasErrors(): boolean {

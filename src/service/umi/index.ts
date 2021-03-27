@@ -119,6 +119,7 @@ export namespace umi {
     export const scanner = new Map<ScannerCode, Scanner>();
     export const status = new Map<StatusCode, Status>();
     export const reason = new Map<ReasonCode, Reason>();
+    export const version = data.version;
 
     export function init(i18n: VueI18n<unknown, unknown, unknown>) {
         for (const raw of data.scanners) {
