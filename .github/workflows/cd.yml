@@ -23,7 +23,7 @@ jobs:
       - name: Build Documents
         run: npm run build:docs
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v3.8.0
         with:
           github_token: ${{ secrets.TOKEN_DEPLOY }}
           publish_dir: ./dist
