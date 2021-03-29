@@ -23,9 +23,6 @@
     "@firebase/database": "^0.9.6",
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@lucka-labs/eli": "^0.1.2",
-    "@types/gapi.auth2": "0.0.54",
-    "@types/gapi.client.drive": "^3.0.13",
-    "@types/gapi.client.gmail": "^1.0.3",
     "chart.js": "^3.0.0-rc.6",
     "chartjs-adapter-luxon": "^1.0.0-beta.2",
     "luxon": "^1.26.0",
@@ -41,6 +38,9 @@
     "vuex": "^4.0.0"
   },
   "devDependencies": {
+    "@types/gapi.auth2": "^0.0.54",
+    "@types/gapi.client.drive": "^3.0.13",
+    "@types/gapi.client.gmail": "^1.0.3",
     "@types/luxon": "^1.26.2",
     "@types/mapbox-gl": "^2.1.1",
     "@types/webpack-bundle-analyzer": "^3.9.2",
