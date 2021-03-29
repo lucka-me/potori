@@ -1,4 +1,4 @@
-import { UserConfig, DefaultThemeOptions } from 'vuepress';
+import { defineUserConfig, DefaultThemeOptions, UserConfig } from 'vuepress';
 
 const themeConfig: DefaultThemeOptions = {
     repo: 'lucka-me/potori',
@@ -40,7 +40,7 @@ const themeConfig: DefaultThemeOptions = {
     }
 };
 
-export const config: UserConfig = {
+const userConfig: UserConfig = {
     base: '/docs/',
     title: 'Potori Docs',
     description: 'Documents for Potori',
@@ -59,3 +59,7 @@ export const config: UserConfig = {
     },
     themeConfig: themeConfig
 };
+
+const config = defineUserConfig(userConfig)
+
+export default config;

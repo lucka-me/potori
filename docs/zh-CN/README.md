@@ -4,8 +4,10 @@ heroText: Potori
 heroImage: /assets/hero.png
 tagline: 可视化您的Ingress提名
 actions:
-  - text: 使用
-  - link: https://potori.lucka.moe/
+  - text: Web App
+    link: https://potori.lucka.moe/
+  - text: App Store
+    link: https://apps.apple.com/app/id1552339183
 features:
   - title: 基于Gmail
     details: 从Gmail中解析提名，支持Scanner [REDACTED]和Prime。
