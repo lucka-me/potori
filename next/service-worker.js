@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/next/precache-manifest.18565df15766f35211e0aba52d78e490.js"
+  "/next/precache-manifest.c755122a7fcbc0636ac3df3307a2fd8d.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "potori"});
