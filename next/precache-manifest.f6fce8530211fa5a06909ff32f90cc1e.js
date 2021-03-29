@@ -16,11 +16,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/assets/title.png"
   },
   {
-    "revision": "0cefe2aaa7f8df01d1aa",
+    "revision": "ef22e4460160922c7009",
     "url": "/next/css/app.797a826b.css"
   },
   {
-    "revision": "059030670caf92b20d6c",
+    "revision": "e967a74299e7e502f7eb",
     "url": "/next/css/brainstorming.92917073.css"
   },
   {
@@ -28,7 +28,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/brainstorming~charts.5109a264.css"
   },
   {
-    "revision": "435f127655ceec30d2f5",
+    "revision": "b7b22efb12fee4701ed2",
     "url": "/next/css/brainstorming~charts~dashboard~details~list~map~match~preferences.456360f3.css"
   },
   {
@@ -40,11 +40,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/charts.a8695c17.css"
   },
   {
-    "revision": "a5e071d36686f6ee82fb",
+    "revision": "695e478a2097de06a430",
     "url": "/next/css/dashboard.030c0685.css"
   },
   {
-    "revision": "342459b25a03d0b5a553",
+    "revision": "83c7ad34dfd376e8831c",
     "url": "/next/css/details.e45c7c88.css"
   },
   {
@@ -52,7 +52,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/details~map.8a324763.css"
   },
   {
-    "revision": "edf33fc0e4506631015b",
+    "revision": "577fa32b7081f5834e0e",
     "url": "/next/css/list.6a9f041e.css"
   },
   {
@@ -60,11 +60,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/map.dc687b38.css"
   },
   {
-    "revision": "7c75ffe85f1ef0ced89d",
+    "revision": "af5fa5b27eade9408830",
     "url": "/next/css/match.4e5ee524.css"
   },
   {
-    "revision": "02c81c146d03de30be51",
+    "revision": "bd35393656046b0395c6",
     "url": "/next/css/preferences.a2815486.css"
   },
   {
@@ -88,24 +88,24 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/img/fa-solid-900.376c1f97.svg"
   },
   {
-    "revision": "1dfe250c13b82e20e22828305a2b1699",
+    "revision": "2c577fb607bb788826b1dfc6132dbf12",
     "url": "/next/index.html"
   },
   {
-    "revision": "0cefe2aaa7f8df01d1aa",
-    "url": "/next/js/app.63650360.js"
+    "revision": "ef22e4460160922c7009",
+    "url": "/next/js/app.85446f6b.js"
   },
   {
-    "revision": "059030670caf92b20d6c",
-    "url": "/next/js/brainstorming.94bb5d42.js"
+    "revision": "e967a74299e7e502f7eb",
+    "url": "/next/js/brainstorming.ae017023.js"
   },
   {
     "revision": "966f388c85a47e408d20",
     "url": "/next/js/brainstorming~charts.a78ac884.js"
   },
   {
-    "revision": "435f127655ceec30d2f5",
-    "url": "/next/js/brainstorming~charts~dashboard~details~list~map~match~preferences.525ed155.js"
+    "revision": "b7b22efb12fee4701ed2",
+    "url": "/next/js/brainstorming~charts~dashboard~details~list~map~match~preferences.89e6cb9c.js"
   },
   {
     "revision": "511b40a29734aa25b9b3",
@@ -120,12 +120,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/chunk-vendors.ec73f7d3.js"
   },
   {
-    "revision": "a5e071d36686f6ee82fb",
-    "url": "/next/js/dashboard.85f896dc.js"
+    "revision": "695e478a2097de06a430",
+    "url": "/next/js/dashboard.43737bf6.js"
   },
   {
-    "revision": "342459b25a03d0b5a553",
-    "url": "/next/js/details.9aecec01.js"
+    "revision": "83c7ad34dfd376e8831c",
+    "url": "/next/js/details.29181e44.js"
   },
   {
     "revision": "9bec2e5cdf67b6751880",
@@ -136,8 +136,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/firebase.5e48b75b.js"
   },
   {
-    "revision": "edf33fc0e4506631015b",
-    "url": "/next/js/list.fd9db85b.js"
+    "revision": "577fa32b7081f5834e0e",
+    "url": "/next/js/list.b39a99ea.js"
   },
   {
     "revision": "b2dc4b9137ce390f2503",
@@ -148,12 +148,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/mapbox.5d5a8588.js"
   },
   {
-    "revision": "7c75ffe85f1ef0ced89d",
-    "url": "/next/js/match.232d04bd.js"
+    "revision": "af5fa5b27eade9408830",
+    "url": "/next/js/match.aa2d7e27.js"
   },
   {
-    "revision": "02c81c146d03de30be51",
-    "url": "/next/js/preferences.e75b6f1d.js"
+    "revision": "bd35393656046b0395c6",
+    "url": "/next/js/preferences.c6d24ed6.js"
   },
   {
     "revision": "0acea94284e5075dac837ad119ada8b5",
