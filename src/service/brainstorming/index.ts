@@ -188,6 +188,14 @@ export namespace brainstorming {
     }
 
     /**
+     * Check if the nomination got result before creation of firebase, should skip query if true
+     * @param nomination The nomination
+     */
+     export function beforeCreate(nomination: Nomination): boolean {
+        return nomination.status !== umi.StatusCode.Pending && nomination.resultTime < 1518796800000;
+    }
+
+    /**
      * Query from the local IndexedDB database
      * @param id Brainstorming ID
      */
@@ -249,14 +257,6 @@ export namespace brainstorming {
         const store = getStore('readwrite');
         if (!store) return;
         store.put(record, id);
-    }
-
-    /**
-     * Check if the nomination got result before creation of firebase, should skip query if true
-     * @param nomination The nomination
-     */
-    function beforeCreate(nomination: Nomination): boolean {
-        return nomination.status !== umi.StatusCode.Pending && nomination.resultTime < 1518796800000;
     }
 
     function getStore(mode: IDBTransactionMode): IDBObjectStore | undefined {
