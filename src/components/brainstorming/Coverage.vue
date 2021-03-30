@@ -24,7 +24,7 @@ import locales from './Coverage.locales.json';
 })
 export default class CoverageChart extends Vue {
 
-    private static readonly colors = [ 'royalblue', 'gray' ];
+    private static readonly colors = [ 'royalblue', 'gray', 'orange' ];
 
     options: ChartOptions<'doughnut'> = {
         plugins: {
@@ -43,7 +43,7 @@ export default class CoverageChart extends Vue {
     }
 
     get labels(): Array<string> {
-        return [ this.$t('covered'), this.$t('notCovered') ];
+        return [ this.$t('recorded'), this.$t('notRecorded'), this.$t('early') ];
     }
 
     mounted() {
@@ -52,9 +52,13 @@ export default class CoverageChart extends Vue {
 
     private async updateData() {
         const nominations = this.$store.state.nominations;
-        const data = [ 0, 0 ];
+        const data = [ 0, 0, 0 ];
         const queries: Array<Promise<void>> = [];
         for (const nomination of nominations) {
+            if (brainstorming.beforeCreate(nomination)) {
+                data[2]++;
+                continue;
+            }
             const query = brainstorming.contains(nomination)
                 .then(contains => {
                     data[contains ? 0 : 1]++;
@@ -72,7 +76,7 @@ export default class CoverageChart extends Vue {
         };
         this.datasets = [ dataset ];
         if (data[0] > 0 || data[1] > 0) {
-            this.rate = data[0] / (data[0] + data[1]) * 100;
+            this.rate = data[0] / (data[0] + data[1] + data[2]) * 100;
         } else {
             this.rate = 0;
         }

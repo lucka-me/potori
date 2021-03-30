@@ -8,9 +8,7 @@
     "prebuild": "ts-node --project scripts/tsconfig.json ./scripts/prepare.ts",
     "build-config": "tsc -m commonjs --esModuleInterop vue.config.ts",
     "start": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "start:docs": "vuepress dev docs",
-    "build:docs": "vuepress build docs"
+    "build": "vue-cli-service build"
   },
   "repository": {
     "type": "git",
@@ -34,7 +32,6 @@
     "vue-i18n": "^9.0.0",
     "vue-property-decorator": "^10.0.0-rc.3",
     "vue-router": "^4.0.4",
-    "vuepress": "^2.0.0-beta.6",
     "vuex": "^4.0.0"
   },
   "devDependencies": {

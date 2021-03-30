@@ -1,12 +1,14 @@
 {
     "en": {
         "title": "Coverage",
-        "covered": "Covered",
-        "notCovered": "Not Covered"
+        "recorded": "Recorded",
+        "notRecorded": "Not Recorded",
+        "early": "Early Nomination"
     },
     "zh": {
         "title": "覆盖率",
-        "covered": "已覆盖",
-        "notCovered": "未覆盖"
+        "recorded": "有记录",
+        "notRecorded": "无记录",
+        "early": "早期提名"
     }
 }
