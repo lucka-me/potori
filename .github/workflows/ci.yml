@@ -21,5 +21,3 @@ jobs:
         run: npm ci
       - name: Build Potori
         run: npm run build
-      - name: Build Documents
-        run: npm run build:docs
