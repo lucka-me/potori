@@ -29,6 +29,6 @@ jobs:
       - name: Dispatch Docs CD
         uses: peter-evans/repository-dispatch@v1
         with:
-          token: ${{ secrets.DISPATCH_DOCS_TOKEN }}
+          token: ${{ secrets.DOCS_DISPATCH_TOKEN }}
           repository: lucka-me/potori-docs
           event-type: cd
