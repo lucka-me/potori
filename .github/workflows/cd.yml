@@ -26,3 +26,9 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           cname: potori.lucka.moe
+      - name: Dispatch Docs CD
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.DISPATCH_DOCS_TOKEN }}
+          repository: lucka-me/potori-docs
+          event-type: cd
