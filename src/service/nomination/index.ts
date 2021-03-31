@@ -197,19 +197,19 @@ export default class Nomination implements NominationData {
 
     /**
      * Parse nomination from JSON
-     * @param data Raw data to be parsed
+     * @param json Raw JSON to be parsed
      * @throws An `Error` when JSON missing `id`, `title` or `image`
      */
-    static from(data: NominationData): Nomination {
-        if (!data.id) throw new Error(ParseErrorReason.MISSING_ID);
-        if (!data.title) throw new Error(ParseErrorReason.MISSING_TITLE);
-        if (!data.image) throw new Error(ParseErrorReason.MISSING_IMAGE);
+    static from(json: NominationJSON): Nomination {
+        if (!json.id) throw new Error(ParseErrorReason.MISSING_ID);
+        if (!json.title) throw new Error(ParseErrorReason.MISSING_TITLE);
+        if (!json.image) throw new Error(ParseErrorReason.MISSING_IMAGE);
 
         // Fix old issues
-        const image = data.image.replace('\r', '');
+        const image = json.image.replace('\r', '');
 
         // Test format
-        if (!/^[a-zA-Z0-9]+$/.test(data.id)) {
+        if (!/^[a-zA-Z0-9]+$/.test(json.id)) {
             throw new Error(ParseErrorReason.INVALID_ID);
         }
         if (!/^[0-9a-zA-Z\-\_]+$/.test(image)) {
@@ -217,44 +217,44 @@ export default class Nomination implements NominationData {
         }
 
         const nomination = new Nomination();
-        nomination.id = data.id;
-        nomination.title = data.title;
+        nomination.id = json.id;
+        nomination.title = json.title;
         nomination.image = image;
 
-        if (data.scanner) {
-            nomination.scanner = data.scanner;
+        if (json.scanner) {
+            nomination.scanner = json.scanner;
         }
 
-        if (data.status === umi.StatusCode.Pending) {
+        if (json.status === umi.StatusCode.Pending) {
             nomination.status = umi.StatusCode.Pending;
-        } else if (data.status === umi.StatusCode.Accepted) {
+        } else if (json.status === umi.StatusCode.Accepted) {
             nomination.status = umi.StatusCode.Accepted;
         } else {
             nomination.status = umi.StatusCode.Rejected;
-            if (data.status !== umi.Reason.undeclared) {
-                if (umi.reason.has(data.status)) {
-                    nomination.reasons.push(data.status);
+            if (json.status !== umi.Reason.undeclared) {
+                if (umi.reason.has(json.status)) {
+                    nomination.reasons.push(json.status);
                 }
             }
         }
-        if (data.reasons) {
-            for (const code of data.reasons) {
+        if (json.reasons) {
+            for (const code of json.reasons) {
                 if (umi.reason.has(code) && !nomination.reasons.includes(code)) {
                     nomination.reasons.push(code);
                 }
             }
         }
 
-        nomination.confirmedTime = data.confirmedTime > Nomination.timestampSecondBound ? data.confirmedTime : data.confirmedTime * 1000;
-        nomination.confirmationMailId = data.confirmationMailId;
+        nomination.confirmedTime = json.confirmedTime > Nomination.timestampSecondBound ? json.confirmedTime : json.confirmedTime * 1000;
+        nomination.confirmationMailId = json.confirmationMailId;
 
-        if (data.resultTime) nomination.resultTime = data.resultTime > Nomination.timestampSecondBound ? data.resultTime : data.resultTime * 1000;
-        if (data.resultMailId) nomination.resultMailId = data.resultMailId;
+        if (json.resultTime) nomination.resultTime = json.resultTime > Nomination.timestampSecondBound ? json.resultTime : json.resultTime * 1000;
+        if (json.resultMailId) nomination.resultMailId = json.resultMailId;
 
-        if (data.lngLat) {
+        if (json.lngLat) {
             nomination.lngLat = {
-                lng: data.lngLat.lng,
-                lat: data.lngLat.lat,
+                lng: json.lngLat.lng,
+                lat: json.lngLat.lat,
             }
         }
         return nomination;
