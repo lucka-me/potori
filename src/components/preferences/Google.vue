@@ -25,7 +25,6 @@ import { Options, Vue } from 'vue-class-component';
 import { service } from '@/service';
 import { delibird } from '@/service/delibird';
 import { preferences } from '@/service/preferences';
-import { State } from '@/store';
 
 import MaterialButton from '@/components/material/Button.vue';
 import MaterialSwitch from '@/components/material/Switch.vue';
@@ -45,15 +44,15 @@ import locales from './Google.locales.json';
 export default class GooglePreferences extends Vue {
 
     get loaded() {
-        return this.$store.state.gapiLoaded;
+        return this.$store.state.google.loaded;
     }
 
     get authed() {
-        return this.$store.state.gapiAuthed;
+        return this.$store.state.google.authed;
     }
 
     get idle() {
-        return this.$store.state.status === State.Status.idle;
+        return this.$store.state.service.status === service.Status.idle;
     }
 
     get sync(): boolean {

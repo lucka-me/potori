@@ -44,7 +44,7 @@ export default class Reasons extends Vue {
     get reasons(): Array<ReasonData> {
         const list: Array<ReasonData> = [];
         for (const reason of umi.reason.values()) {
-            const count = this.$store.getters.count(reason.predicator);
+            const count = this.$store.getters['data/count'](reason.predicator);
             if (count < 1) continue;
             list.push({ reason: reason, count: count });
             if (!this.more && list.length > 3) break;

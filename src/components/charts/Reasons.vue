@@ -65,7 +65,7 @@ export default class ReasonsChart extends Vue {
         for (const [code, reason] of umi.reason) {
             stats.set(code, [reason, 0]);
         }
-        this.$store.state.nominations.reduce((map, nomination) => {
+        this.$store.state.data.nominations.reduce((map, nomination) => {
             if (nomination.status !== umi.StatusCode.Rejected) return map;
             if (nomination.reasons.length > 0) {
                 for (const code of nomination.reasons) {

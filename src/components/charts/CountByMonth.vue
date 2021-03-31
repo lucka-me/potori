@@ -40,7 +40,7 @@ export default class CountByMonthChart extends Vue {
     };
 
     get datasets(): Array<ChartDataset<'line'>> {
-        const nominations = this.$store.state.nominations;
+        const nominations = this.$store.state.data.nominations;
         const mapSubmissions = new Map<number, number>();
         const mapResults = new Map<number, number>();
         if (nominations.length > 0) {

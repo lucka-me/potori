@@ -6,7 +6,7 @@
 <main v-if="!$store.getters.empty" class="brainstorming">
     <div v-if="updating" class="progress">
         <div>{{ $t('updating') }}</div>
-        <material-linear-progress :progress="$store.state.progress" determinate/>
+        <material-linear-progress :progress="$store.state.progress.progress" determinate/>
     </div>
     <div v-if="idle" class="grid grid--1-1-1">
         <coverage-chart/>
@@ -30,7 +30,6 @@ import { Vue, Options } from 'vue-class-component';
 
 import { service } from '@/service';
 import { delibird } from '@/service/delibird';
-import { State } from '@/store';
 
 import MaterialIconButton from '@/components/material/IconButton.vue';
 import MaterialLinearProgress from '@/components/material/LinearProgress.vue';
@@ -58,7 +57,7 @@ import locales from './Brainstorming.locales.json';
 export default class Brainstorming extends Vue {
 
     get canUpdate(): boolean {
-        return !this.$store.getters.empty && this.$store.state.status === State.Status.idle;
+        return !this.$store.getters.empty && this.$store.state.service.status === service.Status.idle;
     }
 
     created() {
@@ -75,11 +74,11 @@ export default class Brainstorming extends Vue {
     }
 
     get updating(): boolean {
-        return this.$store.state.status === State.Status.queryingBrainstorming;
+        return this.$store.state.service.status === service.Status.queryingBrainstorming;
     }
 
     get idle(): boolean {
-        return this.$store.state.status === State.Status.idle;
+        return this.$store.state.service.status === service.Status.idle;
     }
 
     async update() {

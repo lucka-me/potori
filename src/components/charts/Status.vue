@@ -45,7 +45,7 @@ export default class StatusChart extends Vue {
         for (const code of umi.status.keys()) {
             stats.set(code, 0);
         }
-        this.$store.state.nominations.reduce((map, nomination) => {
+        this.$store.state.data.nominations.reduce((map, nomination) => {
             map.set(nomination.status, map.get(nomination.status)! + 1);
             return map;
         }, stats);

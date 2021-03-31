@@ -55,7 +55,7 @@ export default class NominationDetails extends Vue {
     created() {
         const id = this.$route.query.id;
         if (id && typeof(id) === 'string') {
-            const nomination = this.$store.state.nominations.find((nomination) => nomination.id === id);
+            const nomination = this.$store.state.data.nominations.find((nomination) => nomination.id === id);
             if (nomination) {
                 this.nomination = nomination;
             }

@@ -52,7 +52,7 @@ export default class CoverageChart extends Vue {
     }
 
     private async updateData() {
-        const nominations = this.$store.state.nominations;
+        const nominations = this.$store.state.data.nominations;
         const data = [ 0, 0 ];
         const queries: Array<Promise<void>> = [];
         for (const nomination of nominations) {

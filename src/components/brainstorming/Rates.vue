@@ -57,7 +57,7 @@ export default class RatesChart extends Vue {
     }
 
     private async updateData() {
-        const nominations = this.$store.state.nominations;
+        const nominations = this.$store.state.data.nominations;
         type ReviewItem = { count: number, rate: number };
         const stats: Array<ReviewItem> = [];
         for (let i = 0; i < 6; ++i) {

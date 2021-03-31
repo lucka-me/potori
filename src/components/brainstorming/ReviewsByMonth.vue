@@ -49,7 +49,7 @@ export default class ReviewsByMonthChart extends Vue {
     }
 
     private async updateData() {
-        const nominations = this.$store.state.nominations;
+        const nominations = this.$store.state.data.nominations;
         const stats = new Map<number, number>();
         if (nominations.length > 0) {
             let min = DateTime.fromMillis(nominations[0].confirmedTime).startOf('month').valueOf();

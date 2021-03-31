@@ -38,7 +38,7 @@ export default class Gallery extends Vue {
     } 
 
     get nominations(): Array<Nomination> {
-        return this.$store.state.nominations.filter(Gallery.predicator).sort(Nomination.comparatorByTime);
+        return this.$store.state.data.nominations.filter(Gallery.predicator).sort(Nomination.comparatorByTime);
     }
 
     open(id: string) {

@@ -48,7 +48,7 @@ export default class IntervalChart extends Vue {
     }
 
     private get stats(): Array<{ interval: number, count: number}> {
-        const nominations = this.$store.state.nominations;
+        const nominations = this.$store.state.data.nominations;
         const raw = nominations.reduce((map, nomination) => {
             if (nomination.status === umi.StatusCode.Pending) return map;
             if (nomination.confirmedTime < IntervalChart.timeValid) return map;

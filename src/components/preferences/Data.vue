@@ -19,7 +19,6 @@ import { Options, Vue } from 'vue-class-component';
 
 import { delibird } from '@/service/delibird';
 import { service } from '@/service';
-import { State } from '@/store';
 
 import MaterialButton from '@/components/material/Button.vue';
 import PreferenceRow from './Row.vue';
@@ -38,7 +37,7 @@ import locales from './Data.locales.json';
 export default class DataPreferences extends Vue {
 
     get idle() {
-        return this.$store.state.status === State.Status.idle;
+        return this.$store.state.service.status === service.Status.idle;
     }
 
     importNominations() {

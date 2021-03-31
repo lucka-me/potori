@@ -1,10 +1,10 @@
 <template>
 <h2>{{ $t('header') }}</h2>
 <div class="card-grid">
-    <dashboard-card :title="$t('all')" icon="arrow-up" :count="$store.state.nominations.length" @click="open"/>
+    <dashboard-card :title="$t('all')" icon="arrow-up" :count="$store.state.data.nominations.length" @click="open"/>
     <dashboard-card
         v-for="status of statuses" :key="status.code"
-        :title="status.title" :icon="status.icon" :count="$store.getters.count(status.predicator)"
+        :title="status.title" :icon="status.icon" :count="$store.getters['data/count'](status.predicator)"
         @click="open(status)"
     />
 </div>

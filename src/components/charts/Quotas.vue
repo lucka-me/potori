@@ -39,7 +39,7 @@ export default class QuotasChart extends Vue {
     }
 
     get datasets(): Array<ChartDataset<'bar'>> {
-        const nominations = this.$store.state.nominations;
+        const nominations = this.$store.state.data.nominations;
         const now = Date.now();
         const data = new Array(14).fill(0);
         for (const nomination of nominations) {

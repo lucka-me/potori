@@ -35,7 +35,7 @@ export default class NominationMap extends Vue {
     }
 
     get nominations(): Array<Nomination> {
-        let list = this.$store.state.nominations.filter((nomination) => nomination.lngLat);
+        let list = this.$store.state.data.nominations.filter((nomination) => nomination.lngLat);
         const commonSense = this.commonSense;
         if (commonSense) list = list.filter(commonSense.predicator);
         return list;

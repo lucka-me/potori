@@ -37,7 +37,7 @@ export default class Scanners extends Vue {
         const list: Array<ScannerData> = [];
         for (const scanner of umi.scanner.values()) {
             if (scanner.code === umi.ScannerCode.Unknown) continue;
-            const count = this.$store.getters.count(scanner.predicator);
+            const count = this.$store.getters['data/count'](scanner.predicator);
             if (count < 1) continue;
             list.push({
                 scanner: scanner,

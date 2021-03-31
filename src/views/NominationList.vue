@@ -45,7 +45,7 @@ export default class NominationList extends Vue {
     }
 
     get nominations(): Array<Nomination> {
-        let list = this.$store.state.nominations;
+        let list = this.$store.state.data.nominations;
         const commonSense = this.commonSense;
         if (commonSense) list = list.filter(commonSense.predicator);
         list = list.sort(Nomination.comparatorByTime);

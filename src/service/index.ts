@@ -2,6 +2,7 @@ import type { VueI18n } from 'vue-i18n';
 import { Store } from 'vuex'
 import { toRaw } from '@vue/reactivity';
 
+import type { State } from '@/store/state';
 import { brainstorming } from './brainstorming';
 import { delibird } from './delibird';
 import { dia } from './dia';
@@ -9,12 +10,21 @@ import { preferences } from './preferences';
 import { umi } from './umi';
 import { util } from './utils';
 import { CountCallback } from './types';
-import { State } from '@/store';
 import GoogleKit from './google';
 import Mari from './mari';
 import Nomination, { NominationData } from './nomination';
 
+export enum ServiceStatus {
+    idle,
+    processingMails,
+    requestMatch,
+    queryingBrainstorming,
+    syncing
+}
+
 export namespace service {
+
+    export import Status = ServiceStatus;
 
     enum Filename {
         nominations = 'nominations.json',
@@ -59,8 +69,8 @@ export namespace service {
 
         google.init(() => {
             google.auth.events.authStatusChanged = (authed) => {
-                _store.commit('setGAPIAuthed', authed);
-                _store.commit('gapiLoaded');
+                _store.commit('google/setAuthed', authed);
+                _store.commit('google/loaded');
             };
             google.auth.init();
 
@@ -85,7 +95,7 @@ export namespace service {
     export async function refresh() {
         if (preferences.google.sync()) await download(Filename.nominations);
         setProgress(0);
-        setStatus(State.Status.processingMails);
+        setStatus(Status.processingMails);
         const raws = getRaws()
         await mari.start(raws);
         const matchTargets: Array<Nomination> = [];
@@ -118,17 +128,17 @@ export namespace service {
         if (preferences.google.sync()) {
             await upload();
         }
-        _store.commit('setNominations', reduced);
+        _store.commit('data/setNominations', reduced);
         save();
-        setStatus(State.Status.idle);
+        setStatus(Status.idle);
     }
 
     export async function updateBrainstorming() {
-        setStatus(State.Status.queryingBrainstorming);
+        setStatus(Status.queryingBrainstorming);
         const count = await brainstorming.update(getRaws(), progress => {
             setProgress(progress);
         });
-        setStatus(State.Status.idle);
+        setStatus(Status.idle);
         return count;
     }
 
@@ -138,15 +148,15 @@ export namespace service {
     }
 
     export async function upload() {
-        setStatus(State.Status.syncing);
+        setStatus(Status.syncing);
         const blob = getNominationsBlod();
         await google.drive.upload(Filename.nominations, mimeJSON, blob, google.auth.accessToken);
-        setStatus(State.Status.idle);
+        setStatus(Status.idle);
     }
 
     export function migrate(callback: CountCallback) {
         download(Filename.legacy).then(count => {
-            setStatus(State.Status.idle);
+            setStatus(Status.idle);
             callback(count);
         })
     }
@@ -189,7 +199,7 @@ export namespace service {
             return -2;
         }
 
-        const nominations = _store.state.nominations;
+        const nominations = _store.state.data.nominations;
         const mapNomination = nominations.reduce((map, nomination) => {
             map.set(nomination.id, nomination);
             return map;
@@ -217,12 +227,12 @@ export namespace service {
 
     export function clearNominations() {
         dia.clear();
-        _store.commit('setNominations', []);
+        _store.commit('data/setNominations', []);
     }
 
     export function deleteNomination(id: string) {
         dia.remove(id);
-        _store.commit('deleteNomination', id);
+        _store.commit('data/deleteNomination', id);
     }
 
     export function save() {
@@ -234,7 +244,7 @@ export namespace service {
         await dia.init();
         const raws = await dia.load();
         const nominations = raws.map(raw => Nomination.from(raw));
-        _store.commit('setNominations', nominations);
+        _store.commit('data/setNominations', nominations);
     }
 
     /**
@@ -280,12 +290,12 @@ export namespace service {
                 matchData.packs = [];
                 resolve();
             };
-            setStatus(State.Status.requestMatch);
+            setStatus(Status.requestMatch);
         });
     }
 
     async function queryBrainstorming(list: Array<Nomination>) {
-        setStatus(State.Status.queryingBrainstorming);
+        setStatus(Status.queryingBrainstorming);
         let count = 0;
         for (const nomination of list) {
             count++;
@@ -305,16 +315,16 @@ export namespace service {
         }
     }
 
-    function setStatus(status: State.Status) {
-        _store.commit('setStatus', status);
+    function setStatus(status: Status) {
+        _store.commit('service/setStatus', status);
     }
 
     function setProgress(progress: number) {
-        _store.commit('setProgress', progress);
+        _store.commit('progress/setProgress', progress);
     }
 
     async function download(filename: Filename) {
-        setStatus(State.Status.syncing);
+        setStatus(Status.syncing);
         const file = await google.drive.download(filename, content => {
             try {
                 const list = content as Array<NominationData>;
@@ -332,7 +342,7 @@ export namespace service {
         let count = 0;
         try {
             const sources = list.map(data => Nomination.from(data));
-            const nominations = _store.state.nominations.map((nomination) => nomination);
+            const nominations = _store.state.data.nominations.map((nomination) => nomination);
             for (const nomination of sources) {
                 let merged = false;
                 for (const target of nominations) {
@@ -345,7 +355,7 @@ export namespace service {
                 if (merged) continue;
                 nominations.push(nomination);
             }
-            _store.commit('setNominations', nominations);
+            _store.commit('data/setNominations', nominations);
             save();
         } catch (error) {
             count = 0;
@@ -354,11 +364,11 @@ export namespace service {
     }
 
     function getRaws(): Array<Nomination> {
-        return _store.state.nominations.map(nomination => toRaw(nomination));
+        return _store.state.data.nominations.map(nomination => toRaw(nomination));
     }
 
     function getNominationsBlod(): Blob {
-        const raws = _store.state.nominations.map((nomination) => toRaw(nomination.data));
+        const raws = _store.state.data.nominations.map((nomination) => toRaw(nomination.data));
         return new Blob(
             [ JSON.stringify(raws, null, 4) ],
             { type: mimeJSON }

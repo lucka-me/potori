@@ -17,7 +17,6 @@
 import { Options, Vue } from 'vue-class-component';
 
 import { service } from '@/service';
-import { State } from '@/store';
 
 import MaterialIconButton from '@/components/material/IconButton.vue';
 import MaterialTopAppBar from '@/components/material/TopAppBar.vue';
@@ -43,7 +42,7 @@ import locales from './Dashboard.locales.json';
 export default class Dashboard extends Vue {
 
     get canRefresh() {
-        return this.$store.state.status === State.Status.idle && this.$store.state.gapiAuthed;
+        return this.$store.state.service.status === service.Status.idle && this.$store.state.google.authed;
     }
 
     refresh() {
