@@ -16,11 +16,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/assets/title.png"
   },
   {
-    "revision": "17aa38d5c149653c68c1",
+    "revision": "ce578441d71956fb963c",
     "url": "/next/css/app.797a826b.css"
   },
   {
-    "revision": "e8016c5b6ffc96d0b83e",
+    "revision": "b88c64ddc42d31f78a07",
     "url": "/next/css/brainstorming.92917073.css"
   },
   {
@@ -36,15 +36,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/brainstorming~dashboard.088a28d9.css"
   },
   {
-    "revision": "df3345e845d929e4c13e",
+    "revision": "cc63ec5507045e52ae12",
     "url": "/next/css/charts.a8695c17.css"
   },
   {
-    "revision": "f5046acf1ba08d4c3e52",
+    "revision": "1409e4574626a66ac6bb",
     "url": "/next/css/dashboard.030c0685.css"
   },
   {
-    "revision": "6804caed5fa7ac44de6d",
+    "revision": "b3ec70df7c30548a7945",
     "url": "/next/css/details.e45c7c88.css"
   },
   {
@@ -52,19 +52,19 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/details~map.8a324763.css"
   },
   {
-    "revision": "a5edbf577cd0999ff45b",
+    "revision": "0c09c53e8b16d5394002",
     "url": "/next/css/list.6a9f041e.css"
   },
   {
-    "revision": "c65917a8a1bc49b4bcf8",
+    "revision": "4f6b220af1d356296d10",
     "url": "/next/css/map.dc687b38.css"
   },
   {
-    "revision": "676707f45474bad3dbad",
+    "revision": "f47d09ddf356d6ec33d5",
     "url": "/next/css/match.4e5ee524.css"
   },
   {
-    "revision": "922d596a428a78c4fcea",
+    "revision": "a92f55ba90d48e6a9c89",
     "url": "/next/css/preferences.a2815486.css"
   },
   {
@@ -88,16 +88,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/img/fa-solid-900.376c1f97.svg"
   },
   {
-    "revision": "ea553342c27d70fcd5d73eb94acb5745",
+    "revision": "828ce25b581df9bbd37ca90a49469a4f",
     "url": "/next/index.html"
   },
   {
-    "revision": "17aa38d5c149653c68c1",
-    "url": "/next/js/app.23eeb39b.js"
+    "revision": "ce578441d71956fb963c",
+    "url": "/next/js/app.82c095de.js"
   },
   {
-    "revision": "e8016c5b6ffc96d0b83e",
-    "url": "/next/js/brainstorming.4a3e0578.js"
+    "revision": "b88c64ddc42d31f78a07",
+    "url": "/next/js/brainstorming.2a71e114.js"
   },
   {
     "revision": "f7475b7cd3ba4a819f4c",
@@ -112,20 +112,20 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/brainstorming~dashboard.f3f2bb86.js"
   },
   {
-    "revision": "df3345e845d929e4c13e",
-    "url": "/next/js/charts.5ca4a1dd.js"
+    "revision": "cc63ec5507045e52ae12",
+    "url": "/next/js/charts.92f42ed0.js"
   },
   {
-    "revision": "b4f8880ddebc8410adaa",
-    "url": "/next/js/chunk-vendors.d0bac785.js"
+    "revision": "5a8ef76bb18063caa27a",
+    "url": "/next/js/chunk-vendors.b5e45e2f.js"
   },
   {
-    "revision": "f5046acf1ba08d4c3e52",
-    "url": "/next/js/dashboard.20fa176a.js"
+    "revision": "1409e4574626a66ac6bb",
+    "url": "/next/js/dashboard.fb623d58.js"
   },
   {
-    "revision": "6804caed5fa7ac44de6d",
-    "url": "/next/js/details.c382211d.js"
+    "revision": "b3ec70df7c30548a7945",
+    "url": "/next/js/details.f6e6567e.js"
   },
   {
     "revision": "9bec2e5cdf67b6751880",
@@ -136,24 +136,24 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/firebase.6f230759.js"
   },
   {
-    "revision": "a5edbf577cd0999ff45b",
-    "url": "/next/js/list.6e8eccd4.js"
+    "revision": "0c09c53e8b16d5394002",
+    "url": "/next/js/list.f3f1f9a5.js"
   },
   {
-    "revision": "c65917a8a1bc49b4bcf8",
-    "url": "/next/js/map.2b205515.js"
+    "revision": "4f6b220af1d356296d10",
+    "url": "/next/js/map.1edfc995.js"
   },
   {
     "revision": "a863def486a83b012b0c",
     "url": "/next/js/mapbox.5d5a8588.js"
   },
   {
-    "revision": "676707f45474bad3dbad",
-    "url": "/next/js/match.e6ac0bc5.js"
+    "revision": "f47d09ddf356d6ec33d5",
+    "url": "/next/js/match.8f408d69.js"
   },
   {
-    "revision": "922d596a428a78c4fcea",
-    "url": "/next/js/preferences.a931878a.js"
+    "revision": "a92f55ba90d48e6a9c89",
+    "url": "/next/js/preferences.73e2b65c.js"
   },
   {
     "revision": "0acea94284e5075dac837ad119ada8b5",
