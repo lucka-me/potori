@@ -1,7 +1,7 @@
 <template>
 <material-top-app-bar :title="$t('title')" navi-back/>
 <material-top-app-bar-adjust/>
-<main v-if="!$store.getters.empty" class="charts">
+<main v-if="!empty" class="charts">
     <div class="grid grid--1-2">
         <status-chart/>
         <reasons-chart/>
@@ -23,7 +23,9 @@ import {
     Tooltip, Legend
 } from 'chart.js';
 import 'chartjs-adapter-luxon';
-import { Vue, Options } from 'vue-class-component';
+import { Vue, Options, Watch } from 'vue-property-decorator';
+
+import { dia } from '@/service/dia';
 
 import MaterialTopAppBar from '@/components/material/TopAppBar.vue';
 import MaterialTopAppBarAdjust from '@/components/material/TopAppBarAdjust.vue';
@@ -48,7 +50,14 @@ import locales from './Charts.locales.json';
 })
 export default class Charts extends Vue {
 
+    empty: boolean = true;
+
+    get saveID(): number {
+        return this.$store.state.dia.saveID;
+    }
+
     created() {
+        this.updateData();
         Chart.register(
             ArcElement, BarElement, LineElement, PointElement,
             BarController, DoughnutController, LineController,
@@ -59,6 +68,16 @@ export default class Charts extends Vue {
         Chart.defaults.plugins.legend!.labels.boxWidth = 10;
         Chart.defaults.plugins.tooltip!.intersect = false;
         Chart.defaults.elements.line!.tension = 0.1;
+    }
+
+    @Watch('saveID')
+    onSaved() {
+        this.updateData();
+    }
+
+    private async updateData() {
+        const count = await dia.count();
+        this.empty = count < 1;
     }
 }
 </script>

@@ -18,8 +18,9 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { Vue, Options, Watch } from 'vue-property-decorator';
 
+import { dia } from '@/service/dia';
 import { service } from '@/service';
 
 import MaterialIconButton from '@/components/material/IconButton.vue';
@@ -38,11 +39,17 @@ import locales from './Status.locales.json';
 })
 export default class Status extends Vue {
 
+    empty: boolean = true;
+
+    get saveID(): number {
+        return this.$store.state.dia.saveID;
+    }
+
     get showProgress(): boolean {
         if (this.$store.state.service.status === service.Status.processingMails) return true;
         if (this.$store.state.service.status === service.Status.queryingBrainstorming) return true;
         if (this.$store.state.service.status === service.Status.syncing) return true;
-        if (this.$store.getters.empty && !this.gapiLoaded) return true;
+        if (this.empty && !this.gapiLoaded) return true;
         return false;
     }
 
@@ -50,7 +57,7 @@ export default class Status extends Vue {
         if (this.$store.state.service.status === service.Status.processingMails) return 'processingMails';
         if (this.$store.state.service.status === service.Status.queryingBrainstorming) return 'queryingBrainstorming';
         if (this.$store.state.service.status === service.Status.syncing) return 'syncing';
-        if (this.$store.getters.empty && !this.gapiLoaded) return 'loadingGAPI';
+        if (this.empty && !this.gapiLoaded) return 'loadingGAPI';
         return '';
     }
 
@@ -69,7 +76,7 @@ export default class Status extends Vue {
     }
 
     get showChartsButton(): boolean {
-        return !this.$store.getters.empty;
+        return !this.empty;
     }
 
     get showActions(): boolean {
@@ -82,6 +89,15 @@ export default class Status extends Vue {
 
     get gapiLoaded() {
         return this.$store.state.google.loaded;
+    }
+
+    created() {
+        this.updateData();
+    }
+
+    @Watch('saveID')
+    onSaved() {
+        this.updateData();
     }
 
     link() {
@@ -98,6 +114,11 @@ export default class Status extends Vue {
 
     openBrainstorming() {
         this.$router.push({ path: '/brainstorming' });
+    }
+
+    private async updateData() {
+        const count = await dia.count();
+        this.empty = count < 1;
     }
 }
 </script>

@@ -3,7 +3,7 @@
     <material-icon-button v-if="canUpdate" icon="redo" :title="$t('update')" @click="update"/>
 </material-top-app-bar>
 <material-top-app-bar-adjust/>
-<main v-if="!$store.getters.empty" class="brainstorming">
+<main v-if="!empty" class="brainstorming">
     <div v-if="updating" class="progress">
         <div>{{ $t('updating') }}</div>
         <material-linear-progress :progress="$store.state.progress.progress" determinate/>
@@ -26,10 +26,11 @@ import {
     Filler, Tooltip, Legend,
 } from 'chart.js';
 import 'chartjs-adapter-luxon';
-import { Vue, Options } from 'vue-class-component';
+import { Vue, Options, Watch } from 'vue-property-decorator';
 
-import { service } from '@/service';
 import { delibird } from '@/service/delibird';
+import { dia } from '@/service/dia';
+import { service } from '@/service';
 
 import MaterialIconButton from '@/components/material/IconButton.vue';
 import MaterialLinearProgress from '@/components/material/LinearProgress.vue';
@@ -56,11 +57,26 @@ import locales from './Brainstorming.locales.json';
 })
 export default class Brainstorming extends Vue {
 
+    empty: boolean = true;
+
+    get saveID(): number {
+        return this.$store.state.dia.saveID;
+    }
+
     get canUpdate(): boolean {
-        return !this.$store.getters.empty && this.$store.state.service.status === service.Status.idle;
+        return !this.empty && this.$store.state.service.status === service.Status.idle;
+    }
+
+    get updating(): boolean {
+        return this.$store.state.service.status === service.Status.queryingBrainstorming;
+    }
+
+    get idle(): boolean {
+        return this.$store.state.service.status === service.Status.idle;
     }
 
     created() {
+        this.updateData();
         Chart.register(
             ArcElement, LineElement, PointElement,
             DoughnutController, LineController, RadarController,
@@ -73,17 +89,19 @@ export default class Brainstorming extends Vue {
         Chart.defaults.elements.line!.tension = 0.1;
     }
 
-    get updating(): boolean {
-        return this.$store.state.service.status === service.Status.queryingBrainstorming;
-    }
-
-    get idle(): boolean {
-        return this.$store.state.service.status === service.Status.idle;
+    @Watch('saveID')
+    onSaved() {
+        this.updateData();
     }
 
     async update() {
         const count = await service.updateBrainstorming();
         delibird.inform(this.$t('updateInform', { count: count }));
+    }
+
+    private async updateData() {
+        const count = await dia.count();
+        this.empty = count < 1;
     }
 }
 </script>
