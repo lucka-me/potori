@@ -3,9 +3,9 @@
 <div class="card-grid">
     <dashboard-card :title="$t('all')" icon="arrow-up" :count="countAll" @click="open"/>
     <dashboard-card
-        v-for="status of statuses" :key="status.status.code"
-        :title="status.status.title" :icon="status.status.icon" :count="status.count"
-        @click="open(status.status)"
+        v-for="data of dataset" :key="data.status.code"
+        :title="data.status.title" :icon="data.status.icon" :count="data.count"
+        @click="open(data.status)"
     />
 </div>
 </template>
@@ -37,19 +37,19 @@ interface StatusData {
 export default class Highlight extends Vue {
 
     countAll: number = 0;
-    statuses: Array<StatusData> = [];
+    dataset: Array<StatusData> = [];
 
     get saveID(): number {
         return this.$store.state.dia.saveID;
     }
 
-    mounted() {
-        this.update();
+    created() {
+        this.updateData();
     }
 
     @Watch('saveID')
     onSaved() {
-        this.update();
+        this.updateData();
     }
 
     open(status?: umi.Status) {
@@ -58,7 +58,7 @@ export default class Highlight extends Vue {
         this.$router.push(location);
     }
 
-    private async update() {
+    private async updateData() {
         dia.count().then(count => this.countAll = count);
         const list: Array<StatusData> = [];
         const queries: Array<Promise<void>> = [];
@@ -69,7 +69,7 @@ export default class Highlight extends Vue {
             queries.push(query);
         }
         await Promise.allSettled(queries);
-        this.statuses = list;
+        this.dataset = list;
     }
 }
 </script>

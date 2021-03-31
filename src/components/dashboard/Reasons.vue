@@ -6,7 +6,7 @@
 </h2>
 <div class="card-grid">
     <dashboard-card
-        v-for="data of reasons" :key="data.reason.code"
+        v-for="data of dataset" :key="data.reason.code"
         :title="data.reason.title" :icon="data.reason.icon" :count="data.count"
         @click="open(data.reason)"
     />
@@ -14,8 +14,9 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { Vue, Options, Watch } from 'vue-property-decorator';
 
+import { dia } from '@/service/dia';
 import { umi } from '@/service/umi';
 
 import MaterialButton from '@/components/material/Button.vue';
@@ -40,16 +41,23 @@ interface ReasonData {
 export default class Reasons extends Vue {
 
     more: boolean = false;
+    private datasetAll: Array<ReasonData> = [];
 
-    get reasons(): Array<ReasonData> {
-        const list: Array<ReasonData> = [];
-        for (const reason of umi.reason.values()) {
-            const count = this.$store.getters['data/count'](reason.predicator);
-            if (count < 1) continue;
-            list.push({ reason: reason, count: count });
-            if (!this.more && list.length > 3) break;
-        }
-        return list;
+    get saveID(): number {
+        return this.$store.state.dia.saveID;
+    }
+
+    get dataset(): Array<ReasonData> {
+        return this.more ? this.datasetAll : this.datasetAll.slice(0, 4);
+    }
+
+    created() {
+        this.updateData();
+    }
+
+    @Watch('saveID')
+    onSaved() {
+        this.updateData();
     }
 
     toggleMore() {
@@ -61,6 +69,20 @@ export default class Reasons extends Vue {
             path: '/list',
             query: { reason: reason.code }
         });
+    }
+
+    private async updateData() {
+        const list: Array<ReasonData> = [];
+        const queries: Array<Promise<void>> = [];
+        for (const reason of umi.reason.values()) {
+            const query = dia.count(reason.predicator).then(count => {
+                if (count < 1) return;
+                list.push({ reason: reason, count: count });
+            });
+            queries.push(query);
+        }
+        await Promise.allSettled(queries);
+        this.datasetAll = list.sort((a, b) => a.reason.code > b.reason.code ? 1 : -1);
     }
 }
 </script>

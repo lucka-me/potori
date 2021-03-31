@@ -2,7 +2,7 @@
 <h2>{{ $t('header') }}</h2>
 <div class="card-grid">
     <dashboard-card
-        v-for="data of scanners" :key="data.scanner.code"
+        v-for="data of dataset" :key="data.scanner.code"
         :title="data.scanner.title" icon="mobile-alt" :count="data.count"
         @click="open(data.scanner)"
     />
@@ -10,8 +10,9 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { Vue, Options, Watch } from 'vue-property-decorator';
 
+import { dia } from '@/service/dia';
 import { umi } from '@/service/umi';
 
 import DashboardCard from './Card.vue';
@@ -33,18 +34,15 @@ interface ScannerData {
 })
 export default class Scanners extends Vue {
 
-    get scanners(): Array<ScannerData> {
-        const list: Array<ScannerData> = [];
-        for (const scanner of umi.scanner.values()) {
-            if (scanner.code === umi.ScannerCode.Unknown) continue;
-            const count = this.$store.getters['data/count'](scanner.predicator);
-            if (count < 1) continue;
-            list.push({
-                scanner: scanner,
-                count: count
-            });
-        }
-        return list;
+    dataset: Array<ScannerData> = [];
+
+    created() {
+        this.updateData();
+    }
+
+    @Watch('saveID')
+    onSaved() {
+        this.updateData();
     }
 
     open(scanner: umi.Scanner) {
@@ -52,6 +50,20 @@ export default class Scanners extends Vue {
             path: '/list',
             query: { scanner: scanner.code }
         });
+    }
+
+    private async updateData() {
+        const list: Array<ScannerData> = [];
+        const queries: Array<Promise<void>> = [];
+        for (const scanner of umi.scanner.values()) {
+            const query = dia.count(scanner.predicator).then(count => {
+                if (count < 1) return;
+                list.push({ scanner: scanner, count: count });
+            });
+            queries.push(query);
+        }
+        await Promise.allSettled(queries);
+        this.dataset = list.sort((a, b) => a.scanner.code > b.scanner.code ? 1 : -1);
     }
 }
 </script>
