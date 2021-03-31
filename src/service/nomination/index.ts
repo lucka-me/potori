@@ -17,7 +17,7 @@ export interface LngLat {
     lat: number;    // Latitude
 }
 
-export interface NominationData {
+export interface NominationJSON {
     id: string;     // Short ID, also brainstorming ID
     title: string;  // Title
     image: string;  // Hash part of the image URL
@@ -32,6 +32,12 @@ export interface NominationData {
     resultMailId?: string;   // ID of result mail
 
     lngLat?: LngLat;    // Location
+}
+
+export interface NominationData extends NominationJSON {
+    reasons: Array<umi.ReasonCode>;
+    resultTime: number;
+    resultMailId: string;
 }
 
 /**
@@ -117,11 +123,33 @@ export default class Nomination implements NominationData {
         return this.confirmedTime + (14 * 24 * 3600 * 1000);
     }
 
+    get data(): NominationData {
+        let data: NominationData = {
+            id: this.id,
+            title: this.title,
+            image: this.image,
+            scanner: this.scanner,
+            status: this.status,
+            reasons: this.reasons,
+            confirmedTime: this.confirmedTime / 1000,
+            confirmationMailId: this.confirmationMailId,
+            resultTime: this.resultTime / 1000,
+            resultMailId: this.resultMailId
+        };
+        if (this.lngLat) {
+            data.lngLat = {
+                lng: this.lngLat.lng,
+                lat: this.lngLat.lat
+            };
+        }
+        return data;
+    }
+
     /**
      * Serialize to JSON
      */
-    get data(): NominationData {
-        let data: NominationData = {
+    get json(): NominationJSON {
+        let json: NominationJSON = {
             id: this.id,
             title: this.title,
             image: this.image,
@@ -131,17 +159,17 @@ export default class Nomination implements NominationData {
             confirmationMailId: this.confirmationMailId,
         };
         if (this.reasons.length > 0) {
-            data.reasons = this.reasons;
+            json.reasons = this.reasons;
         }
-        if (this.resultTime) data.resultTime = this.resultTime / 1000;
-        if (this.resultMailId) data.resultMailId = this.resultMailId;
+        if (this.resultTime) json.resultTime = this.resultTime / 1000;
+        if (this.resultMailId) json.resultMailId = this.resultMailId;
         if (this.lngLat) {
-            data.lngLat = {
+            json.lngLat = {
                 lng: this.lngLat.lng,
                 lat: this.lngLat.lat
             };
         }
-        return data;
+        return json;
     }
 
     /**
@@ -244,4 +272,4 @@ export default class Nomination implements NominationData {
 /**
  * Callback for Array<Nomination>.filter()
  */
-export type Predicator = (nomination: Nomination) => boolean;
+export type Predicator = (nomination: NominationData) => boolean;
