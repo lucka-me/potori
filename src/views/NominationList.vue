@@ -15,10 +15,11 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { Vue, Options, Watch } from 'vue-property-decorator';
 
-import Nomination from '@/service/nomination';
+import { dia } from '@/service/dia';
 import { umi } from '@/service/umi';
+import Nomination from '@/service/nomination';
 
 import MaterialIconButton from '@/components/material/IconButton.vue';
 import MaterialList from '@/components/material/List.vue';
@@ -40,16 +41,38 @@ import locales from './NominationList.locales.json';
     }
 })
 export default class NominationList extends Vue {
+
+    nominations: Array<Nomination> = [];
+
     get title(): string {
         return this.commonSense?.title ?? this.$t('all');
     }
 
-    get nominations(): Array<Nomination> {
-        let list = this.$store.state.data.nominations;
-        const commonSense = this.commonSense;
-        if (commonSense) list = list.filter(commonSense.predicator);
-        list = list.sort(Nomination.comparatorByTime);
-        return list;
+    get saveID(): number {
+        return this.$store.state.dia.saveID;
+    }
+
+    created() {
+        this.updateData();
+    }
+
+    @Watch('saveID')
+    onSaved() {
+        this.updateData();
+    }
+
+    openMap() {
+        this.$router.push({
+            path: '/map',
+            query: this.$route.query
+        });
+    }
+
+    open(id: string) {
+        this.$router.push({
+            path: '/details',
+            query: { id: id }
+        });
     }
 
     private get commonSense(): umi.CommonSense | null {
@@ -68,18 +91,10 @@ export default class NominationList extends Vue {
         return null;
     }
 
-    openMap() {
-        this.$router.push({
-            path: '/map',
-            query: this.$route.query
-        });
-    }
-
-    open(id: string) {
-        this.$router.push({
-            path: '/details',
-            query: { id: id }
-        });
+    private async updateData() {
+        const commonSense = this.commonSense;
+        const raws = await dia.getAll(commonSense?.predicator);
+        this.nominations = raws.map(raw => Nomination.from(raw)).sort(Nomination.comparatorByTime);
     }
 }
 </script>

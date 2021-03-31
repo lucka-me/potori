@@ -7,11 +7,12 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { Vue, Options, Watch } from 'vue-property-decorator';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-import Nomination from '@/service/nomination';
+import { dia } from '@/service/dia';
 import { umi } from '@/service/umi';
+import Nomination from '@/service/nomination';
 
 import MaterialTopAppBar from '@/components/material/TopAppBar.vue';
 import MaterialTopAppBarAdjust from '@/components/material/TopAppBarAdjust.vue';
@@ -32,13 +33,6 @@ export default class NominationMap extends Vue {
 
     get title(): string {
         return this.commonSense?.title ?? this.$t('all');
-    }
-
-    get nominations(): Array<Nomination> {
-        let list = this.$store.state.data.nominations.filter((nomination) => nomination.lngLat);
-        const commonSense = this.commonSense;
-        if (commonSense) list = list.filter(commonSense.predicator);
-        return list;
     }
 
     private get commonSense(): umi.CommonSense | null {
@@ -77,9 +71,9 @@ export default class NominationMap extends Vue {
         });
     }
 
-    private pourData() {
+    private async pourData() {
         if (!this.ctrl) return;
-        const nominations = this.nominations;
+        const nominations = await this.loadNominations();
         // Generate GeoJSON and get bounds
         const boundsNE = { lng: -181.0, lat: -91.0 };
         const boundsSW = { lng:  181.0, lat:  91.0 };
@@ -197,6 +191,12 @@ export default class NominationMap extends Vue {
         if (boundsSW.lng > -181) {
             this.ctrl.fitBounds([boundsSW, boundsNE], { linear: true, padding: 16 });
         }
+    }
+
+    private async loadNominations() {
+        const commonSense = this.commonSense;
+        const raws = await dia.getAll(commonSense?.predicator);
+        return raws.filter(raw => raw.lngLat).map(raw => Nomination.from(raw));
     }
 }
 </script>
