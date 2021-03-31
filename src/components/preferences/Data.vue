@@ -40,10 +40,9 @@ export default class DataPreferences extends Vue {
         return this.$store.state.service.status === service.Status.idle;
     }
 
-    importNominations() {
-        service.importNominationsFile((count) => {
-            delibird.inform(this.$t('importNominationsInform', { count: count}));
-        });
+    async importNominations() {
+        const count = await service.importNominationsFile();
+        delibird.inform(this.$t('importNominationsInform', { count: count}));
     }
 
     exportNominations() {

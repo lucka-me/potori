@@ -149,7 +149,7 @@ export namespace service {
 
     export async function upload() {
         setStatus(Status.syncing);
-        const blob = getNominationsJSONBlod();
+        const blob = await getNominationsJSONBlod();
         await google.drive.upload(Filename.nominations, mimeJSON, blob, google.auth.accessToken);
         setStatus(Status.idle);
     }
@@ -161,19 +161,20 @@ export namespace service {
         })
     }
 
-    export async function importNominationsFile(callback: CountCallback) {
+    export async function importNominationsFile(): Promise<number> {
         const content = await util.importFile();
         try {
             const list = JSON.parse(content) as Array<NominationData>;
             const count = await importNominations(list);
-            callback(count);
+            return count;
         } catch (error) {
-            callback(0);
+            return 0;
         }
     }
 
-    export function exportNominationsFile() {
-        util.exportFile(Filename.nominations, getNominationsJSONBlod());
+    export async function exportNominationsFile() {
+        const blob = await getNominationsJSONBlod();
+        util.exportFile(Filename.nominations, blob);
     }
 
     /**
@@ -367,8 +368,9 @@ export namespace service {
         return _store.state.data.nominations.map(nomination => toRaw(nomination));
     }
 
-    function getNominationsJSONBlod(): Blob {
-        const jsons = _store.state.data.nominations.map((nomination) => toRaw(nomination.json));
+    async function getNominationsJSONBlod(): Promise<Blob> {
+        const raws = await dia.getAll();
+        const jsons = raws.map(raws => Nomination.from(raws).json);
         return new Blob(
             [ JSON.stringify(jsons, null, 4) ],
             { type: mimeJSON }
