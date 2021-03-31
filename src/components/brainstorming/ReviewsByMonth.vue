@@ -9,6 +9,7 @@ import { DateTime } from 'luxon';
 import { Vue, Options } from 'vue-property-decorator';
 
 import { brainstorming } from '@/service/brainstorming';
+import { dia } from '@/service/dia';
 
 import ChartBlock, { fillTimeCountMap } from '@/components/charts/ChartBlock.vue';
 import ChartView, { ChartDataset, ChartOptions } from '@/components/charts/ChartView.vue';
@@ -49,7 +50,7 @@ export default class ReviewsByMonthChart extends Vue {
     }
 
     private async updateData() {
-        const nominations = this.$store.state.data.nominations;
+        const nominations = await dia.getAll();
         const stats = new Map<number, number>();
         if (nominations.length > 0) {
             let min = DateTime.fromMillis(nominations[0].confirmedTime).startOf('month').valueOf();

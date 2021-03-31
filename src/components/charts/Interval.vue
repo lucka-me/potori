@@ -7,6 +7,7 @@
 <script lang="ts">
 import { Vue, Options, Watch } from 'vue-property-decorator';
 
+import { dia } from '@/service/dia';
 import { umi } from '@/service/umi';
 
 import ChartBlock from './ChartBlock.vue';
@@ -51,7 +52,7 @@ export default class IntervalChart extends Vue {
     }
 
     private async updateData() {
-        const nominations = this.$store.state.data.nominations;
+        const nominations = await dia.getAll();
         const raw = nominations.reduce((map, nomination) => {
             if (nomination.status === umi.StatusCode.Pending) return map;
             if (nomination.confirmedTime < IntervalChart.timeValid) return map;

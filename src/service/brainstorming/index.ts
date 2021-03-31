@@ -3,7 +3,7 @@ import type { Reference } from '@firebase/database-types';
 import { umi } from '@/service/umi';
 import { util } from '../utils';
 import { ProgressCallback } from '../types';
-import Nomination from '@/service/nomination';
+import Nomination, { NominationData } from '@/service/nomination';
 
 /**
  * Result for {@link BrainstormingKit.analyse}
@@ -92,7 +92,7 @@ export namespace brainstorming {
      * @param succeed Triggered when succeed to query data
      * @param failed Triggered when Failed to query data
      */
-    export async function query(nomination: Nomination): Promise<Record> {
+    export async function query(nomination: NominationData): Promise<Record> {
         if (beforeCreate(nomination)) {
             throw new Error(FailReason.EARLY);
         }
@@ -114,7 +114,7 @@ export namespace brainstorming {
      * @param nominations Nomination list
      * @param finish Triggered when all query finishes
      */
-    export async function update(nominations: Array<Nomination>, callback: ProgressCallback): Promise<number> {
+    export async function update(nominations: Array<NominationData>, callback: ProgressCallback): Promise<number> {
         let succeed = 0;
         let processed = 0;
         const total = nominations.length;
@@ -143,12 +143,12 @@ export namespace brainstorming {
         return succeed;
     }
 
-    export async function getFromLocal(nomination: Nomination) {
+    export async function getFromLocal(nomination: NominationData) {
         if (beforeCreate(nomination)) return undefined;
         return await queryDatabase(nomination.id);
     }
 
-    export async function contains(nomination: Nomination) {
+    export async function contains(nomination: NominationData) {
         if (beforeCreate(nomination)) return false;
         const record = await queryDatabase(nomination.id);
         return typeof record !== 'undefined';
@@ -191,7 +191,7 @@ export namespace brainstorming {
      * Check if the nomination got result before creation of firebase, should skip query if true
      * @param nomination The nomination
      */
-     export function beforeCreate(nomination: Nomination): boolean {
+     export function beforeCreate(nomination: NominationData): boolean {
         return nomination.status !== umi.StatusCode.Pending && nomination.resultTime < 1518796800000;
     }
 

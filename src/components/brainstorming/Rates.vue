@@ -8,6 +8,7 @@
 import { Vue, Options } from 'vue-property-decorator';
 
 import { brainstorming } from '@/service/brainstorming';
+import { dia } from '@/service/dia';
 
 import ChartBlock from '@/components/charts/ChartBlock.vue';
 import ChartView, { ChartDataset, ChartOptions } from '@/components/charts/ChartView.vue';
@@ -57,7 +58,7 @@ export default class RatesChart extends Vue {
     }
 
     private async updateData() {
-        const nominations = this.$store.state.data.nominations;
+        const nominations = await dia.getAll();
         type ReviewItem = { count: number, rate: number };
         const stats: Array<ReviewItem> = [];
         for (let i = 0; i < 6; ++i) {

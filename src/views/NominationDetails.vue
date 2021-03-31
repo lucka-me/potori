@@ -18,8 +18,9 @@
 <script lang="ts">
 import { Options, Vue } from 'vue-class-component';
 
-import Nomination from '@/service/nomination';
+import { dia } from '@/service/dia';
 import { service } from '@/service';
+import Nomination from '@/service/nomination';
 
 import MaterialIconButton from '@/components/material/IconButton.vue';
 import MaterialTopAppBar from '@/components/material/TopAppBar.vue';
@@ -53,13 +54,7 @@ export default class NominationDetails extends Vue {
     }
 
     created() {
-        const id = this.$route.query.id;
-        if (id && typeof(id) === 'string') {
-            const nomination = this.$store.state.data.nominations.find((nomination) => nomination.id === id);
-            if (nomination) {
-                this.nomination = nomination;
-            }
-        }
+        this.load();
     }
 
     edit() {
@@ -77,6 +72,16 @@ export default class NominationDetails extends Vue {
         this.editData.save(this.nomination);
         service.update(this.nomination);
         this.editing = false;
+    }
+
+    private async load() {
+        const id = this.$route.query.id;
+        if (id && typeof(id) === 'string') {
+            const raw = await dia.get(id);
+            if (raw) {
+                this.nomination = Nomination.from(raw);
+            }
+        }
     }
 }
 </script>

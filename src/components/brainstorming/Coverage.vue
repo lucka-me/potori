@@ -8,6 +8,7 @@
 import { Vue, Options } from 'vue-property-decorator';
 
 import { brainstorming } from '@/service/brainstorming';
+import { dia } from '@/service/dia';
 
 import ChartBlock from '@/components/charts/ChartBlock.vue';
 import ChartView, { ChartDataset, ChartOptions } from '@/components/charts/ChartView.vue';
@@ -51,7 +52,7 @@ export default class CoverageChart extends Vue {
     }
 
     private async updateData() {
-        const nominations = this.$store.state.data.nominations;
+        const nominations = await dia.getAll();
         const data = [ 0, 0, 0 ];
         const queries: Array<Promise<void>> = [];
         for (const nomination of nominations) {
