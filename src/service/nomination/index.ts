@@ -50,7 +50,7 @@ export default class Nomination implements NominationData {
     /**
      * Comparator for sorting by time
      */
-    static readonly comparatorByTime = (a: Nomination, b: Nomination) => {
+    static readonly comparatorByTime = (a: NominationData, b: NominationData) => {
         const timeA = a.resultTime ? a.resultTime : a.confirmedTime;
         const timeB = b.resultTime ? b.resultTime : b.confirmedTime;
         return timeA < timeB ? 1 : -1;

@@ -6,15 +6,15 @@
 <material-top-app-bar-adjust/>
 <main class="dashboard">
     <status/>
-    <highlight v-if="!$store.getters.empty"/>
-    <gallery v-if="!$store.getters.empty"/>
-    <scanners v-if="!$store.getters.empty"/>
-    <reasons v-if="!$store.getters.empty"/>
+    <highlight  v-if="!empty"/>
+    <gallery    v-if="!empty"/>
+    <scanners   v-if="!empty"/>
+    <reasons    v-if="!empty"/>
 </main>
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { Vue, Options, Watch } from 'vue-property-decorator';
 
 import { service } from '@/service';
 
@@ -28,6 +28,7 @@ import Scanners from '@/components/dashboard/Scanners.vue';
 import Reasons from '@/components/dashboard/Reasons.vue';
 
 import locales from './Dashboard.locales.json';
+import { dia } from '@/service/dia';
 
 @Options({
     components: {
@@ -41,8 +42,23 @@ import locales from './Dashboard.locales.json';
 })
 export default class Dashboard extends Vue {
 
+    empty: boolean = true;
+
     get canRefresh() {
         return this.$store.state.service.status === service.Status.idle && this.$store.state.google.authed;
+    }
+
+    get saveID(): number {
+        return this.$store.state.dia.saveID;
+    }
+
+    created() {
+        this.updateData();
+    }
+
+    @Watch('saveID')
+    onSaved() {
+        this.updateData();
     }
 
     refresh() {
@@ -51,6 +67,11 @@ export default class Dashboard extends Vue {
 
     openPreference() {
         this.$router.push({ path: '/preferences' });
+    }
+
+    private async updateData() {
+        const count = await dia.count();
+        this.empty = count < 1;
     }
 }
 </script>

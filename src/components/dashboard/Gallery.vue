@@ -13,8 +13,9 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { Vue, Options, Watch } from 'vue-property-decorator';
 
+import { dia } from '@/service/dia';
 import Nomination, { Predicator } from '@/service/nomination';
 
 import MaterialCard from '@/components/material/Card.vue';
@@ -35,10 +36,21 @@ export default class Gallery extends Vue {
     private static readonly datePast30Days = Date.now() - (30 * 24 * 3600 * 1000);
     private static readonly predicator: Predicator = (nomination) => {
         return nomination.confirmedTime > Gallery.datePast30Days || nomination.resultTime > Gallery.datePast30Days;
-    } 
+    }
 
-    get nominations(): Array<Nomination> {
-        return this.$store.state.data.nominations.filter(Gallery.predicator).sort(Nomination.comparatorByTime);
+    nominations: Array<Nomination> = [];
+
+    get saveID(): number {
+        return this.$store.state.dia.saveID;
+    }
+
+    created() {
+        this.updateData();
+    }
+
+    @Watch('saveID')
+    onSaved() {
+        this.updateData();
     }
 
     open(id: string) {
@@ -46,6 +58,11 @@ export default class Gallery extends Vue {
             path: '/details',
             query: { id: id }
         });
+    }
+
+    private async updateData() {
+        const raws = await dia.getAll(Gallery.predicator);
+        this.nominations = raws.map(raws => Nomination.from(raws)).sort(Nomination.comparatorByTime);
     }
 }
 </script>
