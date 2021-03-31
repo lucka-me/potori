@@ -5,7 +5,9 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options } from 'vue-property-decorator';
+import { dia } from '@/service/dia';
+import Nomination from '@/service/nomination';
+import { Vue, Options, Watch } from 'vue-property-decorator';
 
 import ChartBlock from './ChartBlock.vue';
 import ChartView, { ChartDataset, ChartOptions } from './ChartView.vue';
@@ -38,8 +40,24 @@ export default class QuotasChart extends Vue {
         return labels;
     }
 
-    get datasets(): Array<ChartDataset<'bar'>> {
-        const nominations = this.$store.state.data.nominations;
+    datasets: Array<ChartDataset<'bar'>> = [];
+
+    get saveID(): number {
+        return this.$store.state.dia.saveID;
+    }
+
+    created() {
+        this.updateData();
+    }
+
+    @Watch('saveID')
+    onSaved() {
+        this.updateData();
+    }
+
+    private async updateData() {
+        const raws = await dia.getAll();
+        const nominations = raws.map(raw => Nomination.from(raw));
         const now = Date.now();
         const data = new Array(14).fill(0);
         for (const nomination of nominations) {
@@ -53,7 +71,7 @@ export default class QuotasChart extends Vue {
             backgroundColor: 'royalblue',
             hoverBackgroundColor: 'royalblue',
         };
-        return [ dataset ];
+        this.datasets = [ dataset ];
     }
 }
 </script>

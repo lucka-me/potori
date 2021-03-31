@@ -5,8 +5,9 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options } from 'vue-property-decorator';
+import { Vue, Options, Watch } from 'vue-property-decorator';
 
+import { dia } from '@/service/dia';
 import { umi } from '@/service/umi';
 
 import ChartBlock from './ChartBlock.vue';
@@ -40,12 +41,28 @@ export default class StatusChart extends Vue {
         return labels;
     }
 
-    get datasets(): Array<ChartDataset<'doughnut'>> {
+    datasets: Array<ChartDataset<'doughnut'>> = [];
+
+    get saveID(): number {
+        return this.$store.state.dia.saveID;
+    }
+
+    created() {
+        this.updateData();
+    }
+
+    @Watch('saveID')
+    onSaved() {
+        this.updateData();
+    }
+
+    private async updateData() {
         const stats = new Map<umi.StatusCode, number>();
         for (const code of umi.status.keys()) {
             stats.set(code, 0);
         }
-        this.$store.state.data.nominations.reduce((map, nomination) => {
+        const nominations = await dia.getAll();
+        nominations.reduce((map, nomination) => {
             map.set(nomination.status, map.get(nomination.status)! + 1);
             return map;
         }, stats);
@@ -62,7 +79,7 @@ export default class StatusChart extends Vue {
             hoverBackgroundColor: StatusChart.colors,
             hoverBorderColor: 'rgba(0, 0, 0, 0.4)',
         };
-        return [ dataset ];
+        this.datasets = [ dataset ];
     }
 }
 </script>

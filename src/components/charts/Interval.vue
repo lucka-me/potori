@@ -5,7 +5,7 @@
 </template>
 
 <script lang="ts">
-import { Vue, Options } from 'vue-property-decorator';
+import { Vue, Options, Watch } from 'vue-property-decorator';
 
 import { umi } from '@/service/umi';
 
@@ -33,21 +33,24 @@ export default class IntervalChart extends Vue {
         }
     };
 
-    get labels(): Array<number> {
-        return this.stats.map((pair) => pair.interval);
+    labels: Array<number> = [];
+
+    datasets: Array<ChartDataset<'bar'>> = [];
+
+    get saveID(): number {
+        return this.$store.state.dia.saveID;
     }
 
-    get datasets(): Array<ChartDataset<'bar'>> {
-        const data = this.stats.map((pair) => pair.count);
-        const dataset: ChartDataset<'bar'> = {
-            data: data,
-            backgroundColor: 'royalblue',
-            hoverBackgroundColor: 'royalblue',
-        };
-        return [ dataset ];
+    created() {
+        this.updateData();
     }
 
-    private get stats(): Array<{ interval: number, count: number}> {
+    @Watch('saveID')
+    onSaved() {
+        this.updateData();
+    }
+
+    private async updateData() {
         const nominations = this.$store.state.data.nominations;
         const raw = nominations.reduce((map, nomination) => {
             if (nomination.status === umi.StatusCode.Pending) return map;
@@ -63,7 +66,14 @@ export default class IntervalChart extends Vue {
             stats.push({ interval: interval, count: count });
         }
         stats.sort((a, b) => a.interval - b.interval);
-        return stats;
+        const data = stats.map((data) => data.count);
+        const dataset: ChartDataset<'bar'> = {
+            data: data,
+            backgroundColor: 'royalblue',
+            hoverBackgroundColor: 'royalblue',
+        };
+        this.labels = stats.map(data => data.interval);
+        this.datasets = [ dataset ];
     }
 }
 </script>

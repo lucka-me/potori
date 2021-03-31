@@ -6,7 +6,9 @@
 
 <script lang="ts">
 import { DateTime } from 'luxon';
-import { Vue, Options } from 'vue-property-decorator';
+import { Vue, Options, Watch } from 'vue-property-decorator';
+
+import { dia } from '@/service/dia';
 
 import ChartBlock, { fillTimeCountMap } from './ChartBlock.vue';
 import ChartView, { ChartDataset, ChartOptions } from './ChartView.vue';
@@ -22,6 +24,8 @@ import locales from './CountByMonth.locales.json';
     }
 })
 export default class CountByMonthChart extends Vue {
+
+    datasets: Array<ChartDataset<'line'>> = [];
 
     options: ChartOptions<'line'> = {
         scales: {
@@ -39,8 +43,21 @@ export default class CountByMonthChart extends Vue {
         }
     };
 
-    get datasets(): Array<ChartDataset<'line'>> {
-        const nominations = this.$store.state.data.nominations;
+    get saveID(): number {
+        return this.$store.state.dia.saveID;
+    }
+
+    created() {
+        this.updateData();
+    }
+
+    @Watch('saveID')
+    onSaved() {
+        this.updateData();
+    }
+
+    private async updateData() {
+        const nominations = await dia.getAll();
         const mapSubmissions = new Map<number, number>();
         const mapResults = new Map<number, number>();
         if (nominations.length > 0) {
@@ -89,7 +106,7 @@ export default class CountByMonthChart extends Vue {
             pointRadius: 0,
             fill: false,
         };
-        return [ datasetSubmissions, datasetResults ];
+        this.datasets = [ datasetSubmissions, datasetResults ];
     }
 }
 </script>
