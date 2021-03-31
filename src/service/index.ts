@@ -12,7 +12,7 @@ import { util } from './utils';
 import { CountCallback } from './types';
 import GoogleKit from './google';
 import Mari from './mari';
-import Nomination, { NominationData } from './nomination';
+import Nomination, { NominationData, NominationJSON } from './nomination';
 
 export enum ServiceStatus {
     idle,
@@ -161,16 +161,15 @@ export namespace service {
         })
     }
 
-    export function importNominationsFile(callback: CountCallback) {
-        util.importFile().then(content => {
-            try {
-                const list = JSON.parse(content) as Array<NominationData>;
-                const count = importNominations(list);
-                callback(count);
-            } catch (error) {
-                callback(0);
-            }
-        });
+    export async function importNominationsFile(callback: CountCallback) {
+        const content = await util.importFile();
+        try {
+            const list = JSON.parse(content) as Array<NominationData>;
+            const count = await importNominations(list);
+            callback(count);
+        } catch (error) {
+            callback(0);
+        }
     }
 
     export function exportNominationsFile() {
@@ -186,7 +185,7 @@ export namespace service {
      * @param json Raw JSON
      * @returns Count of updated nominations or error code
      */
-    export function importWayfarerJSON(json: string): number {
+    export async function importWayfarerJSON(json: string): Promise<number> {
         let parsed;
         try {
             parsed = JSON.parse(json);
@@ -199,11 +198,11 @@ export namespace service {
             return -2;
         }
 
-        const nominations = _store.state.data.nominations;
+        const nominations = await dia.getAll();
         const mapNomination = nominations.reduce((map, nomination) => {
             map.set(nomination.id, nomination);
             return map;
-        }, new Map<string, Nomination>());
+        }, new Map<string, NominationData>());
         
         let count = 0;
         for (const data of parsed.result) {
@@ -327,7 +326,7 @@ export namespace service {
         setStatus(Status.syncing);
         const file = await google.drive.download(filename, content => {
             try {
-                const list = content as Array<NominationData>;
+                const list = content as Array<NominationJSON>;
                 list.forEach(data => Nomination.from(data));
             } catch {
                 return false;
@@ -335,14 +334,15 @@ export namespace service {
             return true;
         });
         if (!file) return 0;
-        return importNominations(file as Array<NominationData>);
+        return await importNominations(file as Array<NominationJSON>);
     }
 
-    function importNominations(list: Array<NominationData>): number {
+    async function importNominations(list: Array<NominationJSON>): Promise<number> {
         let count = 0;
         try {
             const sources = list.map(data => Nomination.from(data));
-            const nominations = _store.state.data.nominations.map((nomination) => nomination);
+            const raws = await dia.getAll();
+            const nominations = raws.map(raw => Nomination.from(raw));
             for (const nomination of sources) {
                 let merged = false;
                 for (const target of nominations) {

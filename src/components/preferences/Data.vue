@@ -50,10 +50,10 @@ export default class DataPreferences extends Vue {
         service.exportNominationsFile();
     }
 
-    importWayfarerJSON() {
+    async importWayfarerJSON() {
         const text = window.prompt(this.$t('importWayfarerPrompt'));
         if (!text) return;
-        const result = service.importWayfarerJSON(text);
+        const result = await service.importWayfarerJSON(text);
         switch (result) {
             case -1:
                 delibird.alert(this.$t('importWayfarerAlertParseError'));
