@@ -1,11 +1,11 @@
 <template>
 <material-top-app-bar :title="title" navi-back>
-    <material-icon-button v-if="nomination && editing" icon="times" :title="$t('cancel')" @click="cancel"/>
-    <material-icon-button v-if="nomination && editing" icon="check" :title="$t('save')" @click="save"/>
-    <material-icon-button v-else-if="nomination" icon="pen" :title="$t('edit')" @click="edit"/>
+    <material-icon-button v-if="available && editing" icon="times" :title="$t('cancel')" @click="cancel"/>
+    <material-icon-button v-if="available && editing" icon="check" :title="$t('save')" @click="save"/>
+    <material-icon-button v-else-if="available" icon="pen" :title="$t('edit')" @click="edit"/>
 </material-top-app-bar>
 <material-top-app-bar-adjust/>
-<main v-if="nomination" class="nomination-details">
+<main v-if="available" class="nomination-details">
     <div v-if="!editing" class="details">
         <actions-block :nomination="nomination"/>
         <div class="divider"/>
@@ -16,10 +16,9 @@
 </template>
 
 <script lang="ts">
-import { Options, Vue } from 'vue-class-component';
+import { Vue, Options } from 'vue-class-component';
 
 import { dia } from '@/service/dia';
-import { service } from '@/service';
 import Nomination from '@/service/nomination';
 
 import MaterialIconButton from '@/components/material/IconButton.vue';
@@ -30,6 +29,7 @@ import InfoBlock from '@/components/details/Info.vue';
 import NominationEditor, { EditData } from "@/components/details/Editor.vue";
 
 import locales from './NominationDetails.locales.json';
+import { toRaw } from '@vue/reactivity';
 
 @Options({
     components: {
@@ -44,10 +44,14 @@ import locales from './NominationDetails.locales.json';
 })
 export default class NominationDetails extends Vue {
 
-    nomination?: Nomination;
+    nomination: Nomination | null = null;
 
     editing: boolean = false;
     editData = new EditData();
+
+    get available(): boolean {
+        return this.nomination !== null;
+    }
 
     get title(): string {
         return this.nomination?.title ?? this.$t('notFound');
@@ -70,18 +74,16 @@ export default class NominationDetails extends Vue {
     save() {
         if (!this.nomination) return;
         this.editData.save(this.nomination);
-        service.update(this.nomination);
+        dia.save(toRaw(this.nomination.data));
         this.editing = false;
     }
 
     private async load() {
         const id = this.$route.query.id;
-        if (id && typeof(id) === 'string') {
-            const raw = await dia.get(id);
-            if (raw) {
-                this.nomination = Nomination.from(raw);
-            }
-        }
+        if (!id || typeof(id) !== 'string') return;
+        const raw = await dia.get(id);
+        if (!raw) return;
+        this.nomination = Nomination.from(raw);
     }
 }
 </script>

@@ -62,10 +62,9 @@ export namespace service {
             errors.push(errorEvent);
         });
 
-        umi.init(i18n);
+        dia.init(_store);
         brainstorming.init();
-
-        load();
+        umi.init(i18n);
 
         google.init(() => {
             google.auth.events.authStatusChanged = (authed) => {
@@ -96,25 +95,26 @@ export namespace service {
         if (preferences.google.sync()) await download(Filename.nominations);
         setProgress(0);
         setStatus(Status.processingMails);
-        const raws = getRaws()
+        const raws = await dia.getAll()
         await mari.start(raws);
         const matchTargets: Array<Nomination> = [];
-        const reduced = raws.reduce((list, nomination) => {
-            if (nomination.id.length < 1) {
-                console.log(`service.arrange: Need match: #${nomination.id}[${nomination.title}]`);
-                matchTargets.push(nomination);
+        const reduced = raws.reduce((list, raw) => {
+            if (raw.id.length < 1) {
+                console.log(`service.arrange: Need match: #${raw.id}[${raw.title}]`);
+                matchTargets.push(Nomination.from(raw));
                 return list;
             }
             // Merge
             let merged = false;
+
             for (const target of list) {
-                if (target.merge(nomination)) {
+                if (target.merge(raw)) {
                     merged = true;
                     break;
                 }
             }
             if (!merged) {
-                list.push(nomination);
+                list.push(Nomination.from(raw));
             }
             return list;
         }, new Array<Nomination>());
@@ -128,14 +128,13 @@ export namespace service {
         if (preferences.google.sync()) {
             await upload();
         }
-        _store.commit('data/setNominations', reduced);
-        save();
+        await dia.saveAll(reduced);
         setStatus(Status.idle);
     }
 
     export async function updateBrainstorming() {
         setStatus(Status.queryingBrainstorming);
-        const count = await brainstorming.update(getRaws(), progress => {
+        const count = await brainstorming.update(await dia.getAll(), progress => {
             setProgress(progress);
         });
         setStatus(Status.idle);
@@ -217,34 +216,8 @@ export namespace service {
             };
             count += 1;
         }
-        save();
+        await dia.saveAll(nominations);
         return count;
-    }
-
-    export function update(nomination: Nomination) {
-        dia.save(toRaw(nomination));
-    }
-
-    export function clearNominations() {
-        dia.clear();
-        _store.commit('data/setNominations', []);
-    }
-
-    export function deleteNomination(id: string) {
-        dia.remove(id);
-        _store.commit('data/deleteNomination', id);
-    }
-
-    export function save() {
-        const raws = getRaws();
-        dia.saveAll(raws);
-    }
-
-    async function load() {
-        await dia.init(_store);
-        const raws = await dia.getAll();
-        const nominations = raws.map(raw => Nomination.from(raw));
-        _store.commit('data/setNominations', nominations);
     }
 
     /**
@@ -356,16 +329,11 @@ export namespace service {
                 if (merged) continue;
                 nominations.push(nomination);
             }
-            _store.commit('data/setNominations', nominations);
-            save();
+            await dia.saveAll(nominations.map(nomination => nomination.data));
         } catch (error) {
             count = 0;
         }
         return count;
-    }
-
-    function getRaws(): Array<Nomination> {
-        return _store.state.data.nominations.map(nomination => toRaw(nomination));
     }
 
     async function getNominationsJSONBlod(): Promise<Blob> {

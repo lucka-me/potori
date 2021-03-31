@@ -45,7 +45,7 @@ import { Vue, Options, Prop } from 'vue-property-decorator';
 
 import { brainstorming } from '@/service/brainstorming';
 import { delibird } from '@/service/delibird';
-import { service } from '@/service';
+import { dia } from '@/service/dia';
 import { umi } from '@/service/umi';
 import Nomination, { LngLat } from '@/service/nomination';
 
@@ -176,8 +176,8 @@ export default class NominationEditor extends Vue {
         }
     }
 
-    deleteNomination() {
-        service.deleteNomination(this.editData.id);
+    async deleteNomination() {
+        await dia.remove(this.editData.id);
         this.$router.back();
     }
 }

@@ -177,7 +177,7 @@ export default class Nomination implements NominationData {
      * @param nomination The nomination to merge from
      * @returns Succeed or not
      */
-    merge(nomination: Nomination): boolean {
+    merge(nomination: NominationData): boolean {
         if (this.id !== nomination.id) return false;
         if (this.status === umi.StatusCode.Pending) {
             this.title = nomination.title;

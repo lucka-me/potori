@@ -77,34 +77,57 @@ export namespace dia {
         });
     }
 
-    export function saveAll(nominations: Array<NominationData>) {
-        const store = getStore('readwrite');
-        if (!store) return;
-        for (const nomination of nominations) {
-            store.put(nomination);
-        }
+    export async function save(nomination: NominationData) {
+        return new Promise<void>(resolve => {
+            const store = getStore('readwrite');
+            if (!store) {
+                resolve();
+                return;
+            }
+            const request = store.put(nomination);
+            request.onsuccess = () => {
+                saved();
+                resolve();
+            }
+            request.onerror = () => resolve;
+        });
+    }
+
+    export async function saveAll(nominations: Array<NominationData>) {
+        await Promise.allSettled(nominations.map(nomination => save(nomination)));
         saved();
     }
 
-    export function save(nomination: NominationData) {
-        const store = getStore('readwrite');
-        if (!store) return;
-        store.put(nomination);
-        saved();
+    export async function remove(id: string) {
+        return new Promise<void>(resolve => {
+            const store = getStore('readwrite');
+            if (!store) {
+                resolve();
+                return;
+            }
+            const request = store.delete(id);
+            request.onsuccess = () => {
+                saved();
+                resolve();
+            };
+            request.onerror = () => resolve();
+        });
     }
 
-    export function remove(id: string) {
-        const store = getStore('readwrite');
-        if (!store) return;
-        store.delete(id);
-        saved();
-    }
-
-    export function clear() {
-        const store = getStore('readwrite');
-        if (!store) return;
-        store.clear();
-        saved();
+    export async function clear() {
+        return new Promise<void>(resolve => {
+            const store = getStore('readwrite');
+            if (!store) {
+                resolve();
+                return;
+            }
+            const request = store.clear();
+            request.onsuccess = () => {
+                saved();
+                resolve();
+            };
+            request.onerror = () => resolve();
+        });
     }
 
     function getStore(mode: IDBTransactionMode): IDBObjectStore | undefined {

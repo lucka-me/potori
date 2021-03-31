@@ -18,6 +18,7 @@
 import { Options, Vue } from 'vue-class-component';
 
 import { delibird } from '@/service/delibird';
+import { dia } from '@/service/dia';
 import { service } from '@/service';
 
 import MaterialButton from '@/components/material/Button.vue';
@@ -67,7 +68,7 @@ export default class DataPreferences extends Vue {
     }
 
     clearNominations() {
-        service.clearNominations();
+        dia.clear();
     }
 }
 </script>

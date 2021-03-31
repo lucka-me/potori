@@ -1,7 +1,7 @@
 import { preferences } from '@/service/preferences';
 import { umi } from '@/service/umi';
 import { MessageCallback, ProgressCallback } from '@/service/types';
-import Nomination from '@/service/nomination';
+import Nomination, { NominationData } from '@/service/nomination';
 
 import { parser } from './parser';
 
@@ -135,7 +135,7 @@ export default class Mari {
      * Start the process
      * @param nominations Existing nominations
      */
-    async start(nominations: Array<Nomination>) {
+    async start(nominations: Array<NominationData>) {
         this.nominations.length = 0;
         this.progress.lists.clear();
         this.progress.messages.clear();
