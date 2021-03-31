@@ -37,13 +37,19 @@ export namespace dia {
                 resolve(0);
                 return;
             }
-            const request = store.getAll();
-            request.onsuccess = () => {
-                let result = request.result as Array<NominationData>;
-                if (predicator) result = result.filter(predicator);
-                resolve(result.length);
+            if (predicator) {
+                const request = store.getAll();
+                request.onsuccess = () => {
+                    let result = request.result as Array<NominationData>;
+                    if (predicator) result = result.filter(predicator);
+                    resolve(result.length);
+                }
+                request.onerror = () => resolve(0);
+            } else {
+                const request = store.count();
+                request.onsuccess = () => resolve(request.result);
+                request.onerror = () => resolve(0);
             }
-            request.onerror = () => resolve(0);
         });
     }
 
