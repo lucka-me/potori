@@ -72,17 +72,14 @@ export default class Reasons extends Vue {
     }
 
     private async updateData() {
-        const list: Array<ReasonData> = [];
-        const queries: Array<Promise<void>> = [];
+        const stats = new Map<umi.ScannerCode, ReasonData>();
+        const nominations = await dia.getAll(umi.status.get(umi.StatusCode.Rejected)!.predicator);
         for (const reason of umi.reason.values()) {
-            const query = dia.count(reason.predicator).then(count => {
-                if (count < 1) return;
-                list.push({ reason: reason, count: count });
-            });
-            queries.push(query);
+            const count = nominations.filter(reason.predicator).length;
+            if (count < 1) continue;
+            stats.set(reason.code, { reason: reason, count: count });
         }
-        await Promise.allSettled(queries);
-        this.datasetAll = list.sort((a, b) => a.reason.code > b.reason.code ? 1 : -1);
+        this.datasetAll = Array.from(stats.values());
     }
 }
 </script>

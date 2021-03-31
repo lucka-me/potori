@@ -53,17 +53,20 @@ export default class Scanners extends Vue {
     }
 
     private async updateData() {
-        const list: Array<ScannerData> = [];
-        const queries: Array<Promise<void>> = [];
+        const stats = new Map<umi.ScannerCode, ScannerData>();
         for (const scanner of umi.scanner.values()) {
-            const query = dia.count(scanner.predicator).then(count => {
-                if (count < 1) return;
-                list.push({ scanner: scanner, count: count });
-            });
-            queries.push(query);
+            if (scanner.code === umi.ScannerCode.Unknown) continue;
+            stats.set(scanner.code, { scanner: scanner, count: 0 });
         }
-        await Promise.allSettled(queries);
-        this.dataset = list.sort((a, b) => a.scanner.code > b.scanner.code ? 1 : -1);
+        const nominations = await dia.getAll();
+        for (const nomination of nominations) {
+            if (nomination.scanner === umi.ScannerCode.Unknown) continue;
+            const data = stats.get(nomination.scanner)!;
+            data.count++;
+        }
+        this.dataset = Array.from(stats.values())
+            .filter(data => data.count > 0)
+            .sort((a, b) => a.scanner.code > b.scanner.code ? 1 : -1);
     }
 }
 </script>

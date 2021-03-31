@@ -59,17 +59,17 @@ export default class Highlight extends Vue {
     }
 
     private async updateData() {
-        dia.count().then(count => this.countAll = count);
-        const list: Array<StatusData> = [];
-        const queries: Array<Promise<void>> = [];
+        const stats = new Map<umi.StatusCode, StatusData>();
         for (const status of umi.status.values()) {
-            const data: StatusData = { status: status, count: 0 };
-            list.push(data);
-            const query = dia.count(status.predicator).then(count => { data.count = count; });
-            queries.push(query);
+            stats.set(status.code, { status: status, count: 0 });
         }
-        await Promise.allSettled(queries);
-        this.dataset = list;
+        const nominations = await dia.getAll();
+        for (const nomination of nominations) {
+            const data = stats.get(nomination.status)!;
+            data.count++;
+        }
+        this.countAll = nominations.length;
+        this.dataset = Array.from(stats.values());
     }
 }
 </script>
