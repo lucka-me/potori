@@ -8,17 +8,39 @@
         "duplicated": "Duplicated",
         "close": "Too Close",
     
-        "criteriaCriteria": "Criteria",
+        "criteriaBodypart": "Body Part",
+        "criteriaCriteria": "Other Criteria",
+        "criteriaAnimals": "Animal",
         "criteriaNatural": "Natural",
         "criteriaTemporary": "Temporary",
+        "criteriaPeople": "Person",
         "criteriaGeneric": "Generic Store",
     
+        "locationInappropriate": "Location Inappropriate",
+        "locationSensitive": "Sensitive",
         "locationMismatched": "Mismatched",
+        "locationEmergency": "Emergency",
         "locationPedestrian": "Pedestrian",
         "locationPrivate": "Private",
+        "locationSchool": "School",
         
+        "photoFace": "Face",
         "photoPlate": "License Plate",
-        "photoQuality": "Photo Quality"
+        "photoQuality": "Photo Quality",
+        "photoDir": "Orientation",
+        "photoTag": "Submitter Identifiable",
+        "photo3p": "Third Party Photo",
+        "photoWatermark": "Watermark",
+
+        "textEmoji": "Emoji",
+        "textBad": "Text Not Relevant",
+        "textMarkup": "URL or Markup",
+
+        "abuseFake": "Fake",
+        "abuseAbuse": "Abuse",
+        "abuseExplicit": "Explicit",
+        "abuseOffensive": "Offensive",
+        "abusePersonal": "Personal Info"
     },
     "zh": {
         "pending": "审核中",
@@ -29,16 +51,38 @@
         "duplicated": "重复",
         "close": "过近",
     
-        "criteriaCriteria": "不合标准",
+        "criteriaBodypart": "身体部位",
+        "criteriaCriteria": "其它",
+        "criteriaAnimals": "动物",
         "criteriaNatural": "天然地貌",
         "criteriaTemporary": "临时",
+        "criteriaPeople": "人",
         "criteriaGeneric": "一般商家",
     
+        "locationInappropriate": "位置不当",
+        "locationSensitive": "敏感地点",
         "locationMismatched": "地点不符",
+        "locationEmergency": "紧急服务",
         "locationPedestrian": "行人通道",
         "locationPrivate": "私人",
+        "locationSchool": "学校",
         
+        "photoFace": "脸部",
         "photoPlate": "车牌",
-        "photoQuality": "照片质量"
+        "photoQuality": "照片质量",
+        "photoDir": "方向",
+        "photoTag": "可辨识提交者",
+        "photo3p": "第三方照片",
+        "photoWatermark": "水印",
+
+        "textEmoji": "表情符号",
+        "textBad": "文字不相关",
+        "textMarkup": "网址或标记",
+
+        "abuseFake": "虚假",
+        "abuseAbuse": "滥用",
+        "abuseExplicit": "不雅",
+        "abuseOffensive": "令人反感",
+        "abusePersonal": "个人信息"
     }
 }
