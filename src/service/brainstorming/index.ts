@@ -96,15 +96,9 @@ export namespace brainstorming {
         if (beforeCreate(nomination)) {
             throw new Error(FailReason.EARLY);
         }
-        let record = await queryDatabase(nomination.id).catch(error => {
-            throw error;
-        });
-        if (record) {
-            return record;
-        }
-        record = await queryFirebase(nomination.id).catch(error => {
-            throw error;
-        });
+        let record = await queryDatabase(nomination.id).catch(error => { throw error; });
+        if (record) return record;
+        record = await queryFirebase(nomination.id).catch(error => { throw error; });
         if (!record) throw new Error(FailReason.NOT_EXISTS);
         return record;
     }
@@ -118,7 +112,7 @@ export namespace brainstorming {
         let succeed = 0;
         let processed = 0;
         const total = nominations.length;
-        const queries: Array<Promise<Record | undefined>> = [];
+        const queries: Array<Promise<void>> = [];
         for (const nomination of nominations) {
             if (beforeCreate(nomination)) {
                 processed++;
@@ -126,16 +120,11 @@ export namespace brainstorming {
                 continue;
             }
             const query = queryFirebase(nomination.id)
-                .then(record => {
-                    processed++;
-                    if (record) succeed++;
-                    callback(processed / total);
-                    return record;
-                })
-                .catch(_ => {
+                .then(record => { if (record) succeed++; })
+                .catch()
+                .finally(() => {
                     processed++;
                     callback(processed / total);
-                    return undefined;
                 })
             queries.push(query);
         }
@@ -199,17 +188,10 @@ export namespace brainstorming {
      * Query from the local IndexedDB database
      * @param id Brainstorming ID
      */
-    function queryDatabase(id: string) {
-        return new Promise<Record | undefined>((resolve, reject) => {
-            const store = getStore('readonly');
-            if (!store) {
-                reject(FailReason.INDEXEDDB_ERROR);
-                return;
-            }
-            const request = store.get(id);
-            request.onsuccess = () => resolve(request.result);
-            request.onerror = () => resolve(undefined);
-        });
+    async function queryDatabase(id: string): Promise<Record | undefined> {
+        const store = getStore('readonly');
+        if (!store) throw new Error(FailReason.INDEXEDDB_ERROR);
+        return await settled(store.get(id));
     }
 
     /**
@@ -217,50 +199,47 @@ export namespace brainstorming {
      * @param id Brainstorming ID
      */
     async function queryFirebase(id: string): Promise<Record | undefined> {
-        const [ firebase, _ ] = await Promise.all([
-            import(/* webpackChunkName: 'firebase' */ '@firebase/app'),
-            import(/* webpackChunkName: 'firebase' */ '@firebase/database'),
-        ]).catch(_ => {
-            throw new Error(FailReason.FIREBASE_ERROR);
-        });
         if (!reference) {
-            const app = firebase.default.initializeApp({ databaseURL: 'https://oprbrainstorming.firebaseio.com' });
-            if (!reference) reference = app.database!().ref('c/reviews/');
+            const [ firebase, _ ] = await Promise.all([
+                import(/* webpackChunkName: 'firebase' */ '@firebase/app'),
+                import(/* webpackChunkName: 'firebase' */ '@firebase/database'),
+            ]).catch(_ => {
+                throw new Error(FailReason.FIREBASE_ERROR);
+            });
+            if (!reference) {
+                const app = firebase.default.initializeApp({ databaseURL: 'https://oprbrainstorming.firebaseio.com' });
+                if (!reference) reference = app.database!().ref('c/reviews/');
+            }
         }
         const data = await reference.child(id).once('value').catch(_ => {
             throw new Error(FailReason.FIREBASE_ERROR);
         });
         const record: Record | undefined = data.val();
-        if (record) save(id, record);
+        if (record) await save(id, record);
         return record;
     }
 
-    function getAll() {
-        return new Promise<Array<Record>>((resolve) => {
-            const store = getStore('readonly');
-            if (!store) {
-                resolve([]);
-                return;
-            }
-            const request = store.getAll();
-            request.onsuccess = () => {
-                resolve(request.result);
-            }
-            request.onerror = () => {
-                console.log(request.error);
-                resolve([]);
-            }
-        });
+    async function getAll(): Promise<Array<Record>> {
+        const store = getStore('readonly');
+        if (!store) return [];
+        return await settled(store.getAll()) ?? [];
     }
 
-    function save(id: string, record: Record) {
+    async function save(id: string, record: Record) {
         const store = getStore('readwrite');
         if (!store) return;
-        store.put(record, id);
+        await settled(store.put(record, id));
     }
 
     function getStore(mode: IDBTransactionMode): IDBObjectStore | undefined {
         if (!database) return undefined;
         return database.transaction([ storeName ], mode).objectStore(storeName);
+    }
+
+    function settled<T>(request: IDBRequest<T>) {
+        return new Promise<T | undefined>((resolve) => {
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = () => resolve(undefined);
+        });
     }
 }
