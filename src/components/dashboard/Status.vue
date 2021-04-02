@@ -1,9 +1,6 @@
 <template>
 <div class="status">
-    <div v-if="showProgress" class="progress">
-        <div>{{ $t(progressText) }}</div>
-        <material-linear-progress :progress="$store.state.progress.progress" :determinate="progressDeterminate"/>
-    </div>
+    <linear-progress v-if="showProgress" :text="$t(progressText)" :determinate="progressDeterminate"/>
     <div v-if="showActions" class="actions">
         <material-icon-button
             v-if="showLinkButton" icon="sign-in-alt" :title="$t('link')" @click="link"/>
@@ -24,14 +21,14 @@ import { dia } from '@/service/dia';
 import { service } from '@/service';
 
 import MaterialIconButton from '@/components/material/IconButton.vue';
-import MaterialLinearProgress from '@/components/material/LinearProgress.vue';
+import LinearProgress from '@/components/basic/LinearProgress.vue';
 
 import locales from './Status.locales.json';
 
 @Options({
     components: {
         MaterialIconButton,
-        MaterialLinearProgress
+        LinearProgress
     },
     i18n: {
         messages: locales
@@ -46,24 +43,27 @@ export default class Status extends Vue {
     }
 
     get showProgress(): boolean {
-        if (this.$store.state.service.status === service.Status.processingMails) return true;
-        if (this.$store.state.service.status === service.Status.queryingBrainstorming) return true;
-        if (this.$store.state.service.status === service.Status.syncing) return true;
+        const status = this.$store.state.service.status;
+        if (status === service.Status.processingMails) return true;
+        if (status === service.Status.queryingBrainstorming) return true;
+        if (status === service.Status.syncing) return true;
         if (this.empty && !this.gapiLoaded) return true;
         return false;
     }
 
     get progressText(): string {
-        if (this.$store.state.service.status === service.Status.processingMails) return 'processingMails';
-        if (this.$store.state.service.status === service.Status.queryingBrainstorming) return 'queryingBrainstorming';
-        if (this.$store.state.service.status === service.Status.syncing) return 'syncing';
+        const status = this.$store.state.service.status;
+        if (status === service.Status.processingMails) return 'processingMails';
+        if (status === service.Status.queryingBrainstorming) return 'queryingBrainstorming';
+        if (status === service.Status.syncing) return 'syncing';
         if (this.empty && !this.gapiLoaded) return 'loadingGAPI';
         return '';
     }
 
     get progressDeterminate(): boolean {
-        if (this.$store.state.service.status === service.Status.processingMails) return true;
-        if (this.$store.state.service.status === service.Status.queryingBrainstorming) return true;
+        const status = this.$store.state.service.status;
+        if (status === service.Status.processingMails) return this.$store.state.progress.max > 0;
+        if (status === service.Status.queryingBrainstorming) return true;
         return false
     }
 
@@ -132,12 +132,6 @@ export default class Status extends Vue {
 
     > .progress + .actions {
         margin-block-start: 0.4rem;
-    }
-
-    > .progress {
-        > .mdc-linear-progress {
-            margin-block-start: 0.4em;
-        }
     }
 }
 </style>

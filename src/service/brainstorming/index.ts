@@ -116,7 +116,7 @@ export namespace brainstorming {
         for (const nomination of nominations) {
             if (beforeCreate(nomination)) {
                 processed++;
-                callback(processed / total);
+                callback(processed, total);
                 continue;
             }
             const query = queryFirebase(nomination.id)
@@ -124,7 +124,7 @@ export namespace brainstorming {
                 .catch()
                 .finally(() => {
                     processed++;
-                    callback(processed / total);
+                    callback(processed, total);
                 })
             queries.push(query);
         }
@@ -170,7 +170,7 @@ export namespace brainstorming {
     /**
      * Clear local database
      */
-     export function clear() {
+    export function clear() {
         const store = getStore('readwrite');
         if (!store) return;
         store.clear();
@@ -180,7 +180,7 @@ export namespace brainstorming {
      * Check if the nomination got result before creation of firebase, should skip query if true
      * @param nomination The nomination
      */
-     export function beforeCreate(nomination: NominationData): boolean {
+    export function beforeCreate(nomination: NominationData): boolean {
         return nomination.status !== umi.StatusCode.Pending && nomination.resultTime < 1518796800000;
     }
 

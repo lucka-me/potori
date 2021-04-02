@@ -31,13 +31,6 @@ class ProgressItem {
     get left() {
         return this.finished < this.total;
     }
-
-    /**
-     * The percentage of progress
-     */
-    get percent() {
-        return this.total === 0 ? 0.0 : (this.finished / this.total);
-    }
 }
 
 /**
@@ -63,6 +56,7 @@ class Progress {
      */
     addList() {
         this.lists.total += 1;
+        this.onProgress(0, this.lists.total);
     }
 
     /**
@@ -72,8 +66,7 @@ class Progress {
     finishList(messages: number) {
         this.lists.finished += 1;
         this.messages.total += messages;
-        this.onProgress(this.percent);
-        console.log(`Mari progress: [list][${this.lists.finished}/${this.lists.total}]`);
+        this.onProgress(this.lists.finished, this.lists.total);
     }
 
     /**
@@ -81,30 +74,9 @@ class Progress {
      */
     finishMessage() {
         this.messages.finished += 1;
-        console.log(`Mari progress: [message][${this.messages.finished}/${this.messages.total}]`);
         if (!this.lists.left) {
-            this.onProgress(this.percent);
+            this.onProgress(this.messages.finished, this.messages.total);
         }
-    }
-
-    /**
-     * Detect if there is list or message left
-     */
-    private get left() {
-        return this.lists.left || this.messages.left;
-    }
-
-    /**
-     * The percentage of progress
-     */
-    private get percent() {
-        if (this.lists.total === 0 || this.messages.total === 0) {
-            return 0.0
-        }
-        if (this.lists.left) {
-            return this.lists.percent * 0.2;
-        }
-        return 0.2 + this.messages.percent * 0.8;
     }
 }
 
@@ -128,7 +100,7 @@ export default class Mari {
      * Initiate Mari
      */
     init() {
-        this.progress.onProgress = (percent) => this.events.progress(percent);
+        this.progress.onProgress = (progress, max) => this.events.progress(progress, max);
     }
 
     /**

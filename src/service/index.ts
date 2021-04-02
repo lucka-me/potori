@@ -76,8 +76,8 @@ export namespace service {
             mari.events.alert = (message) => {
                 delibird.alert(message);
             }
-            mari.events.progress = (progress) => {
-                setProgress(progress);
+            mari.events.progress = (progress, max) => {
+                setProgress(progress, max);
             };
             mari.init();
         });
@@ -93,7 +93,7 @@ export namespace service {
 
     export async function refresh() {
         if (preferences.google.sync()) await download(Filename.nominations);
-        setProgress(0);
+        setProgress(0, 0);
         setStatus(Status.processingMails);
         const raws = await dia.getAll()
         await mari.start(raws);
@@ -133,9 +133,10 @@ export namespace service {
     }
 
     export async function updateBrainstorming() {
+        setProgress(0, 0);
         setStatus(Status.queryingBrainstorming);
-        const count = await brainstorming.update(await dia.getAll(), progress => {
-            setProgress(progress);
+        const count = await brainstorming.update(await dia.getAll(), (progress, max) => {
+            setProgress(progress, max);
         });
         setStatus(Status.idle);
         return count;
@@ -273,18 +274,18 @@ export namespace service {
         for (const nomination of list) {
             count++;
             if (nomination.lngLat) {
-                setProgress(count / list.length);
+                setProgress(count, list.length);
                 continue;
             }
             const record = await brainstorming.query(nomination).catch(_ => undefined);
             if (!record) {
-                setProgress(count / list.length);
+                setProgress(count, list.length);
                 continue;
             }
             nomination.lngLat = {
                 lng: parseFloat(record.lng), lat: parseFloat(record.lat)
             };
-            setProgress(count / list.length);
+            setProgress(count, list.length);
         }
     }
 
@@ -292,7 +293,8 @@ export namespace service {
         _store.commit('service/setStatus', status);
     }
 
-    function setProgress(progress: number) {
+    function setProgress(progress: number, max: number) {
+        _store.commit('progress/setMax', max);
         _store.commit('progress/setProgress', progress);
     }
 

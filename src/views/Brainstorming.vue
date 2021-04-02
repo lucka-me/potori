@@ -4,10 +4,7 @@
 </material-top-app-bar>
 <material-top-app-bar-adjust/>
 <main v-if="!empty" class="brainstorming">
-    <div v-if="updating" class="progress">
-        <div>{{ $t('updating') }}</div>
-        <material-linear-progress :progress="$store.state.progress.progress" determinate/>
-    </div>
+    <linear-progress v-if="updating" :text="$t('updating')" determinate/>
     <div v-if="idle" class="grid grid--1-1-1">
         <coverage-chart/>
         <rates-chart/>
@@ -33,9 +30,9 @@ import { dia } from '@/service/dia';
 import { service } from '@/service';
 
 import MaterialIconButton from '@/components/material/IconButton.vue';
-import MaterialLinearProgress from '@/components/material/LinearProgress.vue';
 import MaterialTopAppBar from '@/components/material/TopAppBar.vue';
 import MaterialTopAppBarAdjust from '@/components/material/TopAppBarAdjust.vue';
+import LinearProgress from '@/components/basic/LinearProgress.vue';
 import CoverageChart from '@/components/brainstorming/Coverage.vue';
 import RatesChart from '@/components/brainstorming/Rates.vue';
 import ReviewsByMonthChart from '@/components/brainstorming/ReviewsByMonth.vue';
@@ -47,7 +44,7 @@ import locales from './Brainstorming.locales.json';
     components: {
         MaterialTopAppBar, MaterialTopAppBarAdjust,
         MaterialIconButton,
-        MaterialLinearProgress,
+        LinearProgress,
         CoverageChart, RatesChart, SynchChart,
         ReviewsByMonthChart
     },
@@ -73,6 +70,10 @@ export default class Brainstorming extends Vue {
 
     get idle(): boolean {
         return this.$store.state.service.status === service.Status.idle;
+    }
+
+    get progress(): number {
+        return this.$store.state.progress.progress / this.$store.state.progress.max;
     }
 
     created() {
@@ -109,12 +110,6 @@ export default class Brainstorming extends Vue {
 <style lang="scss">
 .brainstorming {
     padding: 1rem;
-
-    > .progress {
-        > .mdc-linear-progress {
-            margin-block-start: 0.4em;
-        }
-    }
 
     > div:not(:first-child) {
         margin-block-start: 0.6rem;
