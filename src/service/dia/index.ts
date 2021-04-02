@@ -30,73 +30,35 @@ export namespace dia {
         });
     }
 
-    export function count(predicator?: Predicator) {
-        return new Promise<number>((resolve, _) => {
-            const store = getStore('readonly');
-            if (!store) {
-                resolve(0);
-                return;
-            }
-            if (predicator) {
-                const request = store.getAll();
-                request.onsuccess = () => {
-                    let result = request.result as Array<NominationData>;
-                    if (predicator) result = result.filter(predicator);
-                    resolve(result.length);
-                }
-                request.onerror = () => resolve(0);
-            } else {
-                const request = store.count();
-                request.onsuccess = () => resolve(request.result);
-                request.onerror = () => resolve(0);
-            }
-        });
+    export async function count(predicator?: Predicator): Promise<number> {
+        const store = getStore('readonly');
+        if (!store) return 0;
+        if (!predicator) return await settled(store.count()) ?? 0;
+        const list = await settled(store.getAll());
+        if (!list) return 0;
+        return list.filter(predicator).length;
     }
 
-    export function get(id: string) {
-        return new Promise<NominationData | undefined>((resolve, _) => {
-            const store = getStore('readonly');
-            if (!store) {
-                resolve(undefined);
-                return;
-            }
-            const request = store.get(id);
-            request.onsuccess = () => resolve(request.result);
-            request.onerror = () => resolve(undefined);
-        });
+    export async function get(id: string): Promise<NominationData | undefined> {
+        const store = getStore('readonly');
+        if (!store) return;
+        return await settled(store.get(id));
     }
 
-    export function getAll(predicator?: Predicator) {
-        return new Promise<Array<NominationData>>((resolve, _) => {
-            const store = getStore('readonly');
-            if (!store) {
-                resolve([]);
-                return;
-            }
-            const request = store.getAll();
-            request.onsuccess = () => {
-                let result = request.result as Array<NominationData>;
-                if (predicator) result = result.filter(predicator);
-                resolve(result);
-            }
-            request.onerror = () => resolve([]);
-        });
+    export async function getAll(predicator?: Predicator): Promise<Array<NominationData>> {
+        const store = getStore('readonly');
+        if (!store) return [];
+        let list = await settled(store.getAll());
+        if (!list) return [];
+        if (predicator) list = list.filter(predicator);
+        return list;
     }
 
     export async function save(nomination: NominationData) {
-        return new Promise<void>(resolve => {
-            const store = getStore('readwrite');
-            if (!store) {
-                resolve();
-                return;
-            }
-            const request = store.put(nomination);
-            request.onsuccess = () => {
-                saved();
-                resolve();
-            }
-            request.onerror = () => resolve;
-        });
+        const store = getStore('readwrite');
+        if (!store) return;
+        await settled(store.put(nomination));
+        saved();
     }
 
     export async function saveAll(nominations: Array<NominationData>) {
@@ -105,40 +67,29 @@ export namespace dia {
     }
 
     export async function remove(id: string) {
-        return new Promise<void>(resolve => {
-            const store = getStore('readwrite');
-            if (!store) {
-                resolve();
-                return;
-            }
-            const request = store.delete(id);
-            request.onsuccess = () => {
-                saved();
-                resolve();
-            };
-            request.onerror = () => resolve();
-        });
+        const store = getStore('readwrite');
+        if (!store) return;
+        await settled(store.delete(id));
+        saved();
     }
 
     export async function clear() {
-        return new Promise<void>(resolve => {
-            const store = getStore('readwrite');
-            if (!store) {
-                resolve();
-                return;
-            }
-            const request = store.clear();
-            request.onsuccess = () => {
-                saved();
-                resolve();
-            };
-            request.onerror = () => resolve();
-        });
+        const store = getStore('readwrite');
+        if (!store) return;
+        await settled(store.clear());
+        saved();
     }
 
     function getStore(mode: IDBTransactionMode): IDBObjectStore | undefined {
-        if (!database) return undefined;
+        if (!database) return;
         return database.transaction([ storeName ], mode).objectStore(storeName);
+    }
+
+    function settled<T>(request: IDBRequest<T>) {
+        return new Promise<T | undefined>((resolve) => {
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = () => resolve(undefined);
+        });
     }
 
     function saved() {
