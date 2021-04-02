@@ -48,8 +48,7 @@ export namespace dia {
     export async function getAll(predicator?: Predicator): Promise<Array<NominationData>> {
         const store = getStore('readonly');
         if (!store) return [];
-        let list = await settled(store.getAll());
-        if (!list) return [];
+        let list = await settled(store.getAll()) ?? [];
         if (predicator) list = list.filter(predicator);
         return list;
     }
@@ -57,8 +56,8 @@ export namespace dia {
     export async function save(nomination: NominationData) {
         const store = getStore('readwrite');
         if (!store) return;
-        await settled(store.put(nomination));
-        saved();
+        const result = await settled(store.put(nomination));
+        if (typeof result !== 'undefined') saved();
     }
 
     export async function saveAll(nominations: Array<NominationData>) {
