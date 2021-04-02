@@ -16,15 +16,15 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/assets/title.png"
   },
   {
-    "revision": "eee9e84116d08a7b467c",
+    "revision": "a8c287ba7c9d3b6cf451",
     "url": "/next/css/app.797a826b.css"
   },
   {
-    "revision": "cf54d0dc65827fc2a5e6",
-    "url": "/next/css/brainstorming.92917073.css"
+    "revision": "ad7d8bbd2ad76aed92fb",
+    "url": "/next/css/brainstorming.2454f1eb.css"
   },
   {
-    "revision": "f7475b7cd3ba4a819f4c",
+    "revision": "dd487cf0e4cca5372ac4",
     "url": "/next/css/brainstorming~charts.5109a264.css"
   },
   {
@@ -32,16 +32,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/brainstorming~charts~dashboard~details~list~map~match~preferences.456360f3.css"
   },
   {
-    "revision": "e844f51338d6153958f9",
-    "url": "/next/css/brainstorming~dashboard.088a28d9.css"
+    "revision": "fb173c9be46c2aab6144",
+    "url": "/next/css/brainstorming~dashboard.abfe8bd8.css"
   },
   {
-    "revision": "93907ffa6701fb0059ad",
+    "revision": "9b9aeb25d098cbfaa5eb",
     "url": "/next/css/charts.a8695c17.css"
   },
   {
-    "revision": "8c1e9901d10fa5e0b6b9",
-    "url": "/next/css/dashboard.030c0685.css"
+    "revision": "f497d9f47396fce0b0ed",
+    "url": "/next/css/dashboard.c8a23613.css"
   },
   {
     "revision": "b3ec70df7c30548a7945",
@@ -64,7 +64,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/match.4e5ee524.css"
   },
   {
-    "revision": "46346f9cd845e125e930",
+    "revision": "3aa62031889db6f5e4eb",
     "url": "/next/css/preferences.a2815486.css"
   },
   {
@@ -88,40 +88,40 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/img/fa-solid-900.376c1f97.svg"
   },
   {
-    "revision": "2a53843da9664c8a66a48c63126ee023",
+    "revision": "f4050fa00e8632b1344d8824cee13fef",
     "url": "/next/index.html"
   },
   {
-    "revision": "eee9e84116d08a7b467c",
-    "url": "/next/js/app.78448bd8.js"
+    "revision": "a8c287ba7c9d3b6cf451",
+    "url": "/next/js/app.878b7891.js"
   },
   {
-    "revision": "cf54d0dc65827fc2a5e6",
-    "url": "/next/js/brainstorming.11469c15.js"
+    "revision": "ad7d8bbd2ad76aed92fb",
+    "url": "/next/js/brainstorming.08ec32dc.js"
   },
   {
-    "revision": "f7475b7cd3ba4a819f4c",
-    "url": "/next/js/brainstorming~charts.26766597.js"
+    "revision": "dd487cf0e4cca5372ac4",
+    "url": "/next/js/brainstorming~charts.3321dd55.js"
   },
   {
     "revision": "4d03242ff56f0778c505",
     "url": "/next/js/brainstorming~charts~dashboard~details~list~map~match~preferences.8cbc9ed7.js"
   },
   {
-    "revision": "e844f51338d6153958f9",
-    "url": "/next/js/brainstorming~dashboard.f3f2bb86.js"
+    "revision": "fb173c9be46c2aab6144",
+    "url": "/next/js/brainstorming~dashboard.dc8ca4ab.js"
   },
   {
-    "revision": "93907ffa6701fb0059ad",
-    "url": "/next/js/charts.e4ff4bb7.js"
+    "revision": "9b9aeb25d098cbfaa5eb",
+    "url": "/next/js/charts.498517d7.js"
   },
   {
     "revision": "5a8ef76bb18063caa27a",
     "url": "/next/js/chunk-vendors.b5e45e2f.js"
   },
   {
-    "revision": "8c1e9901d10fa5e0b6b9",
-    "url": "/next/js/dashboard.9b6fdd7c.js"
+    "revision": "f497d9f47396fce0b0ed",
+    "url": "/next/js/dashboard.19c87d27.js"
   },
   {
     "revision": "b3ec70df7c30548a7945",
@@ -152,8 +152,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/match.8f408d69.js"
   },
   {
-    "revision": "46346f9cd845e125e930",
-    "url": "/next/js/preferences.8a008797.js"
+    "revision": "3aa62031889db6f5e4eb",
+    "url": "/next/js/preferences.eeb27a61.js"
   },
   {
     "revision": "0acea94284e5075dac837ad119ada8b5",
