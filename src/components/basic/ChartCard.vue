@@ -9,7 +9,7 @@
 import { DateTime } from 'luxon';
 import { Vue, Prop } from 'vue-property-decorator';
 
-export default class ChartBlock extends Vue {
+export default class ChartCard extends Vue {
     @Prop(String) readonly title!: string;
 }
 

@@ -1,7 +1,7 @@
 <template>
-<chart-block :title="title">
+<chart-card :title="title">
     <chart-view chart-type="doughnut" :chart-datasets="datasets" :chart-labels="labels" :chart-options="options"/>
-</chart-block>
+</chart-card>
 </template>
 
 <script lang="ts">
@@ -11,14 +11,14 @@ import { brainstorming } from '@/service/brainstorming';
 import { dia } from '@/service/dia';
 import { umi } from '@/service/umi';
 
-import ChartBlock from '@/components/charts/ChartBlock.vue';
-import ChartView, { ChartDataset, ChartOptions } from '@/components/charts/ChartView.vue';
+import ChartCard from '@/components/basic/ChartCard.vue';
+import ChartView, { ChartDataset, ChartOptions } from '@/components/basic/ChartView.vue';
 
 import locales from './Synch.locales.json';
 
 @Options({
     components: {
-        ChartBlock, ChartView
+        ChartCard, ChartView
     },
     i18n: {
         messages: locales

@@ -1,7 +1,7 @@
 <template>
-<chart-block :title="$t('title')">
+<chart-card :title="$t('title')">
     <chart-view chart-type="bar" :chart-datasets="datasets" :chart-labels="labels" :chart-options="options"/>
-</chart-block>
+</chart-card>
 </template>
 
 <script lang="ts">
@@ -10,14 +10,14 @@ import { Vue, Options, Watch } from 'vue-property-decorator';
 import { dia } from '@/service/dia';
 import { umi } from '@/service/umi';
 
-import ChartBlock from './ChartBlock.vue';
-import ChartView, { ChartDataset, ChartOptions } from './ChartView.vue';
+import ChartCard from '../basic/ChartCard.vue';
+import ChartView, { ChartDataset, ChartOptions } from '../basic/ChartView.vue';
 
 import locales from './Interval.locales.json';
 
 @Options({
     components: {
-        ChartBlock, ChartView
+        ChartCard, ChartView
     },
     i18n: {
         messages: locales

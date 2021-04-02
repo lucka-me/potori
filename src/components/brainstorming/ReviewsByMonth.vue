@@ -1,7 +1,7 @@
 <template>
-<chart-block :title="$t('title')">
+<chart-card :title="$t('title')">
     <chart-view chart-type="line" :chart-datasets="datasets" :chart-options="options"/>
-</chart-block>
+</chart-card>
 </template>
 
 <script lang="ts">
@@ -11,14 +11,14 @@ import { Vue, Options } from 'vue-property-decorator';
 import { brainstorming } from '@/service/brainstorming';
 import { dia } from '@/service/dia';
 
-import ChartBlock, { fillTimeCountMap } from '@/components/charts/ChartBlock.vue';
-import ChartView, { ChartDataset, ChartOptions } from '@/components/charts/ChartView.vue';
+import ChartCard, { fillTimeCountMap } from '@/components/basic/ChartCard.vue';
+import ChartView, { ChartDataset, ChartOptions } from '@/components/basic/ChartView.vue';
 
 import locales from './ReviewsByMonth.locales.json';
 
 @Options({
     components: {
-        ChartBlock, ChartView
+        ChartCard, ChartView
     },
     i18n: {
         messages: locales
