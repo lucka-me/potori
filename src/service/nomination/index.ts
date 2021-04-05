@@ -131,9 +131,9 @@ export default class Nomination implements NominationData {
             scanner: this.scanner,
             status: this.status,
             reasons: this.reasons,
-            confirmedTime: this.confirmedTime / 1000,
+            confirmedTime: this.confirmedTime,
             confirmationMailId: this.confirmationMailId,
-            resultTime: this.resultTime / 1000,
+            resultTime: this.resultTime,
             resultMailId: this.resultMailId
         };
         if (this.lngLat) {
