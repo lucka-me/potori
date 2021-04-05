@@ -27,7 +27,7 @@
     "mapbox-gl": "^2.2.0",
     "material-components-web": "^10.0.0",
     "register-service-worker": "^1.7.2",
-    "vue": "^3.0.7",
+    "vue": "^3.0.11",
     "vue-class-component": "^8.0.0-rc.1",
     "vue-i18n": "^9.0.0",
     "vue-property-decorator": "^10.0.0-rc.3",
