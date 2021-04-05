@@ -58,9 +58,10 @@ export namespace service {
     export function init(store: Store<State>, i18n: VueI18n<unknown, unknown, unknown>) {
         _store = store;
 
-        window.addEventListener('error', (errorEvent) => {
-            errors.push(errorEvent);
-        });
+        window.addEventListener('error', errorEvent => errors.push(errorEvent));
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js'));
+        }
 
         dia.init(_store);
         brainstorming.init();
@@ -226,7 +227,7 @@ export namespace service {
      * @param targets Nominations without image
      * @param list Normal nominations
      */
-     async function match(targets: Array<Nomination>, list: Array<Nomination>) {
+    async function match(targets: Array<Nomination>, list: Array<Nomination>) {
         const pendings = list.filter(umi.status.get(umi.StatusCode.Pending)!.predicator);
         const packs: Array<MatchPack> = [];
         for (const target of targets) {
