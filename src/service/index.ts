@@ -272,22 +272,25 @@ export namespace service {
     async function queryBrainstorming(list: Array<Nomination>) {
         setStatus(Status.queryingBrainstorming);
         let count = 0;
+        const queries: Array<Promise<void>> = [];
         for (const nomination of list) {
-            count++;
             if (nomination.lngLat) {
+                count++;
                 setProgress(count, list.length);
                 continue;
             }
-            const record = await brainstorming.query(nomination).catch(_ => undefined);
-            if (!record) {
-                setProgress(count, list.length);
-                continue;
-            }
-            nomination.lngLat = {
-                lng: parseFloat(record.lng), lat: parseFloat(record.lat)
-            };
-            setProgress(count, list.length);
+            const query = brainstorming.query(nomination)
+                .then(record => {
+                    nomination.lngLat = { lng: parseFloat(record.lng), lat: parseFloat(record.lat) };
+                })
+                .catch()
+                .finally(() => {
+                    count++;
+                    setProgress(count, list.length);
+                });
+            queries.push(query);
         }
+        await Promise.allSettled(queries);
     }
 
     function setStatus(status: Status) {
