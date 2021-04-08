@@ -5,12 +5,12 @@ import type { State } from '@/store/state';
 import { brainstorming } from './brainstorming';
 import { delibird } from './delibird';
 import { dia } from './dia';
+import { google } from './google';
+import { mari } from './mari';
 import { preferences } from './preferences';
 import { umi } from './umi';
 import { util } from './utils';
 import { CountCallback } from './types';
-import { google } from './google';
-import Mari from './mari';
 import Nomination, { NominationData, NominationJSON } from './nomination';
 
 export enum ServiceStatus {
@@ -43,7 +43,6 @@ export namespace service {
 
     const mimeJSON = 'application/json';
 
-    const mari = new Mari();
     let _store: Store<State>;
 
     export const matchData: MatchData = {
@@ -65,9 +64,6 @@ export namespace service {
         brainstorming.init();
         umi.init(i18n);
         google.init(_store);
-
-        mari.events.alert = (message) => delibird.alert(message);
-        mari.events.progress = setProgress;
     }
 
     export function signIn() {
@@ -83,7 +79,7 @@ export namespace service {
         setProgress(0, 0);
         setStatus(Status.processingMails);
         const raws = await dia.getAll()
-        await mari.start(raws);
+        await mari.start(raws, setProgress);
         const matchTargets: Array<Nomination> = [];
         const reduced = raws.reduce((list, raw) => {
             if (raw.id.length < 1) {
