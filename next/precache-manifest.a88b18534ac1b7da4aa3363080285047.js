@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/assets/title.png"
   },
   {
-    "revision": "5ea6b80932b5f88175d6",
+    "revision": "b5658b6e2dc01741402c",
     "url": "/next/css/app.797a826b.css"
   },
   {
@@ -44,7 +44,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/dashboard.c8a23613.css"
   },
   {
-    "revision": "b3ec70df7c30548a7945",
+    "revision": "6621498eb6f4d011fdd0",
     "url": "/next/css/details.e45c7c88.css"
   },
   {
@@ -64,7 +64,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/match.4e5ee524.css"
   },
   {
-    "revision": "c76d53460635b7e028dd",
+    "revision": "af2116ba1fabea8f9487",
     "url": "/next/css/preferences.a2815486.css"
   },
   {
@@ -88,12 +88,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/img/fa-solid-900.376c1f97.svg"
   },
   {
-    "revision": "57a9376a2bb8c12c8e00868899131ee2",
+    "revision": "8b5c673c29c13c07694b8fd71b4958f1",
     "url": "/next/index.html"
   },
   {
-    "revision": "5ea6b80932b5f88175d6",
-    "url": "/next/js/app.1de206ec.js"
+    "revision": "b5658b6e2dc01741402c",
+    "url": "/next/js/app.0784a7c5.js"
   },
   {
     "revision": "ad7d8bbd2ad76aed92fb",
@@ -124,8 +124,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/dashboard.19c87d27.js"
   },
   {
-    "revision": "b3ec70df7c30548a7945",
-    "url": "/next/js/details.f6e6567e.js"
+    "revision": "6621498eb6f4d011fdd0",
+    "url": "/next/js/details.0ed28c09.js"
   },
   {
     "revision": "9bec2e5cdf67b6751880",
@@ -152,8 +152,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/match.8f408d69.js"
   },
   {
-    "revision": "c76d53460635b7e028dd",
-    "url": "/next/js/preferences.9a2abe96.js"
+    "revision": "af2116ba1fabea8f9487",
+    "url": "/next/js/preferences.5cae6469.js"
   },
   {
     "revision": "e740a533dfc63e89adcc986fa213f9c3",
