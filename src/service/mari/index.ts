@@ -1,17 +1,10 @@
+import { delibird } from '@/service/delibird';
 import { preferences } from '@/service/preferences';
 import { umi } from '@/service/umi';
-import { MessageCallback, ProgressCallback } from '@/service/types';
+import { ProgressCallback } from '@/service/types';
 import Nomination, { NominationData } from '@/service/nomination';
 
 import { parser } from './parser';
-
-/**
- * Events for {@link Mari}
- */
-interface MariEvents {
-    alert:      MessageCallback;    // Triggered when alert should be displayed
-    progress:   ProgressCallback,   // Triggered when main progress update
-}
 
 /**
  * Item of {@link Progress}
@@ -83,53 +76,45 @@ class Progress {
 /**
  * Query and process mails
  */
-export default class Mari {
+export namespace mari {
 
-    private queryAfter: string = '';
-    private ignoreIds: Array<string> = [];      // List of ids of mails that should be ignored
-    private nominations: Array<Nomination> = [];    // List of nominations
+    let queryAfter: string = '';
+    let ignoreIds: Array<string> = [];      // List of ids of mails that should be ignored
+    let nominations: Array<Nomination> = [];    // List of nominations
 
-    private progress = new Progress();  // Progress manager
-
-    events: MariEvents = {
-        alert:  () => {},
-        progress: () => {},
-    };
-
-    constructor() {
-        this.progress.onProgress = (progress, max) => this.events.progress(progress, max);
-    }
+    const progress = new Progress();  // Progress manager
 
     /**
      * Start the process
      * @param nominations Existing nominations
      */
-    async start(nominations: Array<NominationData>) {
-        this.nominations.length = 0;
-        this.progress.lists.clear();
-        this.progress.messages.clear();
+    export async function start(raws: Array<NominationData>, onProgress: ProgressCallback) {
+        progress.onProgress = onProgress;
+        nominations.length = 0;
+        progress.lists.clear();
+        progress.messages.clear();
 
         // Ignore the mails already in the list
-        this.ignoreIds = nominations.flatMap(nomination => {
+        ignoreIds = raws.flatMap(nomination => {
             return nomination.resultMailId.length > 0 
                 ? [ nomination.confirmationMailId, nomination.resultMailId ] : [ nomination.confirmationMailId ];
         });
         if (preferences.general.queryAfterLatest()) {
-            const latest = Math.floor(this.nominations.reduce((time, nomination) => {
+            const latest = Math.floor(nominations.reduce((time, nomination) => {
                 return Math.max(time, nomination.confirmedTime, nomination.resultTime)
             }, 0) / 1000);
-            this.queryAfter = ` after:${latest}`;
+            queryAfter = ` after:${latest}`;
         } else {
-            this.queryAfter = '';
+            queryAfter = '';
         }
         const queries: Array<Promise<void>> = [];
         for (const status of umi.status.values()) {
             for (const scanner of status.queries.keys()) {
-                queries.push(this.query(status, scanner));
+                queries.push(query(status, scanner));
             }
         }
         await Promise.allSettled(queries);
-        nominations.push(...this.nominations);
+        raws.push(...nominations);
         return;
     }
 
@@ -138,8 +123,8 @@ export default class Mari {
      * @param status Status to query
      * @param scanner Scanner to query
      */
-    private async query(status: umi.Status, scanner: umi.ScannerCode) {
-        this.progress.addList();
+    async function query(status: umi.Status, scanner: umi.ScannerCode) {
+        progress.addList();
         // Query ID list
         const ids: Array<string> = [];
         let pageToken: string | undefined = undefined;
@@ -147,20 +132,20 @@ export default class Mari {
             type ListResponse = gapi.client.Response<gapi.client.gmail.ListMessagesResponse>;
             const response: ListResponse = await gapi.client.gmail.users.messages.list({
                 userId: 'me',
-                q: `${status.queries.get(scanner)!}${this.queryAfter}`,
+                q: `${status.queries.get(scanner)!}${queryAfter}`,
                 pageToken: pageToken
             });
             if (!response) break;
             if (response.result.messages) {
                 const filtered = response.result.messages.filter(message => {
                     if (!message.id) return false;
-                    return !this.ignoreIds.includes(message.id);
+                    return !ignoreIds.includes(message.id);
                 }).map(message => message.id!);
                 ids.push(...filtered);
             }
             pageToken = response.result.nextPageToken;
         } while (pageToken);
-        this.progress.finishList(ids.length);
+        progress.finishList(ids.length);
         // Query and parse mails
         for (const id of ids) {
             const response = await gapi.client.gmail.users.messages.get({
@@ -173,7 +158,7 @@ export default class Mari {
             const fullMail = response.result;
             try {
                 const nomination = parser.parse(fullMail, status.code, scanner);
-                this.nominations.push(nomination);
+                nominations.push(nomination);
             } catch (error) {
                 let subject = '';
                 for (const header of fullMail.payload!.headers!) {
@@ -187,9 +172,9 @@ export default class Mari {
                     const typedError = error as Error;
                     details = typedError.stack || typedError.message;
                 }
-                this.events.alert(`An error occurs when parsing mail, you may report the mail ${subject}  with this message to developers: [${status}:${scanner}]${details}`);
+                delibird.alert(`An error occurs when parsing mail, you may report the mail ${subject}  with this message to developers: [${status}:${scanner}]${details}`);
             }
-            this.progress.finishMessage();
+            progress.finishMessage();
         }
         return;
     }
