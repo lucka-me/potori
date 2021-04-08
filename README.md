@@ -36,7 +36,7 @@ Potori is NOT fully compatible with Prime yet, we still need more [mail samples]
 
 ## Future Style
 > Since Niantic launched the Niantic Wayfarer with a nomination manager, I've thought a lot about the future of Potori and realized how much I've learned from the development and I hope to keep on.  
-> There are still many posibilities: re-writing the entire Potori with ~~Angular~~ ~~Vue~~ TypeScript and Webpack, extending it to a data visualization tool, import from [Wayfarer Nomination Manage API response data](https://wayfarer.nianticlabs.com/api/v1/vault/manage)...  
+> There are still many posibilities: re-writing the entire Potori with ~~Angular~~ ~~Vue~~ TypeScript and ~~Webpack~~ finally Vue, extending it to a data visualization tool, import from [Wayfarer Nomination Manage API response data](https://wayfarer.nianticlabs.com/api/v1/vault/manage)...  
 > ~~I'm actually working on them, which is little bit tough for me, though.~~ I've done most part of them, and hope to keep Potori evolving.
 > 
 > Lucka.
