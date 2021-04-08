@@ -2,7 +2,7 @@ import { delibird } from '@/service/delibird';
 import { preferences } from '@/service/preferences';
 import { umi } from '@/service/umi';
 import { ProgressCallback } from '@/service/types';
-import Nomination, { NominationData } from '@/service/nomination';
+import Nomination, { NominationRAW } from '@/service/nomination';
 
 import { parser } from './parser';
 
@@ -80,7 +80,7 @@ export namespace mari {
 
     let queryAfter: string = '';
     let ignoreIds: Array<string> = [];      // List of ids of mails that should be ignored
-    let nominations: Array<Nomination> = [];    // List of nominations
+    let nominations: Array<NominationRAW> = [];    // List of raw nominations
 
     const progress = new Progress();  // Progress manager
 
@@ -88,7 +88,7 @@ export namespace mari {
      * Start the process
      * @param nominations Existing nominations
      */
-    export async function start(raws: Array<NominationData>, onProgress: ProgressCallback) {
+    export async function start(raws: Array<NominationRAW>, onProgress: ProgressCallback) {
         progress.onProgress = onProgress;
         nominations.length = 0;
         progress.lists.clear();

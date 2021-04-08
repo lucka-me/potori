@@ -3,7 +3,6 @@ import { Store } from 'vuex'
 
 import type { State } from '@/store/state';
 import { brainstorming } from './brainstorming';
-import { delibird } from './delibird';
 import { dia } from './dia';
 import { google } from './google';
 import { mari } from './mari';
@@ -11,7 +10,7 @@ import { preferences } from './preferences';
 import { umi } from './umi';
 import { util } from './utils';
 import { CountCallback } from './types';
-import Nomination, { NominationData, NominationJSON } from './nomination';
+import Nomination, { NominationRAW, NominationJSON } from './nomination';
 
 export enum ServiceStatus {
     idle,
@@ -78,7 +77,7 @@ export namespace service {
         if (preferences.google.sync()) await download(Filename.nominations);
         setProgress(0, 0);
         setStatus(Status.processingMails);
-        const raws = await dia.getAll()
+        const raws = await dia.getAll();
         await mari.start(raws, setProgress);
         const matchTargets: Array<Nomination> = [];
         const reduced = raws.reduce((list, raw) => {
@@ -147,7 +146,7 @@ export namespace service {
     export async function importNominationsFile(): Promise<number> {
         const content = await util.importFile();
         try {
-            const list = JSON.parse(content) as Array<NominationData>;
+            const list = JSON.parse(content) as Array<NominationRAW>;
             const count = await importNominations(list);
             return count;
         } catch (error) {
@@ -186,7 +185,7 @@ export namespace service {
         const mapNomination = nominations.reduce((map, nomination) => {
             map.set(nomination.id, nomination);
             return map;
-        }, new Map<string, NominationData>());
+        }, new Map<string, NominationRAW>());
         
         let count = 0;
         for (const data of parsed.result) {
@@ -317,7 +316,7 @@ export namespace service {
                 if (merged) continue;
                 nominations.push(nomination);
             }
-            await dia.saveAll(nominations.map(nomination => nomination.data));
+            await dia.saveAll(nominations.map(nomination => nomination.raw));
         } catch (error) {
             count = 0;
         }

@@ -1,5 +1,5 @@
 import { umi } from '@/service/umi';
-import Nomination, { LngLat } from '@/service/nomination';
+import Nomination, { NominationRAW, LngLat } from '@/service/nomination';
 
 /**
  * Parsers for mail content
@@ -16,7 +16,7 @@ export namespace parser {
         mail: gapi.client.gmail.Message,
         status: umi.StatusCode,
         scanner: umi.ScannerCode
-    ): Nomination {
+    ): NominationRAW {
         const nomination = new Nomination();
         nomination.status = status;
         nomination.scanner = scanner;
@@ -57,7 +57,7 @@ export namespace parser {
             }
             break;
         }
-        return nomination;
+        return nomination.raw;
     }
 
     /**
