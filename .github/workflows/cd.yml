@@ -13,18 +13,22 @@ jobs:
         with:
           fetch-depth: 0
           submodules: true
-      - uses: actions/setup-node@v2.1.4
+      - uses: actions/setup-node@v2.1.5
         with:
           node-version: 12.x
       - name: Initiate
         run: npm ci
       - name: Build Potori
         run: npm run build
-      - name: Build Documents
-        run: npm run build:docs
       - name: Deploy
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v3.8.0
         with:
-          github_token: ${{ secrets.TOKEN_DEPLOY }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           cname: potori.lucka.moe
+      - name: Dispatch Docs CD
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          token: ${{ secrets.DOCS_DISPATCH_TOKEN }}
+          repository: lucka-me/potori-docs
+          event-type: cd

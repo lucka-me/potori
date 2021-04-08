@@ -1,0 +1,48 @@
+{
+    "en": {
+        "header": "Data",
+        "importAction": "Import",
+        "exportAction": "Export",
+        "clearAction": "Clear",
+
+        "importNominations": "Import Nominations",
+        "importNominationsDesc": "Import nominations from JSON ile",
+        "importNominationsInform": "Imported {count} nominations",
+
+        "exportNominations": "Export Nominations",
+        "exportNominationsDesc": "Export nominations to JSON file",
+
+        "importWayfarer": "Import Wayfarer JSON",
+        "importWayfarerDesc": "Import JSON from https://wayfarer.nianticlabs.com/api/v1/vault/manage",
+        "importWayfarerPrompt": "Paste Wayfarer JSON",
+        "importWayfarerAlertParseError": "Unable to parse the JSON.",
+        "importWayfarerAlertDataInvalid": "The data is invalid.",
+        "importWayfarerInform": "Updated {count} nominations",
+
+        "clearNominations": "Clear Nominations",
+        "clearNominationsDesc": "Clear all nominations from local storage"
+    },
+    "zh": {
+        "header": "数据",
+        "importAction": "导入",
+        "exportAction": "导出",
+        "clearAction": "清空",
+
+        "importNominations": "导入提名",
+        "importNominationsDesc": "从JSON文件中导入提名",
+        "importNominationsInform": "导入了{count}个提名。",
+
+        "exportNominations": "导出提名",
+        "exportNominationsDesc": "将提名导出至JSON文件",
+
+        "importWayfarer": "导入Wayfarer JSON",
+        "importWayfarerDesc": "导入来自 https://wayfarer.nianticlabs.com/api/v1/vault/manage 的JSON",
+        "importWayfarerPrompt": "粘贴Wayfarer JSON",
+        "importWayfarerAlertParseError": "无法解析JSON。",
+        "importWayfarerAlertDataInvalid": "数据不正确。",
+        "importWayfarerInform": "更新了{count}个提名。",
+
+        "clearNominations": "清空提名",
+        "clearNominationsDesc": "从本地存储中清空提名"
+    }
+}

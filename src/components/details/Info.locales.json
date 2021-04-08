@@ -1,0 +1,14 @@
+{
+    "en": {
+        "confirmed": "Confirmed",
+        "scanner": "Scanner",
+        "reasons": "Reasons",
+        "location": "Location"
+    },
+    "zh": {
+        "confirmed": "确认",
+        "scanner": "扫描器",
+        "reasons": "拒绝原因",
+        "location": "位置"
+    }
+}

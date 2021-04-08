@@ -1,8 +1,10 @@
-# ![](./src/assets/title.png)
-[![CI Status](https://img.shields.io/github/workflow/status/lucka-me/potori/CI?label=CI&logo=github-actions&logoColor=white)](https://github.com/lucka-me/potori/actions?query=workflow%3ACI "CI Workflow")
-[![CD Status](https://img.shields.io/github/workflow/status/lucka-me/potori/CD?label=CD&logo=github-actions&logoColor=white)](https://github.com/lucka-me/potori/actions?query=workflow%3ACD "CD Workflow")  
+# ![](./public/assets/title.png)
+[![CD Status](https://img.shields.io/github/workflow/status/lucka-me/potori/CD?label=CD&logo=github-actions&logoColor=white)](https://github.com/lucka-me/potori/actions/workflows/cd.yml "CD Workflow")
+[![CI-Next Status](https://img.shields.io/github/workflow/status/lucka-me/potori/CI-Next?label=CI-Next&logo=github-actions&logoColor=white)](https://github.com/lucka-me/potori/actions/workflows/ci-next.yml "CI-Next Workflow")
+[![CD-Next Status](https://img.shields.io/github/workflow/status/lucka-me/potori/CD-Next?label=CD-Next&logo=github-actions&logoColor=white)](https://github.com/lucka-me/potori/actions/workflows/cd-next.yml "CD-Next Workflow")  
 [![Release](https://img.shields.io/github/v/release/lucka-me/potori)](https://github.com/lucka-me/potori/releases/latest "Last release")
 [![Deployed Version](https://img.shields.io/github/package-json/v/lucka-me/potori/main?label=deployed)](https://github.com/lucka-me/potori/tree/main "Main Branch")
+[![Deployed Version](https://img.shields.io/github/package-json/v/lucka-me/potori/dev?label=next)](https://github.com/lucka-me/potori/tree/dev "Dev Branch")
 [![Website](https://img.shields.io/website?url=https%3A%2F%2Fpotori.lucka.moe)](https://potori.lucka.moe "Website")  
 [![Lines of code](https://img.shields.io/tokei/lines/github/lucka-me/potori)](https://github.com/lucka-me/potori "Repository")
 [![License](https://img.shields.io/github/license/lucka-me/potori)](./LICENSE "License")  
@@ -10,27 +12,31 @@
 
 ## Description
 
-A web app to visualize Ingress nominations from Gmail inbox.
-
-**A native app for macOS and iOS built with Swift is WIP [here](https://github.com/lucka-me/potori-swift).**
+A web app to manage Ingress nominations from Gmail inbox.
 
 ## Build & Run
 ```sh
-$ git checkout main # If you want to run the version deployed on website
+$ git checkout main # To run the deployed version
+$ git submodule update --init
 $ npm i
 $ npm start
 ```
 
-Open `http://localhost:8000/` in browser.
+Open `http://localhost:8080/next` (`dev` branch) or `http://localhost:8080/` (`main` branch) in browser.
+
+The `dev` branch will also be deployed continuously to the [`next` directory in website](https://potori.lucka.moe/next).
+
+## Related repositories
+- [lucka-me/potori-docs](https://github.com/lucka-me/potori-docs): Documents of Potori
+- [lucka-me/potori-swift](https://github.com/lucka-me/potori-swift): Native app built with SwiftUI for iOS / iPadOS / macOS
+- [lucka-me/potori-umi](https://github.com/lucka-me/potori-umi): Status and reasons data used in Potori
 
 ## Notice
-Due to Google's policy (which aims to protect user's data), some features related to 3rd-party are suspended in the public web app (as a lite version).
-
 Potori is NOT fully compatible with Prime yet, we still need more [mail samples](https://github.com/lucka-me/potori-umi/tree/main/samples) to figure out how to query all related and localized mails exactly and identify each reason for rejection. If you have any trouble or want to help, please open an issue or contact us via Telegram@SeeleUN.
 
 ## Future Style
-> Since Niantic launched the Niantic Wayfarer which contains a nomination manager, I've thought a lot about the future of Potori. I've learned a lot during the development and I do not want to abandon.  
-> There are still many posibilities: re-writing the entire Potori with ~~Angular~~ ~~Vue~~ TypeScript and Webpack, extending it to a data visualization tool, import from [Wayfarer Nomination Manage API response data](https://wayfarer.nianticlabs.com/api/v1/vault/manage)...  
+> Since Niantic launched the Niantic Wayfarer with a nomination manager, I've thought a lot about the future of Potori and realized how much I've learned from the development and I hope to keep on.  
+> There are still many posibilities: re-writing the entire Potori with ~~Angular~~ ~~Vue~~ TypeScript and ~~Webpack~~ finally Vue, extending it to a data visualization tool, import from [Wayfarer Nomination Manage API response data](https://wayfarer.nianticlabs.com/api/v1/vault/manage)...  
 > ~~I'm actually working on them, which is little bit tough for me, though.~~ I've done most part of them, and hope to keep Potori evolving.
 > 
 > Lucka.
@@ -49,7 +55,8 @@ Potori is NOT fully compatible with Prime yet, we still need more [mail samples]
   Done in `0.7.0`
 - [x] Upgrade data struct
   Done in `0.8.0`
-- [ ] Convert to Vue app
+- [x] Convert to Vue app  
+  Done in `1.0.0`
 
 ## Changelog
 See [CHANGELOG.md](./CHANGELOG.md).

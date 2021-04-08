@@ -1,6 +1,43 @@
 # Changelog
 Noteable changes of Potori will be documented here.
 
+## [1.0.0](https://github.com/lucka-me/potori/releases/tag/1.0.0) - 2021-04-08
+Rebuild with Vue
+
+## Added
+- New page: Dashboard, to display general informations and provide entrances to other pages
+- New page: Charts, to display non-brainstorming charts
+- New page: Brainstorming, to display brainstorming-related charts and update local database
+- New page: List, to display nominations filtered by status, scanner or reasons
+- New page: Map, to display nominations filtered by status, scanner or reasons in map
+- New page: Details, to display details of nomination and edit
+- New page: Preferences, to configure Potori and manage data
+- New chart: Interval, days between confirmed and resulted
+- New chart: Coverage (Brainstorming), recorded, not recorded and early nominations
+- Feature: Delete nomination
+- Feature: Clear all nominations and brainstorming data
+- Feature: Sync nominations with Google Drive automatically or manually
+- Feature: Only query mails after the latest one
+- Feature: Automatically query brainstorming for locations after processing mails
+- Feature: Detailed progress with finished / total
+- Feature: Paste Intel URL to set nomination's location
+
+## Changed
+- Framework: Rebuilt with Vue 3
+- Framework: Nominations and brainstorming data are saved in local IndexedDB database
+- UI: Optimized for standalone mode of mobile devices
+- Code: Optimized with async / await
+
+## Removed
+- Feature: Filter controller (Filter card), repleced by: Tap cards in dashboard to open filtered lists
+
+## Known Issues
+- UI: Support for dark mode is removed (temporarily)
+- Feature: Unable to load Google API in some browsers, please try adding to home screen or installing Potori
+
+<details><summary>0.8.x</summary>
+<p>
+
 ## [0.8.1](https://github.com/lucka-me/potori/releases/tag/0.8.1) - 2021-03-21
 Split umi data and mail samples to independent repository
 
@@ -23,6 +60,9 @@ Update structure
 
 ### Changed
 - Use more regex when processing mails
+
+</p>
+</details>
 
 <details><summary>0.7.x</summary>
 <p>

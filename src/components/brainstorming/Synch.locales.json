@@ -1,0 +1,12 @@
+{
+    "en": {
+        "title": "Synch",
+        "synched": "Synched",
+        "notSynched": "Not Synched"
+    },
+    "zh": {
+        "title": "同步率",
+        "synched": "同步",
+        "notSynched": "不同步"
+    }
+}

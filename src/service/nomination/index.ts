@@ -1,10 +1,13 @@
-import i18next from 'i18next';
+import { umi } from '@/service/umi';
 
-import { umi } from 'service/umi';
+enum ParseErrorReason {
+    MISSING_ID = 'MISSING_ID',
+    MISSING_TITLE = 'MISSING_TITLE',
+    MISSING_IMAGE = 'MISSING_IMAGE',
 
-import { StringKey } from './constants';
-
-const now = Date.now();
+    INVALID_ID = 'INVALID_ID',
+    INVALID_IMAGE = 'INVALID_IMAGE'
+}
 
 /**
  * Location
@@ -14,27 +17,59 @@ export interface LngLat {
     lat: number;    // Latitude
 }
 
+export interface NominationJSON {
+    id: string;     // Short ID, also brainstorming ID
+    title: string;  // Title
+    image: string;  // Hash part of the image URL
+    scanner: umi.ScannerCode;   // Scanner of the nomination
+
+    status: umi.StatusCode; // Status code
+    reasons?: Array<umi.ReasonCode>; // Reason codes
+
+    confirmedTime: number;  // Confirmed time, the timestamp of confirmation mail
+    confirmationMailId: string; // ID of confirmation mail
+    resultTime?: number; // Result time, the timestamp of result mail
+    resultMailId?: string;   // ID of result mail
+
+    lngLat?: LngLat;    // Location
+}
+
+export interface NominationData extends NominationJSON {
+    reasons: Array<umi.ReasonCode>;
+    resultTime: number;
+    resultMailId: string;
+}
+
 /**
  * Nomination data
  */
-export default class Nomination {
+export default class Nomination implements NominationData {
 
-    static timestampSecondBound = 1E12;
+    private static timestampSecondBound = 1E12;
 
-    id = '';    // Short ID, also brainstorming ID
-    title = ''; // Title
-    image = ''; // Hash part of the image URL
-    scanner: umi.ScannerCode = umi.ScannerCode.Unknown; // Scanner of the nomination
+    /**
+     * Comparator for sorting by time
+     */
+    static readonly comparatorByTime = (a: NominationData, b: NominationData) => {
+        const timeA = a.resultTime ? a.resultTime : a.confirmedTime;
+        const timeB = b.resultTime ? b.resultTime : b.confirmedTime;
+        return timeA < timeB ? 1 : -1;
+    };
 
-    status: umi.StatusCode = umi.StatusCode.Pending;  // Status code
-    reasons: Array<umi.ReasonCode> = [];    // Reason codes
+    id = '';
+    title = '';
+    image = '';
+    scanner: umi.ScannerCode = umi.ScannerCode.Unknown;
 
-    confirmedTime = 0;              // Confirmed time, the timestamp of confirmation mail
-    confirmationMailId = '';        // ID of confirmation mail
-    resultTime: number = null;      // Result time, the timestamp of result mail
-    resultMailId: string = null;    // ID of result mail
+    status: umi.StatusCode = umi.StatusCode.Pending;
+    reasons: Array<umi.ReasonCode> = [];
 
-    lngLat: LngLat = null;  // Location
+    confirmedTime = 0;
+    confirmationMailId = '';
+    resultTime = 0;
+    resultMailId = '';
+
+    lngLat?: LngLat = undefined;
 
     /**
      * Get the image URL
@@ -47,7 +82,11 @@ export default class Nomination {
      * Get Intel Maps URL
      */
     get intelUrl(): string {
-        return `https://intel.ingress.com/intel?ll=${this.lngLat.lat},${this.lngLat.lng}&z=18`;
+        if (this.lngLat) {
+            return `https://intel.ingress.com/intel?ll=${this.lngLat.lat},${this.lngLat.lng}&z=18`;
+        } else {
+            return 'https://intel.ingress.com/intel';
+        }
     }
 
     /**
@@ -57,11 +96,15 @@ export default class Nomination {
         return `https://brainstorming.azurewebsites.net/watermeter.html#${this.id}`;
     }
 
+    get scannerData(): umi.Scanner {
+        return umi.scanner.get(this.scanner)!;
+    }
+
     /**
      * Get status data
      */
-    get statusData(): umi.Status{
-        return umi.status.get(this.status);
+    get statusData(): umi.Status {
+        return umi.status.get(this.status)!;
     }
 
     /**
@@ -69,7 +112,7 @@ export default class Nomination {
      */
     get reasonsData(): Array<umi.Reason> {
         return this.reasons.map((code) => {
-            return umi.reason.get(umi.reason.has(code) ? code : umi.Reason.undeclared);
+            return umi.reason.get(code)!;
         });
     }
 
@@ -80,57 +123,41 @@ export default class Nomination {
         return this.confirmedTime + (14 * 24 * 3600 * 1000);
     }
 
-    /**
-     * Get the string of confirmedTime
-     */
-    get confirmedDateString(): string {
-        if (this.confirmedTime > 0) {
-            return new Date(this.confirmedTime).toLocaleDateString();
+    get data(): NominationData {
+        let data: NominationData = {
+            id: this.id,
+            title: this.title,
+            image: this.image,
+            scanner: this.scanner,
+            status: this.status,
+            reasons: this.reasons,
+            confirmedTime: this.confirmedTime,
+            confirmationMailId: this.confirmationMailId,
+            resultTime: this.resultTime,
+            resultMailId: this.resultMailId
+        };
+        if (this.lngLat) {
+            data.lngLat = {
+                lng: this.lngLat.lng,
+                lat: this.lngLat.lat
+            };
         }
-        return i18next.t(StringKey.missing);
-    }
-
-    /**
-     * Get the string of resultTime
-     */
-    get resultDateString(): string {
-        return new Date(this.resultTime).toLocaleDateString();
-    }
-
-    /**
-     * Get string of interval between confirmedTime and resultTime or now
-     */
-    get intervalString(): string {
-        const end = this.resultTime ? this.resultTime : now;
-        return i18next.t(StringKey.day, {
-            count: Math.floor((end - this.confirmedTime) / (24 * 3600 * 1000))
-        });
-    }
-
-    /**
-     * Get string of interval between now and restore time
-     */
-    get restoreIntervalString(): string {
-        return i18next.t(StringKey.day, {
-            count: Math.floor((this.restoreTime - now) / (24 * 3600 * 1000))
-        });
+        return data;
     }
 
     /**
      * Serialize to JSON
      */
-    get json(): any {
-        let json: any = {
+    get json(): NominationJSON {
+        let json: NominationJSON = {
             id: this.id,
             title: this.title,
             image: this.image,
+            scanner: this.scanner,
             status: this.status,
             confirmedTime: this.confirmedTime / 1000,
             confirmationMailId: this.confirmationMailId,
         };
-        if (this.scanner != umi.ScannerCode.Unknown) {
-            json.scanner = this.scanner;
-        }
         if (this.reasons.length > 0) {
             json.reasons = this.reasons;
         }
@@ -146,24 +173,47 @@ export default class Nomination {
     }
 
     /**
-     * Parse nomination from JSON
-     * @param json JSON to be parsed
-     * @throws An `Error` when JSON missing `id`, `title`, `image` or `confirmedTime`
+     * Merge from another nomination
+     * @param nomination The nomination to merge from
+     * @returns Succeed or not
      */
-    static parse(json: any): Nomination {
-        if (!json.id) throw new Error(StringKey.messageParseErrorMissingId);
-        if (!json.title) throw new Error(StringKey.messageParseErrorMissingTitle);
-        if (!json.image) throw new Error(StringKey.messageParseErrorMissingImage);
+    merge(nomination: NominationData): boolean {
+        if (this.id !== nomination.id) return false;
+        if (this.status === umi.StatusCode.Pending) {
+            this.title = nomination.title;
+            this.status = nomination.status;
+            this.reasons = nomination.reasons;
+            this.resultTime = nomination.resultTime;
+            this.resultMailId = nomination.resultMailId;
+        } else {
+            this.confirmedTime = nomination.confirmedTime;
+            this.confirmationMailId = nomination.confirmationMailId;
+        }
+        if (!this.lngLat) {
+            this.lngLat = nomination.lngLat;
+        }
+        return true;
+    }
+
+    /**
+     * Parse nomination from JSON
+     * @param json Raw JSON to be parsed
+     * @throws An `Error` when JSON missing `id`, `title` or `image`
+     */
+    static from(json: NominationJSON): Nomination {
+        if (!json.id) throw new Error(ParseErrorReason.MISSING_ID);
+        if (!json.title) throw new Error(ParseErrorReason.MISSING_TITLE);
+        if (!json.image) throw new Error(ParseErrorReason.MISSING_IMAGE);
 
         // Fix old issues
-        const image = (json.image as string).replace('\r', '');
+        const image = json.image.replace('\r', '');
 
         // Test format
         if (!/^[a-zA-Z0-9]+$/.test(json.id)) {
-            throw new Error(StringKey.messageParseErrorInvalidId);
+            throw new Error(ParseErrorReason.INVALID_ID);
         }
         if (!/^[0-9a-zA-Z\-\_]+$/.test(image)) {
-            throw new Error(StringKey.messageParseErrorInvalidImage);
+            throw new Error(ParseErrorReason.INVALID_IMAGE);
         }
 
         const nomination = new Nomination();
@@ -218,3 +268,8 @@ export default class Nomination {
         return imgUrl.replace(/[^a-zA-Z0-9]/g, '').slice(-10).toLowerCase();
     }
 }
+
+/**
+ * Callback for Array<Nomination>.filter()
+ */
+export type Predicator = (nomination: NominationData) => boolean;

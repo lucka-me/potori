@@ -1,0 +1,34 @@
+name: CD-Next
+
+on:
+  push:
+    branches: [ dev ]
+  workflow_run:
+    workflows: [ 'CD' ]
+    types:
+      - completed
+
+jobs:
+  build:
+    name: Build and Deploy
+    if: ${{ github.event_name == 'push' || github.event.workflow_run.conclusion == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+          submodules: true
+      - uses: actions/setup-node@v2.1.5
+        with:
+          node-version: 12.x
+      - name: Initiate
+        run: npm ci
+      - name: Build Potori
+        run: npm run build
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3.8.0
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          destination_dir: next
+          cname: potori.lucka.moe

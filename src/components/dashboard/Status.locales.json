@@ -1,0 +1,24 @@
+{
+    "en": {
+        "link": "Link Google Account",
+        "match": "Manually Match",
+        "charts": "Charts",
+        "brainstorming": "Brainstorming",
+
+        "processingMails": "Processing Mails",
+        "queryingBrainstorming": "Querying Brainstorming",
+        "syncing": "Syncing",
+        "loadingGAPI": "Loading Google API"
+    },
+    "zh": {
+        "link": "连接Google账号",
+        "match": "手动匹配",
+        "charts": "图表",
+        "brainstorming": "Brainstorming",
+
+        "processingMails": "处理邮件中",
+        "queryingBrainstorming": "查询Brainstorming中",
+        "syncing": "同步中",
+        "loadingGAPI": "正在加载Google API"
+    }
+}

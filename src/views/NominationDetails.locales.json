@@ -1,0 +1,14 @@
+{
+    "en": {
+        "notFound": "Not Found",
+        "edit": "Edit",
+        "save": "Save",
+        "cancel": "Cancel"
+    },
+    "zh": {
+        "notFound": "未找到",
+        "edit": "编辑",
+        "save": "保存",
+        "cancel": "取消"
+    }
+}

@@ -1,0 +1,12 @@
+{
+    "en": {
+        "header": "Reasons",
+        "more": "More",
+        "less": "Less"
+    },
+    "zh": {
+        "header": "拒绝原因",
+        "more": "更多",
+        "less": "更少"
+    }
+}

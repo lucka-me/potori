@@ -1,0 +1,32 @@
+{
+    "en": {
+        "status": "Status",
+        "resultTime": "Result Time",
+        "reasons": "Reasons",
+        "location": "Location",
+        "locationLabel": "Latitude,Longitude",
+        "pasteIntelURL": "Paste Intel Map URL",
+        "queryBrainstorming": "Query Brainstorming",
+        "delete": "Delete",
+
+        "bsEarly": "It's an early nominaion that does not exist in database.",
+        "bsNotExists": "Nomination does not exist in database.",
+        "bsIndexedDBError": "Internal error occured in local database.",
+        "bsFirebaseError": "Internal error occured in Firebase database."
+    },
+    "zh": {
+        "status": "状态",
+        "resultTime": "结果时间",
+        "reasons": "拒绝原因",
+        "location": "位置",
+        "locationLabel": "纬度,经度",
+        "pasteIntelURL": "粘贴Intel Map链接",
+        "queryBrainstorming": "查询Brainstorming",
+        "delete": "删除",
+
+        "bsEarly": "早期提名未录入数据库中。",
+        "bsNotExists": "数据库中未找到提名。",
+        "bsIndexedDBError": "本地数据库发生内部错误。",
+        "bsFirebaseError": "Firebase数据库发生内部错误。"
+    }
+}

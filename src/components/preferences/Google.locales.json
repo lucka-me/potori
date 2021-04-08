@@ -1,0 +1,50 @@
+{
+    "en": {
+        "header": "Google",
+
+        "account": "Account",
+        "accountDesc": "Link / unlink Google Account",
+        "link": "Link",
+        "unlink": "Unlink",
+        
+        "sync": "Sync Google Drive",
+        "syncDesc": "Sync with Google Drive when refresh",
+        
+        "syncNow": "Sync Now",
+        "syncNowDesc": "Sync with Google Drive",
+        "syncNowAction": "Sync",
+
+        "uploadNow": "Upload Now",
+        "uploadNowDesc": "Upload data to Google Drive",
+        "uploadNowAction": "Upload",
+
+        "migrate": "Migrate",
+        "migrateDesc": "Migrate data from Potori before 0.8.0",
+
+        "loadingGAPI": "Loading Google API"
+    },
+    "zh": {
+        "header": "Google",
+        
+        "account": "账号",
+        "accountDesc": "连接/取消连接Google账号",
+        "link": "连接",
+        "unlink": "取消连接",
+        
+        "sync": "同步Google硬盘",
+        "syncDesc": "刷新时同步Google硬盘",
+        
+        "syncNow": "现在同步",
+        "syncNowDesc": "现在同步Google硬盘",
+        "syncNowAction": "同步",
+
+        "uploadNow": "现在上传",
+        "uploadNowDesc": "将数据上传至Google硬盘",
+        "uploadNowAction": "上传",
+
+        "migrate": "迁移",
+        "migrateDesc": "从0.8.0之前的Potori迁移数据",
+
+        "loadingGAPI": "正在加载Google API"
+    }
+}

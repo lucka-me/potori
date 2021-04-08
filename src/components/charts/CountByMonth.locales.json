@@ -1,0 +1,12 @@
+{
+    "en": {
+        "title": "Count by Month",
+        "submissions": "Submissions",
+        "results": "Results"
+    },
+    "zh": {
+        "title": "每月统计",
+        "submissions": "提交",
+        "results": "结果"
+    }
+}

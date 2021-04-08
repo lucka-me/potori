@@ -1,0 +1,16 @@
+{
+    "en": {
+        "title": "Brainstorming",
+        "update": "Update",
+        "updating": "Updating Brainstorming",
+
+        "updateInform": "Updated {count} records."
+    },
+    "zh": {
+        "title": "Brainstorming",
+        "update": "更新",
+        "updating": "正在更新Brainstorming",
+
+        "updateInform": "更新了{count}条记录。"
+    }
+}

@@ -2,4 +2,7 @@
 /dist
 /src/locales
 /src/data/version.json
+vue.config.js
+.cache
+.temp
 .DS_Store

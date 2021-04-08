@@ -1,10 +1,9 @@
 import type { Reference } from '@firebase/database-types';
 
-import { service } from 'service';
-import { umi } from 'service/umi';
-import Nomination, { LngLat } from 'service/nomination'
-
-import { QueryFailReason, RateItems } from './constants';
+import { umi } from '@/service/umi';
+import { util } from '../utils';
+import { ProgressCallback } from '../types';
+import Nomination, { NominationData } from '@/service/nomination';
 
 /**
  * Result for {@link BrainstormingKit.analyse}
@@ -20,18 +19,72 @@ interface BrainstormingStats {
     },
 }
 
-type FailCallback = (reason: QueryFailReason) => void;
-type QueryCallback = (data: any) => void;
-type QueryLocationCallback = (lngLat: LngLat) => void;
-type UpdateCallback = () => void;
-
 /**
  * Host Brainstorming data and handle tasks related to Brainstorming
  */
-class BrainstormingKit {
+export namespace brainstorming {
 
-    data: Map<string, any> = new Map();     // Local database
-    private reference: Reference = null;    // Firebase reference
+    const mimeJSON = 'application/json';
+    const filename = 'bsdata.json';
+
+    export enum FailReason {
+        INDEXEDDB_ERROR = 'INDEXEDDB_ERROR',    // Unable to query local database
+        FIREBASE_ERROR  = 'FIREBASE_ERROR',     // Unable to query firebase
+        NOT_EXISTS      = 'NOT_EXISTS',         // Nomination not exists in local database or firebase
+        EARLY           = 'EARLY',              // Nomination got result before firebase exists
+    };
+
+    export interface ReviewRaw {
+        cultural: string;
+        description: string;
+        location: string;
+        quality: string;
+        safety: string;
+        uniqueness: string;
+    }
+
+    export interface Review {
+        JSON: ReviewRaw;
+        Timestamp: number;
+        author: string;
+        reasons: string;
+        stars: string;
+    }
+
+    export interface Record {
+        description: string;
+        hashTags: Array<string>;
+        imageUrl: string;
+        lastTime: number;
+        lat: string;
+        lng: string;
+        statement?: string;
+        streetAddress: string;
+        supportingImageUrl?: string;
+        title: string;
+        [name: string]: any | Review;
+    }
+
+    const databaseName = 'brainstorming';
+    const databaseVersion = 1;
+    const storeName = 'record';
+
+    let database: IDBDatabase | undefined = undefined;  // Local database
+    let reference: Reference | undefined = undefined;   // Firebase reference
+
+    export async function init() {
+        return new Promise<boolean>((resolve, reject) => {
+            const request = window.indexedDB.open(databaseName, databaseVersion);
+            request.onsuccess = () => {
+                database = request.result;
+                resolve(true);
+            };
+            request.onerror = () => reject(request.error);
+            request.onupgradeneeded = () => {
+                request.result.createObjectStore(storeName);
+            };
+        });
+    }
 
     /**
      * Query data from local databse and firebase (full version only)
@@ -39,32 +92,15 @@ class BrainstormingKit {
      * @param succeed Triggered when succeed to query data
      * @param failed Triggered when Failed to query data
      */
-    query(nomination: Nomination, succeed: QueryCallback, failed: FailCallback) {
-        if (this.beforeCreate(nomination)) {
-            failed(QueryFailReason.EARLY);
-            return;
+    export async function query(nomination: NominationData): Promise<Record> {
+        if (beforeCreate(nomination)) {
+            throw new Error(FailReason.EARLY);
         }
-        if (this.data.has(nomination.id)) {
-            succeed(this.data.get(nomination.id));
-            return;
-        }
-        if (!service.version.full) {
-            failed(QueryFailReason.NOT_EXISTS);
-            return;
-        }
-        this.queryFirebase(nomination, succeed, failed);
-    }
-
-    /**
-     * Query location data from local databse and firebase (full version only)
-     * @param nomination Nomination to query
-     * @param succeed Triggered when succeed to query location
-     * @param failed Triggered when Failed to query location
-     */
-    queryLocation(nomination: Nomination, succeed: QueryLocationCallback, failed: FailCallback) {
-        this.query(nomination, (data) => {
-            succeed({ lng: parseFloat(data.lng), lat: parseFloat(data.lat) });
-        }, failed);
+        let record = await queryDatabase(nomination.id).catch(error => { throw error; });
+        if (record) return record;
+        record = await queryFirebase(nomination.id).catch(error => { throw error; });
+        if (!record) throw new Error(FailReason.NOT_EXISTS);
+        return record;
     }
 
     /**
@@ -72,154 +108,138 @@ class BrainstormingKit {
      * @param nominations Nomination list
      * @param finish Triggered when all query finishes
      */
-    update(nominations: Array<Nomination>, finish: UpdateCallback) {
-        const queryList = [];
+    export async function update(nominations: Array<NominationData>, callback: ProgressCallback): Promise<number> {
+        let succeed = 0;
+        let processed = 0;
+        const total = nominations.length;
+        const queries: Array<Promise<void>> = [];
         for (const nomination of nominations) {
-            if (this.beforeCreate(nomination)) continue;
-            queryList.push(nomination);
+            if (beforeCreate(nomination)) {
+                processed++;
+                callback(processed, total);
+                continue;
+            }
+            const query = queryFirebase(nomination.id)
+                .then(record => { if (record) succeed++; })
+                .catch()
+                .finally(() => {
+                    processed++;
+                    callback(processed, total);
+                })
+            queries.push(query);
         }
-        let left = queryList.length;
-        const queried = () => {
-            left--;
-            if (left < 1) finish();
-        }
-        for (const nomination of queryList) {
-            this.queryFirebase(nomination, (value) => {
-                this.data.set(nomination.id, value);
-                queried();
-            }, queried);
-        }
+        await Promise.allSettled(queries);
+        return succeed;
     }
 
-    /**
-     * Query the firebase
-     * @param bsId Brainstorming ID
-     * @param succeed Triggered when succeed
-     * @param failed Triggered when failed
-     */
-    private queryFirebase(nomination: Nomination, succeed: QueryCallback, failed: FailCallback) {
-        if (this.beforeCreate(nomination)) {
-            failed(QueryFailReason.EARLY);
-            return;
+    export async function getFromLocal(nomination: NominationData) {
+        if (beforeCreate(nomination)) return undefined;
+        return await queryDatabase(nomination.id);
+    }
+
+    export async function contains(nomination: NominationData) {
+        if (beforeCreate(nomination)) return false;
+        const record = await queryDatabase(nomination.id);
+        return typeof record !== 'undefined';
+    }
+
+    export async function importDatabase() {
+        const content = await util.importFile();
+        let data: Map<string, Record>;
+        try {
+            data = new Map(JSON.parse(content));
+        } catch (error) {
+            return 0;
         }
-        Promise.all([
-            import(/* webpackChunkName: 'modules-async' */ '@firebase/app'),
-            import(/* webpackChunkName: 'modules-async' */ '@firebase/database'),
-        ]).then(([ firebase, _ ]) => {
-            if (!this.reference) {
-                const app = firebase.default.initializeApp({ databaseURL: 'https://oprbrainstorming.firebaseio.com' });
-                if (!this.reference) this.reference = app.database().ref('c/reviews/');
-            }
-            this.reference.child(nomination.id).once('value', (data) => {
-                const value = data.val();
-                if (!value) {
-                    failed(QueryFailReason.NOT_EXISTS);
-                    return;
-                }
-                succeed(value);
-            }, () => failed(QueryFailReason.FIREBASE_ERROR));
-        });
+        for (const [key, record] of data) save(key, record);
+        return data.size;
+    }
+
+    export async function exportDatabase(): Promise<number> {
+        const list = await getAll();
+        if (list.length < 1) return 0;
+        const pairs: Array<[string, Record]> = list.map(record => [ Nomination.parseId(record.imageUrl), record]);
+        const blob = new Blob(
+            [ JSON.stringify(pairs, null, 4) ],
+            { type: mimeJSON }
+        );
+        util.exportFile(filename, blob);
+        return pairs.length;
     }
 
     /**
      * Clear local database
      */
-    clear() {
-        this.data.clear();
+    export function clear() {
+        const store = getStore('readwrite');
+        if (!store) return;
+        store.clear();
     }
 
     /**
      * Check if the nomination got result before creation of firebase, should skip query if true
      * @param nomination The nomination
      */
-    beforeCreate(nomination: Nomination): boolean {
+    export function beforeCreate(nomination: NominationData): boolean {
         return nomination.status !== umi.StatusCode.Pending && nomination.resultTime < 1518796800000;
     }
 
     /**
-     * Analyse reviews of given nominations
-     * @param nominations Nomination list
+     * Query from the local IndexedDB database
+     * @param id Brainstorming ID
      */
-    analyse(nominations: Array<Nomination>): BrainstormingStats {
-        const stats: BrainstormingStats = {
-            review: 0,
-            nomination: 0,
-            rate: new Map(),
-            reviewTimes: [],
-            synch: { total: 0, synched: 0 },
-        };
-        const rateKeys = Object.keys(RateItems);
-        for (const key of rateKeys) {
-            stats.rate.set(key, []);
-        }
-        const statsRate = (rateJson: any, key: string) => {
-            if (rateJson[key]) {
-                stats.rate.get(key).push(parseInt(rateJson[key]));
-            }
-        }
-        for (const nomination of nominations) {
-            if (!this.data.has(nomination.id)) continue;
-            const bs = this.data.get(nomination.id);
-            const generals = [];
-            for (const key of Object.keys(bs)) {
-                if (!key.startsWith('review')) continue;
-                const review = bs[key];
-                if (!review.stars) continue;
-                stats.review += 1;
-                generals.push(review.stars);
-                const rateJson = review.JSON;
-                for (const rateKey of rateKeys) {
-                    statsRate(rateJson, rateKey);
-                }
-                stats.reviewTimes.push(review.Timestamp);
-                if (nomination.status === umi.StatusCode.Pending) continue;
-                // Synch
-                stats.synch.total += 1;
-                if (this.isSynched(review.stars, nomination)) {
-                    stats.synch.synched += 1;
-                }
-            }
-            if (generals.length < 1) continue;
-            stats.nomination += 1;
-        }
-        return stats;
+    async function queryDatabase(id: string): Promise<Record | undefined> {
+        const store = getStore('readonly');
+        if (!store) throw new Error(FailReason.INDEXEDDB_ERROR);
+        return await settled(store.get(id));
     }
 
     /**
-     * Detect if a review matches the result
-     * 
-     * - D matches duplicated
-     * - 3 or 3+ stars matches accepted and tooClose
-     * - 3- stars matches rejected
-     * 
-     * @param stars Stars of the review
-     * @param status Status code of the resulted nomination
+     * Query from the Firebase database
+     * @param id Brainstorming ID
      */
-    private isSynched(stars: string, nomination: Nomination) {
-        if (
-            stars === 'D'
-            && nomination.status === umi.StatusCode.Rejected
-            && nomination.reasons.includes(umi.Reason.duplicated)
-        ) {
-            return true;
+    async function queryFirebase(id: string): Promise<Record | undefined> {
+        if (!reference) {
+            const [ firebase, _ ] = await Promise.all([
+                import(/* webpackChunkName: 'firebase' */ '@firebase/app'),
+                import(/* webpackChunkName: 'firebase' */ '@firebase/database'),
+            ]).catch(_ => {
+                throw new Error(FailReason.FIREBASE_ERROR);
+            });
+            if (!reference) {
+                const app = firebase.default.initializeApp({ databaseURL: 'https://oprbrainstorming.firebaseio.com' });
+                if (!reference) reference = app.database!().ref('c/reviews/');
+            }
         }
-        const general = parseFloat(stars);
-        if (isNaN(general)) return false;
-        
-        if (
-            nomination.status === umi.StatusCode.Accepted
-            || (nomination.status === umi.StatusCode.Rejected && nomination.reasons.includes(umi.Reason.close))
-        ) {
-            // Accepted
-            if (general >= 3) return true;
-        } else {
-            // Rejected
-            if (general < 3) return true;
-        }
-        
-        return false;
+        const data = await reference.child(id).once('value').catch(_ => {
+            throw new Error(FailReason.FIREBASE_ERROR);
+        });
+        const record: Record | undefined = data.val();
+        if (record) await save(id, record);
+        return record;
+    }
+
+    async function getAll(): Promise<Array<Record>> {
+        const store = getStore('readonly');
+        if (!store) return [];
+        return await settled(store.getAll()) ?? [];
+    }
+
+    async function save(id: string, record: Record) {
+        const store = getStore('readwrite');
+        if (!store) return;
+        await settled(store.put(record, id));
+    }
+
+    function getStore(mode: IDBTransactionMode): IDBObjectStore | undefined {
+        if (!database) return undefined;
+        return database.transaction([ storeName ], mode).objectStore(storeName);
+    }
+
+    function settled<T>(request: IDBRequest<T>) {
+        return new Promise<T | undefined>((resolve) => {
+            request.onsuccess = () => resolve(request.result);
+            request.onerror = () => resolve(undefined);
+        });
     }
 }
-
-export default BrainstormingKit;
-export { BrainstormingStats, QueryFailReason, RateItems };

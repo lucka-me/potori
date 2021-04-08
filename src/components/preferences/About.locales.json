@@ -1,0 +1,46 @@
+{
+    "en": {
+        "header": "About",
+        "openAction": "Open",
+
+        "appVersion": "App Version",
+        "dataVersion": "Data Version",
+        
+        "document": "Document",
+        "documentLink": "/docs",
+        "privacy": "Privacy",
+        "privacyLink": "/docs/privacy",
+
+        "telegram": "Telegram Channel",
+
+        "repository": "Code Repository",
+        "repositoryDesc": "GitHub",
+
+        "exportErrors": "Export Errors",
+        "exportErrorsDesc": "Export errors logged in Potori to clipboard",
+        "exportErrorsAction": "Export",
+        "exportErrorsInform": "Exported {count} errors to clipboard."
+    },
+    "zh": {
+        "header": "关于",
+        "openAction": "打开",
+
+        "appVersion": "应用版本",
+        "dataVersion": "数据版本",
+
+        "document": "文档",
+        "documentLink": "/docs/zh",
+        "privacy": "隐私",
+        "privacyLink": "/docs/zh/privacy",
+
+        "telegram": "Telegram频道",
+
+        "repository": "代码仓库",
+        "repositoryDesc": "GitHub",
+        
+        "exportErrors": "导出错误",
+        "exportErrorsDesc": "将Potori中记录的错误导出至剪贴板",
+        "exportErrorsAction": "导出",
+        "exportErrorsInform": "已将{count}个错误导出至剪贴板。"
+    }
+}

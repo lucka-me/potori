@@ -1,519 +1,350 @@
-import i18next from 'i18next';
-import LanguageDetector from 'i18next-browser-languagedetector';
+import type { VueI18n } from 'vue-i18n';
+import { Store } from 'vuex'
+import { toRaw } from '@vue/reactivity';
 
+import type { State } from '@/store/state';
+import { brainstorming } from './brainstorming';
+import { delibird } from './delibird';
+import { dia } from './dia';
+import { preferences } from './preferences';
 import { umi } from './umi';
+import { util } from './utils';
+import { CountCallback } from './types';
+import GoogleKit from './google';
+import Mari from './mari';
+import Nomination, { NominationData, NominationJSON } from './nomination';
 
-import AuthKit, { AuthStatusChangedCallback } from './auth';
-import BrainstormingKit from './brainstorming';
-import FileKit, { DownloadCallback, Filename } from './file';
-import Mari, { ProgressCallback } from './mari';
-import Nomination from './nomination';
-import translations from 'locales';
-import Version from './version';
-
-import { BlobGenerator, Parser } from './tools';
-
-type BasicCallback = () => void;
-type MessageCallback = (message: string) => void;
-type MatchCallback = (target: Nomination, candidate: Nomination, callback: (matched: boolean) => void) => void;
-
-/**
- * Events for {@link Service}
- */
-interface ServiceEvents {
-    authStatusChanged   : AuthStatusChangedCallback,    // Triggered when authentication status changed
-    progressUpdate      : ProgressCallback, // Triggered when progress updated
-    bufferUpdate        : ProgressCallback, // Triggered when buffer (secondary progress) updated
-    bsUpdate            : BasicCallback,    // Triggered when brainstorming data updated
-
-    start   : BasicCallback,    // Triggered when progress bar should show up
-    idle    : BasicCallback,    // Triggered when process is finished
-    clear   : BasicCallback,    // Triggered when UI should be cleared
-
-    match   : MatchCallback,    // Triggered when a manually matching required
-
-    alert   : MessageCallback,  // Triggered when alert raised
-    info    : MessageCallback,  // Triggered when some information should be passed to user
+export enum ServiceStatus {
+    idle,
+    processingMails,
+    requestMatch,
+    queryingBrainstorming,
+    syncing
 }
 
-/**
- * Item for manually matching
- */
-interface MatchItem {
-    target: Nomination,             // The broken nomination, should be rejected and missing image
-    candidates: Array<Nomination>,  // Candidates, pending, early than target and with same title
-}
-
-/**
- * Handle all non-UI tasks and host data
- */
 export namespace service {
 
-    export const auth       = new AuthKit();
-    export const bs         = new BrainstormingKit();
-    export const file       = new FileKit();
-    export const mari       = new Mari();
-    export const version    = new Version();
+    export import Status = ServiceStatus;
 
-    export const nominations: Array<Nomination> = [];    // Nomination list
+    enum Filename {
+        nominations = 'nominations.json',
+        legacy = 'potori.json'
+    }
+
+    export interface MatchPack {
+        target: Nomination;
+        candidates: Array<Nomination>;
+        selected: string;
+    }
+
+    export interface MatchData {
+        packs: Array<MatchPack>;
+        callback: () => void;
+    }
+
+    const mimeJSON = 'application/json';
+
+    const google = new GoogleKit();
+    const mari = new Mari();
+    let _store: Store<State>;
+
+    export const matchData: MatchData = {
+        packs: [],
+        callback: () => { }
+    };
 
     export const errors: Array<ErrorEvent> = [];
 
-    export const events: ServiceEvents = {
-        authStatusChanged:  () => { },
-        progressUpdate:     () => { },
-        bufferUpdate:       () => { },
-        bsUpdate:           () => { },
-        
-        start:  () => { },
-        idle:   () => { },
-        clear:  () => { },
+    export function init(store: Store<State>, i18n: VueI18n<unknown, unknown, unknown>) {
+        _store = store;
 
-        match:  () => { },
-        
-        alert:  () => { },
-        info:   () => { },
-    };
-
-    export function init() {
-        // Register service worker
+        window.addEventListener('error', errorEvent => errors.push(errorEvent));
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/sw.js');
-            });
+            window.addEventListener('load', () => navigator.serviceWorker.register('./service-worker.js'));
         }
 
-        i18next
-            .use(LanguageDetector)
-            .init({
-                fallbackLng: 'en-US',
-                keySeparator: false,
-                resources: translations,
-                ns: ['general', 'message'],
-                defaultNS: 'general',
-            });
+        dia.init(_store);
+        brainstorming.init();
+        umi.init(i18n);
 
-        auth.events.authStatusChanged = (signedIn) => {
-            if (!signedIn) {
-                nominations.length = 0;
+        google.init(() => {
+            google.auth.events.authStatusChanged = (authed) => {
+                _store.commit('google/setAuthed', authed);
+                _store.commit('google/loaded');
+            };
+            google.auth.init();
+
+            mari.events.alert = (message) => {
+                delibird.alert(message);
             }
-            events.authStatusChanged(signedIn);
-            if (signedIn) {
-                startMail();
+            mari.events.progress = (progress, max) => {
+                setProgress(progress, max);
+            };
+            mari.init();
+        });
+    }
+
+    export function signIn() {
+        google.auth.signIn();
+    }
+
+    export function signOut() {
+        google.auth.signOut();
+    }
+
+    export async function refresh() {
+        if (preferences.google.sync()) await download(Filename.nominations);
+        setProgress(0, 0);
+        setStatus(Status.processingMails);
+        const raws = await dia.getAll()
+        await mari.start(raws);
+        const matchTargets: Array<Nomination> = [];
+        const reduced = raws.reduce((list, raw) => {
+            if (raw.id.length < 1) {
+                console.log(`service.arrange: Need match: #${raw.id}[${raw.title}]`);
+                matchTargets.push(Nomination.from(raw));
+                return list;
             }
-        };
-        auth.events.error = (error) => {
-            events.alert(JSON.stringify(error, null, 2));
+            // Merge
+            let merged = false;
+
+            for (const target of list) {
+                if (target.merge(raw)) {
+                    merged = true;
+                    break;
+                }
+            }
+            if (!merged) {
+                list.push(Nomination.from(raw));
+            }
+            return list;
+        }, new Array<Nomination>());
+        console.log(`service.arrange: ${raws.length} reduced to ${reduced.length}`);
+        if (matchTargets.length > 0) {
+            await match(matchTargets, reduced);
         }
+        if (preferences.brainstorming.autoQueryFirebase()) {
+            await queryBrainstorming(reduced);
+        }
+        if (preferences.google.sync()) {
+            await upload();
+        }
+        await dia.saveAll(reduced);
+        setStatus(Status.idle);
+    }
 
-        auth.init();
+    export async function updateBrainstorming() {
+        setProgress(0, 0);
+        setStatus(Status.queryingBrainstorming);
+        const count = await brainstorming.update(await dia.getAll(), (progress, max) => {
+            setProgress(progress, max);
+        });
+        setStatus(Status.idle);
+        return count;
+    }
 
-        mari.events.alert = (message) => events.alert(message);
-        mari.events.progress = (percent) => events.progressUpdate(percent * 0.9);
-        mari.events.buffer = (percent) => events.bufferUpdate(percent);
-        mari.events.finish = () => arrange();
-        mari.init();
+    export async function sync() {
+        await download(Filename.nominations);
+        await upload();
+    }
 
-        window.addEventListener('error', (errorEvent) => {
-            errors.push(errorEvent);
+    export async function upload() {
+        setStatus(Status.syncing);
+        const blob = await getNominationsJSONBlod();
+        await google.drive.upload(Filename.nominations, mimeJSON, blob, google.auth.accessToken);
+        setStatus(Status.idle);
+    }
+
+    export function migrate(callback: CountCallback) {
+        download(Filename.legacy).then(count => {
+            setStatus(Status.idle);
+            callback(count);
         })
     }
 
-    export function migrate() {
-        events.progressUpdate(0);
-        events.start()
-        file.googleDrive.download(Filename.nominationsLegacy, (file) => {
-            if (!file) {
-                events.idle();
-                return false;
-            }
-            const legacyList = []
-            try {
-                const jsonList = file as Array<any>;
-                for (const json of jsonList) {
-                    try {
-                        legacyList.push(Nomination.parse(json));
-                    } catch (error) {
-                        // Log or alert
-                    }
-                }
-            } catch (error) {
-                return true;
-            }
-            merge(legacyList);
-            return false;
-        });
-    }
-
-    function merge(legacyList: Array<Nomination>) {
-        for (const legacy of legacyList) {
-            let merged = false;
-            for (const nomination of nominations) {
-                if (legacy.id !== nomination.id) continue;
-                if (nomination.status === umi.StatusCode.Pending && legacy.status !== umi.StatusCode.Pending) {
-                    nomination.status = legacy.status;
-                    nomination.reasons = legacy.reasons;
-                }
-                if (!nomination.resultTime) nomination.resultTime = legacy.resultTime;
-                if (!nomination.resultMailId) nomination.resultMailId = legacy.resultMailId;
-                if (!nomination.lngLat) nomination.lngLat = legacy.lngLat;
-                merged = true;
-            }
-            if (!merged) {
-                nominations.push(legacy);
-            }
-        }
-        sort();
-    }
-
-    /**
-     * Start to download data and process mail
-     */
-    function startMail() {
-        events.clear();
-        events.start();
-        download(() => {
-            mari.start(nominations);
-        });
-    }
-
-    /**
-     * Arrange nominations, merge duplicated nominations
-     * Next step is {@link sort}
-     */
-    function arrange() {
-        events.start();
-        // Collect broken nominations
-        const matchQueue: Array<MatchItem> = [];
-        // Merge duplicated nominations -> targets
-        for (let i = nominations.length - 1; i >= 0; i--) {
-            const current = nominations[i];
-            if (current.id.length < 1) {
-                matchQueue.push({
-                    target: current,
-                    candidates: []
-                });
-                nominations.splice(i, 1);
-                continue;
-            }
-            for (let j = 0; j < i; j++) {
-                const target = nominations[j];
-                if (current.id !== target.id) continue;
-                if (target.status === umi.StatusCode.Pending) {
-                    target.title = current.title;
-                    target.status = current.status;
-                    target.reasons = current.reasons;
-                    target.resultTime = current.resultTime;
-                    target.resultMailId = current.resultMailId;
-                    if (current.lngLat) target.lngLat = current.lngLat;
-                } else {
-                    target.confirmedTime = current.confirmedTime;
-                    target.confirmationMailId = current.confirmationMailId;
-                    if (!target.lngLat) target.lngLat = current.lngLat;
-                }
-                nominations.splice(i, 1);
-                break;
-            }
-        }
-
-        const pendings = nominations.filter((nomination) => nomination.status === umi.StatusCode.Pending);
-
-        // Find out candidates
-        for (const item of matchQueue) {
-            const testScanner = item.target.scanner !== umi.ScannerCode.Unknown;
-            for (const nomination of pendings) {
-                if (item.target.title !== nomination.title) continue;
-                if (item.target.resultTime < nomination.confirmedTime) continue;
-                if (
-                    testScanner
-                    && nomination.scanner !== umi.ScannerCode.Unknown
-                    && nomination.scanner !== item.target.scanner
-                ) continue;
-                item.candidates.push(nomination);
-            }
-        }
-
-        manuallyMatch(matchQueue);
-    }
-
-    /**
-     * Match the first target in queue and first candidate in its cadidates
-     * Next step is {@link sort}
-     * @param queue Queue to match
-     */
-    function manuallyMatch(queue: Array<MatchItem>) {
-        if (queue.length < 1) {
-            sort();
-            return;
-        }
-        const item = queue[0];
-        if (item.candidates.length < 1) {
-            queue.shift();
-            manuallyMatch(queue);
-            return;
-        }
-        const candidate = item.candidates[0];
-        events.match(item.target, candidate, (matched) => {
-            if (matched) {
-                candidate.status = item.target.status;
-                candidate.resultTime = item.target.resultTime;
-                candidate.resultMailId = item.target.resultMailId;
-                queue.shift();
-                for (const item of queue) {
-                    const index = item.candidates.indexOf(candidate);
-                    if (index < 0) continue;
-                    item.candidates.splice(index, 1);
-                }
-            } else {
-                item.candidates.shift();
-            }
-            manuallyMatch(queue);
-        });
-    }
-
-    /**
-     * Sort nominations by result time or confirmed time
-     * Next step is {@link queryLocation}
-     */
-    function sort() {
-        nominations.sort((a, b) => {
-            const timeA = a.resultTime ? a.resultTime : a.confirmedTime;
-            const timeB = b.resultTime ? b.resultTime : b.confirmedTime;
-            return timeA < timeB ? 1 : -1;
-        });
-
-        queryLocation();
-    }
-
-    /**
-     * Query locations
-     * Next step is {@link event.idle}
-     */
-    function queryLocation() {
-        const finished = () => {
-            events.idle();
-        };
-
-        // Query locations
-        const listNoLocation = nominations.reduce((list, nomination) => {
-            if (!nomination.lngLat) list.push(nomination);
-            return list;
-        }, new Array<Nomination>());
-        if (listNoLocation.length < 1) {
-            finished();
-            return;
-        }
-        let count = 0;
-        events.progressUpdate(0.9);
-        const countUp = () => {
-            count += 1;
-            events.progressUpdate(0.9 + (count / listNoLocation.length * 0.1));
-            if (count === listNoLocation.length) finished();
-        };
-        for (const nomination of listNoLocation) {
-            bs.queryLocation(
-                nomination,
-                (lngLat) => {
-                    nomination.lngLat = lngLat;
-                    countUp();
-                },
-                countUp
-            );
+    export async function importNominationsFile(): Promise<number> {
+        const content = await util.importFile();
+        try {
+            const list = JSON.parse(content) as Array<NominationData>;
+            const count = await importNominations(list);
+            return count;
+        } catch (error) {
+            return 0;
         }
     }
 
-    /**
-     * Open local file
-     */
-    export function open() {
-        events.clear();
-        const onload = (content: string) => {
-            const resultNominations = Parser.nominations(content);
-            if (resultNominations.matched) {
-                nominations.length = 0;
-                nominations.push(...resultNominations.nominations);
-                arrange();
-                return;
-            }
-            const resultBsData = Parser.bsData(content);
-            if (resultBsData.matched) {
-                bs.data = resultBsData.data;
-                if (nominations.length > 0) {
-                    events.bsUpdate();
-                }
-                events.info(i18next.t('message:service.loadBsData'));
-                return;
-            }
-            // Parse as other contents
-        };
-        file.local.open(onload, events.alert);
-    }
-
-    /**
-     * Save local file
-     */
-    export function save() {
-        if (nominations.length < 1) {
-            events.alert(i18next.t('message:service.nominationsEmpty'));
-            return;
-        }
-        file.local.save(Filename.nominations, BlobGenerator.nominations(nominations));
-        window.setTimeout(() => {
-            file.local.save(Filename.bsData, BlobGenerator.bsData(bs.data));
-        }, 2000);
-    }
-
-    /**
-     * Download data files from Google Drive
-     * @param finish Triggered when download finishes
-     */
-    function download(finish: BasicCallback) {
-        let finishedNominations = false;
-        let finishedBsData = false;
-
-        const checkFinish = () => {
-            if (finishedNominations && finishedBsData) finish();
-        };
-
-        file.googleDrive.download(Filename.bsData, (result) => {
-            if (!result) {
-                finishedBsData = true;
-                checkFinish();
-                return false;
-            }
-
-            try {
-                bs.data = new Map(result as Array<[string, any]>);
-            } catch (error) {
-                return true;
-            }
-
-            finishedBsData = true;
-            checkFinish();
-            return false;
-        });
-
-        file.googleDrive.download(Filename.nominations, (file) => {
-            if (!file) {
-                finishedNominations = true;
-                checkFinish();
-                return false;
-            }
-            try {
-                const jsonList = file as Array<any>;
-                nominations.length = 0;
-                for (const json of jsonList) {
-                    try {
-                        nominations.push(Nomination.parse(json));
-                    } catch (error) {
-                        // Log or alert
-                    }
-                }
-            } catch (error) {
-                return true;
-            }
-
-            finishedNominations = true;
-            checkFinish();
-            return false;
-        });
-    }
-
-    /**
-     * Upload data to Google Drive
-     */
-    export function upload() {
-
-        let uploadedNominations = false;
-        let uploadedBsData = false;
-
-        const checkFinish = () => {
-            if (uploadedNominations && uploadedBsData) {
-                events.info(i18next.t('message:service.uploaded'));
-            };
-        };
-
-        file.googleDrive.upload(
-            Filename.nominations,
-            BlobGenerator.nominations(nominations),
-            auth.accessToken,
-            (succeed: boolean, message?: string) => {
-                uploadedNominations = true;
-                if (!succeed) {
-                    events.alert(`${i18next.t('message:service.uploadNominationsError')}${message ? `\n${message}` : ''}`);
-                }
-                checkFinish();
-            }
-        );
-
-        file.googleDrive.upload(
-            Filename.bsData,
-            BlobGenerator.bsData(bs.data),
-            auth.accessToken,
-            (succeed: boolean, message?: string) => {
-                uploadedBsData = true;
-                if (!succeed) {
-                    events.alert(`${i18next.t('message:service.uploadBsDataError')}${message ? `\n${message}` : ''}`);
-                }
-                checkFinish();
-            }
-        );
-
+    export async function exportNominationsFile() {
+        const blob = await getNominationsJSONBlod();
+        util.exportFile(Filename.nominations, blob);
     }
 
     /**
      * Import JSON from Wayfarer API response
-     * @param raw Raw JSON
+     * 
+     * Error codes
+     * - `-1` Parse error
+     * - `-2` Invalid data
+     * @param json Raw JSON
+     * @returns Count of updated nominations or error code
      */
-    export function importJSON(raw: string) {
+    export async function importWayfarerJSON(json: string): Promise<number> {
         let parsed;
         try {
-            parsed = JSON.parse(raw);
+            parsed = JSON.parse(json);
         } catch (error) {
-            events.alert(i18next.t('message:service.parseError'));
-            return;
+            // Parse error
+            return -1;
         }
         if (!parsed.result || parsed.result.length < 1) {
-            events.alert(i18next.t('message:service.invalidData'));
-            return;
+            // Invalid data
+            return -2;
         }
-        const mapNomination = new Map<string, Nomination>();
-        
-        for (const monination of nominations) {
-            mapNomination.set(monination.id, monination);
-        }
-        let count = 0;
-        for (const nomination of parsed.result) {
-            const imageUrl = nomination.imageUrl.replace('https://lh3.googleusercontent.com/', '');
-            const id = Nomination.parseId(imageUrl);
-            if (!mapNomination.has(id)) continue;
 
-            const monination = mapNomination.get(id);
-            monination.title = nomination.title;
-            monination.lngLat = {
-                lng: parseFloat(nomination.lng),
-                lat: parseFloat(nomination.lat)
+        const nominations = await dia.getAll();
+        const mapNomination = nominations.reduce((map, nomination) => {
+            map.set(nomination.id, nomination);
+            return map;
+        }, new Map<string, NominationData>());
+        
+        let count = 0;
+        for (const data of parsed.result) {
+            const id = Nomination.parseId(data.imageUrl);
+            const nomination = mapNomination.get(id);
+            if (!nomination) continue;
+            nomination.title = data.title;
+            nomination.lngLat = {
+                lng: parseFloat(data.lng),
+                lat: parseFloat(data.lat)
             };
             count += 1;
         }
-        events.info(i18next.t('message:service.imported', { count: count }));
-        events.idle();
+        await dia.saveAll(nominations);
+        return count;
     }
 
     /**
-     * Query Brainstorming firebase and update local bs data
+     * Some result mails don't contain image URL, should match from pending nominations manually.
+     * @param targets Nominations without image
+     * @param list Normal nominations
      */
-    export function updateBsData() {
-        bs.update(nominations, () => {
-            events.bsUpdate();
-            events.info(i18next.t('message:service.bsDataUpdated'));
+    async function match(targets: Array<Nomination>, list: Array<Nomination>) {
+        const pendings = list.filter(umi.status.get(umi.StatusCode.Pending)!.predicator);
+        const packs: Array<MatchPack> = [];
+        for (const target of targets) {
+            const checkScanner = target.scanner !== umi.ScannerCode.Unknown;
+            const candidates = pendings.filter((nomination) => {
+                if (nomination.title !== target.title) return false;
+                if (nomination.confirmedTime >= target.resultTime) return false;
+                if (checkScanner && nomination.scanner !== umi.ScannerCode.Unknown && nomination.scanner !== nomination.scanner) return false;
+                return true;
+            });
+            if (candidates.length < 1) continue;
+            packs.push({ target: target, candidates: candidates, selected: '' });
+        }
+        return new Promise<void>((resolve) => {
+            if (packs.length < 1) {
+                resolve();
+                return;
+            }
+            matchData.packs = packs;
+            matchData.callback = () => {
+                matchData.callback = () => { };
+                for (const pack of matchData.packs) {
+                    if (pack.selected.length < 1) continue;
+                    for (const candidate of pack.candidates) {
+                        if (candidate.id !== pack.selected) continue;
+                        pack.target.image = candidate.image;
+                        pack.target.id = candidate.id;
+                        break;
+                    }
+                    if (pack.target.id.length < 1) continue;
+                    for (const nomination of list) {
+                        nomination.merge(pack.target);
+                    }
+                }
+                matchData.packs = [];
+                resolve();
+            };
+            setStatus(Status.requestMatch);
         });
     }
 
-    /**
-     * Clear Brainstorming database
-     */
-    export function clearBsData() {
-        bs.clear();
+    async function queryBrainstorming(list: Array<Nomination>) {
+        setStatus(Status.queryingBrainstorming);
+        let count = 0;
+        for (const nomination of list) {
+            count++;
+            if (nomination.lngLat) {
+                setProgress(count, list.length);
+                continue;
+            }
+            const record = await brainstorming.query(nomination).catch(_ => undefined);
+            if (!record) {
+                setProgress(count, list.length);
+                continue;
+            }
+            nomination.lngLat = {
+                lng: parseFloat(record.lng), lat: parseFloat(record.lat)
+            };
+            setProgress(count, list.length);
+        }
+    }
+
+    function setStatus(status: Status) {
+        _store.commit('service/setStatus', status);
+    }
+
+    function setProgress(progress: number, max: number) {
+        _store.commit('progress/setMax', max);
+        _store.commit('progress/setProgress', progress);
+    }
+
+    async function download(filename: Filename) {
+        setStatus(Status.syncing);
+        const file = await google.drive.download(filename, content => {
+            try {
+                const list = content as Array<NominationJSON>;
+                list.forEach(data => Nomination.from(data));
+            } catch {
+                return false;
+            }
+            return true;
+        });
+        if (!file) return 0;
+        return await importNominations(file as Array<NominationJSON>);
+    }
+
+    async function importNominations(list: Array<NominationJSON>): Promise<number> {
+        let count = 0;
+        try {
+            const sources = list.map(data => Nomination.from(data));
+            const raws = await dia.getAll();
+            const nominations = raws.map(raw => Nomination.from(raw));
+            for (const nomination of sources) {
+                let merged = false;
+                for (const target of nominations) {
+                    merged = target.merge(nomination);
+                    if (merged) {
+                        count += 1;
+                        break;
+                    }
+                }
+                if (merged) continue;
+                nominations.push(nomination);
+            }
+            await dia.saveAll(nominations.map(nomination => nomination.data));
+        } catch (error) {
+            count = 0;
+        }
+        return count;
+    }
+
+    async function getNominationsJSONBlod(): Promise<Blob> {
+        const raws = await dia.getAll();
+        const jsons = raws.map(raws => Nomination.from(raws).json);
+        return new Blob(
+            [ JSON.stringify(jsons, null, 4) ],
+            { type: mimeJSON }
+        )
     }
 }
