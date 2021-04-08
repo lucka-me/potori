@@ -1,8 +1,8 @@
 import { delibird } from '@/service/delibird';
 import { preferences } from '@/service/preferences';
 import { umi } from '@/service/umi';
+import { NominationRAW } from '@/service/nomination';
 import { ProgressCallback } from '@/service/types';
-import Nomination, { NominationRAW } from '@/service/nomination';
 
 import { parser } from './parser';
 
@@ -36,12 +36,8 @@ class Progress {
 
     onProgress  : ProgressCallback  = () => { };    // Triggered when a message finished if all lists are finished
 
-    /**
-     * Clear all progress
-     */
-    clear() {
-        this.lists.clear();
-        this.messages.clear();
+    constructor(callback: ProgressCallback) {
+        this.onProgress = callback;
     }
 
     /**
@@ -78,52 +74,47 @@ class Progress {
  */
 export namespace mari {
 
-    let queryAfter: string = '';
-    let ignoreIds: Array<string> = [];      // List of ids of mails that should be ignored
-    let nominations: Array<NominationRAW> = [];    // List of raw nominations
-
-    const progress = new Progress();  // Progress manager
-
     /**
      * Start the process
      * @param nominations Existing nominations
      */
     export async function start(raws: Array<NominationRAW>, onProgress: ProgressCallback) {
-        progress.onProgress = onProgress;
-        nominations.length = 0;
-        progress.lists.clear();
-        progress.messages.clear();
+        const progress = new Progress(onProgress);
 
         // Ignore the mails already in the list
-        ignoreIds = raws.flatMap(nomination => {
+        const ignoreIds = raws.flatMap(nomination => {
             return nomination.resultMailId.length > 0 
                 ? [ nomination.confirmationMailId, nomination.resultMailId ] : [ nomination.confirmationMailId ];
         });
+        let queryAfter = '';
         if (preferences.general.queryAfterLatest()) {
-            const latest = Math.floor(nominations.reduce((time, nomination) => {
+            const latest = Math.floor(raws.reduce((time, nomination) => {
                 return Math.max(time, nomination.confirmedTime, nomination.resultTime)
             }, 0) / 1000);
             queryAfter = ` after:${latest}`;
-        } else {
-            queryAfter = '';
         }
         const queries: Array<Promise<void>> = [];
         for (const status of umi.status.values()) {
             for (const scanner of status.queries.keys()) {
-                queries.push(query(status, scanner));
+                queries.push(query(raws, progress, status, scanner, queryAfter, ignoreIds));
             }
         }
         await Promise.allSettled(queries);
-        raws.push(...nominations);
         return;
     }
 
     /**
      * Start to query message list
+     * @param raws Nomination list to fill
+     * @param progress Progress manager
      * @param status Status to query
      * @param scanner Scanner to query
      */
-    async function query(status: umi.Status, scanner: umi.ScannerCode) {
+    async function query(
+        raws: Array<NominationRAW>, progress: Progress,
+        status: umi.Status, scanner: umi.ScannerCode,
+        queryAfter: string,  ignoreIds: Array<string>
+    ) {
         progress.addList();
         // Query ID list
         const ids: Array<string> = [];
@@ -157,8 +148,7 @@ export namespace mari {
             if (!response) continue;
             const fullMail = response.result;
             try {
-                const nomination = parser.parse(fullMail, status.code, scanner);
-                nominations.push(nomination);
+                raws.push(parser.parse(fullMail, status.code, scanner));
             } catch (error) {
                 let subject = '';
                 for (const header of fullMail.payload!.headers!) {
