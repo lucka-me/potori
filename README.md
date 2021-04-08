@@ -1,5 +1,4 @@
 # ![](./public/assets/title.png)
-[![CI Status](https://img.shields.io/github/workflow/status/lucka-me/potori/CI?label=CI&logo=github-actions&logoColor=white)](https://github.com/lucka-me/potori/actions/workflows/ci.yml "CI Workflow")
 [![CD Status](https://img.shields.io/github/workflow/status/lucka-me/potori/CD?label=CD&logo=github-actions&logoColor=white)](https://github.com/lucka-me/potori/actions/workflows/cd.yml "CD Workflow")
 [![CI-Next Status](https://img.shields.io/github/workflow/status/lucka-me/potori/CI-Next?label=CI-Next&logo=github-actions&logoColor=white)](https://github.com/lucka-me/potori/actions/workflows/ci-next.yml "CI-Next Workflow")
 [![CD-Next Status](https://img.shields.io/github/workflow/status/lucka-me/potori/CD-Next?label=CD-Next&logo=github-actions&logoColor=white)](https://github.com/lucka-me/potori/actions/workflows/cd-next.yml "CD-Next Workflow")  
@@ -13,21 +12,24 @@
 
 ## Description
 
-A web app to visualize Ingress nominations from Gmail inbox.
-
-**A native app for macOS and iOS built with SwiftUI is [here](https://github.com/lucka-me/potori-swift).**
+A web app to manage Ingress nominations from Gmail inbox.
 
 ## Build & Run
 ```sh
-$ git checkout main # If you want to run the version deployed on website
+$ git checkout main # To run the deployed version
 $ git submodule update --init
 $ npm i
 $ npm start
 ```
 
-Open `http://localhost:8080/next` (`dev` branch) or `http://localhost:8000/` (`main` branch) in browser.
+Open `http://localhost:8080/next` (`dev` branch) or `http://localhost:8080/` (`main` branch) in browser.
 
 The `dev` branch will also be deployed continuously to the [`next` directory in website](https://potori.lucka.moe/next).
+
+## Related repositories
+- [lucka-me/potori-docs](https://github.com/lucka-me/potori-docs): Documents of Potori
+- [lucka-me/potori-swift](https://github.com/lucka-me/potori-swift): Native app built with SwiftUI for iOS / iPadOS / macOS
+- [lucka-me/potori-umi](https://github.com/lucka-me/potori-umi): Status and reasons data used in Potori
 
 ## Notice
 Potori is NOT fully compatible with Prime yet, we still need more [mail samples](https://github.com/lucka-me/potori-umi/tree/main/samples) to figure out how to query all related and localized mails exactly and identify each reason for rejection. If you have any trouble or want to help, please open an issue or contact us via Telegram@SeeleUN.
@@ -53,7 +55,8 @@ Potori is NOT fully compatible with Prime yet, we still need more [mail samples]
   Done in `0.7.0`
 - [x] Upgrade data struct
   Done in `0.8.0`
-- [ ] Convert to Vue app
+- [x] Convert to Vue app  
+  Done in `1.0.0`
 
 ## Changelog
 See [CHANGELOG.md](./CHANGELOG.md).
