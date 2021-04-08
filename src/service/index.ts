@@ -1,6 +1,5 @@
 import type { VueI18n } from 'vue-i18n';
 import { Store } from 'vuex'
-import { toRaw } from '@vue/reactivity';
 
 import type { State } from '@/store/state';
 import { brainstorming } from './brainstorming';
@@ -10,7 +9,7 @@ import { preferences } from './preferences';
 import { umi } from './umi';
 import { util } from './utils';
 import { CountCallback } from './types';
-import GoogleKit from './google';
+import { google } from './google';
 import Mari from './mari';
 import Nomination, { NominationData, NominationJSON } from './nomination';
 
@@ -44,7 +43,6 @@ export namespace service {
 
     const mimeJSON = 'application/json';
 
-    const google = new GoogleKit();
     const mari = new Mari();
     let _store: Store<State>;
 
@@ -66,22 +64,10 @@ export namespace service {
         dia.init(_store);
         brainstorming.init();
         umi.init(i18n);
+        google.init(_store);
 
-        google.init(() => {
-            google.auth.events.authStatusChanged = (authed) => {
-                _store.commit('google/setAuthed', authed);
-                _store.commit('google/loaded');
-            };
-            google.auth.init();
-
-            mari.events.alert = (message) => {
-                delibird.alert(message);
-            }
-            mari.events.progress = (progress, max) => {
-                setProgress(progress, max);
-            };
-            mari.init();
-        });
+        mari.events.alert = (message) => delibird.alert(message);
+        mari.events.progress = setProgress;
     }
 
     export function signIn() {

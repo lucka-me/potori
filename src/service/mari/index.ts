@@ -96,10 +96,7 @@ export default class Mari {
         progress: () => {},
     };
 
-    /**
-     * Initiate Mari
-     */
-    init() {
+    constructor() {
         this.progress.onProgress = (progress, max) => this.events.progress(progress, max);
     }
 
