@@ -18,7 +18,7 @@
   "license": "MIT",
   "dependencies": {
     "@firebase/app": "^0.6.17",
-    "@firebase/database": "^0.9.6",
+    "@firebase/database": "^0.9.10",
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@lucka-labs/eli": "^0.1.2",
     "chart.js": "^3.0.2",
