@@ -17,7 +17,7 @@
   "author": "lucka-me",
   "license": "MIT",
   "dependencies": {
-    "@firebase/app": "^0.6.17",
+    "@firebase/app": "^0.6.21",
     "@firebase/database": "^0.9.6",
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@lucka-labs/eli": "^0.1.2",
