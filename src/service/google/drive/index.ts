@@ -16,7 +16,7 @@ export default class GoogleDriveKit {
      * next one or not by return a boolean
      * 
      * @param filename Name of the file to download
-     * @param callback Triggered when a file is downloaded
+     * @param validator Triggered when a file is downloaded
      */
     async download(filename: string, validator: FileValidator) {
         const listResponse = await gapi.client.drive.files.list({
