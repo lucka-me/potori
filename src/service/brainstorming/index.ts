@@ -6,20 +6,6 @@ import { ProgressCallback } from '../types';
 import Nomination, { NominationData } from '@/service/nomination';
 
 /**
- * Result for {@link BrainstormingKit.analyse}
- */
-interface BrainstormingStats {
-    review: number,                     // Review count
-    nomination: number,                 // Count of nominations containing reviews
-    rate: Map<string, Array<number>>,   // Map of rate lists
-    reviewTimes: Array<number>,         // List of review timestamps
-    synch: {
-        total: number,  // Count of reviews of resulted nominations
-        synched: number // Count of reviews matches the result
-    },
-}
-
-/**
  * Host Brainstorming data and handle tasks related to Brainstorming
  */
 export namespace brainstorming {
