@@ -23,7 +23,7 @@
     "@lucka-labs/eli": "^0.1.2",
     "chart.js": "^3.2.1",
     "chartjs-adapter-luxon": "^1.0.0",
-    "luxon": "^1.26.0",
+    "luxon": "^1.27.0",
     "mapbox-gl": "^2.2.0",
     "material-components-web": "^10.0.0",
     "register-service-worker": "^1.7.2",
