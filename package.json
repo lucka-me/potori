@@ -1,6 +1,6 @@
 {
   "name": "potori",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Web App to Visualize Ingress Nominations",
   "scripts": {
     "postinstall": "ts-node --project scripts/tsconfig.json ./scripts/prepare.ts && tsc -m commonjs --esModuleInterop vue.config.ts",
