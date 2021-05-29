@@ -1,18 +1,21 @@
+import { Store } from 'vuex'
+
+import type { State } from '@/store/state';
 import { util } from '@/service/utils';
 import AuthKit from './auth';
 import GoogleDriveKit from './drive';
 
-type BasicCallback = () => void;
+export namespace google {
 
-export default class GoogleKit {
+    export const auth = new AuthKit();
+    export const drive = new GoogleDriveKit();
 
-    auth = new AuthKit();
-    drive = new GoogleDriveKit();
-
-    init(callback: BasicCallback) {
-        util.loadScript('https://apis.google.com/js/api.js')
-            .then(() => {
-                callback();
-            });
+    export async function init(store: Store<State>) {
+        await util.loadScript('https://apis.google.com/js/api.js');
+        auth.events.authStatusChanged = (authed) => {
+            store.commit('google/setAuthed', authed);
+            store.commit('google/loaded');
+        };
+        auth.init();
     }
 }

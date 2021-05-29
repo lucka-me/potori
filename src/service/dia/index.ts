@@ -1,7 +1,7 @@
 import { Store } from 'vuex';
 import { State } from '@/store/state';
 
-import { NominationData, Predicator } from '@/service/nomination';
+import { NominationRAW, Predicator } from '@/service/nomination';
 
 export namespace dia {
 
@@ -39,13 +39,13 @@ export namespace dia {
         return list.filter(predicator).length;
     }
 
-    export async function get(id: string): Promise<NominationData | undefined> {
+    export async function get(id: string): Promise<NominationRAW | undefined> {
         const store = getStore('readonly');
         if (!store) return;
         return await settled(store.get(id));
     }
 
-    export async function getAll(predicator?: Predicator): Promise<Array<NominationData>> {
+    export async function getAll(predicator?: Predicator): Promise<Array<NominationRAW>> {
         const store = getStore('readonly');
         if (!store) return [];
         let list = await settled(store.getAll()) ?? [];
@@ -53,14 +53,14 @@ export namespace dia {
         return list;
     }
 
-    export async function save(nomination: NominationData) {
+    export async function save(nomination: NominationRAW) {
         const store = getStore('readwrite');
         if (!store) return;
         const result = await settled(store.put(nomination));
         if (typeof result !== 'undefined') saved();
     }
 
-    export async function saveAll(nominations: Array<NominationData>) {
+    export async function saveAll(nominations: Array<NominationRAW>) {
         await Promise.allSettled(nominations.map(nomination => save(nomination)));
         saved();
     }

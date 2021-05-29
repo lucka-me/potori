@@ -1,18 +1,16 @@
 import type { VueI18n } from 'vue-i18n';
 import { Store } from 'vuex'
-import { toRaw } from '@vue/reactivity';
 
 import type { State } from '@/store/state';
 import { brainstorming } from './brainstorming';
-import { delibird } from './delibird';
 import { dia } from './dia';
+import { google } from './google';
+import { mari } from './mari';
 import { preferences } from './preferences';
 import { umi } from './umi';
 import { util } from './utils';
 import { CountCallback } from './types';
-import GoogleKit from './google';
-import Mari from './mari';
-import Nomination, { NominationData, NominationJSON } from './nomination';
+import Nomination, { NominationRAW, NominationJSON } from './nomination';
 
 export enum ServiceStatus {
     idle,
@@ -44,8 +42,6 @@ export namespace service {
 
     const mimeJSON = 'application/json';
 
-    const google = new GoogleKit();
-    const mari = new Mari();
     let _store: Store<State>;
 
     export const matchData: MatchData = {
@@ -66,22 +62,7 @@ export namespace service {
         dia.init(_store);
         brainstorming.init();
         umi.init(i18n);
-
-        google.init(() => {
-            google.auth.events.authStatusChanged = (authed) => {
-                _store.commit('google/setAuthed', authed);
-                _store.commit('google/loaded');
-            };
-            google.auth.init();
-
-            mari.events.alert = (message) => {
-                delibird.alert(message);
-            }
-            mari.events.progress = (progress, max) => {
-                setProgress(progress, max);
-            };
-            mari.init();
-        });
+        google.init(_store);
     }
 
     export function signIn() {
@@ -96,8 +77,8 @@ export namespace service {
         if (preferences.google.sync()) await download(Filename.nominations);
         setProgress(0, 0);
         setStatus(Status.processingMails);
-        const raws = await dia.getAll()
-        await mari.start(raws);
+        const raws = await dia.getAll();
+        await mari.start(raws, setProgress);
         const matchTargets: Array<Nomination> = [];
         const reduced = raws.reduce((list, raw) => {
             if (raw.id.length < 1) {
@@ -165,7 +146,7 @@ export namespace service {
     export async function importNominationsFile(): Promise<number> {
         const content = await util.importFile();
         try {
-            const list = JSON.parse(content) as Array<NominationData>;
+            const list = JSON.parse(content) as Array<NominationRAW>;
             const count = await importNominations(list);
             return count;
         } catch (error) {
@@ -204,7 +185,7 @@ export namespace service {
         const mapNomination = nominations.reduce((map, nomination) => {
             map.set(nomination.id, nomination);
             return map;
-        }, new Map<string, NominationData>());
+        }, new Map<string, NominationRAW>());
         
         let count = 0;
         for (const data of parsed.result) {
@@ -272,22 +253,25 @@ export namespace service {
     async function queryBrainstorming(list: Array<Nomination>) {
         setStatus(Status.queryingBrainstorming);
         let count = 0;
+        const queries: Array<Promise<void>> = [];
         for (const nomination of list) {
-            count++;
             if (nomination.lngLat) {
+                count++;
                 setProgress(count, list.length);
                 continue;
             }
-            const record = await brainstorming.query(nomination).catch(_ => undefined);
-            if (!record) {
-                setProgress(count, list.length);
-                continue;
-            }
-            nomination.lngLat = {
-                lng: parseFloat(record.lng), lat: parseFloat(record.lat)
-            };
-            setProgress(count, list.length);
+            const query = brainstorming.query(nomination)
+                .then(record => {
+                    nomination.lngLat = { lng: parseFloat(record.lng), lat: parseFloat(record.lat) };
+                })
+                .catch()
+                .finally(() => {
+                    count++;
+                    setProgress(count, list.length);
+                });
+            queries.push(query);
         }
+        await Promise.allSettled(queries);
     }
 
     function setStatus(status: Status) {
@@ -332,7 +316,7 @@ export namespace service {
                 if (merged) continue;
                 nominations.push(nomination);
             }
-            await dia.saveAll(nominations.map(nomination => nomination.data));
+            await dia.saveAll(nominations.map(nomination => nomination.raw));
         } catch (error) {
             count = 0;
         }

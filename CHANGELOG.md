@@ -1,7 +1,7 @@
 # Changelog
 Noteable changes of Potori will be documented here.
 
-## [1.0.0](https://github.com/lucka-me/potori/releases/tag/1.0.0) - 2021-04-TBA
+## [1.0.0](https://github.com/lucka-me/potori/releases/tag/1.0.0) - 2021-04-08
 Rebuild with Vue
 
 ## Added
@@ -33,7 +33,7 @@ Rebuild with Vue
 
 ## Known Issues
 - UI: Support for dark mode is removed (temporarily)
-- Feature: Unable to load Google API in some devices / browsers
+- Feature: Unable to load Google API in some browsers, please try adding to home screen or installing Potori
 
 <details><summary>0.8.x</summary>
 <p>
