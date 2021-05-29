@@ -21,7 +21,7 @@
     "@firebase/database": "^0.10.2",
     "@fortawesome/fontawesome-free": "^5.15.3",
     "@lucka-labs/eli": "^0.1.2",
-    "chart.js": "^3.2.1",
+    "chart.js": "^3.3.0",
     "chartjs-adapter-luxon": "^1.0.0",
     "luxon": "^1.27.0",
     "mapbox-gl": "^2.2.0",
