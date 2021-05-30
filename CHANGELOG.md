@@ -1,6 +1,12 @@
 # Changelog
 Noteable changes of Potori will be documented here.
 
+## [1.1.0](https://github.com/lucka-me/potori/releases/tag/1.1.0) - 2021-05-TBA
+Update dependencies
+
+## Changed
+- Update dependencies
+
 ## [1.0.0](https://github.com/lucka-me/potori/releases/tag/1.0.0) - 2021-04-08
 Rebuild with Vue
 
