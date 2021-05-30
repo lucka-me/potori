@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/assets/title.png"
   },
   {
-    "revision": "eb9d91e4ee120c056fe0",
+    "revision": "020254af29fc63281926",
     "url": "/next/css/app.797a826b.css"
   },
   {
@@ -48,8 +48,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/details.e45c7c88.css"
   },
   {
-    "revision": "4b4687cbc710d6ba1a2c",
-    "url": "/next/css/details~map.8a324763.css"
+    "revision": "ebf51ec9a04b6870f9dd",
+    "url": "/next/css/details~map.f18d09a4.css"
   },
   {
     "revision": "32c01504a7f5f605b63b",
@@ -64,7 +64,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/match.4e5ee524.css"
   },
   {
-    "revision": "f431b6e7114cd458c946",
+    "revision": "9544d9ffa67431a11749",
     "url": "/next/css/preferences.a2815486.css"
   },
   {
@@ -88,12 +88,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/img/fa-solid-900.376c1f97.svg"
   },
   {
-    "revision": "f9e8a6bdff4dc8bb71b28338a38c9f29",
+    "revision": "96b70248ba74bca45cd6493a45dac5b6",
     "url": "/next/index.html"
   },
   {
-    "revision": "eb9d91e4ee120c056fe0",
-    "url": "/next/js/app.31b28d0b.js"
+    "revision": "020254af29fc63281926",
+    "url": "/next/js/app.45eb28eb.js"
   },
   {
     "revision": "cf4b100c1d0be91cb5c6",
@@ -128,7 +128,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/details.6c3606f3.js"
   },
   {
-    "revision": "4b4687cbc710d6ba1a2c",
+    "revision": "ebf51ec9a04b6870f9dd",
     "url": "/next/js/details~map.085d37d2.js"
   },
   {
@@ -144,16 +144,16 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/map.efbc28c2.js"
   },
   {
-    "revision": "df301819e0f92965b2c3",
-    "url": "/next/js/mapbox.1d0f6be6.js"
+    "revision": "4ec187e1c70cca9ad411",
+    "url": "/next/js/mapbox.37414d4f.js"
   },
   {
     "revision": "148eac7a69293cec88e4",
     "url": "/next/js/match.4ecdd57c.js"
   },
   {
-    "revision": "f431b6e7114cd458c946",
-    "url": "/next/js/preferences.1993e6b0.js"
+    "revision": "9544d9ffa67431a11749",
+    "url": "/next/js/preferences.fa9fd7a0.js"
   },
   {
     "revision": "e740a533dfc63e89adcc986fa213f9c3",
