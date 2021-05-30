@@ -3,9 +3,9 @@
   "version": "1.1.0",
   "description": "Web App to Visualize Ingress Nominations",
   "scripts": {
-    "postinstall": "ts-node --project scripts/tsconfig.json ./scripts/prepare.ts && tsc -m commonjs --esModuleInterop vue.config.ts",
-    "prestart": "ts-node --project scripts/tsconfig.json ./scripts/prepare.ts",
-    "prebuild": "ts-node --project scripts/tsconfig.json ./scripts/prepare.ts",
+    "postinstall": "ts-node ./scripts/prepare.ts && tsc -m commonjs --esModuleInterop vue.config.ts",
+    "prestart": "ts-node ./scripts/prepare.ts",
+    "prebuild": "ts-node ./scripts/prepare.ts",
     "build-config": "tsc -m commonjs --esModuleInterop vue.config.ts",
     "start": "vue-cli-service serve",
     "build": "vue-cli-service build"
