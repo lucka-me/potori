@@ -40,5 +40,5 @@ export default class MaterialList extends Vue {
 <style lang="scss">
 @use "@material/list";
 
-@include list.deprecated-core-styles;
+@include list.core-styles;
 </style>
