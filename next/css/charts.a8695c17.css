@@ -1,1 +1,0 @@
-.charts{padding:1rem}.charts>div:not(:first-child){-webkit-margin-before:.6rem;margin-block-start:.6rem}.charts>.grid{display:grid;grid-template-columns:1fr;gap:.6rem}@media screen and (min-width:600px){.charts>.grid--1-1{grid-template-columns:1fr 1fr}.charts>.grid--1-2{grid-template-columns:1fr 2fr}.charts>.grid--2-1{grid-template-columns:2fr 1fr}}
