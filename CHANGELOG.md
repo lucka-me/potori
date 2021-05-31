@@ -1,7 +1,7 @@
 # Changelog
 Noteable changes of Potori will be documented here.
 
-## [1.1.0](https://github.com/lucka-me/potori/releases/tag/1.1.0) - 2021-05-TBA
+## [1.1.0](https://github.com/lucka-me/potori/releases/tag/1.1.0) - 2021-05-31
 Update dependencies
 
 ## Changed
