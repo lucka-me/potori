@@ -74,7 +74,7 @@ export default class NominationDetails extends Vue {
     save() {
         if (!this.nomination) return;
         this.editData.save(this.nomination);
-        dia.save(toRaw(this.nomination.data));
+        dia.save(toRaw(this.nomination.raw));
         this.editing = false;
     }
 

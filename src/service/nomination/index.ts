@@ -34,7 +34,7 @@ export interface NominationJSON {
     lngLat?: LngLat;    // Location
 }
 
-export interface NominationData extends NominationJSON {
+export interface NominationRAW extends NominationJSON {
     reasons: Array<umi.ReasonCode>;
     resultTime: number;
     resultMailId: string;
@@ -43,14 +43,14 @@ export interface NominationData extends NominationJSON {
 /**
  * Nomination data
  */
-export default class Nomination implements NominationData {
+export default class Nomination implements NominationRAW {
 
     private static timestampSecondBound = 1E12;
 
     /**
      * Comparator for sorting by time
      */
-    static readonly comparatorByTime = (a: NominationData, b: NominationData) => {
+    static readonly comparatorByTime = (a: NominationRAW, b: NominationRAW) => {
         const timeA = a.resultTime ? a.resultTime : a.confirmedTime;
         const timeB = b.resultTime ? b.resultTime : b.confirmedTime;
         return timeA < timeB ? 1 : -1;
@@ -123,8 +123,8 @@ export default class Nomination implements NominationData {
         return this.confirmedTime + (14 * 24 * 3600 * 1000);
     }
 
-    get data(): NominationData {
-        let data: NominationData = {
+    get raw(): NominationRAW {
+        let raw: NominationRAW = {
             id: this.id,
             title: this.title,
             image: this.image,
@@ -137,12 +137,12 @@ export default class Nomination implements NominationData {
             resultMailId: this.resultMailId
         };
         if (this.lngLat) {
-            data.lngLat = {
+            raw.lngLat = {
                 lng: this.lngLat.lng,
                 lat: this.lngLat.lat
             };
         }
-        return data;
+        return raw;
     }
 
     /**
@@ -174,23 +174,23 @@ export default class Nomination implements NominationData {
 
     /**
      * Merge from another nomination
-     * @param nomination The nomination to merge from
+     * @param raw The raw nomination to merge from
      * @returns Succeed or not
      */
-    merge(nomination: NominationData): boolean {
-        if (this.id !== nomination.id) return false;
+    merge(raw: NominationRAW): boolean {
+        if (this.id !== raw.id) return false;
         if (this.status === umi.StatusCode.Pending) {
-            this.title = nomination.title;
-            this.status = nomination.status;
-            this.reasons = nomination.reasons;
-            this.resultTime = nomination.resultTime;
-            this.resultMailId = nomination.resultMailId;
+            this.title = raw.title;
+            this.status = raw.status;
+            this.reasons = raw.reasons;
+            this.resultTime = raw.resultTime;
+            this.resultMailId = raw.resultMailId;
         } else {
-            this.confirmedTime = nomination.confirmedTime;
-            this.confirmationMailId = nomination.confirmationMailId;
+            this.confirmedTime = raw.confirmedTime;
+            this.confirmationMailId = raw.confirmationMailId;
         }
         if (!this.lngLat) {
-            this.lngLat = nomination.lngLat;
+            this.lngLat = raw.lngLat;
         }
         return true;
     }
@@ -272,4 +272,4 @@ export default class Nomination implements NominationData {
 /**
  * Callback for Array<Nomination>.filter()
  */
-export type Predicator = (nomination: NominationData) => boolean;
+export type Predicator = (nomination: NominationRAW) => boolean;
