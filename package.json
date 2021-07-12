@@ -37,7 +37,7 @@
     "@types/gapi.client.drive": "^3.0.13",
     "@types/gapi.client.gmail": "^1.0.3",
     "@types/luxon": "^1.26.5",
-    "@types/mapbox-gl": "^2.1.2",
+    "@types/mapbox-gl": "^2.3.3",
     "@types/webpack-bundle-analyzer": "^3.9.2",
     "@vue/cli-plugin-pwa": "^4.5.13",
     "@vue/cli-plugin-router": "^4.5.13",
