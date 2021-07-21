@@ -186,6 +186,7 @@ export namespace brainstorming {
         try {
             const response = await fetch(`https://oprbrainstorming.firebaseio.com/c/reviews/${id}.json`);
             record = await response.json();
+            if (record) await save(id, record);
         } catch {
             throw new Error(FailReason.FIREBASE_ERROR);
         }
