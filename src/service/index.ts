@@ -30,7 +30,7 @@ export namespace service {
     }
 
     export interface MatchPack {
-        target: Nomination;
+        target: NominationRAW;
         candidates: Array<Nomination>;
         selected: string;
     }
@@ -79,11 +79,11 @@ export namespace service {
         setStatus(Status.processingMails);
         const raws = await dia.getAll();
         await mari.start(raws, setProgress);
-        const matchTargets: Array<Nomination> = [];
+        const matchTargets: Array<NominationRAW> = [];
         const reduced = raws.reduce((list, raw) => {
             if (raw.id.length < 1) {
                 console.log(`service.arrange: Need match: #${raw.id}[${raw.title}]`);
-                matchTargets.push(Nomination.from(raw));
+                matchTargets.push(raw);
                 return list;
             }
             // Merge
@@ -207,7 +207,7 @@ export namespace service {
      * @param targets Nominations without image
      * @param list Normal nominations
      */
-    async function match(targets: Array<Nomination>, list: Array<Nomination>) {
+    async function match(targets: Array<NominationRAW>, list: Array<Nomination>) {
         const pendings = list.filter(umi.status.get(umi.StatusCode.Pending)!.predicator);
         const packs: Array<MatchPack> = [];
         for (const target of targets) {

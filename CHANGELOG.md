@@ -7,6 +7,9 @@ Support Pokémon GO
 ### Added
 - Incomplete support for Pokémon GO
 
+### Fixed
+- Error occurs when manually matching is required
+
 ## [1.1.0](https://github.com/lucka-me/potori/releases/tag/1.1.0) - 2021-05-31
 Update dependencies
 
