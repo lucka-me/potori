@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/assets/title.png"
   },
   {
-    "revision": "f068f808f1617fb81405",
+    "revision": "23b636b5b02f6e10adf9",
     "url": "/next/css/app.797a826b.css"
   },
   {
@@ -60,11 +60,11 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/map.dc687b38.css"
   },
   {
-    "revision": "9b61b935baa483522317",
+    "revision": "7b1e3ba6386bd54a8b97",
     "url": "/next/css/match.4e5ee524.css"
   },
   {
-    "revision": "9e6d844016ffba85a9f0",
+    "revision": "0f173b9c16c1b26c72cb",
     "url": "/next/css/preferences.a2815486.css"
   },
   {
@@ -88,12 +88,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/img/fa-solid-900.376c1f97.svg"
   },
   {
-    "revision": "0f9951fb3bf4c8f13c3dc5df34d58f12",
+    "revision": "63fcf5fa402bdcf631c207132ce7843f",
     "url": "/next/index.html"
   },
   {
-    "revision": "f068f808f1617fb81405",
-    "url": "/next/js/app.6fd276ff.js"
+    "revision": "23b636b5b02f6e10adf9",
+    "url": "/next/js/app.de80e955.js"
   },
   {
     "revision": "add36172119093a65e57",
@@ -144,12 +144,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/mapbox.37414d4f.js"
   },
   {
-    "revision": "9b61b935baa483522317",
-    "url": "/next/js/match.a970bf59.js"
+    "revision": "7b1e3ba6386bd54a8b97",
+    "url": "/next/js/match.95859617.js"
   },
   {
-    "revision": "9e6d844016ffba85a9f0",
-    "url": "/next/js/preferences.5e959a53.js"
+    "revision": "0f173b9c16c1b26c72cb",
+    "url": "/next/js/preferences.44db1699.js"
   },
   {
     "revision": "e740a533dfc63e89adcc986fa213f9c3",
