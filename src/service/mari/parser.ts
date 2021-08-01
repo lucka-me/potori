@@ -46,7 +46,7 @@ export namespace parser {
             const mailBody = base64(part.body!.data!);
             // Title
             if (scanner === umi.ScannerCode.GO && nomination.title.length === 0) {
-                const matchedTitle = mailBody.match(/\– (The )?Pokémon GO.+(?:\n|\r|<\/p>| )+<p>(.+?)<\/p>(?:\n|\r)/);
+                const matchedTitle = mailBody.match(/\– (?:The )?Pokémon GO.+(?:\n|\r|<\/p>| )+<p>(.+?)<\/p>(?:\n|\r)/);
                 if (matchedTitle && matchedTitle.length > 1) {
                     nomination.title = matchedTitle[1];
                 }
@@ -74,7 +74,7 @@ export namespace parser {
      * @param scanner The scanner key for fetch the keywords
      */
     function reason(mail: string, scanner: umi.ScannerCode): Array<umi.ReasonCode> {
-        const matchedMainBody = mail.match(/(\n|\r|.)+?\-NianticOps/);
+        const matchedMainBody = mail.match(/(\n|\r|.)+?\-(NianticOps| Pokémon GO)/);
         if (!matchedMainBody || matchedMainBody.length < 1) {
             return [ ];
         }
