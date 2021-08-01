@@ -14,7 +14,7 @@ jobs:
           submodules: true
       - uses: actions/setup-node@v2.1.5
         with:
-          node-version: 12.x
+          node-version: 14.x
       - name: Initiate
         run: npm ci
       - name: Build Potori
