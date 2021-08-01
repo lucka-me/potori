@@ -30,19 +30,27 @@ export namespace parser {
 
         // Subject -> Title
         for (const header of mail.payload!.headers!) {
-            if (header.name === 'Subject') {
-                const matched = header.value!.match(/[:：](.+)/);
-                if (matched && matched.length > 1) {
-                    nomination.title = matched[1].trim();
-                }
-                break;
+            if (header.name !== 'Subject') continue;
+            const matched = header.value!
+                .replace(/^Trainer .+?:/, '')
+                .match(/[:：](.+)/);
+            if (matched && matched.length > 1) {
+                nomination.title = matched[1].trim();
             }
+            break;
         }
 
         // Body -> image, id, lngLat and reason
         for (const part of mail.payload!.parts!) {
             if (part.partId !== '1') continue;
             const mailBody = base64(part.body!.data!);
+            // Title
+            if (scanner === umi.ScannerCode.GO && nomination.title.length === 0) {
+                const matchedTitle = mailBody.match(/\– (The )?Pokémon GO.+(?:\n|\r|<\/p>| )+<p>(.+?)<\/p>(?:\n|\r)/);
+                if (matchedTitle && matchedTitle.length > 1) {
+                    nomination.title = matchedTitle[1];
+                }
+            }
             const matched = mailBody.match(/(?:googleusercontent|ggpht)\.com\/([0-9a-zA-Z\-\_]+)/);
             if (matched && matched.length > 1) {
                 nomination.image = matched[1];

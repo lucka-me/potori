@@ -15,6 +15,7 @@ export namespace umi {
         Unknown     = 0,
         Redacted    = 1,
         Prime       = 2,
+        GO          = 3,
     }
     
     /**

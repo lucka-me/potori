@@ -100,7 +100,6 @@ export namespace service {
             }
             return list;
         }, new Array<Nomination>());
-        console.log(`service.arrange: ${raws.length} reduced to ${reduced.length}`);
         if (matchTargets.length > 0) {
             await match(matchTargets, reduced);
         }
