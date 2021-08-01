@@ -23,7 +23,7 @@
     "chartjs-adapter-luxon": "^1.0.0",
     "luxon": "^1.27.0",
     "mapbox-gl": "^2.3.0",
-    "material-components-web": "^10.0.0",
+    "material-components-web": "^12.0.0",
     "register-service-worker": "^1.7.2",
     "vue": "^3.1.1",
     "vue-class-component": "^8.0.0-rc.1",
