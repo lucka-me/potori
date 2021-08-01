@@ -17,7 +17,7 @@
     <div class="candidates">
         <material-card
             v-for="candidate of pack.candidates" :key="candidate.id"
-            :image="candidate.image"
+            :image="candidate.imageUrl"
             @click="select(candidate.id)"
         >
             <div class="content">
