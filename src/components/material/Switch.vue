@@ -39,7 +39,6 @@ export default class MaterialSwitch extends Vue {
     mounted() {
         this.ctrl = MDCSwitch.attachTo(this.$el);
         this.ctrl.selected = this.value;
-        console.log(`mounted ${this.ctrl.selected}`);
     }
 
     unmounted() {

@@ -82,7 +82,6 @@ export namespace service {
         const matchTargets: Array<NominationRAW> = [];
         const reduced = raws.reduce((list, raw) => {
             if (raw.id.length < 1) {
-                console.log(`service.arrange: Need match: #${raw.id}[${raw.title}]`);
                 matchTargets.push(raw);
                 return list;
             }
