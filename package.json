@@ -33,7 +33,7 @@
     "vuex": "^4.0.1"
   },
   "devDependencies": {
-    "@types/gapi.auth2": "^0.0.54",
+    "@types/gapi.auth2": "^0.0.55",
     "@types/gapi.client.drive": "^3.0.13",
     "@types/gapi.client.gmail": "^1.0.3",
     "@types/luxon": "^1.26.5",
