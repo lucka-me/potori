@@ -74,7 +74,7 @@ export namespace parser {
      * @param scanner The scanner key for fetch the keywords
      */
     function reason(mail: string, scanner: umi.ScannerCode): Array<umi.ReasonCode> {
-        const matchedMainBody = mail.match(/(\n|\r|.)+?\-(NianticOps| Pokémon GO)/);
+        const matchedMainBody = mail.match(/^(\n|\r|.)+?\-(NianticOps| Pokémon GO)/);
         if (!matchedMainBody || matchedMainBody.length < 1) {
             return [ ];
         }
