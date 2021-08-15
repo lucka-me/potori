@@ -1,11 +1,23 @@
 <template>
-<div class="mdc-switch">
+<button class="mdc-switch" type="button" role="switch" @click="changed()">
     <div class="mdc-switch__track"></div>
-    <div class="mdc-switch__thumb-underlay">
-        <div class="mdc-switch__thumb"></div>
-        <input type="checkbox" class="mdc-switch__native-control" role="switch"/>
+    <div class="mdc-switch__handle-track">
+        <div class="mdc-switch__handle">
+            <div class="mdc-switch__shadow">
+                <div class="mdc-elevation-overlay"></div>
+            </div>
+            <div class="mdc-switch__ripple"></div>
+            <div class="mdc-switch__icons">
+                <svg class="mdc-switch__icon mdc-switch__icon--on" viewBox="0 0 24 24">
+                    <path d="M19.69,5.23L8.96,15.96l-4.23-4.23L2.96,13.5l6,6L21.46,7L19.69,5.23z" />
+                </svg>
+                <svg class="mdc-switch__icon mdc-switch__icon--off" viewBox="0 0 24 24">
+                    <path d="M20 13H4v-2h16v2z" />
+                </svg>
+            </div>
+        </div>
     </div>
-</div>
+</button>
 </template>
 
 <script lang="ts">
@@ -21,30 +33,27 @@ export default class MaterialSwitch extends Vue {
     @Watch('value')
     onValueChanged(newVal: boolean, _: string) {
         if (!this.ctrl) return;
-        this.ctrl.checked = newVal
+        this.ctrl.selected = newVal;
     }
 
     mounted() {
         this.ctrl = MDCSwitch.attachTo(this.$el);
-        this.ctrl.checked = this.value;
-        this.ctrl.listen('change', this.changed);
+        this.ctrl.selected = this.value;
     }
 
     unmounted() {
         this.ctrl?.destroy();
     }
 
-    private changed() {
+    changed() {
         if (!this.ctrl) return;
-        this.$emit('update:modelValue', this.ctrl.checked);
+        this.$emit('update:modelValue', !this.ctrl.selected);
     }
 }
 </script>
 
 <style lang="scss">
-@use "@material/switch";
-
-@include switch.core-styles;
+@use '@material/switch/styles';
 
 .mdc-switch {
     margin: 1rem;

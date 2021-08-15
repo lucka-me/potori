@@ -17,8 +17,8 @@ export default class MaterialList extends Vue {
 
     get className() {
         let name = 'mdc-list';
-        if (this.twoLine) name += ' mdc-list--two-line';
-        if (this.leading) name += ` mdc-list--${this.leading}-list`;
+        // if (this.twoLine) name += ' mdc-list--two-line';
+        // if (this.leading) name += ` mdc-list--${this.leading}-list`;
         return name;
     }
 
@@ -38,7 +38,6 @@ export default class MaterialList extends Vue {
 </script>
 
 <style lang="scss">
-@use "@material/list";
-
-@include list.core-styles;
+@use "@material/list/evolution-mixins" as list-evolution-mixins;
+@include list-evolution-mixins.core-styles();
 </style>

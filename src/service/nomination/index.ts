@@ -202,7 +202,7 @@ export default class Nomination implements NominationRAW {
      */
     static from(json: NominationJSON): Nomination {
         if (!json.id) throw new Error(ParseErrorReason.MISSING_ID);
-        if (!json.title) throw new Error(ParseErrorReason.MISSING_TITLE);
+        // if (!json.title) throw new Error(ParseErrorReason.MISSING_TITLE);
         if (!json.image) throw new Error(ParseErrorReason.MISSING_IMAGE);
 
         // Fix old issues

@@ -5,19 +5,19 @@
         <div class="details">
             <div>
                 <material-icon icon="mobile-alt" fixed-width/>
-                <span>{{ pack.target.scannerData.title }}</span>
+                <span>{{ scannerTitle }}</span>
             </div>
             <div>
-                <material-icon :icon="pack.target.statusData.icon" fixed-width/>
+                <material-icon :icon="statusIcon" fixed-width/>
                 <span>{{ getTimeString(pack.target.resultTime) }}</span>
             </div>
         </div>
     </div>
-    <div class="candiddates-title">Candidates</div>
+    <div class="candiddates-title">{{ $t('candidates') }}</div>
     <div class="candidates">
         <material-card
             v-for="candidate of pack.candidates" :key="candidate.id"
-            :image="candidate.image"
+            :image="candidate.imageUrl"
             @click="select(candidate.id)"
         >
             <div class="content">
@@ -35,6 +35,7 @@
 import { Vue, Options, Prop } from 'vue-property-decorator';
 
 import { service } from '@/service';
+import { umi } from '@/service/umi';
 
 import MaterialCard from '@/components/material/Card.vue';
 import MaterialIcon from '@/components/material/Icon.vue';
@@ -53,6 +54,14 @@ import locales from './Pack.locales.json';
 export default class MatchPackView extends Vue {
 
     @Prop(Object) readonly pack!: service.MatchPack;
+
+    get scannerTitle(): string {
+        return umi.scanner.get(this.pack.target.scanner)!.title;
+    }
+
+    get statusIcon(): string {
+        return umi.status.get(this.pack.target.status)!.icon;
+    }
 
     getTimeString(time: number) {
         return new Date(time).toLocaleString()

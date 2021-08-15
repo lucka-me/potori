@@ -1,16 +1,25 @@
 # Changelog
 Noteable changes of Potori will be documented here.
 
+## [1.2.0](https://github.com/lucka-me/potori/releases/tag/1.2.0) - 2021-08-15
+Support Pokémon GO
+
+### Added
+- Incomplete support for Pokémon GO
+
+### Fixed
+- Error occurs when manually matching is required
+
 ## [1.1.0](https://github.com/lucka-me/potori/releases/tag/1.1.0) - 2021-05-31
 Update dependencies
 
-## Changed
+### Changed
 - Update dependencies
 
 ## [1.0.0](https://github.com/lucka-me/potori/releases/tag/1.0.0) - 2021-04-08
 Rebuild with Vue
 
-## Added
+### Added
 - New page: Dashboard, to display general informations and provide entrances to other pages
 - New page: Charts, to display non-brainstorming charts
 - New page: Brainstorming, to display brainstorming-related charts and update local database
@@ -28,7 +37,7 @@ Rebuild with Vue
 - Feature: Detailed progress with finished / total
 - Feature: Paste Intel URL to set nomination's location
 
-## Changed
+### Changed
 - Framework: Rebuilt with Vue 3
 - Framework: Nominations and brainstorming data are saved in local IndexedDB database
 - UI: Optimized for standalone mode of mobile devices

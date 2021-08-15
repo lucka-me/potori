@@ -1,8 +1,6 @@
-import type { Reference } from '@firebase/database-types';
-
 import { umi } from '@/service/umi';
-import { util } from '../utils';
-import { ProgressCallback } from '../types';
+import { util } from '@/service/utils';
+import { ProgressCallback } from '@/service/types';
 import Nomination, { NominationRAW } from '@/service/nomination';
 
 /**
@@ -56,7 +54,6 @@ export namespace brainstorming {
     const storeName = 'record';
 
     let database: IDBDatabase | undefined = undefined;  // Local database
-    let reference: Reference | undefined = undefined;   // Firebase reference
 
     export async function init() {
         return new Promise<boolean>((resolve, reject) => {
@@ -185,23 +182,14 @@ export namespace brainstorming {
      * @param id Brainstorming ID
      */
     async function queryFirebase(id: string): Promise<Record | undefined> {
-        if (!reference) {
-            const [ firebase, _ ] = await Promise.all([
-                import(/* webpackChunkName: 'firebase' */ '@firebase/app'),
-                import(/* webpackChunkName: 'firebase' */ '@firebase/database'),
-            ]).catch(_ => {
-                throw new Error(FailReason.FIREBASE_ERROR);
-            });
-            if (!reference) {
-                const app = firebase.default.initializeApp({ databaseURL: 'https://oprbrainstorming.firebaseio.com' });
-                if (!reference) reference = app.database!().ref('c/reviews/');
-            }
-        }
-        const data = await reference.child(id).once('value').catch(_ => {
+        let record: Record | undefined = undefined;
+        try {
+            const response = await fetch(`https://oprbrainstorming.firebaseio.com/c/reviews/${id}.json`);
+            record = await response.json();
+            if (record) await save(id, record);
+        } catch {
             throw new Error(FailReason.FIREBASE_ERROR);
-        });
-        const record: Record | undefined = data.val();
-        if (record) await save(id, record);
+        }
         return record;
     }
 

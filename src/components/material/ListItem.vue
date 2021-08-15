@@ -1,15 +1,15 @@
 <template>
-<li class="mdc-list-item">
+<li class="mdc-list-item mdc-list-item--with-two-lines mdc-list-item--with-leading-image mdc-list-item--with-trailing-icon">
     <span class="mdc-list-item__ripple"></span>
-    <span v-if="$slots.leading" class="mdc-list-item__graphic">
+    <span v-if="$slots.leading" class="mdc-list-item__start">
         <slot name="leading"/>
     </span>
-    <span v-if="secondary" class="mdc-list-item__text">
-        <span  class="mdc-list-item__primary-text">{{ text }}</span>
+    <span v-if="secondary" class="mdc-list-item__content">
+        <span class="mdc-list-item__primary-text">{{ text }}</span>
         <span class="mdc-list-item__secondary-text">{{ secondary }}</span>
     </span>
-    <span v-else class="mdc-list-item__text">{{ text }}</span>
-    <span v-if="$slots.meta" class="mdc-list-item__meta">
+    <span v-else class="mdc-list-item__content">{{ text }}</span>
+    <span v-if="$slots.meta" class="mdc-list-item__end">
         <slot name="meta"/>
     </span>
 </li>
