@@ -16,35 +16,35 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/assets/title.png"
   },
   {
-    "revision": "9235940405885dc3544e",
+    "revision": "c7ec3dc527796048a469",
     "url": "/next/css/app.6988ef80.css"
   },
   {
-    "revision": "ed8d58d34bdde3ed6f1a",
+    "revision": "fbbf89420a6fa12c2f53",
     "url": "/next/css/brainstorming.2454f1eb.css"
   },
   {
-    "revision": "719962c06d56e7fc1ed8",
+    "revision": "53c637caf37882ad9f40",
     "url": "/next/css/brainstorming~charts.5109a264.css"
   },
   {
-    "revision": "fef0064e265596f424b3",
+    "revision": "142d001705a6c2ee4eec",
     "url": "/next/css/brainstorming~charts~dashboard~details~list~map~match~preferences.e3bf8ac8.css"
   },
   {
-    "revision": "040eb230fb498fda1ec0",
+    "revision": "2746f688b4ca44845c0b",
     "url": "/next/css/brainstorming~dashboard.7d15308f.css"
   },
   {
-    "revision": "c455c4c75c223b3f8235",
+    "revision": "5008f92cf60faeae22aa",
     "url": "/next/css/charts.a8695c17.css"
   },
   {
-    "revision": "b3827d726b195411bea9",
+    "revision": "31664148cecf06b6c0f6",
     "url": "/next/css/dashboard.ea051903.css"
   },
   {
-    "revision": "ddc51088b276269ef8fa",
+    "revision": "68d34f8d3de3a2918dee",
     "url": "/next/css/details.b56758cc.css"
   },
   {
@@ -52,19 +52,19 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/details~map.649328d6.css"
   },
   {
-    "revision": "7f99c94089e6aa11f6f9",
+    "revision": "1268d6b7c81fb29de03a",
     "url": "/next/css/list.a11a204f.css"
   },
   {
-    "revision": "67a0b7cd79190d20e848",
+    "revision": "1d8a1162c8c7b4cdcc0f",
     "url": "/next/css/map.dc687b38.css"
   },
   {
-    "revision": "8db5d498daa6b4358b11",
+    "revision": "270c80c6b8bc02066b01",
     "url": "/next/css/match.d5345565.css"
   },
   {
-    "revision": "60e68296c4dc17b074e6",
+    "revision": "384280ec7626ecdcd772",
     "url": "/next/css/preferences.1d61bbd0.css"
   },
   {
@@ -88,68 +88,68 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/img/fa-solid-900.37bc7099.svg"
   },
   {
-    "revision": "e01d5eec15efb6bebfeabc504160dedf",
+    "revision": "c6c882d7be07247b505b216f405494db",
     "url": "/next/index.html"
   },
   {
-    "revision": "9235940405885dc3544e",
-    "url": "/next/js/app.9d826f96.js"
+    "revision": "c7ec3dc527796048a469",
+    "url": "/next/js/app.3e745230.js"
   },
   {
-    "revision": "ed8d58d34bdde3ed6f1a",
-    "url": "/next/js/brainstorming.7e1c708d.js"
+    "revision": "fbbf89420a6fa12c2f53",
+    "url": "/next/js/brainstorming.2f110b3b.js"
   },
   {
-    "revision": "719962c06d56e7fc1ed8",
-    "url": "/next/js/brainstorming~charts.c1622551.js"
+    "revision": "53c637caf37882ad9f40",
+    "url": "/next/js/brainstorming~charts.dd76275e.js"
   },
   {
-    "revision": "fef0064e265596f424b3",
-    "url": "/next/js/brainstorming~charts~dashboard~details~list~map~match~preferences.38ff0177.js"
+    "revision": "142d001705a6c2ee4eec",
+    "url": "/next/js/brainstorming~charts~dashboard~details~list~map~match~preferences.4974e163.js"
   },
   {
-    "revision": "040eb230fb498fda1ec0",
-    "url": "/next/js/brainstorming~dashboard.30e6244c.js"
+    "revision": "2746f688b4ca44845c0b",
+    "url": "/next/js/brainstorming~dashboard.b81bc155.js"
   },
   {
-    "revision": "c455c4c75c223b3f8235",
-    "url": "/next/js/charts.898f5ce9.js"
+    "revision": "5008f92cf60faeae22aa",
+    "url": "/next/js/charts.8a78e454.js"
   },
   {
-    "revision": "b73c283b11c1498237be",
-    "url": "/next/js/chunk-vendors.9bf2d2c0.js"
+    "revision": "2048361bc14ab9a76840",
+    "url": "/next/js/chunk-vendors.a864708d.js"
   },
   {
-    "revision": "b3827d726b195411bea9",
-    "url": "/next/js/dashboard.71d20a0a.js"
+    "revision": "31664148cecf06b6c0f6",
+    "url": "/next/js/dashboard.02bcea16.js"
   },
   {
-    "revision": "ddc51088b276269ef8fa",
-    "url": "/next/js/details.05cd8dbd.js"
+    "revision": "68d34f8d3de3a2918dee",
+    "url": "/next/js/details.f2b4a7b7.js"
   },
   {
     "revision": "814a84f032b91c2c40aa",
     "url": "/next/js/details~map.085d37d2.js"
   },
   {
-    "revision": "7f99c94089e6aa11f6f9",
-    "url": "/next/js/list.b1376a3c.js"
+    "revision": "1268d6b7c81fb29de03a",
+    "url": "/next/js/list.c0407d51.js"
   },
   {
-    "revision": "67a0b7cd79190d20e848",
-    "url": "/next/js/map.a555fadb.js"
+    "revision": "1d8a1162c8c7b4cdcc0f",
+    "url": "/next/js/map.0e1e2a72.js"
   },
   {
     "revision": "0cb625d6642dd0d87316",
     "url": "/next/js/mapbox.5ac0ade1.js"
   },
   {
-    "revision": "8db5d498daa6b4358b11",
-    "url": "/next/js/match.d9591c4e.js"
+    "revision": "270c80c6b8bc02066b01",
+    "url": "/next/js/match.f560edfd.js"
   },
   {
-    "revision": "60e68296c4dc17b074e6",
-    "url": "/next/js/preferences.0f6fae34.js"
+    "revision": "384280ec7626ecdcd772",
+    "url": "/next/js/preferences.5055a2a7.js"
   },
   {
     "revision": "e740a533dfc63e89adcc986fa213f9c3",
