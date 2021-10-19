@@ -25,7 +25,11 @@ import locales from './Status.locales.json';
 })
 export default class StatusChart extends Vue {
 
-    private static readonly colors = [ '#CAAF85', '#35C572', '#B0373C' ];
+    private static readonly colors = [
+        umi.Status.colors.get(umi.StatusCode.Pending),
+        umi.Status.colors.get(umi.StatusCode.Accepted),
+        umi.Status.colors.get(umi.StatusCode.Rejected)
+    ];
 
     options: ChartOptions<'doughnut'> = {
         plugins: {

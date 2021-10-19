@@ -53,9 +53,16 @@ export namespace umi {
      */
     export class Status {
 
+        static colors = new Map<StatusCode, string>([
+            [ umi.StatusCode.Pending, '#CAAF85' ],
+            [ umi.StatusCode.Accepted, '#35C572' ],
+            [ umi.StatusCode.Rejected, '#B0373C' ],
+        ]);
+
         readonly code: StatusCode; // Code to identify the status and saved in file
         readonly title: string; // Title to display
         readonly icon: string;  // Icon to represent the status
+        readonly color: string; // Color
     
         readonly queries: Map<ScannerCode, string>;  // Queries to search mails, <scanner, query>
 
@@ -68,6 +75,8 @@ export namespace umi {
             this.code = code;
             this.title = title;
             this.icon = icon;
+            this.color = Status.colors.get(this.code)!;
+            console.log(`${this.code} -> ${this.color}`);
 
             this.queries = queries;
             this.predicator = (nomination) => nomination.status === this.code;
