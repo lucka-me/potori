@@ -17,7 +17,7 @@
   "author": "lucka-me",
   "license": "MIT",
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.3",
+    "@fortawesome/fontawesome-free": "^5.15.4",
     "@lucka-labs/eli": "^0.1.2",
     "chart.js": "^3.3.2",
     "chartjs-adapter-luxon": "^1.0.0",
