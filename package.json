@@ -39,7 +39,7 @@
     "@types/luxon": "^2.0.5",
     "@types/mapbox-gl": "^2.4.2",
     "@types/webpack-bundle-analyzer": "^3.9.2",
-    "@vue/cli-plugin-pwa": "^4.5.13",
+    "@vue/cli-plugin-pwa": "^4.5.14",
     "@vue/cli-plugin-router": "^4.5.14",
     "@vue/cli-plugin-typescript": "^4.5.14",
     "@vue/cli-plugin-vuex": "^4.5.13",
