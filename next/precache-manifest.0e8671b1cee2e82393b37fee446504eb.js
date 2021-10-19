@@ -16,7 +16,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/assets/title.png"
   },
   {
-    "revision": "94de28f338a97ef1e3ac",
+    "revision": "79b397bf862a7cf2b2f2",
     "url": "/next/css/app.594be4f4.css"
   },
   {
@@ -36,7 +36,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/brainstorming~dashboard.7d15308f.css"
   },
   {
-    "revision": "80391f4094be292f57c9",
+    "revision": "c455c4c75c223b3f8235",
     "url": "/next/css/charts.a8695c17.css"
   },
   {
@@ -56,7 +56,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/list.a11a204f.css"
   },
   {
-    "revision": "db0c2a6681871ebffe76",
+    "revision": "67a0b7cd79190d20e848",
     "url": "/next/css/map.dc687b38.css"
   },
   {
@@ -64,7 +64,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/css/match.d5345565.css"
   },
   {
-    "revision": "34dc3f9f6286440191b4",
+    "revision": "b7906416fa5f7077b1b1",
     "url": "/next/css/preferences.1d61bbd0.css"
   },
   {
@@ -88,12 +88,12 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/img/fa-solid-900.376c1f97.svg"
   },
   {
-    "revision": "e15c7dc587e559f97f00f5d5c3ecfc62",
+    "revision": "cd5b4b2ab38a3f35b94102c45521181a",
     "url": "/next/index.html"
   },
   {
-    "revision": "94de28f338a97ef1e3ac",
-    "url": "/next/js/app.b386b9a3.js"
+    "revision": "79b397bf862a7cf2b2f2",
+    "url": "/next/js/app.57986e72.js"
   },
   {
     "revision": "ed8d58d34bdde3ed6f1a",
@@ -112,8 +112,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/brainstorming~dashboard.30e6244c.js"
   },
   {
-    "revision": "80391f4094be292f57c9",
-    "url": "/next/js/charts.f4976e99.js"
+    "revision": "c455c4c75c223b3f8235",
+    "url": "/next/js/charts.898f5ce9.js"
   },
   {
     "revision": "f492f41aee90e357f6a9",
@@ -136,8 +136,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/list.b1376a3c.js"
   },
   {
-    "revision": "db0c2a6681871ebffe76",
-    "url": "/next/js/map.1f2bd2ee.js"
+    "revision": "67a0b7cd79190d20e848",
+    "url": "/next/js/map.a555fadb.js"
   },
   {
     "revision": "85b444b8750c07f7134b",
@@ -148,8 +148,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/next/js/match.d9591c4e.js"
   },
   {
-    "revision": "34dc3f9f6286440191b4",
-    "url": "/next/js/preferences.34653ac4.js"
+    "revision": "b7906416fa5f7077b1b1",
+    "url": "/next/js/preferences.3e7b3c53.js"
   },
   {
     "revision": "e740a533dfc63e89adcc986fa213f9c3",
