@@ -157,12 +157,11 @@ export namespace mari {
                         break;
                     }
                 }
-                let details: string = error;
-                if ('message' in error) {
-                    const typedError = error as Error;
-                    details = typedError.stack || typedError.message;
+                let details: string = '';
+                if (error instanceof Error) {
+                    details = error.stack || error.message;
                 }
-                delibird.alert(`An error occurs when parsing mail, you may report the mail ${subject}  with this message to developers: [${status}:${scanner}]${details}`);
+                delibird.alert(`An error occurs when parsing mail, you may report the mail ${subject} with this message to developers: [${status}:${scanner}]${details}`);
             }
             progress.finishMessage();
         }
