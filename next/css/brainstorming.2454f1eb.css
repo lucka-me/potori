@@ -1,1 +1,0 @@
-.brainstorming{padding:1rem}.brainstorming>div:not(:first-child){-webkit-margin-before:.6rem;margin-block-start:.6rem}.brainstorming>.grid{display:grid;grid-template-columns:1fr;gap:.6rem}@media screen and (min-width:600px){.brainstorming>.grid--1-1-1{grid-template-columns:1fr 1fr 1fr}}
