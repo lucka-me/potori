@@ -1,6 +1,16 @@
 # Changelog
 Noteable changes of Potori will be documented here.
 
+## [1.3.0](https://github.com/lucka-me/potori/releases/tag/1.3.0) - 2021-11-07
+Support new acceptance mails and reasons
+
+### Added
+- Mails: Support new acceptance mails in zh
+- Mails: Support Cultural and Niantic
+
+### Changed
+- Map: Add title and set color for nominations by their status
+
 ## [1.2.0](https://github.com/lucka-me/potori/releases/tag/1.2.0) - 2021-08-15
 Support Pokémon GO
 

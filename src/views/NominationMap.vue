@@ -87,7 +87,10 @@ export default class NominationMap extends Vue {
                 if (lngLat.lat < boundsSW.lat) boundsSW.lat = lngLat.lat;
                 return {
                     type: 'Feature',
-                    properties: { title: nomination.title },
+                    properties: {
+                        title: nomination.title,
+                        color: nomination.statusData.color
+                    },
                     geometry: {
                         type: 'Point',
                         coordinates: [lngLat.lng, lngLat.lat],
@@ -96,8 +99,7 @@ export default class NominationMap extends Vue {
             }),
         };
         const id = 'nominations';
-        const color = '#2578B5';
-        const colorLight = '#63A7E7';
+        const color = getComputedStyle(document.documentElement).getPropertyValue('--mdc-theme-secondary');
 
         // Add source and layers
         this.ctrl.addSource(id, {
@@ -109,17 +111,19 @@ export default class NominationMap extends Vue {
             id: `${id}-cluster`,
             type: 'circle',
             source: id,
-            filter: ['has', 'point_count'],
+            filter: [ 'has', 'point_count' ],
             paint: {
-                'circle-color': colorLight,
+                'circle-color': color,
                 'circle-opacity': 0.6,
                 'circle-stroke-width': 4,
                 'circle-stroke-color': color,
                 'circle-radius': [
-                    'step', ['get', 'point_count'],
-                    20, 50,
-                    30, 100,
-                    40
+                    'interpolate',
+                    [ 'linear' ],
+                    [ 'get', 'point_count' ],
+                    5, 10,
+                    50, 30,
+                    200, 50,
                 ]
             }
         });
@@ -127,9 +131,9 @@ export default class NominationMap extends Vue {
             id: `${id}-count`,
             type: 'symbol',
             source: id,
-            filter: ['has', 'point_count'],
+            filter: [ 'has', 'point_count' ],
             layout: {
-                'text-field': '{point_count_abbreviated}',
+                'text-field': [ 'get', 'point_count' ],
                 'text-font': ['DIN Offc Pro Medium', 'Arial Unicode MS Bold'],
                 'text-size': 12,
             },
@@ -141,12 +145,31 @@ export default class NominationMap extends Vue {
             id: `${id}-unclustered`,
             type: 'circle',
             source: id,
-            filter: ['!', ['has', 'point_count']],
+            filter: [ '!', [ 'has', 'point_count' ] ],
             paint: {
-                'circle-color': colorLight,
+                'circle-color': [ 'get', 'color' ],
+                'circle-opacity': 0.6,
                 'circle-radius': 5,
                 'circle-stroke-width': 2,
-                'circle-stroke-color': color
+                'circle-stroke-color': [ 'get', 'color' ],
+            }
+        });
+        this.ctrl.addLayer({
+            id: `${id}-title`,
+            type: 'symbol',
+            source: id,
+            filter: [ 'has', 'title' ],
+            layout: {
+                'text-field': [ 'get', 'title' ],
+                'text-font': [ 'DIN Offc Pro Medium', 'Arial Unicode MS Bold' ],
+                'text-size': 12,
+                'text-anchor': 'top',
+                'text-offset': [ 0, 0.6 ]
+            },
+            paint: {
+                'text-color': '#FFF',
+                'text-halo-color': '#000',
+                'text-halo-width': 1
             }
         });
 
@@ -165,26 +188,6 @@ export default class NominationMap extends Vue {
                     });
                 }
             );
-        });
-
-        this.ctrl.on('click', `${id}-unclustered`, event => {
-            if (!this.ctrl || !event.features) return;
-            const feature = event.features[0];
-            const coordinates = (feature.geometry as GeoJSON.Point).coordinates as [number, number];
-            while (Math.abs(event.lngLat.lng - coordinates[0]) > 180) {
-                coordinates[0] += event.lngLat.lng > coordinates[0] ? 360 : -360;
-            }
-
-            import(
-                /* webpackChunkName: 'mapbox' */
-                'mapbox-gl'
-            ).then((mapboxgl) => {
-                if (!this.ctrl) return;
-                new mapboxgl.Popup()
-                    .setLngLat(coordinates)
-                    .setText(feature.properties!.title)
-                    .addTo(this.ctrl);
-            });
         });
 
         // Fit the bounds
