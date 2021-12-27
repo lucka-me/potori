@@ -19,7 +19,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
     "@lucka-labs/eli": "^0.1.2",
-    "chart.js": "^3.5.1",
+    "chart.js": "^3.7.0",
     "chartjs-adapter-luxon": "^1.1.0",
     "luxon": "^2.0.2",
     "mapbox-gl": "^2.5.1",
