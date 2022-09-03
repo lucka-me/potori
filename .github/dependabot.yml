@@ -11,10 +11,11 @@ updates:
     labels:
       - 'dependencies'
       - 'npm'
-    open-pull-requests-limit: 10
+    open-pull-requests-limit: 0
   
   - package-ecosystem: 'github-actions'
     directory: '/'
     schedule:
       interval: 'weekly'
       timezone: 'Asia/Hong_Kong'
+    open-pull-requests-limit: 0
